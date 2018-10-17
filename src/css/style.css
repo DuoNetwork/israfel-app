@@ -1,0 +1,137 @@
+@import '~antd/dist/antd.css';
+body {
+	font-family: 'Roboto', 'Microsoft YaHei';
+	background: #121416;
+}
+.ant-layout {
+	background: #121416;
+}
+/* Header */
+.icon-wrapper {
+	height: 100%;
+}
+.icon-wrapper > a > img {
+	height: 60px;
+	width: 75.6px;
+}
+.nav-button-wrapper {
+	height: 100%;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Roboto', 'Microsoft YaHei';
+	font-weight: bold;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+.nav-button-wrapper > a {
+	color: rgba(250, 250, 250, 0.65);
+	text-decoration: none;
+}
+.nav-button-wrapper:hover > a {
+	color: rgba(250, 250, 250, 1);
+}
+.nav-button-wrapper > a:visited {
+	color: rgba(250, 250, 250, 0.65);
+}
+.error-msg {
+	color: rgba(255,94,94,.8);
+	font-weight: 200;
+}
+
+/* D3 Test Graph */
+.d3-test-graph {
+	width: 640px;
+	height: 424px;
+	background: rgba(32,31,33,.5);
+}
+.d3-OHLC-chart {
+	width: 100%;
+	height: 100%;
+}
+
+.loading {
+	pointer-events: none;
+	width: 100%;
+    height: 100%;
+	display: flex;
+	font: 14px 'Roboto', 'Microsoft YaHei';
+	font-weight: 400;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+	color: rgba(255,255,255,0.5);
+	position: relative;
+}
+.loading-img {
+	position: absolute;
+	width: 185px;
+	height:	200px;
+	opacity: 0.02;
+	
+}
+.chart-wrapper {
+	width: 760px;
+	height: 400px;
+	margin-top: 10px;
+	border: 1px dashed;
+	border-color: rgba(255,255,255,0.1);
+}
+.x-axis text,
+.ly-axis text,
+.ry-axis text {
+	font: 10px 'Roboto', 'Microsoft YaHei';
+	fill: #474849;
+	pointer-events: none;
+}
+.x-axis path,
+.x-axis line,
+.ly-axis path,
+.ly-axis line,
+.ry-axis path,
+.ry-axis line {
+	fill: none;
+	stroke: #303132;
+	shape-rendering: crispEdges;
+	pointer-events: none;
+}
+path.domain {
+	stroke: #303132 !important;
+	stroke-width: 0.5px;
+}
+.grid line {
+	stroke: rgba(34, 34, 34, 1);
+	stroke-opacity: 0.7;
+	shape-rendering: crispEdges;
+	z-index: 0;
+	pointer-events: none;
+}
+.overlay {
+	cursor: crosshair;
+}
+.eth-dot {
+	cursor: pointer;
+}
+.assist-line-x, .assist-line-y {
+	pointer-events: none;
+}
+.dashed {
+	stroke-dasharray: 2 4;
+	opacity: 0.4;
+}
+.ledger-reminder {
+	color: rgba(250, 250, 250, 0.6);
+	margin-top: 12px;
+}
+.ledger-account-selector {
+	margin-top: 20px;
+}
+.log-out-button {
+	cursor: pointer;
+	color: rgba(255,255,255,0.6);
+	transition: all 0.3s;
+}
+.log-out-button:hover {
+	color: rgba(255,255,255,1);
+}

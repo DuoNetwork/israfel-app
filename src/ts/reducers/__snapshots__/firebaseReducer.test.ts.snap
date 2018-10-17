@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`firebase reducer auth 1`] = `
+Object {
+  "auth": true,
+}
+`;
+
+exports[`firebase reducer default 1`] = `
+Object {
+  "auth": false,
+}
+`;

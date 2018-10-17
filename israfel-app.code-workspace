@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "C:\\Users\\YizhouCao\\DevApps\\israfel-relayer"
+		}
+	],
+	"settings": {
+		"vsicons.presets.angular": false,
+		"javascript.validate.enable": false
+	}
+}

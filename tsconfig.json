@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+		"module": "commonjs",
+		//"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"outDir": "./dist/",
+		"target": "es5",
+		"sourceMap": true,
+		"lib": ["es2017", "es2015", "es6", "dom"],
+		"noImplicitAny": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowSyntheticDefaultImports": true,
+    "allowJs": true,
+		"jsx": "react",
+		"baseUrl": "./src"
+	},
+	"include": [
+		"src/**/*"
+	]
+}

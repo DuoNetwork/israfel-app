@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions authUpdate 1`] = `
+Object {
+  "auth": true,
+  "type": "auth",
+}
+`;
