@@ -5,5 +5,37 @@ Object {
   "firebase": Object {
     "auth": true,
   },
+  "ws": Object {
+    "subscribe": Object {
+      "asks": Array [
+        Object {
+          "amount": 0,
+          "makerTokenName": "",
+          "marketId": "",
+          "price": 0,
+          "side": "",
+          "takerTokenName": "",
+        },
+      ],
+      "bids": Array [
+        Object {
+          "amount": 0,
+          "makerTokenName": "",
+          "marketId": "",
+          "price": 0,
+          "side": "",
+          "takerTokenName": "",
+        },
+      ],
+      "channel": Object {
+        "marketId": "",
+        "name": "",
+      },
+      "delay": 0,
+      "requestId": 0,
+      "timestamp": 0,
+      "type": "",
+    },
+  },
 }
 `;

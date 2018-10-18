@@ -6,6 +6,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import 'whatwg-fetch';
 import Israfel from './containers/IsrafelContainer';
 import store from './store/store';
+import * as wsActions from './actions/wsActions';
+import * as CST from './common/constants';
+import wsUtil from './common/wsUtil';
+
+wsUtil.init(CST.RELAYER_WS_URL);
+wsUtil.onOrderBooks(orderBooks => store.dispatch(wsActions.orderBooksUpdate(orderBooks)));
 
 ReactDOM.render(
 	<Provider store={store}>
