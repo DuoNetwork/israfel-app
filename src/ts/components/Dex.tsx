@@ -5,11 +5,14 @@ import {
 	// IBalances,
 	// ICustodianPrices,
 	// ICustodianStates,
+	IWSAskBid,
 	IWSOrderBookSubscription
 } from '../common/types';
 import { SDivFlexCenter } from './_styled';
+import OperationCard from './Cards/OperationCard';
+import OperationHistory from './Cards/OperationHistory';
 // import OperationCard from './Cards/OperationCard';
-import OrderbookCardSubscription from './Cards/OrderbookCardSubscription';
+// import OrderbookCardSubscription from './Cards/OrderbookCardSubscription';
 
 export interface IProps {
 	wsSubMsg: IWSOrderBookSubscription;
@@ -17,11 +20,13 @@ export interface IProps {
 	// states: ICustodianStates;
 	// prices: ICustodianPrices;
 	// balances: IBalances;
+	bidAskMsg: IWSAskBid;
 	account: string;
 	gasPrice: number;
 	refresh: () => any;
 	// addOrder: () => any;
 	subscription: (marketId: string, pair: string) => any;
+	submitOrders: (amount: number, price: number, action: string) => any;
 	// cancelOrder: () => any;
 }
 
@@ -35,7 +40,7 @@ export default class Admin extends React.PureComponent<IProps> {
 	}
 
 	private async subscription() {
-		this.props.subscription('orderbook', 'ZRX-WETH');
+		// this.props.subscription('orderbook', 'ZRX-WETH');
 		console.log('subscription');
 	}
 
@@ -44,7 +49,7 @@ export default class Admin extends React.PureComponent<IProps> {
 	}
 
 	public componentDidMount() {
-		this.props.subscription('orderbook', 'ZRX-WETH');
+		// this.props.subscription('orderbook', 'ZRX-WETH');
 		console.log('componentDidMount');
 	}
 
@@ -53,15 +58,16 @@ export default class Admin extends React.PureComponent<IProps> {
 	}
 	public render() {
 		const {
-			wsSubMsg,
-			// states,
+			// wsSubMsg, // states,
 			// refresh,
-			locale
-			// prices,
-			// balances,
-			// account,
-			// gasPrice
+			bidAskMsg,
+			locale,
+			submitOrders
 		} = this.props;
+		// prices,
+		// balances,
+		// account,
+		// gasPrice
 		return (
 			<Layout>
 				<div className="App">
@@ -89,20 +95,13 @@ export default class Admin extends React.PureComponent<IProps> {
 						</button>
 					</p>
 					<SDivFlexCenter center horizontal>
-						<OrderbookCardSubscription
-							orderBookSubscription={wsSubMsg}
-							locale={locale}
-						/>
-						<Affix offsetTop={20}>
-							{/* <OperationCard
-								locale={locale}
-								reset={prices.reset}
-								states={states}
-								balances={balances}
-								account={account}
-								refresh={refresh}
-								gasPrice={gasPrice}
-							/> */}
+						<OperationHistory askBidMsg={bidAskMsg} locale={locale} />
+						<Affix offsetTop={10}>
+							<OperationCard
+								submitOrders={(a: number, p: number, q: string) =>
+									submitOrders(a, p, q)
+								}
+							/>
 						</Affix>
 					</SDivFlexCenter>
 				</div>

@@ -4,11 +4,11 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'whatwg-fetch';
-import Israfel from './containers/IsrafelContainer';
-import store from './store/store';
 import * as wsActions from './actions/wsActions';
 import * as CST from './common/constants';
 import wsUtil from './common/wsUtil';
+import Israfel from './containers/IsrafelContainer';
+import store from './store/store';
 
 wsUtil.init(CST.RELAYER_WS_URL);
 wsUtil.onOrderBooks(orderBooks => store.dispatch(wsActions.orderBooksUpdate(orderBooks)));

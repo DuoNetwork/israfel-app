@@ -1,3 +1,4 @@
+import { SignedOrder } from '0x.js';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
@@ -14,6 +15,8 @@ export interface IFirebaseState {
 
 export interface IWSState {
 	readonly subscribe: IWSOrderBookSubscription;
+	readonly addBidAsk: IWSAskBid;
+	// readonly addOrder: number[];
 }
 
 export interface IWSChannel {
@@ -25,6 +28,12 @@ export interface IWSChannel {
 	requestId: number;
 	timestamp: number;
 	delay?: number;
+}
+
+export interface IWSAskBid {
+	amount: number;
+	price: number;
+	action: string;
 }
 
 export interface IWSOrderBookSubscription extends IWSChannel {
@@ -48,4 +57,32 @@ export interface IWSOrderBookSubscription extends IWSChannel {
 			price: number;
 		}
 	];
+}
+
+export interface IBaseRequest {
+	method: string;
+	channel: string;
+}
+
+export interface IAddOrderRequest extends IBaseRequest {
+	order: SignedOrder;
+}
+
+export enum WsChannelMessageTypes {
+	Add = 'add',
+	Cancel = 'cancel',
+	Subscribe = 'subscribe'
+}
+
+export enum WsChannelName {
+	Orderbook = 'orderbook',
+	Order = 'order'
+}
+
+export interface IOption {
+	live: boolean;
+	token: string;
+	maker: number;
+	spender: number;
+	amount: number;
 }

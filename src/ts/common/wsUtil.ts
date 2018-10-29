@@ -1,13 +1,37 @@
+import {
+	assetDataUtils,
+	BigNumber,
+	generatePseudoRandomSalt,
+	Order,
+	orderHashUtils,
+	signatureUtils,
+	SignerType
+} from '0x.js';
+import { RPCSubprovider, SignerSubprovider, Web3ProviderEngine } from '@0xproject/subproviders';
+import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import WebSocket from 'isomorphic-ws';
+import { IAddOrderRequest, WsChannelMessageTypes, WsChannelName } from '../common/types';
+import assetsUtil from './assetsUtil';
 import * as CST from './constants';
 import { IWSChannel, IWSOrderBookSubscription } from './types';
-// import util from './util';
+import util from './util';
+
+const zrxTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_ZRX);
+const etherTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_WETH);
+
+if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
+
+const zrxAssetData = assetDataUtils.encodeERC20AssetData(zrxTokenAddress);
+const wethAssetData = assetDataUtils.encodeERC20AssetData(etherTokenAddress);
 
 class WsUtil {
 	public ws: WebSocket | null = null;
 	private handleOrderBooksUpdate: ((orderBooks: IWSOrderBookSubscription) => any) | null = null;
 	public init(host: string) {
 		this.ws = new WebSocket(host);
+		this.ws.onopen = function open() {
+			console.log('Connected');
+		};
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
 	}
 
@@ -22,7 +46,7 @@ class WsUtil {
 					// const src = others[0];
 					if (obRes && obRes.asks && obRes.bids) {
 						// obRes.delay = util.getUTCNowTimestamp() - obRes.timestamp;
-						// console.log("obRes");
+						console.log('obRes');
 						this.handleOrderBooksUpdate(obRes);
 					}
 				}
@@ -52,10 +76,68 @@ class WsUtil {
 		}
 	}
 
+	public async addOrder(price: number, amount: number, isBid: boolean) {
+		const wss = this.ws;
+		console.log(amount + '' + price + isBid + '');
+		const providerEngine = new Web3ProviderEngine();
+		providerEngine.addProvider(new SignerSubprovider((window as any).web3.currentProvider));
+		providerEngine.addProvider(new RPCSubprovider(CST.PROVIDER_LOCAL));
+		providerEngine.start();
+		(async () => {
+			// Get all of the accounts through the Web3Wrapper
+			const web3Wrapper = new Web3Wrapper(providerEngine);
+			console.log(web3Wrapper.signMessageAsync);
+			const accounts = await web3Wrapper.getAvailableAddressesAsync();
+			console.log(accounts);
+			const exchangeAddress = assetsUtil.contractWrappers.exchange.getContractAddress();
+			// const zrxTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_ZRX);
+			// const etherTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_WETH);
+			const order: Order = {
+				exchangeAddress: exchangeAddress,
+				makerAddress: accounts[0],
+				takerAddress: accounts[0],
+				senderAddress: accounts[0],
+				feeRecipientAddress: accounts[0],
+				expirationTimeSeconds: util.getRandomFutureDateInSeconds(),
+				salt: generatePseudoRandomSalt(),
+				makerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(0.858), 18),
+				takerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(0.868), 18),
+				makerAssetData: wethAssetData,
+				takerAssetData: zrxAssetData,
+				makerFee: new BigNumber(0),
+				takerFee: new BigNumber(0)
+			};
+			const orderHashHex = orderHashUtils.getOrderHashHex(order);
+			console.log(orderHashHex);
+			const signature = await signatureUtils.ecSignOrderHashAsync(
+				providerEngine,
+				orderHashHex,
+				accounts[0],
+				SignerType.Metamask
+			);
+			console.log(signature);
+			const signedOrder = { ...order, signature };
+			const pair = 'ZRX-WETH';
+			const msg: IAddOrderRequest = {
+				method: WsChannelMessageTypes.Add,
+				channel: `${WsChannelName.Order}|${pair}`,
+				order: signedOrder
+			};
+			console.log(wss);
+			console.log(WebSocket.OPEN);
+			if (wss.readyState !== WebSocket.OPEN)
+				wss.onopen = function open() {
+					console.log('Connected');
+					wss.send(JSON.stringify(msg));
+					console.log(`SENT ORDER: ${orderHashHex}`);
+				};
+			else wss.send(JSON.stringify(msg));
+		})();
+	}
+
 	public onOrderBooks(handleOrderBooksUpdate: (orderBooks: IWSOrderBookSubscription) => any) {
 		this.handleOrderBooksUpdate = handleOrderBooksUpdate;
 	}
-
 }
 
 const wsUtil = new WsUtil();

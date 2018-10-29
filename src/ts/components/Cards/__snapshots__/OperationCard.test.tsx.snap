@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1`] = `
+<Styled(Card)
+  margin="0 0 0 5px"
+  title={
+    <styled.div>
+      OPERATION
+    </styled.div>
+  }
+  width="370px"
+>
+  <styled.div>
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+          >
+            <span>
+              Trades
+            </span>
+          </li>
+          <li>
+            <styled.div
+              horizontal={true}
+              marginBottom="10px"
+              padding="5px 10px 0 0"
+              width="100%"
+            >
+              <button
+                className="conv-button selected"
+                onClick={[Function]}
+              >
+                sell
+              </button>
+              <button
+                className="conv-button non-select"
+                onClick={[Function]}
+              >
+                buy
+              </button>
+            </styled.div>
+          </li>
+          <li
+            className="input-line bg-dark"
+          >
+            <span
+              className="title"
+            >
+              Price
+            </span>
+            <styled.input
+              className="bg-dark"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              right={true}
+              value="0"
+              width="60%"
+            />
+          </li>
+          <li
+            className="input-line"
+          >
+            <span
+              className="title"
+            >
+              Amount
+            </span>
+            <styled.input
+              className=""
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              right={true}
+              value="0"
+              width="60%"
+            />
+          </li>
+          <li
+            className="description"
+          >
+            <div />
+          </li>
+          <li>
+            <styled.div
+              horizontal={true}
+              marginTop="10px"
+              padding="0"
+              width="100%"
+            >
+              <button
+                className="form-button"
+                disabled={true}
+                onClick={[Function]}
+              >
+                Submit
+              </button>
+              <button
+                className="form-button"
+                onClick={[Function]}
+              >
+                Clear
+              </button>
+            </styled.div>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;

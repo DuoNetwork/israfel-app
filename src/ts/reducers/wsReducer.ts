@@ -29,12 +29,18 @@ export const initialState: IWSState = {
 				price: 0
 			}
 		]
+	},
+	addBidAsk: {
+		amount: 0,
+		price: 0,
+		action: ""
 	}
 };
 
 export function wsReducer(state: IWSState = initialState, action: AnyAction): IWSState {
 	switch (action.type) {
 		case CST.TH_SUBSCRIBE:
+		case CST.TH_ADD_BIDASK:
 			return Object.assign({}, state, { [action.type]: action[action.type] });
 		default:
 			return state;
