@@ -16,14 +16,6 @@ import * as CST from './constants';
 import { IWSChannel, IWSOrderBookSubscription } from './types';
 import util from './util';
 
-const zrxTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_ZRX);
-const etherTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_WETH);
-
-if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
-
-const zrxAssetData = assetDataUtils.encodeERC20AssetData(zrxTokenAddress);
-const wethAssetData = assetDataUtils.encodeERC20AssetData(etherTokenAddress);
-
 class WsUtil {
 	public ws: WebSocket | null = null;
 	private handleOrderBooksUpdate: ((orderBooks: IWSOrderBookSubscription) => any) | null = null;
@@ -78,6 +70,13 @@ class WsUtil {
 
 	public async addOrder(price: number, amount: number, isBid: boolean) {
 		const wss = this.ws;
+		const zrxTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_ZRX);
+		const etherTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_WETH);
+
+		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
+
+		const zrxAssetData = assetDataUtils.encodeERC20AssetData(zrxTokenAddress);
+		const wethAssetData = assetDataUtils.encodeERC20AssetData(etherTokenAddress);
 		console.log(amount + '' + price + isBid + '');
 		const providerEngine = new Web3ProviderEngine();
 		providerEngine.addProvider(new SignerSubprovider((window as any).web3.currentProvider));

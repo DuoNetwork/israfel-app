@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1`] = `
+<Styled(Card)
+  margin="0 10px 0 0"
+  title={
+    <styled.div>
+      ORDERBOOK
+    </styled.div>
+  }
+  width="800px"
+>
+  <styled.div
+    center={true}
+    horizontal={true}
+  >
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="right"
+          >
+            <span
+              className="title"
+            >
+              ACTIONS
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              123.00
+            </span>
+            <span
+              className="title"
+            >
+              123.00
+            </span>
+            <span
+              className="title"
+            >
+              Sell
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "100px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Status
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              Pending
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "150px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Actions
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <button
+              className="form-button"
+            >
+              cancel
+            </button>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;

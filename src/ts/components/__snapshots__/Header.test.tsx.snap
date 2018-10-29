@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Test User Login Test Snapshot 1`] = `
+<Styled(Adapter)>
+  <styled.div
+    horizontal={true}
+    padding="0 20px"
+    width="100%"
+  >
+    <div
+      className="icon-wrapper"
+    >
+      <Link
+        className="log-out-button"
+        replace={false}
+        to="/"
+      >
+        <img
+          src={null}
+        />
+      </Link>
+    </div>
+  </styled.div>
+</Styled(Adapter)>
+`;

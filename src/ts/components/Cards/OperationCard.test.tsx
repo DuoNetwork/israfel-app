@@ -80,6 +80,10 @@ describe('OperationCard Test', () => {
 				.find(SInput)
 				.at(1)
 				.simulate('blur');
+			wrapper
+				.find('button')
+				.at(2)
+				.simulate('click');
 			expect(wrapper.state('amount')).toBe('6556');
 			expect(wrapper.state('price')).toBe('6506.88');
 			setTimeout(() => {
@@ -91,7 +95,7 @@ describe('OperationCard Test', () => {
 						.at(4)
 						.find('.description')
 				).toBe('Buy 6556 at price 6506.88');
-
+				expect(submitOrdersMock).toHaveBeenCalled();
 				expect(wrapper.state('description')).toBe('Buy 6556 at price 6506.88');
 			}, 1500);
 		});
@@ -141,18 +145,13 @@ describe('OperationCard Test', () => {
 				.find('button')
 				.at(3)
 				.simulate('click');
+			wrapper.find('button').at(2).simulate('click');
 			expect(wrapper.state('amount')).toBe('0');
 			expect(wrapper.state('price')).toBe('0');
 			expect(wrapper.state('description')).toBe('');
 			setTimeout(() => {
-				expect(
-					wrapper
-						.find('div')
-						.at(4)
-						.find('li')
-						.at(4)
-						.find('.description')
-				).toBe('Buy 0 at price 0');
+				expect(wrapper.find('div').at(4).find('li').at(4).find('.description')).toBe('Buy 0 at price 0');
+				expect(submitOrdersMock).toHaveBeenCalled();
 			}, 500);
 		});
 	});
