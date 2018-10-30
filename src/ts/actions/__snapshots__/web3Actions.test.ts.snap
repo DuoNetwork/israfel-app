@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions accountUpdate 1`] = `
+Object {
+  "type": "account",
+  "value": "test",
+}
+`;
+
+exports[`actions getAccount 1`] = `
+Array [
+  Object {
+    "type": "account",
+    "value": "0x0",
+  },
+]
+`;
+
+exports[`actions getNetwork 1`] = `
+Array [
+  Object {
+    "type": "network",
+    "value": 123,
+  },
+]
+`;
+
+exports[`actions networkUpdate 1`] = `
+Object {
+  "type": "network",
+  "value": 123,
+}
+`;

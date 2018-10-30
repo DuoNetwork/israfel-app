@@ -4,16 +4,14 @@ import {
 	IWsOrderResponse,
 	IWsUserOrderResponse
 } from '../../../../israfel-relayer/src/common/types';
-import Web3Util from '../../../../israfel-relayer/src/utils/Web3Util';
-import { IWsAddOrderRequest } from '../common/types';
+import { IWsAddOrderRequest } from './types';
 import util from './util';
+import web3Util from './web3Util';
 
 class WsUtil {
 	public ws: WebSocket | null = null;
-	private web3Util: Web3Util | null = null;
 	private handleOrderBooksUpdate: ((orderBooks: IWsUserOrderResponse) => any) | null = null;
 	public init(host: string) {
-		this.web3Util = new Web3Util(window, !__DEV__);
 		this.ws = new WebSocket(host);
 		this.ws.onopen = function open() {
 			console.log('Connected');
@@ -56,13 +54,12 @@ class WsUtil {
 	}
 
 	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean) {
-		if (!this.web3Util) throw new Error('error');
-		const zrxTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
-		const etherTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
+		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
+		const etherTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
 
-		const accounts = await this.web3Util.web3Wrapper.getAvailableAddressesAsync();
-		const rawOrder = await this.web3Util.createRawOrder(
+		const accounts = await web3Util.web3Wrapper.getAvailableAddressesAsync();
+		const rawOrder = await web3Util.createRawOrder(
 			accounts[0],
 			__DEV__ ? CST.RELAYER_ADDR_KOVAN : CST.RELAYER_ADDR_MAIN,
 			isBid ? zrxTokenAddress : etherTokenAddress,

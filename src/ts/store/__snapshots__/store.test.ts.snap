@@ -2,6 +2,10 @@
 
 exports[`store actions 1`] = `
 Object {
+  "web3": Object {
+    "account": "0x0000000000000000000000000000000000000000",
+    "network": 0,
+  },
   "ws": Object {
     "userOrders": Array [],
   },

@@ -1,5 +1,9 @@
 export * from '../../../../israfel-relayer/src/common/constants';
 
+export const AC_ACCOUNT = 'account';
+export const AC_NETWORK = 'network';
+// export const AC_GAS_PX = 'gasPrice';
+
 export const TH_LOGIN = 'Admin Login';
 export const TH_LOGOUT = 'Log out';
 export const TH_ACCOUNT = 'Account';
