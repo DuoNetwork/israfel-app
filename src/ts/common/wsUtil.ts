@@ -85,9 +85,7 @@ class WsUtil {
 		(async () => {
 			// Get all of the accounts through the Web3Wrapper
 			const web3Wrapper = new Web3Wrapper(providerEngine);
-			console.log(web3Wrapper.signMessageAsync);
 			const accounts = await web3Wrapper.getAvailableAddressesAsync();
-			console.log(accounts);
 			const exchangeAddress = assetsUtil.contractWrappers.exchange.getContractAddress();
 			// const zrxTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_ZRX);
 			// const etherTokenAddress = assetsUtil.getTokenAddressFromName(CST.TOKEN_WETH);
@@ -107,14 +105,12 @@ class WsUtil {
 				takerFee: new BigNumber(0)
 			};
 			const orderHashHex = orderHashUtils.getOrderHashHex(order);
-			console.log(orderHashHex);
 			const signature = await signatureUtils.ecSignOrderHashAsync(
 				providerEngine,
 				orderHashHex,
 				accounts[0],
 				SignerType.Metamask
 			);
-			console.log(signature);
 			const signedOrder = { ...order, signature };
 			const pair = 'ZRX-WETH';
 			const msg: IAddOrderRequest = {
