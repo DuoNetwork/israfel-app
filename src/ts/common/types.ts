@@ -1,6 +1,7 @@
 import { SignedOrder } from '0x.js';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import { IWsOrderRequest } from '../../../../israfel-relayer/src/common/types';
 
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
@@ -59,12 +60,7 @@ export interface IWSOrderBookSubscription extends IWSChannel {
 	];
 }
 
-export interface IBaseRequest {
-	method: string;
-	channel: string;
-}
-
-export interface IAddOrderRequest extends IBaseRequest {
+export interface IWsAddOrderRequest extends IWsOrderRequest {
 	order: SignedOrder;
 }
 

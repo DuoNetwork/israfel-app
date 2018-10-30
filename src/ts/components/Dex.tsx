@@ -1,12 +1,9 @@
 import { Layout } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
+import { IWsUserOrderResponse } from '../../../../israfel-relayer/src/common/types';
 import {
-	// IBalances,
-	// ICustodianPrices,
-	// ICustodianStates,
 	IWSAskBid,
-	IWSOrderBookSubscription
 } from '../common/types';
 import { SDivFlexCenter } from './_styled';
 import OperationCard from './Cards/OperationCard';
@@ -16,7 +13,7 @@ import OperationHistory from './Cards/OperationHistory';
 import Header from './Header';
 
 export interface IProps {
-	wsSubMsg: IWSOrderBookSubscription;
+	wsUserOrderResponse: IWsUserOrderResponse;
 	locale: string;
 	// states: ICustodianStates;
 	// prices: ICustodianPrices;
@@ -46,22 +43,16 @@ export default class Admin extends React.PureComponent<IProps> {
 	}
 	public render() {
 		const {
-			// wsSubMsg, // states,
-			// refresh,
-			bidAskMsg,
+			wsUserOrderResponse,
 			locale,
 			submitOrders
 		} = this.props;
-		// prices,
-		// balances,
-		// account,
-		// gasPrice
 		return (
 			<Layout>
 				<div className="App">
 					<Header location={location} />
 					<SDivFlexCenter center horizontal>
-						<OperationHistory askBidMsg={bidAskMsg} locale={locale} />
+						<OperationHistory askBidMsg={wsUserOrderResponse.userOrder} locale={locale} />
 						<Affix offsetTop={10}>
 							<OperationCard
 								submitOrders={(a: number, p: number, q: string) =>

@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
 import * as CST from '../../common/constants';
-import { IWSAskBid, IWSOrderBookSubscription } from '../../common/types';
+import { IWSOrderBookSubscription } from '../../common/types';
 import util from '../../common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
 
 interface IProps {
-	askBidMsg: IWSAskBid;
+	askBidMsg: IUserOrder;
 	locale: string;
 }
 
@@ -20,8 +21,8 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 	public render() {
 		const { askBidMsg } = this.props;
 		const title = CST.TH_ORDERBOOK.toUpperCase();
-		const askBidArray: IWSAskBid[] = [];
-		if (askBidMsg.amount !== 0) askBidArray.push(askBidMsg);
+		const askBidArray: IUserOrder[] = [];
+		if (askBidMsg && askBidMsg.amount !== 0) askBidArray.push(askBidMsg);
 		const step = util.range(0, askBidArray.length);
 		return (
 			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">
@@ -52,7 +53,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 											<span className="title">
 												{i < askBidArray.length
 													? askBidArray[i].price !== 0
-														? askBidArray[i].action
+														? askBidArray[i].side
 														: '-'
 													: '-'}
 											</span>
@@ -74,7 +75,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 								{step.length > 0 ? (
 									step.map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
-											<span className="title">{'Pending'}</span>
+											<span className="title"> {askBidArray[i].status} </span>
 										</li>
 									))
 								) : (
