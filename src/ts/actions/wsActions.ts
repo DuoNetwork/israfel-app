@@ -1,6 +1,6 @@
 import { IWsUserOrderResponse } from '../../../../israfel-relayer/src/common/types';
 import * as CST from '../common/constants';
-import { IWSAskBid, VoidThunkAction } from '../common/types';
+import { VoidThunkAction } from '../common/types';
 import wsUtil from '../common/wsUtil';
 
 export function onSubscription(marketId: string, pair: string): VoidThunkAction {
@@ -16,14 +16,14 @@ export function orderBooksUpdate(message: IWsUserOrderResponse) {
 	};
 }
 
-export function addWSOrder(message: IWSAskBid): VoidThunkAction {
-	return async () => {
-		await wsUtil.addOrder(message.amount, message.price, message.action === "Sell" ? true : false);
-	}
-}
+// export function addWSOrder(message: IWSAskBid): VoidThunkAction {
+// 	return async () => {
+// 		await wsUtil.addOrder(message.amount, message.price, message.action === "Sell" ? true : false);
+// 	}
+// }
 
-export function onAddOrders(amount: number, price: number, action: string): VoidThunkAction {
-	return async dispatch => {
-		dispatch(addWSOrder({ amount: amount, price: price, action: action }));
-	};
-}
+// export function onAddOrders(amount: number, price: number, action: string): VoidThunkAction {
+// 	return async dispatch => {
+// 		dispatch(addWSOrder({ amount: amount, price: price, action: action }));
+// 	};
+// }

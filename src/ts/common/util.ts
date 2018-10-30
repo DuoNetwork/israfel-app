@@ -2,7 +2,7 @@
 // import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
 import { BigNumber } from '0x.js';
 import * as d3 from 'd3';
-import moment, { DurationInputArg2 } from 'moment';
+import moment from 'moment';
 import * as CST from './constants';
 
 class Util {
@@ -17,36 +17,6 @@ class Util {
 
 	public getUTCNowTimestamp() {
 		return moment().valueOf();
-	}
-
-	public calculateNav(
-		price: number,
-		time: number,
-		resetPrice: number,
-		resetTime: number,
-		alpha: number,
-		beta: number,
-		period: number,
-		coupon: number
-	) {
-		const navParent = (price / resetPrice / beta) * (1 + alpha);
-
-		const navA = 1 + Math.floor((time - resetTime) / 1000 / period) * coupon;
-		const navAAdj = navA * alpha;
-		if (navParent <= navAAdj) return [navParent / alpha, 0];
-		else return [navA, navParent - navAAdj];
-	}
-
-	public getDates(length: number, step: number, stepSize: DurationInputArg2, format: string) {
-		const dates: string[] = [];
-		const date = moment.utc();
-		for (let i = 0; i < length; i++) {
-			dates.push(date.format(format));
-			date.subtract(step, stepSize);
-		}
-		dates.sort((a, b) => a.localeCompare(b));
-
-		return dates;
 	}
 
 	public round(num: number) {
@@ -76,59 +46,9 @@ class Util {
 			.replace(/G/g, 'B');
 	}
 
-	public logInfo(text: any): void {
-		console.log(text);
-	}
-
 	public getRandomFutureDateInSeconds() {
 		return new BigNumber(Date.now() + CST.TEN_MINUTES_MS).div(CST.ONE_SECOND_MS).ceil();
 	}
-
-	// public getLastPriceFromStatus(status: IStatus[]): ISourceData<ICustodianPrice> {
-	// 	// const bitfinex: ICustodianPrice = {
-	// 	// 	address: CST.DUMMY_ADDR,
-	// 	// 	price: 0,
-	// 	// 	timestamp: 0
-	// 	// };
-	// 	const kraken: ICustodianPrice = {
-	// 		address: CST.DUMMY_ADDR,
-	// 		price: 0,
-	// 		timestamp: 0
-	// 	};
-	// 	const gemini: ICustodianPrice = {
-	// 		address: CST.DUMMY_ADDR,
-	// 		price: 0,
-	// 		timestamp: 0
-	// 	};
-	// 	const gdax: ICustodianPrice = {
-	// 		address: CST.DUMMY_ADDR,
-	// 		price: 0,
-	// 		timestamp: 0
-	// 	};
-	// 	status.forEach(s => {
-	// 		// if (s.process === 'PRICE_AWS_PUBLIC_BITFINEX') {
-	// 		// 	bitfinex.price = (s as IPriceStatus).price;
-	// 		// 	bitfinex.timestamp = (s as IPriceStatus).timestamp;
-	// 		// } else
-	// 		if (s.process === 'TRADE_AWS_PUBLIC_GEMINI') {
-	// 			gemini.price = (s as IPriceStatus).price;
-	// 			gemini.timestamp = (s as IPriceStatus).timestamp;
-	// 		} else if (s.process === 'TRADE_AWS_PUBLIC_KRAKEN') {
-	// 			kraken.price = (s as IPriceStatus).price;
-	// 			kraken.timestamp = (s as IPriceStatus).timestamp;
-	// 		} else if (s.process === 'TRADE_AWS_PUBLIC_GDAX') {
-	// 			gdax.price = (s as IPriceStatus).price;
-	// 			gdax.timestamp = (s as IPriceStatus).timestamp;
-	// 		}
-	// 	});
-
-	// 	return {
-	// 		// bitfinex,
-	// 		kraken,
-	// 		gemini,
-	// 		gdax
-	// 	};
-	// }
 }
 
 const util = new Util();

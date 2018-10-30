@@ -2,45 +2,8 @@
 
 exports[`store actions 1`] = `
 Object {
-  "firebase": Object {
-    "auth": true,
-  },
   "ws": Object {
-    "addBidAsk": Object {
-      "action": "",
-      "amount": 0,
-      "price": 0,
-    },
-    "subscribe": Object {
-      "asks": Array [
-        Object {
-          "amount": 0,
-          "makerTokenName": "",
-          "marketId": "",
-          "price": 0,
-          "side": "",
-          "takerTokenName": "",
-        },
-      ],
-      "bids": Array [
-        Object {
-          "amount": 0,
-          "makerTokenName": "",
-          "marketId": "",
-          "price": 0,
-          "side": "",
-          "takerTokenName": "",
-        },
-      ],
-      "channel": Object {
-        "marketId": "",
-        "name": "",
-      },
-      "delay": 0,
-      "requestId": 0,
-      "timestamp": 0,
-      "type": "",
-    },
+    "userOrders": Array [],
   },
 }
 `;

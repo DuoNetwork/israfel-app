@@ -1,84 +1,15 @@
-import { SignedOrder } from '0x.js';
+// import { SignedOrder } from '0x.js';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { IWsOrderRequest } from '../../../../israfel-relayer/src/common/types';
+export * from '../../../../israfel-relayer/src/common/types';
+import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
-	readonly firebase: IFirebaseState;
-	readonly ws: IWSState;
+	readonly ws: IWsState;
 }
 
-export interface IFirebaseState {
-	readonly auth: boolean;
-}
-
-export interface IWSState {
-	readonly subscribe: IWSOrderBookSubscription;
-	readonly addBidAsk: IWSAskBid;
-	// readonly addOrder: number[];
-}
-
-export interface IWSChannel {
-	type: string;
-	channel: {
-		name: string;
-		marketId: string;
-	};
-	requestId: number;
-	timestamp: number;
-	delay?: number;
-}
-
-export interface IWSAskBid {
-	amount: number;
-	price: number;
-	action: string;
-}
-
-export interface IWSOrderBookSubscription extends IWSChannel {
-	bids: [
-		{
-			makerTokenName: string;
-			takerTokenName: string;
-			marketId: string;
-			side: string;
-			amount: number;
-			price: number;
-		}
-	];
-	asks: [
-		{
-			makerTokenName: string;
-			takerTokenName: string;
-			marketId: string;
-			side: string;
-			amount: number;
-			price: number;
-		}
-	];
-}
-
-export interface IWsAddOrderRequest extends IWsOrderRequest {
-	order: SignedOrder;
-}
-
-export enum WsChannelMessageTypes {
-	Add = 'add',
-	Cancel = 'cancel',
-	Subscribe = 'subscribe'
-}
-
-export enum WsChannelName {
-	Orderbook = 'orderbook',
-	Order = 'order'
-}
-
-export interface IOption {
-	live: boolean;
-	token: string;
-	maker: number;
-	spender: number;
-	amount: number;
+export interface IWsState {
+	readonly userOrders: relayerTypes.IUserOrder[];
 }

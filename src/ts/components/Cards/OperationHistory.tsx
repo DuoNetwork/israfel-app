@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
 import * as CST from '../../common/constants';
-import { IWSOrderBookSubscription } from '../../common/types';
+// import { IWSOrderBookSubscription } from '../../common/types';
 import util from '../../common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardTitle } from './_styled';
@@ -12,11 +12,11 @@ interface IProps {
 	locale: string;
 }
 
-interface IState {
-	orderBookSubscription: IWSOrderBookSubscription;
-}
+// interface IState {
+// 	orderBookSubscription: IWSOrderBookSubscription;
+// }
 
-export default class TimeSeriesCard extends React.Component<IProps, IState> {
+export default class TimeSeriesCard extends React.Component<IProps> {
 
 	public render() {
 		const { askBidMsg } = this.props;

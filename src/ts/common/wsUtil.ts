@@ -11,9 +11,12 @@ import { RPCSubprovider, SignerSubprovider, Web3ProviderEngine } from '@0xprojec
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import WebSocket from 'isomorphic-ws';
 import * as CST from '../../../../israfel-relayer/src/common/constants';
-import { IWsOrderResponse, IWsUserOrderResponse } from '../../../../israfel-relayer/src/common/types';
+import {
+	IWsOrderResponse,
+	IWsUserOrderResponse
+} from '../../../../israfel-relayer/src/common/types';
 import Web3Util from '../../../../israfel-relayer/src/utils/Web3Util';
-import { IWsAddOrderRequest, WsChannelMessageTypes } from '../common/types';
+import { IWsAddOrderRequest } from '../common/types';
 import util from './util';
 
 class WsUtil {
@@ -59,19 +62,12 @@ class WsUtil {
 				},
 				requestId: Date.now().toString()
 			};
-			if (this.ws.readyState !== WebSocket.OPEN) {
-				const wss = this.ws;
-				this.ws.onopen = function open() {
-					console.log('Connected');
-					wss.send(JSON.stringify(req));
-				};
-			} else this.ws.send(JSON.stringify(req));
+			this.ws.send(JSON.stringify(req));
 		}
 	}
 
 	public async addOrder(price: number, amount: number, isBid: boolean) {
 		if (!this.web3Util) throw new Error('error');
-		const wss = this.ws;
 		const zrxTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
 		const etherTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
@@ -83,51 +79,43 @@ class WsUtil {
 		providerEngine.addProvider(new SignerSubprovider((window as any).web3.currentProvider));
 		providerEngine.addProvider(new RPCSubprovider(CST.PROVIDER_INFURA_KOVAN));
 		providerEngine.start();
-		(async () => {
-			// Get all of the accounts through the Web3Wrapper
-			if (!this.web3Util) throw new Error('error');
-			const web3Wrapper = new Web3Wrapper(providerEngine);
-			const accounts = await web3Wrapper.getAvailableAddressesAsync();
-			const exchangeAddress = this.web3Util.contractWrappers.exchange.getContractAddress();
-			const order: Order = {
-				senderAddress: accounts[0],
-				makerAddress: accounts[0],
-				takerAddress: accounts[0],
-				makerFee: new BigNumber(0),
-				takerFee: new BigNumber(0),
-				makerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(price), 18),
-				takerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(amount), 18),
-				makerAssetData: wethAssetData,
-				takerAssetData: zrxAssetData,
-				salt: generatePseudoRandomSalt(),
-				exchangeAddress: exchangeAddress,
-				feeRecipientAddress: accounts[0],
-				expirationTimeSeconds: util.getRandomFutureDateInSeconds()
-			};
-			const orderHashHex = orderHashUtils.getOrderHashHex(order);
-			const signature = await signatureUtils.ecSignOrderHashAsync(
-				providerEngine,
-				orderHashHex,
-				accounts[0],
-				SignerType.Metamask
-			);
-			const signedOrder = { ...order, signature };
-			const pair = 'ZRX-WETH';
-			const msg: IWsAddOrderRequest = {
-				method: WsChannelMessageTypes.Add,
-				channel: CST.DB_ORDERS,
-				pair: pair,
-				orderHash: orderHashHex,
-				order: signedOrder
-			};
-			if (wss.readyState !== WebSocket.OPEN)
-				wss.onopen = function open() {
-					console.log('Connected');
-					wss.send(JSON.stringify(msg));
-					console.log(`SENT ORDER: ${orderHashHex}`);
-				};
-			else wss.send(JSON.stringify(msg));
-		})();
+
+		// Get all of the accounts through the Web3Wrapper
+		const web3Wrapper = new Web3Wrapper(providerEngine);
+		const accounts = await web3Wrapper.getAvailableAddressesAsync();
+		const exchangeAddress = this.web3Util.contractWrappers.exchange.getContractAddress();
+		const order: Order = {
+			senderAddress: accounts[0],
+			makerAddress: accounts[0],
+			takerAddress: accounts[0],
+			makerFee: new BigNumber(0),
+			takerFee: new BigNumber(0),
+			makerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(price), 18),
+			takerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(amount), 18),
+			makerAssetData: wethAssetData,
+			takerAssetData: zrxAssetData,
+			salt: generatePseudoRandomSalt(),
+			exchangeAddress: exchangeAddress,
+			feeRecipientAddress: accounts[0],
+			expirationTimeSeconds: util.getRandomFutureDateInSeconds()
+		};
+		const orderHashHex = orderHashUtils.getOrderHashHex(order);
+		const signature = await signatureUtils.ecSignOrderHashAsync(
+			providerEngine,
+			orderHashHex,
+			accounts[0],
+			SignerType.Metamask
+		);
+		const signedOrder = { ...order, signature };
+		const pair = 'ZRX-WETH';
+		const msg: IWsAddOrderRequest = {
+			method: CST.DB_ADD,
+			channel: CST.DB_ORDERS,
+			pair: pair,
+			orderHash: orderHashHex,
+			order: JSON.parse(JSON.stringify(signedOrder))
+		};
+		this.ws.send(JSON.stringify(msg));
 	}
 
 	public onOrderBooks(handleOrderBooksUpdate: (orderBooks: IWsUserOrderResponse) => any) {
