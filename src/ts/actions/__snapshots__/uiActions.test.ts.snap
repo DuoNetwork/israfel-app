@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions localeUpdate 1`] = `
+Object {
+  "type": "locale",
+  "value": "test",
+}
+`;

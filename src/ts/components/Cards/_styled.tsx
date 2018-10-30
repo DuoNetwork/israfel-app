@@ -104,6 +104,19 @@ injectGlobal([
 		.ant-select-dropdown-menu-item:first-child, .ant-select-dropdown-menu-item:last-child {
 			border-radius: 0;
 		}
+		.locale-select {
+			display: flex;
+			align-items: center;
+			margin-left: 10px;
+			.ant-select-selection-selected-value {
+				width: 72px;
+			}
+		}
+		.locale-img {
+			width: 14px;
+			height: 14px;
+			margin-right: 2px;
+		}
 	}
 `
 ] as any);

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ui reducer default 1`] = `
+Object {
+  "locale": "EN",
+}
+`;
+
+exports[`ui reducer locale 1`] = `
+Object {
+  "locale": "test",
+}
+`;

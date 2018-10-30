@@ -1,7 +1,8 @@
 import WebSocket from 'isomorphic-ws';
 import * as CST from '../../../../israfel-relayer/src/common/constants';
 import {
-	IWsOrderResponse,
+	IUserOrder,
+	IWsResponse,
 	IWsUserOrderResponse
 } from '../../../../israfel-relayer/src/common/types';
 import { IWsAddOrderRequest } from './types';
@@ -10,29 +11,30 @@ import web3Util from './web3Util';
 
 class WsUtil {
 	public ws: WebSocket | null = null;
-	private handleOrderBooksUpdate: ((orderBooks: IWsUserOrderResponse) => any) | null = null;
+	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
 	public init(host: string) {
-		this.ws = new WebSocket(host);
-		this.ws.onopen = function open() {
-			console.log('Connected');
-		};
-		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
+		return new Promise(resolve => {
+			this.ws = new WebSocket(host);
+			this.ws.onopen = function open() {
+				console.log('Connected');
+				resolve();
+			};
+			this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
+		});
 	}
 
 	public handleMessage(message: string) {
-		const wsMsg: IWsOrderResponse = JSON.parse(message);
-		const method = wsMsg.method;
-		switch (method) {
-			case CST.DB_ADD:
-				if (this.handleOrderBooksUpdate) {
-					const obRes = wsMsg as IWsUserOrderResponse;
-					// const src = others[0];
-					if (obRes && obRes.userOrder) {
-						// obRes.delay = util.getUTCNowTimestamp() - obRes.timestamp;
-						console.log('obRes');
-						this.handleOrderBooksUpdate(obRes);
-					}
-				}
+		const wsMsg: IWsResponse = JSON.parse(message);
+		if (wsMsg.status !== CST.WS_OK) {
+			console.log(message);
+			return;
+		}
+
+		switch (wsMsg.channel) {
+			case CST.DB_ORDERS:
+				this.handleOrderUpdate(wsMsg.method, (wsMsg as IWsUserOrderResponse).userOrder);
+				break;
+			case CST.DB_ORDER_BOOKS:
 				break;
 			default:
 				break;
@@ -79,8 +81,8 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public onOrderBooks(handleOrderBooksUpdate: (orderBooks: IWsUserOrderResponse) => any) {
-		this.handleOrderBooksUpdate = handleOrderBooksUpdate;
+	public onOrder(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
+		this.handleOrderUpdate = handleOrderUpdate;
 	}
 }
 

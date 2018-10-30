@@ -10,12 +10,7 @@ export default class Israfel extends React.PureComponent {
 			<Layout>
 				<SContent>
 					<Switch>
-						<Route
-							exact
-							path={'/'}
-							render={() => <div style={{ color: 'white' }}>Signed In</div>}
-						/>
-						<Route exact path={'/dex'} render={() => <Dex />} />
+						<Route path={'/'} render={() => <Dex />} />
 					</Switch>
 				</SContent>
 			</Layout>

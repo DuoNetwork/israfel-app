@@ -1,62 +1,41 @@
 import { Layout } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
-import { IWsUserOrderResponse } from '../../../../israfel-relayer/src/common/types';
-import {
-	IWSAskBid,
-} from '../common/types';
+// import { IWsUserOrderResponse } from '../common/types';
 import { SDivFlexCenter } from './_styled';
 import OperationCard from './Cards/OperationCard';
-import OperationHistory from './Cards/OperationHistory';
+// import OperationHistory from './Cards/OperationHistory';
 // import OperationCard from './Cards/OperationCard';
 // import OrderbookCardSubscription from './Cards/OrderbookCardSubscription';
 import Header from './Header';
 
 export interface IProps {
-	wsUserOrderResponse: IWsUserOrderResponse;
+	// wsUserOrderResponse: IWsUserOrderResponse;
+	network: number;
 	locale: string;
-	// states: ICustodianStates;
-	// prices: ICustodianPrices;
-	// balances: IBalances;
-	bidAskMsg: IWSAskBid;
 	account: string;
-	gasPrice: number;
-	refresh: () => any;
-	// addOrder: () => any;
-	subscription: (marketId: string, pair: string) => any;
-	submitOrders: (amount: number, price: number, action: string) => any;
-	// cancelOrder: () => any;
+	updateLocale: (locale: string) => any;
+	// refresh: () => any;
+	// subscription: (marketId: string, pair: string) => any;
+	// submitOrders: (amount: number, price: number, action: string) => any;
 }
 
-export default class Admin extends React.PureComponent<IProps> {
-	public componentDidUpdate() {
-		console.log('componentDidUpdate');
-	}
-
-	public componentDidMount() {
-		// this.props.subscription('orderbook', 'ZRX-WETH');
-		console.log('componentDidMount');
-	}
-
-	constructor(props: IProps) {
-		super(props);
-	}
+export default class Dex extends React.PureComponent<IProps> {
 	public render() {
-		const {
-			wsUserOrderResponse,
-			locale,
-			submitOrders
-		} = this.props;
+		const { locale, network, updateLocale } = this.props;
 		return (
 			<Layout>
 				<div className="App">
-					<Header location={location} />
+					<Header locale={locale} network={network} updateLocale={updateLocale} />
 					<SDivFlexCenter center horizontal>
-						<OperationHistory askBidMsg={wsUserOrderResponse.userOrder} locale={locale} />
+						{/* <OperationHistory
+							askBidMsg={wsUserOrderResponse.userOrder}
+							locale={locale}
+						/> */}
 						<Affix offsetTop={10}>
 							<OperationCard
 								submitOrders={(a: number, p: number, q: string) =>
-									submitOrders(a, p, q)
+									console.log(a, p, q)
 								}
 							/>
 						</Affix>

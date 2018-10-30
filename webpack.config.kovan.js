@@ -1,44 +1,37 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: {
-		app: path.resolve(__dirname, 'src/ts/app.tsx')
+		app: path.resolve(__dirname, 'src/ts/live/app.tsx')
 	},
 	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: '[name].js',
+		path: path.join(__dirname, 'dist/kovan'),
+		filename: '[name].[chunkhash].js',
 		publicPath: '/'
 	},
-	devServer: {
-		// https: true,
-		contentBase: './dist',
-		hot: true,
-		historyApiFallback: true,
-		host: '0.0.0.0',
-		disableHostCheck: true
-	},
 	plugins: [
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		}),
-		new webpack.SourceMapDevToolPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development'),
-			__DEV__: true,
+			'process.env.NODE_ENV': JSON.stringify('production'),
+			__DEV__: false,
 			__KOVAN__: true
 		}),
-		new webpack.HotModuleReplacementPlugin(),
+		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+		new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
 		new HtmlWebpackPlugin({
-			title: 'DUO Dex',
+			title: 'DUO | Beethoven',
 			template: path.resolve(__dirname, 'src/index.ejs'),
 			favicon: path.join(__dirname, 'src/images/favicon.ico'),
 			filename: 'index.html'
 		})
 	],
 	optimization: {
+		minimizer: [new TerserPlugin({}), new OptimizeCssAssetsPlugin({})],
 		splitChunks: {
 			cacheGroups: {
 				commons: {
@@ -64,19 +57,14 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			},
 			{
 				test: /\.less$/,
 				use: [
-					'style-loader',
+					MiniCssExtractPlugin.loader,
 					'css-loader',
-					{
-						loader: 'less-loader',
-						options: {
-							javascriptEnabled: true
-						}
-					}
+					{ loader: 'less-loader', options: { javascriptEnabled: true } }
 				]
 			},
 			{

@@ -18,12 +18,13 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
-			__DEV__: false
+			__DEV__: false,
+			__KOVAN__: false
 		}),
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 		new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
 		new HtmlWebpackPlugin({
-			title: 'FinBook Boilerplates',
+			title: 'DUO | Dex',
 			template: path.resolve(__dirname, 'src/index.ejs'),
 			favicon: path.join(__dirname, 'src/images/favicon.ico'),
 			filename: 'index.html'

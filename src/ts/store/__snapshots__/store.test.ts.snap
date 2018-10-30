@@ -2,6 +2,12 @@
 
 exports[`store actions 1`] = `
 Object {
+  "dynamo": Object {
+    "status": Array [],
+  },
+  "ui": Object {
+    "locale": "EN",
+  },
   "web3": Object {
     "account": "0x0000000000000000000000000000000000000000",
     "network": 0,
