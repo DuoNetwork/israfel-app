@@ -1,4 +1,3 @@
-// import { SignedOrder } from '0x.js';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 export * from '../../../../israfel-relayer/src/common/types';

@@ -1,14 +1,3 @@
-import {
-	assetDataUtils,
-	BigNumber,
-	generatePseudoRandomSalt,
-	Order,
-	orderHashUtils,
-	signatureUtils,
-	SignerType
-} from '0x.js';
-import { RPCSubprovider, SignerSubprovider, Web3ProviderEngine } from '@0xproject/subproviders';
-import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import WebSocket from 'isomorphic-ws';
 import * as CST from '../../../../israfel-relayer/src/common/constants';
 import {
@@ -24,7 +13,7 @@ class WsUtil {
 	private web3Util: Web3Util | null = null;
 	private handleOrderBooksUpdate: ((orderBooks: IWsUserOrderResponse) => any) | null = null;
 	public init(host: string) {
-		this.web3Util = new Web3Util();
+		this.web3Util = new Web3Util(window, !__DEV__);
 		this.ws = new WebSocket(host);
 		this.ws.onopen = function open() {
 			console.log('Connected');
@@ -66,54 +55,29 @@ class WsUtil {
 		}
 	}
 
-	public async addOrder(price: number, amount: number, isBid: boolean) {
+	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean) {
 		if (!this.web3Util) throw new Error('error');
 		const zrxTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
 		const etherTokenAddress = this.web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
 
-		const zrxAssetData = assetDataUtils.encodeERC20AssetData(zrxTokenAddress);
-		const wethAssetData = assetDataUtils.encodeERC20AssetData(etherTokenAddress);
-		console.log(amount + '' + price + isBid + '');
-		const providerEngine = new Web3ProviderEngine();
-		providerEngine.addProvider(new SignerSubprovider((window as any).web3.currentProvider));
-		providerEngine.addProvider(new RPCSubprovider(CST.PROVIDER_INFURA_KOVAN));
-		providerEngine.start();
-
-		// Get all of the accounts through the Web3Wrapper
-		const web3Wrapper = new Web3Wrapper(providerEngine);
-		const accounts = await web3Wrapper.getAvailableAddressesAsync();
-		const exchangeAddress = this.web3Util.contractWrappers.exchange.getContractAddress();
-		const order: Order = {
-			senderAddress: accounts[0],
-			makerAddress: accounts[0],
-			takerAddress: accounts[0],
-			makerFee: new BigNumber(0),
-			takerFee: new BigNumber(0),
-			makerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(price), 18),
-			takerAssetAmount: Web3Wrapper.toBaseUnitAmount(new BigNumber(amount), 18),
-			makerAssetData: wethAssetData,
-			takerAssetData: zrxAssetData,
-			salt: generatePseudoRandomSalt(),
-			exchangeAddress: exchangeAddress,
-			feeRecipientAddress: accounts[0],
-			expirationTimeSeconds: util.getRandomFutureDateInSeconds()
-		};
-		const orderHashHex = orderHashUtils.getOrderHashHex(order);
-		const signature = await signatureUtils.ecSignOrderHashAsync(
-			providerEngine,
-			orderHashHex,
+		const accounts = await this.web3Util.web3Wrapper.getAvailableAddressesAsync();
+		const rawOrder = await this.web3Util.createRawOrder(
 			accounts[0],
-			SignerType.Metamask
+			__DEV__ ? CST.RELAYER_ADDR_KOVAN : CST.RELAYER_ADDR_MAIN,
+			isBid ? zrxTokenAddress : etherTokenAddress,
+			isBid ? etherTokenAddress : zrxTokenAddress,
+			isBid ? zrxAmt : ethAmt,
+			isBid ? ethAmt : zrxAmt,
+			Math.ceil(util.getUTCNowTimestamp() / 1000) + 3600
 		);
-		const signedOrder = { ...order, signature };
 		const pair = 'ZRX-WETH';
 		const msg: IWsAddOrderRequest = {
 			method: CST.DB_ADD,
 			channel: CST.DB_ORDERS,
 			pair: pair,
-			orderHash: orderHashHex,
-			order: JSON.parse(JSON.stringify(signedOrder))
+			orderHash: rawOrder.orderHash,
+			order: rawOrder.signedOrder
 		};
 		this.ws.send(JSON.stringify(msg));
 	}

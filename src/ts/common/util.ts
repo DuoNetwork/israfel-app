@@ -1,9 +1,8 @@
 // import * as CST from './constants';
 // import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
-import { BigNumber } from '0x.js';
 import * as d3 from 'd3';
 import moment from 'moment';
-import * as CST from './constants';
+// import * as CST from './constants';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
@@ -44,10 +43,6 @@ class Util {
 			.format(',.4s')(num)
 			.toUpperCase()
 			.replace(/G/g, 'B');
-	}
-
-	public getRandomFutureDateInSeconds() {
-		return new BigNumber(Date.now() + CST.TEN_MINUTES_MS).div(CST.ONE_SECOND_MS).ceil();
 	}
 }
 

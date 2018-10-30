@@ -1,4 +1,4 @@
-import { BigNumber } from '0x.js';
+// import { BigNumber } from '0x.js';
 import moment from 'moment';
 // import status from '../../../../../duo-admin/src/samples/dynamo/status.json';
 // import dynamoUtil from '../../../../../duo-admin/src/utils/dynamoUtil';
@@ -43,8 +43,8 @@ test('getUTCNowTimestamp Long Ago', () => {
 	expect(util.convertUpdateTime(moment().valueOf() - 260000000000000000)).toBe('Long Time Ago');
 });
 
-test('getRandomFutureDateInSeconds', () => {
-	const MockDateNow = jest.fn(() => 1530518207007);
-	global.Date.now = MockDateNow;
-	expect(util.getRandomFutureDateInSeconds()).toEqual(new BigNumber("1530518808"));
-});
+// test('getRandomFutureDateInSeconds', () => {
+// 	const MockDateNow = jest.fn(() => 1530518207007);
+// 	global.Date.now = MockDateNow;
+// 	expect(util.getRandomFutureDateInSeconds()).toEqual(new BigNumber("1530518808"));
+// });
