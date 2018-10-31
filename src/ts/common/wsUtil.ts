@@ -13,10 +13,10 @@ class WsUtil {
 			const status = await dynamoUtil.scanStatus();
 			const now = util.getUTCNowTimestamp();
 			const relayerStatus = status.filter(
-				s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 10000
+				s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 15000
 			);
 			if (!relayerStatus.length) {
-				reject('no relayer available');
+				reject('no relayer status');
 				return;
 			}
 			let hostname = '';
@@ -31,7 +31,7 @@ class WsUtil {
 			const relayerServices = await dynamoUtil.getServices(CST.DB_RELAYER);
 			const relayerService = relayerServices.find(r => r.hostname === hostname);
 			if (!relayerService) {
-				reject('no relayer available');
+				reject('no relayer config');
 				return;
 			}
 			this.ws = new WebSocket(relayerService.url);
