@@ -1,18 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ws reducer connection 1`] = `
+Object {
+  "connection": true,
+  "userOrders": Array [
+    Object {
+      "userOrder": "test",
+    },
+  ],
+}
+`;
+
 exports[`ws reducer default 1`] = `
 Object {
+  "connection": false,
   "userOrders": Array [],
 }
 `;
 
 exports[`ws reducer userOrder 1`] = `
 Object {
-  "userOrder": Array [
+  "connection": false,
+  "userOrders": Array [
     Object {
       "userOrder": "test",
     },
   ],
-  "userOrders": Array [],
 }
 `;

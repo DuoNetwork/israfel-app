@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`actions connectionUpdate 1`] = `
+Object {
+  "type": "connection",
+  "value": true,
+}
+`;
+
 exports[`actions userOrder 1`] = `
 Object {
   "type": "userOrder",
-  "userOrder": Object {
+  "value": Object {
     "test": "test",
   },
 }

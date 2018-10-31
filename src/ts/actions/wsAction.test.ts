@@ -5,6 +5,10 @@ import * as wsActions from './wsActions';
 // const mockStore = configureMockStore([thunk]);
 
 describe('actions', () => {
+	test('connectionUpdate', () => {
+		expect(wsActions.connectionUpdate(true)).toMatchSnapshot();
+	});
+
 	test('userOrder', () => {
 		expect(wsActions.userOrderUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});

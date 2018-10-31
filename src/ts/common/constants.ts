@@ -7,6 +7,7 @@ export const AC_STATUS = 'status';
 export const AC_LOCALE = 'locale';
 export const AC_USER_ORDER = 'userOrder';
 export const AC_USER_ORDERS = 'userOrders';
+export const AC_CONNECTION = 'connection';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';

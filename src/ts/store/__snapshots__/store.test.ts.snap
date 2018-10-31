@@ -14,6 +14,7 @@ Object {
     "network": 0,
   },
   "ws": Object {
+    "connection": false,
     "userOrders": Array [],
   },
 }

@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
 import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
+import * as wsActions from './actions/wsActions';
 // import * as CST from './common/constants';
 import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
@@ -27,7 +28,6 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 });
 
 store.dispatch(web3Actions.refresh());
-store.dispatch(dynamoActions.refresh());
 
 setInterval(() => {
 	store.dispatch(web3Actions.refresh());
@@ -38,8 +38,13 @@ wsUtil.onOrder((method, userOrder) => {
 	console.log(method, userOrder);
 });
 wsUtil.onConfigError(text => alert(text));
-wsUtil.onReconnect(() => alert('reconnecting'));
-wsUtil.onConnected(() =>
+wsUtil.onReconnect(() => {
+	alert('reconnecting');
+	store.dispatch(wsActions.connectionUpdate(false));
+});
+wsUtil.onConnected(() => {
+	store.dispatch(wsActions.connectionUpdate(true));
+	store.dispatch(dynamoActions.refresh());
 	ReactDOM.render(
 		<Provider store={store}>
 			<Router>
@@ -50,5 +55,5 @@ wsUtil.onConnected(() =>
 		</Provider>,
 		document.getElementById('app')
 	)
-);
+});
 wsUtil.connectToRelayer();

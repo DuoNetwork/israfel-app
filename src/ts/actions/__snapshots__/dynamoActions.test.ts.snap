@@ -13,6 +13,8 @@ Array [
 ]
 `;
 
+exports[`actions getUserOrders dummy addr 1`] = `Array []`;
+
 exports[`actions scanStatus 1`] = `
 Array [
   Object {

@@ -25,20 +25,23 @@ export function userOrdersUpdte(userOrders: IUserOrder[]) {
 }
 
 export function getUserOrders(): VoidThunkAction {
-	return async (dispatch, getState) =>
-		dispatch(
-			userOrdersUpdte(
-				await dynamoUtil.getUserOrders(
-					getState().web3.account,
-					util.getUTCNowTimestamp() - 30 * 86400000
+	return async (dispatch, getState) => {
+		const account = getState().web3.account;
+		if (account !== CST.DUMMY_ADDR)
+			dispatch(
+				userOrdersUpdte(
+					await dynamoUtil.getUserOrders(
+						account,
+						util.getUTCNowTimestamp() - 30 * 86400000
+					)
 				)
-			)
-		);
+			);
+	};
 }
 
 export function refresh(): VoidThunkAction {
 	return dispatch => {
-		dispatch(scanStatus())
+		dispatch(scanStatus());
 		dispatch(getUserOrders());
-	}
+	};
 }
