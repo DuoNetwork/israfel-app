@@ -6,7 +6,8 @@ export const AC_NETWORK = 'network';
 export const AC_STATUS = 'status';
 export const AC_LOCALE = 'locale';
 export const AC_USER_ORDER = 'userOrder';
-export const AC_EXPIRE = 'expire time';
+export const AC_USER_ORDERS = 'userOrders';
+
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';
 export const LOCALE_RU = 'RU';
@@ -43,6 +44,7 @@ export const TH_AMT = 'Amount';
 export const TH_STATUS = 'Status';
 export const TH_ACTIONS = 'Actions';
 export const TH_ADD_BIDASK = 'addBidAsk';
+export const TH_EXPIRE = 'expire time';
 
 export const TT_NETWORK_CHECK: ILocaleText = {
 	[LOCALE_CN]:

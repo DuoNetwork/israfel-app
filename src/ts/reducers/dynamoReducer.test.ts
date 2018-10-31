@@ -18,4 +18,14 @@ describe('dynamo reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 	});
+
+	test('userOrders', () => {
+		state = dynamoReducer(state, {
+			type: CST.AC_USER_ORDERS,
+			value: [{
+				userOrders: 'test'
+			}]
+		});
+		expect(state).toMatchSnapshot();
+	});
 });

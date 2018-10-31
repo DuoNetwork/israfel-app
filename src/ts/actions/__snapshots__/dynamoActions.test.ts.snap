@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`actions getUserOrders 1`] = `
+Array [
+  Object {
+    "type": "userOrders",
+    "value": Array [
+      Object {
+        "test": "test",
+      },
+    ],
+  },
+]
+`;
+
 exports[`actions scanStatus 1`] = `
 Array [
   Object {
@@ -14,8 +27,21 @@ Array [
 exports[`actions statusUpdate 1`] = `
 Object {
   "type": "status",
-  "value": Object {
-    "test": "test",
-  },
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
+}
+`;
+
+exports[`actions userOrdersUpdte 1`] = `
+Object {
+  "type": "userOrders",
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
 }
 `;

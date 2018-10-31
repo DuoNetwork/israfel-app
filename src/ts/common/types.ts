@@ -14,6 +14,7 @@ export interface IState {
 
 export interface IDynamoState {
 	readonly status: relayerTypes.IStatus[];
+	readonly userOrders: relayerTypes.IUserOrder[];
 }
 
 export interface IUIState {

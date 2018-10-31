@@ -241,7 +241,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 								</li>
 								<li className={'input-line'}>
 									<span className="title" style={{ width: 200 }}>
-										{CST.AC_EXPIRE.toUpperCase()}
+										{CST.TH_EXPIRE.toUpperCase()}
 									</span>
 									<TimePicker
 										onChange={(time: Moment, timeString: string) =>

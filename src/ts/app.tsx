@@ -22,15 +22,16 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	) {
 		store.dispatch(web3Actions.accountUpdate(addr));
 		store.dispatch(web3Actions.networkUpdate(network));
+		store.dispatch(dynamoActions.refresh());
 	}
 });
 
 store.dispatch(web3Actions.refresh());
-store.dispatch(dynamoActions.scanStatus());
+store.dispatch(dynamoActions.refresh());
 
 setInterval(() => {
 	store.dispatch(web3Actions.refresh());
-	store.dispatch(dynamoActions.scanStatus());
+	store.dispatch(dynamoActions.refresh());
 }, 60000);
 
 wsUtil.onOrder((method, userOrder) => {
