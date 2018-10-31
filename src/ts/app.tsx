@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
 import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
-import * as CST from './common/constants';
+// import * as CST from './common/constants';
 import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
 import Israfel from './components/Israfel';
@@ -14,19 +14,6 @@ import store from './store/store';
 
 const config = require(`./keys/aws.ui.${__KOVAN__ ? 'dev' : 'live'}.json`);
 dynamoUtil.init(config, !__KOVAN__);
-
-store.dispatch(web3Actions.refresh());
-store.dispatch(dynamoActions.scanStatus());
-
-setInterval(() => {
-	store.dispatch(web3Actions.refresh());
-	store.dispatch(dynamoActions.scanStatus());
-}, 60000);
-
-wsUtil.init(CST.RELAYER_WS_URL);
-wsUtil.onOrder((method, userOrder) => {
-	console.log(method, userOrder);
-});
 
 web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	if (
@@ -38,13 +25,26 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	}
 });
 
-ReactDOM.render(
-	<Provider store={store}>
-		<Router>
-			<React.StrictMode>
-				<Israfel />
-			</React.StrictMode>
-		</Router>
-	</Provider>,
-	document.getElementById('app')
+store.dispatch(web3Actions.refresh());
+store.dispatch(dynamoActions.scanStatus());
+
+setInterval(() => {
+	store.dispatch(web3Actions.refresh());
+	store.dispatch(dynamoActions.scanStatus());
+}, 60000);
+
+wsUtil.onOrder((method, userOrder) => {
+	console.log(method, userOrder);
+});
+wsUtil.init().then(() =>
+	ReactDOM.render(
+		<Provider store={store}>
+			<Router>
+				<React.StrictMode>
+					<Israfel />
+				</React.StrictMode>
+			</Router>
+		</Provider>,
+		document.getElementById('app')
+	)
 );

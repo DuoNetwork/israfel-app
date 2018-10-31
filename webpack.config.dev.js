@@ -13,7 +13,7 @@ module.exports = {
 		publicPath: '/'
 	},
 	devServer: {
-		// https: true,
+		https: true,
 		contentBase: './dist',
 		hot: true,
 		historyApiFallback: true,

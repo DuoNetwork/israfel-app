@@ -1,20 +1,40 @@
 import WebSocket from 'isomorphic-ws';
-import * as CST from '../../../../israfel-relayer/src/common/constants';
-import {
-	IUserOrder,
-	IWsResponse,
-	IWsUserOrderResponse
-} from '../../../../israfel-relayer/src/common/types';
-import { IWsAddOrderRequest } from './types';
+import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
+import * as CST from './constants';
+import { IUserOrder, IWsAddOrderRequest, IWsResponse, IWsUserOrderResponse } from './types';
 import util from './util';
 import web3Util from './web3Util';
 
 class WsUtil {
 	public ws: WebSocket | null = null;
 	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
-	public init(host: string) {
-		return new Promise(resolve => {
-			this.ws = new WebSocket(host);
+	public init() {
+		return new Promise(async (resolve, reject) => {
+			const status = await dynamoUtil.scanStatus();
+			const now = util.getUTCNowTimestamp();
+			const relayerStatus = status.filter(
+				s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 10000
+			);
+			if (!relayerStatus.length) {
+				reject('no relayer available');
+				return;
+			}
+			let hostname = '';
+			let clientCount = Number.MAX_SAFE_INTEGER;
+			relayerStatus.forEach(r => {
+				if (!r.count || r.count < clientCount) {
+					clientCount = r.count || 0;
+					hostname = r.hostname;
+				}
+			});
+
+			const relayerServices = await dynamoUtil.getServices(CST.DB_RELAYER);
+			const relayerService = relayerServices.find(r => r.hostname === hostname);
+			if (!relayerService) {
+				reject('no relayer available');
+				return;
+			}
+			this.ws = new WebSocket(relayerService.url);
 			this.ws.onopen = function open() {
 				console.log('Connected');
 				resolve();
