@@ -55,7 +55,7 @@ class WsUtil {
 	// 	}
 	// }
 
-	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean) {
+	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: string) {
 		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
 		const etherTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
@@ -68,7 +68,7 @@ class WsUtil {
 			isBid ? etherTokenAddress : zrxTokenAddress,
 			isBid ? zrxAmt : ethAmt,
 			isBid ? ethAmt : zrxAmt,
-			Math.ceil(util.getUTCNowTimestamp() / 1000) + 3600
+			Math.ceil(util.getUTCNowTimestamp() / 1000) + util.convertSecond(expireTime)
 		);
 		const pair = 'ZRX-WETH';
 		const msg: IWsAddOrderRequest = {

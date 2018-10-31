@@ -47,11 +47,34 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
           <li
             className="input-line bg-dark"
           >
-            <span
-              className="title"
+            <Select
+              choiceTransitionName="zoom"
+              filterOption={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              optionFilterProp="children"
+              placeholder="Target Currency"
+              prefixCls="ant-select"
+              showSearch={true}
+              style={
+                Object {
+                  "width": 200,
+                }
+              }
+              transitionName="slide-up"
             >
-              Price
-            </span>
+              <Option
+                key="ZRX"
+              >
+                ZRX
+              </Option>
+              <Option
+                key="ETH"
+              >
+                ETH
+              </Option>
+            </Select>
             <styled.input
               className="bg-dark"
               onBlur={[Function]}
@@ -65,10 +88,56 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
           <li
             className="input-line"
           >
+            <Select
+              choiceTransitionName="zoom"
+              filterOption={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              optionFilterProp="children"
+              placeholder="Base Currency"
+              prefixCls="ant-select"
+              showSearch={true}
+              style={
+                Object {
+                  "width": 200,
+                }
+              }
+              transitionName="slide-up"
+            >
+              <Option
+                key="ZRX"
+              >
+                ZRX
+              </Option>
+              <Option
+                key="ETH"
+              >
+                ETH
+              </Option>
+            </Select>
+            <styled.input
+              className=""
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              right={true}
+              value="0"
+              width="60%"
+            />
+          </li>
+          <li
+            className="input-line"
+          >
             <span
               className="title"
+              style={
+                Object {
+                  "width": 200,
+                }
+              }
             >
-              Amount
+              Price
             </span>
             <styled.input
               className=""
@@ -78,6 +147,43 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               right={true}
               value="0"
               width="60%"
+            />
+          </li>
+          <li
+            className="input-line"
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 200,
+                }
+              }
+            >
+              EXPIRE TIME
+            </span>
+            <TimePicker
+              align={
+                Object {
+                  "offset": Array [
+                    0,
+                    -2,
+                  ],
+                }
+              }
+              defaultValue={"2018-10-31T00:00:00.000Z"}
+              disabled={false}
+              focusOnOpen={true}
+              hideDisabledOptions={false}
+              onChange={[Function]}
+              placement="bottomLeft"
+              prefixCls="ant-time-picker"
+              style={
+                Object {
+                  "width": 170,
+                }
+              }
+              transitionName="slide-up"
             />
           </li>
           <li

@@ -14,6 +14,16 @@ class Util {
 		else return 'Long Time Ago';
 	}
 
+	public convertSecond(time: string) {
+		const index = time.split(':');
+		let seconds = 0;
+		for (let i = 0 ; i < index.length; i++) {
+			seconds *= 60;
+			seconds += Number(index[i]);
+		}
+		return seconds;
+	}
+
 	public getUTCNowTimestamp() {
 		return moment().valueOf();
 	}

@@ -1,3 +1,6 @@
+import { Select } from 'antd';
+import { TimePicker } from 'antd';
+import moment, { Moment } from 'moment';
 import * as React from 'react';
 import * as CST from '../../common/constants';
 import wsUtil from '../../common/wsUtil';
@@ -6,9 +9,11 @@ import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_st
 
 interface IState {
 	isCreate: boolean;
-	amount: string;
+	baseCurrency: string;
 	description: string;
 	price: string;
+	targetCurrency: string;
+	expireTime: string;
 }
 
 export default class OperationCard extends React.PureComponent<{}, IState> {
@@ -16,54 +21,106 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		super(props);
 		this.state = {
 			isCreate: true,
-			amount: '0',
+			baseCurrency: '0',
 			description: '',
-			price: '0'
+			targetCurrency: '0',
+			price: '0',
+			expireTime: '0'
 		};
 	}
 
 	private handleTypeChange = () =>
 		this.setState({
 			isCreate: !this.state.isCreate,
-			amount: '0',
+			baseCurrency: '0',
+			targetCurrency: '0',
+			description: '',
 			price: '0',
-			description: ''
+			expireTime: '0'
 		});
 
 	private submit = async () => {
 		const action = this.state.isCreate ? 'Sell' : 'Buy';
-		await wsUtil.addOrder(Number(this.state.price), Number(this.state.amount), action === 'Buy');
+		await wsUtil.addOrder(
+			Number(this.state.baseCurrency),
+			Number(this.state.targetCurrency),
+			action === 'Buy',
+			this.state.expireTime
+		);
 	};
 
 	private getDescription = () => {
-		const { isCreate, price, amount } = this.state;
+		const { isCreate, targetCurrency, baseCurrency } = this.state;
+		if (targetCurrency !== '0' && baseCurrency !== '0')
+			this.setState({
+				price: (Number(targetCurrency) / Number(baseCurrency)).toString()
+			});
+		else
+			this.setState({
+				price: '0'
+			});
 
 		this.setState({
 			description: !isCreate
-				? 'Buy ' + amount + ' at price ' + price
-				: 'Sell ' + amount + ' at price ' + price
+				? 'Buy ' + baseCurrency + ' with ' + targetCurrency
+				: 'Sell ' + baseCurrency + ' with ' + targetCurrency
 		});
 	};
 
 	private handleAmountInputChange = (value: string) =>
 		this.setState({
-			amount: value
+			baseCurrency: value
 		});
 
 	private handlePriceInputChange = (price: string) => {
+		const { baseCurrency } = this.state;
+		if (price > '0')
+			this.setState({
+				targetCurrency: (Number(price) * Number(baseCurrency)).toString()
+			});
 		this.setState({
 			price: price
 		});
 	};
 
+	private handleTargetCurrencyInput = (targetCurrency: string) => {
+		this.setState({
+			targetCurrency: targetCurrency
+		});
+	};
+
+	private handleExpireTime(time: Moment, timeString: string) {
+		this.setState({
+			expireTime: timeString
+		});
+		console.log(time.toString());
+	}
+
 	private handleClear = () =>
 		this.setState({
-			amount: '0',
-			price: '0',
+			baseCurrency: '0',
+			targetCurrency: '0',
 			description: ''
 		});
 
+	private handleChange(value: any) {
+		console.log(`selected ${value}`);
+	}
+
+	private handleBlur() {
+		console.log('blur');
+	}
+
+	private handleFocus() {
+		console.log('focus');
+	}
+
 	public render() {
+		const Option = Select.Option;
+		const children = [];
+		for (let i = 0; i < CST.TH_CURRENCY.length; i++)
+			children.push(<Option key={CST.TH_CURRENCY[i]}>{CST.TH_CURRENCY[i]}</Option>);
+
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_OPERA.toUpperCase()}</SCardTitle>}
@@ -107,27 +164,91 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									</SDivFlexCenter>
 								</li>
 								<li className="input-line bg-dark">
-									<span className="title">{CST.TH_PX}</span>
+									<Select
+										showSearch
+										style={{ width: 200 }}
+										placeholder={CST.TH_PLACEHOLDER[0]}
+										optionFilterProp="children"
+										onChange={this.handleChange}
+										onFocus={this.handleFocus}
+										onBlur={this.handleBlur}
+										filterOption={(input, option) =>
+											option.props.children
+												? option.props.children
+														.toString()
+														.toLowerCase()
+														.indexOf(input.toLowerCase()) >= 0
+												: null
+										}
+									>
+										{children}
+									</Select>
 									<SInput
 										width="60%"
 										className="bg-dark"
-										value={this.state.price}
-										onChange={e => this.handlePriceInputChange(e.target.value)}
+										value={this.state.targetCurrency}
+										onChange={e =>
+											this.handleTargetCurrencyInput(e.target.value)
+										}
 										onBlur={() => this.getDescription()}
 										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
 										right
 									/>
 								</li>
 								<li className={'input-line'}>
-									<span className="title">{CST.TH_AMT}</span>
+									<Select
+										showSearch
+										style={{ width: 200 }}
+										placeholder={CST.TH_PLACEHOLDER[1]}
+										optionFilterProp="children"
+										onChange={this.handleChange}
+										onFocus={this.handleFocus}
+										onBlur={this.handleBlur}
+										filterOption={(input, option) =>
+											option.props.children
+												? option.props.children
+														.toString()
+														.toLowerCase()
+														.indexOf(input.toLowerCase()) >= 0
+												: null
+										}
+									>
+										{children}
+									</Select>
 									<SInput
 										width="60%"
 										className={''}
-										value={this.state.amount}
+										value={this.state.baseCurrency}
 										onChange={e => this.handleAmountInputChange(e.target.value)}
 										onBlur={() => this.getDescription()}
 										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
 										right
+									/>
+								</li>
+								<li className={'input-line'}>
+									<span className="title" style={{ width: 200 }}>
+										{CST.TH_PX}
+									</span>
+									<SInput
+										width="60%"
+										className={''}
+										value={this.state.price}
+										onChange={e => this.handlePriceInputChange(e.target.value)}
+										onBlur={e => this.handlePriceInputChange(e.target.value)}
+										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+										right
+									/>
+								</li>
+								<li className={'input-line'}>
+									<span className="title" style={{ width: 200 }}>
+										{CST.AC_EXPIRE.toUpperCase()}
+									</span>
+									<TimePicker
+										onChange={(time: Moment, timeString: string) =>
+											this.handleExpireTime(time, timeString)
+										}
+										defaultValue={moment('8:00:00', 'HH:mm:ss')}
+										style={{ width: 170 }}
 									/>
 								</li>
 								<li className="description">
@@ -143,8 +264,8 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										<button
 											className={'form-button'}
 											disabled={
-												this.state.amount === '0' ||
-												this.state.price === '0'
+												this.state.baseCurrency === '0' ||
+												this.state.targetCurrency === '0'
 											}
 											onClick={this.submit}
 										>

@@ -6,7 +6,7 @@ export const AC_NETWORK = 'network';
 export const AC_STATUS = 'status';
 export const AC_LOCALE = 'locale';
 export const AC_USER_ORDER = 'userOrder';
-
+export const AC_EXPIRE = 'expire time';
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';
 export const LOCALE_RU = 'RU';
@@ -18,7 +18,8 @@ export interface ILocaleText {
 	JP: string;
 	[key: string]: string;
 }
-
+export const TH_PLACEHOLDER = ['Target Currency', 'Base Currency'];
+export const TH_CURRENCY = ['ZRX', 'ETH'];
 export const TH_LOGIN = 'Admin Login';
 export const TH_LOGOUT = 'Log out';
 export const TH_ACCOUNT = 'Account';

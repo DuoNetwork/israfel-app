@@ -46,6 +46,16 @@ injectGlobal([
 			pointer-events: none !important;
 			opacity: 0.5;
 		}
+		.ant-time-picker-input {
+			color: #fff;
+			background-color: transparent;
+			border: none;
+			border-radius: 4px;
+			text-align: center;
+		}
+		.ant-time-picker-icon .ant-time-picker-clock-icon {
+			color: #fff;
+		}
 	}
 `
 ] as any);
