@@ -36,7 +36,9 @@ setInterval(() => {
 wsUtil.onOrder((method, userOrder) => {
 	console.log(method, userOrder);
 });
-wsUtil.init().then(() =>
+wsUtil.onConfigError(text => alert(text));
+wsUtil.onReconnect(() => alert('reconnecting'));
+wsUtil.onConnected(() =>
 	ReactDOM.render(
 		<Provider store={store}>
 			<Router>
@@ -48,3 +50,4 @@ wsUtil.init().then(() =>
 		document.getElementById('app')
 	)
 );
+wsUtil.connectToRelayer();
