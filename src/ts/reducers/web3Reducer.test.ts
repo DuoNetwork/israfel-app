@@ -1,7 +1,7 @@
 import * as CST from '../common/constants';
 import { initialState, web3Reducer } from './web3Reducer';
 
-describe('ui reducer', () => {
+describe('web3 reducer', () => {
 	let state = initialState;
 
 	test('default', () => {

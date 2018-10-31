@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ui reducer default 1`] = `
+exports[`dynamo reducer default 1`] = `
 Object {
   "status": Array [],
 }
 `;
 
-exports[`ui reducer status 1`] = `
+exports[`dynamo reducer status 1`] = `
 Object {
   "status": Array [
     Object {

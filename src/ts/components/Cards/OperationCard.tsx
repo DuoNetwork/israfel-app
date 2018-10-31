@@ -1,13 +1,8 @@
-//import moment from 'moment';
 import * as React from 'react';
-// import Web3 from 'web3';
 import * as CST from '../../common/constants';
+import wsUtil from '../../common/wsUtil';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
-
-interface IProps {
-	submitOrders: (amount: number, price: number, action: string) => any;
-}
 
 interface IState {
 	isCreate: boolean;
@@ -16,8 +11,8 @@ interface IState {
 	price: string;
 }
 
-export default class OperationCard extends React.PureComponent<IProps, IState> {
-	constructor(props: IProps) {
+export default class OperationCard extends React.PureComponent<{}, IState> {
+	constructor(props: object) {
 		super(props);
 		this.state = {
 			isCreate: true,
@@ -37,12 +32,7 @@ export default class OperationCard extends React.PureComponent<IProps, IState> {
 
 	private submit = async () => {
 		const action = this.state.isCreate ? 'Sell' : 'Buy';
-
-		this.props.submitOrders(
-			parseFloat(this.state.amount),
-			parseFloat(this.state.price),
-			action
-		);
+		await wsUtil.addOrder(Number(this.state.price), Number(this.state.amount), action === 'Buy');
 	};
 
 	private getDescription = () => {

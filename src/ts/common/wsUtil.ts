@@ -41,19 +41,19 @@ class WsUtil {
 		}
 	}
 
-	public subscribe(name: string, marketId: string) {
-		if (this.ws && name && marketId) {
-			const req = {
-				type: 'subscribe',
-				channel: {
-					name: name,
-					marketId: marketId
-				},
-				requestId: Date.now().toString()
-			};
-			this.ws.send(JSON.stringify(req));
-		}
-	}
+	// public subscribe(name: string, marketId: string) {
+	// 	if (this.ws && name && marketId) {
+	// 		const req = {
+	// 			type: 'subscribe',
+	// 			channel: {
+	// 				name: name,
+	// 				marketId: marketId
+	// 			},
+	// 			requestId: Date.now().toString()
+	// 		};
+	// 		this.ws.send(JSON.stringify(req));
+	// 	}
+	// }
 
 	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean) {
 		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);

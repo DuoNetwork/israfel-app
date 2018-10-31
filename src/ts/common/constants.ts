@@ -5,6 +5,7 @@ export const AC_NETWORK = 'network';
 // export const AC_GAS_PX = 'gasPrice';
 export const AC_STATUS = 'status';
 export const AC_LOCALE = 'locale';
+export const AC_USER_ORDER = 'userOrder';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';

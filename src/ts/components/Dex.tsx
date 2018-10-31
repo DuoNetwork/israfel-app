@@ -33,11 +33,7 @@ export default class Dex extends React.PureComponent<IProps> {
 							locale={locale}
 						/> */}
 						<Affix offsetTop={10}>
-							<OperationCard
-								submitOrders={(a: number, p: number, q: string) =>
-									console.log(a, p, q)
-								}
-							/>
+							<OperationCard />
 						</Affix>
 					</SDivFlexCenter>
 				</div>

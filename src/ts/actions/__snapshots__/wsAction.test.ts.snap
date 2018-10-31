@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions userOrder 1`] = `
+Object {
+  "type": "userOrder",
+  "userOrder": Object {
+    "test": "test",
+  },
+}
+`;

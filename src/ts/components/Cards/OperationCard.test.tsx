@@ -4,10 +4,9 @@ import { SInput } from './_styled';
 import OperationCard from './OperationCard';
 
 describe('OperationCard Test', () => {
-	const submitOrdersMock = jest.fn();
 	describe('When user search by Price and Volume', () => {
 		it('Test Snapshot', () => {
-			const wrapper = shallow(<OperationCard submitOrders={submitOrdersMock}/>);
+			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
 			expect(wrapper).toMatchSnapshot();
 			setTimeout(() => {
@@ -24,7 +23,7 @@ describe('OperationCard Test', () => {
 		});
 
 		it('Test SInput Input', async () => {
-			const wrapper = shallow(<OperationCard submitOrders={submitOrdersMock}/>);
+			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
 			await wrapper
 				.find(SInput)
@@ -58,7 +57,7 @@ describe('OperationCard Test', () => {
 		});
 
 		it('Test SInput Input', async () => {
-			const wrapper = shallow(<OperationCard submitOrders={submitOrdersMock} />);
+			const wrapper = shallow(<OperationCard />);
 			wrapper
 				.find('button')
 				.at(0)
@@ -95,13 +94,13 @@ describe('OperationCard Test', () => {
 						.at(4)
 						.find('.description')
 				).toBe('Buy 6556 at price 6506.88');
-				expect(submitOrdersMock).toHaveBeenCalled();
+				// expect(submitOrdersMock).toHaveBeenCalled();
 				expect(wrapper.state('description')).toBe('Buy 6556 at price 6506.88');
 			}, 1500);
 		});
 
 		it('Sell Clear', async () => {
-			const wrapper = shallow(<OperationCard submitOrders={submitOrdersMock} />);
+			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
 			await wrapper
 				.find(SInput)
@@ -127,7 +126,7 @@ describe('OperationCard Test', () => {
 		});
 
 		it('Buy Clear', async () => {
-			const wrapper = shallow(<OperationCard submitOrders={submitOrdersMock} />);
+			const wrapper = shallow(<OperationCard />);
 			wrapper
 				.find('button')
 				.at(0)
@@ -145,13 +144,23 @@ describe('OperationCard Test', () => {
 				.find('button')
 				.at(3)
 				.simulate('click');
-			wrapper.find('button').at(2).simulate('click');
+			wrapper
+				.find('button')
+				.at(2)
+				.simulate('click');
 			expect(wrapper.state('amount')).toBe('0');
 			expect(wrapper.state('price')).toBe('0');
 			expect(wrapper.state('description')).toBe('');
 			setTimeout(() => {
-				expect(wrapper.find('div').at(4).find('li').at(4).find('.description')).toBe('Buy 0 at price 0');
-				expect(submitOrdersMock).toHaveBeenCalled();
+				expect(
+					wrapper
+						.find('div')
+						.at(4)
+						.find('li')
+						.at(4)
+						.find('.description')
+				).toBe('Buy 0 at price 0');
+				// expect(submitOrdersMock).toHaveBeenCalled();
 			}, 500);
 		});
 	});

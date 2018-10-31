@@ -1,19 +1,18 @@
-import { IWsUserOrderResponse } from '../../../../israfel-relayer/src/common/types';
 import * as CST from '../common/constants';
-import { VoidThunkAction } from '../common/types';
-import wsUtil from '../common/wsUtil';
+import { IUserOrder /*, VoidThunkAction*/ } from '../common/types';
+// import wsUtil from '../common/wsUtil';
 
-export function onSubscription(marketId: string, pair: string): VoidThunkAction {
-	return async () => {
-		await wsUtil.subscribe(marketId, pair);
-	};
-}
+// export function onSubscription(marketId: string, pair: string): VoidThunkAction {
+// 	return async () => {
+// 		await wsUtil.subscribe(marketId, pair);
+// 	};
+// }
 
-export function orderBooksUpdate(message: IWsUserOrderResponse) {
+export function userOrderUpdate(userOrder: IUserOrder) {
 	return {
-		type: CST.TH_SUBSCRIBE,
-		[CST.TH_SUBSCRIBE]: message
-	};
+		type: CST.AC_USER_ORDER,
+		[CST.AC_USER_ORDER]: userOrder
+	}
 }
 
 // export function addWSOrder(message: IWSAskBid): VoidThunkAction {

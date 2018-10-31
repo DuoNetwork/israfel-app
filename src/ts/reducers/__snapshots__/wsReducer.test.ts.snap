@@ -1,14 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ui reducer default 1`] = `
+exports[`ws reducer default 1`] = `
 Object {
   "userOrders": Array [],
 }
 `;
 
-exports[`ui reducer subscribe 1`] = `
+exports[`ws reducer userOrder 1`] = `
 Object {
-  "subscribe": undefined,
+  "userOrder": Array [
+    Object {
+      "userOrder": "test",
+    },
+  ],
   "userOrders": Array [],
 }
 `;

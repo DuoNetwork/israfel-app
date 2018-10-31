@@ -8,9 +8,10 @@ export const initialState: IWsState = {
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
 	switch (action.type) {
-		case CST.TH_SUBSCRIBE:
-		case CST.TH_ADD_BIDASK:
-			return Object.assign({}, state, { [action.type]: action[action.type] });
+		case CST.AC_USER_ORDER:
+			return Object.assign({}, state, {
+				[CST.AC_USER_ORDER]: [...state.userOrders, action[action.type]]
+			});
 		default:
 			return state;
 	}

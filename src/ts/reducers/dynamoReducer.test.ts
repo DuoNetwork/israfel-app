@@ -1,7 +1,7 @@
 import * as CST from '../common/constants';
 import { dynamoReducer, initialState } from './dynamoReducer';
 
-describe('ui reducer', () => {
+describe('dynamo reducer', () => {
 	let state = initialState;
 
 	test('default', () => {

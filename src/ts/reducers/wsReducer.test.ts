@@ -1,7 +1,7 @@
 import * as CST from '../common/constants';
 import { initialState, wsReducer } from './wsReducer';
 
-describe('ui reducer', () => {
+describe('ws reducer', () => {
 	let state = initialState;
 
 	test('default', () => {
@@ -9,9 +9,10 @@ describe('ui reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('subscribe', () => {
+	test('userOrder', () => {
 		state = wsReducer(state, {
-			type: CST.TH_SUBSCRIBE
+			type: CST.AC_USER_ORDER,
+			[CST.AC_USER_ORDER]: { userOrder: 'test' }
 		});
 		expect(state).toMatchSnapshot();
 	});
