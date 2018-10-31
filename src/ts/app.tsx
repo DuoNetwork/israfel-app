@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
+import * as wsActions from '../ts/actions/wsActions';
 import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
@@ -12,7 +13,6 @@ import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
 import Israfel from './components/Israfel';
 import store from './store/store';
-
 const config = require(`./keys/aws.ui.${__KOVAN__ ? 'dev' : 'live'}.json`);
 dynamoUtil.init(config, !__KOVAN__);
 
@@ -35,6 +35,7 @@ setInterval(() => {
 }, 60000);
 
 wsUtil.onOrder((method, userOrder) => {
+	store.dispatch(wsActions.userOrderUpdate(userOrder));
 	console.log(method, userOrder);
 });
 wsUtil.onConfigError(text => alert(text));

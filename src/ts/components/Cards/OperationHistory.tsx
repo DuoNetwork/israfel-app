@@ -8,7 +8,7 @@ import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
 
 interface IProps {
-	askBidMsg: IUserOrder;
+	userOrder: IUserOrder[];
 	locale: string;
 }
 
@@ -19,11 +19,11 @@ interface IProps {
 export default class TimeSeriesCard extends React.Component<IProps> {
 
 	public render() {
-		const { askBidMsg } = this.props;
+		const { userOrder } = this.props;
+		console.log(userOrder);
 		const title = CST.TH_ORDERBOOK.toUpperCase();
-		const askBidArray: IUserOrder[] = [];
-		if (askBidMsg && askBidMsg.amount !== 0) askBidArray.push(askBidMsg);
-		const step = util.range(0, askBidArray.length);
+		// const index = userOrder.findIndex((element: IUserOrder) => { return element.orderHash === userOrder.orderHash);
+		const step = userOrder ? util.range(0, userOrder.length) : [];
 		return (
 			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">
 				<SDivFlexCenter center horizontal>
@@ -33,27 +33,27 @@ export default class TimeSeriesCard extends React.Component<IProps> {
 								<li className="right">
 									<span className="title">{CST.TH_ACTIONS.toUpperCase()}</span>
 								</li>
-								{askBidArray.length ? (
-									util.range(0, askBidArray.length).map((i: any) => (
+								{ userOrder && userOrder.length ? (
+									util.range(0, userOrder.length).map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
-												{i < askBidArray.length
-													? askBidArray[i].amount !== 0
-														? util.formatNumber(askBidArray[i].amount)
+												{i < userOrder.length
+													? userOrder[i].amount !== 0
+														? util.formatNumber(userOrder[i].amount)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < askBidArray.length
-													? askBidArray[i].price !== 0
-														? util.formatNumber(askBidArray[i].price)
+												{i < userOrder.length
+													? userOrder[i].price !== 0
+														? util.formatNumber(userOrder[i].price)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < askBidArray.length
-													? askBidArray[i].price !== 0
-														? askBidArray[i].side
+												{i < userOrder.length
+													? userOrder[i].price !== 0
+														? userOrder[i].side
 														: '-'
 													: '-'}
 											</span>
@@ -75,7 +75,7 @@ export default class TimeSeriesCard extends React.Component<IProps> {
 								{step.length > 0 ? (
 									step.map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
-											<span className="title"> {askBidArray[i].status} </span>
+											<span className="title"> {userOrder[i].status} </span>
 										</li>
 									))
 								) : (

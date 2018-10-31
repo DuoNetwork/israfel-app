@@ -50,9 +50,6 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
             <Select
               choiceTransitionName="zoom"
               filterOption={[Function]}
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               optionFilterProp="children"
               placeholder="Target Currency"
               prefixCls="ant-select"
@@ -91,9 +88,6 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
             <Select
               choiceTransitionName="zoom"
               filterOption={[Function]}
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               optionFilterProp="children"
               placeholder="Base Currency"
               prefixCls="ant-select"

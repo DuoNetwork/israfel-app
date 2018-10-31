@@ -9,7 +9,8 @@ function mapStateToProps(state: IState) {
 	return {
 		network: state.web3.network,
 		locale: state.ui.locale,
-		account: state.web3.account
+		account: state.web3.account,
+		userOrders: state.ws.userOrders,
 	};
 }
 

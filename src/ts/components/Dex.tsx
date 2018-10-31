@@ -1,10 +1,11 @@
 import { Layout } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
+import { IUserOrder } from 'ts/common/types';
 // import { IWsUserOrderResponse } from '../common/types';
 import { SDivFlexCenter } from './_styled';
 import OperationCard from './Cards/OperationCard';
-// import OperationHistory from './Cards/OperationHistory';
+import OperationHistory from './Cards/OperationHistory';
 // import OperationCard from './Cards/OperationCard';
 // import OrderbookCardSubscription from './Cards/OrderbookCardSubscription';
 import Header from './Header';
@@ -14,6 +15,7 @@ export interface IProps {
 	network: number;
 	locale: string;
 	account: string;
+	userOrders: IUserOrder[];
 	updateLocale: (locale: string) => any;
 	// refresh: () => any;
 	// subscription: (marketId: string, pair: string) => any;
@@ -22,16 +24,17 @@ export interface IProps {
 
 export default class Dex extends React.PureComponent<IProps> {
 	public render() {
-		const { locale, network, updateLocale } = this.props;
+		const { userOrders, locale, network, updateLocale } = this.props;
+		console.log(userOrders);
 		return (
 			<Layout>
 				<div className="App">
-					<Header locale={locale} network={network} updateLocale={updateLocale} />
+					<Header locale={locale} network={network} updateLocale={updateLocale}/>
 					<SDivFlexCenter center horizontal>
-						{/* <OperationHistory
-							askBidMsg={wsUserOrderResponse.userOrder}
+						<OperationHistory
+							userOrder={userOrders}
 							locale={locale}
-						/> */}
+						/>
 						<Affix offsetTop={10}>
 							<OperationCard />
 						</Affix>

@@ -103,18 +103,6 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			description: ''
 		});
 
-	private handleChange(value: any) {
-		console.log(`selected ${value}`);
-	}
-
-	private handleBlur() {
-		console.log('blur');
-	}
-
-	private handleFocus() {
-		console.log('focus');
-	}
-
 	public render() {
 		const Option = Select.Option;
 		const children = [];
@@ -169,9 +157,6 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										style={{ width: 200 }}
 										placeholder={CST.TH_PLACEHOLDER[0]}
 										optionFilterProp="children"
-										onChange={this.handleChange}
-										onFocus={this.handleFocus}
-										onBlur={this.handleBlur}
 										filterOption={(input, option) =>
 											option.props.children
 												? option.props.children
@@ -201,9 +186,6 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										style={{ width: 200 }}
 										placeholder={CST.TH_PLACEHOLDER[1]}
 										optionFilterProp="children"
-										onChange={this.handleChange}
-										onFocus={this.handleFocus}
-										onBlur={this.handleBlur}
 										filterOption={(input, option) =>
 											option.props.children
 												? option.props.children
