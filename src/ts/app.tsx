@@ -4,7 +4,6 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
-import * as wsActions from '../ts/actions/wsActions';
 import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
