@@ -7,8 +7,8 @@ test('handleMessage no channel', () => {
 	wsUtil.onOrderUpdate(handleOrderUpdate);
 	wsUtil.onOrderError(handleOrderError);
 	wsUtil.handleMessage(JSON.stringify({}));
-	expect(handleOrderUpdate.mock.calls.length).toBe(0);
-	expect(handleOrderError.mock.calls.length).toBe(0);
+	expect(handleOrderUpdate).not.toBeCalled();
+	expect(handleOrderError).not.toBeCalled();
 });
 
 test('handleMessage order error', () => {
@@ -24,7 +24,7 @@ test('handleMessage order error', () => {
 			orderHash: '0xOrderHash'
 		})
 	);
-	expect(handleOrderUpdate.mock.calls.length).toBe(0);
+	expect(handleOrderUpdate).not.toBeCalled();
 	expect(handleOrderError.mock.calls).toMatchSnapshot();
 });
 
@@ -44,5 +44,5 @@ test('handleMessage order ok', () => {
 		})
 	);
 	expect(handleOrderUpdate.mock.calls).toMatchSnapshot();
-	expect(handleOrderError.mock.calls.length).toBe(0);
+	expect(handleOrderError).not.toBeCalled();
 });
