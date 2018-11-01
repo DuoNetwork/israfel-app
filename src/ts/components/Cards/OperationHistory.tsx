@@ -7,6 +7,7 @@ import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
 
 interface IProps {
+	orderHistory: IUserOrder[];
 	userOrder: IUserOrder[];
 	locale: string;
 }
@@ -14,9 +15,11 @@ interface IProps {
 export default class TimeSeriesCard extends React.Component<IProps> {
 
 	public render() {
+		let { orderHistory } = this.props;
 		const { userOrder } = this.props;
+		for (let i = 0; i < userOrder.length; i++) orderHistory = util.checkOrderHash(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDERBOOK.toUpperCase();
-		const step = userOrder ? util.range(0, userOrder.length) : [];
+		const step = orderHistory ? util.range(0, orderHistory.length) : [];
 		return (
 			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">
 				<SDivFlexCenter center horizontal>

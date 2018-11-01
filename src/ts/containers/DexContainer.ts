@@ -11,6 +11,7 @@ function mapStateToProps(state: IState) {
 		locale: state.ui.locale,
 		account: state.web3.account,
 		userOrders: state.ws.userOrders,
+		orderHistory: state.dynamo.userOrders,
 	};
 }
 

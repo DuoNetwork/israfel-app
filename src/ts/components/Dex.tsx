@@ -12,12 +12,13 @@ export interface IProps {
 	locale: string;
 	account: string;
 	userOrders: IUserOrder[];
+	orderHistory: IUserOrder[];
 	updateLocale: (locale: string) => any;
 }
 
 export default class Dex extends React.PureComponent<IProps> {
 	public render() {
-		const { userOrders, locale, network, updateLocale } = this.props;
+		const { userOrders, locale, network, orderHistory, updateLocale } = this.props;
 		return (
 			<Layout>
 				<div className="App">
@@ -25,6 +26,7 @@ export default class Dex extends React.PureComponent<IProps> {
 					<SDivFlexCenter center horizontal>
 						<OperationHistory
 							userOrder={userOrders}
+							orderHistory={orderHistory}
 							locale={locale}
 						/>
 						<Affix offsetTop={10}>
