@@ -165,7 +165,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                   ],
                 }
               }
-              defaultValue={"2018-10-31T00:00:00.000Z"}
+              defaultValue={"2018-11-01T00:00:00.000Z"}
               disabled={false}
               focusOnOpen={true}
               hideDisabledOptions={false}

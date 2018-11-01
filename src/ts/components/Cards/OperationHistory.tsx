@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
 import * as CST from '../../common/constants';
-// import { IWSOrderBookSubscription } from '../../common/types';
 import util from '../../common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardTitle } from './_styled';
@@ -12,17 +11,11 @@ interface IProps {
 	locale: string;
 }
 
-// interface IState {
-// 	orderBookSubscription: IWSOrderBookSubscription;
-// }
-
 export default class TimeSeriesCard extends React.Component<IProps> {
 
 	public render() {
 		const { userOrder } = this.props;
-		console.log(userOrder);
 		const title = CST.TH_ORDERBOOK.toUpperCase();
-		// const index = userOrder.findIndex((element: IUserOrder) => { return element.orderHash === userOrder.orderHash);
 		const step = userOrder ? util.range(0, userOrder.length) : [];
 		return (
 			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">

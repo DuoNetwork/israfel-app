@@ -2,6 +2,7 @@
 // import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
 import * as d3 from 'd3';
 import moment from 'moment';
+import { IUserOrder } from '../../../../israfel-relayer/src/common/types';
 // import * as CST from './constants';
 
 class Util {
@@ -17,11 +18,20 @@ class Util {
 	public convertSecond(time: string) {
 		const index = time.split(':');
 		let seconds = 0;
-		for (let i = 0 ; i < index.length; i++) {
+		for (let i = 0; i < index.length; i++) {
 			seconds *= 60;
 			seconds += Number(index[i]);
 		}
 		return seconds;
+	}
+
+	public checkOrderHash(orderBook: IUserOrder[], newOrder: IUserOrder) {
+		const index = orderBook.findIndex(
+			(element: IUserOrder) => element.orderHash === newOrder.orderHash
+		);
+		if (index !== -1) orderBook[index].status = newOrder.status;
+		else orderBook.push(newOrder);
+		return orderBook;
 	}
 
 	public getUTCNowTimestamp() {
