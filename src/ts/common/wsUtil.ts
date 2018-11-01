@@ -1,16 +1,27 @@
 import WebSocket from 'isomorphic-ws';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 import * as CST from './constants';
-import { IUserOrder, IWsAddOrderRequest, IWsResponse, IWsUserOrderResponse } from './types';
+import {
+	IUserOrder,
+	IWsAddOrderRequest,
+	IWsOrderResponse,
+	IWsResponse,
+	IWsUserOrderResponse
+} from './types';
 import util from './util';
 import web3Util from './web3Util';
 
 class WsUtil {
 	public ws: WebSocket | null = null;
-	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
+	private handleConfigError: (text: string) => any = () => ({});
 	private handleConnected: () => any = () => ({});
 	private handleReconnect: () => any = () => ({});
-	private handleConfigError: (text: string) => any = () => ({});
+	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
+	private handleOrderError: (
+		method: string,
+		orderHash: string,
+		error: string
+	) => any = () => ({});
 
 	private reconnect() {
 		this.handleReconnect();
@@ -59,16 +70,25 @@ class WsUtil {
 		};
 	}
 
+	private handleOrderResponse(orderResponse: IWsOrderResponse) {
+		if (orderResponse.status !== CST.WS_OK)
+			this.handleOrderError(
+				orderResponse.method,
+				orderResponse.orderHash,
+				orderResponse.status
+			);
+		else
+			this.handleOrderUpdate(
+				orderResponse.method,
+				(orderResponse as IWsUserOrderResponse).userOrder
+			);
+	}
+
 	public handleMessage(message: string) {
 		const wsMsg: IWsResponse = JSON.parse(message);
-		if (wsMsg.status !== CST.WS_OK) {
-			console.log(message);
-			return;
-		}
-
 		switch (wsMsg.channel) {
 			case CST.DB_ORDERS:
-				this.handleOrderUpdate(wsMsg.method, (wsMsg as IWsUserOrderResponse).userOrder);
+				this.handleOrderResponse(wsMsg as IWsOrderResponse);
 				break;
 			case CST.DB_ORDER_BOOKS:
 				break;
@@ -117,8 +137,14 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public onOrder(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
+	public onOrderUpdate(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
 		this.handleOrderUpdate = handleOrderUpdate;
+	}
+
+	public onOrderError(
+		handleOrderError: (method: string, orderHash: string, error: string) => any
+	) {
+		this.handleOrderError = handleOrderError;
 	}
 
 	public onReconnect(handleReconnect: () => any) {

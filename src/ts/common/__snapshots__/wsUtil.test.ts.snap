@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handleMessage order error 1`] = `
+Array [
+  Array [
+    "method",
+    "0xOrderHash",
+    "not ok",
+  ],
+]
+`;
+
+exports[`handleMessage order ok 1`] = `
+Array [
+  Array [
+    "method",
+    Object {
+      "test": "test",
+    },
+  ],
+]
+`;
