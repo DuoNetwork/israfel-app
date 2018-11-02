@@ -33,7 +33,7 @@ setInterval(() => {
 	store.dispatch(dynamoActions.refresh());
 }, 60000);
 
-wsUtil.onOrder((method, userOrder) => {
+wsUtil.onOrderUpdate((method, userOrder) => {
 	store.dispatch(wsActions.userOrderUpdate(userOrder));
 	console.log(method, userOrder);
 });
