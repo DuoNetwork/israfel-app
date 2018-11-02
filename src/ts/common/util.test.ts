@@ -44,5 +44,58 @@ test('getUTCNowTimestamp Long Ago', () => {
 });
 
 test('convertSecond', () => {
-	expect(util.convertSecond("12:1:1")).toEqual(43261);
+	expect(util.convertSecond('12:1:1')).toEqual(43261);
+});
+
+test('operationOrder', () => {
+	const mockOrderBook = [
+		{
+			account: 'text',
+			pair: 'ZRX-WETH',
+			orderHash: '0x00',
+			price: 1,
+			amount: 1,
+			side: '0x00',
+			createdAt: 1,
+			updatedAt: 1,
+			initialSequence: 1,
+			currentSequence: 1,
+			type: 'add',
+			status: 'confirmed',
+			updatedBy: 'relayer'
+		}
+	];
+	const mockNewOrder = {
+		account: 'text',
+		pair: 'ZRX-WETH',
+		orderHash: '0x00',
+		price: 1,
+		amount: 1,
+		side: '0x00',
+		createdAt: 1,
+		updatedAt: 1,
+		initialSequence: 1,
+		currentSequence: 1,
+		type: 'add',
+		status: 'confirmed',
+		updatedBy: 'relayer'
+	};
+	const mockResult = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x00',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x00',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		}
+	];
+	expect(util.operationOrder(mockOrderBook, mockNewOrder)).toEqual(mockResult);
 });

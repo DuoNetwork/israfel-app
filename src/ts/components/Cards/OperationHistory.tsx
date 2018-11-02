@@ -1,4 +1,6 @@
+import { Popconfirm } from 'antd';
 import * as React from 'react';
+import wsUtil from 'ts/common/wsUtil';
 import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
 import * as CST from '../../common/constants';
 import util from '../../common/util';
@@ -12,12 +14,35 @@ interface IProps {
 	locale: string;
 }
 
-export default class TimeSeriesCard extends React.Component<IProps> {
+interface IState {
+	orderHash: string;
+}
 
+let orderHash: string = '';
+
+export default class TimeSeriesCard extends React.Component<IProps, IState> {
+	constructor(props: IProps) {
+		super(props);
+		this.state = {
+			orderHash: ''
+		};
+	}
+
+	private setOrderHash(index: any) {
+		orderHash = this.props.orderHistory[index].orderHash;
+	}
+
+	private deleteOrder() {
+		wsUtil.deleteOrder(orderHash);
+	}
 	public render() {
 		let { orderHistory } = this.props;
 		const { userOrder } = this.props;
-		for (let i = 0; i < userOrder.length; i++) orderHistory = util.checkOrderHash(orderHistory, userOrder[i]);
+		console.log(userOrder);
+		for (let i = 0; i < userOrder.length; i++)
+			if (userOrder[i].type === 'add')
+				orderHistory = util.addOrder(orderHistory, userOrder[i]);
+		orderHistory = userOrder;
 		const title = CST.TH_ORDERBOOK.toUpperCase();
 		const step = orderHistory ? util.range(0, orderHistory.length) : [];
 		return (
@@ -29,27 +54,27 @@ export default class TimeSeriesCard extends React.Component<IProps> {
 								<li className="right">
 									<span className="title">{CST.TH_ACTIONS.toUpperCase()}</span>
 								</li>
-								{ userOrder && userOrder.length ? (
-									util.range(0, userOrder.length).map((i: any) => (
+								{orderHistory && orderHistory.length ? (
+									util.range(0, orderHistory.length).map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
-												{i < userOrder.length
-													? userOrder[i].amount !== 0
-														? util.formatNumber(userOrder[i].amount)
+												{i < orderHistory.length
+													? orderHistory[i].amount !== 0
+														? util.formatNumber(orderHistory[i].amount)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < userOrder.length
-													? userOrder[i].price !== 0
-														? util.formatNumber(userOrder[i].price)
+												{i < orderHistory.length
+													? orderHistory[i].price !== 0
+														? util.formatNumber(orderHistory[i].price)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < userOrder.length
-													? userOrder[i].price !== 0
-														? userOrder[i].side
+												{i < orderHistory.length
+													? orderHistory[i].price !== 0
+														? orderHistory[i].side
 														: '-'
 													: '-'}
 											</span>
@@ -71,7 +96,7 @@ export default class TimeSeriesCard extends React.Component<IProps> {
 								{step.length > 0 ? (
 									step.map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
-											<span className="title"> {userOrder[i].status} </span>
+											<span className="title">{orderHistory[i].status}</span>
 										</li>
 									))
 								) : (
@@ -89,9 +114,26 @@ export default class TimeSeriesCard extends React.Component<IProps> {
 								</li>
 								{step.length > 0 ? (
 									step.map((i: any) => (
-										<li key={i} style={{ height: '28px' }}>
-											<button className={'form-button'}>cancel</button>
-										</li>
+										<Popconfirm
+											placement="top"
+											title={CST.TH_DELETE_ORDER}
+											okText="Confirm"
+											cancelText="Cancel"
+											onConfirm={this.deleteOrder}
+										>
+											<li
+												key={i}
+												style={{ height: '28px' }}
+												onClick={this.setOrderHash.bind(this, i)}
+											>
+												<button
+													className={'form-button'}
+													disabled={orderHistory[i].status === 'pending'}
+												>
+													cancel
+												</button>
+											</li>
+										</Popconfirm>
 									))
 								) : (
 									<li className="block-title t-center">...</li>

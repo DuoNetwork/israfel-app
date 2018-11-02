@@ -46,6 +46,7 @@ export const TH_STATUS = 'Status';
 export const TH_ACTIONS = 'Actions';
 export const TH_ADD_BIDASK = 'addBidAsk';
 export const TH_EXPIRE = 'expire time';
+export const TH_DELETE_ORDER = 'Are you sure to delete this order?';
 
 export const TT_NETWORK_CHECK: ILocaleText = {
 	[LOCALE_CN]:

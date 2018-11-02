@@ -25,12 +25,29 @@ class Util {
 		return seconds;
 	}
 
-	public checkOrderHash(orderBook: IUserOrder[], newOrder: IUserOrder) {
+	public operationOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
+		if (newOrder.type === 'add') orderBook = this.addOrder(orderBook, newOrder);
+		else if (newOrder.type === 'cancel') orderBook = this.deleteOrder(orderBook, newOrder);
+		return orderBook;
+	}
+
+	public addOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
 		const index = orderBook.findIndex(
 			(element: IUserOrder) => element.orderHash === newOrder.orderHash
 		);
 		if (index !== -1) orderBook[index].status = newOrder.status;
 		else orderBook.push(newOrder);
+		return orderBook;
+	}
+
+	public deleteOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
+		const index = orderBook.findIndex(
+			(element: IUserOrder) => element.orderHash === newOrder.orderHash
+		);
+		if (index !== -1)
+			if (newOrder.status === 'confirmed')
+				orderBook.splice(index, 1);
+			else orderBook[index].status = newOrder.status;
 		return orderBook;
 	}
 

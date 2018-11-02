@@ -9,6 +9,8 @@ export const initialState: IWsState = {
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
+	console.log(state.userOrders);
+	console.log(action.value);
 	switch (action.type) {
 		case CST.AC_CONNECTION:
 			return Object.assign({}, state, {
@@ -16,7 +18,7 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 			});
 		case CST.AC_USER_ORDER:
 			return Object.assign({}, state, {
-				userOrders: util.checkOrderHash([...state.userOrders], action.value)
+				userOrders: util.operationOrder([...state.userOrders], action.value)
 			});
 		default:
 			return state;

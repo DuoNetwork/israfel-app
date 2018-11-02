@@ -1,7 +1,13 @@
 import WebSocket from 'isomorphic-ws';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 import * as CST from './constants';
-import { IUserOrder, IWsAddOrderRequest, IWsResponse, IWsUserOrderResponse } from './types';
+import {
+	IUserOrder,
+	IWsAddOrderRequest,
+	IWsOrderRequest,
+	IWsResponse,
+	IWsUserOrderResponse
+} from './types';
 import util from './util';
 import web3Util from './web3Util';
 
@@ -114,6 +120,18 @@ class WsUtil {
 			orderHash: rawOrder.orderHash,
 			order: rawOrder.signedOrder
 		};
+		this.ws.send(JSON.stringify(msg));
+	}
+
+	public async deleteOrder(orderHash: string) {
+		const pair = 'ZRX-WETH';
+		const msg: IWsOrderRequest = {
+			method: CST.DB_CANCEL,
+			channel: CST.DB_ORDERS,
+			pair: pair,
+			orderHash: orderHash
+		};
+		console.log(msg);
 		this.ws.send(JSON.stringify(msg));
 	}
 
