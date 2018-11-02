@@ -41,8 +41,22 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 		for (let i = 0; i < userOrder.length; i++)
 			if (userOrder[i].type === 'add')
 				orderHistory = util.addOrder(orderHistory, userOrder[i]);
-		const title = CST.TH_ORDERBOOK.toUpperCase();
+		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		const step = orderHistory ? util.range(0, orderHistory.length) : [];
+		orderHistory.sort(
+			(a, b) =>
+				a.orderHash === b.orderHash
+					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
+					: Number(a.orderHash) - Number(b.orderHash)
+		);
+		const cancelList: IUserOrder[] = [];
+		for (let i = 1; i < orderHistory.length; i++)
+			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
+				cancelList.push(orderHistory[i - 1]);
+		cancelList.push(orderHistory[orderHistory.length - 1]);
+		orderHistory.sort(
+			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
+		);
 		return (
 			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">
 				<SDivFlexCenter center horizontal>
@@ -50,11 +64,21 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="right">
-									<span className="title" style={{width: 30}}>{CST.TH_AMT.toUpperCase()}</span>
-									<span className="title" style={{width: 30}}>{CST.TH_PX.toUpperCase()}</span>
-									<span className="title" style={{width: 30}}>{CST.TH_ASK.toUpperCase() + "/" + CST.TH_BID.toUpperCase()}</span>
-									<span className="title" style={{width: 30}}>{CST.TH_ACTIONS}</span>
-									<span className="title" style={{width: 150}}>{CST.TH_TIME}</span>
+									<span className="title" style={{ width: 30 }}>
+										{CST.TH_AMT.toUpperCase()}
+									</span>
+									<span className="title" style={{ width: 30 }}>
+										{CST.TH_PX.toUpperCase()}
+									</span>
+									<span className="title" style={{ width: 30 }}>
+										{CST.TH_ASK.toUpperCase() + '/' + CST.TH_BID.toUpperCase()}
+									</span>
+									<span className="title" style={{ width: 30 }}>
+										{CST.TH_ACTIONS}
+									</span>
+									<span className="title" style={{ width: 150 }}>
+										{CST.TH_TIME}
+									</span>
 								</li>
 								{orderHistory && orderHistory.length ? (
 									util.range(0, orderHistory.length).map((i: any) => (
@@ -90,7 +114,9 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 											<span className="title">
 												{i < orderHistory.length
 													? orderHistory[i].price !== 0
-														? moment(orderHistory[i].createdAt).format("DD-MM-YYYY HH:mm:ss")
+														? moment(orderHistory[i].createdAt).format(
+																'DD-MM-YYYY HH:mm:ss'
+														  )
 														: '-'
 													: '-'}
 											</span>
@@ -144,7 +170,11 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 											>
 												<button
 													className={'form-button'}
-													disabled={orderHistory[i].status === 'pending' || orderHistory[i].type === 'cancel'}
+													disabled={
+														orderHistory[i].status === 'pending' ||
+														orderHistory[i].type === 'cancel' ||
+														cancelList.indexOf(orderHistory[i]) === -1
+													}
 												>
 													cancel
 												</button>

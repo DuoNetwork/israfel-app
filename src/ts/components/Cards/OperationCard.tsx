@@ -111,7 +111,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 
 		return (
 			<SCard
-				title={<SCardTitle>{CST.TH_OPERA.toUpperCase()}</SCardTitle>}
+				title={<SCardTitle>{CST.TH_ORDER.toUpperCase()}</SCardTitle>}
 				width="370px"
 				margin="0 0 0 5px"
 			>
