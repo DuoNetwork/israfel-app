@@ -9,8 +9,6 @@ export const initialState: IWsState = {
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
-	console.log(state.userOrders);
-	console.log(action.value);
 	switch (action.type) {
 		case CST.AC_CONNECTION:
 			return Object.assign({}, state, {

@@ -38,7 +38,6 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 	public render() {
 		let { orderHistory } = this.props;
 		const { userOrder } = this.props;
-		console.log(userOrder);
 		for (let i = 0; i < userOrder.length; i++)
 			if (userOrder[i].type === 'add')
 				orderHistory = util.addOrder(orderHistory, userOrder[i]);
