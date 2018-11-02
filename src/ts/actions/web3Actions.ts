@@ -10,7 +10,10 @@ export function accountUpdate(account: string) {
 }
 
 export function getAccount(): VoidThunkAction {
-	return async dispatch => dispatch(accountUpdate(await web3Util.getCurrentAddress()));
+	return async dispatch => {
+		const account = await web3Util.getCurrentAddress();
+		if (account) dispatch(accountUpdate(account));
+	};
 }
 
 export function networkUpdate(networkId: number) {

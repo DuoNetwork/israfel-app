@@ -22,6 +22,18 @@ describe('actions', () => {
 		);
 	});
 
+	test('getAccount empty', () => {
+		const store: any = mockStore({});
+		web3Util.getCurrentAddress = jest.fn(() => Promise.resolve(''));
+		store.dispatch(web3Actions.getAccount());
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions().length).toBe(0);
+				resolve();
+			}, 0)
+		);
+	});
+
 	test('networkUpdate', () => {
 		expect(web3Actions.networkUpdate(123)).toMatchSnapshot();
 	});

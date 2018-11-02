@@ -41,7 +41,6 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 		for (let i = 0; i < userOrder.length; i++)
 			if (userOrder[i].type === 'add')
 				orderHistory = util.addOrder(orderHistory, userOrder[i]);
-		orderHistory = userOrder;
 		const title = CST.TH_ORDERBOOK.toUpperCase();
 		const step = orderHistory ? util.range(0, orderHistory.length) : [];
 		return (
