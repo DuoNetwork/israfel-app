@@ -26,10 +26,6 @@ class WsUtil {
 
 	private reconnect() {
 		this.handleReconnect();
-		if (this.ws) {
-			this.ws.removeAllListeners();
-			this.ws.terminate();
-		}
 		this.connectToRelayer();
 	}
 
