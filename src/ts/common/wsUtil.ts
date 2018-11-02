@@ -61,12 +61,10 @@ class WsUtil {
 		this.ws = new WebSocket(relayerService.url);
 		this.ws.onopen = () => this.handleConnected();
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
-		this.ws.onerror = (error: Error) => {
-			console.log(error);
+		this.ws.onerror = () => {
 			this.reconnect();
 		};
-		this.ws.onclose = (code: number, reason: string) => {
-			console.log('connection closed ' + code + ' ' + reason);
+		this.ws.onclose = () => {
 			this.reconnect();
 		};
 	}
@@ -113,6 +111,10 @@ class WsUtil {
 	// }
 
 	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
 		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
 		const etherTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
@@ -139,6 +141,10 @@ class WsUtil {
 	}
 
 	public async deleteOrder(orderHash: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
 		const pair = 'ZRX-WETH';
 		const msg: IWsOrderRequest = {
 			method: CST.DB_CANCEL,
@@ -151,7 +157,6 @@ class WsUtil {
 	}
 
 	public onOrderUpdate(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
-
 		this.handleOrderUpdate = handleOrderUpdate;
 	}
 
