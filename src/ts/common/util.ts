@@ -47,7 +47,10 @@ class Util {
 		if (index !== -1)
 			if (newOrder.status === 'confirmed')
 				orderBook.splice(index, 1);
-			else orderBook[index].status = newOrder.status;
+			else {
+				orderBook[index].type = newOrder.type;
+				orderBook[index].status = newOrder.status;
+			}
 		return orderBook;
 	}
 

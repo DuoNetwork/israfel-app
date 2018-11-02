@@ -47,7 +47,7 @@ test('convertSecond', () => {
 	expect(util.convertSecond('12:1:1')).toEqual(43261);
 });
 
-test('operationOrder', () => {
+test('operationOrder add same orderHash', () => {
 	const mockOrderBook = [
 		{
 			account: 'text',
@@ -91,6 +91,227 @@ test('operationOrder', () => {
 			pair: 'ZRX-WETH',
 			price: 1,
 			side: '0x00',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		}
+	];
+	expect(util.operationOrder(mockOrderBook, mockNewOrder)).toEqual(mockResult);
+});
+
+test('operationOrder add new orderHash', () => {
+	const mockOrderBook = [
+		{
+			account: 'text',
+			pair: 'ZRX-WETH',
+			orderHash: '0x00',
+			price: 1,
+			amount: 1,
+			side: '0x00',
+			createdAt: 1,
+			updatedAt: 1,
+			initialSequence: 1,
+			currentSequence: 1,
+			type: 'add',
+			status: 'confirmed',
+			updatedBy: 'relayer'
+		}
+	];
+	const mockNewOrder = {
+		account: 'text',
+		pair: 'ZRX-WETH',
+		orderHash: '0x001',
+		price: 1,
+		amount: 1,
+		side: '0x001',
+		createdAt: 1,
+		updatedAt: 1,
+		initialSequence: 1,
+		currentSequence: 1,
+		type: 'add',
+		status: 'confirmed',
+		updatedBy: 'relayer'
+	};
+	const mockResult = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x00',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x00',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		},
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x001',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x001',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		}
+	];
+	expect(util.operationOrder(mockOrderBook, mockNewOrder)).toEqual(mockResult);
+});
+
+test('operationOrder cancel new orderHash', () => {
+	const mockOrderBook = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x001',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x00',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		},
+		{
+			account: 'text',
+			pair: 'ZRX-WETH',
+			orderHash: '0x00',
+			price: 1,
+			amount: 1,
+			side: '0x001',
+			createdAt: 1,
+			updatedAt: 1,
+			initialSequence: 1,
+			currentSequence: 1,
+			type: 'add',
+			status: 'confirmed',
+			updatedBy: 'relayer'
+		}
+	];
+	const mockNewOrder = {
+		account: 'text',
+		pair: 'ZRX-WETH',
+		orderHash: '0x001',
+		price: 1,
+		amount: 1,
+		side: '0x001',
+		createdAt: 1,
+		updatedAt: 1,
+		initialSequence: 1,
+		currentSequence: 1,
+		type: 'cancel',
+		status: 'confirmed',
+		updatedBy: 'relayer'
+	};
+	const mockResult = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x00',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x001',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		}
+	];
+	expect(util.operationOrder(mockOrderBook, mockNewOrder)).toEqual(mockResult);
+});
+
+test('operationOrder cancel new orderHash', () => {
+	const mockOrderBook = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x001',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x00',
+			status: 'confirmed',
+			type: 'add',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		},
+		{
+			account: 'text',
+			pair: 'ZRX-WETH',
+			orderHash: '0x00',
+			price: 1,
+			amount: 1,
+			side: '0x001',
+			createdAt: 1,
+			updatedAt: 1,
+			initialSequence: 1,
+			currentSequence: 1,
+			type: 'add',
+			status: 'confirmed',
+			updatedBy: 'relayer'
+		}
+	];
+
+	const mockNewOrder = {
+		account: 'text',
+		pair: 'ZRX-WETH',
+		orderHash: '0x001',
+		price: 1,
+		amount: 1,
+		side: '0x001',
+		createAt: 1,
+		updatedAt: 1,
+		initialSequence: 1,
+		currentSequence: 1,
+		type: 'cancel',
+		status: 'pending',
+		updatedBy: 'relayer'
+	};
+
+	const mockResult = [
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x001',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x00',
+			status: 'pending',
+			type: 'cancel',
+			updatedAt: 1,
+			updatedBy: 'relayer'
+		},
+		{
+			account: 'text',
+			amount: 1,
+			createdAt: 1,
+			currentSequence: 1,
+			initialSequence: 1,
+			orderHash: '0x00',
+			pair: 'ZRX-WETH',
+			price: 1,
+			side: '0x001',
 			status: 'confirmed',
 			type: 'add',
 			updatedAt: 1,
