@@ -1,4 +1,5 @@
 import { Popconfirm } from 'antd';
+import moment from 'moment';
 import * as React from 'react';
 import wsUtil from 'ts/common/wsUtil';
 import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
@@ -7,7 +8,6 @@ import util from '../../common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
-
 interface IProps {
 	orderHistory: IUserOrder[];
 	userOrder: IUserOrder[];
@@ -50,7 +50,11 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="right">
-									<span className="title">{CST.TH_ACTIONS.toUpperCase()}</span>
+									<span className="title" style={{width: 30}}>{CST.TH_AMT.toUpperCase()}</span>
+									<span className="title" style={{width: 30}}>{CST.TH_PX.toUpperCase()}</span>
+									<span className="title" style={{width: 30}}>{CST.TH_ASK.toUpperCase() + "/" + CST.TH_BID.toUpperCase()}</span>
+									<span className="title" style={{width: 30}}>{CST.TH_ACTIONS}</span>
+									<span className="title" style={{width: 150}}>{CST.TH_TIME}</span>
 								</li>
 								{orderHistory && orderHistory.length ? (
 									util.range(0, orderHistory.length).map((i: any) => (
@@ -73,6 +77,20 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 												{i < orderHistory.length
 													? orderHistory[i].price !== 0
 														? orderHistory[i].side
+														: '-'
+													: '-'}
+											</span>
+											<span className="title">
+												{i < orderHistory.length
+													? orderHistory[i].price !== 0
+														? orderHistory[i].type
+														: '-'
+													: '-'}
+											</span>
+											<span className="title">
+												{i < orderHistory.length
+													? orderHistory[i].price !== 0
+														? moment(orderHistory[i].createdAt).format("DD-MM-YYYY HH:mm:ss")
 														: '-'
 													: '-'}
 											</span>
@@ -126,7 +144,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 											>
 												<button
 													className={'form-button'}
-													disabled={orderHistory[i].status === 'pending'}
+													disabled={orderHistory[i].status === 'pending' || orderHistory[i].type === 'cancel'}
 												>
 													cancel
 												</button>

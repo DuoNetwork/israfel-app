@@ -34,7 +34,8 @@ setInterval(() => {
 }, 60000);
 
 wsUtil.onOrderUpdate((method, userOrder) => {
-	store.dispatch(wsActions.userOrderUpdate(userOrder));
+	// store.dispatch(wsActions.userOrderUpdate(userOrder));
+	store.dispatch(dynamoActions.refresh());
 	console.log(method, userOrder);
 });
 wsUtil.onConfigError(text => alert(text));
