@@ -20,6 +20,7 @@ export interface ILocaleText {
 	JP: string;
 	[key: string]: string;
 }
+export const TH_MODE = ['Detail', 'Summary'];
 export const TH_PLACEHOLDER = ['Target Currency', 'Base Currency'];
 export const TH_CURRENCY = ['ZRX', 'ETH'];
 export const TH_LOGIN = 'Admin Login';

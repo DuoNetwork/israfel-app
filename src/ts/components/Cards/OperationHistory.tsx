@@ -1,4 +1,5 @@
 import { Popconfirm } from 'antd';
+import { Select } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 import wsUtil from 'ts/common/wsUtil';
@@ -8,6 +9,7 @@ import util from '../../common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
+
 interface IProps {
 	orderHistory: IUserOrder[];
 	userOrder: IUserOrder[];
@@ -16,15 +18,20 @@ interface IProps {
 
 interface IState {
 	orderHash: string;
+	mode: string;
 }
 
 let orderHash: string = '';
+const Option = Select.Option;
+let cancelList: IUserOrder[] = [];
+let displayData: IUserOrder[] = [];
 
 export default class TimeSeriesCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			orderHash: ''
+			orderHash: '',
+			mode: 'detail'
 		};
 	}
 
@@ -32,24 +39,33 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 		orderHash = this.props.orderHistory[index].orderHash;
 	}
 
+	private handleChangeMode(value: any) {
+		this.setState({
+			mode: value
+		});
+	}
+
 	private deleteOrder() {
 		wsUtil.deleteOrder(orderHash);
 	}
+
 	public render() {
 		let { orderHistory } = this.props;
 		const { userOrder } = this.props;
+		const children = [];
+		for (let i = 0 ; i < CST.TH_MODE.length ; i++)
+			children.push(<Option value={CST.TH_MODE[i]}> {CST.TH_MODE[i]}</Option>)
 		for (let i = 0; i < userOrder.length; i++)
 			if (userOrder[i].type === 'add')
 				orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
-		const step = orderHistory ? util.range(0, orderHistory.length) : [];
+		cancelList = [];
 		orderHistory.sort(
 			(a, b) =>
 				a.orderHash === b.orderHash
 					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 					: Number(a.orderHash) - Number(b.orderHash)
 		);
-		const cancelList: IUserOrder[] = [];
 		for (let i = 1; i < orderHistory.length; i++)
 			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
 				cancelList.push(orderHistory[i - 1]);
@@ -57,8 +73,28 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 		orderHistory.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
+		if (this.state.mode === CST.TH_MODE[1])
+			displayData = cancelList;
+		else displayData = orderHistory;
+		const step = displayData ? util.range(0, displayData.length) : [];
+
 		return (
-			<SCard title={<SCardTitle>{title}</SCardTitle>} width="800px" margin="0 10px 0 0">
+			<SCard
+				title={
+					<SCardTitle>
+						{title}
+						<Select
+							defaultValue={CST.TH_MODE[0]}
+							style={{ width: 200 }}
+							onChange={e => this.handleChangeMode(e)}
+						>
+							{children}
+						</Select>
+					</SCardTitle>
+				}
+				width="800px"
+				margin="0 10px 0 0"
+			>
 				<SDivFlexCenter center horizontal>
 					<SCardList>
 						<div className="status-list-wrapper">
@@ -80,43 +116,43 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 										{CST.TH_TIME}
 									</span>
 								</li>
-								{orderHistory && orderHistory.length ? (
-									util.range(0, orderHistory.length).map((i: any) => (
+								{displayData && displayData.length ? (
+									util.range(0, displayData.length).map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
-												{i < orderHistory.length
-													? orderHistory[i].amount !== 0
-														? util.formatNumber(orderHistory[i].amount)
+												{i < displayData.length
+													? displayData[i].amount !== 0
+														? util.formatNumber(displayData[i].amount)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < orderHistory.length
-													? orderHistory[i].price !== 0
-														? util.formatNumber(orderHistory[i].price)
+												{i < displayData.length
+													? displayData[i].price !== 0
+														? util.formatNumber(displayData[i].price)
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < orderHistory.length
-													? orderHistory[i].price !== 0
-														? orderHistory[i].side
+												{i < displayData.length
+													? displayData[i].price !== 0
+														? displayData[i].side
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < orderHistory.length
-													? orderHistory[i].price !== 0
-														? orderHistory[i].type
+												{i < displayData.length
+													? displayData[i].price !== 0
+														? displayData[i].type
 														: '-'
 													: '-'}
 											</span>
 											<span className="title">
-												{i < orderHistory.length
-													? orderHistory[i].price !== 0
-														? moment(orderHistory[i].createdAt).format(
+												{i < displayData.length
+													? displayData[i].price !== 0
+														? moment(displayData[i].createdAt).format(
 																'DD-MM-YYYY HH:mm:ss'
-														  )
+														)
 														: '-'
 													: '-'}
 											</span>
@@ -138,7 +174,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 								{step.length > 0 ? (
 									step.map((i: any) => (
 										<li key={i} style={{ height: '28px' }}>
-											<span className="title">{orderHistory[i].status}</span>
+											<span className="title">{displayData[i].status}</span>
 										</li>
 									))
 								) : (
@@ -171,9 +207,9 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 												<button
 													className={'form-button'}
 													disabled={
-														orderHistory[i].status === 'pending' ||
-														orderHistory[i].type === 'cancel' ||
-														cancelList.indexOf(orderHistory[i]) === -1
+														displayData[i].status === 'pending' ||
+														displayData[i].type === 'cancel' ||
+														cancelList.indexOf(displayData[i]) === -1
 													}
 												>
 													cancel
