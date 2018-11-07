@@ -111,8 +111,6 @@ class WsUtil {
 			this.handleConfigError('not connected');
 			return;
 		}
-		console.log("123");
-		console.log(expireTime);
 		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
 		const etherTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
 		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
