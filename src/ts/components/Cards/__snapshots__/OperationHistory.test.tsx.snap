@@ -251,6 +251,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
                 type="exclamation-circle"
               />
             }
+            key="0"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -285,6 +286,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
                 type="exclamation-circle"
               />
             }
+            key="1"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -569,6 +571,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
                 type="exclamation-circle"
               />
             }
+            key="0"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -603,6 +606,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
                 type="exclamation-circle"
               />
             }
+            key="1"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -887,6 +891,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
                 type="exclamation-circle"
               />
             }
+            key="0"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -921,6 +926,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
                 type="exclamation-circle"
               />
             }
+            key="1"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -1205,6 +1211,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
                 type="exclamation-circle"
               />
             }
+            key="0"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
@@ -1239,6 +1246,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
                 type="exclamation-circle"
               />
             }
+            key="1"
             okText="Confirm"
             okType="primary"
             onConfirm={[Function]}
