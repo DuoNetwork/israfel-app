@@ -15,7 +15,7 @@ interface IProps {
 // 	orderBookSubscription: IWSOrderBookSubscription;
 // }
 
-export default class TimeSeriesCard extends React.Component<IProps> {
+export default class OrderBookCardSubscription extends React.Component<IProps> {
 	public render() {
 		return null;
 		// const { orderBookSubscription } = this.props;

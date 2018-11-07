@@ -26,7 +26,7 @@ const Option = Select.Option;
 let cancelList: IUserOrder[] = [];
 let displayData: IUserOrder[] = [];
 
-export default class TimeSeriesCard extends React.Component<IProps, IState> {
+export default class OperationHistory extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
@@ -52,9 +52,12 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 	public render() {
 		let { orderHistory } = this.props;
 		const { userOrder } = this.props;
-		const children = [];
-		for (let i = 0 ; i < CST.TH_MODE.length ; i++)
-			children.push(<Option value={CST.TH_MODE[i]}> {CST.TH_MODE[i]}</Option>)
+		const children = CST.TH_MODE.map(mode => (
+			<Option key={mode} value={mode}>
+				{' '}
+				{mode}
+			</Option>
+		));
 		for (let i = 0; i < userOrder.length; i++)
 			if (userOrder[i].type === 'add')
 				orderHistory = util.addOrder(orderHistory, userOrder[i]);
@@ -73,8 +76,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 		orderHistory.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
-		if (this.state.mode === CST.TH_MODE[1])
-			displayData = cancelList;
+		if (this.state.mode === CST.TH_MODE[1]) displayData = cancelList;
 		else displayData = orderHistory;
 		const step = displayData ? util.range(0, displayData.length) : [];
 
@@ -117,43 +119,25 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 									</span>
 								</li>
 								{displayData && displayData.length ? (
-									util.range(0, displayData.length).map((i: any) => (
+									displayData.map((data, i) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
-												{i < displayData.length
-													? displayData[i].amount !== 0
-														? util.formatNumber(displayData[i].amount)
-														: '-'
-													: '-'}
+												{data.amount ? util.formatNumber(data.amount) : '-'}
 											</span>
 											<span className="title">
-												{i < displayData.length
-													? displayData[i].price !== 0
-														? util.formatNumber(displayData[i].price)
-														: '-'
-													: '-'}
+												{data.price ? util.formatNumber(data.price) : '-'}
 											</span>
 											<span className="title">
-												{i < displayData.length
-													? displayData[i].price !== 0
-														? displayData[i].side
-														: '-'
-													: '-'}
+												{data.side ? data.side : '-'}
 											</span>
 											<span className="title">
-												{i < displayData.length
-													? displayData[i].price !== 0
-														? displayData[i].type
-														: '-'
-													: '-'}
+												{data.type ? data.type : '-'}
 											</span>
 											<span className="title">
-												{i < displayData.length
-													? displayData[i].price !== 0
-														? moment(displayData[i].createdAt).format(
-																'DD-MM-YYYY HH:mm:ss'
-														)
-														: '-'
+												{data.createdAt
+													? moment(data.createdAt).format(
+															'DD-MM-YYYY HH:mm:ss'
+													)
 													: '-'}
 											</span>
 										</li>
@@ -193,6 +177,7 @@ export default class TimeSeriesCard extends React.Component<IProps, IState> {
 								{step.length > 0 ? (
 									step.map((i: any) => (
 										<Popconfirm
+											key={i + ''}
 											placement="top"
 											title={CST.TH_DELETE_ORDER}
 											okText="Confirm"
