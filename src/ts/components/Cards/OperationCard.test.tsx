@@ -189,9 +189,9 @@ describe('OperationCard Test', () => {
 				.at(1)
 				.simulate('change', { target: { value: '1' } });
 			wrapper.find('button').at(1).simulate('click');
-			expect(wrapper.state('price')).toBe('0');
-			expect(wrapper.state('baseCurrency')).toBe('0');
-			expect(wrapper.state('targetCurrency')).toBe('0');
+			expect(wrapper.state('price')).toBe('');
+			expect(wrapper.state('baseCurrency')).toBe('');
+			expect(wrapper.state('targetCurrency')).toBe('');
 		});
 
 		it('Sell Clear', async () => {
@@ -205,9 +205,9 @@ describe('OperationCard Test', () => {
 				.find('button')
 				.at(3)
 				.simulate('click');
-			expect(wrapper.state('baseCurrency')).toBe('0');
-			expect(wrapper.state('targetCurrency')).toBe('0');
-			expect(wrapper.state('price')).toBe('0');
+			expect(wrapper.state('baseCurrency')).toBe('');
+			expect(wrapper.state('targetCurrency')).toBe('');
+			expect(wrapper.state('price')).toBe('');
 		});
 	});
 });

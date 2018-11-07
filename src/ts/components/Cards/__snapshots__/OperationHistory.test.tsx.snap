@@ -8,7 +8,6 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
       ORDER HISTORY
       <Select
         choiceTransitionName="zoom"
-        defaultValue="Detail"
         onChange={[Function]}
         prefixCls="ant-select"
         showSearch={false}
@@ -18,17 +17,16 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
           }
         }
         transitionName="slide-up"
+        value="Detail"
       >
         <Option
           value="Detail"
         >
-           
           Detail
         </Option>
         <Option
           value="Summary"
         >
-           
           Summary
         </Option>
       </Select>
@@ -328,7 +326,6 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
       ORDER HISTORY
       <Select
         choiceTransitionName="zoom"
-        defaultValue="Detail"
         onChange={[Function]}
         prefixCls="ant-select"
         showSearch={false}
@@ -338,17 +335,16 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
           }
         }
         transitionName="slide-up"
+        value="Detail"
       >
         <Option
           value="Detail"
         >
-           
           Detail
         </Option>
         <Option
           value="Summary"
         >
-           
           Summary
         </Option>
       </Select>
@@ -648,7 +644,6 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
       ORDER HISTORY
       <Select
         choiceTransitionName="zoom"
-        defaultValue="Detail"
         onChange={[Function]}
         prefixCls="ant-select"
         showSearch={false}
@@ -658,17 +653,16 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
           }
         }
         transitionName="slide-up"
+        value="Detail"
       >
         <Option
           value="Detail"
         >
-           
           Detail
         </Option>
         <Option
           value="Summary"
         >
-           
           Summary
         </Option>
       </Select>
@@ -968,7 +962,6 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
       ORDER HISTORY
       <Select
         choiceTransitionName="zoom"
-        defaultValue="Detail"
         onChange={[Function]}
         prefixCls="ant-select"
         showSearch={false}
@@ -978,17 +971,16 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
           }
         }
         transitionName="slide-up"
+        value="Detail"
       >
         <Option
           value="Detail"
         >
-           
           Detail
         </Option>
         <Option
           value="Summary"
         >
-           
           Summary
         </Option>
       </Select>

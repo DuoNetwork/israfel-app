@@ -23,7 +23,7 @@ interface IState {
 
 let orderHash: string = '';
 const Option = Select.Option;
-let cancelList: IUserOrder[] = [];
+let summaryList: IUserOrder[] = [];
 let displayData: IUserOrder[] = [];
 
 export default class OperationHistory extends React.Component<IProps, IState> {
@@ -31,7 +31,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			orderHash: '',
-			mode: 'detail'
+			mode: CST.TH_MODE[0]
 		};
 	}
 
@@ -50,19 +50,18 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	}
 
 	public render() {
-		let { orderHistory } = this.props;
-		const { userOrder } = this.props;
+		const { orderHistory } = this.props;
+		// const { userOrder } = this.props;
 		const children = CST.TH_MODE.map(mode => (
 			<Option key={mode} value={mode}>
-				{' '}
 				{mode}
 			</Option>
 		));
-		for (let i = 0; i < userOrder.length; i++)
-			if (userOrder[i].type === 'add')
-				orderHistory = util.addOrder(orderHistory, userOrder[i]);
+		// for (let i = 0; i < userOrder.length; i++)
+		// 	if (userOrder[i].type === 'add')
+		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
-		cancelList = [];
+		summaryList = [];
 		orderHistory.sort(
 			(a, b) =>
 				a.orderHash === b.orderHash
@@ -71,12 +70,12 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		);
 		for (let i = 1; i < orderHistory.length; i++)
 			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
-				cancelList.push(orderHistory[i - 1]);
-		cancelList.push(orderHistory[orderHistory.length - 1]);
+				summaryList.push(orderHistory[i - 1]);
+		summaryList.push(orderHistory[orderHistory.length - 1]);
 		orderHistory.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
-		if (this.state.mode === CST.TH_MODE[1]) displayData = cancelList;
+		if (this.state.mode === CST.TH_MODE[1]) displayData = summaryList;
 		else displayData = orderHistory;
 		const step = displayData ? util.range(0, displayData.length) : [];
 
@@ -86,7 +85,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 					<SCardTitle>
 						{title}
 						<Select
-							defaultValue={CST.TH_MODE[0]}
+							value={this.state.mode}
 							style={{ width: 200 }}
 							onChange={e => this.handleChangeMode(e)}
 						>
@@ -118,7 +117,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										{CST.TH_TIME}
 									</span>
 								</li>
-								{displayData && displayData.length ? (
+								{displayData ? (
 									displayData.map((data, i) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
@@ -193,8 +192,8 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 													className={'form-button'}
 													disabled={
 														displayData[i].status === 'pending' ||
-														displayData[i].type === 'cancel' ||
-														cancelList.indexOf(displayData[i]) === -1
+														displayData[i].type === 'terminate' ||
+														summaryList.indexOf(displayData[i]) === -1
 													}
 												>
 													cancel

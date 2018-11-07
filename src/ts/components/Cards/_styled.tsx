@@ -54,7 +54,13 @@ injectGlobal([
 			text-align: center;
 		}
 		.ant-time-picker-icon .ant-time-picker-clock-icon {
+			color: transparent;
+		}
+		.ant-input {
 			color: #fff;
+			background-color: transparent;
+			padding: 0px 4px;
+			border: none;
 		}
 	}
 `

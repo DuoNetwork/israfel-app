@@ -1,6 +1,7 @@
 import { Select } from 'antd';
+import { TimePicker } from 'antd';
 import { DatePicker } from 'antd';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import * as React from 'react';
 import * as CST from '../../common/constants';
 import util from '../../common/util';
@@ -14,7 +15,8 @@ interface IState {
 	description: string;
 	price: string;
 	targetCurrency: string;
-	expireTime: number;
+	expireDate: number;
+	expireTime: string;
 }
 
 export default class OperationCard extends React.PureComponent<{}, IState> {
@@ -22,35 +24,38 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		super(props);
 		this.state = {
 			isCreate: true,
-			baseCurrency: '0',
+			baseCurrency: '',
 			description: '',
-			targetCurrency: '0',
-			price: '0',
-			expireTime: moment(util.getUTCNowTimestamp())
+			expireDate: moment(moment().startOf('day'))
 				.add(1, 'day')
-				.valueOf()
+				.valueOf(),
+			expireTime: '00:00:00',
+			targetCurrency: '',
+			price: ''
 		};
 	}
 
 	private handleTypeChange = () =>
 		this.setState({
 			isCreate: !this.state.isCreate,
-			baseCurrency: '0',
-			targetCurrency: '0',
+			baseCurrency: '',
+			targetCurrency: '',
 			description: '',
-			price: '0',
-			expireTime: moment(util.getUTCNowTimestamp())
+			expireDate: moment(util.getUTCNowTimestamp())
 				.add(1, 'day')
-				.valueOf()
+				.valueOf(),
+			expireTime: '00:00:00',
+			price: ''
 		});
 
 	private submit = async () => {
+		console.log(moment().toDate());
 		const action = this.state.isCreate ? 'Sell' : 'Buy';
 		await wsUtil.addOrder(
 			Number(this.state.baseCurrency),
 			Number(this.state.targetCurrency),
 			action === 'Buy',
-			this.state.expireTime
+			Math.ceil(this.state.expireDate / 1000) + util.convertSecond(this.state.expireTime)
 		);
 	};
 
@@ -60,15 +65,12 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			this.setState({
 				price: (Number(targetCurrency) / Number(baseCurrency)).toString()
 			});
-		else
-			this.setState({
-				price: '0'
-			});
+		else this.setState({ price: '0' });
 
 		this.setState({
 			description: !isCreate
-				? 'Buy ' + baseCurrency + ' with ' + targetCurrency
-				: 'Sell ' + baseCurrency + ' with ' + targetCurrency
+				? 'Buy ' + targetCurrency + ' with ' + baseCurrency
+				: 'Sell ' + baseCurrency + ' for ' + targetCurrency
 		});
 	};
 
@@ -83,37 +85,37 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			this.setState({
 				targetCurrency: (Number(price) * Number(baseCurrency)).toString()
 			});
-		this.setState({
-			price: price
-		});
+		this.setState({ price: price });
 	};
 
 	private handleTargetCurrencyInput = (targetCurrency: string) => {
-		this.setState({
-			targetCurrency: targetCurrency
-		});
+		this.setState({ targetCurrency: targetCurrency });
 	};
 
-	private handleExpireTime(time: number) {
+	private handleExpireDate(time: number) {
 		this.setState({
-			expireTime: time.valueOf()
+			expireDate: time.valueOf()
 		});
+	}
+
+	private handleExpireTime(time: Moment, timeString: string) {
+		this.setState({ expireTime: timeString });
+		console.log(time.toString());
 	}
 
 	private handleClear = () =>
 		this.setState({
-			baseCurrency: '0',
-			targetCurrency: '0',
+			baseCurrency: '',
+			targetCurrency: '',
 			description: '',
-			price: '0'
+			price: ''
 		});
 
 	public render() {
 		const Option = Select.Option;
-		const children = [];
-		for (let i = 0; i < CST.TH_CURRENCY.length; i++)
-			children.push(<Option key={CST.TH_CURRENCY[i]}>{CST.TH_CURRENCY[i]}</Option>);
-
+		const children = CST.TH_CURRENCY.map(currency => (
+			<Option key={currency}>{currency}</Option>
+		));
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_ORDER.toUpperCase()}</SCardTitle>}
@@ -181,7 +183,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 											this.handleTargetCurrencyInput(e.target.value)
 										}
 										onBlur={() => this.getDescription()}
-										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+										placeholder={CST.TH_PLACEHOLDER[0]}
 										right
 									/>
 								</li>
@@ -208,7 +210,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										value={this.state.baseCurrency}
 										onChange={e => this.handleAmountInputChange(e.target.value)}
 										onBlur={() => this.getDescription()}
-										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+										placeholder={CST.TH_PLACEHOLDER[1]}
 										right
 									/>
 								</li>
@@ -222,7 +224,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										value={this.state.price}
 										onChange={e => this.handlePriceInputChange(e.target.value)}
 										onBlur={e => this.handlePriceInputChange(e.target.value)}
-										placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+										placeholder={CST.TH_PX}
 										right
 									/>
 								</li>
@@ -231,9 +233,13 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										{CST.TH_EXPIRE.toUpperCase()}
 									</span>
 									<DatePicker
-										value={moment(this.state.expireTime)}
-										onChange={time => this.handleExpireTime(time.valueOf())}
+										value={moment(this.state.expireDate)}
+										onChange={time => this.handleExpireDate(time.valueOf())}
 										style={{ width: 170 }}
+									/>
+									<TimePicker
+										onChange={(time: Moment, timeString: string) => this.handleExpireTime(time, timeString)}
+										value={moment(this.state.expireTime, 'HH:mm:ss')}
 									/>
 								</li>
 								<li className="description">

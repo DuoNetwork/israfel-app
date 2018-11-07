@@ -76,9 +76,9 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               className="bg-dark"
               onBlur={[Function]}
               onChange={[Function]}
-              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              placeholder="Target Currency"
               right={true}
-              value="0"
+              value=""
               width="60%"
             />
           </li>
@@ -114,9 +114,9 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               className=""
               onBlur={[Function]}
               onChange={[Function]}
-              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              placeholder="Base Currency"
               right={true}
-              value="0"
+              value=""
               width="60%"
             />
           </li>
@@ -137,9 +137,9 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               className=""
               onBlur={[Function]}
               onChange={[Function]}
-              placeholder="{CST.TT_INPUT_AMOUNT[locale]}"
+              placeholder="Price"
               right={true}
-              value="0"
+              value=""
               width="60%"
             />
           </li>
@@ -171,7 +171,25 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 }
               }
               transitionName="slide-up"
-              value={"1970-01-16T06:56:07.890Z"}
+              value={"2018-11-07T16:00:00.000Z"}
+            />
+            <TimePicker
+              align={
+                Object {
+                  "offset": Array [
+                    0,
+                    -2,
+                  ],
+                }
+              }
+              disabled={false}
+              focusOnOpen={true}
+              hideDisabledOptions={false}
+              onChange={[Function]}
+              placement="bottomLeft"
+              prefixCls="ant-time-picker"
+              transitionName="slide-up"
+              value={"2018-11-06T16:00:00.000Z"}
             />
           </li>
           <li
@@ -188,7 +206,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
             >
               <button
                 className="form-button"
-                disabled={true}
+                disabled={false}
                 onClick={[Function]}
               >
                 Submit
