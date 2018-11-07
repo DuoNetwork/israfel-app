@@ -143,7 +143,7 @@ class WsUtil {
 		}
 		const pair = 'ZRX-WETH';
 		const msg: IWsOrderRequest = {
-			method: CST.DB_CANCEL,
+			method: CST.DB_TERMINATE,
 			channel: CST.DB_ORDERS,
 			pair: pair,
 			orderHash: orderHash

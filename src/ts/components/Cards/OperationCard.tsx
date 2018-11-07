@@ -100,7 +100,8 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		this.setState({
 			baseCurrency: '0',
 			targetCurrency: '0',
-			description: ''
+			description: '',
+			price: '0'
 		});
 
 	public render() {

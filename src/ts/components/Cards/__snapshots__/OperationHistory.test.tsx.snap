@@ -1,0 +1,1273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OperationHistory Test User Login Test Snapshot 1`] = `
+<Styled(Card)
+  margin="0 10px 0 0"
+  title={
+    <styled.div>
+      ORDER HISTORY
+      <Select
+        choiceTransitionName="zoom"
+        defaultValue="Detail"
+        onChange={[Function]}
+        prefixCls="ant-select"
+        showSearch={false}
+        style={
+          Object {
+            "width": 200,
+          }
+        }
+        transitionName="slide-up"
+      >
+        <Option
+          value="Detail"
+        >
+           
+          Detail
+        </Option>
+        <Option
+          value="Summary"
+        >
+           
+          Summary
+        </Option>
+      </Select>
+    </styled.div>
+  }
+  width="800px"
+>
+  <styled.div
+    center={true}
+    horizontal={true}
+  >
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="right"
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              AMOUNT
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              PRICE
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              ASK/BID
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              Actions
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 150,
+                }
+              }
+            >
+              Time
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "100px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Status
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              confirm
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              pending
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "150px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Actions
+            </span>
+          </li>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="0"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={false}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="1"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={true}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
+
+exports[`OperationHistory Test User Login Test Snapshot 2`] = `
+<Styled(Card)
+  margin="0 10px 0 0"
+  title={
+    <styled.div>
+      ORDER HISTORY
+      <Select
+        choiceTransitionName="zoom"
+        defaultValue="Detail"
+        onChange={[Function]}
+        prefixCls="ant-select"
+        showSearch={false}
+        style={
+          Object {
+            "width": 200,
+          }
+        }
+        transitionName="slide-up"
+      >
+        <Option
+          value="Detail"
+        >
+           
+          Detail
+        </Option>
+        <Option
+          value="Summary"
+        >
+           
+          Summary
+        </Option>
+      </Select>
+    </styled.div>
+  }
+  width="800px"
+>
+  <styled.div
+    center={true}
+    horizontal={true}
+  >
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="right"
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              AMOUNT
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              PRICE
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              ASK/BID
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              Actions
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 150,
+                }
+              }
+            >
+              Time
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "100px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Status
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              confirm
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              pending
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "150px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Actions
+            </span>
+          </li>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="0"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={false}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="1"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={true}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
+
+exports[`OperationHistory Test User Login Test Snapshot 3`] = `
+<Styled(Card)
+  margin="0 10px 0 0"
+  title={
+    <styled.div>
+      ORDER HISTORY
+      <Select
+        choiceTransitionName="zoom"
+        defaultValue="Detail"
+        onChange={[Function]}
+        prefixCls="ant-select"
+        showSearch={false}
+        style={
+          Object {
+            "width": 200,
+          }
+        }
+        transitionName="slide-up"
+      >
+        <Option
+          value="Detail"
+        >
+           
+          Detail
+        </Option>
+        <Option
+          value="Summary"
+        >
+           
+          Summary
+        </Option>
+      </Select>
+    </styled.div>
+  }
+  width="800px"
+>
+  <styled.div
+    center={true}
+    horizontal={true}
+  >
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="right"
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              AMOUNT
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              PRICE
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              ASK/BID
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              Actions
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 150,
+                }
+              }
+            >
+              Time
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "100px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Status
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              confirm
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              pending
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "150px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Actions
+            </span>
+          </li>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="0"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={false}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="1"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={true}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
+
+exports[`OperationHistory Test User Login Test Snapshot 4`] = `
+<Styled(Card)
+  margin="0 10px 0 0"
+  title={
+    <styled.div>
+      ORDER HISTORY
+      <Select
+        choiceTransitionName="zoom"
+        defaultValue="Detail"
+        onChange={[Function]}
+        prefixCls="ant-select"
+        showSearch={false}
+        style={
+          Object {
+            "width": 200,
+          }
+        }
+        transitionName="slide-up"
+      >
+        <Option
+          value="Detail"
+        >
+           
+          Detail
+        </Option>
+        <Option
+          value="Summary"
+        >
+           
+          Summary
+        </Option>
+      </Select>
+    </styled.div>
+  }
+  width="800px"
+>
+  <styled.div
+    center={true}
+    horizontal={true}
+  >
+    <styled.div>
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="right"
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              AMOUNT
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              PRICE
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              ASK/BID
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
+              Actions
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 150,
+                }
+              }
+            >
+              Time
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              2.00
+            </span>
+            <span
+              className="title"
+            >
+              0.1667
+            </span>
+            <span
+              className="title"
+            >
+              ask
+            </span>
+            <span
+              className="title"
+            >
+              add
+            </span>
+            <span
+              className="title"
+            >
+              02-11-2018 15:16:47
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "100px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Status
+            </span>
+          </li>
+          <li
+            key="0"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              confirm
+            </span>
+          </li>
+          <li
+            key="1"
+            style={
+              Object {
+                "height": "28px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              pending
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      fixWidth={true}
+      style={
+        Object {
+          "width": "150px",
+        }
+      }
+    >
+      <div
+        className="status-list-wrapper narrow"
+      >
+        <ul
+          className="noborder"
+        >
+          <li>
+            <span
+              className="title"
+            >
+              Actions
+            </span>
+          </li>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="0"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={false}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+          <Popconfirm
+            cancelText="Cancel"
+            icon={
+              <Icon
+                theme="filled"
+                type="exclamation-circle"
+              />
+            }
+            okText="Confirm"
+            okType="primary"
+            onConfirm={[Function]}
+            placement="top"
+            prefixCls="ant-popover"
+            title="Are you sure to delete this order?"
+            transitionName="zoom-big"
+            trigger="click"
+          >
+            <li
+              key="1"
+              onClick={[Function]}
+              style={
+                Object {
+                  "height": "28px",
+                }
+              }
+            >
+              <button
+                className="form-button"
+                disabled={true}
+              >
+                cancel
+              </button>
+            </li>
+          </Popconfirm>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
