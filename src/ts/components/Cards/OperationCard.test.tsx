@@ -1,13 +1,15 @@
-import { TimePicker } from 'antd';
+import { DatePicker } from 'antd';
 import { shallow } from 'enzyme';
+import moment from 'moment';
 import * as React from 'react';
-import moment = require('../../../../../israfel-relayer/node_modules/moment/moment');
+import util from '../../common/util';
 import wsUtil from '../../common/wsUtil';
 import { SInput } from './_styled';
 import OperationCard from './OperationCard';
 
 describe('OperationCard Test', () => {
 	describe('When user search by Price and Volume', () => {
+		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 		it('Test Snapshot', () => {
 			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
@@ -92,13 +94,12 @@ describe('OperationCard Test', () => {
 			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
 			await wrapper
-				.find(TimePicker)
+				.find(DatePicker)
 				.at(0)
 				.simulate('change', {
 					target: {
 						value: {
-							time: moment.now,
-							timeString: '08:00:00'
+							time: moment(1234567890)
 						}
 					}
 				});

@@ -1,8 +1,9 @@
 import { Select } from 'antd';
-import { TimePicker } from 'antd';
-import moment, { Moment } from 'moment';
+import { DatePicker } from 'antd';
+import moment from 'moment';
 import * as React from 'react';
 import * as CST from '../../common/constants';
+import util from '../../common/util';
 import wsUtil from '../../common/wsUtil';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
@@ -13,7 +14,7 @@ interface IState {
 	description: string;
 	price: string;
 	targetCurrency: string;
-	expireTime: string;
+	expireTime: number;
 }
 
 export default class OperationCard extends React.PureComponent<{}, IState> {
@@ -25,7 +26,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			description: '',
 			targetCurrency: '0',
 			price: '0',
-			expireTime: '0'
+			expireTime: moment(util.getUTCNowTimestamp())
+				.add(1, 'day')
+				.valueOf()
 		};
 	}
 
@@ -36,7 +39,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			targetCurrency: '0',
 			description: '',
 			price: '0',
-			expireTime: '0'
+			expireTime: moment(util.getUTCNowTimestamp())
+				.add(1, 'day')
+				.valueOf()
 		});
 
 	private submit = async () => {
@@ -89,11 +94,10 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		});
 	};
 
-	private handleExpireTime(time: Moment, timeString: string) {
+	private handleExpireTime(time: number) {
 		this.setState({
-			expireTime: timeString
+			expireTime: time.valueOf()
 		});
-		console.log(time.toString());
 	}
 
 	private handleClear = () =>
@@ -226,11 +230,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									<span className="title" style={{ width: 200 }}>
 										{CST.TH_EXPIRE.toUpperCase()}
 									</span>
-									<TimePicker
-										onChange={(time: Moment, timeString: string) =>
-											this.handleExpireTime(time, timeString)
-										}
-										defaultValue={moment('8:00:00', 'HH:mm:ss')}
+									<DatePicker
+										value={moment(this.state.expireTime)}
+										onChange={time => this.handleExpireTime(time.valueOf())}
 										style={{ width: 170 }}
 									/>
 								</li>

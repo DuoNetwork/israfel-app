@@ -106,7 +106,7 @@ class WsUtil {
 	// 	}
 	// }
 
-	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: string) {
+	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: number) {
 		if (!this.ws) {
 			this.handleConfigError('not connected');
 			return;
@@ -123,7 +123,7 @@ class WsUtil {
 			isBid ? etherTokenAddress : zrxTokenAddress,
 			isBid ? zrxAmt : ethAmt,
 			isBid ? ethAmt : zrxAmt,
-			Math.ceil(util.getUTCNowTimestamp() / 1000) + util.convertSecond(expireTime)
+			Math.ceil(expireTime / 1000)
 		);
 		const pair = 'ZRX-WETH';
 		const msg: IWsAddOrderRequest = {
