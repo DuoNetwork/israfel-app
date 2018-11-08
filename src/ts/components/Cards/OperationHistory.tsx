@@ -106,6 +106,9 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										{CST.TH_AMT.toUpperCase()}
 									</span>
 									<span className="title" style={{ width: 30 }}>
+										{CST.TH_BALANCE.toUpperCase()}
+									</span>
+									<span className="title" style={{ width: 30 }}>
 										{CST.TH_PX.toUpperCase()}
 									</span>
 									<span className="title" style={{ width: 30 }}>
@@ -114,7 +117,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 									<span className="title" style={{ width: 30 }}>
 										{CST.TH_ACTIONS}
 									</span>
-									<span className="title" style={{ width: 150 }}>
+									<span className="title" style={{ width: 120 }}>
 										{CST.TH_TIME}
 									</span>
 								</li>
@@ -123,6 +126,9 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">
 												{data.amount ? util.formatNumber(data.amount) : '-'}
+											</span>
+											<span className="content">
+												{data.balance ? util.formatNumber(data.balance) : '-'}
 											</span>
 											<span className="title">
 												{data.price ? util.formatNumber(data.price) : '-'}

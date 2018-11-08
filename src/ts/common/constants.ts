@@ -44,6 +44,7 @@ export const TH_BUY = 'buy';
 export const TH_OPERA = 'OPERATION';
 export const TH_PX = 'Price';
 export const TH_AMT = 'Amount';
+export const TH_BALANCE = 'Balance';
 export const TH_STATUS = 'Status';
 export const TH_ACTIONS = 'Actions';
 export const TH_ADD_BIDASK = 'addBidAsk';

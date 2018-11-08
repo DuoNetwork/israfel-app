@@ -10,6 +10,7 @@ describe('OperationHistory Test', () => {
 		{
 			account: '0x66ad9d0b933da88bbee196b2a9c0badc901c4a3a',
 			amount: 2,
+			balance: 1,
 			createdAt: 1541143007295,
 			currentSequence: 0,
 			initialSequence: 0,
@@ -25,6 +26,7 @@ describe('OperationHistory Test', () => {
 		{
 			account: '0x66ad9d0b933da88bbee196b2a9c0badc901c4a3a',
 			amount: 2,
+			balance: 1,
 			createdAt: 1541143007295,
 			currentSequence: 0,
 			initialSequence: 0,
