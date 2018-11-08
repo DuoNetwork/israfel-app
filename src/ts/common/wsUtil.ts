@@ -66,6 +66,7 @@ class WsUtil {
 	}
 
 	private handleOrderResponse(orderResponse: IWsOrderResponse) {
+		console.log(orderResponse);
 		if (orderResponse.status !== CST.WS_OK)
 			this.handleOrderError(
 				orderResponse.method,
