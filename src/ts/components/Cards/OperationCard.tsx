@@ -1,6 +1,7 @@
 import { Select } from 'antd';
-import { TimePicker } from 'antd';
 import { DatePicker } from 'antd';
+import { TimePicker } from 'antd';
+import { SelectValue } from 'antd/lib/select';
 import moment, { Moment } from 'moment';
 import * as React from 'react';
 import * as CST from '../../common/constants';
@@ -17,6 +18,8 @@ interface IState {
 	targetCurrency: string;
 	expireDate: number;
 	expireTime: string;
+	base: string;
+	target: string;
 }
 
 export default class OperationCard extends React.PureComponent<{}, IState> {
@@ -31,7 +34,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 				.valueOf(),
 			expireTime: '00:00:00',
 			targetCurrency: '',
-			price: ''
+			price: '',
+			base: CST.TH_PLACEHOLDER[1],
+			target: CST.TH_PLACEHOLDER[0]
 		};
 	}
 
@@ -45,7 +50,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 				.add(1, 'day')
 				.valueOf(),
 			expireTime: '00:00:00',
-			price: ''
+			price: '',
+			base: CST.TH_PLACEHOLDER[1],
+			target: CST.TH_PLACEHOLDER[0]
 		});
 
 	private submit = async () => {
@@ -60,11 +67,11 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 
 	private getDescription = () => {
 		const { isCreate, targetCurrency, baseCurrency } = this.state;
-		if (targetCurrency !== '0' && baseCurrency !== '0')
+		if (targetCurrency > '0' && baseCurrency > '0')
 			this.setState({
 				price: (Number(targetCurrency) / Number(baseCurrency)).toString()
 			});
-		else this.setState({ price: '0' });
+		else this.setState({ price: '' });
 
 		this.setState({
 			description: !isCreate
@@ -72,6 +79,18 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 				: 'Sell ' + baseCurrency + ' for ' + targetCurrency
 		});
 	};
+
+	private handleChangeBase(base: SelectValue) {
+		this.setState({
+			base: base.toString()
+		});
+	}
+
+	private handleChangeTarget(target: SelectValue) {
+		this.setState({
+			target: target.toString()
+		});
+	}
 
 	private handleAmountInputChange = (value: string) =>
 		this.setState({
@@ -107,7 +126,13 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			baseCurrency: '',
 			targetCurrency: '',
 			description: '',
-			price: ''
+			price: '',
+			base: CST.TH_PLACEHOLDER[1],
+			target: CST.TH_PLACEHOLDER[0],
+			expireDate: moment(moment().startOf('day'))
+				.add(1, 'day')
+				.valueOf(),
+			expireTime: '00:00:00'
 		});
 
 	public render() {
@@ -161,16 +186,8 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									<Select
 										showSearch
 										style={{ width: 200 }}
-										placeholder={CST.TH_PLACEHOLDER[0]}
-										optionFilterProp="children"
-										filterOption={(input, option) =>
-											option.props.children
-												? option.props.children
-														.toString()
-														.toLowerCase()
-														.indexOf(input.toLowerCase()) >= 0
-												: null
-										}
+										value={this.state.target}
+										onSelect={e => this.handleChangeTarget(e)}
 									>
 										{children}
 									</Select>
@@ -190,16 +207,8 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									<Select
 										showSearch
 										style={{ width: 200 }}
-										placeholder={CST.TH_PLACEHOLDER[1]}
-										optionFilterProp="children"
-										filterOption={(input, option) =>
-											option.props.children
-												? option.props.children
-														.toString()
-														.toLowerCase()
-														.indexOf(input.toLowerCase()) >= 0
-												: null
-										}
+										value={this.state.base}
+										onSelect={(e: SelectValue) => this.handleChangeBase(e)}
 									>
 										{children}
 									</Select>
@@ -222,7 +231,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										className={''}
 										value={this.state.price}
 										onChange={e => this.handlePriceInputChange(e.target.value)}
-										onBlur={e => this.handlePriceInputChange(e.target.value)}
+										onBlur={() => this.getDescription()}
 										placeholder={CST.TH_PX}
 										right
 									/>
@@ -237,7 +246,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										style={{ width: 170 }}
 									/>
 									<TimePicker
-										onChange={(time: Moment, timeString: string) => this.handleExpireTime(time, timeString)}
+										onChange={(time: Moment, timeString: string) =>
+											this.handleExpireTime(time, timeString)
+										}
 										value={moment(this.state.expireTime, 'HH:mm:ss')}
 									/>
 								</li>

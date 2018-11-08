@@ -71,7 +71,8 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		for (let i = 1; i < orderHistory.length; i++)
 			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
 				summaryList.push(orderHistory[i - 1]);
-		summaryList.push(orderHistory[orderHistory.length - 1]);
+		if (orderHistory.length > 0)
+			summaryList.push(orderHistory[orderHistory.length - 1]);
 		orderHistory.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
@@ -117,7 +118,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										{CST.TH_TIME}
 									</span>
 								</li>
-								{displayData ? (
+								{displayData.length > 0 ? (
 									displayData.map((data, i) => (
 										<li key={i} style={{ height: '28px' }}>
 											<span className="content">

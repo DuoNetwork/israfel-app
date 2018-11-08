@@ -1,4 +1,4 @@
-import { DatePicker } from 'antd';
+import { DatePicker, Select, TimePicker } from 'antd';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import * as React from 'react';
@@ -90,7 +90,7 @@ describe('OperationCard Test', () => {
 			expect(wsUtil.addOrder).toHaveBeenCalled();
 		});
 
-		it(' Expire Time Input ', async () => {
+		it('Expire Time Input ', async () => {
 			const wrapper = shallow(<OperationCard />);
 			jest.useFakeTimers();
 			await wrapper
@@ -100,6 +100,17 @@ describe('OperationCard Test', () => {
 					target: {
 						value: {
 							time: moment(1234567890)
+						}
+					}
+				});
+			await wrapper
+				.find(TimePicker)
+				.at(0)
+				.simulate('change', {
+					target: {
+						value: {
+							time: moment(1234567890),
+							timeString: moment(1234567890).toString()
 						}
 					}
 				});
@@ -146,6 +157,15 @@ describe('OperationCard Test', () => {
 				.find(SInput)
 				.at(1)
 				.simulate('blur');
+			await wrapper
+				.find(Select)
+				.at(1)
+				.simulate('select', {
+					target: {
+						value: 1
+					}
+				});
+			await wrapper.find(Select).at(0).simulate('select', {target: {value: 0 } });
 			expect(wrapper.state('baseCurrency')).toBe('2');
 			expect(wrapper.state('targetCurrency')).toBe('1');
 			expect(wrapper.state('price')).toBe('0.5');
@@ -169,7 +189,7 @@ describe('OperationCard Test', () => {
 				});
 			await wrapper
 				.find(SInput)
-				.at(1)
+				.at(2)
 				.simulate('blur');
 			expect(wrapper.state('baseCurrency')).toBe('2');
 			expect(wrapper.state('targetCurrency')).toBe('4');
@@ -188,7 +208,10 @@ describe('OperationCard Test', () => {
 				.find(SInput)
 				.at(1)
 				.simulate('change', { target: { value: '1' } });
-			wrapper.find('button').at(1).simulate('click');
+			wrapper
+				.find('button')
+				.at(1)
+				.simulate('click');
 			expect(wrapper.state('price')).toBe('');
 			expect(wrapper.state('baseCurrency')).toBe('');
 			expect(wrapper.state('targetCurrency')).toBe('');
@@ -211,113 +234,3 @@ describe('OperationCard Test', () => {
 		});
 	});
 });
-
-// 		it('Test SInput Input', async () => {
-// 			const wrapper = shallow(<OperationCard />);
-// 			wrapper
-// 				.find('button')
-// 				.at(0)
-// 				.simulate('click');
-// 			jest.useFakeTimers();
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(0)
-// 				.simulate('change', { target: { value: '6506.88' } });
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(0)
-// 				.simulate('blur');
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(1)
-// 				.simulate('change', { target: { value: '6556' } });
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(1)
-// 				.simulate('blur');
-// 			wrapper
-// 				.find('button')
-// 				.at(2)
-// 				.simulate('click');
-// 			expect(wrapper.state('amount')).toBe('6556');
-// 			expect(wrapper.state('price')).toBe('6506.88');
-// 			setTimeout(() => {
-// 				expect(
-// 					wrapper
-// 						.find('div')
-// 						.at(4)
-// 						.find('li')
-// 						.at(4)
-// 						.find('.description')
-// 				).toBe('Buy 6556 at price 6506.88');
-// 				// expect(submitOrdersMock).toHaveBeenCalled();
-// 				expect(wrapper.state('description')).toBe('Buy 6556 at price 6506.88');
-// 			}, 1500);
-// 		});
-
-// 		it('Sell Clear', async () => {
-// 			const wrapper = shallow(<OperationCard />);
-// 			jest.useFakeTimers();
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(1)
-// 				.simulate('change', { target: { value: '6556' } });
-// 			await wrapper
-// 				.find('button')
-// 				.at(1)
-// 				.simulate('click');
-// 			expect(wrapper.state('amount')).toBe('0');
-// 			expect(wrapper.state('price')).toBe('0');
-// 			expect(wrapper.state('description')).toBe('');
-// 			setTimeout(() => {
-// 				expect(
-// 					wrapper
-// 						.find('div')
-// 						.at(4)
-// 						.find('li')
-// 						.at(4)
-// 						.find('.description')
-// 				).toBe('Sell 0 at price 0');
-// 			}, 500);
-// 		});
-
-// 		it('Buy Clear', async () => {
-// 			const wrapper = shallow(<OperationCard />);
-// 			wrapper
-// 				.find('button')
-// 				.at(0)
-// 				.simulate('click');
-// 			jest.useFakeTimers();
-// 			await wrapper
-// 				.find(SInput)
-// 				.at(1)
-// 				.simulate('change', { target: { value: '6556' } });
-// 			await wrapper
-// 				.find('button')
-// 				.at(1)
-// 				.simulate('click');
-// 			await wrapper
-// 				.find('button')
-// 				.at(3)
-// 				.simulate('click');
-// 			wrapper
-// 				.find('button')
-// 				.at(2)
-// 				.simulate('click');
-// 			expect(wrapper.state('amount')).toBe('0');
-// 			expect(wrapper.state('price')).toBe('0');
-// 			expect(wrapper.state('description')).toBe('');
-// 			setTimeout(() => {
-// 				expect(
-// 					wrapper
-// 						.find('div')
-// 						.at(4)
-// 						.find('li')
-// 						.at(4)
-// 						.find('.description')
-// 				).toBe('Buy 0 at price 0');
-// 				// expect(submitOrdersMock).toHaveBeenCalled();
-// 			}, 500);
-// 		});
-// 	});
-// });
