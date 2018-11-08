@@ -120,10 +120,10 @@ class WsUtil {
 		const rawOrder = await web3Util.createRawOrder(
 			accounts[0],
 			__DEV__ ? CST.RELAYER_ADDR_KOVAN : CST.RELAYER_ADDR_MAIN,
-			isBid ? zrxTokenAddress : etherTokenAddress,
 			isBid ? etherTokenAddress : zrxTokenAddress,
-			isBid ? zrxAmt : ethAmt,
+			isBid ? zrxTokenAddress : etherTokenAddress,
 			isBid ? ethAmt : zrxAmt,
+			isBid ? zrxAmt : ethAmt,
 			expireTime
 		);
 		const pair = 'ZRX-WETH';
