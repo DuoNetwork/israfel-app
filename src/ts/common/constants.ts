@@ -50,6 +50,8 @@ export const TH_ADD_BIDASK = 'addBidAsk';
 export const TH_EXPIRE = 'expire time';
 export const TH_TIME = 'Time';
 export const TH_DELETE_ORDER = 'Are you sure to delete this order?';
+export const TH_WRAP = 'Wrap';
+export const TH_UNWRAP = 'Unwrap';
 
 export const TT_NETWORK_CHECK: ILocaleText = {
 	[LOCALE_CN]:

@@ -5,6 +5,7 @@ import { IUserOrder } from 'ts/common/types';
 import { SDivFlexCenter } from './_styled';
 import OperationCard from './Cards/OperationCard';
 import OperationHistory from './Cards/OperationHistory';
+import WrapEtherCard from './Cards/WrapEtherCard';
 import Header from './Header';
 
 export interface IProps {
@@ -31,6 +32,11 @@ export default class Dex extends React.PureComponent<IProps> {
 						/>
 						<Affix offsetTop={10}>
 							<OperationCard />
+						</Affix>
+					</SDivFlexCenter>
+					<SDivFlexCenter center horizontal>
+						<Affix offsetTop={10}>
+							<WrapEtherCard />
 						</Affix>
 					</SDivFlexCenter>
 				</div>
