@@ -52,7 +52,7 @@ export default class SetAllowanceCard extends React.PureComponent<{}, IState> {
 											className={'form-button'}
 											// disabled={!Number(this.state.amount)}
 											onClick={() =>
-												web3Util.setUnlimitedEtherTokenAllowance()
+												web3Util.setUnlimitedTokenAllowance(CST.TOKEN_WETH)
 											}
 										>
 											{'Approve'}

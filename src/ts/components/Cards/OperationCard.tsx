@@ -58,7 +58,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			Number(this.state.targetCurrency),
 			Number(this.state.baseCurrency),
 			action === 'Buy',
-			this.state.expireTime / 1000
+			Math.ceil(this.state.expireTime / 1000)
 		);
 	};
 
