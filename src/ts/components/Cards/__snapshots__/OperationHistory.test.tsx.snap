@@ -74,6 +74,16 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
                 }
               }
             >
+              FILL
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
               PRICE
             </span>
             <span
@@ -84,7 +94,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
                 }
               }
             >
-              ASK/BID
+              SIDE
             </span>
             <span
               className="title"
@@ -126,6 +136,11 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               1.00
             </span>
             <span
+              className="content"
+            >
+              -
+            </span>
+            <span
               className="title"
             >
               0.1667
@@ -163,6 +178,11 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="content"
             >
               1.00
+            </span>
+            <span
+              className="content"
+            >
+              -
             </span>
             <span
               className="title"
@@ -412,6 +432,16 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
                 }
               }
             >
+              FILL
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
               PRICE
             </span>
             <span
@@ -422,7 +452,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
                 }
               }
             >
-              ASK/BID
+              SIDE
             </span>
             <span
               className="title"
@@ -464,6 +494,11 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               1.00
             </span>
             <span
+              className="content"
+            >
+              -
+            </span>
+            <span
               className="title"
             >
               0.1667
@@ -501,6 +536,11 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="content"
             >
               1.00
+            </span>
+            <span
+              className="content"
+            >
+              -
             </span>
             <span
               className="title"
@@ -750,6 +790,16 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
                 }
               }
             >
+              FILL
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
               PRICE
             </span>
             <span
@@ -760,7 +810,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
                 }
               }
             >
-              ASK/BID
+              SIDE
             </span>
             <span
               className="title"
@@ -802,6 +852,11 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               1.00
             </span>
             <span
+              className="content"
+            >
+              -
+            </span>
+            <span
               className="title"
             >
               0.1667
@@ -839,6 +894,11 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="content"
             >
               1.00
+            </span>
+            <span
+              className="content"
+            >
+              -
             </span>
             <span
               className="title"
@@ -1088,6 +1148,16 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
                 }
               }
             >
+              FILL
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "width": 30,
+                }
+              }
+            >
               PRICE
             </span>
             <span
@@ -1098,7 +1168,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
                 }
               }
             >
-              ASK/BID
+              SIDE
             </span>
             <span
               className="title"
@@ -1140,6 +1210,11 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               1.00
             </span>
             <span
+              className="content"
+            >
+              -
+            </span>
+            <span
               className="title"
             >
               0.1667
@@ -1177,6 +1252,11 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="content"
             >
               1.00
+            </span>
+            <span
+              className="content"
+            >
+              -
             </span>
             <span
               className="title"

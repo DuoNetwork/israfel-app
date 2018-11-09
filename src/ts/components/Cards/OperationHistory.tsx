@@ -62,17 +62,15 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		summaryList = [];
-		orderHistory.sort(
-			(a, b) =>
-				a.orderHash === b.orderHash
-					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
-					: Number(a.orderHash) - Number(b.orderHash)
+		orderHistory.sort((a, b) =>
+			a.orderHash === b.orderHash
+				? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
+				: Number(a.orderHash) - Number(b.orderHash)
 		);
 		for (let i = 1; i < orderHistory.length; i++)
 			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
 				summaryList.push(orderHistory[i - 1]);
-		if (orderHistory.length > 0)
-			summaryList.push(orderHistory[orderHistory.length - 1]);
+		if (orderHistory.length > 0) summaryList.push(orderHistory[orderHistory.length - 1]);
 		orderHistory.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
@@ -109,10 +107,13 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										{CST.TH_BALANCE.toUpperCase()}
 									</span>
 									<span className="title" style={{ width: 30 }}>
+										{CST.TH_FILL.toUpperCase()}
+									</span>
+									<span className="title" style={{ width: 30 }}>
 										{CST.TH_PX.toUpperCase()}
 									</span>
 									<span className="title" style={{ width: 30 }}>
-										{CST.TH_ASK.toUpperCase() + '/' + CST.TH_BID.toUpperCase()}
+										{CST.TH_SIDE.toUpperCase()}
 									</span>
 									<span className="title" style={{ width: 30 }}>
 										{CST.TH_ACTIONS}
@@ -128,7 +129,12 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 												{data.amount ? util.formatNumber(data.amount) : '-'}
 											</span>
 											<span className="content">
-												{data.balance ? util.formatNumber(data.balance) : '-'}
+												{data.balance
+													? util.formatNumber(data.balance)
+													: '-'}
+											</span>
+											<span className="content">
+												{data.fill ? util.formatNumber(data.fill) : '-'}
 											</span>
 											<span className="title">
 												{data.price ? util.formatNumber(data.price) : '-'}
