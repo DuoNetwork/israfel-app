@@ -1,3 +1,5 @@
+import { Select } from 'antd';
+import { SelectValue } from 'antd/lib/select';
 import * as React from 'react';
 import * as CST from '../../common/constants';
 import web3Util from '../../common/web3Util';
@@ -6,13 +8,15 @@ import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_st
 
 interface IState {
 	amount: string;
+	tokenName: string;
 }
 
 export default class SetAllowanceCard extends React.PureComponent<{}, IState> {
 	constructor(props: object) {
 		super(props);
 		this.state = {
-			amount: ''
+			amount: '',
+			tokenName: CST.TOKEN_WETH
 		};
 	}
 
@@ -21,23 +25,37 @@ export default class SetAllowanceCard extends React.PureComponent<{}, IState> {
 			amount: value
 		});
 
+	private handleChangeToken(target: SelectValue) {
+		this.setState({
+			tokenName: target.toString()
+		});
+	}
+
 	public render() {
+		const Option = Select.Option;
+		const children = CST.TH_CURRENCY.map(currency => (
+			<Option key={currency}>{currency}</Option>
+		));
 		return (
 			<SCard title={<SCardTitle>{'Allowance'}</SCardTitle>} width="370px" margin="0 0 0 5px">
 				<SCardConversionForm>
 					<SCardList>
 						<div className="status-list-wrapper">
 							<ul>
-								<li className={'input-line'}>
-									<span className="title" style={{ width: 200 }}>
-										{CST.TH_AMT}
-									</span>
+								<li>
+									<Select
+										showSearch
+										style={{ width: 200 }}
+										value={this.state.tokenName}
+										onSelect={e => this.handleChangeToken(e)}
+									>
+										{children}
+									</Select>
 									<SInput
 										width="60%"
-										className={''}
+										className="bg-dark"
 										value={this.state.amount}
 										onChange={e => this.handleAmountInputChange(e.target.value)}
-										placeholder={CST.TH_AMT}
 										right
 									/>
 								</li>
@@ -50,10 +68,21 @@ export default class SetAllowanceCard extends React.PureComponent<{}, IState> {
 									>
 										<button
 											className={'form-button'}
-											// disabled={!Number(this.state.amount)}
-											onClick={() =>
-												web3Util.setUnlimitedTokenAllowance(CST.TOKEN_WETH)
-											}
+											onClick={() => {
+												if (!this.state.amount)
+													web3Util.setUnlimitedTokenAllowance(
+														this.state.tokenName
+													);
+												else {
+													const tokenAddress = web3Util.getTokenAddressFromName(
+														this.state.tokenName
+													);
+													web3Util.setProxyAllowance(
+														tokenAddress,
+														Number(this.state.amount)
+													);
+												}
+											}}
 										>
 											{'Approve'}
 										</button>

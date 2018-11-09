@@ -22,7 +22,7 @@ export interface ILocaleText {
 }
 export const TH_MODE = ['Detail', 'Summary'];
 export const TH_PLACEHOLDER = ['Target Currency', 'Base Currency'];
-export const TH_CURRENCY = ['ZRX', 'ETH'];
+export const TH_CURRENCY = ['ZRX', 'WETH'];
 export const TH_LOGIN = 'Admin Login';
 export const TH_LOGOUT = 'Log out';
 export const TH_ACCOUNT = 'Account';

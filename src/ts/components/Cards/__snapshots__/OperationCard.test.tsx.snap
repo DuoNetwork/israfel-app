@@ -66,9 +66,9 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 ZRX
               </Option>
               <Option
-                key="ETH"
+                key="WETH"
               >
-                ETH
+                WETH
               </Option>
             </Select>
             <styled.input
@@ -103,9 +103,9 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 ZRX
               </Option>
               <Option
-                key="ETH"
+                key="WETH"
               >
-                ETH
+                WETH
               </Option>
             </Select>
             <styled.input
