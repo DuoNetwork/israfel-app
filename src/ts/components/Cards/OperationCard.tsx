@@ -11,13 +11,12 @@ import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
 
 interface IState {
-	isCreate: boolean;
+	isSell: boolean;
 	baseCurrency: string;
 	description: string;
 	price: string;
 	targetCurrency: string;
-	expireDate: number;
-	expireTime: string;
+	expireTime: number;
 	base: string;
 	target: string;
 }
@@ -26,13 +25,12 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 	constructor(props: object) {
 		super(props);
 		this.state = {
-			isCreate: true,
+			isSell: true,
 			baseCurrency: '',
 			description: '',
-			expireDate: moment(moment().startOf('day'))
+			expireTime: moment(util.getUTCNowTimestamp())
 				.add(1, 'day')
 				.valueOf(),
-			expireTime: '00:00:00',
 			targetCurrency: '',
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
@@ -42,31 +40,30 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 
 	private handleTypeChange = () =>
 		this.setState({
-			isCreate: !this.state.isCreate,
+			isSell: !this.state.isSell,
 			baseCurrency: '',
 			targetCurrency: '',
 			description: '',
-			expireDate: moment(util.getUTCNowTimestamp())
+			expireTime: moment(util.getUTCNowTimestamp())
 				.add(1, 'day')
 				.valueOf(),
-			expireTime: '00:00:00',
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
 			target: CST.TH_PLACEHOLDER[0]
 		});
 
 	private submit = async () => {
-		const action = this.state.isCreate ? 'Sell' : 'Buy';
+		const action = this.state.isSell ? 'Sell' : 'Buy';
 		await wsUtil.addOrder(
 			Number(this.state.targetCurrency),
 			Number(this.state.baseCurrency),
 			action === 'Buy',
-			Math.ceil(this.state.expireDate / 1000) + util.convertSecond(this.state.expireTime)
+			this.state.expireTime / 1000
 		);
 	};
 
 	private getDescription = () => {
-		const { isCreate, targetCurrency, baseCurrency } = this.state;
+		const { isSell, targetCurrency, baseCurrency } = this.state;
 		if (targetCurrency > '0' && baseCurrency > '0')
 			this.setState({
 				price: (Number(targetCurrency) / Number(baseCurrency)).toString()
@@ -74,7 +71,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		else this.setState({ price: '' });
 
 		this.setState({
-			description: !isCreate
+			description: !isSell
 				? 'Buy ' + targetCurrency + ' with ' + baseCurrency
 				: 'Sell ' + baseCurrency + ' for ' + targetCurrency
 		});
@@ -112,13 +109,22 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 
 	private handleExpireDate(time: number) {
 		this.setState({
-			expireDate: time.valueOf()
+			expireTime:
+				(time / 1000 +
+					util.convertSecond(moment(this.state.expireTime).format('HH:mm:ss'))) *
+				1000
 		});
 	}
 
 	private handleExpireTime(time: Moment, timeString: string) {
-		this.setState({ expireTime: timeString });
-		console.log(time.toString());
+		console.log(time);
+		this.setState({
+			expireTime:
+				(new Date(moment(this.state.expireTime).format('YYYY-MM-DD')).getTime() / 1000 -
+					8 * 60 * 60 +
+					util.convertSecond(timeString)) *
+				1000
+		});
 	}
 
 	private handleClear = () =>
@@ -129,10 +135,9 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
 			target: CST.TH_PLACEHOLDER[0],
-			expireDate: moment(moment().startOf('day'))
+			expireTime: moment(util.getUTCNowTimestamp())
 				.add(1, 'day')
-				.valueOf(),
-			expireTime: '00:00:00'
+				.valueOf()
 		});
 
 	public render() {
@@ -162,23 +167,23 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									>
 										<button
 											className={
-												this.state.isCreate
+												this.state.isSell
 													? 'conv-button selected'
 													: 'conv-button non-select'
 											}
 											onClick={() => this.handleTypeChange()}
 										>
-											{CST.TH_SELL}
+											{CST.TH_SELL.toUpperCase()}
 										</button>
 										<button
 											className={
-												!this.state.isCreate
+												!this.state.isSell
 													? 'conv-button selected'
 													: 'conv-button non-select'
 											}
 											onClick={() => this.handleTypeChange()}
 										>
-											{CST.TH_BUY}
+											{CST.TH_BUY.toUpperCase()}
 										</button>
 									</SDivFlexCenter>
 								</li>
@@ -224,7 +229,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 								</li>
 								<li className={'input-line'}>
 									<span className="title" style={{ width: 200 }}>
-										{CST.TH_PX}
+										{CST.TH_PX.toUpperCase()}
 									</span>
 									<SInput
 										width="60%"
@@ -232,7 +237,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										value={this.state.price}
 										onChange={e => this.handlePriceInputChange(e.target.value)}
 										onBlur={() => this.getDescription()}
-										placeholder={CST.TH_PX}
+										placeholder={CST.TH_PX.toUpperCase()}
 										right
 									/>
 								</li>
@@ -241,7 +246,11 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										{CST.TH_EXPIRE.toUpperCase()}
 									</span>
 									<DatePicker
-										value={moment(this.state.expireDate)}
+										value={moment(
+											moment(this.state.expireTime)
+												.format('YYYY-MM-DD HH:mm:ss')
+												.split(' ')[0]
+										)}
 										onChange={time => this.handleExpireDate(time.valueOf())}
 										style={{ width: 170 }}
 									/>
@@ -249,7 +258,12 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 										onChange={(time: Moment, timeString: string) =>
 											this.handleExpireTime(time, timeString)
 										}
-										value={moment(this.state.expireTime, 'HH:mm:ss')}
+										value={moment(
+											moment(this.state.expireTime)
+												.format('YYYY-MM-DD HH:mm:ss')
+												.split(' ')[1],
+											'HH:mm:ss'
+										)}
 									/>
 								</li>
 								<li className="description">

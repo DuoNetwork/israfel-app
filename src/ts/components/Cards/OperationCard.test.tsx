@@ -1,4 +1,4 @@
-import { DatePicker, Select, TimePicker } from 'antd';
+import { DatePicker, Select } from 'antd';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import * as React from 'react';
@@ -12,6 +12,7 @@ describe('OperationCard Test', () => {
 		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 		it('Test Snapshot', () => {
 			const wrapper = shallow(<OperationCard />);
+			wrapper.setState({ expireTime: '1541721600000' });
 			jest.useFakeTimers();
 			expect(wrapper).toMatchSnapshot();
 		});
@@ -19,6 +20,7 @@ describe('OperationCard Test', () => {
 
 		it('Test SInput Input', async () => {
 			const wrapper = shallow(<OperationCard />);
+			wrapper.setState({ expireTime: '1541721600000' });
 			jest.useFakeTimers();
 			await wrapper
 				.find(SInput)
@@ -92,6 +94,7 @@ describe('OperationCard Test', () => {
 
 		it('Expire Time Input ', async () => {
 			const wrapper = shallow(<OperationCard />);
+			wrapper.setState({ expireTime: '1541721600000' });
 			jest.useFakeTimers();
 			await wrapper
 				.find(DatePicker)
@@ -100,17 +103,6 @@ describe('OperationCard Test', () => {
 					target: {
 						value: {
 							time: moment(1234567890)
-						}
-					}
-				});
-			await wrapper
-				.find(TimePicker)
-				.at(0)
-				.simulate('change', {
-					target: {
-						value: {
-							time: moment(1234567890),
-							timeString: moment(1234567890).toString()
 						}
 					}
 				});
@@ -128,6 +120,7 @@ describe('OperationCard Test', () => {
 
 		it('Test SInput Input', async () => {
 			const wrapper = shallow(<OperationCard />);
+			wrapper.setState({ expireTime: '1541721600000' });
 			wrapper
 				.find('button')
 				.at(0)
@@ -165,7 +158,10 @@ describe('OperationCard Test', () => {
 						value: 1
 					}
 				});
-			await wrapper.find(Select).at(0).simulate('select', {target: {value: 0 } });
+			await wrapper
+				.find(Select)
+				.at(0)
+				.simulate('select', { target: { value: 0 } });
 			expect(wrapper.state('baseCurrency')).toBe('2');
 			expect(wrapper.state('targetCurrency')).toBe('1');
 			expect(wrapper.state('price')).toBe('0.5');

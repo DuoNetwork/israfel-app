@@ -34,13 +34,13 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 className="conv-button selected"
                 onClick={[Function]}
               >
-                sell
+                SELL
               </button>
               <button
                 className="conv-button non-select"
                 onClick={[Function]}
               >
-                buy
+                BUY
               </button>
             </styled.div>
           </li>
@@ -129,13 +129,13 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 }
               }
             >
-              Price
+              PRICE
             </span>
             <styled.input
               className=""
               onBlur={[Function]}
               onChange={[Function]}
-              placeholder="Price"
+              placeholder="PRICE"
               right={true}
               value=""
               width="60%"
@@ -169,7 +169,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 }
               }
               transitionName="slide-up"
-              value={"2018-11-08T16:00:00.000Z"}
+              value={null}
             />
             <TimePicker
               align={
@@ -187,7 +187,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               placement="bottomLeft"
               prefixCls="ant-time-picker"
               transitionName="slide-up"
-              value={"2018-11-07T16:00:00.000Z"}
+              value={null}
             />
           </li>
           <li

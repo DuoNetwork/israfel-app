@@ -22,9 +22,6 @@ interface IState {
 }
 
 let orderHash: string = '';
-const Option = Select.Option;
-let summaryList: IUserOrder[] = [];
-let displayData: IUserOrder[] = [];
 
 export default class OperationHistory extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -51,6 +48,9 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 
 	public render() {
 		const { orderHistory } = this.props;
+		const Option = Select.Option;
+		let summaryList: IUserOrder[] = [];
+		let displayData: IUserOrder[] = [];
 		// const { userOrder } = this.props;
 		const children = CST.TH_MODE.map(mode => (
 			<Option key={mode} value={mode}>
@@ -62,10 +62,11 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		summaryList = [];
-		orderHistory.sort((a, b) =>
-			a.orderHash === b.orderHash
-				? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
-				: Number(a.orderHash) - Number(b.orderHash)
+		orderHistory.sort(
+			(a, b) =>
+				a.orderHash === b.orderHash
+					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
+					: Number(a.orderHash) - Number(b.orderHash)
 		);
 		for (let i = 1; i < orderHistory.length; i++)
 			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
