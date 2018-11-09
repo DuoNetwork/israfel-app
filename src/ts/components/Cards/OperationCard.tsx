@@ -58,8 +58,8 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 	private submit = async () => {
 		const action = this.state.isCreate ? 'Sell' : 'Buy';
 		await wsUtil.addOrder(
-			Number(this.state.baseCurrency),
 			Number(this.state.targetCurrency),
+			Number(this.state.baseCurrency),
 			action === 'Buy',
 			Math.ceil(this.state.expireDate / 1000) + util.convertSecond(this.state.expireTime)
 		);
