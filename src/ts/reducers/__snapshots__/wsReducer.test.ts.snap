@@ -3,6 +3,11 @@
 exports[`ws reducer connection 1`] = `
 Object {
   "connection": true,
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "timestamp": 0,
+  },
   "userOrders": Array [],
 }
 `;
@@ -10,6 +15,11 @@ Object {
 exports[`ws reducer default 1`] = `
 Object {
   "connection": false,
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "timestamp": 0,
+  },
   "userOrders": Array [],
 }
 `;
@@ -17,6 +27,11 @@ Object {
 exports[`ws reducer userOrder 1`] = `
 Object {
   "connection": false,
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "timestamp": 0,
+  },
   "userOrders": Array [],
 }
 `;

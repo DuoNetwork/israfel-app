@@ -29,4 +29,5 @@ export interface IWeb3State {
 export interface IWsState {
 	readonly connection: boolean;
 	readonly userOrders: relayerTypes.IUserOrder[];
+	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 }

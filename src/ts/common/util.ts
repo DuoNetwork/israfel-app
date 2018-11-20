@@ -25,33 +25,33 @@ class Util {
 		return seconds;
 	}
 
-	public operationOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
-		if (newOrder.type === 'add') orderBook = this.addOrder(orderBook, newOrder);
-		else if (newOrder.type === 'cancel') orderBook = this.deleteOrder(orderBook, newOrder);
-		return orderBook;
+	public operationOrder(orders: IUserOrder[], newOrder: IUserOrder) {
+		if (newOrder.type === 'add') orders = this.addOrder(orders, newOrder);
+		else if (newOrder.type === 'cancel') orders = this.deleteOrder(orders, newOrder);
+		return orders;
 	}
 
-	public addOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
-		const index = orderBook.findIndex(
+	public addOrder(orders: IUserOrder[], newOrder: IUserOrder) {
+		const index = orders.findIndex(
 			(element: IUserOrder) => element.orderHash === newOrder.orderHash
 		);
-		if (index !== -1) orderBook[index].status = newOrder.status;
-		else orderBook.push(newOrder);
-		return orderBook;
+		if (index !== -1) orders[index].status = newOrder.status;
+		else orders.push(newOrder);
+		return orders;
 	}
 
-	public deleteOrder(orderBook: IUserOrder[], newOrder: IUserOrder) {
-		const index = orderBook.findIndex(
+	public deleteOrder(orders: IUserOrder[], newOrder: IUserOrder) {
+		const index = orders.findIndex(
 			(element: IUserOrder) => element.orderHash === newOrder.orderHash
 		);
 		if (index !== -1)
 			if (newOrder.status === 'confirmed')
-				orderBook.splice(index, 1);
+				orders.splice(index, 1);
 			else {
-				orderBook[index].type = newOrder.type;
-				orderBook[index].status = newOrder.status;
+				orders[index].type = newOrder.type;
+				orders[index].status = newOrder.status;
 			}
-		return orderBook;
+		return orders;
 	}
 
 	public getUTCNowTimestamp() {

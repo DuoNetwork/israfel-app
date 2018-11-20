@@ -5,7 +5,12 @@ import { IWsState } from '../common/types';
 
 export const initialState: IWsState = {
 	connection: false,
-	userOrders: []
+	userOrders: [],
+	orderBookSnapshot: {
+		timestamp: 0,
+		bids: [],
+		asks: []
+	}
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {

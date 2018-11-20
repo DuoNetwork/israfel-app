@@ -15,6 +15,11 @@ Object {
   },
   "ws": Object {
     "connection": false,
+    "orderBookSnapshot": Object {
+      "asks": Array [],
+      "bids": Array [],
+      "timestamp": 0,
+    },
     "userOrders": Array [],
   },
 }

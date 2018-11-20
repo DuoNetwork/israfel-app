@@ -2,8 +2,12 @@ import WebSocket from 'isomorphic-ws';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 import * as CST from './constants';
 import {
+	IOrderBookSnapshot,
+	IOrderBookSnapshotUpdate,
 	IUserOrder,
 	IWsAddOrderRequest,
+	IWsOrderBookResponse,
+	IWsOrderBookUpdateResponse,
 	IWsOrderRequest,
 	IWsOrderResponse,
 	IWsResponse,
@@ -23,6 +27,15 @@ class WsUtil {
 		orderHash: string,
 		error: string
 	) => any = () => ({});
+	private handleOrderBookSnapshot: (
+		pair: string,
+		orderBookSnapshot: IOrderBookSnapshot
+	) => any = () => ({});
+	private handleOrderBookUpdate: (
+		pair: string,
+		orderBookUpdate: IOrderBookSnapshotUpdate
+	) => any = () => ({});
+	private handleOrderBookError: (method: string, pair: string, error: string) => any = () => ({});
 
 	private reconnect() {
 		this.handleReconnect();
@@ -80,32 +93,38 @@ class WsUtil {
 			);
 	}
 
+	private handleOrderBookResponse(orderBookResponse: IWsResponse) {
+		if (orderBookResponse.status !== CST.WS_OK)
+			this.handleOrderBookError(
+				orderBookResponse.method,
+				orderBookResponse.pair,
+				orderBookResponse.status
+			);
+		else if (orderBookResponse.method === CST.DB_SNAPSHOT)
+			this.handleOrderBookSnapshot(
+				orderBookResponse.pair,
+				(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
+			);
+		else
+			this.handleOrderBookUpdate(
+				orderBookResponse.pair,
+				(orderBookResponse as IWsOrderBookUpdateResponse).orderBookUpdate
+			);
+	}
+
 	public handleMessage(message: string) {
-		const wsMsg: IWsResponse = JSON.parse(message);
-		switch (wsMsg.channel) {
+		const res: IWsResponse = JSON.parse(message);
+		switch (res.channel) {
 			case CST.DB_ORDERS:
-				this.handleOrderResponse(wsMsg as IWsOrderResponse);
+				this.handleOrderResponse(res as IWsOrderResponse);
 				break;
 			case CST.DB_ORDER_BOOKS:
+				this.handleOrderBookResponse(res);
 				break;
 			default:
 				break;
 		}
 	}
-
-	// public subscribe(name: string, marketId: string) {
-	// 	if (this.ws && name && marketId) {
-	// 		const req = {
-	// 			type: 'subscribe',
-	// 			channel: {
-	// 				name: name,
-	// 				marketId: marketId
-	// 			},
-	// 			requestId: Date.now().toString()
-	// 		};
-	// 		this.ws.send(JSON.stringify(req));
-	// 	}
-	// }
 
 	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: number) {
 		if (!this.ws) {
@@ -161,6 +180,24 @@ class WsUtil {
 		handleOrderError: (method: string, orderHash: string, error: string) => any
 	) {
 		this.handleOrderError = handleOrderError;
+	}
+
+	public onOrderBookSnapshot(
+		handleOrderBookSnapshot: (pair: string, orderBookSnapshot: IOrderBookSnapshot) => any
+	) {
+		this.handleOrderBookSnapshot = handleOrderBookSnapshot;
+	}
+
+	public onOrderBookUpdate(
+		handleOrderBookUpdate: (pair: string, orderBookUpdate: IOrderBookSnapshotUpdate) => any
+	) {
+		this.handleOrderBookUpdate = handleOrderBookUpdate;
+	}
+
+	public onOrderBookError(
+		handleOrderBookError: (method: string, pair: string, error: string) => any
+	) {
+		this.handleOrderBookError = handleOrderBookError;
 	}
 
 	public onReconnect(handleReconnect: () => any) {

@@ -27,8 +27,8 @@ describe('actions', () => {
 		);
 	});
 
-	test('userOrdersUpdte', () => {
-		expect(dynamoActions.userOrdersUpdte([{ test: 'test' }] as any)).toMatchSnapshot();
+	test('userOrdersUpdate', () => {
+		expect(dynamoActions.userOrdersUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
 	});
 
 	test('getUserOrders dummy addr', () => {

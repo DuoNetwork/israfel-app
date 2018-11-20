@@ -37,7 +37,7 @@ Object {
 }
 `;
 
-exports[`actions userOrdersUpdte 1`] = `
+exports[`actions userOrdersUpdate 1`] = `
 Object {
   "type": "userOrders",
   "value": Array [

@@ -17,7 +17,7 @@ export function scanStatus(): VoidThunkAction {
 	};
 }
 
-export function userOrdersUpdte(userOrders: IUserOrder[]) {
+export function userOrdersUpdate(userOrders: IUserOrder[]) {
 	return {
 		type: CST.AC_USER_ORDERS,
 		value: userOrders
@@ -29,7 +29,7 @@ export function getUserOrders(): VoidThunkAction {
 		const account = getState().web3.account;
 		if (account !== CST.DUMMY_ADDR)
 			dispatch(
-				userOrdersUpdte(
+				userOrdersUpdate(
 					await dynamoUtil.getUserOrders(
 						account,
 						util.getUTCNowTimestamp() - 30 * 86400000
