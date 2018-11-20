@@ -10,8 +10,7 @@ function mapStateToProps(state: IState) {
 		network: state.web3.network,
 		locale: state.ui.locale,
 		account: state.web3.account,
-		userOrders: state.ws.userOrders,
-		orderHistory: state.dynamo.userOrders,
+		userOrders: state.dex.userOrders
 	};
 }
 

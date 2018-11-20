@@ -4,7 +4,6 @@ exports[`store actions 1`] = `
 Object {
   "dynamo": Object {
     "status": Array [],
-    "userOrders": Array [],
   },
   "ui": Object {
     "locale": "EN",
@@ -15,12 +14,6 @@ Object {
   },
   "ws": Object {
     "connection": false,
-    "orderBookSnapshot": Object {
-      "asks": Array [],
-      "bids": Array [],
-      "timestamp": 0,
-    },
-    "userOrders": Array [],
   },
 }
 `;

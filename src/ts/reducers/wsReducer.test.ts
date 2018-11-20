@@ -9,14 +9,6 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrder', () => {
-		state = wsReducer(state, {
-			type: CST.AC_USER_ORDER,
-			value: { userOrder: 'test' }
-		});
-		expect(state).toMatchSnapshot();
-	});
-
 	test('connection', () => {
 		state = wsReducer(state, {
 			type: CST.AC_CONNECTION,

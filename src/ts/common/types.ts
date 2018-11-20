@@ -6,15 +6,20 @@ import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
+	readonly dex: IDexState;
 	readonly dynamo: IDynamoState;
 	readonly ui: IUIState;
 	readonly web3: IWeb3State;
 	readonly ws: IWsState;
 }
 
+export interface IDexState {
+	readonly userOrders: relayerTypes.IUserOrder[];
+	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
+}
+
 export interface IDynamoState {
 	readonly status: relayerTypes.IStatus[];
-	readonly userOrders: relayerTypes.IUserOrder[];
 }
 
 export interface IUIState {
@@ -28,6 +33,4 @@ export interface IWeb3State {
 
 export interface IWsState {
 	readonly connection: boolean;
-	readonly userOrders: relayerTypes.IUserOrder[];
-	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 }

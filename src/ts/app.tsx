@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
+import * as dexActions from './actions/dexActions';
 import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
@@ -38,6 +39,13 @@ wsUtil.onOrderUpdate((method, userOrder) => {
 	store.dispatch(dynamoActions.refresh());
 	console.log(method, userOrder);
 });
+wsUtil.onOrderBookSnapshot((orderBookSnapshot) => {
+	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot));
+});
+wsUtil.onOrderBookUpdate((orderBookUpdate) => {
+	store.dispatch(dexActions.orderBookUpdate(orderBookUpdate));
+});
+
 wsUtil.onConfigError(text => alert(text));
 wsUtil.onReconnect(() => {
 	alert('reconnecting');

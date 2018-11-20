@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions getUserOrders 1`] = `
+Array [
+  Object {
+    "type": "userOrder",
+    "value": Array [
+      Object {
+        "test": "test",
+      },
+    ],
+  },
+]
+`;
+
+exports[`actions getUserOrders dummy addr 1`] = `Array []`;
+
+exports[`actions orderBookSnapshotUpdate 1`] = `
+Object {
+  "type": "orderBookSnapshot",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions orderBookUpdate 1`] = `
+Object {
+  "type": "orderBook",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions userOrder 1`] = `
+Object {
+  "type": "userOrder",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions userOrdersUpdate 1`] = `
+Object {
+  "type": "userOrder",
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
+}
+`;

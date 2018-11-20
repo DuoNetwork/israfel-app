@@ -27,14 +27,8 @@ class WsUtil {
 		orderHash: string,
 		error: string
 	) => any = () => ({});
-	private handleOrderBookSnapshot: (
-		pair: string,
-		orderBookSnapshot: IOrderBookSnapshot
-	) => any = () => ({});
-	private handleOrderBookUpdate: (
-		pair: string,
-		orderBookUpdate: IOrderBookSnapshotUpdate
-	) => any = () => ({});
+	private handleOrderBookSnapshot: (orderBookSnapshot: IOrderBookSnapshot) => any = () => ({});
+	private handleOrderBookUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any = () => ({});
 	private handleOrderBookError: (method: string, pair: string, error: string) => any = () => ({});
 
 	private reconnect() {
@@ -94,6 +88,7 @@ class WsUtil {
 	}
 
 	private handleOrderBookResponse(orderBookResponse: IWsResponse) {
+		console.log(orderBookResponse);
 		if (orderBookResponse.status !== CST.WS_OK)
 			this.handleOrderBookError(
 				orderBookResponse.method,
@@ -102,12 +97,10 @@ class WsUtil {
 			);
 		else if (orderBookResponse.method === CST.DB_SNAPSHOT)
 			this.handleOrderBookSnapshot(
-				orderBookResponse.pair,
 				(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
 			);
 		else
 			this.handleOrderBookUpdate(
-				orderBookResponse.pair,
 				(orderBookResponse as IWsOrderBookUpdateResponse).orderBookUpdate
 			);
 	}
@@ -183,13 +176,13 @@ class WsUtil {
 	}
 
 	public onOrderBookSnapshot(
-		handleOrderBookSnapshot: (pair: string, orderBookSnapshot: IOrderBookSnapshot) => any
+		handleOrderBookSnapshot: (orderBookSnapshot: IOrderBookSnapshot) => any
 	) {
 		this.handleOrderBookSnapshot = handleOrderBookSnapshot;
 	}
 
 	public onOrderBookUpdate(
-		handleOrderBookUpdate: (pair: string, orderBookUpdate: IOrderBookSnapshotUpdate) => any
+		handleOrderBookUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any
 	) {
 		this.handleOrderBookUpdate = handleOrderBookUpdate;
 	}

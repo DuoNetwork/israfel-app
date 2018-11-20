@@ -169,7 +169,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
                 }
               }
               transitionName="slide-up"
-              value={null}
+              value={"2018-11-08T16:00:00.000Z"}
             />
             <TimePicker
               align={
@@ -187,7 +187,7 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
               placement="bottomLeft"
               prefixCls="ant-time-picker"
               transitionName="slide-up"
-              value={null}
+              value={"2018-11-20T00:00:00.000Z"}
             />
           </li>
           <li

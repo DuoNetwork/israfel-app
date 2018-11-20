@@ -47,7 +47,6 @@ describe('OperationHistory Test', () => {
 			const wrapper = shallow(
 				<OperationHistory
 					locale={''}
-					orderHistory={orderHistory}
 					userOrder={orderHistory}
 				/>
 			);

@@ -120,7 +120,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		console.log(time);
 		this.setState({
 			expireTime:
-				(new Date(moment(this.state.expireTime).format('YYYY-MM-DD')).getTime() / 1000 -
+				(moment(this.state.expireTime).valueOf() / 1000 -
 					8 * 60 * 60 +
 					util.convertSecond(timeString)) *
 				1000

@@ -6,12 +6,3 @@ Object {
   "value": true,
 }
 `;
-
-exports[`actions userOrder 1`] = `
-Object {
-  "type": "userOrder",
-  "value": Object {
-    "test": "test",
-  },
-}
-`;

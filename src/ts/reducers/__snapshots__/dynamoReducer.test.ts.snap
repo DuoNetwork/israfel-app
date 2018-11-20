@@ -3,7 +3,6 @@
 exports[`dynamo reducer default 1`] = `
 Object {
   "status": Array [],
-  "userOrders": Array [],
 }
 `;
 
@@ -12,22 +11,6 @@ Object {
   "status": Array [
     Object {
       "process": "test",
-    },
-  ],
-  "userOrders": Array [],
-}
-`;
-
-exports[`dynamo reducer userOrders 1`] = `
-Object {
-  "status": Array [
-    Object {
-      "process": "test",
-    },
-  ],
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
     },
   ],
 }

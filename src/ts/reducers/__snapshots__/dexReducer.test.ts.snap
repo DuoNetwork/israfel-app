@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dex reducer default 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "userOrders": Array [],
+}
+`;
+
+exports[`dex reducer userOrder 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "userOrders": Array [],
+}
+`;
+
+exports[`dex reducer userOrders 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;

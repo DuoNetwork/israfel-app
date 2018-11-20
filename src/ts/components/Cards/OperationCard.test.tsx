@@ -12,7 +12,7 @@ describe('OperationCard Test', () => {
 		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 		it('Test Snapshot', () => {
 			const wrapper = shallow(<OperationCard />);
-			wrapper.setState({ expireTime: '1541721600000' });
+			wrapper.setState({ expireTime: 1541721600000 });
 			jest.useFakeTimers();
 			expect(wrapper).toMatchSnapshot();
 		});
@@ -20,7 +20,7 @@ describe('OperationCard Test', () => {
 
 		it('Test SInput Input', async () => {
 			const wrapper = shallow(<OperationCard />);
-			wrapper.setState({ expireTime: '1541721600000' });
+			wrapper.setState({ expireTime: 1541721600000 });
 			jest.useFakeTimers();
 			await wrapper
 				.find(SInput)
@@ -94,7 +94,7 @@ describe('OperationCard Test', () => {
 
 		it('Expire Time Input ', async () => {
 			const wrapper = shallow(<OperationCard />);
-			wrapper.setState({ expireTime: '1541721600000' });
+			wrapper.setState({ expireTime: 1541721600000 });
 			jest.useFakeTimers();
 			await wrapper
 				.find(DatePicker)
@@ -120,7 +120,7 @@ describe('OperationCard Test', () => {
 
 		it('Test SInput Input', async () => {
 			const wrapper = shallow(<OperationCard />);
-			wrapper.setState({ expireTime: '1541721600000' });
+			wrapper.setState({ expireTime: 1541721600000 });
 			wrapper
 				.find('button')
 				.at(0)

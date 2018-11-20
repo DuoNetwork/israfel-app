@@ -11,7 +11,6 @@ import { SCard, SCardTitle } from './_styled';
 import { SCardList } from './_styled';
 
 interface IProps {
-	orderHistory: IUserOrder[];
 	userOrder: IUserOrder[];
 	locale: string;
 }
@@ -33,7 +32,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	}
 
 	private setOrderHash(index: any) {
-		orderHash = this.props.orderHistory[index].orderHash;
+		orderHash = this.props.userOrder[index].orderHash;
 	}
 
 	private handleChangeMode(value: any) {
@@ -47,7 +46,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	}
 
 	public render() {
-		const { orderHistory } = this.props;
+		const { userOrder } = this.props;
 		const Option = Select.Option;
 		let summaryList: IUserOrder[] = [];
 		let displayData: IUserOrder[] = [];
@@ -62,21 +61,21 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		summaryList = [];
-		orderHistory.sort(
+		userOrder.sort(
 			(a, b) =>
 				a.orderHash === b.orderHash
 					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 					: Number(a.orderHash) - Number(b.orderHash)
 		);
-		for (let i = 1; i < orderHistory.length; i++)
-			if (orderHistory[i].orderHash !== orderHistory[i - 1].orderHash)
-				summaryList.push(orderHistory[i - 1]);
-		if (orderHistory.length > 0) summaryList.push(orderHistory[orderHistory.length - 1]);
-		orderHistory.sort(
+		for (let i = 1; i < userOrder.length; i++)
+			if (userOrder[i].orderHash !== userOrder[i - 1].orderHash)
+				summaryList.push(userOrder[i - 1]);
+		if (userOrder.length > 0) summaryList.push(userOrder[userOrder.length - 1]);
+		userOrder.sort(
 			(a, b) => (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
 		);
 		if (this.state.mode === CST.TH_MODE[1]) displayData = summaryList;
-		else displayData = orderHistory;
+		else displayData = userOrder;
 		const step = displayData ? util.range(0, displayData.length) : [];
 
 		return (
