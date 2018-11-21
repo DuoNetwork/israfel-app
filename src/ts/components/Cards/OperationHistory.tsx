@@ -210,8 +210,8 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 								</li>
 								{step.length > 0 ? (
 									step.map((i: any) => (
-										<li key={i} style={{ height: '28px' }}>
-											<span className="title">{displayData[i].status}</span>
+										<li key={i} style={{ height: '40px', textAlign: 'center' }}>
+											<span className="status">{displayData[i].status}</span>
 										</li>
 									))
 								) : (
@@ -239,7 +239,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 										>
 											<li
 												key={i}
-												style={{ height: '28px' }}
+												style={{ height: '40px' }}
 												onClick={this.setOrderHash.bind(this, i)}
 											>
 												<button

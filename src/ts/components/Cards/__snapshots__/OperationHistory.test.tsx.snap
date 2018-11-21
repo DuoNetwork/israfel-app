@@ -324,12 +324,13 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               confirm
             </span>
@@ -338,12 +339,13 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               pending
             </span>
@@ -395,7 +397,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -430,7 +432,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -773,12 +775,13 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               confirm
             </span>
@@ -787,12 +790,13 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               pending
             </span>
@@ -844,7 +848,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -879,7 +883,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -1222,12 +1226,13 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               confirm
             </span>
@@ -1236,12 +1241,13 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               pending
             </span>
@@ -1293,7 +1299,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -1328,7 +1334,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -1671,12 +1677,13 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               confirm
             </span>
@@ -1685,12 +1692,13 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
+                "textAlign": "center",
               }
             }
           >
             <span
-              className="title"
+              className="status"
             >
               pending
             </span>
@@ -1742,7 +1750,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >
@@ -1777,7 +1785,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               onClick={[Function]}
               style={
                 Object {
-                  "height": "28px",
+                  "height": "40px",
                 }
               }
             >

@@ -458,7 +458,7 @@ export const SCardList = styled.div`
 	.status-list-wrapper > ul {
 		list-style: none;
 		margin: 10px 0;
-		padding: 10px 5px;
+		padding: 10px 5px 0 5px;
 		border: 1px dashed;
 		border-color: ${ColorStyles.BorderWhite1};
 		li:nth-child(even) {
@@ -498,6 +498,9 @@ export const SCardList = styled.div`
 			justify-content: space-between;
 			padding: 0 5px;
 			.title {
+				color: ${ColorStyles.TextWhiteAlphaL}
+			}
+			.status {
 				color: ${ColorStyles.TextWhiteAlphaL};
 			}
 			.content {
@@ -723,6 +726,7 @@ injectGlobal([
 		.form-button {
 			outline: none;
 			cursor: pointer;
+			margin: auto;
 			width: 180px;
 			font-family: 'Roboto', 'Microsoft YaHei';
 			background-color: transparent;
@@ -742,7 +746,10 @@ injectGlobal([
 			background-color: ${ColorStyles.ButtonHoverWhite1};
 		}
 		.address-table-action-col {
-			cursor: default !important;
+			cursor: default !important
+		}
+		span.status {
+			margin: auto;
 		}
 	}
 `
