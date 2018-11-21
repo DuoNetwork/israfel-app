@@ -41,7 +41,7 @@ class WsUtil {
 		const status = await dynamoUtil.scanStatus();
 		const now = util.getUTCNowTimestamp();
 		const relayerStatus = status.filter(
-			s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 15000
+			s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 60000
 		);
 		if (!relayerStatus.length) {
 			this.handleConfigError('no relayer status');
