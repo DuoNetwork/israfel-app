@@ -97,8 +97,14 @@ Object {
 exports[`dex reducer orderBookUpdate 1`] = `
 Object {
   "orderBookSnapshot": Object {
+    "asks": Array [
+      2,
+    ],
+    "bids": Array [
+      1,
+    ],
     "pair": "pair",
-    "version": 1234567890,
+    "version": 123,
   },
   "orderBookSubscription": "pair",
   "userOrderSubscription": 0,
@@ -133,8 +139,14 @@ Array [
 exports[`dex reducer orderBookUpdate wrong pair 1`] = `
 Object {
   "orderBookSnapshot": Object {
+    "asks": Array [
+      2,
+    ],
+    "bids": Array [
+      1,
+    ],
     "pair": "pair",
-    "version": 1234567890,
+    "version": 123,
   },
   "orderBookSubscription": "pair",
   "userOrderSubscription": 0,

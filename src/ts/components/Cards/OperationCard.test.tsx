@@ -48,7 +48,7 @@ describe('OperationCard Test', () => {
 				.simulate('blur');
 			expect(wrapper.state('baseCurrency')).toBe('2');
 			expect(wrapper.state('targetCurrency')).toBe('1');
-			expect(wrapper.state('price')).toBe('0.5');
+			expect(wrapper.state('price')).toBe('2');
 			setTimeout(() => {
 				expect(
 					wrapper
@@ -72,7 +72,7 @@ describe('OperationCard Test', () => {
 				.at(1)
 				.simulate('blur');
 			expect(wrapper.state('baseCurrency')).toBe('2');
-			expect(wrapper.state('targetCurrency')).toBe('4');
+			expect(wrapper.state('targetCurrency')).toBe('1');
 			expect(wrapper.state('price')).toBe('2');
 			setTimeout(() => {
 				expect(
@@ -164,7 +164,7 @@ describe('OperationCard Test', () => {
 				.simulate('select', { target: { value: 0 } });
 			expect(wrapper.state('baseCurrency')).toBe('2');
 			expect(wrapper.state('targetCurrency')).toBe('1');
-			expect(wrapper.state('price')).toBe('0.5');
+			expect(wrapper.state('price')).toBe('2');
 			setTimeout(() => {
 				expect(
 					wrapper
@@ -188,7 +188,7 @@ describe('OperationCard Test', () => {
 				.at(2)
 				.simulate('blur');
 			expect(wrapper.state('baseCurrency')).toBe('2');
-			expect(wrapper.state('targetCurrency')).toBe('4');
+			expect(wrapper.state('targetCurrency')).toBe('1');
 			expect(wrapper.state('price')).toBe('2');
 			setTimeout(() => {
 				expect(

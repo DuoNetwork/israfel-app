@@ -66,7 +66,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		const { isSell, targetCurrency, baseCurrency } = this.state;
 		if (targetCurrency > '0' && baseCurrency > '0')
 			this.setState({
-				price: (Number(targetCurrency) / Number(baseCurrency)).toString()
+				price: (Number(baseCurrency) / Number(targetCurrency)).toString()
 			});
 		else this.setState({ price: '' });
 
@@ -98,7 +98,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		const { baseCurrency } = this.state;
 		if (price > '0')
 			this.setState({
-				targetCurrency: (Number(price) * Number(baseCurrency)).toString()
+				targetCurrency: (Number(baseCurrency) / Number(price)).toString()
 			});
 		this.setState({ price: price });
 	};

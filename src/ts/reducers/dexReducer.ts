@@ -31,14 +31,15 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 		case CST.AC_OB_UPDATE:
 			if (state.orderBookSubscription === action.value.pair) {
 				const obUpdate: IOrderBookSnapshotUpdate = action.value;
-				const prevOrderBook: IOrderBookSnapshot = JSON.parse(
+				const orderBook: IOrderBookSnapshot = JSON.parse(
 					JSON.stringify(state.orderBookSnapshot)
 				);
+				orderBookUtil.updateOrderBookSnapshot(
+					orderBook,
+					obUpdate
+				);
 				return Object.assign({}, state, {
-					orderBookSnapshot: orderBookUtil.updateOrderBookSnapshot(
-						prevOrderBook,
-						obUpdate
-					)
+					orderBookSnapshot: orderBook
 				});
 			} else return state;
 		case CST.AC_OB_SUB:
