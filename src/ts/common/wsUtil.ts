@@ -10,6 +10,7 @@ import {
 	IWsOrderBookUpdateResponse,
 	IWsOrderRequest,
 	IWsOrderResponse,
+	IWsRequest,
 	IWsResponse,
 	IWsUserOrderResponse
 } from './types';
@@ -117,6 +118,34 @@ class WsUtil {
 			default:
 				break;
 		}
+	}
+
+	public async subscribeOrderBook(pair: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
+
+		const msg: IWsRequest = {
+			method: CST.WS_SUB,
+			channel: CST.DB_ORDER_BOOKS,
+			pair: pair
+		};
+		this.ws.send(JSON.stringify(msg));
+	}
+
+	public async unsubscribeOrderBook(pair: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
+
+		const msg: IWsRequest = {
+			method: CST.WS_UNSUB,
+			channel: CST.DB_ORDER_BOOKS,
+			pair: pair
+		};
+		this.ws.send(JSON.stringify(msg));
 	}
 
 	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: number) {

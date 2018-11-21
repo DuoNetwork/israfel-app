@@ -2,6 +2,17 @@
 
 exports[`store actions 1`] = `
 Object {
+  "dex": Object {
+    "orderBookSnapshot": Object {
+      "asks": Array [],
+      "bids": Array [],
+      "pair": "pair",
+      "version": 0,
+    },
+    "orderBookSubscription": "",
+    "userOrderSubscription": 0,
+    "userOrders": Array [],
+  },
   "dynamo": Object {
     "status": Array [],
   },

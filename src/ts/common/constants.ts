@@ -8,8 +8,10 @@ export const AC_LOCALE = 'locale';
 export const AC_USER_ORDER = 'userOrder';
 export const AC_USER_ORDERS = 'userOrders';
 export const AC_CONNECTION = 'connection';
-export const AC_ORDER_BOOK = 'orderBook';
+export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
+export const AC_OB_SUB = 'orderBookSubscription';
+export const AC_UO_SUB = 'userOrderSubscription';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';

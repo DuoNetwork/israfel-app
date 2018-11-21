@@ -1,6 +1,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as CST from 'ts/common/constants';
+import util from 'ts/common/util';
+import wsUtil from 'ts/common/wsUtil';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 import * as dexActions from './dexActions';
 
@@ -15,12 +17,20 @@ describe('actions', () => {
 		expect(dexActions.userOrdersUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
 	});
 
+	test('userOrderSubscriptionUpdate', () => {
+		expect(dexActions.userOrderSubscriptionUpdate(123)).toMatchSnapshot();
+	});
+
 	test('orderBookSnapshotUpdate', () => {
 		expect(dexActions.orderBookSnapshotUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
 	test('orderBookUpdate', () => {
 		expect(dexActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
+	});
+
+	test('orderBookSubscriptionUpdate', () => {
+		expect(dexActions.orderBookSubscriptionUpdate('pair')).toMatchSnapshot();
 	});
 
 	test('getUserOrders dummy addr', () => {
@@ -38,12 +48,14 @@ describe('actions', () => {
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
+				expect((dynamoUtil.getUserOrders as jest.Mock).mock.calls).toMatchSnapshot();
 				resolve();
 			}, 0)
 		);
 	});
 
 	test('getUserOrders', () => {
+		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 		const store: any = mockStore({
 			web3: {
 				account: '0xAccount'
@@ -58,6 +70,20 @@ describe('actions', () => {
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
+				expect((dynamoUtil.getUserOrders as jest.Mock).mock.calls).toMatchSnapshot();
+				resolve();
+			}, 0)
+		);
+	});
+
+	test('subscribeOrderBook', () => {
+		const store: any = mockStore({});
+		wsUtil.subscribeOrderBook = jest.fn();
+		store.dispatch(dexActions.subscribeOrderBook('pair'));
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions()).toMatchSnapshot();
+				expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
 				resolve();
 			}, 0)
 		);

@@ -10,7 +10,7 @@ export default class Israfel extends React.PureComponent {
 			<Layout>
 				<SContent>
 					<Switch>
-						<Route path={'/'} render={() => <Dex />} />
+						<Route path={'/'} render={() => <Dex pair={'ZRX-WETH'}/>} />
 					</Switch>
 				</SContent>
 			</Layout>

@@ -6,6 +6,7 @@ import {
 	VoidThunkAction
 } from 'ts/common/types';
 import util from 'ts/common/util';
+import wsUtil from 'ts/common/wsUtil';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 
 export function userOrderUpdate(userOrder: IUserOrder) {
@@ -22,6 +23,13 @@ export function userOrdersUpdate(userOrders: IUserOrder[]) {
 	};
 }
 
+export function userOrderSubscriptionUpdate(intervalId: number) {
+	return {
+		type: CST.AC_UO_SUB,
+		value: intervalId
+	};
+}
+
 export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
 	return {
 		type: CST.AC_OB_SNAPSHOT,
@@ -31,8 +39,15 @@ export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
 
 export function orderBookUpdate(obUpdate: IOrderBookSnapshotUpdate) {
 	return {
-		type: CST.AC_ORDER_BOOK,
+		type: CST.AC_OB_UPDATE,
 		value: obUpdate
+	};
+}
+
+export function orderBookSubscriptionUpdate(pair: string) {
+	return {
+		type: CST.AC_OB_SUB,
+		value: pair
 	};
 }
 
@@ -54,5 +69,13 @@ export function getUserOrders(): VoidThunkAction {
 export function refresh(): VoidThunkAction {
 	return dispatch => {
 		dispatch(getUserOrders());
+	};
+}
+
+export function subscribeOrderBook(pair: string): VoidThunkAction {
+	return dispatch => {
+		dispatch(orderBookSubscriptionUpdate(''));
+		dispatch(orderBookSubscriptionUpdate(pair));
+		wsUtil.subscribeOrderBook(pair);
 	};
 }

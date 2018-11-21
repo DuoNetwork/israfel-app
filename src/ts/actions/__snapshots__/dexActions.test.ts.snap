@@ -13,7 +13,18 @@ Array [
 ]
 `;
 
+exports[`actions getUserOrders 2`] = `
+Array [
+  Array [
+    "0xAccount",
+    -1357432110,
+  ],
+]
+`;
+
 exports[`actions getUserOrders dummy addr 1`] = `Array []`;
+
+exports[`actions getUserOrders dummy addr 2`] = `Array []`;
 
 exports[`actions orderBookSnapshotUpdate 1`] = `
 Object {
@@ -24,13 +35,41 @@ Object {
 }
 `;
 
+exports[`actions orderBookSubscriptionUpdate 1`] = `
+Object {
+  "type": "orderBookSubscription",
+  "value": "pair",
+}
+`;
+
 exports[`actions orderBookUpdate 1`] = `
 Object {
-  "type": "orderBook",
+  "type": "orderBookUpdate",
   "value": Object {
     "test": "test",
   },
 }
+`;
+
+exports[`actions subscribeOrderBook 1`] = `
+Array [
+  Object {
+    "type": "orderBookSubscription",
+    "value": "",
+  },
+  Object {
+    "type": "orderBookSubscription",
+    "value": "pair",
+  },
+]
+`;
+
+exports[`actions subscribeOrderBook 2`] = `
+Array [
+  Array [
+    "pair",
+  ],
+]
 `;
 
 exports[`actions userOrder 1`] = `
@@ -39,6 +78,13 @@ Object {
   "value": Object {
     "test": "test",
   },
+}
+`;
+
+exports[`actions userOrderSubscriptionUpdate 1`] = `
+Object {
+  "type": "userOrderSubscription",
+  "value": 123,
 }
 `;
 

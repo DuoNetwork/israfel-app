@@ -8,7 +8,141 @@ Object {
     "pair": "pair",
     "version": 0,
   },
+  "orderBookSubscription": "",
+  "userOrderSubscription": 0,
   "userOrders": Array [],
+}
+`;
+
+exports[`dex reducer orderBookSnapshot 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [
+      2,
+    ],
+    "bids": Array [
+      1,
+    ],
+    "pair": "pair",
+    "version": 123,
+  },
+  "orderBookSubscription": "pair",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;
+
+exports[`dex reducer orderBookSnapshot wrong pair 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [
+      2,
+    ],
+    "bids": Array [
+      1,
+    ],
+    "pair": "pair",
+    "version": 123,
+  },
+  "orderBookSubscription": "pair",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;
+
+exports[`dex reducer orderBookSubscription off 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": "",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;
+
+exports[`dex reducer orderBookSubscription on 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": "pair",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;
+
+exports[`dex reducer orderBookUpdate 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "pair": "pair",
+    "version": 1234567890,
+  },
+  "orderBookSubscription": "pair",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
+}
+`;
+
+exports[`dex reducer orderBookUpdate 2`] = `
+Array [
+  Array [
+    Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    Object {
+      "pair": "pair",
+    },
+  ],
+]
+`;
+
+exports[`dex reducer orderBookUpdate wrong pair 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "pair": "pair",
+    "version": 1234567890,
+  },
+  "orderBookSubscription": "pair",
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "userOrders": "test",
+    },
+  ],
 }
 `;
 
@@ -20,6 +154,8 @@ Object {
     "pair": "pair",
     "version": 0,
   },
+  "orderBookSubscription": "",
+  "userOrderSubscription": 0,
   "userOrders": Array [],
 }
 `;
@@ -32,6 +168,8 @@ Object {
     "pair": "pair",
     "version": 0,
   },
+  "orderBookSubscription": "",
+  "userOrderSubscription": 0,
   "userOrders": Array [
     Object {
       "userOrders": "test",
