@@ -1,8 +1,6 @@
 import { Select } from 'antd';
-import { DatePicker } from 'antd';
-import { TimePicker } from 'antd';
 import { SelectValue } from 'antd/lib/select';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import * as React from 'react';
 import * as CST from '../../common/constants';
 import util from '../../common/util';
@@ -16,9 +14,9 @@ interface IState {
 	description: string;
 	price: string;
 	targetCurrency: string;
-	expireTime: number;
 	base: string;
 	target: string;
+	expireHours: number;
 }
 
 export default class OperationCard extends React.PureComponent<{}, IState> {
@@ -28,13 +26,11 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			isSell: true,
 			baseCurrency: '',
 			description: '',
-			expireTime: moment(util.getUTCNowTimestamp())
-				.add(1, 'day')
-				.valueOf(),
 			targetCurrency: '',
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
-			target: CST.TH_PLACEHOLDER[0]
+			target: CST.TH_PLACEHOLDER[0],
+			expireHours: 8
 		};
 	}
 
@@ -44,9 +40,6 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			baseCurrency: '',
 			targetCurrency: '',
 			description: '',
-			expireTime: moment(util.getUTCNowTimestamp())
-				.add(1, 'day')
-				.valueOf(),
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
 			target: CST.TH_PLACEHOLDER[0]
@@ -58,7 +51,11 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			Number(this.state.targetCurrency),
 			Number(this.state.baseCurrency),
 			action === 'Buy',
-			Math.ceil(this.state.expireTime / 1000)
+			Math.ceil(
+				(moment(util.getUTCNowTimestamp()).valueOf() +
+					this.state.expireHours * 3600 * 1000) /
+					1000
+			)
 		);
 	};
 
@@ -107,25 +104,11 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 		this.setState({ targetCurrency: targetCurrency });
 	};
 
-	private handleExpireDate(time: number) {
+	private handleExpireButtonClick = (key: number) => {
 		this.setState({
-			expireTime:
-				(time / 1000 +
-					util.convertSecond(moment(this.state.expireTime).format('HH:mm:ss'))) *
-				1000
+			expireHours: key
 		});
-	}
-
-	private handleExpireTime(time: Moment, timeString: string) {
-		console.log(time);
-		this.setState({
-			expireTime:
-				(moment(this.state.expireTime).valueOf() / 1000 -
-					8 * 60 * 60 +
-					util.convertSecond(timeString)) *
-				1000
-		});
-	}
+	};
 
 	private handleClear = () =>
 		this.setState({
@@ -134,10 +117,7 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 			description: '',
 			price: '',
 			base: CST.TH_PLACEHOLDER[1],
-			target: CST.TH_PLACEHOLDER[0],
-			expireTime: moment(util.getUTCNowTimestamp())
-				.add(1, 'day')
-				.valueOf()
+			target: CST.TH_PLACEHOLDER[0]
 		});
 
 	public render() {
@@ -245,26 +225,24 @@ export default class OperationCard extends React.PureComponent<{}, IState> {
 									<span className="title" style={{ width: 200 }}>
 										{CST.TH_EXPIRE.toUpperCase()}
 									</span>
-									<DatePicker
-										value={moment(
-											moment(this.state.expireTime)
-												.format('YYYY-MM-DD HH:mm:ss')
-												.split(' ')[0]
-										)}
-										onChange={time => this.handleExpireDate(time.valueOf())}
-										style={{ width: 170 }}
-									/>
-									<TimePicker
-										onChange={(time: Moment, timeString: string) =>
-											this.handleExpireTime(time, timeString)
-										}
-										value={moment(
-											moment(this.state.expireTime)
-												.format('YYYY-MM-DD HH:mm:ss')
-												.split(' ')[1],
-											'HH:mm:ss'
-										)}
-									/>
+									<SDivFlexCenter horizontal width="100%" padding="2px 0 2px 0">
+										{[8, 16, 24, 36].map(pct => (
+											<button
+												key={pct}
+												className={
+													this.state.expireHours === pct
+														? 'button'
+														: 'percent-button'
+												}
+												onClick={this.handleExpireButtonClick.bind(
+													this,
+													pct
+												)}
+											>
+												{pct + 'h'}
+											</button>
+										))}
+									</SDivFlexCenter>
 								</li>
 								<li className="description">
 									<div>{this.state.description}</div>

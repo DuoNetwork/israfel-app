@@ -1,6 +1,5 @@
-import { DatePicker, Select } from 'antd';
+import { Select } from 'antd';
 import { shallow } from 'enzyme';
-import moment from 'moment';
 import * as React from 'react';
 import util from '../../common/util';
 import wsUtil from '../../common/wsUtil';
@@ -87,35 +86,9 @@ describe('OperationCard Test', () => {
 			wsUtil.addOrder = jest.fn();
 			wrapper
 				.find('button')
-				.at(2)
+				.at(6)
 				.simulate('click');
 			expect(wsUtil.addOrder).toHaveBeenCalled();
-		});
-
-		it('Expire Time Input ', async () => {
-			const wrapper = shallow(<OperationCard />);
-			wrapper.setState({ expireTime: 1541721600000 });
-			jest.useFakeTimers();
-			await wrapper
-				.find(DatePicker)
-				.at(0)
-				.simulate('change', {
-					target: {
-						value: {
-							time: moment(1234567890)
-						}
-					}
-				});
-			setTimeout(() => {
-				expect(
-					wrapper
-						.find('div')
-						.at(4)
-						.find('li')
-						.at(4)
-						.find('.expireTime')
-				).toBe('');
-			}, 1500);
 		});
 
 		it('Test SInput Input', async () => {
@@ -222,7 +195,7 @@ describe('OperationCard Test', () => {
 				.simulate('change', { target: { value: '1' } });
 			wrapper
 				.find('button')
-				.at(3)
+				.at(7)
 				.simulate('click');
 			expect(wrapper.state('baseCurrency')).toBe('');
 			expect(wrapper.state('targetCurrency')).toBe('');

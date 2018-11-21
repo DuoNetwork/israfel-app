@@ -154,41 +154,40 @@ exports[`OperationCard Test When user search by Price and Volume Test Snapshot 1
             >
               EXPIRE TIME
             </span>
-            <PickerWrapper
-              format="YYYY-MM-DD"
-              inputPrefixCls="ant-input"
-              locale={Object {}}
-              onChange={[Function]}
-              onOk={[Function]}
-              onOpenChange={[Function]}
-              popupStyle={Object {}}
-              prefixCls="ant-calendar"
-              style={
-                Object {
-                  "width": 170,
-                }
-              }
-              transitionName="slide-up"
-              value={"2018-11-08T16:00:00.000Z"}
-            />
-            <TimePicker
-              align={
-                Object {
-                  "offset": Array [
-                    0,
-                    -2,
-                  ],
-                }
-              }
-              disabled={false}
-              focusOnOpen={true}
-              hideDisabledOptions={false}
-              onChange={[Function]}
-              placement="bottomLeft"
-              prefixCls="ant-time-picker"
-              transitionName="slide-up"
-              value={"2018-11-21T00:00:00.000Z"}
-            />
+            <styled.div
+              horizontal={true}
+              padding="2px 0 2px 0"
+              width="100%"
+            >
+              <button
+                className="button"
+                key="8"
+                onClick={[Function]}
+              >
+                8h
+              </button>
+              <button
+                className="percent-button"
+                key="16"
+                onClick={[Function]}
+              >
+                16h
+              </button>
+              <button
+                className="percent-button"
+                key="24"
+                onClick={[Function]}
+              >
+                24h
+              </button>
+              <button
+                className="percent-button"
+                key="36"
+                onClick={[Function]}
+              >
+                36h
+              </button>
+            </styled.div>
           </li>
           <li
             className="description"
