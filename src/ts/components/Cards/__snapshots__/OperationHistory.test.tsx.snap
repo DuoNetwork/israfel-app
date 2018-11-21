@@ -50,26 +50,29 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              AMOUNT
+              AMT
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              BALANCE
+              BAL
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -80,6 +83,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -90,6 +94,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -100,6 +105,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -110,6 +116,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 120,
                 }
               }
@@ -121,42 +128,84 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -165,42 +214,84 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -408,26 +499,29 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              AMOUNT
+              AMT
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              BALANCE
+              BAL
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -438,6 +532,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -448,6 +543,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -458,6 +554,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -468,6 +565,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 120,
                 }
               }
@@ -479,42 +577,84 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -523,42 +663,84 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -766,26 +948,29 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              AMOUNT
+              AMT
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              BALANCE
+              BAL
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -796,6 +981,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -806,6 +992,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -816,6 +1003,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -826,6 +1014,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 120,
                 }
               }
@@ -837,42 +1026,84 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -881,42 +1112,84 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -1124,26 +1397,29 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              AMOUNT
+              AMT
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
             >
-              BALANCE
+              BAL
             </span>
             <span
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -1154,6 +1430,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -1164,6 +1441,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -1174,6 +1452,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 30,
                 }
               }
@@ -1184,6 +1463,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
               className="title"
               style={
                 Object {
+                  "textAlign": "center",
                   "width": 120,
                 }
               }
@@ -1195,42 +1475,84 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
             key="0"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>
@@ -1239,42 +1561,84 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
             key="1"
             style={
               Object {
-                "height": "28px",
+                "height": "40px",
               }
             }
           >
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               2.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               1.00
             </span>
             <span
               className="content"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               -
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               0.1667
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               ask
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 30,
+                }
+              }
             >
               add
             </span>
             <span
               className="title"
+              style={
+                Object {
+                  "textAlign": "center",
+                  "width": 120,
+                }
+              }
             >
               02-11-2018 15:16:47
             </span>

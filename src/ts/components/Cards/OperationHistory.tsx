@@ -61,11 +61,10 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		summaryList = [];
-		userOrder.sort(
-			(a, b) =>
-				a.orderHash === b.orderHash
-					? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
-					: Number(a.orderHash) - Number(b.orderHash)
+		userOrder.sort((a, b) =>
+			a.orderHash === b.orderHash
+				? (a.updatedAt || Number(moment.now)) - (b.updatedAt || Number(moment.now))
+				: Number(a.orderHash) - Number(b.orderHash)
 		);
 		for (let i = 1; i < userOrder.length; i++)
 			if (userOrder[i].orderHash !== userOrder[i - 1].orderHash)
@@ -100,52 +99,94 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="right">
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_AMT.toUpperCase()}
 									</span>
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_BALANCE.toUpperCase()}
 									</span>
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_FILL.toUpperCase()}
 									</span>
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_PX.toUpperCase()}
 									</span>
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_SIDE.toUpperCase()}
 									</span>
-									<span className="title" style={{ width: 30 }}>
+									<span
+										className="title"
+										style={{ width: 30, textAlign: 'center' }}
+									>
 										{CST.TH_ACTIONS}
 									</span>
-									<span className="title" style={{ width: 120 }}>
+									<span
+										className="title"
+										style={{ width: 120, textAlign: 'center' }}
+									>
 										{CST.TH_TIME}
 									</span>
 								</li>
 								{displayData.length > 0 ? (
 									displayData.map((data, i) => (
-										<li key={i} style={{ height: '28px' }}>
-											<span className="content">
+										<li key={i} style={{ height: '40px' }}>
+											<span
+												className="content"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.amount ? util.formatNumber(data.amount) : '-'}
 											</span>
-											<span className="content">
+											<span
+												className="content"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.balance
 													? util.formatNumber(data.balance)
 													: '-'}
 											</span>
-											<span className="content">
+											<span
+												className="content"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.fill ? util.formatNumber(data.fill) : '-'}
 											</span>
-											<span className="title">
+											<span
+												className="title"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.price ? util.formatNumber(data.price) : '-'}
 											</span>
-											<span className="title">
+											<span
+												className="title"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.side ? data.side : '-'}
 											</span>
-											<span className="title">
+											<span
+												className="title"
+												style={{ width: 30, textAlign: 'center' }}
+											>
 												{data.type ? data.type : '-'}
 											</span>
-											<span className="title">
+											<span
+												className="title"
+												style={{ width: 120, textAlign: 'center' }}
+											>
 												{data.createdAt
 													? moment(data.createdAt).format(
 															'DD-MM-YYYY HH:mm:ss'
