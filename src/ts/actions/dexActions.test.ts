@@ -77,13 +77,24 @@ describe('actions', () => {
 	});
 
 	test('subscribeOrderBook', () => {
-		const store: any = mockStore({});
+		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+		const store: any = mockStore({
+			web3: {
+				account: '0xAccount'
+			}
+		});
+		dynamoUtil.getUserOrders = jest.fn(() =>
+			Promise.resolve([{
+				test: 'test'
+			}])
+		);
 		wsUtil.subscribeOrderBook = jest.fn();
 		store.dispatch(dexActions.subscribeOrderBook('pair'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+				expect((dynamoUtil.getUserOrders as jest.Mock).mock.calls).toMatchSnapshot();
 				resolve();
 			}, 0)
 		);

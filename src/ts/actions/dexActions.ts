@@ -18,7 +18,7 @@ export function userOrderUpdate(userOrder: IUserOrder) {
 
 export function userOrdersUpdate(userOrders: IUserOrder[]) {
 	return {
-		type: CST.AC_USER_ORDER,
+		type: CST.AC_USER_ORDERS,
 		value: userOrders
 	};
 }
@@ -75,6 +75,7 @@ export function refresh(): VoidThunkAction {
 export function subscribeOrderBook(pair: string): VoidThunkAction {
 	return dispatch => {
 		dispatch(orderBookSubscriptionUpdate(''));
+		dispatch(getUserOrders());
 		dispatch(orderBookSubscriptionUpdate(pair));
 		wsUtil.subscribeOrderBook(pair);
 	};

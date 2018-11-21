@@ -3,7 +3,7 @@
 exports[`actions getUserOrders 1`] = `
 Array [
   Object {
-    "type": "userOrder",
+    "type": "userOrders",
     "value": Array [
       Object {
         "test": "test",
@@ -61,6 +61,14 @@ Array [
     "type": "orderBookSubscription",
     "value": "pair",
   },
+  Object {
+    "type": "userOrders",
+    "value": Array [
+      Object {
+        "test": "test",
+      },
+    ],
+  },
 ]
 `;
 
@@ -68,6 +76,15 @@ exports[`actions subscribeOrderBook 2`] = `
 Array [
   Array [
     "pair",
+  ],
+]
+`;
+
+exports[`actions subscribeOrderBook 3`] = `
+Array [
+  Array [
+    "0xAccount",
+    -1357432110,
   ],
 ]
 `;
@@ -90,7 +107,7 @@ Object {
 
 exports[`actions userOrdersUpdate 1`] = `
 Object {
-  "type": "userOrder",
+  "type": "userOrders",
   "value": Array [
     Object {
       "test": "test",

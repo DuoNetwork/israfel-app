@@ -28,6 +28,7 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 });
 
 store.dispatch(web3Actions.refresh());
+store.dispatch(dynamoActions.refresh());
 
 setInterval(() => {
 	store.dispatch(web3Actions.refresh());
@@ -36,7 +37,7 @@ setInterval(() => {
 
 wsUtil.onOrderUpdate((method, userOrder) => {
 	// store.dispatch(wsActions.userOrderUpdate(userOrder));
-	store.dispatch(dynamoActions.refresh());
+	store.dispatch(dexActions.refresh());
 	console.log(method, userOrder);
 });
 wsUtil.onOrderBookSnapshot((orderBookSnapshot) => {

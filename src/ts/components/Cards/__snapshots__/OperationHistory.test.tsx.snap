@@ -17,7 +17,7 @@ exports[`OperationHistory Test User Login Test Snapshot 1`] = `
           }
         }
         transitionName="slide-up"
-        value="Detail"
+        value="Summary"
       >
         <Option
           value="Detail"
@@ -375,7 +375,7 @@ exports[`OperationHistory Test User Login Test Snapshot 2`] = `
           }
         }
         transitionName="slide-up"
-        value="Detail"
+        value="Summary"
       >
         <Option
           value="Detail"
@@ -733,7 +733,7 @@ exports[`OperationHistory Test User Login Test Snapshot 3`] = `
           }
         }
         transitionName="slide-up"
-        value="Detail"
+        value="Summary"
       >
         <Option
           value="Detail"
@@ -1091,7 +1091,7 @@ exports[`OperationHistory Test User Login Test Snapshot 4`] = `
           }
         }
         transitionName="slide-up"
-        value="Detail"
+        value="Summary"
       >
         <Option
           value="Detail"

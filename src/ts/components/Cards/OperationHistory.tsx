@@ -27,7 +27,7 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			orderHash: '',
-			mode: CST.TH_MODE[0]
+			mode: CST.TH_MODE[1]
 		};
 	}
 
