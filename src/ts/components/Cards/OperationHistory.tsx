@@ -13,6 +13,7 @@ import { SCardList } from './_styled';
 interface IProps {
 	userOrder: IUserOrder[];
 	locale: string;
+	updateOrders: IUserOrder;
 }
 
 interface IState {
@@ -47,18 +48,21 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	}
 
 	public render() {
-		const { userOrder } = this.props;
+		const { userOrder, updateOrders } = this.props;
 		const Option = Select.Option;
 		let displayData: IUserOrder[] = [];
-		// const { userOrder } = this.props;
 		const children = CST.TH_MODE.map(mode => (
 			<Option key={mode} value={mode}>
 				{mode}
 			</Option>
 		));
-		// for (let i = 0; i < userOrder.length; i++)
-		// 	if (userOrder[i].type === 'add')
-		// 		orderHistory = util.addOrder(orderHistory, userOrder[i]);
+		if (updateOrders.orderHash !== '') {
+			const index = userOrder.findIndex(
+				element => element.orderHash === updateOrders.orderHash
+			);
+			if (index !== -1) userOrder[index] = updateOrders;
+			else userOrder.push(updateOrders);
+		}
 		const title = CST.TH_ORDER_HISTORY.toUpperCase();
 		summaryList = [];
 		userOrder.sort((a, b) =>

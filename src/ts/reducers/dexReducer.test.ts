@@ -10,9 +10,9 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrder', () => {
+	test('updateOrders', () => {
 		state = dexReducer(state, {
-			type: CST.AC_USER_ORDER,
+			type: CST.AC_UPDATE_ORDERS,
 			value: { userOrder: 'test' }
 		});
 		expect(state).toMatchSnapshot();

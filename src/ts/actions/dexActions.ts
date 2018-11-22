@@ -9,10 +9,10 @@ import util from 'ts/common/util';
 import wsUtil from 'ts/common/wsUtil';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 
-export function userOrderUpdate(userOrder: IUserOrder) {
+export function userOrderUpdate(updateOrders: IUserOrder) {
 	return {
-		type: CST.AC_USER_ORDER,
-		value: userOrder
+		type: CST.AC_UPDATE_ORDERS,
+		value: updateOrders
 	};
 }
 

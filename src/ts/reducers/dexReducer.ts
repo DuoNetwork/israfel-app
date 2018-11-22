@@ -6,6 +6,21 @@ import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
 export const initialState: IDexState = {
 	userOrders: [],
+	updateOrders: {
+		account: '',
+		pair: '',
+		orderHash: '',
+		price: 0,
+		amount: 0,
+		balance: 0,
+		fill: 0,
+		side: '',
+		initialSequence: 0,
+		currentSequence: 0,
+		type: '',
+		status: '',
+		updatedBy: ''
+	},
 	orderBookSnapshot: {
 		pair: 'pair',
 		version: 0,
@@ -18,6 +33,7 @@ export const initialState: IDexState = {
 
 export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
 	switch (action.type) {
+		case CST.AC_UPDATE_ORDERS:
 		case CST.AC_USER_ORDERS:
 			return Object.assign({}, state, {
 				[action.type]: action.value
@@ -34,10 +50,7 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 				const orderBook: IOrderBookSnapshot = JSON.parse(
 					JSON.stringify(state.orderBookSnapshot)
 				);
-				orderBookUtil.updateOrderBookSnapshot(
-					orderBook,
-					obUpdate
-				);
+				orderBookUtil.updateOrderBookSnapshot(orderBook, obUpdate);
 				return Object.assign({}, state, {
 					orderBookSnapshot: orderBook
 				});

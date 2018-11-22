@@ -14,6 +14,7 @@ interface IProps {
 	locale: string;
 	account: string;
 	userOrders: IUserOrder[];
+	updateOrders: IUserOrder;
 	orderBook: IOrderBookSnapshot;
 	subscribe: (pair: string) => any;
 	unsubscribe: () => any;
@@ -48,13 +49,17 @@ export default class Dex extends React.Component<IProps> {
 	}
 
 	public render() {
-		const { userOrders, locale, orderBook } = this.props;
+		const { userOrders, locale, updateOrders, orderBook } = this.props;
 		return (
 			<Layout>
 				<div className="App">
 					<Header />
 					<SDivFlexCenter center horizontal>
-						<OperationHistory userOrder={userOrders} locale={locale} />
+						<OperationHistory
+							updateOrders={updateOrders}
+							userOrder={userOrders}
+							locale={locale}
+						/>
 						<Affix offsetTop={10}>
 							<OperationCard />
 						</Affix>

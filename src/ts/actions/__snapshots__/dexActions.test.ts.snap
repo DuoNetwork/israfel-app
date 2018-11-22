@@ -91,7 +91,7 @@ Array [
 
 exports[`actions userOrder 1`] = `
 Object {
-  "type": "userOrder",
+  "type": "updateOrders",
   "value": Object {
     "test": "test",
   },

@@ -36,7 +36,7 @@ setInterval(() => {
 }, 60000);
 
 wsUtil.onOrderUpdate((method, userOrder) => {
-	// store.dispatch(wsActions.userOrderUpdate(userOrder));
+	store.dispatch(dexActions.userOrderUpdate(userOrder));
 	store.dispatch(dexActions.refresh());
 	console.log(method, userOrder);
 });

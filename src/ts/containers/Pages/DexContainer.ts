@@ -9,6 +9,7 @@ function mapStateToProps(state: IState) {
 	return {
 		locale: state.ui.locale,
 		account: state.web3.account,
+		updateOrders: state.dex.updateOrders,
 		userOrders: state.dex.userOrders,
 		orderBook: state.dex.orderBookSnapshot
 	};
