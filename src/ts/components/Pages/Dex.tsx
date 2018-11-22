@@ -2,21 +2,19 @@ import { Layout } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
 import { IOrderBookSnapshot, IUserOrder } from 'ts/common/types';
-import { SDivFlexCenter } from './_styled';
-import AllowanceCard from './Cards/AllowanceCard';
-import OperationCard from './Cards/OperationCard';
-import OperationHistory from './Cards/OperationHistory';
-import WrapEtherCard from './Cards/WrapEtherCard';
-import Header from './Header';
+import Header from 'ts/containers/HeaderContainer';
+import { SDivFlexCenter } from '../_styled';
+import AllowanceCard from '../Cards/AllowanceCard';
+import OperationCard from '../Cards/OperationCard';
+import OperationHistory from '../Cards/OperationHistory';
+import WrapEtherCard from '../Cards/WrapEtherCard';
 
 interface IProps {
 	pair: string;
-	network: number;
 	locale: string;
 	account: string;
 	userOrders: IUserOrder[];
 	orderBook: IOrderBookSnapshot;
-	updateLocale: (locale: string) => any;
 	subscribe: (pair: string) => any;
 	unsubscribe: () => any;
 }
@@ -25,7 +23,7 @@ interface IState {
 	pair: string;
 }
 
-export default class Dex extends React.PureComponent<IProps> {
+export default class Dex extends React.Component<IProps> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
@@ -50,11 +48,11 @@ export default class Dex extends React.PureComponent<IProps> {
 	}
 
 	public render() {
-		const { userOrders, locale, network, updateLocale, orderBook } = this.props;
+		const { userOrders, locale, orderBook } = this.props;
 		return (
 			<Layout>
 				<div className="App">
-					<Header locale={locale} network={network} updateLocale={updateLocale} />
+					<Header />
 					<SDivFlexCenter center horizontal>
 						<OperationHistory userOrder={userOrders} locale={locale} />
 						<Affix offsetTop={10}>

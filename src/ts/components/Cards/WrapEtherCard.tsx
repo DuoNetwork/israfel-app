@@ -8,7 +8,7 @@ interface IState {
 	amount: string;
 }
 
-export default class WrapEtherCard extends React.PureComponent<{}, IState> {
+export default class WrapEtherCard extends React.Component<{}, IState> {
 	constructor(props: object) {
 		super(props);
 		this.state = {

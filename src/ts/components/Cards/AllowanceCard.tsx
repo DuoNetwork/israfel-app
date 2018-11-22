@@ -11,7 +11,7 @@ interface IState {
 	tokenName: string;
 }
 
-export default class SetAllowanceCard extends React.PureComponent<{}, IState> {
+export default class SetAllowanceCard extends React.Component<{}, IState> {
 	constructor(props: object) {
 		super(props);
 		this.state = {

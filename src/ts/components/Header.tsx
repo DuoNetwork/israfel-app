@@ -1,32 +1,31 @@
+import duoIcon from 'images/DUO_icon.png';
 import * as React from 'react';
-import duoIcon from '../../images/DUO_icon.png';
-import * as CST from '../common/constants';
+import { Link } from 'react-router-dom';
+import * as CST from 'ts/common/constants';
 import { SDivFlexCenter, SHeader } from './_styled';
 import LocaleSelect from './Common/LocaleSelect';
 
 interface IProps {
+	location: object;
 	network: number;
-	width?: string;
 	locale: string;
 	updateLocale: (locale: string) => any;
 }
 
-export default class Header extends React.PureComponent<IProps> {
+export default class Header extends React.Component<IProps> {
 	public render() {
-		const { network, width, updateLocale } = this.props;
+		const { location, network, updateLocale } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
+		const path = (location as any).pathname.toLowerCase();
+		const isStatusPage = path.includes(CST.TH_STATUS.toLowerCase());
 		return (
 			<SHeader>
-				<SDivFlexCenter horizontal width={width ? width : '1200px'}>
-					<div className="icon-wrapper">
-						<a
-							href={
-								'https://duo.network' + (locale === CST.LOCALE_CN ? '/cn.html' : '')
-							}
-						>
+				<SDivFlexCenter horizontal width={'1200px'}>
+					<Link to={'/'}>
+						<div className="icon-wrapper">
 							<img src={duoIcon} />
-						</a>
-					</div>
+						</div>
+					</Link>
 					{network ? (
 						(__KOVAN__ && network !== CST.NETWORK_ID_KOVAN) ||
 						(!__KOVAN__ && network !== CST.NETWORK_ID_MAIN) ? (
@@ -36,9 +35,12 @@ export default class Header extends React.PureComponent<IProps> {
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
-						{updateLocale ? (
-							<LocaleSelect locale={locale} onSelect={updateLocale} />
+						{!isStatusPage ? (
+							<div className="nav-button-wrapper">
+								<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
+							</div>
 						) : null}
+						<LocaleSelect locale={locale} onSelect={updateLocale} />
 					</SDivFlexCenter>
 				</SDivFlexCenter>
 			</SHeader>

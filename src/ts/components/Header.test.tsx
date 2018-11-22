@@ -8,6 +8,7 @@ describe('Header Test', () => {
 		it('Test Snapshot', () => {
 			const wrapper = shallow(
 				<Header
+					location={{ pathname: 'path' }}
 					locale={CST.LOCALE_EN}
 					network={CST.NETWORK_ID_KOVAN}
 					updateLocale={() => ({})}

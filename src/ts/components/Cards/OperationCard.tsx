@@ -19,7 +19,7 @@ interface IState {
 	expireHours: number;
 }
 
-export default class OperationCard extends React.PureComponent<{}, IState> {
+export default class OperationCard extends React.Component<{}, IState> {
 	constructor(props: object) {
 		super(props);
 		this.state = {

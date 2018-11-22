@@ -6,20 +6,31 @@ exports[`Header Test User Login Test Snapshot 1`] = `
     horizontal={true}
     width="1200px"
   >
-    <div
-      className="icon-wrapper"
+    <Link
+      replace={false}
+      to="/"
     >
-      <a
-        href="https://duo.network"
+      <div
+        className="icon-wrapper"
       >
         <img
           src={null}
         />
-      </a>
-    </div>
+      </div>
+    </Link>
     <styled.div
       horizontal={true}
     >
+      <div
+        className="nav-button-wrapper"
+      >
+        <Link
+          replace={false}
+          to="/status"
+        >
+          STATUS
+        </Link>
+      </div>
       <CardTitleSelect
         locale="EN"
         onSelect={[Function]}
