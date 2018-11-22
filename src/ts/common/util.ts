@@ -2,7 +2,6 @@
 // import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
 import * as d3 from 'd3';
 import moment from 'moment';
-import { IUserOrder } from '../../../../israfel-relayer/src/common/types';
 // import * as CST from './constants';
 
 class Util {
@@ -23,35 +22,6 @@ class Util {
 			seconds += Number(index[i]);
 		}
 		return seconds;
-	}
-
-	public operationOrder(orders: IUserOrder[], newOrder: IUserOrder) {
-		if (newOrder.type === 'add') orders = this.addOrder(orders, newOrder);
-		else if (newOrder.type === 'cancel') orders = this.deleteOrder(orders, newOrder);
-		return orders;
-	}
-
-	public addOrder(orders: IUserOrder[], newOrder: IUserOrder) {
-		const index = orders.findIndex(
-			(element: IUserOrder) => element.orderHash === newOrder.orderHash
-		);
-		if (index !== -1) orders[index].status = newOrder.status;
-		else orders.push(newOrder);
-		return orders;
-	}
-
-	public deleteOrder(orders: IUserOrder[], newOrder: IUserOrder) {
-		const index = orders.findIndex(
-			(element: IUserOrder) => element.orderHash === newOrder.orderHash
-		);
-		if (index !== -1)
-			if (newOrder.status === 'confirmed')
-				orders.splice(index, 1);
-			else {
-				orders[index].type = newOrder.type;
-				orders[index].status = newOrder.status;
-			}
-		return orders;
 	}
 
 	public getUTCNowTimestamp() {

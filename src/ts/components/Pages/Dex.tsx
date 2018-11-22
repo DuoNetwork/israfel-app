@@ -4,7 +4,7 @@ import * as React from 'react';
 import { IOrderBookSnapshot, IUserOrder } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
-import AllowanceCard from '../Cards/AllowanceCard';
+// import AllowanceCard from '../Cards/AllowanceCard';
 import OrderBookCard from '../Cards/OrderBookCard';
 import OrderCard from '../Cards/OrderCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
@@ -64,9 +64,9 @@ export default class Dex extends React.Component<IProps> {
 						</Affix>
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal>
-						<Affix offsetTop={10}>
+						{/* <Affix offsetTop={10}>
 							<AllowanceCard />
-						</Affix>
+						</Affix> */}
 						<Affix offsetTop={10}>
 							<WrapEtherCard />
 						</Affix>

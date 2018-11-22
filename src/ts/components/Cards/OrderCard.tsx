@@ -76,7 +76,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title">
-									<span>{CST.TH_TRADE}</span>
+									<span>{this.props.pair.replace('|', '-')}</span>
 								</li>
 								<li>
 									<SDivFlexCenter
@@ -89,7 +89,8 @@ export default class OrderCard extends React.Component<IProps, IState> {
 											<button
 												key={side}
 												className={
-													this.state.isBid && side === CST.TH_BUY
+													(this.state.isBid && side === CST.TH_BUY) ||
+													(!this.state.isBid && side === CST.TH_SELL)
 														? 'conv-button selected'
 														: 'conv-button non-select'
 												}
