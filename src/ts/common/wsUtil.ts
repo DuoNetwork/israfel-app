@@ -4,6 +4,7 @@ import * as CST from './constants';
 import {
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IToken,
 	IUserOrder,
 	IWsAddOrderRequest,
 	IWsOrderBookResponse,
@@ -12,6 +13,7 @@ import {
 	IWsOrderResponse,
 	IWsRequest,
 	IWsResponse,
+	IWsTokenResponse,
 	IWsUserOrderResponse
 } from './types';
 import util from './util';
@@ -22,6 +24,7 @@ class WsUtil {
 	private handleConfigError: (text: string) => any = () => ({});
 	private handleConnected: () => any = () => ({});
 	private handleReconnect: () => any = () => ({});
+	private handleTokensUpdate: (tokens: IToken[]) => any = () => ({});
 	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
 	private handleOrderError: (
 		method: string,
@@ -115,6 +118,11 @@ class WsUtil {
 			case CST.DB_ORDER_BOOKS:
 				this.handleOrderBookResponse(res);
 				break;
+			case CST.DB_TOKENS:
+				const tokens = (res as IWsTokenResponse).tokens;
+				web3Util.setTokens(tokens);
+				this.handleTokensUpdate(tokens);
+				break;
 			default:
 				break;
 		}
@@ -148,26 +156,25 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async addOrder(zrxAmt: number, ethAmt: number, isBid: boolean, expireTime: number) {
+	public async addOrder(account: string, pair: string, price: number, amount: number, isBid: boolean, secondsToLive: number) {
 		if (!this.ws) {
 			this.handleConfigError('not connected');
 			return;
 		}
-		const zrxTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_ZRX);
-		const etherTokenAddress = web3Util.getTokenAddressFromName(CST.TOKEN_WETH);
-		if (etherTokenAddress === undefined) throw console.error('undefined etherTokenAddress');
+		const [code1, code2] = pair.split('|');
+		const address1 = web3Util.getTokenAddressFromCode(code1);
+		const address2 = web3Util.getTokenAddressFromCode(code2);
+		const amount2 = amount * price;
 
-		const accounts = await web3Util.web3Wrapper.getAvailableAddressesAsync();
 		const rawOrder = await web3Util.createRawOrder(
-			accounts[0],
-			__DEV__ ? CST.RELAYER_ADDR_KOVAN : CST.RELAYER_ADDR_MAIN,
-			isBid ? etherTokenAddress : zrxTokenAddress,
-			isBid ? zrxTokenAddress : etherTokenAddress,
-			isBid ? ethAmt : zrxAmt,
-			isBid ? zrxAmt : ethAmt,
-			expireTime
+			account,
+			web3Util.relayerAddress,
+			isBid ? address2 : address1,
+			isBid ? address1 : address2,
+			isBid ? amount2 : amount,
+			isBid ? amount : amount2,
+			secondsToLive + util.getUTCNowTimestamp() / 1000
 		);
-		const pair = 'ZRX-WETH';
 		const msg: IWsAddOrderRequest = {
 			method: CST.DB_ADD,
 			channel: CST.DB_ORDERS,
@@ -178,12 +185,11 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async deleteOrder(orderHash: string) {
+	public async deleteOrder(pair: string, orderHash: string) {
 		if (!this.ws) {
 			this.handleConfigError('not connected');
 			return;
 		}
-		const pair = 'ZRX-WETH';
 		const msg: IWsOrderRequest = {
 			method: CST.DB_TERMINATE,
 			channel: CST.DB_ORDERS,
@@ -228,6 +234,10 @@ class WsUtil {
 
 	public onConnected(handleConnected: () => any) {
 		this.handleConnected = handleConnected;
+	}
+
+	public onTokensUpdate(handleTokensUpdate: (tokens: IToken[]) => any) {
+		this.handleTokensUpdate = handleTokensUpdate;
 	}
 
 	public onConfigError(handleConfigError: (text: string) => any) {

@@ -10,20 +10,41 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('updateOrders', () => {
+	test('userOrderSubscription on', () => {
 		state = dexReducer(state, {
-			type: CST.AC_UPDATE_ORDERS,
-			value: { userOrder: 'test' }
+			type: CST.AC_UO_SUB,
+			value: 111
 		});
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrders', () => {
+	test('userOrderList', () => {
 		state = dexReducer(state, {
-			type: CST.AC_USER_ORDERS,
+			type: CST.AC_USER_ORDER_LIST,
 			value: [{
-				userOrders: 'test'
+				userOrders: 'fromList',
+				currentSequence: 123
+			},
+			{
+				userOrders: 'fromList',
+				currentSequence: 456
 			}]
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('updateOrder', () => {
+		state = dexReducer(state, {
+			type: CST.AC_USER_ORDER,
+			value: { userOrder: 'from single order', currentSequence: 456 }
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('userOrderSubscription off', () => {
+		state = dexReducer(state, {
+			type: CST.AC_UO_SUB,
+			value: 0
 		});
 		expect(state).toMatchSnapshot();
 	});

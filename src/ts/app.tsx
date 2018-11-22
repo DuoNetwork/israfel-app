@@ -11,7 +11,7 @@ import * as wsActions from './actions/wsActions';
 // import * as CST from './common/constants';
 import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
-import Israfel from './components/Israfel';
+import Israfel from './containers/IsrafelContainer';
 import store from './store/store';
 const config = require(`./keys/aws.ui.${__KOVAN__ ? 'dev' : 'live'}.json`);
 dynamoUtil.init(config, !__KOVAN__);
@@ -37,13 +37,13 @@ setInterval(() => {
 
 wsUtil.onOrderUpdate((method, userOrder) => {
 	store.dispatch(dexActions.userOrderUpdate(userOrder));
-	store.dispatch(dexActions.refresh());
+	// store.dispatch(dexActions.refresh());
 	console.log(method, userOrder);
 });
-wsUtil.onOrderBookSnapshot((orderBookSnapshot) => {
+wsUtil.onOrderBookSnapshot(orderBookSnapshot => {
 	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot));
 });
-wsUtil.onOrderBookUpdate((orderBookUpdate) => {
+wsUtil.onOrderBookUpdate(orderBookUpdate => {
 	store.dispatch(dexActions.orderBookUpdate(orderBookUpdate));
 });
 
@@ -52,6 +52,7 @@ wsUtil.onReconnect(() => {
 	alert('reconnecting');
 	store.dispatch(wsActions.connectionUpdate(false));
 });
+wsUtil.onTokensUpdate(tokens => store.dispatch(wsActions.tokensUpdate(tokens)));
 wsUtil.onConnected(() => {
 	store.dispatch(wsActions.connectionUpdate(true));
 	store.dispatch(dynamoActions.refresh());
@@ -64,6 +65,6 @@ wsUtil.onConnected(() => {
 			</Router>
 		</Provider>,
 		document.getElementById('app')
-	)
+	);
 });
 wsUtil.connectToRelayer();

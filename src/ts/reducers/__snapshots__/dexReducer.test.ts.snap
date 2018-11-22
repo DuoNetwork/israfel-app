@@ -9,21 +9,6 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "updateOrders": Object {
-    "account": "",
-    "amount": 0,
-    "balance": 0,
-    "currentSequence": 0,
-    "fill": 0,
-    "initialSequence": 0,
-    "orderHash": "",
-    "pair": "",
-    "price": 0,
-    "side": "",
-    "status": "",
-    "type": "",
-    "updatedBy": "",
-  },
   "userOrderSubscription": 0,
   "userOrders": Array [],
 }
@@ -42,15 +27,8 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
+  "userOrders": Array [],
 }
 `;
 
@@ -67,15 +45,8 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
+  "userOrders": Array [],
 }
 `;
 
@@ -88,15 +59,8 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
+  "userOrders": Array [],
 }
 `;
 
@@ -109,15 +73,8 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "pair",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
+  "userOrders": Array [],
 }
 `;
 
@@ -134,15 +91,8 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
+  "userOrders": Array [],
 }
 `;
 
@@ -179,36 +129,12 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
-  "userOrderSubscription": 0,
-  "userOrders": Array [
-    Object {
-      "userOrders": "test",
-    },
-  ],
-}
-`;
-
-exports[`dex reducer updateOrders 1`] = `
-Object {
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
   "userOrderSubscription": 0,
   "userOrders": Array [],
 }
 `;
 
-exports[`dex reducer userOrders 1`] = `
+exports[`dex reducer updateOrder 1`] = `
 Object {
   "orderBookSnapshot": Object {
     "asks": Array [],
@@ -216,15 +142,70 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": "",
-  "updateOrders": Object {
-    "userOrder": "test",
-  },
+  "orderBookSubscription": 111,
   "userOrderSubscription": 0,
   "userOrders": Array [
     Object {
-      "userOrders": "test",
+      "currentSequence": 456,
+      "userOrder": "from single order",
+    },
+    Array [
+      Object {
+        "currentSequence": 123,
+        "userOrders": "fromList",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`dex reducer userOrderList 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": 111,
+  "userOrderSubscription": 0,
+  "userOrders": Array [
+    Object {
+      "currentSequence": 123,
+      "userOrders": "fromList",
+    },
+    Object {
+      "currentSequence": 456,
+      "userOrders": "fromList",
     },
   ],
+}
+`;
+
+exports[`dex reducer userOrderSubscription off 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": 111,
+  "userOrderSubscription": 0,
+  "userOrders": Array [],
+}
+`;
+
+exports[`dex reducer userOrderSubscription on 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": 111,
+  "userOrderSubscription": 0,
+  "userOrders": Array [],
 }
 `;

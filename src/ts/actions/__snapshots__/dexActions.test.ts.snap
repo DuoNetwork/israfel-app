@@ -3,7 +3,7 @@
 exports[`actions getUserOrders 1`] = `
 Array [
   Object {
-    "type": "userOrders",
+    "type": "userOrderList",
     "value": Array [
       Object {
         "test": "test",
@@ -18,6 +18,8 @@ Array [
   Array [
     "0xAccount",
     -1357432110,
+    1234567890,
+    "pair",
   ],
 ]
 `;
@@ -51,18 +53,26 @@ Object {
 }
 `;
 
-exports[`actions subscribeOrderBook 1`] = `
+exports[`actions subscribe 1`] = `
 Array [
   Object {
     "type": "orderBookSubscription",
     "value": "",
   },
   Object {
+    "type": "userOrderSubscription",
+    "value": 0,
+  },
+  Object {
     "type": "orderBookSubscription",
     "value": "pair",
   },
   Object {
-    "type": "userOrders",
+    "type": "userOrderSubscription",
+    "value": 123,
+  },
+  Object {
+    "type": "userOrderList",
     "value": Array [
       Object {
         "test": "test",
@@ -72,7 +82,7 @@ Array [
 ]
 `;
 
-exports[`actions subscribeOrderBook 2`] = `
+exports[`actions subscribe 2`] = `
 Array [
   Array [
     "pair",
@@ -80,21 +90,34 @@ Array [
 ]
 `;
 
-exports[`actions subscribeOrderBook 3`] = `
+exports[`actions subscribe 3`] = `
 Array [
   Array [
     "0xAccount",
     -1357432110,
+    1234567890,
+    "pair",
   ],
 ]
 `;
 
 exports[`actions userOrder 1`] = `
 Object {
-  "type": "updateOrders",
+  "type": "updateOrder",
   "value": Object {
     "test": "test",
   },
+}
+`;
+
+exports[`actions userOrderListUpdate 1`] = `
+Object {
+  "type": "userOrderList",
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
 }
 `;
 
@@ -102,16 +125,5 @@ exports[`actions userOrderSubscriptionUpdate 1`] = `
 Object {
   "type": "userOrderSubscription",
   "value": 123,
-}
-`;
-
-exports[`actions userOrdersUpdate 1`] = `
-Object {
-  "type": "userOrders",
-  "value": Array [
-    Object {
-      "test": "test",
-    },
-  ],
 }
 `;

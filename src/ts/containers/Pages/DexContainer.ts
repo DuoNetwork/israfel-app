@@ -9,7 +9,6 @@ function mapStateToProps(state: IState) {
 	return {
 		locale: state.ui.locale,
 		account: state.web3.account,
-		updateOrders: state.dex.updateOrders,
 		userOrders: state.dex.userOrders,
 		orderBook: state.dex.orderBookSnapshot
 	};
@@ -17,8 +16,11 @@ function mapStateToProps(state: IState) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
-		subscribe: (pair: string) => dispatch(dexActions.subscribeOrderBook(pair)),
-		unsubscribe: () => dispatch(dexActions.orderBookSubscriptionUpdate(''))
+		subscribe: (pair: string) => dispatch(dexActions.subscribe(pair)),
+		unsubscribe: () => {
+			dispatch(dexActions.orderBookSubscriptionUpdate(''));
+			dispatch(dexActions.userOrderSubscriptionUpdate(0))
+		}
 	};
 }
 

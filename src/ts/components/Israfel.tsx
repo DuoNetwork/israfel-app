@@ -1,21 +1,34 @@
-import { Layout } from 'antd';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Dex from '../containers/Pages/DexContainer';
-import Status from '../containers/Pages/StatusContainer';
-import { SContent } from './_styled';
+import { IToken } from 'ts/common/types';
+import Dex from 'ts/containers/Pages/DexContainer';
+import Status from 'ts/containers/Pages/StatusContainer';
+import Loading from './Pages/Loading';
 
-export default class Israfel extends React.Component {
+interface IProps {
+	tokens: IToken[];
+}
+
+export default class Israfel extends React.Component<IProps> {
 	public render() {
 		return (
-			<Layout>
-				<SContent>
-					<Switch>
-						<Route path={'/status'} render={() => <Status />} />
-						<Route render={() => <Dex pair={'ZRX-WETH'} />} />
-					</Switch>
-				</SContent>
-			</Layout>
+			<div>
+				<Switch>
+					<Route path={'/status'} render={() => <Status />} />
+					{this.props.tokens.map(token => (
+						<Route
+							key={token.code}
+							path={`/${token.code}-WETH`}
+							render={() => <Dex pair={`${token.code}|WETH`} />}
+						/>
+					))}
+					{this.props.tokens.length ? (
+						<Route render={() => <Dex pair={'B-PPT-I0|WETH'} />} />
+					) : (
+						<Route render={() => <Loading />} />
+					)}
+				</Switch>
+			</div>
 		);
 	}
 }

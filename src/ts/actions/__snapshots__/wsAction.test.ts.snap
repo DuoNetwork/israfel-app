@@ -6,3 +6,12 @@ Object {
   "value": true,
 }
 `;
+
+exports[`actions tokensUpdate 1`] = `
+Object {
+  "type": "tokens",
+  "value": Array [
+    "token1",
+  ],
+}
+`;

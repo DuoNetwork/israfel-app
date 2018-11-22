@@ -9,16 +9,16 @@ import util from 'ts/common/util';
 import wsUtil from 'ts/common/wsUtil';
 import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 
-export function userOrderUpdate(updateOrders: IUserOrder) {
+export function userOrderUpdate(userOrder: IUserOrder) {
 	return {
-		type: CST.AC_UPDATE_ORDERS,
-		value: updateOrders
+		type: CST.AC_USER_ORDER,
+		value: userOrder
 	};
 }
 
-export function userOrdersUpdate(userOrders: IUserOrder[]) {
+export function userOrderListUpdate(userOrders: IUserOrder[]) {
 	return {
-		type: CST.AC_USER_ORDERS,
+		type: CST.AC_USER_ORDER_LIST,
 		value: userOrders
 	};
 }
@@ -51,32 +51,31 @@ export function orderBookSubscriptionUpdate(pair: string) {
 	};
 }
 
-export function getUserOrders(): VoidThunkAction {
+export function getUserOrders(pair: string): VoidThunkAction {
 	return async (dispatch, getState) => {
 		const account = getState().web3.account;
-		if (account !== CST.DUMMY_ADDR)
+		if (account !== CST.DUMMY_ADDR) {
+			const now = util.getUTCNowTimestamp();
 			dispatch(
-				userOrdersUpdate(
-					await dynamoUtil.getUserOrders(
-						account,
-						util.getUTCNowTimestamp() - 30 * 86400000
-					)
+				userOrderListUpdate(
+					await dynamoUtil.getUserOrders(account, now - 30 * 86400000, now, pair)
 				)
 			);
+		}
 	};
 }
 
-export function refresh(): VoidThunkAction {
-	return dispatch => {
-		dispatch(getUserOrders());
-	};
-}
-
-export function subscribeOrderBook(pair: string): VoidThunkAction {
+export function subscribe(pair: string): VoidThunkAction {
 	return dispatch => {
 		dispatch(orderBookSubscriptionUpdate(''));
-		dispatch(getUserOrders());
+		dispatch(userOrderSubscriptionUpdate(0));
+		dispatch(getUserOrders(pair));
 		dispatch(orderBookSubscriptionUpdate(pair));
 		wsUtil.subscribeOrderBook(pair);
+		dispatch(
+			userOrderSubscriptionUpdate(
+				window.setInterval(() => dispatch(getUserOrders(pair)), 60000)
+			)
+		);
 	};
 }

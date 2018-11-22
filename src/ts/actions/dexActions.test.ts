@@ -13,8 +13,8 @@ describe('actions', () => {
 		expect(dexActions.userOrderUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
-	test('userOrdersUpdate', () => {
-		expect(dexActions.userOrdersUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
+	test('userOrderListUpdate', () => {
+		expect(dexActions.userOrderListUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
 	});
 
 	test('userOrderSubscriptionUpdate', () => {
@@ -44,7 +44,7 @@ describe('actions', () => {
 				test: 'test'
 			}])
 		);
-		store.dispatch(dexActions.getUserOrders());
+		store.dispatch(dexActions.getUserOrders('pair'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -66,7 +66,7 @@ describe('actions', () => {
 				test: 'test'
 			}])
 		);
-		store.dispatch(dexActions.getUserOrders());
+		store.dispatch(dexActions.getUserOrders('pair'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -76,7 +76,8 @@ describe('actions', () => {
 		);
 	});
 
-	test('subscribeOrderBook', () => {
+	test('subscribe', () => {
+		window.setInterval = jest.fn(() => 123);
 		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 		const store: any = mockStore({
 			web3: {
@@ -89,7 +90,7 @@ describe('actions', () => {
 			}])
 		);
 		wsUtil.subscribeOrderBook = jest.fn();
-		store.dispatch(dexActions.subscribeOrderBook('pair'));
+		store.dispatch(dexActions.subscribe('pair'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();

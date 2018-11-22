@@ -3,11 +3,13 @@
 exports[`ws reducer connection 1`] = `
 Object {
   "connection": true,
+  "tokens": Array [],
 }
 `;
 
 exports[`ws reducer default 1`] = `
 Object {
   "connection": false,
+  "tokens": Array [],
 }
 `;

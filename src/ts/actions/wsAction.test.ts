@@ -8,4 +8,8 @@ describe('actions', () => {
 	test('connectionUpdate', () => {
 		expect(wsActions.connectionUpdate(true)).toMatchSnapshot();
 	});
+
+	test('tokensUpdate', () => {
+		expect(wsActions.tokensUpdate(['token1'] as any)).toMatchSnapshot();
+	});
 });

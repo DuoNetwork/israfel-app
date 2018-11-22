@@ -5,9 +5,9 @@ import { IOrderBookSnapshot, IUserOrder } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import AllowanceCard from '../Cards/AllowanceCard';
-import OperationCard from '../Cards/OperationCard';
-import OperationHistory from '../Cards/OperationHistory';
-import PriceOrderBookCard from '../Cards/PriceOrderBookCard';
+import OrderBookCard from '../Cards/OrderBookCard';
+import OrderCard from '../Cards/OrderCard';
+import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import WrapEtherCard from '../Cards/WrapEtherCard';
 
 interface IProps {
@@ -15,7 +15,6 @@ interface IProps {
 	locale: string;
 	account: string;
 	userOrders: IUserOrder[];
-	updateOrders: IUserOrder;
 	orderBook: IOrderBookSnapshot;
 	subscribe: (pair: string) => any;
 	unsubscribe: () => any;
@@ -50,19 +49,18 @@ export default class Dex extends React.Component<IProps> {
 	}
 
 	public render() {
-		const { userOrders, locale, updateOrders, orderBook } = this.props;
+		const { userOrders, locale, orderBook, account, pair } = this.props;
 		return (
 			<Layout>
 				<div className="App">
 					<Header />
 					<SDivFlexCenter center horizontal>
-						<OperationHistory
-							updateOrders={updateOrders}
-							userOrder={userOrders}
+						<OrderHistoryCard
+							userOrders={userOrders}
 							locale={locale}
 						/>
 						<Affix offsetTop={10}>
-							<OperationCard />
+							<OrderCard account={account} pair={pair}/>
 						</Affix>
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal>
@@ -73,7 +71,7 @@ export default class Dex extends React.Component<IProps> {
 							<WrapEtherCard />
 						</Affix>
 						<Affix offsetTop={10}>
-							<PriceOrderBookCard OrderBookSnapshot={orderBook} />
+							<OrderBookCard OrderBookSnapshot={orderBook} />
 						</Affix>
 					</SDivFlexCenter>
 				</div>

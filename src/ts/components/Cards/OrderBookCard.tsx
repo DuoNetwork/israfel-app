@@ -20,7 +20,7 @@ interface IState {
 let askArray: number[][] = [];
 let bidArray: number[][] = [];
 
-export default class PriceOrderBookCard extends React.Component<IProps, IState> {
+export default class OrderBookCard extends React.Component<IProps, IState> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -36,8 +36,8 @@ export default class PriceOrderBookCard extends React.Component<IProps, IState> 
 		askArray = [];
 		bidArray = [];
 		if (OrderBookSnapshot) {
-			const asks = OrderBookSnapshot[CST.TH_ASK];
-			const bids = OrderBookSnapshot[CST.TH_BID];
+			const asks = OrderBookSnapshot.asks;
+			const bids = OrderBookSnapshot.bids;
 			for (let i = 0; i < asks.length; i++) askArray.push([asks[i].amount, asks[i].price]);
 			for (let i = 0; i < bids.length; i++) bidArray.push([bids[i].amount, bids[i].price]);
 		}

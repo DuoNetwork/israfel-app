@@ -4,9 +4,10 @@ export const AC_ACCOUNT = 'account';
 export const AC_NETWORK = 'network';
 // export const AC_GAS_PX = 'gasPrice';
 export const AC_STATUS = 'status';
+export const AC_TOKENS = 'tokens';
 export const AC_LOCALE = 'locale';
-export const AC_UPDATE_ORDERS = 'updateOrders';
-export const AC_USER_ORDERS = 'userOrders';
+export const AC_USER_ORDER = 'updateOrder';
+export const AC_USER_ORDER_LIST = 'userOrderList';
 export const AC_CONNECTION = 'connection';
 export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
@@ -24,39 +25,24 @@ export interface ILocaleText {
 	JP: string;
 	[key: string]: string;
 }
-export const TH_MODE = ['Detail', 'Summary'];
-export const TH_PLACEHOLDER = ['Target Currency', 'Base Currency'];
-export const TH_CURRENCY = ['ZRX', 'WETH'];
-export const TH_LOGIN = 'Admin Login';
-export const TH_LOGOUT = 'Log out';
-export const TH_ACCOUNT = 'Account';
-export const TH_PASSWORD = 'Password';
-export const TH_ACCOUNT_PH = 'Please input account';
-export const TH_PASSWORD_PH = 'Please input password';
 export const TH_SUBMIT = 'Submit';
 export const TH_CLEAR = 'Clear';
-export const TH_SUBSCRIBE = 'subscribe';
-export const TH_UPDATE = 'update';
-export const TH_BID = 'bids'; /************************** */
-export const TH_ASK = 'asks'; /************************** */
-export const TH_ORDER = 'order';
-export const TH_ORDER_HISTORY = 'order history';
-export const TH_LOADING = 'loading';
+export const TH_ORDER = 'Order';
+export const TH_HISTORY = 'History'
+export const TH_LOADING = 'Loading';
 export const TH_TRADE = 'Trades';
-export const TH_SELL = 'sell';
-export const TH_BUY = 'buy';
-export const TH_OPERA = 'OPERATION';
+export const TH_SELL = 'Sell';
+export const TH_BUY = 'Buy';
 export const TH_PX = 'Price';
-export const TH_AMT = 'Amt';
-export const TH_BALANCE = 'Bal';
+export const TH_AMT = 'Amount';
+export const TH_BALANCE = 'Balance';
 export const TH_FILL = 'Fill';
 export const TH_SIDE = 'Side';
 export const TH_STATUS = 'Status';
 export const TH_ACTIONS = 'Actions';
-export const TH_ADD_BIDASK = 'addBidAsk';
-export const TH_EXPIRE = 'expire time';
+export const TH_EXPIRY = 'Expiry';
+export const TH_ORDER_HASH = 'Order Hash';
 export const TH_TIME = 'Time';
-export const TH_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TH_WRAP = 'Wrap';
 export const TH_UNWRAP = 'Unwrap';
 export const TH_PROCESS = 'Process';
@@ -64,6 +50,7 @@ export const TH_UPDATED = 'Updated';
 export const TH_INFO = 'Info';
 export const TH_HOSTNAME = 'Hostname';
 
+export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
 	[LOCALE_CN]:
 		'此页面只支持' + (__KOVAN__ ? 'KOVAN' : 'MainNet') + '，请在MetaMask中选择正确的网络',

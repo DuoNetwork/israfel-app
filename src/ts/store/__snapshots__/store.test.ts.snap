@@ -10,21 +10,6 @@ Object {
       "version": 0,
     },
     "orderBookSubscription": "",
-    "updateOrders": Object {
-      "account": "",
-      "amount": 0,
-      "balance": 0,
-      "currentSequence": 0,
-      "fill": 0,
-      "initialSequence": 0,
-      "orderHash": "",
-      "pair": "",
-      "price": 0,
-      "side": "",
-      "status": "",
-      "type": "",
-      "updatedBy": "",
-    },
     "userOrderSubscription": 0,
     "userOrders": Array [],
   },
@@ -40,6 +25,7 @@ Object {
   },
   "ws": Object {
     "connection": false,
+    "tokens": Array [],
   },
 }
 `;

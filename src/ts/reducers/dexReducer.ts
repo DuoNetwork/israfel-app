@@ -1,26 +1,16 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
-import { IDexState, IOrderBookSnapshot, IOrderBookSnapshotUpdate } from 'ts/common/types';
+import {
+	IDexState,
+	IOrderBookSnapshot,
+	IOrderBookSnapshotUpdate,
+	IUserOrder
+} from 'ts/common/types';
 import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
 export const initialState: IDexState = {
 	userOrders: [],
-	updateOrders: {
-		account: '',
-		pair: '',
-		orderHash: '',
-		price: 0,
-		amount: 0,
-		balance: 0,
-		fill: 0,
-		side: '',
-		initialSequence: 0,
-		currentSequence: 0,
-		type: '',
-		status: '',
-		updatedBy: ''
-	},
 	orderBookSnapshot: {
 		pair: 'pair',
 		version: 0,
@@ -33,10 +23,17 @@ export const initialState: IDexState = {
 
 export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
 	switch (action.type) {
-		case CST.AC_UPDATE_ORDERS:
-		case CST.AC_USER_ORDERS:
+		case CST.AC_USER_ORDER_LIST:
 			return Object.assign({}, state, {
-				[action.type]: action.value
+				userOrders: action.value
+			});
+		case CST.AC_USER_ORDER:
+			const newOrder: IUserOrder = action.value;
+			return Object.assign({}, state, {
+				userOrders: [
+					newOrder,
+					state.userOrders.filter(uo => uo.currentSequence !== newOrder.currentSequence)
+				]
 			});
 		case CST.AC_OB_SNAPSHOT:
 			if (state.orderBookSubscription === action.value.pair)
@@ -72,6 +69,20 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 						asks: []
 					},
 					orderBookSubscription: ''
+				};
+			}
+		case CST.AC_UO_SUB:
+			if (action.value)
+				return Object.assign({}, state, {
+					orderBookSubscription: action.value
+				});
+			else {
+				const { userOrders, userOrderSubscription, ...restUo } = state;
+				if (userOrderSubscription) window.clearInterval(userOrderSubscription);
+				return {
+					...restUo,
+					userOrders: [],
+					userOrderSubscription: 0
 				};
 			}
 		default:
