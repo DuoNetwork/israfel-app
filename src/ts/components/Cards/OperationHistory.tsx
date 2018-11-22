@@ -23,6 +23,7 @@ interface IState {
 
 let orderHash: string = '';
 let summaryList: IUserOrder[] = [];
+let displayData: IUserOrder[] = [];
 
 export default class OperationHistory extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -34,10 +35,13 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	}
 
 	private setOrderHash(index: any) {
-		orderHash = summaryList[index].orderHash;
+		orderHash = displayData[index].orderHash;
 	}
 
 	private handleChangeMode(value: any) {
+		const { userOrder } = this.props;
+		if (value === CST.TH_MODE[1]) displayData = summaryList;
+		else displayData = userOrder;
 		this.setState({
 			mode: value
 		});
@@ -50,7 +54,6 @@ export default class OperationHistory extends React.Component<IProps, IState> {
 	public render() {
 		const { userOrder, updateOrders } = this.props;
 		const Option = Select.Option;
-		let displayData: IUserOrder[] = [];
 		const children = CST.TH_MODE.map(mode => (
 			<Option key={mode} value={mode}>
 				{mode}

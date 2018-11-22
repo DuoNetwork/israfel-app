@@ -7,6 +7,7 @@ import { SDivFlexCenter } from '../_styled';
 import AllowanceCard from '../Cards/AllowanceCard';
 import OperationCard from '../Cards/OperationCard';
 import OperationHistory from '../Cards/OperationHistory';
+import PriceOrderBookCard from '../Cards/PriceOrderBookCard';
 import WrapEtherCard from '../Cards/WrapEtherCard';
 
 interface IProps {
@@ -71,10 +72,10 @@ export default class Dex extends React.Component<IProps> {
 						<Affix offsetTop={10}>
 							<WrapEtherCard />
 						</Affix>
+						<Affix offsetTop={10}>
+							<PriceOrderBookCard OrderBookSnapshot={orderBook} />
+						</Affix>
 					</SDivFlexCenter>
-					<div style={{ color: 'white' }}>
-						<pre>{JSON.stringify(orderBook, null, 4)}</pre>
-					</div>
 				</div>
 			</Layout>
 		);
