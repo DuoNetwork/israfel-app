@@ -47,7 +47,7 @@ export default class PriceOrderBookCard extends React.Component<IProps, IState> 
 			<div>
 				<SCard
 					title={<SCardTitle>{CST.DB_ORDER_BOOKS.toUpperCase()}</SCardTitle>}
-					width="360px"
+					width="400px"
 					margin="0 0 0 5px"
 				>
 					<SDivFlexCenter width="370px" center horizontal>
