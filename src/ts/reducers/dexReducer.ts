@@ -34,10 +34,12 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 		case CST.AC_USER_ORDER:
 			const newOrder: IUserOrder = action.value;
 			return Object.assign({}, state, {
-				userOrders: [
-					newOrder,
-					state.userOrders.filter(uo => uo.currentSequence !== newOrder.currentSequence)
-				]
+				userOrders:
+					state.userOrders.findIndex(
+						element => element.currentSequence !== newOrder.currentSequence
+					) !== -1
+						? state.userOrders.push(newOrder)
+						: state.userOrders
 			});
 		case CST.AC_OB_SNAPSHOT:
 			if (state.orderBookSubscription === action.value.pair)
@@ -78,7 +80,7 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 		case CST.AC_USER_SUB:
 			if (action.value)
 				return Object.assign({}, state, {
-					orderBookSubscription: action.value
+					userSubscription: action.value
 				});
 			else {
 				const { tokenBalance, userOrders, userSubscription, ...restUo } = state;

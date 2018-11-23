@@ -123,8 +123,10 @@ export default class OrderCard extends React.Component<IProps, IState> {
 									</button>
 								) : (
 									[
-										<li key={CST.TH_PX} className="input-line bg-dark">
-											{CST.TH_PX}
+										<li key={CST.TH_PX} className={'input-line'}>
+											<span className="title" style={{ width: 200 }}>
+												{CST.TH_PX}
+											</span>
 											<SInput
 												width="60%"
 												className="bg-dark"
@@ -136,7 +138,9 @@ export default class OrderCard extends React.Component<IProps, IState> {
 											/>
 										</li>,
 										<li key={CST.TH_AMT} className={'input-line'}>
-											{CST.TH_AMT}
+											<span className="title" style={{ width: 200 }}>
+												{CST.TH_AMT}
+											</span>
 											<SInput
 												width="60%"
 												className={''}

@@ -170,24 +170,13 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": 111,
+  "orderBookSubscription": "",
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-    Array [
-      Object {
-        "currentSequence": 123,
-        "userOrders": "fromList",
-      },
-    ],
-  ],
-  "userSubscription": 0,
+  "userOrders": 3,
+  "userSubscription": 111,
 }
 `;
 
@@ -199,7 +188,7 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": 111,
+  "orderBookSubscription": "",
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
@@ -214,7 +203,7 @@ Object {
       "userOrders": "fromList",
     },
   ],
-  "userSubscription": 0,
+  "userSubscription": 111,
 }
 `;
 
@@ -226,7 +215,7 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": 111,
+  "orderBookSubscription": "",
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
@@ -236,7 +225,13 @@ Object {
 }
 `;
 
-exports[`dex reducer userSubscription off 2`] = `Array []`;
+exports[`dex reducer userSubscription off 2`] = `
+Array [
+  Array [
+    111,
+  ],
+]
+`;
 
 exports[`dex reducer userSubscription on 1`] = `
 Object {
@@ -246,12 +241,12 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": 111,
+  "orderBookSubscription": "",
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
   "userOrders": Array [],
-  "userSubscription": 0,
+  "userSubscription": 111,
 }
 `;

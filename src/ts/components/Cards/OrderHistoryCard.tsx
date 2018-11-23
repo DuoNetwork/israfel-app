@@ -17,7 +17,7 @@ interface IProps {
 
 const parseRow: (uo: IUserOrder) => any = (uo: IUserOrder) => ({
 	key: uo.currentSequence,
-	[CST.TH_SIDE]: uo.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
+	[CST.TH_SIDE]: uo.side === CST.DB_BID ? CST.TH_SELL : CST.TH_BUY,
 	[CST.TH_PX]: uo.price,
 	[CST.TH_AMT]: uo.amount,
 	[CST.TH_BALANCE]: uo.balance,
@@ -27,11 +27,13 @@ const parseRow: (uo: IUserOrder) => any = (uo: IUserOrder) => ({
 	children: []
 });
 
+let dataSource: object[] = [];
+
 export default class OrderHistoryCard extends React.Component<IProps> {
 	public render() {
 		const userOrders = this.props.userOrders;
-		const dataSource: object[] = [];
 		if (userOrders.length) {
+			dataSource = [];
 			userOrders.sort((a, b) => -a.currentSequence + b.currentSequence);
 			let parentRow = parseRow(userOrders[0]);
 			for (let i = 1; i < userOrders.length; i++) {
@@ -52,7 +54,7 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 				margin="0 10px 0 0"
 			>
 				<STableWrapper>
-					<Table dataSource={dataSource} pagination={false}>
+					<Table dataSource={dataSource} pagination={false} style={{ width: '800px' }}>
 						{[
 							CST.TH_SIDE,
 							CST.TH_PX,
