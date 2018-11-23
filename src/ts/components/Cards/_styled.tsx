@@ -751,6 +751,30 @@ injectGlobal([
 		span.status {
 			margin: auto;
 		}
+		.ant-table-row-expand-icon {
+			cursor: pointer;
+			display: inline-block;
+			width: 17px;
+			height: 17px;
+			text-align: center;
+			line-height: 14px;
+			border: 1px solid #e8e8e8;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background: transparent;
+		}
+		.fMmshS .ant-table-placeholder {
+			width: 780px;
+			background: none !important;
+			border-bottom: 1px dashed;
+			border-left: 1px dashed;
+			border-right: 1px dashed;
+			border-color: rgba(255,255,255,.1);
+			border-radius: 0;
+			color: rgba(255,255,255,.4);
+		}
 	}
 `
 ] as any);
