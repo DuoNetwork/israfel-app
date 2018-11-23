@@ -11,6 +11,7 @@ exports[`actions ethBalanceUpdate 1`] = `
 Object {
   "type": "ethBalance",
   "value": Object {
+    "allowance": 789,
     "eth": 123,
     "weth": 456,
   },
@@ -26,23 +27,52 @@ Array [
 ]
 `;
 
+exports[`actions getBalance 1`] = `
+Array [
+  Object {
+    "type": "ethBalance",
+    "value": Object {
+      "allowance": 333,
+      "eth": 111,
+      "weth": 222,
+    },
+  },
+]
+`;
+
+exports[`actions getBalance 2`] = `
+Array [
+  Array [
+    "0xAccount",
+  ],
+]
+`;
+
+exports[`actions getBalance 3`] = `
+Array [
+  Array [
+    "WETH",
+    "0xAccount",
+  ],
+]
+`;
+
+exports[`actions getBalance 4`] = `
+Array [
+  Array [
+    "WETH",
+    "0xAccount",
+  ],
+]
+`;
+
+exports[`actions getBalance dummy 1`] = `Array []`;
+
 exports[`actions getNetwork 1`] = `
 Array [
   Object {
     "type": "network",
     "value": 123,
-  },
-]
-`;
-
-exports[`actions getNetwork 2`] = `
-Array [
-  Object {
-    "type": "ethBalance",
-    "value": Object {
-      "eth": 111,
-      "weth": 222,
-    },
   },
 ]
 `;

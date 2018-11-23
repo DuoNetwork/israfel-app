@@ -30,7 +30,8 @@ describe('web3 reducer', () => {
 			type: CST.AC_ETH_BALANCE,
 			value: {
 				eth: 123,
-				weth: 456
+				weth: 456,
+				allowance: 789
 			}
 		});
 		expect(state).toMatchSnapshot();

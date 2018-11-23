@@ -9,8 +9,12 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -27,8 +31,12 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -45,8 +53,12 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -59,8 +71,12 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -73,8 +89,12 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "pair",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -91,8 +111,12 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
@@ -129,12 +153,16 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
-exports[`dex reducer updateOrder 1`] = `
+exports[`dex reducer userOrder 1`] = `
 Object {
   "orderBookSnapshot": Object {
     "asks": Array [],
@@ -143,7 +171,10 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": 111,
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [
     Object {
       "currentSequence": 456,
@@ -156,6 +187,7 @@ Object {
       },
     ],
   ],
+  "userSubscription": 0,
 }
 `;
 
@@ -168,7 +200,10 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": 111,
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [
     Object {
       "currentSequence": 123,
@@ -179,10 +214,11 @@ Object {
       "userOrders": "fromList",
     },
   ],
+  "userSubscription": 0,
 }
 `;
 
-exports[`dex reducer userOrderSubscription off 1`] = `
+exports[`dex reducer userSubscription off 1`] = `
 Object {
   "orderBookSnapshot": Object {
     "asks": Array [],
@@ -191,12 +227,18 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": 111,
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;
 
-exports[`dex reducer userOrderSubscription on 1`] = `
+exports[`dex reducer userSubscription off 2`] = `Array []`;
+
+exports[`dex reducer userSubscription on 1`] = `
 Object {
   "orderBookSnapshot": Object {
     "asks": Array [],
@@ -205,7 +247,11 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": 111,
-  "userOrderSubscription": 0,
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userOrders": Array [],
+  "userSubscription": 0,
 }
 `;

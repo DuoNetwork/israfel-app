@@ -18,7 +18,11 @@ export const initialState: IDexState = {
 		asks: []
 	},
 	orderBookSubscription: '',
-	userOrderSubscription: 0
+	userSubscription: 0,
+	tokenBalance: {
+		balance: 0,
+		allowance: 0
+	}
 };
 
 export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
@@ -71,20 +75,28 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 					orderBookSubscription: ''
 				};
 			}
-		case CST.AC_UO_SUB:
+		case CST.AC_USER_SUB:
 			if (action.value)
 				return Object.assign({}, state, {
 					orderBookSubscription: action.value
 				});
 			else {
-				const { userOrders, userOrderSubscription, ...restUo } = state;
-				if (userOrderSubscription) window.clearInterval(userOrderSubscription);
+				const { tokenBalance, userOrders, userSubscription, ...restUo } = state;
+				if (userSubscription) window.clearInterval(userSubscription);
 				return {
 					...restUo,
 					userOrders: [],
-					userOrderSubscription: 0
+					userSubscription: 0,
+					tokenBalance: {
+						balance: 0,
+						allowance: 0
+					}
 				};
 			}
+		case CST.AC_TOKEN_BALANCE:
+			return Object.assign({}, state, {
+				tokenBalance: action.value
+			});
 		default:
 			return state;
 	}

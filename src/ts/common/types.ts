@@ -17,7 +17,8 @@ export interface IDexState {
 	readonly userOrders: relayerTypes.IUserOrder[];
 	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 	readonly orderBookSubscription: string;
-	readonly userOrderSubscription: number;
+	readonly userSubscription: number;
+	readonly tokenBalance: ITokenBalance;
 }
 
 export interface IDynamoState {
@@ -42,4 +43,10 @@ export interface IWsState {
 export interface IEthBalance {
 	eth: number;
 	weth: number;
+	allowance: number;
+}
+
+export interface ITokenBalance {
+	balance: number;
+	allowance: number;
 }

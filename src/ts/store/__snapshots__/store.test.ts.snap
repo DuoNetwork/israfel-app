@@ -10,8 +10,12 @@ Object {
       "version": 0,
     },
     "orderBookSubscription": "",
-    "userOrderSubscription": 0,
+    "tokenBalance": Object {
+      "allowance": 0,
+      "balance": 0,
+    },
     "userOrders": Array [],
+    "userSubscription": 0,
   },
   "dynamo": Object {
     "status": Array [],
@@ -22,6 +26,7 @@ Object {
   "web3": Object {
     "account": "0x0000000000000000000000000000000000000000",
     "ethBalance": Object {
+      "allowance": 0,
       "eth": 0,
       "weth": 0,
     },

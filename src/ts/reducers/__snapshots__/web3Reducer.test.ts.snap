@@ -4,6 +4,7 @@ exports[`web3 reducer account 1`] = `
 Object {
   "account": "test",
   "ethBalance": Object {
+    "allowance": 0,
     "eth": 0,
     "weth": 0,
   },
@@ -15,6 +16,7 @@ exports[`web3 reducer default 1`] = `
 Object {
   "account": "0x0000000000000000000000000000000000000000",
   "ethBalance": Object {
+    "allowance": 0,
     "eth": 0,
     "weth": 0,
   },
@@ -26,6 +28,7 @@ exports[`web3 reducer ethBalance 1`] = `
 Object {
   "account": "test",
   "ethBalance": Object {
+    "allowance": 789,
     "eth": 123,
     "weth": 456,
   },
@@ -37,6 +40,7 @@ exports[`web3 reducer network 1`] = `
 Object {
   "account": "test",
   "ethBalance": Object {
+    "allowance": 0,
     "eth": 0,
     "weth": 0,
   },

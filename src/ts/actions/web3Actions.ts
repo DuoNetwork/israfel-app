@@ -37,12 +37,14 @@ export function ethBalanceUpdate(balance: IEthBalance) {
 export function getBalance(): VoidThunkAction {
 	return async (dispatch, getState) => {
 		const account = getState().web3.account;
-		dispatch(
-			ethBalanceUpdate({
-				eth: await web3Util.getEthBalance(account),
-				weth: await web3Util.getTokenBalance(CST.TOKEN_WETH, account)
-			})
-		);
+		if (account !== CST.DUMMY_ADDR)
+			dispatch(
+				ethBalanceUpdate({
+					eth: await web3Util.getEthBalance(account),
+					weth: await web3Util.getTokenBalance(CST.TOKEN_WETH, account),
+					allowance: await web3Util.getProxyTokenAllowance(CST.TOKEN_WETH, account)
+				})
+			);
 	};
 }
 

@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`actions getTokenBalance 1`] = `
+Array [
+  Object {
+    "type": "tokenBalance",
+    "value": Object {
+      "allowance": 222,
+      "balance": 111,
+    },
+  },
+]
+`;
+
+exports[`actions getTokenBalance 2`] = `
+Array [
+  Array [
+    "code1",
+    "0xAccount",
+  ],
+]
+`;
+
+exports[`actions getTokenBalance 3`] = `
+Array [
+  Array [
+    "code1",
+    "0xAccount",
+  ],
+]
+`;
+
+exports[`actions getTokenBalance dummy addr 1`] = `Array []`;
+
 exports[`actions getUserOrders 1`] = `
 Array [
   Object {
@@ -25,8 +57,6 @@ Array [
 `;
 
 exports[`actions getUserOrders dummy addr 1`] = `Array []`;
-
-exports[`actions getUserOrders dummy addr 2`] = `Array []`;
 
 exports[`actions orderBookSnapshotUpdate 1`] = `
 Object {
@@ -60,7 +90,7 @@ Array [
     "value": "",
   },
   Object {
-    "type": "userOrderSubscription",
+    "type": "userSubscription",
     "value": 0,
   },
   Object {
@@ -68,7 +98,7 @@ Array [
     "value": "pair",
   },
   Object {
-    "type": "userOrderSubscription",
+    "type": "userSubscription",
     "value": 123,
   },
   Object {
@@ -78,6 +108,13 @@ Array [
         "test": "test",
       },
     ],
+  },
+  Object {
+    "type": "tokenBalance",
+    "value": Object {
+      "allowance": 222,
+      "balance": 111,
+    },
   },
 ]
 `;
@@ -101,9 +138,19 @@ Array [
 ]
 `;
 
+exports[`actions tokenBalanceUpdate 1`] = `
+Object {
+  "type": "tokenBalance",
+  "value": Object {
+    "allowance": 456,
+    "balance": 123,
+  },
+}
+`;
+
 exports[`actions userOrder 1`] = `
 Object {
-  "type": "updateOrder",
+  "type": "userOrder",
   "value": Object {
     "test": "test",
   },
@@ -121,9 +168,9 @@ Object {
 }
 `;
 
-exports[`actions userOrderSubscriptionUpdate 1`] = `
+exports[`actions userSubscriptionUpdate 1`] = `
 Object {
-  "type": "userOrderSubscription",
+  "type": "userSubscription",
   "value": 123,
 }
 `;

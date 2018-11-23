@@ -6,14 +6,15 @@ export const AC_NETWORK = 'network';
 export const AC_STATUS = 'status';
 export const AC_TOKENS = 'tokens';
 export const AC_LOCALE = 'locale';
-export const AC_USER_ORDER = 'updateOrder';
+export const AC_USER_ORDER = 'userOrder';
 export const AC_USER_ORDER_LIST = 'userOrderList';
 export const AC_CONNECTION = 'connection';
 export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
 export const AC_OB_SUB = 'orderBookSubscription';
-export const AC_UO_SUB = 'userOrderSubscription';
+export const AC_USER_SUB = 'userSubscription';
 export const AC_ETH_BALANCE = 'ethBalance';
+export const AC_TOKEN_BALANCE = 'tokenBalance';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';

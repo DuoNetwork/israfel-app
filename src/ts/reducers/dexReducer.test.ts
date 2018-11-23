@@ -10,9 +10,9 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrderSubscription on', () => {
+	test('userSubscription on', () => {
 		state = dexReducer(state, {
-			type: CST.AC_UO_SUB,
+			type: CST.AC_USER_SUB,
 			value: 111
 		});
 		expect(state).toMatchSnapshot();
@@ -33,7 +33,7 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('updateOrder', () => {
+	test('userOrder', () => {
 		state = dexReducer(state, {
 			type: CST.AC_USER_ORDER,
 			value: { userOrder: 'from single order', currentSequence: 456 }
@@ -41,12 +41,24 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrderSubscription off', () => {
+	test('tokenBalance', () => {
 		state = dexReducer(state, {
-			type: CST.AC_UO_SUB,
+			type: CST.AC_TOKEN_BALANCE,
+			value: {
+				balance: 123,
+				allowance: 456
+			}
+		})
+	})
+
+	test('userSubscription off', () => {
+		window.clearInterval = jest.fn();
+		state = dexReducer(state, {
+			type: CST.AC_USER_SUB,
 			value: 0
 		});
 		expect(state).toMatchSnapshot();
+		expect((window.clearInterval as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderBookSubscription on', () => {

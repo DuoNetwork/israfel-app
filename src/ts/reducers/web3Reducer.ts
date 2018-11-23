@@ -7,7 +7,8 @@ export const initialState: IWeb3State = {
 	network: 0,
 	ethBalance: {
 		eth: 0,
-		weth: 0
+		weth: 0,
+		allowance: 0
 	}
 	// gasPrice: 0
 };
