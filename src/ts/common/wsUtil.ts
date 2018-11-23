@@ -156,7 +156,14 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async addOrder(account: string, pair: string, price: number, amount: number, isBid: boolean, secondsToLive: number) {
+	public async addOrder(
+		account: string,
+		pair: string,
+		price: number,
+		amount: number,
+		isBid: boolean,
+		secondsToLive: number
+	) {
 		if (!this.ws) {
 			this.handleConfigError('not connected');
 			return;
@@ -173,7 +180,7 @@ class WsUtil {
 			isBid ? address1 : address2,
 			isBid ? amount2 : amount,
 			isBid ? amount : amount2,
-			secondsToLive + util.getUTCNowTimestamp() / 1000
+			secondsToLive + Math.ceil(util.getUTCNowTimestamp() / 1000)
 		);
 		const msg: IWsAddOrderRequest = {
 			method: CST.DB_ADD,
@@ -196,7 +203,6 @@ class WsUtil {
 			pair: pair,
 			orderHash: orderHash
 		};
-		console.log(msg);
 		this.ws.send(JSON.stringify(msg));
 	}
 
