@@ -1,10 +1,9 @@
 import { Layout } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
-import { IOrderBookSnapshot, IUserOrder } from 'ts/common/types';
+import { IEthBalance, IOrderBookSnapshot, ITokenBalance, IUserOrder } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
-// import AllowanceCard from '../Cards/AllowanceCard';
 import OrderBookCard from '../Cards/OrderBookCard';
 import OrderCard from '../Cards/OrderCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
@@ -14,6 +13,8 @@ interface IProps {
 	pair: string;
 	locale: string;
 	account: string;
+	ethBalance: IEthBalance;
+	tokenBalance: ITokenBalance;
 	userOrders: IUserOrder[];
 	orderBook: IOrderBookSnapshot;
 	subscribe: (pair: string) => any;
@@ -49,24 +50,31 @@ export default class Dex extends React.Component<IProps> {
 	}
 
 	public render() {
-		const { userOrders, locale, orderBook, account, pair } = this.props;
+		const {
+			userOrders,
+			locale,
+			orderBook,
+			account,
+			pair,
+			ethBalance,
+			tokenBalance
+		} = this.props;
 		return (
 			<Layout>
 				<div className="App">
 					<Header />
 					<SDivFlexCenter center horizontal>
-						<OrderHistoryCard
-							userOrders={userOrders}
-							locale={locale}
-						/>
+						<OrderHistoryCard userOrders={userOrders} locale={locale} />
 						<Affix offsetTop={10}>
-							<OrderCard account={account} pair={pair}/>
+							<OrderCard
+								account={account}
+								pair={pair}
+								ethBalance={ethBalance}
+								tokenBalance={tokenBalance}
+							/>
 						</Affix>
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal>
-						{/* <Affix offsetTop={10}>
-							<AllowanceCard />
-						</Affix> */}
 						<Affix offsetTop={10}>
 							<WrapEtherCard />
 						</Affix>
@@ -74,6 +82,12 @@ export default class Dex extends React.Component<IProps> {
 							<OrderBookCard OrderBookSnapshot={orderBook} />
 						</Affix>
 					</SDivFlexCenter>
+					<div style={{ color: 'white' }}>
+						<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
+					</div>
+					<div style={{ color: 'white' }}>
+						<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
+					</div>
 				</div>
 			</Layout>
 		);

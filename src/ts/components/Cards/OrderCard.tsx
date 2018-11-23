@@ -1,12 +1,16 @@
 import * as React from 'react';
-import * as CST from '../../common/constants';
-import wsUtil from '../../common/wsUtil';
+import * as CST from 'ts/common/constants';
+import { IEthBalance, ITokenBalance } from 'ts/common/types';
+import web3Util from 'ts/common/web3Util';
+import wsUtil from 'ts/common/wsUtil';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
 
 interface IProps {
 	account: string;
 	pair: string;
+	ethBalance: IEthBalance;
+	tokenBalance: ITokenBalance;
 }
 
 interface IState {
@@ -45,6 +49,13 @@ export default class OrderCard extends React.Component<IProps, IState> {
 			);
 	};
 
+	private handleApprove = () => {
+		const { pair } = this.props;
+		const { isBid } = this.state;
+		const [code1, code2] = pair.split('|');
+		web3Util.setUnlimitedTokenAllowance(isBid ? code2 : code1);
+	};
+
 	private handleAmountInputChange = (value: string) =>
 		this.setState({
 			amount: value
@@ -65,6 +76,11 @@ export default class OrderCard extends React.Component<IProps, IState> {
 		});
 
 	public render() {
+		const { ethBalance, tokenBalance } = this.props;
+		const { isBid, price, amount, hoursToLive } = this.state;
+		const approveRequired = isBid
+			? !ethBalance.allowance || ethBalance.allowance < ethBalance.weth
+			: !tokenBalance.allowance || tokenBalance.allowance < tokenBalance.balance;
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_ORDER.toUpperCase()}</SCardTitle>}
@@ -89,8 +105,8 @@ export default class OrderCard extends React.Component<IProps, IState> {
 											<button
 												key={side}
 												className={
-													(this.state.isBid && side === CST.TH_BUY) ||
-													(!this.state.isBid && side === CST.TH_SELL)
+													(isBid && side === CST.TH_BUY) ||
+													(!isBid && side === CST.TH_SELL)
 														? 'conv-button selected'
 														: 'conv-button non-select'
 												}
@@ -101,69 +117,87 @@ export default class OrderCard extends React.Component<IProps, IState> {
 										))}
 									</SDivFlexCenter>
 								</li>
-								<li className="input-line bg-dark">
-									{CST.TH_PX}
-									<SInput
-										width="60%"
-										className="bg-dark"
-										value={this.state.price}
-										onChange={e => this.handlePriceInputChange(e.target.value)}
-										right
-									/>
-								</li>
-								<li className={'input-line'}>
-									{CST.TH_AMT}
-									<SInput
-										width="60%"
-										className={''}
-										value={this.state.amount}
-										onChange={e => this.handleAmountInputChange(e.target.value)}
-										right
-									/>
-								</li>
-								<li className={'input-line'}>
-									<span className="title" style={{ width: 200 }}>
-										{CST.TH_EXPIRY.toUpperCase()}
-									</span>
-									<SDivFlexCenter horizontal width="100%" padding="2px 0 2px 0">
-										{[8, 16, 24, 36].map(hour => (
-											<button
-												key={hour}
-												className={
-													this.state.hoursToLive === hour
-														? 'button'
-														: 'percent-button'
+								{approveRequired ? (
+									<button className={'form-button'} onClick={this.handleApprove}>
+										{CST.TH_APPROVE}
+									</button>
+								) : (
+									[
+										<li key={CST.TH_PX} className="input-line bg-dark">
+											{CST.TH_PX}
+											<SInput
+												width="60%"
+												className="bg-dark"
+												value={price}
+												onChange={e =>
+													this.handlePriceInputChange(e.target.value)
 												}
-												onClick={() => this.handleExpireButtonClick(hour)}
+												right
+											/>
+										</li>,
+										<li key={CST.TH_AMT} className={'input-line'}>
+											{CST.TH_AMT}
+											<SInput
+												width="60%"
+												className={''}
+												value={amount}
+												onChange={e =>
+													this.handleAmountInputChange(e.target.value)
+												}
+												right
+											/>
+										</li>,
+										<li key={CST.TH_EXPIRY} className={'input-line'}>
+											<span className="title" style={{ width: 200 }}>
+												{CST.TH_EXPIRY}
+											</span>
+											<SDivFlexCenter
+												horizontal
+												width="100%"
+												padding="2px 0 2px 0"
 											>
-												{hour + 'h'}
-											</button>
-										))}
-									</SDivFlexCenter>
-								</li>
-								<li>
-									<SDivFlexCenter
-										horizontal
-										width="100%"
-										padding="0"
-										marginTop="10px"
-									>
-										<button
-											className={'form-button'}
-											disabled={!this.state.price || !this.state.amount}
-											onClick={this.handleSubmit}
-										>
-											{CST.TH_SUBMIT}
-										</button>
+												{[8, 16, 24, 36].map(hour => (
+													<button
+														key={hour}
+														className={
+															hoursToLive === hour
+																? 'button'
+																: 'percent-button'
+														}
+														onClick={() =>
+															this.handleExpireButtonClick(hour)
+														}
+													>
+														{hour + 'h'}
+													</button>
+												))}
+											</SDivFlexCenter>
+										</li>,
+										<li key={CST.TH_SUBMIT}>
+											<SDivFlexCenter
+												horizontal
+												width="100%"
+												padding="0"
+												marginTop="10px"
+											>
+												<button
+													className={'form-button'}
+													disabled={!price || !amount}
+													onClick={this.handleSubmit}
+												>
+													{CST.TH_SUBMIT}
+												</button>
 
-										<button
-											className={'form-button'}
-											onClick={this.handleClear}
-										>
-											{CST.TH_CLEAR}
-										</button>
-									</SDivFlexCenter>
-								</li>
+												<button
+													className={'form-button'}
+													onClick={this.handleClear}
+												>
+													{CST.TH_CLEAR}
+												</button>
+											</SDivFlexCenter>
+										</li>
+									]
+								)}
 							</ul>
 						</div>
 					</SCardList>
