@@ -96,21 +96,7 @@ export default class Dex extends React.Component<IProps> {
 								<button
 									onClick={() =>
 										web3Util.web3Wrapper
-											.signTypedDataAsync(account, {
-												types: {
-													EIP712Domain: [
-														{ name: 'name', type: 'string' }
-													],
-													Order: [{ name: 'orderHash', type: 'string' }]
-												},
-												primaryType: 'Order',
-												domain: {
-													name: 'DUO Relayer'
-												},
-												message: {
-													orderHash: '0xOrderHash'
-												}
-											})
+											.signMessageAsync(account, '0xOrderHash')
 											.then(result => console.log(result))
 									}
 								>
