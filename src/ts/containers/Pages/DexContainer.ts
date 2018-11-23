@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 		subscribe: (pair: string) => dispatch(dexActions.subscribe(pair)),
 		unsubscribe: () => {
 			dispatch(dexActions.orderBookSubscriptionUpdate(''));
-			dispatch(dexActions.userOrderSubscriptionUpdate(0))
+			dispatch(dexActions.userSubscriptionUpdate(0))
 		}
 	};
 }
