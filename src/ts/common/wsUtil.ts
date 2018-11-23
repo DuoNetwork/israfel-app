@@ -172,7 +172,8 @@ class WsUtil {
 		const [code1, code2] = pair.split('|');
 		const address1 = web3Util.getTokenAddressFromCode(code1);
 		const address2 = web3Util.getTokenAddressFromCode(code2);
-		const amount2 = amount * price;
+		const amount2 = util.round(amount * price);
+
 		const rawOrder = await web3Util.createRawOrder(
 			account,
 			web3Util.relayerAddress,

@@ -1,7 +1,6 @@
-import { Layout } from 'antd';
+import { Layout, Spin } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
-import Loader from 'react-loader-advanced';
 import { IEthBalance, IOrderBookSnapshot, ITokenBalance, IUserOrder } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
@@ -61,48 +60,43 @@ export default class Dex extends React.Component<IProps> {
 			ethBalance,
 			tokenBalance
 		} = this.props;
-		const spinner = (
-			<span>
-				<img
-					src="https://cdn.ndtv.com/vp/static/images/preloader.gif"
-					style={{ width: '30px' }}
-				/>
-				loading...
-			</span>
-		);
 		return (
-			<Loader show={!this.props.connection} message={spinner}>
-				<Layout>
-					<div className="App">
-						<Header />
-						<SDivFlexCenter center horizontal>
-							<OrderHistoryCard userOrders={userOrders} locale={locale} />
-							<Affix offsetTop={10}>
-								<OrderCard
-									account={account}
-									pair={pair}
-									ethBalance={ethBalance}
-									tokenBalance={tokenBalance}
-								/>
-							</Affix>
-						</SDivFlexCenter>
-						<SDivFlexCenter center horizontal>
-							<Affix offsetTop={10}>
-								<WrapEtherCard />
-							</Affix>
-							<Affix offsetTop={10}>
-								<OrderBookCard OrderBookSnapshot={orderBook} />
-							</Affix>
-						</SDivFlexCenter>
-						<div style={{ color: 'white' }}>
-							<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
-						</div>
-						<div style={{ color: 'white' }}>
-							<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
-						</div>
-					</div>
-				</Layout>
-			</Loader>
+			<Layout>
+				<div className="App">
+					<Header />
+					{this.props.connection ? (
+						[
+							<SDivFlexCenter key={1} center horizontal>
+								<OrderHistoryCard userOrders={userOrders} locale={locale} />
+								<Affix offsetTop={10}>
+									<OrderCard
+										account={account}
+										pair={pair}
+										ethBalance={ethBalance}
+										tokenBalance={tokenBalance}
+									/>
+								</Affix>
+							</SDivFlexCenter>,
+							<SDivFlexCenter key={2} center horizontal>
+								<Affix offsetTop={10}>
+									<WrapEtherCard />
+								</Affix>
+								<Affix offsetTop={10}>
+									<OrderBookCard OrderBookSnapshot={orderBook} />
+								</Affix>
+							</SDivFlexCenter>,
+							<div key={3} style={{ color: 'white' }}>
+								<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
+							</div>,
+							<div key={4} style={{ color: 'white' }}>
+								<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
+							</div>
+						]
+					) : (
+						<Spin />
+					)}
+				</div>
+			</Layout>
 		);
 	}
 }
