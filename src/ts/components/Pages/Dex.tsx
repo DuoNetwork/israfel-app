@@ -95,8 +95,7 @@ export default class Dex extends React.Component<IProps> {
 							<div key={5} style={{ color: 'white' }}>
 								<button
 									onClick={() =>
-										web3Util.web3Wrapper
-											.signMessageAsync(account, '0xOrderHash')
+										web3Util.web3PersonalSign(account, '0xOrderHash')
 											.then(result => console.log(result))
 									}
 								>
