@@ -3,6 +3,10 @@
 exports[`web3 reducer account 1`] = `
 Object {
   "account": "test",
+  "ethBalance": Object {
+    "eth": 0,
+    "weth": 0,
+  },
   "network": 0,
 }
 `;
@@ -10,13 +14,32 @@ Object {
 exports[`web3 reducer default 1`] = `
 Object {
   "account": "0x0000000000000000000000000000000000000000",
+  "ethBalance": Object {
+    "eth": 0,
+    "weth": 0,
+  },
   "network": 0,
+}
+`;
+
+exports[`web3 reducer ethBalance 1`] = `
+Object {
+  "account": "test",
+  "ethBalance": Object {
+    "eth": 123,
+    "weth": 456,
+  },
+  "network": 123,
 }
 `;
 
 exports[`web3 reducer network 1`] = `
 Object {
   "account": "test",
+  "ethBalance": Object {
+    "eth": 0,
+    "weth": 0,
+  },
   "network": 123,
 }
 `;

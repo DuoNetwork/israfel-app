@@ -50,19 +50,27 @@ describe('actions', () => {
 		);
 	});
 
-	// test('gasPriceUpdate', () => {
-	// 	expect(web3Actions.gasPriceUpdate(123)).toMatchSnapshot();
-	// });
+	test('ethBalanceUpdate', () => {
+		expect(web3Actions.ethBalanceUpdate({
+			eth: 123,
+			weth: 456
+		})).toMatchSnapshot();
+	});
 
-	// test('getGasPrice', () => {
-	// 	const store: any = mockStore({});
-	// 	contract.getGasPrice = jest.fn(() => Promise.resolve(456));
-	// 	store.dispatch(web3Actions.getGasPrice());
-	// 	return new Promise(resolve =>
-	// 		setTimeout(() => {
-	// 			expect(store.getActions()).toMatchSnapshot();
-	// 			resolve();
-	// 		}, 0)
-	// 	);
-	// });
+	test('getNetwork', () => {
+		const store: any = mockStore({
+			web3: {
+				account: '0xAccount'
+			}
+		});
+		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
+		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
+		store.dispatch(web3Actions.getBalance());
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions()).toMatchSnapshot();
+				resolve();
+			}, 0)
+		);
+	});
 });

@@ -31,9 +31,15 @@ export interface IUIState {
 export interface IWeb3State {
 	readonly account: string;
 	readonly network: number;
+	readonly ethBalance: IEthBalance;
 }
 
 export interface IWsState {
 	readonly connection: boolean;
-	readonly tokens: relayerTypes.IToken[]
+	readonly tokens: relayerTypes.IToken[];
+}
+
+export interface IEthBalance {
+	eth: number;
+	weth: number;
 }

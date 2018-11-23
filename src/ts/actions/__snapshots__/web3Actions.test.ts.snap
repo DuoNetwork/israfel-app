@@ -7,6 +7,16 @@ Object {
 }
 `;
 
+exports[`actions ethBalanceUpdate 1`] = `
+Object {
+  "type": "ethBalance",
+  "value": Object {
+    "eth": 123,
+    "weth": 456,
+  },
+}
+`;
+
 exports[`actions getAccount 1`] = `
 Array [
   Object {
@@ -21,6 +31,18 @@ Array [
   Object {
     "type": "network",
     "value": 123,
+  },
+]
+`;
+
+exports[`actions getNetwork 2`] = `
+Array [
+  Object {
+    "type": "ethBalance",
+    "value": Object {
+      "eth": 111,
+      "weth": 222,
+    },
   },
 ]
 `;

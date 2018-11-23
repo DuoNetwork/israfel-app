@@ -1,6 +1,6 @@
-import * as CST from '../common/constants';
-import { VoidThunkAction } from '../common/types';
-import web3Util from '../common/web3Util';
+import * as CST from 'ts/common/constants';
+import { IEthBalance, VoidThunkAction } from 'ts/common/types';
+import web3Util from 'ts/common/web3Util';
 
 export function accountUpdate(account: string) {
 	return {
@@ -27,21 +27,29 @@ export function getNetwork(): VoidThunkAction {
 	return async dispatch => dispatch(networkUpdate(await web3Util.getCurrentNetwork()));
 }
 
-// export function gasPriceUpdate(gasPrice: number) {
-// 	return {
-// 		type: CST.AC_GAS_PX,
-// 		value: gasPrice
-// 	};
-// }
+export function ethBalanceUpdate(balance: IEthBalance) {
+	return {
+		type: CST.AC_ETH_BALANCE,
+		value: balance
+	};
+}
 
-// export function getGasPrice(): VoidThunkAction {
-// 	return async dispatch => dispatch(gasPriceUpdate(await web3Util.getGasPrice()));
-// }
+export function getBalance(): VoidThunkAction {
+	return async (dispatch, getState) => {
+		const account = getState().web3.account;
+		dispatch(
+			ethBalanceUpdate({
+				eth: await web3Util.getEthBalance(account),
+				weth: await web3Util.getTokenBalance(CST.TOKEN_WETH, account)
+			})
+		);
+	};
+}
 
 export function refresh(): VoidThunkAction {
-	return dispatch => {
-		dispatch(getAccount());
-		// dispatch(getGasPrice());
+	return async dispatch => {
 		dispatch(getNetwork());
+		await dispatch(getAccount());
+		dispatch(getBalance());
 	};
 }

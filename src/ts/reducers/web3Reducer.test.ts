@@ -25,6 +25,17 @@ describe('web3 reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('ethBalance', () => {
+		state = web3Reducer(state, {
+			type: CST.AC_ETH_BALANCE,
+			value: {
+				eth: 123,
+				weth: 456
+			}
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	// test('gasPrice', () => {
 	// 	state = web3Reducer(state, {
 	// 		type: CST.AC_GAS_PX,

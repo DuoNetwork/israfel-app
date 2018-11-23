@@ -21,6 +21,10 @@ Object {
   },
   "web3": Object {
     "account": "0x0000000000000000000000000000000000000000",
+    "ethBalance": Object {
+      "eth": 0,
+      "weth": 0,
+    },
     "network": 0,
   },
   "ws": Object {

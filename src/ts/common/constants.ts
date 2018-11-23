@@ -13,6 +13,7 @@ export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
 export const AC_OB_SUB = 'orderBookSubscription';
 export const AC_UO_SUB = 'userOrderSubscription';
+export const AC_ETH_BALANCE = 'ethBalance';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';
