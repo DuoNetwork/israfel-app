@@ -41,8 +41,8 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 			for (let i = 0; i < asks.length; i++) askArray.push([asks[i].amount, asks[i].price]);
 			for (let i = 0; i < bids.length; i++) bidArray.push([bids[i].amount, bids[i].price]);
 		}
-		askArray.sort((a, b) => b[1] - a[1]);
-		bidArray.sort((a, b) => a[1] - b[1]);
+		askArray.sort((a, b) => a[1] - b[1]);
+		bidArray.sort((a, b) => b[1] - a[1]);
 		return (
 			<div>
 				<SCard
@@ -63,21 +63,21 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 												<span className="content">
 													{i < bidArray.length
 														? bidArray[i][1] !== 0
-															? util.formatNumber(bidArray[i][1])
+															? util.formatNumber(bidArray[i][0])
 															: '-'
 														: '-'}
 												</span>
 												<span className="title">
 													{i < bidArray.length
 														? bidArray[i][0] !== 0
-															? util.formatNumber(bidArray[i][0])
+															? util.formatNumber(bidArray[i][1])
 															: '-'
 														: '-'}
 												</span>
 											</li>
 										))
 									) : (
-										<li className="block-title t-center">{CST.TH_LOADING}</li>
+										<li className="block-title t-center">-</li>
 									)}
 								</ul>
 							</div>
@@ -94,21 +94,21 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 												<span className="title">
 													{i < askArray.length
 														? askArray[i][0] !== 0
-															? util.formatNumber(askArray[i][0])
+															? util.formatNumber(askArray[i][1])
 															: '-'
 														: '-'}
 												</span>
 												<span className="content">
 													{i < askArray.length
 														? askArray[i][1] !== 0
-															? util.formatNumber(askArray[i][1])
+															? util.formatNumber(askArray[i][0])
 															: '-'
 														: '-'}
 												</span>
 											</li>
 										))
 									) : (
-										<li className="block-title t-center">{CST.TH_LOADING}</li>
+										<li className="block-title t-center">-</li>
 									)}
 								</ul>
 							</div>
