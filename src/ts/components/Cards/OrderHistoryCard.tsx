@@ -17,7 +17,7 @@ interface IProps {
 
 const parseRow: (uo: IUserOrder) => any = (uo: IUserOrder) => ({
 	key: uo.currentSequence,
-	[CST.TH_SIDE]: uo.side === CST.DB_BID ? CST.TH_SELL : CST.TH_BUY,
+	[CST.TH_SIDE]: uo.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
 	[CST.TH_PX]: uo.price,
 	[CST.TH_AMT]: uo.amount,
 	[CST.TH_BALANCE]: uo.balance,
