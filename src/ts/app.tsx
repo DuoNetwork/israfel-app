@@ -49,7 +49,6 @@ wsUtil.onOrderBookUpdate(orderBookUpdate => {
 
 wsUtil.onConfigError(text => alert(text));
 wsUtil.onReconnect(() => {
-	alert('reconnecting');
 	store.dispatch(wsActions.connectionUpdate(false));
 });
 wsUtil.onTokensUpdate(tokens => store.dispatch(wsActions.tokensUpdate(tokens)));

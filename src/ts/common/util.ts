@@ -54,6 +54,12 @@ class Util {
 			.toUpperCase()
 			.replace(/G/g, 'B');
 	}
+
+	public sleep(ms: number) {
+		return new Promise(resolve => {
+			setTimeout(resolve, ms);
+		});
+	}
 }
 
 const util = new Util();

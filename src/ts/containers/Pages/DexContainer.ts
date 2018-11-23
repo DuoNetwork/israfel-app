@@ -12,7 +12,8 @@ function mapStateToProps(state: IState) {
 		userOrders: state.dex.userOrders,
 		orderBook: state.dex.orderBookSnapshot,
 		ethBalance: state.web3.ethBalance,
-		tokenBalance: state.dex.tokenBalance
+		tokenBalance: state.dex.tokenBalance,
+		connection: state.ws.connection
 	};
 }
 
@@ -21,7 +22,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 		subscribe: (pair: string) => dispatch(dexActions.subscribe(pair)),
 		unsubscribe: () => {
 			dispatch(dexActions.orderBookSubscriptionUpdate(''));
-			dispatch(dexActions.userSubscriptionUpdate(0))
+			dispatch(dexActions.userSubscriptionUpdate(0));
 		}
 	};
 }

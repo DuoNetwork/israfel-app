@@ -37,6 +37,7 @@ class WsUtil {
 
 	private reconnect() {
 		this.handleReconnect();
+		util.sleep(5000);
 		this.connectToRelayer();
 	}
 
@@ -172,7 +173,6 @@ class WsUtil {
 		const address1 = web3Util.getTokenAddressFromCode(code1);
 		const address2 = web3Util.getTokenAddressFromCode(code2);
 		const amount2 = amount * price;
-
 		const rawOrder = await web3Util.createRawOrder(
 			account,
 			web3Util.relayerAddress,
