@@ -93,52 +93,30 @@ export default class Dex extends React.Component<IProps> {
 								<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
 							</div>,
 							<div key={5} style={{ color: 'white' }}>
-							<button
-								onClick={() =>
-									web3Util.web3Wrapper
-										.signTypedDataAsync(account, {
-											types: {
-												EIP712Domain: [
-													{ name: 'name', type: 'string' },
-													{ name: 'version', type: 'string' },
-													{ name: 'chainId', type: 'uint256' },
-												],
-												Person: [
-													{ name: 'name', type: 'string' },
-													{ name: 'wallet', type: 'address' }
-												],
-												Mail: [
-													{ name: 'from', type: 'Person' },
-													{ name: 'to', type: 'Person' },
-													{ name: 'contents', type: 'string' }
-												]
-											},
-											primaryType: 'Mail',
-											domain: {
-												name: 'Ether Mail',
-												version: '1',
-												chainId: 42,
-												verifyingContract:
-													'0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
-											},
-											message: {
-												from: {
-													name: 'Cow',
-													wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826'
+								<button
+									onClick={() =>
+										web3Util.web3Wrapper
+											.signTypedDataAsync(account, {
+												types: {
+													EIP712Domain: [
+														{ name: 'name', type: 'string' }
+													],
+													Order: [{ name: 'orderHash', type: 'string' }]
 												},
-												to: {
-													name: 'Bob',
-													wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
+												primaryType: 'Order',
+												domain: {
+													name: 'DUO Relayer'
 												},
-												contents: 'Hello, Bob!'
-											}
-										})
-										.then(result => console.log(result))
-								}
-							>
-								Sign
-							</button>
-						</div>
+												message: {
+													orderHash: '0xOrderHash'
+												}
+											})
+											.then(result => console.log(result))
+									}
+								>
+									Sign
+								</button>
+							</div>
 						]
 					) : (
 						<Spin />
