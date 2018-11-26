@@ -1,5 +1,5 @@
 import * as CST from 'ts/common/constants';
-import { IToken } from 'ts/common/types';
+import { IStatus, IToken } from 'ts/common/types';
 
 export function connectionUpdate(connected: boolean) {
 	return {
@@ -12,5 +12,12 @@ export function tokensUpdate(tokens: IToken[]) {
 	return {
 		type: CST.AC_TOKENS,
 		value: tokens
+	};
+}
+
+export function statusUpdate(status: IStatus[]) {
+	return {
+		type: CST.AC_STATUS,
+		value: status
 	};
 }

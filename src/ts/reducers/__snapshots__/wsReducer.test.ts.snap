@@ -3,6 +3,7 @@
 exports[`ws reducer connection 1`] = `
 Object {
   "connection": true,
+  "status": Array [],
   "tokens": Array [],
 }
 `;
@@ -10,6 +11,29 @@ Object {
 exports[`ws reducer default 1`] = `
 Object {
   "connection": false,
+  "status": Array [],
   "tokens": Array [],
+}
+`;
+
+exports[`ws reducer status 1`] = `
+Object {
+  "connection": true,
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    "token1",
+  ],
+}
+`;
+
+exports[`ws reducer tokens 1`] = `
+Object {
+  "connection": true,
+  "status": Array [],
+  "tokens": Array [
+    "token1",
+  ],
 }
 `;

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
 import * as dexActions from './actions/dexActions';
-import * as dynamoActions from './actions/dynamoActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
 // import * as CST from './common/constants';
@@ -23,17 +22,11 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	) {
 		store.dispatch(web3Actions.accountUpdate(addr));
 		store.dispatch(web3Actions.networkUpdate(network));
-		store.dispatch(dynamoActions.refresh());
 	}
 });
 
 store.dispatch(web3Actions.refresh());
-store.dispatch(dynamoActions.refresh());
-
-setInterval(() => {
-	store.dispatch(web3Actions.refresh());
-	store.dispatch(dynamoActions.refresh());
-}, 60000);
+setInterval(() => store.dispatch(web3Actions.refresh()), 60000);
 
 wsUtil.onOrderUpdate((method, userOrder) => {
 	store.dispatch(dexActions.userOrderUpdate(userOrder));
@@ -52,9 +45,9 @@ wsUtil.onReconnect(() => {
 	store.dispatch(wsActions.connectionUpdate(false));
 });
 wsUtil.onTokensUpdate(tokens => store.dispatch(wsActions.tokensUpdate(tokens)));
+wsUtil.onStatusUpdate(status => store.dispatch(wsActions.statusUpdate(status)));
 wsUtil.onConnected(() => {
 	store.dispatch(wsActions.connectionUpdate(true));
-	store.dispatch(dynamoActions.refresh());
 	ReactDOM.render(
 		<Provider store={store}>
 			<Router>

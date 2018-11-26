@@ -7,6 +7,15 @@ Object {
 }
 `;
 
+exports[`actions statusUpdate 1`] = `
+Object {
+  "type": "status",
+  "value": Array [
+    "status1",
+  ],
+}
+`;
+
 exports[`actions tokensUpdate 1`] = `
 Object {
   "type": "tokens",

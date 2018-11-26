@@ -3,16 +3,17 @@ import * as CST from './constants';
 import {
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IStatus,
 	IToken,
 	IUserOrder,
 	IWsAddOrderRequest,
+	IWsInfoResponse,
 	IWsOrderBookResponse,
 	IWsOrderBookUpdateResponse,
 	IWsOrderRequest,
 	IWsOrderResponse,
 	IWsRequest,
 	IWsResponse,
-	IWsTokenResponse,
 	IWsUserOrderResponse
 } from './types';
 import util from './util';
@@ -24,6 +25,7 @@ class WsUtil {
 	private handleConnected: () => any = () => ({});
 	private handleReconnect: () => any = () => ({});
 	private handleTokensUpdate: (tokens: IToken[]) => any = () => ({});
+	private handleStatusUpdate: (status: IStatus[]) => any = () => ({});
 	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
 	private handleOrderError: (
 		method: string,
@@ -98,10 +100,11 @@ class WsUtil {
 			case CST.DB_ORDER_BOOKS:
 				this.handleOrderBookResponse(res);
 				break;
-			case CST.DB_TOKENS:
-				const tokens = (res as IWsTokenResponse).tokens;
+			case CST.WS_INFO:
+				const {tokens, processStatus } = (res as IWsInfoResponse);
 				web3Util.setTokens(tokens);
 				this.handleTokensUpdate(tokens);
+				this.handleStatusUpdate(processStatus);
 				break;
 			default:
 				break;
@@ -226,6 +229,10 @@ class WsUtil {
 
 	public onTokensUpdate(handleTokensUpdate: (tokens: IToken[]) => any) {
 		this.handleTokensUpdate = handleTokensUpdate;
+	}
+
+	public onStatusUpdate(handleStatusUpdate: (status: IStatus[]) => any) {
+		this.handleStatusUpdate = handleStatusUpdate;
 	}
 
 	public onConfigError(handleConfigError: (text: string) => any) {
