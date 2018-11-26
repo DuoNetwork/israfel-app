@@ -3,17 +3,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import dynamoUtil from '../../../israfel-relayer/src/utils/dynamoUtil';
 import * as dexActions from './actions/dexActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
-// import * as CST from './common/constants';
 import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
 import Israfel from './containers/IsrafelContainer';
 import store from './store/store';
-const config = require(`./keys/aws.ui.${__KOVAN__ ? 'dev' : 'live'}.json`);
-dynamoUtil.init(config, !__KOVAN__);
 
 web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	if (
@@ -29,9 +25,11 @@ store.dispatch(web3Actions.refresh());
 setInterval(() => store.dispatch(web3Actions.refresh()), 60000);
 
 wsUtil.onOrderUpdate((method, userOrder) => {
-	store.dispatch(dexActions.userOrderUpdate(userOrder));
-	// store.dispatch(dexActions.refresh());
-	console.log(method, userOrder);
+	store.dispatch(dexActions.orderUpdate(userOrder));
+	console.log(method);
+});
+wsUtil.onOrderHistoryUpdate((userOrders) => {
+	store.dispatch(dexActions.orderHistoryUpdate(userOrders));
 });
 wsUtil.onOrderBookSnapshot(orderBookSnapshot => {
 	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot));

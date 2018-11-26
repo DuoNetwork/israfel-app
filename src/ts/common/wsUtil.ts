@@ -10,6 +10,8 @@ import {
 	IWsInfoResponse,
 	IWsOrderBookResponse,
 	IWsOrderBookUpdateResponse,
+	IWsOrderHistoryRequest,
+	IWsOrderHistoryResponse,
 	IWsOrderRequest,
 	IWsOrderResponse,
 	IWsRequest,
@@ -27,6 +29,7 @@ class WsUtil {
 	private handleTokensUpdate: (tokens: IToken[]) => any = () => ({});
 	private handleStatusUpdate: (status: IStatus[]) => any = () => ({});
 	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
+	private handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any = () => ({});
 	private handleOrderError: (
 		method: string,
 		orderHash: string,
@@ -74,7 +77,6 @@ class WsUtil {
 	}
 
 	private handleOrderBookResponse(orderBookResponse: IWsResponse) {
-		console.log(orderBookResponse);
 		if (orderBookResponse.status !== CST.WS_OK)
 			this.handleOrderBookError(
 				orderBookResponse.method,
@@ -93,22 +95,27 @@ class WsUtil {
 
 	public handleMessage(message: string) {
 		const res: IWsResponse = JSON.parse(message);
-		switch (res.channel) {
-			case CST.DB_ORDERS:
-				this.handleOrderResponse(res as IWsOrderResponse);
-				break;
-			case CST.DB_ORDER_BOOKS:
-				this.handleOrderBookResponse(res);
-				break;
-			case CST.WS_INFO:
-				const {tokens, processStatus } = (res as IWsInfoResponse);
-				web3Util.setTokens(tokens);
-				this.handleTokensUpdate(tokens);
-				this.handleStatusUpdate(processStatus);
-				break;
-			default:
-				break;
-		}
+		console.log(res);
+		if (res.method !== CST.WS_UNSUB)
+			switch (res.channel) {
+				case CST.DB_ORDERS:
+					this.handleOrderResponse(res as IWsOrderResponse);
+					break;
+				case CST.DB_ORDER_BOOKS:
+					this.handleOrderBookResponse(res);
+					break;
+				case CST.WS_INFO:
+					const { tokens, processStatus } = res as IWsInfoResponse;
+					web3Util.setTokens(tokens);
+					this.handleTokensUpdate(tokens);
+					this.handleStatusUpdate(processStatus);
+					break;
+				case CST.WS_ORDER_HISTORY:
+					this.handleOrderHistoryUpdate((res as IWsOrderHistoryResponse).orderHistory);
+					break;
+				default:
+					break;
+			}
 	}
 
 	public async subscribeOrderBook(pair: string) {
@@ -135,6 +142,36 @@ class WsUtil {
 			method: CST.WS_UNSUB,
 			channel: CST.DB_ORDER_BOOKS,
 			pair: pair
+		};
+		this.ws.send(JSON.stringify(msg));
+	}
+
+	public async subscribeOrderHistory(account: string, pair: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
+
+		const msg: IWsOrderHistoryRequest = {
+			method: CST.WS_SUB,
+			channel: CST.WS_ORDER_HISTORY,
+			pair: pair,
+			account: account
+		};
+		this.ws.send(JSON.stringify(msg));
+	}
+
+	public async unsubscribeOrderHistory(account: string, pair: string) {
+		if (!this.ws) {
+			this.handleConfigError('not connected');
+			return;
+		}
+
+		const msg: IWsOrderHistoryRequest = {
+			method: CST.WS_UNSUB,
+			channel: CST.WS_ORDER_HISTORY,
+			pair: pair,
+			account: account
 		};
 		this.ws.send(JSON.stringify(msg));
 	}
@@ -191,6 +228,10 @@ class WsUtil {
 
 	public onOrderUpdate(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
 		this.handleOrderUpdate = handleOrderUpdate;
+	}
+
+	public onOrderHistoryUpdate(handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any) {
+		this.handleOrderHistoryUpdate = handleOrderHistoryUpdate;
 	}
 
 	public onOrderError(

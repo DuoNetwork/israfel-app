@@ -32,32 +32,6 @@ Array [
 
 exports[`actions getTokenBalance dummy addr 1`] = `Array []`;
 
-exports[`actions getUserOrders 1`] = `
-Array [
-  Object {
-    "type": "userOrderList",
-    "value": Array [
-      Object {
-        "test": "test",
-      },
-    ],
-  },
-]
-`;
-
-exports[`actions getUserOrders 2`] = `
-Array [
-  Array [
-    "0xAccount",
-    -1357432110,
-    1234567890,
-    "pair",
-  ],
-]
-`;
-
-exports[`actions getUserOrders dummy addr 1`] = `Array []`;
-
 exports[`actions orderBookSnapshotUpdate 1`] = `
 Object {
   "type": "orderBookSnapshot",
@@ -69,8 +43,9 @@ Object {
 
 exports[`actions orderBookSubscriptionUpdate 1`] = `
 Object {
+  "account": "account",
+  "pair": "pair",
   "type": "orderBookSubscription",
-  "value": "pair",
 }
 `;
 
@@ -83,31 +58,45 @@ Object {
 }
 `;
 
+exports[`actions orderHistoryUpdate 1`] = `
+Object {
+  "type": "orderHistory",
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
+}
+`;
+
+exports[`actions orderUpdate 1`] = `
+Object {
+  "type": "order",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
 exports[`actions subscribe 1`] = `
 Array [
   Object {
+    "account": "0xAccount",
+    "pair": "",
     "type": "orderBookSubscription",
-    "value": "",
   },
   Object {
     "type": "userSubscription",
     "value": 0,
   },
   Object {
+    "account": "0xAccount",
+    "pair": "pair",
     "type": "orderBookSubscription",
-    "value": "pair",
   },
   Object {
     "type": "userSubscription",
     "value": 123,
-  },
-  Object {
-    "type": "userOrderList",
-    "value": Array [
-      Object {
-        "test": "test",
-      },
-    ],
   },
   Object {
     "type": "tokenBalance",
@@ -131,8 +120,6 @@ exports[`actions subscribe 3`] = `
 Array [
   Array [
     "0xAccount",
-    -1357432110,
-    1234567890,
     "pair",
   ],
 ]
@@ -145,26 +132,6 @@ Object {
     "allowance": 456,
     "balance": 123,
   },
-}
-`;
-
-exports[`actions userOrder 1`] = `
-Object {
-  "type": "userOrder",
-  "value": Object {
-    "test": "test",
-  },
-}
-`;
-
-exports[`actions userOrderListUpdate 1`] = `
-Object {
-  "type": "userOrderList",
-  "value": Array [
-    Object {
-      "test": "test",
-    },
-  ],
 }
 `;
 

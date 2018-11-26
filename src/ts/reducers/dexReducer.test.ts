@@ -18,9 +18,9 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrderList', () => {
+	test('orderHistory', () => {
 		state = dexReducer(state, {
-			type: CST.AC_USER_ORDER_LIST,
+			type: CST.AC_ORDER_HISTORY,
 			value: [{
 				userOrders: 'fromList',
 				currentSequence: 123
@@ -33,9 +33,9 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('userOrder', () => {
+	test('order', () => {
 		state = dexReducer(state, {
-			type: CST.AC_USER_ORDER,
+			type: CST.AC_ORDER,
 			value: { userOrder: 'from single order', currentSequence: 456 }
 		});
 		expect(state).toMatchSnapshot();

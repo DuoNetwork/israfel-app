@@ -1,7 +1,5 @@
 // import { BigNumber } from '0x.js';
 import moment from 'moment';
-// import status from '../../../../../duo-admin/src/samples/dynamo/status.json';
-// import dynamoUtil from '../../../../../duo-admin/src/utils/dynamoUtil';
 import util from './util';
 
 test('round', () => {

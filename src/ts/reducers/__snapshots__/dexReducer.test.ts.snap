@@ -9,33 +9,56 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
+}
+`;
+
+exports[`dex reducer order 1`] = `
+Object {
+  "orderBookSnapshot": Object {
+    "asks": Array [],
+    "bids": Array [],
+    "pair": "pair",
+    "version": 0,
+  },
+  "orderBookSubscription": "",
+  "orderHistory": Array [
+    Object {
+      "currentSequence": 123,
+      "userOrders": "fromList",
+    },
+    Object {
+      "currentSequence": 456,
+      "userOrders": "fromList",
+    },
+  ],
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
+  "userSubscription": 111,
 }
 `;
 
 exports[`dex reducer orderBookSnapshot 1`] = `
 Object {
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
+    "asks": Array [],
+    "bids": Array [],
     "pair": "pair",
-    "version": 123,
+    "version": 0,
   },
-  "orderBookSubscription": "pair",
+  "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
@@ -43,21 +66,17 @@ Object {
 exports[`dex reducer orderBookSnapshot wrong pair 1`] = `
 Object {
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
+    "asks": Array [],
+    "bids": Array [],
     "pair": "pair",
-    "version": 123,
+    "version": 0,
   },
-  "orderBookSubscription": "pair",
+  "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
@@ -71,11 +90,11 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
@@ -88,12 +107,12 @@ Object {
     "pair": "pair",
     "version": 0,
   },
-  "orderBookSubscription": "pair",
+  "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
@@ -101,68 +120,42 @@ Object {
 exports[`dex reducer orderBookUpdate 1`] = `
 Object {
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
+    "asks": Array [],
+    "bids": Array [],
     "pair": "pair",
-    "version": 123,
+    "version": 0,
   },
-  "orderBookSubscription": "pair",
+  "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
 
-exports[`dex reducer orderBookUpdate 2`] = `
-Array [
-  Array [
-    Object {
-      "asks": Array [
-        2,
-      ],
-      "bids": Array [
-        1,
-      ],
-      "pair": "pair",
-      "version": 123,
-    },
-    Object {
-      "pair": "pair",
-    },
-  ],
-]
-`;
+exports[`dex reducer orderBookUpdate 2`] = `Array []`;
 
 exports[`dex reducer orderBookUpdate wrong pair 1`] = `
 Object {
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
+    "asks": Array [],
+    "bids": Array [],
     "pair": "pair",
-    "version": 123,
+    "version": 0,
   },
-  "orderBookSubscription": "pair",
+  "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
 
-exports[`dex reducer userOrder 1`] = `
+exports[`dex reducer orderHistory 1`] = `
 Object {
   "orderBookSnapshot": Object {
     "asks": Array [],
@@ -171,29 +164,7 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "tokenBalance": Object {
-    "allowance": 0,
-    "balance": 0,
-  },
-  "userOrders": 3,
-  "userSubscription": 111,
-}
-`;
-
-exports[`dex reducer userOrderList 1`] = `
-Object {
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "tokenBalance": Object {
-    "allowance": 0,
-    "balance": 0,
-  },
-  "userOrders": Array [
+  "orderHistory": Array [
     Object {
       "currentSequence": 123,
       "userOrders": "fromList",
@@ -203,6 +174,10 @@ Object {
       "userOrders": "fromList",
     },
   ],
+  "tokenBalance": Object {
+    "allowance": 0,
+    "balance": 0,
+  },
   "userSubscription": 111,
 }
 `;
@@ -216,11 +191,20 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
+  "orderHistory": Array [
+    Object {
+      "currentSequence": 123,
+      "userOrders": "fromList",
+    },
+    Object {
+      "currentSequence": 456,
+      "userOrders": "fromList",
+    },
+  ],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 0,
 }
 `;
@@ -242,11 +226,11 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
+  "orderHistory": Array [],
   "tokenBalance": Object {
     "allowance": 0,
     "balance": 0,
   },
-  "userOrders": Array [],
   "userSubscription": 111,
 }
 `;

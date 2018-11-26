@@ -10,11 +10,11 @@ Object {
       "version": 0,
     },
     "orderBookSubscription": "",
+    "orderHistory": Array [],
     "tokenBalance": Object {
       "allowance": 0,
       "balance": 0,
     },
-    "userOrders": Array [],
     "userSubscription": 0,
   },
   "ui": Object {

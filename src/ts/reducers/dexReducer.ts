@@ -10,7 +10,7 @@ import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
 export const initialState: IDexState = {
-	userOrders: [],
+	orderHistory: [],
 	orderBookSnapshot: {
 		pair: 'pair',
 		version: 0,
@@ -27,19 +27,21 @@ export const initialState: IDexState = {
 
 export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
 	switch (action.type) {
-		case CST.AC_USER_ORDER_LIST:
+		case CST.AC_ORDER_HISTORY:
 			return Object.assign({}, state, {
-				userOrders: action.value
+				orderHistory: action.value
 			});
-		case CST.AC_USER_ORDER:
+		case CST.AC_ORDER:
 			const newOrder: IUserOrder = action.value;
+			if (
+				state.orderHistory.findIndex(
+					element => element.currentSequence === newOrder.currentSequence
+				) !== -1
+			)
+				return state;
+
 			return Object.assign({}, state, {
-				userOrders:
-					state.userOrders.findIndex(
-						element => element.currentSequence !== newOrder.currentSequence
-					) !== -1
-						? state.userOrders.push(newOrder)
-						: state.userOrders
+				orderHistory: [...state.orderHistory, newOrder]
 			});
 		case CST.AC_OB_SNAPSHOT:
 			if (state.orderBookSubscription === action.value.pair)
@@ -59,15 +61,19 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 				});
 			} else return state;
 		case CST.AC_OB_SUB:
-			if (action.value)
+			if (action.pair)
 				return Object.assign({}, state, {
-					orderBookSubscription: action.value
+					orderBookSubscription: action.pair
 				});
 			else {
-				const { orderBookSnapshot, orderBookSubscription, ...restOb } = state;
-				if (orderBookSubscription) wsUtil.unsubscribeOrderBook(orderBookSubscription);
+				const { orderHistory, orderBookSnapshot, orderBookSubscription, ...restOb } = state;
+				if (orderBookSubscription) {
+					wsUtil.unsubscribeOrderBook(orderBookSubscription);
+					wsUtil.unsubscribeOrderHistory(action.account, orderBookSubscription);
+				}
 				return {
 					...restOb,
+					orderHistory: [],
 					orderBookSnapshot: {
 						pair: 'pair',
 						version: 0,
@@ -83,11 +89,10 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 					userSubscription: action.value
 				});
 			else {
-				const { tokenBalance, userOrders, userSubscription, ...restUo } = state;
+				const { tokenBalance, userSubscription, ...restUo } = state;
 				if (userSubscription) window.clearInterval(userSubscription);
 				return {
 					...restUo,
-					userOrders: [],
 					userSubscription: 0,
 					tokenBalance: {
 						balance: 0,

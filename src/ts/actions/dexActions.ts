@@ -6,22 +6,20 @@ import {
 	IUserOrder,
 	VoidThunkAction
 } from 'ts/common/types';
-import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 
-export function userOrderUpdate(userOrder: IUserOrder) {
+export function orderUpdate(order: IUserOrder) {
 	return {
-		type: CST.AC_USER_ORDER,
-		value: userOrder
+		type: CST.AC_ORDER,
+		value: order
 	};
 }
 
-export function userOrderListUpdate(userOrders: IUserOrder[]) {
+export function orderHistoryUpdate(orderHistory: IUserOrder[]) {
 	return {
-		type: CST.AC_USER_ORDER_LIST,
-		value: userOrders
+		type: CST.AC_ORDER_HISTORY,
+		value: orderHistory
 	};
 }
 
@@ -32,24 +30,11 @@ export function orderBookUpdate(obUpdate: IOrderBookSnapshotUpdate) {
 	};
 }
 
-export function orderBookSubscriptionUpdate(pair: string) {
+export function orderBookSubscriptionUpdate(account: string, pair: string) {
 	return {
 		type: CST.AC_OB_SUB,
-		value: pair
-	};
-}
-
-export function getUserOrders(pair: string): VoidThunkAction {
-	return async (dispatch, getState) => {
-		const account = getState().web3.account;
-		if (account !== CST.DUMMY_ADDR) {
-			const now = util.getUTCNowTimestamp();
-			dispatch(
-				userOrderListUpdate(
-					await dynamoUtil.getUserOrders(account, now - 30 * 86400000, now, pair)
-				)
-			);
-		}
+		account: account,
+		pair: pair
 	};
 }
 
@@ -60,9 +45,8 @@ export function tokenBalanceUpdate(balance: ITokenBalance) {
 	};
 }
 
-export function getTokenBalance(pair: string): VoidThunkAction {
-	return async (dispatch, getState) => {
-		const account = getState().web3.account;
+export function getTokenBalance(account: string, pair: string): VoidThunkAction {
+	return async dispatch => {
 		const code = pair.split('|')[0];
 		if (account !== CST.DUMMY_ADDR)
 			dispatch(
@@ -88,21 +72,16 @@ export function userSubscriptionUpdate(intervalId: number) {
 	};
 }
 
-export function subscribe(pair: string): VoidThunkAction {
+export function subscribe(account: string, pair: string): VoidThunkAction {
 	return dispatch => {
-		dispatch(orderBookSubscriptionUpdate(''));
+		dispatch(orderBookSubscriptionUpdate(account, ''));
 		dispatch(userSubscriptionUpdate(0));
-		dispatch(getUserOrders(pair));
-		dispatch(getTokenBalance(pair));
-		dispatch(orderBookSubscriptionUpdate(pair));
+		dispatch(getTokenBalance(account, pair));
+		dispatch(orderBookSubscriptionUpdate(account, pair));
 		wsUtil.subscribeOrderBook(pair);
+		if (account !== CST.DUMMY_ADDR) wsUtil.subscribeOrderHistory(account, pair);
 		dispatch(
-			userSubscriptionUpdate(
-				window.setInterval(() => {
-					dispatch(getTokenBalance(pair));
-					dispatch(getUserOrders(pair));
-				}, 30000)
-			)
+			userSubscriptionUpdate(window.setInterval(() => dispatch(getTokenBalance(account, pair)), 30000))
 		);
 	};
 }

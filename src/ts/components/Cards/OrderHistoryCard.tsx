@@ -2,8 +2,8 @@ import { Table } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 // import wsUtil from 'ts/common/wsUtil';
-import { IUserOrder } from '../../../../../israfel-relayer/src/common/types';
-import * as CST from '../../common/constants';
+import * as CST from 'ts/common/constants';
+import { IUserOrder } from 'ts/common/types';
 // import util from '../../common/util';
 import { SCard, SCardTitle } from './_styled';
 import { STableWrapper } from './_styled';
@@ -11,7 +11,7 @@ import { STableWrapper } from './_styled';
 const Column = Table.Column;
 
 interface IProps {
-	userOrders: IUserOrder[];
+	orderHistory: IUserOrder[];
 	locale: string;
 }
 
@@ -36,24 +36,24 @@ const parseRow: (uo: IUserOrder, isParent: boolean) => any = (
 
 export default class OrderHistoryCard extends React.Component<IProps> {
 	public render() {
-		const userOrders = this.props.userOrders;
+		const orderHistory = this.props.orderHistory;
 		let dataSource = [];
-		if (userOrders.length) {
+		if (orderHistory.length) {
 			dataSource = [];
-			userOrders.sort(
+			orderHistory.sort(
 				(a, b) =>
 					-a.initialSequence + b.initialSequence || -a.currentSequence + b.currentSequence
 			);
-			let parentRow = parseRow(userOrders[0], true);
-			for (let i = 1; i < userOrders.length; i++) {
-				const userOrder = userOrders[i];
+			let parentRow = parseRow(orderHistory[0], true);
+			for (let i = 1; i < orderHistory.length; i++) {
+				const userOrder = orderHistory[i];
 				if (userOrder.orderHash !== parentRow[CST.TH_ORDER_HASH]) {
 					dataSource.push(parentRow);
 					parentRow = parseRow(userOrder, true);
 				} else parentRow.children.push(parseRow(userOrder, false));
 			}
+			dataSource.push(parentRow);
 		}
-
 		return (
 			<SCard
 				title={

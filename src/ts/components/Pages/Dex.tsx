@@ -17,14 +17,15 @@ interface IProps {
 	account: string;
 	ethBalance: IEthBalance;
 	tokenBalance: ITokenBalance;
-	userOrders: IUserOrder[];
+	orderHistory: IUserOrder[];
 	orderBook: IOrderBookSnapshot;
-	subscribe: (pair: string) => any;
-	unsubscribe: () => any;
+	subscribe: (account: string, pair: string) => any;
+	unsubscribe: (account: string) => any;
 	connection: boolean;
 }
 
 interface IState {
+	account: string;
 	pair: string;
 }
 
@@ -32,19 +33,21 @@ export default class Dex extends React.Component<IProps> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			account: props.account,
 			pair: props.pair
 		};
 	}
 
 	public componentDidMount() {
-		this.props.subscribe(this.props.pair);
+		this.props.subscribe(this.props.account, this.props.pair);
 	}
 
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
-		if (props.pair !== state.pair) {
-			props.unsubscribe();
-			props.subscribe(props.pair);
+		if (props.account !== state.account || props.pair !== state.pair) {
+			props.unsubscribe(state.account);
+			props.subscribe(props.account, props.pair);
 			return {
+				account: props.account,
 				pair: props.pair
 			};
 		}
@@ -54,7 +57,7 @@ export default class Dex extends React.Component<IProps> {
 
 	public render() {
 		const {
-			userOrders,
+			orderHistory,
 			locale,
 			orderBook,
 			account,
@@ -68,7 +71,7 @@ export default class Dex extends React.Component<IProps> {
 					<Header />
 					<Spin spinning={!this.props.connection} tip="loading...">
 						<SDivFlexCenter key={1} center horizontal>
-							<OrderHistoryCard userOrders={userOrders} locale={locale} />
+							<OrderHistoryCard orderHistory={orderHistory} locale={locale} />
 							<Affix offsetTop={10}>
 								<OrderCard
 									account={account}
