@@ -1,5 +1,4 @@
 import WebSocket from 'isomorphic-ws';
-import dynamoUtil from '../../../../israfel-relayer/src/utils/dynamoUtil';
 import * as CST from './constants';
 import {
 	IOrderBookSnapshot,
@@ -42,31 +41,7 @@ class WsUtil {
 	}
 
 	public async connectToRelayer() {
-		const status = await dynamoUtil.scanStatus();
-		const now = util.getUTCNowTimestamp();
-		const relayerStatus = status.filter(
-			s => s.tool === CST.DB_RELAYER && now - s.updatedAt < 60000
-		);
-		if (!relayerStatus.length) {
-			this.handleConfigError('no relayer status');
-			return;
-		}
-		let hostname = '';
-		let clientCount = Number.MAX_SAFE_INTEGER;
-		relayerStatus.forEach(r => {
-			if (!r.count || r.count < clientCount) {
-				clientCount = r.count || 0;
-				hostname = r.hostname;
-			}
-		});
-
-		const relayerServices = await dynamoUtil.getServices(CST.DB_RELAYER);
-		const relayerService = relayerServices.find(r => r.hostname === hostname);
-		if (!relayerService) {
-			this.handleConfigError('no relayer config');
-			return;
-		}
-		this.ws = new WebSocket(relayerService.url);
+		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
 		this.ws.onopen = () => this.handleConnected();
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
 		this.ws.onerror = () => {
