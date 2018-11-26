@@ -28,7 +28,7 @@ class WsUtil {
 	private handleReconnect: () => any = () => ({});
 	private handleTokensUpdate: (tokens: IToken[]) => any = () => ({});
 	private handleStatusUpdate: (status: IStatus[]) => any = () => ({});
-	private handleOrderUpdate: (method: string, userOrder: IUserOrder) => any = () => ({});
+	private handleOrderUpdate: (userOrder: IUserOrder) => any = () => ({});
 	private handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any = () => ({});
 	private handleOrderError: (
 		method: string,
@@ -43,9 +43,10 @@ class WsUtil {
 	private reconnect() {
 		if (this.reconnectionNumber < 6) {
 			this.handleReconnect();
-			util.sleep(5000);
-			this.connectToRelayer();
-			this.reconnectionNumber += 1;
+			setTimeout(() => {
+				this.connectToRelayer();
+				this.reconnectionNumber++;
+			}, 5000)
 		} else alert('We have tried 6 times. Please try again later');
 	}
 
@@ -69,11 +70,7 @@ class WsUtil {
 				orderResponse.orderHash,
 				orderResponse.status
 			);
-		else
-			this.handleOrderUpdate(
-				orderResponse.method,
-				(orderResponse as IWsUserOrderResponse).userOrder
-			);
+		else this.handleOrderUpdate((orderResponse as IWsUserOrderResponse).userOrder);
 	}
 
 	private handleOrderBookResponse(orderBookResponse: IWsResponse) {
@@ -226,7 +223,7 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public onOrderUpdate(handleOrderUpdate: (method: string, userOrder: IUserOrder) => any) {
+	public onOrderUpdate(handleOrderUpdate: (userOrder: IUserOrder) => any) {
 		this.handleOrderUpdate = handleOrderUpdate;
 	}
 

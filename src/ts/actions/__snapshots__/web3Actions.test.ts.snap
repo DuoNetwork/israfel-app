@@ -83,3 +83,24 @@ Object {
   "value": 123,
 }
 `;
+
+exports[`actions refresh 1`] = `
+Array [
+  Object {
+    "type": "network",
+    "value": 123,
+  },
+  Object {
+    "type": "account",
+    "value": "0x0",
+  },
+  Object {
+    "type": "ethBalance",
+    "value": Object {
+      "allowance": 333,
+      "eth": 111,
+      "weth": 222,
+    },
+  },
+]
+`;

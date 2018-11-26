@@ -58,20 +58,16 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 										<span className="title">{CST.DB_BID.toUpperCase()}</span>
 									</li>
 									{bidArray.length ? (
-										util.range(0, bidArray.length).map((i: any) => (
+										bidArray.map((bid, i) => (
 											<li key={i}>
 												<span className="content">
-													{i < bidArray.length
-														? bidArray[i][1] !== 0
-															? util.formatNumber(bidArray[i][0])
-															: '-'
+													{bid[1] !== 0
+														? util.formatNumber(bidArray[i][0])
 														: '-'}
 												</span>
 												<span className="title">
-													{i < bidArray.length
-														? bidArray[i][0] !== 0
-															? util.formatNumber(bidArray[i][1])
-															: '-'
+													{bid[0] !== 0
+														? util.formatNumber(bidArray[i][1])
 														: '-'}
 												</span>
 											</li>
@@ -89,20 +85,16 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 										<span className="title">{CST.DB_ASK.toUpperCase()}</span>
 									</li>
 									{askArray.length ? (
-										util.range(0, askArray.length).map((i: any) => (
+										askArray.map((ask, i) => (
 											<li key={i}>
 												<span className="title">
-													{i < askArray.length
-														? askArray[i][0] !== 0
-															? util.formatNumber(askArray[i][1])
-															: '-'
+													{ask[0] !== 0
+														? util.formatNumber(askArray[i][1])
 														: '-'}
 												</span>
 												<span className="content">
-													{i < askArray.length
-														? askArray[i][1] !== 0
-															? util.formatNumber(askArray[i][0])
-															: '-'
+													{ask[1] !== 0
+														? util.formatNumber(askArray[i][0])
 														: '-'}
 												</span>
 											</li>

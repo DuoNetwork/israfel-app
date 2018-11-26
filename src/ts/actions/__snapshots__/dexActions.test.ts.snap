@@ -125,6 +125,39 @@ Array [
 ]
 `;
 
+exports[`actions subscribe dummy account 1`] = `
+Array [
+  Object {
+    "account": "0x0000000000000000000000000000000000000000",
+    "pair": "",
+    "type": "orderBookSubscription",
+  },
+  Object {
+    "type": "userSubscription",
+    "value": 0,
+  },
+  Object {
+    "account": "0x0000000000000000000000000000000000000000",
+    "pair": "pair",
+    "type": "orderBookSubscription",
+  },
+  Object {
+    "type": "userSubscription",
+    "value": 123,
+  },
+]
+`;
+
+exports[`actions subscribe dummy account 2`] = `
+Array [
+  Array [
+    "pair",
+  ],
+]
+`;
+
+exports[`actions subscribe dummy account 3`] = `Array []`;
+
 exports[`actions tokenBalanceUpdate 1`] = `
 Object {
   "type": "tokenBalance",

@@ -32,11 +32,6 @@ class Util {
 		return +(Math.floor((num + 'e+8') as any) + 'e-8');
 	}
 
-	public range(start: number, end: number) {
-		const subArray = Array.apply(null, { length: end }).map(Number.call, Number);
-		return subArray.slice(start, end);
-	}
-
 	public formatBalance(num: number) {
 		if (Math.abs(num) < 1e-8) return '0.000';
 		return d3
@@ -53,12 +48,6 @@ class Util {
 			.format(',.4s')(num)
 			.toUpperCase()
 			.replace(/G/g, 'B');
-	}
-
-	public sleep(ms: number) {
-		return new Promise(resolve => {
-			setTimeout(resolve, ms);
-		});
 	}
 }
 

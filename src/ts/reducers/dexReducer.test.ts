@@ -1,4 +1,5 @@
 import * as CST from 'ts/common/constants';
+import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 import { dexReducer, initialState } from './dexReducer';
 
@@ -21,14 +22,16 @@ describe('dex reducer', () => {
 	test('orderHistory', () => {
 		state = dexReducer(state, {
 			type: CST.AC_ORDER_HISTORY,
-			value: [{
-				userOrders: 'fromList',
-				currentSequence: 123
-			},
-			{
-				userOrders: 'fromList',
-				currentSequence: 456
-			}]
+			value: [
+				{
+					userOrders: 'fromList',
+					currentSequence: 123
+				},
+				{
+					userOrders: 'fromList',
+					currentSequence: 456
+				}
+			]
 		});
 		expect(state).toMatchSnapshot();
 	});
@@ -48,8 +51,8 @@ describe('dex reducer', () => {
 				balance: 123,
 				allowance: 456
 			}
-		})
-	})
+		});
+	});
 
 	test('userSubscription off', () => {
 		window.clearInterval = jest.fn();
@@ -61,10 +64,21 @@ describe('dex reducer', () => {
 		expect((window.clearInterval as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
+	test('userSubscription off again', () => {
+		window.clearInterval = jest.fn();
+		state = dexReducer(state, {
+			type: CST.AC_USER_SUB,
+			value: 0
+		});
+		expect(state).toMatchSnapshot();
+		expect(window.clearInterval as jest.Mock).not.toBeCalled();
+	});
+
 	test('orderBookSubscription on', () => {
 		state = dexReducer(state, {
 			type: CST.AC_OB_SUB,
-			value: 'pair'
+			account: 'account',
+			pair: 'pair'
 		});
 		expect(state).toMatchSnapshot();
 	});
@@ -86,7 +100,7 @@ describe('dex reducer', () => {
 		state = dexReducer(state, {
 			type: CST.AC_OB_SNAPSHOT,
 			value: {
-				pair: 'test',
+				pair: 'test'
 			}
 		});
 		expect(state).toMatchSnapshot();
@@ -100,7 +114,7 @@ describe('dex reducer', () => {
 		state = dexReducer(state, {
 			type: CST.AC_OB_UPDATE,
 			value: {
-				pair: 'pair',
+				pair: 'pair'
 			}
 		});
 		expect(state).toMatchSnapshot();
@@ -120,10 +134,28 @@ describe('dex reducer', () => {
 	});
 
 	test('orderBookSubscription off', () => {
+		wsUtil.unsubscribeOrderBook = jest.fn();
+		wsUtil.unsubscribeOrderHistory = jest.fn();
 		state = dexReducer(state, {
 			type: CST.AC_OB_SUB,
-			value: ''
+			account: 'account',
+			pair: ''
 		});
 		expect(state).toMatchSnapshot();
+		expect((wsUtil.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((wsUtil.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
+	});
+
+	test('orderBookSubscription off again', () => {
+		wsUtil.unsubscribeOrderBook = jest.fn();
+		wsUtil.unsubscribeOrderHistory = jest.fn();
+		state = dexReducer(state, {
+			type: CST.AC_OB_SUB,
+			account: 'account',
+			pair: ''
+		});
+		expect(state).toMatchSnapshot();
+		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
+		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
 	});
 });

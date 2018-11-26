@@ -100,4 +100,24 @@ describe('actions', () => {
 			}, 0)
 		);
 	});
+
+	test('refresh', () => {
+		const store: any = mockStore({
+			web3: {
+				account: '0xAccount'
+			}
+		});
+		web3Util.getCurrentNetwork = jest.fn(() => Promise.resolve(123));
+		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
+		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
+		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
+		web3Util.getCurrentAddress = jest.fn(() => Promise.resolve('0x0'));
+		store.dispatch(web3Actions.refresh());
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions()).toMatchSnapshot();
+				resolve();
+			}, 0)
+		);
+	});
 });

@@ -24,26 +24,22 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 store.dispatch(web3Actions.refresh());
 setInterval(() => store.dispatch(web3Actions.refresh()), 60000);
 
-wsUtil.onOrderUpdate((method, userOrder) => {
-	store.dispatch(dexActions.orderUpdate(userOrder));
-	console.log(method);
-});
-wsUtil.onOrderHistoryUpdate((userOrders) => {
-	store.dispatch(dexActions.orderHistoryUpdate(userOrders));
-});
-wsUtil.onOrderBookSnapshot(orderBookSnapshot => {
-	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot));
-});
-wsUtil.onOrderBookUpdate(orderBookUpdate => {
-	store.dispatch(dexActions.orderBookUpdate(orderBookUpdate));
-});
+wsUtil.onOrderUpdate(userOrder => store.dispatch(dexActions.orderUpdate(userOrder)));
+wsUtil.onOrderHistoryUpdate(userOrders =>
+	store.dispatch(dexActions.orderHistoryUpdate(userOrders))
+);
+wsUtil.onOrderBookSnapshot(orderBookSnapshot =>
+	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot))
+);
+wsUtil.onOrderBookUpdate(orderBookUpdate =>
+	store.dispatch(dexActions.orderBookUpdate(orderBookUpdate))
+);
 
 wsUtil.onConfigError(text => alert(text));
-wsUtil.onReconnect(() => {
-	store.dispatch(wsActions.connectionUpdate(false));
-});
+wsUtil.onReconnect(() => store.dispatch(wsActions.connectionUpdate(false)));
 wsUtil.onTokensUpdate(tokens => store.dispatch(wsActions.tokensUpdate(tokens)));
 wsUtil.onStatusUpdate(status => store.dispatch(wsActions.statusUpdate(status)));
+
 wsUtil.onConnected(() => {
 	store.dispatch(wsActions.connectionUpdate(true));
 	ReactDOM.render(

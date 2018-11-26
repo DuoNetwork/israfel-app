@@ -33,15 +33,13 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 			});
 		case CST.AC_ORDER:
 			const newOrder: IUserOrder = action.value;
-			if (
-				state.orderHistory.findIndex(
-					element => element.currentSequence === newOrder.currentSequence
-				) !== -1
-			)
-				return state;
-
 			return Object.assign({}, state, {
-				orderHistory: [...state.orderHistory, newOrder]
+				orderHistory: [
+					...state.orderHistory.filter(
+						o => o.currentSequence !== newOrder.currentSequence
+					),
+					newOrder
+				]
 			});
 		case CST.AC_OB_SNAPSHOT:
 			if (state.orderBookSubscription === action.value.pair)
