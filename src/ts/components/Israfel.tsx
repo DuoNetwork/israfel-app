@@ -12,8 +12,7 @@ interface IProps {
 export default class Israfel extends React.Component<IProps> {
 	public render() {
 		return (
-			<div>
-				<Switch>
+			<Switch>
 					<Route path={'/status'} render={() => <Status />} />
 					{this.props.tokens.map(token => (
 						<Route
@@ -28,7 +27,6 @@ export default class Israfel extends React.Component<IProps> {
 						<Route render={() => <Loading />} />
 					)}
 				</Switch>
-			</div>
 		);
 	}
 }
