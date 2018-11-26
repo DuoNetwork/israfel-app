@@ -34,11 +34,15 @@ class WsUtil {
 	private handleOrderBookSnapshot: (orderBookSnapshot: IOrderBookSnapshot) => any = () => ({});
 	private handleOrderBookUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any = () => ({});
 	private handleOrderBookError: (method: string, pair: string, error: string) => any = () => ({});
+	public reconnectionNumber: number = 0;
 
 	private reconnect() {
-		this.handleReconnect();
-		util.sleep(5000);
-		this.connectToRelayer();
+		if (this.reconnectionNumber < 6) {
+			this.handleReconnect();
+			util.sleep(5000);
+			this.connectToRelayer();
+			this.reconnectionNumber += 1;
+		} else alert('We have tried 6 times. Please try again later');
 	}
 
 	public async connectToRelayer() {
@@ -66,7 +70,7 @@ class WsUtil {
 			this.handleConfigError('no relayer config');
 			return;
 		}
-		this.ws = new WebSocket(relayerService.url);
+		this.ws = new WebSocket('wss://relayer.dev.israfel.info:8080');
 		this.ws.onopen = () => this.handleConnected();
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
 		this.ws.onerror = () => {

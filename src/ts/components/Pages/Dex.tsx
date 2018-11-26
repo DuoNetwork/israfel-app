@@ -65,47 +65,46 @@ export default class Dex extends React.Component<IProps> {
 			<Layout>
 				<div className="App">
 					<Header />
-					{this.props.connection ? (
-						[
-							<SDivFlexCenter key={1} center horizontal>
-								<OrderHistoryCard userOrders={userOrders} locale={locale} />
-								<Affix offsetTop={10}>
-									<OrderCard
-										account={account}
-										pair={pair}
-										ethBalance={ethBalance}
-										tokenBalance={tokenBalance}
-									/>
-								</Affix>
-							</SDivFlexCenter>,
-							<SDivFlexCenter key={2} center horizontal>
-								<Affix offsetTop={10}>
-									<WrapEtherCard />
-								</Affix>
-								<Affix offsetTop={10}>
-									<OrderBookCard OrderBookSnapshot={orderBook} />
-								</Affix>
-							</SDivFlexCenter>,
-							<div key={3} style={{ color: 'white' }}>
-								<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
-							</div>,
-							<div key={4} style={{ color: 'white' }}>
-								<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
-							</div>,
-							<div key={5} style={{ color: 'white' }}>
-								<button
-									onClick={() =>
-										web3Util.web3PersonalSign(account, '0xOrderHash')
-											.then(result => console.log(result))
-									}
-								>
-									Sign
-								</button>
-							</div>
-						]
-					) : (
-						<Spin />
-					)}
+					<Spin spinning={!this.props.connection} tip="loading...">
+						<SDivFlexCenter key={1} center horizontal>
+							<OrderHistoryCard userOrders={userOrders} locale={locale} />
+							<Affix offsetTop={10}>
+								<OrderCard
+									account={account}
+									pair={pair}
+									ethBalance={ethBalance}
+									tokenBalance={tokenBalance}
+								/>
+							</Affix>
+						</SDivFlexCenter>
+						<SDivFlexCenter key={2} center horizontal>
+							<Affix offsetTop={10}>
+								<WrapEtherCard />
+							</Affix>
+							<Affix offsetTop={10}>
+								<OrderBookCard OrderBookSnapshot={orderBook} />
+							</Affix>
+						</SDivFlexCenter>
+						<div key={3} style={{ color: 'white' }}>
+							<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
+						</div>
+						,
+						<div key={4} style={{ color: 'white' }}>
+							<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
+						</div>
+						,
+						<div key={5} style={{ color: 'white' }}>
+							<button
+								onClick={() =>
+									web3Util
+										.web3PersonalSign(account, '0xOrderHash')
+										.then(result => console.log(result))
+								}
+							>
+								Sign
+							</button>
+						</div>
+					</Spin>
 				</div>
 			</Layout>
 		);
