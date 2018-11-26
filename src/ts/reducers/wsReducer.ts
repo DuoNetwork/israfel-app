@@ -11,10 +11,13 @@ export const initialState: IWsState = {
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
 	switch (action.type) {
 		case CST.AC_CONNECTION:
-		case CST.AC_TOKENS:
-		case CST.AC_STATUS:
 			return Object.assign({}, state, {
-				[action.type]: action.value
+				connection: action.value
+			});
+		case CST.AC_INFO:
+			return Object.assign({}, state, {
+				tokens: action.tokens,
+				status: action.status
 			});
 		default:
 			return state;

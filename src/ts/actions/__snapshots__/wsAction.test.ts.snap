@@ -7,20 +7,14 @@ Object {
 }
 `;
 
-exports[`actions statusUpdate 1`] = `
+exports[`actions infoUpdate 1`] = `
 Object {
-  "type": "status",
-  "value": Array [
+  "status": Array [
     "status1",
   ],
-}
-`;
-
-exports[`actions tokensUpdate 1`] = `
-Object {
-  "type": "tokens",
-  "value": Array [
+  "tokens": Array [
     "token1",
   ],
+  "type": "info",
 }
 `;

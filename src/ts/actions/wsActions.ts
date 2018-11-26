@@ -8,16 +8,10 @@ export function connectionUpdate(connected: boolean) {
 	};
 }
 
-export function tokensUpdate(tokens: IToken[]) {
+export function infoUpdate(tokens: IToken[], status: IStatus[]) {
 	return {
-		type: CST.AC_TOKENS,
-		value: tokens
-	};
-}
-
-export function statusUpdate(status: IStatus[]) {
-	return {
-		type: CST.AC_STATUS,
-		value: status
+		type: CST.AC_INFO,
+		tokens: tokens,
+		status: status
 	};
 }

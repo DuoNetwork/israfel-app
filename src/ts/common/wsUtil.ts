@@ -23,11 +23,9 @@ import web3Util from './web3Util';
 
 class WsUtil {
 	public ws: WebSocket | null = null;
-	private handleConfigError: (text: string) => any = () => ({});
 	private handleConnected: () => any = () => ({});
 	private handleReconnect: () => any = () => ({});
-	private handleTokensUpdate: (tokens: IToken[]) => any = () => ({});
-	private handleStatusUpdate: (status: IStatus[]) => any = () => ({});
+	private handleInfoUpdate: (tokens: IToken[], status: IStatus[]) => any = () => ({});
 	private handleOrderUpdate: (userOrder: IUserOrder) => any = () => ({});
 	private handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any = () => ({});
 	private handleOrderError: (
@@ -41,39 +39,37 @@ class WsUtil {
 	public reconnectionNumber: number = 0;
 
 	private reconnect() {
+		this.ws = null;
 		if (this.reconnectionNumber < 6) {
 			this.handleReconnect();
 			setTimeout(() => {
 				this.connectToRelayer();
 				this.reconnectionNumber++;
-			}, 5000)
+			}, 5000);
 		} else alert('We have tried 6 times. Please try again later');
 	}
 
-	public async connectToRelayer() {
+	public connectToRelayer() {
 		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
 		this.ws.onopen = () => this.handleConnected();
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
-		this.ws.onerror = () => {
-			this.reconnect();
-		};
-		this.ws.onclose = () => {
-			this.reconnect();
-		};
+		this.ws.onerror = () => this.reconnect();
+		this.ws.onclose = () => this.reconnect();
 	}
 
-	private handleOrderResponse(orderResponse: IWsOrderResponse) {
-		console.log(orderResponse);
-		if (orderResponse.status !== CST.WS_OK)
+	public handleOrderResponse(response: IWsResponse) {
+		if (response.status !== CST.WS_OK)
 			this.handleOrderError(
-				orderResponse.method,
-				orderResponse.orderHash,
-				orderResponse.status
+				response.method,
+				(response as IWsOrderResponse).orderHash,
+				response.status
 			);
-		else this.handleOrderUpdate((orderResponse as IWsUserOrderResponse).userOrder);
+		else if (response.method === CST.WS_HISTORY)
+			this.handleOrderHistoryUpdate((response as IWsOrderHistoryResponse).orderHistory);
+		else this.handleOrderUpdate((response as IWsUserOrderResponse).userOrder);
 	}
 
-	private handleOrderBookResponse(orderBookResponse: IWsResponse) {
+	public handleOrderBookResponse(orderBookResponse: IWsResponse) {
 		if (orderBookResponse.status !== CST.WS_OK)
 			this.handleOrderBookError(
 				orderBookResponse.method,
@@ -92,7 +88,6 @@ class WsUtil {
 
 	public handleMessage(message: string) {
 		const res: IWsResponse = JSON.parse(message);
-		console.log(res);
 		if (res.method !== CST.WS_UNSUB)
 			switch (res.channel) {
 				case CST.DB_ORDERS:
@@ -104,22 +99,15 @@ class WsUtil {
 				case CST.WS_INFO:
 					const { tokens, processStatus } = res as IWsInfoResponse;
 					web3Util.setTokens(tokens);
-					this.handleTokensUpdate(tokens);
-					this.handleStatusUpdate(processStatus);
-					break;
-				case CST.WS_ORDER_HISTORY:
-					this.handleOrderHistoryUpdate((res as IWsOrderHistoryResponse).orderHistory);
+					this.handleInfoUpdate(tokens, processStatus);
 					break;
 				default:
 					break;
 			}
 	}
 
-	public async subscribeOrderBook(pair: string) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+	public subscribeOrderBook(pair: string) {
+		if (!this.ws) return;
 
 		const msg: IWsRequest = {
 			method: CST.WS_SUB,
@@ -129,11 +117,8 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async unsubscribeOrderBook(pair: string) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+	public unsubscribeOrderBook(pair: string) {
+		if (!this.ws) return;
 
 		const msg: IWsRequest = {
 			method: CST.WS_UNSUB,
@@ -143,30 +128,26 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async subscribeOrderHistory(account: string, pair: string) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+	public subscribeOrderHistory(account: string, pair: string) {
+		if (!this.ws) return;
+
+		if (!web3Util.isValidAddress(account)) return;
 
 		const msg: IWsOrderHistoryRequest = {
 			method: CST.WS_SUB,
-			channel: CST.WS_ORDER_HISTORY,
+			channel: CST.DB_ORDERS,
 			pair: pair,
 			account: account
 		};
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async unsubscribeOrderHistory(account: string, pair: string) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+	public unsubscribeOrderHistory(account: string, pair: string) {
+		if (!this.ws) return;
 
 		const msg: IWsOrderHistoryRequest = {
 			method: CST.WS_UNSUB,
-			channel: CST.WS_ORDER_HISTORY,
+			channel: CST.DB_ORDERS,
 			pair: pair,
 			account: account
 		};
@@ -181,10 +162,7 @@ class WsUtil {
 		isBid: boolean,
 		secondsToLive: number
 	) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+		if (!this.ws) return;
 		const [code1, code2] = pair.split('|');
 		const address1 = web3Util.getTokenAddressFromCode(code1);
 		const address2 = web3Util.getTokenAddressFromCode(code2);
@@ -209,11 +187,9 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public async deleteOrder(pair: string, orderHash: string) {
-		if (!this.ws) {
-			this.handleConfigError('not connected');
-			return;
-		}
+	public deleteOrder(pair: string, orderHash: string) {
+		if (!this.ws) return;
+
 		const msg: IWsOrderRequest = {
 			method: CST.DB_TERMINATE,
 			channel: CST.DB_ORDERS,
@@ -223,58 +199,33 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public onOrderUpdate(handleOrderUpdate: (userOrder: IUserOrder) => any) {
-		this.handleOrderUpdate = handleOrderUpdate;
-	}
-
-	public onOrderHistoryUpdate(handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any) {
-		this.handleOrderHistoryUpdate = handleOrderHistoryUpdate;
-	}
-
-	public onOrderError(
-		handleOrderError: (method: string, orderHash: string, error: string) => any
+	public onOrder(
+		handleHistory: (userOrders: IUserOrder[]) => any,
+		handleUpdate: (userOrder: IUserOrder) => any,
+		handleError: (method: string, orderHash: string, error: string) => any
 	) {
-		this.handleOrderError = handleOrderError;
+		this.handleOrderHistoryUpdate = handleHistory;
+		this.handleOrderUpdate = handleUpdate;
+		this.handleOrderError = handleError;
 	}
 
-	public onOrderBookSnapshot(
-		handleOrderBookSnapshot: (orderBookSnapshot: IOrderBookSnapshot) => any
+	public onOrderBook(
+		handleSnapshot: (orderBookSnapshot: IOrderBookSnapshot) => any,
+		handleUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any,
+		handleError: (method: string, pair: string, error: string) => any
 	) {
-		this.handleOrderBookSnapshot = handleOrderBookSnapshot;
+		this.handleOrderBookSnapshot = handleSnapshot;
+		this.handleOrderBookUpdate = handleUpdate;
+		this.handleOrderBookError = handleError;
 	}
 
-	public onOrderBookUpdate(
-		handleOrderBookUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any
-	) {
-		this.handleOrderBookUpdate = handleOrderBookUpdate;
-	}
-
-	public onOrderBookError(
-		handleOrderBookError: (method: string, pair: string, error: string) => any
-	) {
-		this.handleOrderBookError = handleOrderBookError;
-	}
-
-	public onReconnect(handleReconnect: () => any) {
-		this.reconnectionNumber = 0;
+	public onConnection(handleConnected: () => any, handleReconnect: () => any) {
+		this.handleConnected = handleConnected;
 		this.handleReconnect = handleReconnect;
 	}
 
-	public onConnected(handleConnected: () => any) {
-		this.reconnectionNumber = 0;
-		this.handleConnected = handleConnected;
-	}
-
-	public onTokensUpdate(handleTokensUpdate: (tokens: IToken[]) => any) {
-		this.handleTokensUpdate = handleTokensUpdate;
-	}
-
-	public onStatusUpdate(handleStatusUpdate: (status: IStatus[]) => any) {
-		this.handleStatusUpdate = handleStatusUpdate;
-	}
-
-	public onConfigError(handleConfigError: (text: string) => any) {
-		this.handleConfigError = handleConfigError;
+	public onInfoUpdate(handleInfoUpdate: (tokens: IToken[], status: IStatus[]) => any) {
+		this.handleInfoUpdate = handleInfoUpdate;
 	}
 }
 

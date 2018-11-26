@@ -22,35 +22,33 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 });
 
 store.dispatch(web3Actions.refresh());
-setInterval(() => store.dispatch(web3Actions.refresh()), 60000);
+setInterval(() => store.dispatch(web3Actions.refresh()), 15000);
 
-wsUtil.onOrderUpdate(userOrder => store.dispatch(dexActions.orderUpdate(userOrder)));
-wsUtil.onOrderHistoryUpdate(userOrders =>
-	store.dispatch(dexActions.orderHistoryUpdate(userOrders))
+wsUtil.onInfoUpdate((tokens, status) => store.dispatch(wsActions.infoUpdate(tokens, status)));
+wsUtil.onOrder(
+	userOrders => store.dispatch(dexActions.orderHistoryUpdate(userOrders)),
+	userOrder => store.dispatch(dexActions.orderUpdate(userOrder)),
+	(method, orderHash, error) => alert(method + orderHash + error)
 );
-wsUtil.onOrderBookSnapshot(orderBookSnapshot =>
-	store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot))
-);
-wsUtil.onOrderBookUpdate(orderBookUpdate =>
-	store.dispatch(dexActions.orderBookUpdate(orderBookUpdate))
+wsUtil.onOrderBook(
+	orderBookSnapshot => store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot)),
+	orderBookUpdate => store.dispatch(dexActions.orderBookUpdate(orderBookUpdate)),
+	(method, pair, error) => alert(method + pair + error)
 );
 
-wsUtil.onConfigError(text => alert(text));
-wsUtil.onReconnect(() => store.dispatch(wsActions.connectionUpdate(false)));
-wsUtil.onTokensUpdate(tokens => store.dispatch(wsActions.tokensUpdate(tokens)));
-wsUtil.onStatusUpdate(status => store.dispatch(wsActions.statusUpdate(status)));
+wsUtil.onConnection(
+	() => store.dispatch(wsActions.connectionUpdate(true)),
+	() => store.dispatch(wsActions.connectionUpdate(false))
+);
 
-wsUtil.onConnected(() => {
-	store.dispatch(wsActions.connectionUpdate(true));
-	ReactDOM.render(
-		<Provider store={store}>
-			<Router>
-				<React.StrictMode>
-					<Israfel />
-				</React.StrictMode>
-			</Router>
-		</Provider>,
-		document.getElementById('app')
-	);
-});
 wsUtil.connectToRelayer();
+ReactDOM.render(
+	<Provider store={store}>
+		<Router>
+			<React.StrictMode>
+				<Israfel />
+			</React.StrictMode>
+		</Router>
+	</Provider>,
+	document.getElementById('app')
+);

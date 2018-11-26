@@ -9,11 +9,7 @@ describe('actions', () => {
 		expect(wsActions.connectionUpdate(true)).toMatchSnapshot();
 	});
 
-	test('tokensUpdate', () => {
-		expect(wsActions.tokensUpdate(['token1'] as any)).toMatchSnapshot();
-	});
-
-	test('statusUpdate', () => {
-		expect(wsActions.statusUpdate(['status1'] as any)).toMatchSnapshot();
+	test('infoUpdate', () => {
+		expect(wsActions.infoUpdate(['token1'] as any, ['status1'] as any)).toMatchSnapshot();
 	});
 });
