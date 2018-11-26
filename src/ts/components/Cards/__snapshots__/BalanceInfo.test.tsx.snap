@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BalanceInfo Test Test Snapshot Test Snapshot 1`] = `
+<styled.div>
+  <div
+    className="bg-logo"
+  >
+    <img
+      src="test"
+    />
+  </div>
+  <div
+    className="tag-title"
+  >
+    <h3>
+      123
+    </h3>
+  </div>
+  <div
+    className="tag-content"
+  >
+    <div>
+      <div>
+        <div
+          className="tag-price"
+        >
+          123.0
+        </div>
+      </div>
+    </div>
+  </div>
+</styled.div>
+`;
+
+exports[`BalanceInfo Test Test Snapshot Test Snapshot 2`] = `
+<styled.div>
+  <div
+    className="bg-logo"
+  >
+    <img
+      src="test"
+    />
+  </div>
+  <div
+    className="tag-title"
+  >
+    <h3>
+      123
+    </h3>
+  </div>
+  <div
+    className="tag-content"
+  >
+    <div>
+      <div>
+        <div
+          className="tag-price"
+        >
+          123.0
+        </div>
+      </div>
+    </div>
+  </div>
+</styled.div>
+`;
+
+exports[`BalanceInfo Test Test Snapshot Test Snapshot 3`] = `
+<styled.div>
+  <div
+    className="bg-logo"
+  >
+    <img
+      src="test"
+    />
+  </div>
+  <div
+    className="tag-title"
+  >
+    <h3>
+      123
+    </h3>
+  </div>
+  <div
+    className="tag-content"
+  >
+    <div>
+      <div>
+        <div
+          className="tag-price"
+        >
+          123.0
+        </div>
+      </div>
+    </div>
+  </div>
+</styled.div>
+`;

@@ -775,6 +775,16 @@ injectGlobal([
 			border-radius: 0;
 			color: rgba(255,255,255,.4);
 		}
+		.QjPQt {
+			height: 100px;
+			width: 32%;
+			position: relative;
+			margin-top: 10px;
+			border: 1px dashed;
+			border-color: rgba(255,255,255,.1);
+			overflow: hidden;
+			padding-top: 10px;
+		}
 	}
 `
 ] as any);

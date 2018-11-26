@@ -5,6 +5,7 @@ import { IEthBalance, IOrderBookSnapshot, ITokenBalance, IUserOrder } from 'ts/c
 import web3Util from 'ts/common/web3Util';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
+import BalanceCard from '../Cards/BalanceCard';
 import OrderBookCard from '../Cards/OrderBookCard';
 import OrderCard from '../Cards/OrderCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
@@ -85,15 +86,12 @@ export default class Dex extends React.Component<IProps> {
 								<OrderBookCard OrderBookSnapshot={orderBook} />
 							</Affix>
 						</SDivFlexCenter>
-						<div key={3} style={{ color: 'white' }}>
-							<pre>{JSON.stringify(ethBalance, null, 4)}</pre>
-						</div>
-						,
+						<SDivFlexCenter key={3} center horizontal>
+							<Affix offsetTop={10}>
+								<BalanceCard eth={ethBalance} tokenBalance={tokenBalance} />
+							</Affix>
+						</SDivFlexCenter>
 						<div key={4} style={{ color: 'white' }}>
-							<pre>{JSON.stringify(tokenBalance, null, 4)}</pre>
-						</div>
-						,
-						<div key={5} style={{ color: 'white' }}>
 							<button
 								onClick={() =>
 									web3Util
