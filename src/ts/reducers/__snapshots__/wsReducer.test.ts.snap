@@ -19,15 +19,11 @@ Object {
 exports[`ws reducer status 1`] = `
 Object {
   "connection": true,
-  "status": Array [],
-  "tokens": Array [],
-}
-`;
-
-exports[`ws reducer tokens 1`] = `
-Object {
-  "connection": true,
-  "status": Array [],
-  "tokens": Array [],
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    "token1",
+  ],
 }
 `;

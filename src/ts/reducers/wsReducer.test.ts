@@ -17,18 +17,11 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('tokens', () => {
-		state = wsReducer(state, {
-			type: CST.AC_TOKENS,
-			value: ['token1']
-		});
-		expect(state).toMatchSnapshot();
-	});
-
 	test('status', () => {
 		state = wsReducer(state, {
-			type: CST.AC_STATUS,
-			value: ['status1']
+			type: CST.AC_INFO,
+			tokens: ['token1'],
+			status: ['status1']
 		});
 		expect(state).toMatchSnapshot();
 	});
