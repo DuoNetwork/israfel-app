@@ -1,6 +1,7 @@
 import { Layout, Spin } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
+import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, ITokenBalance, IUserOrder } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 import Header from 'ts/containers/HeaderContainer';
@@ -98,7 +99,7 @@ export default class Dex extends React.Component<IProps> {
 							<button
 								onClick={() =>
 									web3Util
-										.web3PersonalSign(account, '0xOrderHash')
+										.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG)
 										.then(result => console.log(result))
 								}
 							>
