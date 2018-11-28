@@ -1,8 +1,8 @@
 import * as CST from 'ts/common/constants';
+import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 import util from './util';
 import web3Util from './web3Util';
 import wsUtil from './wsUtil';
-import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 
 test('handleOrderResponse ok', () => {
 	const handleUpdate = jest.fn();
