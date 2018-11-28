@@ -60,6 +60,11 @@ module.exports = {
 					name: 'bn',
 					priority: 100
 				},
+				immutable: {
+					test: /[\\/]node_modules[\\/]immutable/,
+					name: 'immutable',
+					priority: 100
+				},
 				moment: {
 					test: /[\\/]node_modules[\\/]moment/,
 					name: 'moment',
@@ -154,7 +159,13 @@ module.exports = {
 		]
 	},
 	resolve: {
-		modules: [path.join(__dirname, 'src'), 'node_modules', path.join(__dirname, "..", "israfel-relayer","node_modules")],
+		alias: {
+			moment: path.resolve('./node_modules/moment'),
+			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
+			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
+			immutable: path.resolve('./node_modules/immutable'),
+		},
+		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
 	}
 };

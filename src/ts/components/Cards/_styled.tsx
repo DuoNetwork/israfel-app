@@ -62,6 +62,22 @@ injectGlobal([
 			padding: 0px 4px;
 			border: none;
 		}
+		.ant-table-header {
+			margin-bottom: 0px;
+			opacity: 0.9999;
+			overflow: hidden;
+			background: transparent;
+		}
+		.ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
+			position: relative;
+			background: transparent;
+		}
+		.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+			overflow: none;
+			padding-bottom: 20px;
+			margin-bottom: 0px;
+			opacity: 0.9999;
+		}
 	}
 `
 ] as any);
@@ -133,6 +149,12 @@ injectGlobal([
 			height: 14px;
 			margin-right: 2px;
 		}
+	}
+	.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+		overflow: none;
+		padding-bottom: 20px;
+		margin-bottom: 0px;
+		opacity: 0.9999;
 	}
 `
 ] as any);
@@ -584,6 +606,7 @@ export const SCardList = styled.div`
 		}
 	}
 `;
+
 export interface ICardListProgressBarProps {
 	index: number;
 	total: number;

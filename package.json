@@ -11,8 +11,8 @@
 		"start": "webpack-dev-server --config webpack.config.dev.js",
 		"prebuild": "rimraf dist",
 		"analyze": "webpack-bundle-analyzer dist/kovan/stats.json",
-		"rebuild": "webpack --config webpack.config.kovan.js --json > result.json",
-		"rebuildLive": "webpack --config webpack.config.prod.js --json",
+		"rebuild": "webpack --config webpack.config.kovan.js --json > webpack.json",
+		"rebuildLive": "webpack --config webpack.config.prod.js --json > webpack.json",
 		"build": "npm run clean && npm run rebuild && npm run analyze",
 		"buildLive": "npm run clean && npm run rebuildLive && npm run analyze"
 	},
