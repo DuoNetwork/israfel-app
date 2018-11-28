@@ -45,6 +45,11 @@ module.exports = {
 			maxInitialRequests: Infinity,
 			minSize: 0,
 			cacheGroups: {
+				relayer: {
+					test: /israfel-relayer[\\/]node_modules[\\/]/,
+					name: 'relayer',
+					priority: 10
+				},
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
 					name: 'd3',
