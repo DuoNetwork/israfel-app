@@ -246,7 +246,16 @@ test('addOrder bid', async () => {
 		signedOrder: 'signedOrder'
 	}));
 	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
-	await wsUtil.addOrder('account', 'code1|code2', 123, 456, true, 1234567890);
+	await wsUtil.addOrder(
+		'account',
+		'code1|code2',
+		123,
+		456,
+		true,
+		1234567890,
+		{ eth: 10000, weth: 10000, allowance: 10000 },
+		{ balance: 10000, allowance: 10000}
+	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();
@@ -277,7 +286,16 @@ test('addOrder ask', async () => {
 		signedOrder: 'signedOrder'
 	}));
 	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
-	await wsUtil.addOrder('account', 'code1|code2', 123, 456, false, 1234567890);
+	await wsUtil.addOrder(
+		'account',
+		'code1|code2',
+		123,
+		456,
+		false,
+		1234567890,
+		{ eth: 10000, weth: 10000, allowance: 10000 },
+		{ balance: 10000, allowance: 10000}
+	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();

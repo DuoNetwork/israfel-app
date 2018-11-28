@@ -38,9 +38,10 @@ export default class OrderCard extends React.Component<IProps, IState> {
 
 	private handleSubmit = () => {
 		const { account, pair } = this.props;
+		const { ethBalance, tokenBalance } = this.props;
 		const { isBid, price, amount, hoursToLive } = this.state;
 		wsUtil
-			.addOrder(account, pair, Number(price), Number(amount), isBid, hoursToLive * 3600)
+			.addOrder(account, pair, Number(price), Number(amount), isBid, hoursToLive * 3600, ethBalance, tokenBalance)
 			.then(() =>
 				this.setState({
 					price: '',

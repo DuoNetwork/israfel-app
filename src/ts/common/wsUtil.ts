@@ -2,10 +2,12 @@ import WebSocket from 'isomorphic-ws';
 import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 import * as CST from './constants';
 import {
+	IEthBalance,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
 	IStatus,
 	IToken,
+	ITokenBalance,
 	IUserOrder,
 	IWsAddOrderRequest,
 	IWsInfoResponse,
@@ -161,18 +163,42 @@ class WsUtil {
 		price: number,
 		amount: number,
 		isBid: boolean,
-		secondsToLive: number
+		secondsToLive: number,
+		ethBalance: IEthBalance,
+		tokenBalance: ITokenBalance
 	) {
 		if (!this.ws) return;
-		if (!web3Util.isValidPair(pair))
-			throw new Error('Invalid pair');
+		if (!web3Util.isValidPair(pair)) throw new Error('Invalid pair');
 		const [code1, code2] = pair.split('|');
 		const token1 = web3Util.tokens.find(t => t.code === code1);
-		if (!token1)
-			throw new Error('Invalid pair');
+		if (!token1) throw new Error('Invalid pair');
 		const address1 = token1.address;
 		const address2 = web3Util.getTokenAddressFromCode(code2);
-		const amountAfterFee = orderUtil.getAmountAfterFee(amount, price, token1.feeSchedules[code2], isBid);
+		const amountAfterFee = orderUtil.getAmountAfterFee(
+			amount,
+			price,
+			token1.feeSchedules[code2],
+			isBid
+		);
+
+		if (isBid && amountAfterFee.takerAssetAmount < 1)
+			throw new Error('minimum purchase amount should be more than 1');
+		if (!isBid && amountAfterFee.makerAssetAmount < 1)
+			throw new Error('minimum sell amount should be more than 1');
+
+		if (
+			isBid &&
+			(amountAfterFee.makerAssetAmount >= ethBalance.weth ||
+				amountAfterFee.makerAssetAmount >= ethBalance.allowance)
+		)
+			throw new Error('Insufficient weth balance or allowance');
+
+		if (
+			!isBid &&
+			(amountAfterFee.makerAssetAmount >= tokenBalance.balance ||
+				amountAfterFee.makerAssetAmount >= tokenBalance.allowance)
+		)
+			throw new Error('Insufficient token balance or allowance');
 
 		const rawOrder = await web3Util.createRawOrder(
 			account,
