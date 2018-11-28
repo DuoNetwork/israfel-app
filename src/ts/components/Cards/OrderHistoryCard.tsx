@@ -26,6 +26,7 @@ const parseRow: (uo: IUserOrder, isParent: boolean) => any = (
 		[CST.TH_AMT]: uo.amount,
 		[CST.TH_BALANCE]: uo.balance,
 		[CST.TH_FILL]: uo.fill,
+		[CST.TH_FEE]: uo.fee + ' ' + uo.feeAsset,
 		[CST.TH_EXPIRY]: moment(uo.expiry).format('YYYY-MM-DD HH:mm'),
 		[CST.TH_ORDER_HASH]: uo.orderHash
 	};
@@ -70,6 +71,7 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 							CST.TH_AMT,
 							CST.TH_BALANCE,
 							CST.TH_FILL,
+							CST.TH_FEE,
 							CST.TH_EXPIRY
 						].map(c => (
 							<Column key={c} title={c} dataIndex={c} />

@@ -43,6 +43,7 @@ export const TH_AMT = 'Amount';
 export const TH_BALANCE = 'Balance';
 export const TH_FILL = 'Fill';
 export const TH_SIDE = 'Side';
+export const TH_FEE = 'Fee';
 export const TH_STATUS = 'Status';
 export const TH_ACTIONS = 'Actions';
 export const TH_EXPIRY = 'Expiry';
