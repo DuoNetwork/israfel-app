@@ -4,11 +4,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	mode: 'production',
 	entry: {
-		app: path.resolve(__dirname, 'src/ts/live/app.tsx')
+		app: path.resolve(__dirname, 'src/ts/app.tsx')
 	},
 	output: {
 		path: path.join(__dirname, 'dist/kovan'),
@@ -22,12 +23,19 @@ module.exports = {
 			__KOVAN__: true
 		}),
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-		new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
+		new MiniCssExtractPlugin({
+			filename: 'styles.[chunkhash].css'
+		}),
 		new HtmlWebpackPlugin({
 			title: 'DUO | Beethoven',
 			template: path.resolve(__dirname, 'src/index.ejs'),
 			favicon: path.join(__dirname, 'src/images/favicon.ico'),
 			filename: 'index.html'
+		}),
+		new BundleAnalyzerPlugin({
+			analyzerMode: "disabled",
+			reportFilename: "report.html",
+			generateStatsFile: true,
 		})
 	],
 	optimization: {
@@ -40,6 +48,16 @@ module.exports = {
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
 					name: 'd3',
+					priority: 100
+				},
+				ethers: {
+					test: /[\\/]node_modules[\\/]ethers/,
+					name: 'ethers',
+					priority: 100
+				},
+				bn: {
+					test: /[\\/]node_modules[\\/]bn/,
+					name: 'bn',
 					priority: 100
 				},
 				moment: {
@@ -91,8 +109,7 @@ module.exports = {
 		}
 	},
 	module: {
-		rules: [
-			{
+		rules: [{
 				enforce: 'pre',
 				test: /\.tsx?$/,
 				include: path.join(__dirname, 'src'),
@@ -112,19 +129,22 @@ module.exports = {
 				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
-					{ loader: 'less-loader', options: { javascriptEnabled: true } }
+					{
+						loader: 'less-loader',
+						options: {
+							javascriptEnabled: true
+						}
+					}
 				]
 			},
 			{
 				test: /\.(jpg|jpeg|png|gif|svg)(\?.*)?$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 20480
-						}
+				use: [{
+					loader: 'url-loader',
+					options: {
+						limit: 20480
 					}
-				]
+				}]
 			},
 			{
 				test: /\.(xlsm|csv|ico|eot|otf|webp|ttf|ttc|woff|woff2|pdf)(\?.*)?$/,
@@ -134,7 +154,7 @@ module.exports = {
 		]
 	},
 	resolve: {
-		modules: [path.join(__dirname, 'src'), 'node_modules'],
+		modules: [path.join(__dirname, 'src'), 'node_modules', path.join(__dirname, "..", "israfel-relayer","node_modules")],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
 	}
 };
