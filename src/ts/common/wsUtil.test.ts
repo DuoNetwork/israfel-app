@@ -2,6 +2,7 @@ import * as CST from 'ts/common/constants';
 import util from './util';
 import web3Util from './web3Util';
 import wsUtil from './wsUtil';
+import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 
 test('handleOrderResponse ok', () => {
 	const handleUpdate = jest.fn();
@@ -224,6 +225,22 @@ test('addOrder bid', async () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
 	web3Util.getTokenAddressFromCode = jest.fn((code: string) => code + 'address');
+	orderUtil.getAmountAfterFee = jest.fn(() => ({
+		takerAssetAmount: 123,
+		makerAssetAmount: 456
+	}));
+	web3Util.tokens = [
+		{
+			address: 'code1address',
+			code: 'code1',
+			precisions: {
+				code2: 1
+			},
+			feeSchedules: {
+				code2: {}
+			}
+		}
+	] as any;
 	web3Util.createRawOrder = jest.fn(() => ({
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
@@ -231,6 +248,7 @@ test('addOrder bid', async () => {
 	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 	await wsUtil.addOrder('account', 'code1|code2', 123, 456, true, 1234567890);
 	expect(send.mock.calls).toMatchSnapshot();
+	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -238,6 +256,22 @@ test('addOrder ask', async () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
 	web3Util.getTokenAddressFromCode = jest.fn((code: string) => code + 'address');
+	orderUtil.getAmountAfterFee = jest.fn(() => ({
+		takerAssetAmount: 123,
+		makerAssetAmount: 456
+	}));
+	web3Util.tokens = [
+		{
+			address: 'code1address',
+			code: 'code1',
+			precisions: {
+				code2: 1
+			},
+			feeSchedules: {
+				code2: {}
+			}
+		}
+	] as any;
 	web3Util.createRawOrder = jest.fn(() => ({
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
@@ -245,6 +279,7 @@ test('addOrder ask', async () => {
 	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 	await wsUtil.addOrder('account', 'code1|code2', 123, 456, false, 1234567890);
 	expect(send.mock.calls).toMatchSnapshot();
+	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();
 });
 

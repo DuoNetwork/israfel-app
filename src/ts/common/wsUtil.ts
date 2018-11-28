@@ -1,4 +1,5 @@
 import WebSocket from 'isomorphic-ws';
+import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 import * as CST from './constants';
 import {
 	IOrderBookSnapshot,
@@ -163,18 +164,23 @@ class WsUtil {
 		secondsToLive: number
 	) {
 		if (!this.ws) return;
+		if (!web3Util.isValidPair(pair))
+			throw new Error('Invalid pair');
 		const [code1, code2] = pair.split('|');
-		const address1 = web3Util.getTokenAddressFromCode(code1);
+		const token1 = web3Util.tokens.find(t => t.code === code1);
+		if (!token1)
+			throw new Error('Invalid pair');
+		const address1 = token1.address;
 		const address2 = web3Util.getTokenAddressFromCode(code2);
-		const amount2 = util.round(amount * price);
+		const amountAfterFee = orderUtil.getAmountAfterFee(amount, price, token1.feeSchedules[code2], isBid);
 
 		const rawOrder = await web3Util.createRawOrder(
 			account,
 			web3Util.relayerAddress,
 			isBid ? address2 : address1,
 			isBid ? address1 : address2,
-			isBid ? amount2 : amount,
-			isBid ? amount : amount2,
+			amountAfterFee.makerAssetAmount,
+			amountAfterFee.takerAssetAmount,
 			secondsToLive + Math.ceil(util.getUTCNowTimestamp() / 1000)
 		);
 		const msg: IWsAddOrderRequest = {

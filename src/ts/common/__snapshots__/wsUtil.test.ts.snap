@@ -11,12 +11,23 @@ Array [
 exports[`addOrder ask 2`] = `
 Array [
   Array [
+    456,
+    123,
+    Object {},
+    false,
+  ],
+]
+`;
+
+exports[`addOrder ask 3`] = `
+Array [
+  Array [
     "account",
     "0x003519A4aB2C35c59Cb31d9194A45DD3F9Bf9e32",
     "code1address",
     "code2address",
     456,
-    56088,
+    123,
     1235802458,
   ],
 ]
@@ -33,12 +44,23 @@ Array [
 exports[`addOrder bid 2`] = `
 Array [
   Array [
+    456,
+    123,
+    Object {},
+    true,
+  ],
+]
+`;
+
+exports[`addOrder bid 3`] = `
+Array [
+  Array [
     "account",
     "0x003519A4aB2C35c59Cb31d9194A45DD3F9Bf9e32",
     "code2address",
     "code1address",
-    56088,
     456,
+    123,
     1235802458,
   ],
 ]
