@@ -55,6 +55,11 @@ module.exports = {
 					name: 'ethers',
 					priority: 100
 				},
+				'0x': {
+					test: /[\\/]node_modules[\\/]@0x/,
+					name: '0x',
+					priority: 100
+				},
 				bn: {
 					test: /[\\/]node_modules[\\/]bn/,
 					name: 'bn',

@@ -75,6 +75,11 @@ module.exports = {
 					name: 'react',
 					priority: 100
 				},
+				'0x': {
+					test: /[\\/]node_modules[\\/]@0x/,
+					name: '0x',
+					priority: 100
+				},
 				ant: {
 					test: /[\\/]node_modules[\\/]ant/,
 					name: 'antd',
