@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import BalanceInfo from './BalanceInfo';

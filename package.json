@@ -17,9 +17,14 @@
 		"buildLive": "npm run clean && npm run rebuildLive && npm run analyze"
 	},
 	"jest": {
+		"testEnvironment": "node",
 		"globals": {
 			"__DEV__": false,
-			"__KOVAN__": true
+			"__KOVAN__": true,
+			"window": {},
+			"navigator": {
+				"language": "EN"
+			}
 		},
 		"setupFiles": [
 			"<rootDir>/test-setup.js"
