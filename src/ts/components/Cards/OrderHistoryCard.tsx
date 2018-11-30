@@ -48,6 +48,9 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 			let parentRow = parseRow(orderHistory[0], true);
 			for (let i = 1; i < orderHistory.length; i++) {
 				const userOrder = orderHistory[i];
+				console.log(userOrder.orderHash);
+				console.log(parentRow[CST.TH_ORDER_HASH]);
+				console.log(userOrder.orderHash === parentRow[CST.TH_ORDER_HASH]);
 				if (userOrder.orderHash !== parentRow[CST.TH_ORDER_HASH]) {
 					dataSource.push(parentRow);
 					parentRow = parseRow(userOrder, true);
