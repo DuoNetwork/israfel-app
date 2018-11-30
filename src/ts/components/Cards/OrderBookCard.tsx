@@ -35,6 +35,7 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 		const { OrderBookSnapshot } = this.props;
 		askArray = [];
 		bidArray = [];
+		console.log(OrderBookSnapshot);
 		if (OrderBookSnapshot) {
 			const asks = OrderBookSnapshot.asks;
 			const bids = OrderBookSnapshot.bids;
