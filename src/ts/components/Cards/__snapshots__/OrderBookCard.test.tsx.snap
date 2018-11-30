@@ -36,12 +36,12 @@ exports[`OrderBookCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="content"
               >
-                NANUNDEFINED
+                0.000
               </span>
               <span
                 className="title"
               >
-                0.008000
+                -
               </span>
             </li>
             <li
@@ -50,7 +50,7 @@ exports[`OrderBookCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="content"
               >
-                NANUNDEFINED
+                4.00
               </span>
               <span
                 className="title"
@@ -84,7 +84,7 @@ exports[`OrderBookCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="content"
               >
-                NANUNDEFINED
+                30.00
               </span>
             </li>
             <li
@@ -98,7 +98,7 @@ exports[`OrderBookCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="content"
               >
-                NANUNDEFINED
+                4.00
               </span>
             </li>
           </ul>

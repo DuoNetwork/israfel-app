@@ -10,12 +10,12 @@ describe('OrderBookCard Test', () => {
 	describe('Test Snapshot', () => {
 		const orderBook = {
 			asks: [
-				{price: 0.007, amount: 30, count: 3},
-				{price: 0.007, amount: 4, count: 1}
+				{price: 0.007, balance: 30, count: 3},
+				{price: 0.007, balance: 4, count: 1}
 			],
 			bids: [
-				{price: 0.008, amount: 0, count: 1},
-				{price: 0.007, amount: 4, count: 1}
+				{price: 0.008, balance: 0, count: 1},
+				{price: 0.007, balance: 4, count: 1}
 			],
 			pair: "B-PPT-I0|WETH",
 			version: 1543479830843
