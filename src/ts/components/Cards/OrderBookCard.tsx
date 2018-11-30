@@ -39,8 +39,8 @@ export default class OrderBookCard extends React.Component<IProps, IState> {
 		if (OrderBookSnapshot) {
 			const asks = OrderBookSnapshot.asks;
 			const bids = OrderBookSnapshot.bids;
-			for (let i = 0; i < asks.length; i++) askArray.push([asks[i].amount, asks[i].price]);
-			for (let i = 0; i < bids.length; i++) bidArray.push([bids[i].amount, bids[i].price]);
+			for (let i = 0; i < asks.length; i++) askArray.push([asks[i].balance, asks[i].price]);
+			for (let i = 0; i < bids.length; i++) bidArray.push([bids[i].balance, bids[i].price]);
 		}
 		askArray.sort((a, b) => a[1] - b[1]);
 		bidArray.sort((a, b) => b[1] - a[1]);
