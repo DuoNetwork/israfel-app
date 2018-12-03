@@ -21,7 +21,8 @@ describe('ws reducer', () => {
 		state = wsReducer(state, {
 			type: CST.AC_INFO,
 			tokens: ['token1'],
-			status: ['status1']
+			status: ['status1'],
+			acceptedPrices: {custodian: ['acceptedPrices']}
 		});
 		expect(state).toMatchSnapshot();
 	});

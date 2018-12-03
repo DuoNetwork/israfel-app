@@ -22,6 +22,7 @@ Array [
 exports[`addOrder ask 3`] = `
 Array [
   Array [
+    "code1|code2",
     "account",
     "0x003519A4aB2C35c59Cb31d9194A45DD3F9Bf9e32",
     "code1address",
@@ -55,6 +56,7 @@ Array [
 exports[`addOrder bid 3`] = `
 Array [
   Array [
+    "code1|code2",
     "account",
     "0x003519A4aB2C35c59Cb31d9194A45DD3F9Bf9e32",
     "code2address",
@@ -87,6 +89,7 @@ Array [
   Array [
     "tokens",
     "status",
+    "acceptedPrices",
   ],
 ]
 `;

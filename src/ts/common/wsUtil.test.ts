@@ -177,7 +177,8 @@ test('handleMessage info', () => {
 		JSON.stringify({
 			channel: CST.WS_INFO,
 			tokens: 'tokens',
-			processStatus: 'status'
+			processStatus: 'status',
+			acceptedPrices: 'acceptedPrices'
 		})
 	);
 	expect(wsUtil.handleOrderResponse as jest.Mock).not.toBeCalled();

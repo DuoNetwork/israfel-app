@@ -9,6 +9,11 @@ Object {
 
 exports[`actions infoUpdate 1`] = `
 Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptPrices",
+    ],
+  },
   "status": Array [
     "status1",
   ],
