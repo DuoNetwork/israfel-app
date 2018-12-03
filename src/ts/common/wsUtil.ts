@@ -2,6 +2,7 @@ import WebSocket from 'isomorphic-ws';
 import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 import * as CST from './constants';
 import {
+	IAcceptedPrice,
 	IEthBalance,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
@@ -28,7 +29,11 @@ class WsUtil {
 	public ws: WebSocket | null = null;
 	private handleConnected: () => any = () => ({});
 	private handleReconnect: () => any = () => ({});
-	private handleInfoUpdate: (tokens: IToken[], status: IStatus[]) => any = () => ({});
+	private handleInfoUpdate: (
+		tokens: IToken[],
+		status: IStatus[],
+		acceptedPrices: { [custodian: string]: IAcceptedPrice[] }
+	) => any = () => ({});
 	private handleOrderUpdate: (userOrder: IUserOrder) => any = () => ({});
 	private handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any = () => ({});
 	private handleOrderError: (
@@ -57,7 +62,7 @@ class WsUtil {
 		this.ws.onopen = () => {
 			this.reconnectionNumber = 0;
 			this.handleConnected();
-		}
+		};
 		this.ws.onmessage = (m: any) => this.handleMessage(m.data.toString());
 		this.ws.onerror = () => this.reconnect();
 		this.ws.onclose = () => this.reconnect();
@@ -103,9 +108,9 @@ class WsUtil {
 					this.handleOrderBookResponse(res);
 					break;
 				case CST.WS_INFO:
-					const { tokens, processStatus } = res as IWsInfoResponse;
+					const { tokens, processStatus, acceptedPrices } = res as IWsInfoResponse;
 					web3Util.setTokens(tokens);
-					this.handleInfoUpdate(tokens, processStatus);
+					this.handleInfoUpdate(tokens, processStatus, acceptedPrices);
 					break;
 				default:
 					break;
@@ -204,6 +209,7 @@ class WsUtil {
 			throw new Error('Insufficient token balance or allowance');
 
 		const rawOrder = await web3Util.createRawOrder(
+			pair,
 			account,
 			web3Util.relayerAddress,
 			isBid ? address2 : address1,
@@ -260,7 +266,13 @@ class WsUtil {
 		this.handleReconnect = handleReconnect;
 	}
 
-	public onInfoUpdate(handleInfoUpdate: (tokens: IToken[], status: IStatus[]) => any) {
+	public onInfoUpdate(
+		handleInfoUpdate: (
+			tokens: IToken[],
+			status: IStatus[],
+			acceptedPrices: { [custodian: string]: IAcceptedPrice[] }
+		) => any
+	) {
 		this.handleInfoUpdate = handleInfoUpdate;
 	}
 }

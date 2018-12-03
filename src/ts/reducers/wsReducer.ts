@@ -5,7 +5,8 @@ import { IWsState } from '../common/types';
 export const initialState: IWsState = {
 	connection: false,
 	tokens: [],
-	status: []
+	status: [],
+	acceptedPrices: {}
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
@@ -17,7 +18,8 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 		case CST.AC_INFO:
 			return Object.assign({}, state, {
 				tokens: action.tokens,
-				status: action.status
+				status: action.status,
+				acceptedPrices: action.acceptedPrices
 			});
 		default:
 			return state;

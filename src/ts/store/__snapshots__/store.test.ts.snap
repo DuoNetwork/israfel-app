@@ -30,6 +30,7 @@ Object {
     "network": 0,
   },
   "ws": Object {
+    "acceptedPrices": Object {},
     "connection": false,
     "status": Array [],
     "tokens": Array [],
