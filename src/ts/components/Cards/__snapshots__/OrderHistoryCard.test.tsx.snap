@@ -17,9 +17,38 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       dataSource={
         Array [
           Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                style={
+                  Object {
+                    "color": "#f5222d",
+                  }
+                }
+              >
+                cancel
+              </a>
+            </Popconfirm>,
             "Amount": 123,
             "Balance": 123,
-            "Expiry": "1970-01-01 08:00",
+            "Expiry": "1970-01-01 07:30",
             "Fee": "123 test",
             "Fill": 123,
             "Order Hash": "tesst123",
@@ -29,9 +58,38 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
             "key": 1233,
           },
           Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                style={
+                  Object {
+                    "color": "#f5222d",
+                  }
+                }
+              >
+                cancel
+              </a>
+            </Popconfirm>,
             "Amount": 123,
             "Balance": 123,
-            "Expiry": "1970-01-01 08:00",
+            "Expiry": "1970-01-01 07:30",
             "Fee": "123 test",
             "Fill": 123,
             "Order Hash": "test",
@@ -39,9 +97,10 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
             "Side": "Sell",
             "children": Array [
               Object {
+                "Actions": null,
                 "Amount": 123,
                 "Balance": 123,
-                "Expiry": "1970-01-01 08:00",
+                "Expiry": "1970-01-01 07:30",
                 "Fee": "123 test",
                 "Fill": 123,
                 "Order Hash": "test",
@@ -64,7 +123,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       size="default"
       style={
         Object {
-          "width": "800px",
+          "width": "760px",
         }
       }
       useFixedHeader={false}
@@ -103,6 +162,11 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         dataIndex="Expiry"
         key="Expiry"
         title="Expiry"
+      />
+      <Column
+        dataIndex="Actions"
+        key="Actions"
+        title="Actions"
       />
     </Table>
   </styled.div>

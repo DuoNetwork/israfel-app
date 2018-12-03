@@ -1,9 +1,9 @@
 import { Layout, Spin } from 'antd';
 import { Affix } from 'antd';
 import * as React from 'react';
-import * as CST from 'ts/common/constants';
+// import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, ITokenBalance, IUserOrder } from 'ts/common/types';
-import web3Util from 'ts/common/web3Util';
+// import web3Util from 'ts/common/web3Util';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
@@ -72,7 +72,7 @@ export default class Dex extends React.Component<IProps> {
 					<Header />
 					<Spin spinning={!this.props.connection} tip="loading...">
 						<SDivFlexCenter key={1} center horizontal>
-							<OrderHistoryCard orderHistory={orderHistory} locale={locale} />
+							<OrderHistoryCard orderHistory={orderHistory} locale={locale} account={account}/>
 							<Affix offsetTop={10}>
 								<OrderCard
 									account={account}
@@ -95,17 +95,6 @@ export default class Dex extends React.Component<IProps> {
 								<BalanceCard eth={ethBalance} tokenBalance={tokenBalance} />
 							</Affix>
 						</SDivFlexCenter>
-						<div key={4} style={{ color: 'white' }}>
-							<button
-								onClick={() =>
-									web3Util
-										.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG)
-										.then(result => console.log(result))
-								}
-							>
-								Sign
-							</button>
-						</div>
 					</Spin>
 				</div>
 			</Layout>

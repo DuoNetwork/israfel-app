@@ -73,10 +73,11 @@ describe('OrderHistoryCard Test', () => {
 				processed: true
 			}
 		];
+
 		const locale = 'EN';
 
-		it('Test Snapshot', () => {
-			const wrapper = shallow(<OrderHistoryCard orderHistory={orderHistory} locale={locale} />);
+		it("Test Snapshot", () => {
+			const wrapper = shallow(<OrderHistoryCard orderHistory={orderHistory} locale={locale} account={'test'} />);
 			expect(wrapper).toMatchSnapshot();
 		});
 	});
