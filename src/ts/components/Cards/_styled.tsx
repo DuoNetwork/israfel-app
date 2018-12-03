@@ -78,6 +78,23 @@ injectGlobal([
 			margin-bottom: 0px;
 			opacity: 0.9999;
 		}
+		.ant-card-body {
+			width: 101%;
+		}
+		.dQSuwl {
+			overflow: hidden !important;
+			max-width: 1200px;
+			width: 770px !important;
+			margin: 0;
+			display: !important;
+			background: rgba(32,31,33,.5) !important;
+			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2) !important;
+			border-radius: 0px !important;
+			border: none !important;
+		}
+		.ant-table-tbody > tr:hover > td{
+			background-color:rgba(116,255,252,0.5) ! important;
+		}
 	}
 `
 ] as any);
