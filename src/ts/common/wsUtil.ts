@@ -15,10 +15,10 @@ import {
 	IWsOrderBookUpdateResponse,
 	IWsOrderHistoryRequest,
 	IWsOrderHistoryResponse,
-	IWsOrderRequest,
 	IWsOrderResponse,
 	IWsRequest,
 	IWsResponse,
+	IWsTerminateOrderRequest,
 	IWsUserOrderResponse
 } from './types';
 import util from './util';
@@ -222,14 +222,15 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public deleteOrder(pair: string, orderHash: string) {
+	public deleteOrder(pair: string, orderHash: string, signature: string) {
 		if (!this.ws) return;
 
-		const msg: IWsOrderRequest = {
+		const msg: IWsTerminateOrderRequest = {
 			method: CST.DB_TERMINATE,
 			channel: CST.DB_ORDERS,
 			pair: pair,
-			orderHash: orderHash
+			orderHash: orderHash,
+			signature: signature
 		};
 		this.ws.send(JSON.stringify(msg));
 	}

@@ -304,6 +304,6 @@ test('addOrder ask', async () => {
 test('deleteOrder', () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
-	wsUtil.deleteOrder('pair', 'orderHash');
+	wsUtil.deleteOrder('pair', 'orderHash', 'signature');
 	expect(send.mock.calls).toMatchSnapshot();
 });
