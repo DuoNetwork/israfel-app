@@ -9,6 +9,7 @@ import Israfel from './Israfel';
 describe('Israfel Test', () => {
 	describe('User Login', () => {
 		const token = [{
+			custodian: 'test',
 			address: 'test',
 			code: 'test',
 			denomination: 123,
