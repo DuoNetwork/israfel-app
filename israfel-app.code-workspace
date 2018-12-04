@@ -7,10 +7,10 @@
 			"path": "..\\israfel-relayer"
 		},
 		{
-			"path": "..\\duo-contract-wrapper"
+			"path": "..\\duo-admin"
 		},
 		{
-			"path": "..\\duo-admin"
+			"path": "..\\duo-contract-wrapper"
 		}
 	],
 	"settings": {
