@@ -4,13 +4,13 @@
 			"path": "."
 		},
 		{
-			"path": "C:\\Users\\YizhouCao\\DevApps\\israfel-relayer"
+			"path": "..\\israfel-relayer"
 		},
 		{
-			"path": "C:\\Users\\YizhouCao\\DevApps\\duo-admin"
+			"path": "..\\duo-admin"
 		},
 		{
-			"path": "C:\\Users\\YizhouCao\\DevApps\\duo-contract-wrapper"
+			"path": "..\\duo-contract-wrapper"
 		}
 	],
 	"settings": {
