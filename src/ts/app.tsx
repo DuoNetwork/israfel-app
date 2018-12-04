@@ -44,6 +44,8 @@ wsUtil.onConnection(
 );
 
 wsUtil.connectToRelayer();
+if ((window as any).ethereum)
+	(window as any).ethereum.enable();
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>
