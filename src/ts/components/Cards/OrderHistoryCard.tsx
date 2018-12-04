@@ -19,10 +19,11 @@ interface IProps {
 	account: string;
 }
 
-const parseRow: (uo: IUserOrder, isParent: boolean, account: string) => any = (
+const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: boolean) => any = (
 	uo: IUserOrder,
 	isParent: boolean,
 	account: string,
+	isCancel: boolean
 ) => {
 	function handleClick(e: any, orderHash: string, pair: string, acc: string) {
 		web3Util.web3PersonalSign(acc, CST.TERMINATE_SIGN_MSG + orderHash).then(result => wsUtil.deleteOrder(pair, orderHash, result));
@@ -39,7 +40,7 @@ const parseRow: (uo: IUserOrder, isParent: boolean, account: string) => any = (
 		[CST.TH_FEE]: uo.fee + ' ' + uo.feeAsset,
 		[CST.TH_EXPIRY]: moment(uo.expiry).format('YYYY-MM-DD HH:mm'),
 		[CST.TH_ORDER_HASH]: uo.orderHash,
-		[CST.TH_ACTIONS]: isParent ? (
+		[CST.TH_ACTIONS]: isParent && isCancel ? (
 			<Popconfirm
 				title={CST.TT_DELETE_ORDER}
 				icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
@@ -60,21 +61,26 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 	public render() {
 		const orderHistory = this.props.orderHistory;
 		const account = this.props.account;
-		console.log(orderHistory);
 		let dataSource = [];
+		let parentRow = [];
 		if (orderHistory.length) {
 			dataSource = [];
 			orderHistory.sort(
 				(a, b) =>
 					-a.initialSequence + b.initialSequence || -a.currentSequence + b.currentSequence
 			);
-			let parentRow = parseRow(orderHistory[0], true, account);
+			if (orderHistory[0].type === "terminate" && orderHistory[0].status === "confirmed")
+				parentRow = parseRow(orderHistory[0], true, account, false);
+			else parentRow = parseRow(orderHistory[0], true, account, true);
 			for (let i = 1; i < orderHistory.length; i++) {
 				const userOrder = orderHistory[i];
 				if (userOrder.orderHash !== parentRow[CST.TH_ORDER_HASH]) {
 					dataSource.push(parentRow);
-					parentRow = parseRow(userOrder, true, account);
-				} else parentRow.children.push(parseRow(userOrder, false, account));
+					if (userOrder.type === "terminate" && userOrder.status === "confirmed")
+						parentRow = parseRow(userOrder, true, account, false);
+					else
+						parentRow = parseRow(userOrder, true, account, true);
+				} else parentRow.children.push(parseRow(userOrder, false, account, false));
 			}
 			dataSource.push(parentRow);
 		}
