@@ -50,10 +50,8 @@ const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: b
 			</Popconfirm>
 		) : null
 	};
-	if (isParent) {
+	if (isParent)
 		row.children = [];
-		console.log(uo.orderHash);
-	}
 	return row;
 };
 

@@ -1,3 +1,5 @@
+import { Slider } from 'antd';
+import { Radio } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IEthBalance, ITokenBalance } from 'ts/common/types';
@@ -5,7 +7,7 @@ import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
-
+const RadioGroup = Radio.Group;
 interface IProps {
 	account: string;
 	pair: string;
@@ -18,6 +20,7 @@ interface IState {
 	price: string;
 	amount: string;
 	hoursToLive: number;
+	value: number;
 }
 
 export default class OrderCard extends React.Component<IProps, IState> {
@@ -27,7 +30,8 @@ export default class OrderCard extends React.Component<IProps, IState> {
 			isBid: true,
 			price: '',
 			amount: '',
-			hoursToLive: 8
+			hoursToLive: 8,
+			value: 1
 		};
 	}
 
@@ -41,7 +45,16 @@ export default class OrderCard extends React.Component<IProps, IState> {
 		const { ethBalance, tokenBalance } = this.props;
 		const { isBid, price, amount, hoursToLive } = this.state;
 		wsUtil
-			.addOrder(account, pair, Number(price), Number(amount), isBid, hoursToLive * 3600, ethBalance, tokenBalance)
+			.addOrder(
+				account,
+				pair,
+				Number(price),
+				Number(amount),
+				isBid,
+				hoursToLive * 3600,
+				ethBalance,
+				tokenBalance
+			)
 			.then(() =>
 				this.setState({
 					price: '',
@@ -50,6 +63,11 @@ export default class OrderCard extends React.Component<IProps, IState> {
 			);
 	};
 
+	private onChange = (e: number) => {
+		this.setState({
+			value: e
+		});
+	};
 	private handleApprove = () => {
 		const { pair } = this.props;
 		const { isBid } = this.state;
@@ -64,11 +82,6 @@ export default class OrderCard extends React.Component<IProps, IState> {
 
 	private handlePriceInputChange = (price: string) => this.setState({ price: price });
 
-	private handleExpireButtonClick = (hour: number) =>
-		this.setState({
-			hoursToLive: hour
-		});
-
 	private handleClear = () =>
 		this.setState({
 			price: '',
@@ -78,10 +91,44 @@ export default class OrderCard extends React.Component<IProps, IState> {
 
 	public render() {
 		const { ethBalance, tokenBalance } = this.props;
-		const { isBid, price, amount, hoursToLive } = this.state;
+		const { isBid, price, amount } = this.state;
 		const approveRequired = isBid
 			? !ethBalance.allowance || ethBalance.allowance < ethBalance.weth
 			: !tokenBalance.allowance || tokenBalance.allowance < tokenBalance.balance;
+
+		const marks = {
+			0: {
+				style: {
+					color: '#f50'
+				},
+				label: <strong>0</strong>
+			},
+			25: {
+				style: {
+					color: '#f50'
+				},
+				label: <strong>25</strong>
+			},
+			50: {
+				style: {
+					color: '#f50'
+				},
+				label: <strong>50</strong>
+			},
+			75: {
+				style: {
+					color: '#f50'
+				},
+				label: <strong>75</strong>
+			},
+			100: {
+				style: {
+					color: '#f50'
+				},
+				label: <strong>100</strong>
+			}
+		};
+
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_ORDER.toUpperCase()}</SCardTitle>}
@@ -125,32 +172,27 @@ export default class OrderCard extends React.Component<IProps, IState> {
 								) : (
 									[
 										<li key={CST.TH_PX} className={'input-line'}>
-											<span className="title" style={{ width: 200 }}>
-												{CST.TH_PX}
-											</span>
 											<SInput
-												width="60%"
-												className="bg-dark"
+												width="95%"
+												placeholder="Price"
 												value={price}
 												onChange={e =>
 													this.handlePriceInputChange(e.target.value)
 												}
-												right
 											/>
 										</li>,
 										<li key={CST.TH_AMT} className={'input-line'}>
-											<span className="title" style={{ width: 200 }}>
-												{CST.TH_AMT}
-											</span>
 											<SInput
-												width="60%"
-												className={''}
+												width="95%"
+												placeholder="Amount"
 												value={amount}
 												onChange={e =>
 													this.handleAmountInputChange(e.target.value)
 												}
-												right
 											/>
+										</li>,
+										<li key={''} className={'input-line'}>
+											<Slider marks={marks} step={10} defaultValue={0} />
 										</li>,
 										<li key={CST.TH_EXPIRY} className={'input-line'}>
 											<span className="title" style={{ width: 200 }}>
@@ -158,24 +200,16 @@ export default class OrderCard extends React.Component<IProps, IState> {
 											</span>
 											<SDivFlexCenter
 												horizontal
-												width="100%"
+												width="60%"
 												padding="2px 0 2px 0"
 											>
-												{[8, 16, 24, 36].map(hour => (
-													<button
-														key={hour}
-														className={
-															hoursToLive === hour
-																? 'button'
-																: 'percent-button'
-														}
-														onClick={() =>
-															this.handleExpireButtonClick(hour)
-														}
-													>
-														{hour + 'h'}
-													</button>
-												))}
+												<RadioGroup
+													onChange={e => this.onChange(e.target.value)}
+													value={this.state.value}
+												>
+													<Radio value={1}>Day</Radio>
+													<Radio value={2}>Month</Radio>
+												</RadioGroup>
 											</SDivFlexCenter>
 										</li>,
 										<li key={CST.TH_SUBMIT}>
