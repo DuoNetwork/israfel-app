@@ -178,7 +178,7 @@ class WsUtil {
 		if (!this.ws) return;
 		if (!web3Util.isValidPair(pair)) throw new Error('Invalid pair');
 		const [code1, code2] = pair.split('|');
-		const token1 = web3Util.tokens.find(t => t.code === code1);
+		const token1 = web3Util.getTokenByCode(code1);
 		if (!token1) throw new Error('Invalid pair');
 		const address1 = token1.address;
 		const address2 = web3Util.getTokenAddressFromCode(code2);

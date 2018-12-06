@@ -230,18 +230,16 @@ test('addOrder bid', async () => {
 		takerAssetAmount: 123,
 		makerAssetAmount: 456
 	}));
-	web3Util.tokens = [
-		{
-			address: 'code1address',
-			code: 'code1',
-			precisions: {
-				code2: 1
-			},
-			feeSchedules: {
-				code2: {}
-			}
+	web3Util.getTokenByCode = jest.fn(() => ({
+		address: 'code1address',
+		code: 'code1',
+		precisions: {
+			code2: 1
+		},
+		feeSchedules: {
+			code2: {}
 		}
-	] as any;
+	}));
 	web3Util.createRawOrder = jest.fn(() => ({
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
@@ -255,7 +253,7 @@ test('addOrder bid', async () => {
 		true,
 		1234567890,
 		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000}
+		{ balance: 10000, allowance: 10000 }
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
@@ -270,18 +268,16 @@ test('addOrder ask', async () => {
 		takerAssetAmount: 123,
 		makerAssetAmount: 456
 	}));
-	web3Util.tokens = [
-		{
-			address: 'code1address',
-			code: 'code1',
-			precisions: {
-				code2: 1
-			},
-			feeSchedules: {
-				code2: {}
-			}
+	web3Util.getTokenByCode = jest.fn(() => ({
+		address: 'code1address',
+		code: 'code1',
+		precisions: {
+			code2: 1
+		},
+		feeSchedules: {
+			code2: {}
 		}
-	] as any;
+	}));
 	web3Util.createRawOrder = jest.fn(() => ({
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
@@ -295,7 +291,7 @@ test('addOrder ask', async () => {
 		false,
 		1234567890,
 		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000}
+		{ balance: 10000, allowance: 10000 }
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
