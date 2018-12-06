@@ -45,6 +45,7 @@ class WsUtil {
 	private handleOrderBookUpdate: (orderBookUpdate: IOrderBookSnapshotUpdate) => any = () => ({});
 	private handleOrderBookError: (method: string, pair: string, error: string) => any = () => ({});
 	public reconnectionNumber: number = 0;
+	public latestVersionNumber: number = 0;
 
 	private reconnect() {
 		this.ws = null;
@@ -57,9 +58,15 @@ class WsUtil {
 		} else alert('We have tried 6 times. Please try again later');
 	}
 
+	public close() {
+		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
+		this.ws.onclose = () => this.reconnect();
+	}
+
 	public connectToRelayer() {
 		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
 		this.ws.onopen = () => {
+			console.log('reconnect');
 			this.reconnectionNumber = 0;
 			this.handleConnected();
 		};
@@ -87,18 +94,34 @@ class WsUtil {
 				orderBookResponse.pair,
 				orderBookResponse.status
 			);
-		else if (orderBookResponse.method === CST.DB_SNAPSHOT)
+		else if (orderBookResponse.method === CST.DB_SNAPSHOT) {
+			if (
+				(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot.version <
+				this.latestVersionNumber
+			) {
+				wsUtil.subscribeOrderBook(
+					(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot.pair
+				);
+				this.latestVersionNumber = (orderBookResponse as IWsOrderBookResponse).orderBookSnapshot.version;
+			}
 			this.handleOrderBookSnapshot(
 				(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
 			);
-		else
+		} else {
+			console.log(orderBookResponse as IWsOrderBookResponse);
+			this.latestVersionNumber = (orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
+				? (orderBookResponse as IWsOrderBookResponse).orderBookSnapshot.version
+				: 0;
 			this.handleOrderBookUpdate(
 				(orderBookResponse as IWsOrderBookUpdateResponse).orderBookUpdate
 			);
+		}
 	}
 
 	public handleMessage(message: string) {
 		const res: IWsResponse = JSON.parse(message);
+		console.log('res');
+		console.log(res);
 		if (res.method !== CST.WS_UNSUB)
 			switch (res.channel) {
 				case CST.DB_ORDERS:
@@ -238,6 +261,7 @@ class WsUtil {
 			orderHash: orderHash,
 			signature: signature
 		};
+		console.log(msg);
 		this.ws.send(JSON.stringify(msg));
 	}
 

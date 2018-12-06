@@ -8,13 +8,13 @@ import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
-	readonly dex: IDexState;
+	readonly dex: IPairState;
 	readonly ui: IUIState;
 	readonly web3: IWeb3State;
 	readonly ws: IWsState;
 }
 
-export interface IDexState {
+export interface IPairState {
 	readonly orderHistory: relayerTypes.IUserOrder[];
 	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 	readonly orderBookSubscription: string;

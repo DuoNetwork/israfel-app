@@ -1,15 +1,15 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import {
-	IDexState,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IPairState,
 	IUserOrder
 } from 'ts/common/types';
 import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
-export const initialState: IDexState = {
+export const initialState: IPairState = {
 	orderHistory: [],
 	orderBookSnapshot: {
 		pair: 'pair',
@@ -25,7 +25,7 @@ export const initialState: IDexState = {
 	}
 };
 
-export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
+export function dexReducer(state: IPairState = initialState, action: AnyAction): IPairState {
 	switch (action.type) {
 		case CST.AC_ORDER_HISTORY:
 			return Object.assign({}, state, {
@@ -53,7 +53,11 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 				const orderBook: IOrderBookSnapshot = JSON.parse(
 					JSON.stringify(state.orderBookSnapshot)
 				);
+				console.log("1234567890");
+				console.log("OrderBook");
+				console.log(orderBook);
 				orderBookUtil.updateOrderBookSnapshot(orderBook, obUpdate);
+				console.log(orderBook);
 				return Object.assign({}, state, {
 					orderBookSnapshot: orderBook
 				});
