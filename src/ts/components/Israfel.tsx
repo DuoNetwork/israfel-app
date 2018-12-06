@@ -25,7 +25,7 @@ export default class Israfel extends React.Component<IProps> {
 				{this.props.tokens.length ? (
 					<Route path={'/pairs'} render={() => <Pair pair={'B-PPT-I0|WETH'} />} />
 				) : (
-					<Route render={() => <Loading />}
+					<Route render={() => <Loading />} />
 				)}
 				{this.props.tokens.length ? (
 					<Route render={() => <Dex />} />
