@@ -1,4 +1,3 @@
-import { Slider } from 'antd';
 import { Radio } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -6,7 +5,7 @@ import { IEthBalance, ITokenBalance } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
 import { SDivFlexCenter } from '../_styled';
-import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput } from './_styled';
+import { SCard, SCardConversionForm, SCardList, SCardTitle, SInput, SSlider } from './_styled';
 const RadioGroup = Radio.Group;
 interface IProps {
 	account: string;
@@ -98,33 +97,18 @@ export default class OrderCard extends React.Component<IProps, IState> {
 
 		const marks = {
 			0: {
-				style: {
-					color: '#f50'
-				},
 				label: <strong>0</strong>
 			},
 			25: {
-				style: {
-					color: '#f50'
-				},
 				label: <strong>25</strong>
 			},
 			50: {
-				style: {
-					color: '#f50'
-				},
 				label: <strong>50</strong>
 			},
 			75: {
-				style: {
-					color: '#f50'
-				},
 				label: <strong>75</strong>
 			},
 			100: {
-				style: {
-					color: '#f50'
-				},
 				label: <strong>100</strong>
 			}
 		};
@@ -146,7 +130,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 									<SDivFlexCenter
 										horizontal
 										width="100%"
-										padding="5px 10px 0 0"
+										padding="0"
 										marginBottom="10px"
 									>
 										{[CST.TH_BUY, CST.TH_SELL].map(side => (
@@ -173,7 +157,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 									[
 										<li key={CST.TH_PX} className={'input-line'}>
 											<SInput
-												width="95%"
+												width="100%"
 												placeholder="Price"
 												value={price}
 												onChange={e =>
@@ -183,7 +167,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 										</li>,
 										<li key={CST.TH_AMT} className={'input-line'}>
 											<SInput
-												width="95%"
+												width="100%"
 												placeholder="Amount"
 												value={amount}
 												onChange={e =>
@@ -192,7 +176,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 											/>
 										</li>,
 										<li key={''} className={'input-line'}>
-											<Slider marks={marks} step={10} defaultValue={0} />
+											<SSlider marks={marks} step={10} defaultValue={0} />
 										</li>,
 										<li key={CST.TH_EXPIRY} className={'input-line'}>
 											<span className="title" style={{ width: 200 }}>

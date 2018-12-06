@@ -3,21 +3,58 @@
 exports[`Header Test User Login Test Snapshot 1`] = `
 <Styled(Adapter)>
   <styled.div
+    height="60px"
     horizontal={true}
     width="1200px"
   >
-    <Link
-      replace={false}
-      to="/"
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
     >
-      <div
-        className="icon-wrapper"
+      <Link
+        replace={false}
+        to="/"
       >
-        <img
-          src={null}
-        />
+        <div
+          className="icon-wrapper"
+        >
+          <img
+            src={null}
+          />
+        </div>
+      </Link>
+      <div
+        className="nav-bal-wrapper"
+      >
+        <div
+          className="nav-bal-item"
+        >
+          <div>
+            ETH
+          </div>
+          <div
+            className="nav-bal-value"
+          >
+            123,234.12
+          </div>
+        </div>
+        <div
+          className="nav-bal-item"
+        >
+          <div>
+            WETH
+          </div>
+          <div
+            className="nav-bal-value"
+          >
+            123,234.12
+          </div>
+        </div>
       </div>
-    </Link>
+    </div>
     <styled.div
       horizontal={true}
     >
@@ -28,13 +65,19 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           replace={false}
           to="/status"
         >
+          ACCOUNT
+        </Link>
+      </div>
+      <div
+        className="nav-button-wrapper"
+      >
+        <Link
+          replace={false}
+          to="/status"
+        >
           STATUS
         </Link>
       </div>
-      <CardTitleSelect
-        locale="EN"
-        onSelect={[Function]}
-      />
     </styled.div>
   </styled.div>
 </Styled(Adapter)>
