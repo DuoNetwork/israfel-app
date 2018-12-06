@@ -14,20 +14,25 @@ export default class Israfel extends React.Component<IProps> {
 	public render() {
 		return (
 			<Switch>
-					<Route path={'/status'} render={() => <Status />} />
-					{this.props.tokens.map(token => (
-						<Route
-							key={token.code}
-							path={`/${token.code}-WETH`}
-							render={() => <Pair pair={`${token.code}|WETH`} />}
-						/>
-					))}
-					{this.props.tokens.length ? (
-						<Route render={() => <Dex />} />
-					) : (
-						<Route render={() => <Loading />} />
-					)}
-				</Switch>
+				<Route path={'/status'} render={() => <Status />} />
+				{this.props.tokens.map(token => (
+					<Route
+						key={token.code}
+						path={`/${token.code}-WETH`}
+						render={() => <Pair pair={`${token.code}|WETH`} />}
+					/>
+				))}
+				{this.props.tokens.length ? (
+					<Route path={'/pairs'} render={() => <Pair pair={'B-PPT-I0|WETH'} />} />
+				) : (
+					<Route render={() => <Loading />}
+				)}
+				{this.props.tokens.length ? (
+					<Route render={() => <Dex />} />
+				) : (
+					<Route render={() => <Loading />} />
+				)}
+			</Switch>
 		);
 	}
 }
