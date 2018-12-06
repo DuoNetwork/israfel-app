@@ -24,7 +24,7 @@ export const SCard = styled(Card)`
 	& > .ant-card-head {
 		background: ${ColorStyles.MainColor} !important;
 		border-bottom: none !important;
-		padding: 0 16px !important;
+		padding: 0 15px !important;
 		min-height: 40px;
 		height: 40px;
 		.ant-card-head-wrapper {
@@ -34,7 +34,7 @@ export const SCard = styled(Card)`
 		}
 	}
 	& > .ant-card-body {
-		padding: 0px 16px 16px 16px !important;
+		padding: 10px !important;
 	}
 `;
 
@@ -65,6 +65,26 @@ export const SCardTitleSelector = styled(Select as any)`
 	.ant-select-selection:focus {
 		-webkit-box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
 		box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
+	}
+`;
+
+export const SButton = styled.button`
+	cursor: pointer;
+	outline: none;
+	height: 30px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid ${ColorStyles.MainColor};
+	border-radius: 2px;
+	color: ${ColorStyles.MainColor};
+	font-size: 14px;
+	transition: all .2s;
+	&:hover {
+		background: ${ColorStyles.MainColor};
+		color: ${ColorStyles.TextWhite};
+		box-shadow: 0 0 4px 1px ${ColorStyles.MainColorShadow};
 	}
 `;
 
@@ -358,20 +378,21 @@ export const SRadioGroup = styled(RadioGroup as any)`
 export interface ICardListProps {
 	noMargin?: boolean;
 	fixWidth?: boolean;
+	width?: string;
 }
 export const SCardList = styled.div`
-	width: 100%;
+	width: ${(props: ICardListProps) => (props.width ? props.width : '100%')};
 	.status-list-wrapper {
 		width: 100%;
 	}
 	.status-list-wrapper > ul:last-child {
-		margin: ${(props: ICardListProps) => (props.noMargin ? '10px 0 0 0 !important' : '10px 0')};
+		margin: ${(props: ICardListProps) => (props.noMargin ? '0 0 0 0 !important' : '10px 0')};
 	}
 	.status-list-wrapper > ul {
 		list-style: none;
 		margin: 10px 0;
-		padding: 10px 5px 0 5px;
-		border: 1px dashed;
+		padding: 0;
+		border: 1px solid;
 		border-color: ${ColorStyles.BorderWhite1};
 		li:nth-child(even) {
 			background-color: ${ColorStyles.ListHighlight};
@@ -408,15 +429,16 @@ export const SCardList = styled.div`
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
-			padding: 0 5px;
+			padding: 5px;
+			border-bottom: 1px solid ${ColorStyles.BorderWhite1};
 			.title {
-				color: ${ColorStyles.TextBlackAlphaL};
+				color: ${ColorStyles.TextBlackAlpha};
 			}
 			.status {
-				color: ${ColorStyles.TextBlackAlphaL};
+				color: ${ColorStyles.TextBlackAlpha};
 			}
 			.content {
-				color: ${ColorStyles.TextBlackAlpha};
+				color: ${ColorStyles.TextBlack};
 			}
 			.percent-button {
 				outline: none;
@@ -455,6 +477,9 @@ export const SCardList = styled.div`
 				color: ${ColorStyles.TextBlackAlpha};
 				border-color: ${ColorStyles.BorderWhite6};
 			}
+		}
+		li:last-child {
+			border-bottom: none;
 		}
 		.input-line {
 			padding: 5px 5px;
@@ -1203,20 +1228,6 @@ injectGlobal([
 			padding-bottom: 20px;
 			margin-bottom: 0px;
 			opacity: 0.9999;
-		}
-		.ant-card-body {
-			width: 101%;
-		}
-		.dQSuwl {
-			overflow: hidden !important;
-			max-width: 1200px;
-			width: 770px !important;
-			margin: 0;
-			display: !important;
-			background: rgba(32,31,33,.5) !important;
-			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2) !important;
-			border-radius: 0px !important;
-			border: none !important;
 		}
 		.ant-table-tbody > tr:hover > td{
 			background-color:rgba(116,255,252,0.5) ! important;

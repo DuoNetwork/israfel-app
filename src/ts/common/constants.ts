@@ -55,6 +55,8 @@ export const TH_PROCESS = 'Process';
 export const TH_UPDATED = 'Updated';
 export const TH_INFO = 'Info';
 export const TH_HOSTNAME = 'Hostname';
+export const TH_COLLATERAL = 'Collateral';
+export const TH_CONVERT = 'Convert';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
