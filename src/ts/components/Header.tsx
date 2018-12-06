@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as CST from 'ts/common/constants';
 import { SDivFlexCenter, SHeader } from './_styled';
-import LocaleSelect from './Common/LocaleSelect';
+//import LocaleSelect from './Common/LocaleSelect';
 
 interface IProps {
 	location: object;
@@ -14,18 +14,29 @@ interface IProps {
 
 export default class Header extends React.Component<IProps> {
 	public render() {
-		const { location, network, updateLocale } = this.props;
+		const { network } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
-		const path = (location as any).pathname.toLowerCase();
-		const isStatusPage = path.includes(CST.TH_STATUS.toLowerCase());
+		//const path = (location as any).pathname.toLowerCase();
 		return (
 			<SHeader>
-				<SDivFlexCenter horizontal width={'1200px'}>
-					<Link to={'/'}>
-						<div className="icon-wrapper">
-							<img src={duoIcon} />
+				<SDivFlexCenter horizontal width={'1200px'} height={'60px'}>
+					<div style={{ display: 'flex' }}>
+						<Link to={'/'}>
+							<div className="icon-wrapper">
+								<img src={duoIcon} />
+							</div>
+						</Link>
+						<div className="nav-bal-wrapper">
+							<div className="nav-bal-item">
+								<div>{CST.TH_ETH.toUpperCase()}</div>
+								<div className="nav-bal-value">123,234.12</div>
+							</div>
+							<div className="nav-bal-item">
+								<div>{CST.TH_WETH.toUpperCase()}</div>
+								<div className="nav-bal-value">123,234.12</div>
+							</div>
 						</div>
-					</Link>
+					</div>
 					{network ? (
 						(__KOVAN__ && network !== CST.NETWORK_ID_KOVAN) ||
 						(!__KOVAN__ && network !== CST.NETWORK_ID_MAIN) ? (
@@ -35,12 +46,13 @@ export default class Header extends React.Component<IProps> {
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
-						{!isStatusPage ? (
-							<div className="nav-button-wrapper">
-								<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
-							</div>
-						) : null}
-						<LocaleSelect locale={locale} onSelect={updateLocale} />
+						<div className="nav-button-wrapper">
+							<Link to={'/status'}>{CST.AC_ACCOUNT.toUpperCase()}</Link>
+						</div>
+						<div className="nav-button-wrapper">
+							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
+						</div>
+						{/* <LocaleSelect locale={locale} onSelect={updateLocale} /> */}
 					</SDivFlexCenter>
 				</SDivFlexCenter>
 			</SHeader>

@@ -1,48 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LocaleSelect Test Test Snapshot Test Snapshot 1`] = `
-<Styled(Select)
-  className="locale-select"
-  onSelect={[Function]}
-  showArrow={false}
-  size="small"
-  value="EN"
->
-  <Option
-    value="EN"
-  >
-    <img
-      className="locale-img"
-      src={null}
-    />
-    EN
-  </Option>
-  <Option
-    value="CN"
-  >
-    <img
-      className="locale-img"
-      src={null}
-    />
-    中文
-  </Option>
-  <Option
-    value="JP"
-  >
-    <img
-      className="locale-img"
-      src={null}
-    />
-    日本語
-  </Option>
-  <Option
-    value="RU"
-  >
-    <img
-      className="locale-img"
-      src={null}
-    />
-    PУССКИЙ
-  </Option>
-</Styled(Select)>
+<div>
+  123
+</div>
 `;
