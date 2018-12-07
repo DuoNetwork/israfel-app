@@ -26,6 +26,7 @@ interface IState {
 	amount1: string;
 	amount2: string;
 	isExtraInput: boolean;
+	display: boolean;
 }
 
 export default class ConvertPopup extends React.Component<IProps, IState> {
@@ -36,9 +37,24 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 			isCreate: true,
 			amount1: '',
 			amount2: '',
-			isExtraInput: false
+			isExtraInput: false,
+			display: props.display
 		};
 	}
+	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
+		if (nextProps.display !== prevState.display)
+			return {
+				isExpand: false,
+				isCreate: true,
+				amount1: '',
+				amount2: '',
+				isExtraInput: false,
+				display: nextProps.display
+			};
+
+		return null;
+	}
+
 	private handleSideChange = () =>
 		this.setState({
 			isCreate: !this.state.isCreate
@@ -212,8 +228,9 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 										onClick={() => this.handleExtraInputChange()}
 									>
 										<span>
-											<img src={waring} style={{marginRight: 2}}/>
-											{isCreate ? 'Create from ' : 'Redeem to '} ETH, click to {isCreate ? 'create from ' : 'redeem to '} WETH
+											<img src={waring} style={{ marginRight: 2 }} />
+											{isCreate ? 'Create from ' : 'Redeem to '} ETH, click to{' '}
+											{isCreate ? 'create from ' : 'redeem to '} WETH
 										</span>
 									</li>
 								</ul>
