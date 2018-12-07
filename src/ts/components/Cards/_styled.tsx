@@ -1,5 +1,4 @@
 import { Button, Card, Radio, Select, Slider } from 'antd';
-import check from 'images/icons/check.svg';
 import styled, { injectGlobal } from 'styled-components';
 import { ColorStyles } from 'ts/common/styles';
 
@@ -80,7 +79,7 @@ export const SButton = styled.button`
 	border-radius: 2px;
 	color: ${ColorStyles.MainColor};
 	font-size: 14px;
-	transition: all .2s;
+	transition: all 0.2s;
 	&:hover {
 		background: ${ColorStyles.MainColor};
 		color: ${ColorStyles.TextWhite};
@@ -627,7 +626,7 @@ export const SCardConversionForm = styled.div`
 		height: 100%;
 		position: absolute;
 		right: -1px;
-    	top: 0px;
+		top: 0px;
 		border-right: solid 1px ${ColorStyles.MainColor};
 	}
 	.conv-button:hover:not(.selected) {
@@ -861,15 +860,13 @@ export const SSlider = styled(Slider as any)`
 	}
 	&:hover .ant-slider-handle:not(.ant-tooltip-open) {
 		border-color: ${ColorStyles.MainColor};
-
 	}
 `;
 
 injectGlobal([
-	//新injectGlobal
 	`
-		body {
-			.ant-tooltip-placement-top .ant-tooltip-arrow {
+	body {
+		.ant-tooltip-placement-top .ant-tooltip-arrow {
 				border-top-color: ${ColorStyles.MainColor};
 			}
 			.ant-tooltip-inner {
@@ -893,7 +890,6 @@ injectGlobal([
 			}
 			.ant-radio-inner:before {
 				position: absolute;
-				background-image: url('${check}');
 				background-size: contain;
 				width: 12px;
 				height: 9px;
@@ -920,318 +916,4 @@ injectGlobal([
 			}
 		}
 	`
-] as any);
-
-injectGlobal([
-	//旧injectGlobal
-	`
-	body {
-		.ant-table-thead > tr > th .anticon-filter {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-table-thead > tr > th .anticon-filter:hover, .ant-table-thead > tr > th .ant-table-filter-icon:hover {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-table-thead > tr > th .ant-table-filter-selected.anticon-filter {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-table-column-sorter {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-			padding: 10px 10px;
-		}
-		.ant-table-column-sorter-up:hover .anticon, .ant-table-column-sorter-down:hover .anticon {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-table-column-sorter-up.on .anticon-caret-up, .ant-table-column-sorter-down.on .anticon-caret-up, .ant-table-column-sorter-up.on .anticon-caret-down, .ant-table-column-sorter-down.on .anticon-caret-down {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-table-thead > tr > th.ant-table-column-sort {
-			background: ${ColorStyles.ListHighlight};
-		}
-		.ant-table-thead > tr:first-child > th:first-child {
-			border-top-left-radius: 0;
-		}
-		.ant-table-filter-dropdown {
-			border-radius: 0;
-			background: ${ColorStyles.CardBackgroundSolid};
-		}
-		.ant-table-filter-dropdown-btns {
-			border-top: 1px dashed;
-			border-color: ${ColorStyles.BorderWhite1};
-		}
-		.ant-table-filter-dropdown-link {
-			font-family: "Roboto";
-			color: ${ColorStyles.TextBlackAlphaL};
-		}
-		.ant-table-filter-dropdown-link:hover {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-dropdown-menu-item {
-			font-family: "Roboto";
-			color: ${ColorStyles.TextBlackAlphaL};
-			padding: 5px 10px 5px 5px;
-		}
-		.ant-dropdown-menu-item:hover {
-			background: ${ColorStyles.HoverBackgroundSolid};
-		}
-		.ant-dropdown-menu {
-			background: ${ColorStyles.CardBackgroundSolid};
-		}
-		.ant-select-dropdown-menu-item-selected {
-			width: 100%;
-		}
-		.ant-pagination-total-text {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-pagination-item {
-			background: transparent;
-			border: 1px solid;
-			border-radius: 0;
-		}
-		.ant-pagination-item-active:focus, .ant-pagination-item-active:hover {
-			border-color: ${ColorStyles.BorderWhite3};
-		}
-		.ant-pagination-item-active {
-			border-color: ${ColorStyles.BorderWhite3};
-		}
-		.ant-pagination-item a {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-pagination-item-active a, .ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a, .ant-pagination-item:focus a, .ant-pagination-item:hover a {
-			color: ${ColorStyles.TextBlackAlphaL};
-		}
-		.ant-pagination-disabled a, .ant-pagination-disabled:hover a, .ant-pagination-disabled:focus a, .ant-pagination-disabled .ant-pagination-item-link, .ant-pagination-disabled:hover .ant-pagination-item-link, .ant-pagination-disabled:focus .ant-pagination-item-link {
-			color: ${ColorStyles.TextBlackAlphaLLL};
-		}
-		.ant-pagination-prev a, .ant-pagination-next a {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link {
-			color: ${ColorStyles.TextBlackAlphaL};
-		}
-		.ant-select-selection {
-			font-size: 12px;
-			color: ${ColorStyles.TextBlackAlphaLL};
-			border-radius: 0;
-			border: 1px solid;
-			border-color: ${ColorStyles.BorderWhite1};
-			background: transparent;
-		}
-		.ant-select-arrow, .ant-pagination-options-quick-jumper {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-pagination-options-quick-jumper input {
-			color: ${ColorStyles.TextBlackAlphaLL};
-			background-color: transparent;
-			background-image: none;
-			border: 1px solid;
-			border-color: ${ColorStyles.BorderWhite1};
-			border-radius: 0;
-		}
-		.ant-pagination-options-quick-jumper input:focus {
-			-webkit-box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
-			box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
-			border-color: ${ColorStyles.BorderWhite3};
-		}
-		.ant-pagination-options-quick-jumper input:hover {
-			border-color: ${ColorStyles.BorderWhite3};
-		}
-		.ant-pagination-jump-prev:after, .ant-pagination-jump-next:after {
-			color: ${ColorStyles.TextBlackAlphaLLL};
-		}
-		.ant-pagination-jump-prev:focus:after, .ant-pagination-jump-next:focus:after, .ant-pagination-jump-prev:hover:after, .ant-pagination-jump-next:hover:after {
-			color: ${ColorStyles.TextBlackAlphaL};
-		}
-		.ant-select-selection:hover, .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active{
-			border-color: ${ColorStyles.BorderWhite3};
-		}
-		.ant-select-open, .ant-select-selection {
-			box-shadow: none !important;
-		}
-		.ant-select-dropdown-menu-item-active {
-			background: ${ColorStyles.SelectBackgroundSolid};
-			font-weight: 500;
-		}
-		.ant-dropdown-menu-item-selected, .ant-dropdown-menu-submenu-title-selected, .ant-dropdown-menu-item-selected > a, .ant-dropdown-menu-submenu-title-selected > a {
-			background: ${ColorStyles.SelectBackgroundSolid};
-		}
-		.admin-table-row > td {
-			cursor: default !important;
-		}
-		.ant-btn.disabled, .ant-btn[disabled], .ant-btn.disabled:hover, .ant-btn[disabled]:hover, .ant-btn.disabled:focus, .ant-btn[disabled]:focus, .ant-btn.disabled:active, .ant-btn[disabled]:active, .ant-btn.disabled.active, .ant-btn[disabled].active {
-			color: ${ColorStyles.TextBlackAlphaLLL};
-		}
-		.ant-popover-arrow {
-			background: ${ColorStyles.CardBackgroundSolid};
-		}
-		.ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow {
-			bottom: 6px;
-			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
-		}
-		.ant-popover {
-			font-family: 'Roboto', 'Microsoft YaHei';
-		}
-		.ant-popover-inner {
-			background: ${ColorStyles.CardBackgroundSolid};
-			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
-			border-radius: 0;
-		}
-		.ant-popover-inner-content {
-			padding: 10px 10px;
-		}
-		.ant-popover-message {
-			color: ${ColorStyles.TextBlackAlpha};
-		}
-		.ant-btn-sm {
-			padding: 0 10px;
-			font-size: 12px;
-			border-radius: 0;
-			border: 1px solid;
-			border-color: ${ColorStyles.BorderWhite4};
-			height: 20px;
-			background: none;
-			color: ${ColorStyles.TextBlackAlphaL};
-		}
-		.ant-btn-sm:hover {
-			color: ${ColorStyles.TextBlackAlpha} !important;
-			border-color: ${ColorStyles.BorderWhite6} !important;
-			background-color: ${ColorStyles.ButtonHoverWhite1} !important;
-		}
-		.ant-popover-buttons {
-			margin-bottom: 0px;
-		}
-		.form-button {
-			outline: none;
-			cursor: pointer;
-			margin: auto;
-			width: 180px;
-			font-family: 'Roboto', 'Microsoft YaHei';
-			background-color: transparent;
-			color: ${ColorStyles.TextBlackAlphaL};
-			border: 1px solid;
-			border-color: ${ColorStyles.BorderWhite4};
-			transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out,
-				background-color 0.2s ease-in-out;
-		}
-		.form-button:disabled {
-			pointer-events: none;
-			opacity: 0.2 !important;
-		}
-		.form-button:hover {
-			color: ${ColorStyles.TextBlackAlpha};
-			border-color: ${ColorStyles.BorderWhite6};
-			background-color: ${ColorStyles.ButtonHoverWhite1};
-		}
-		.address-table-action-col {
-			cursor: default !important
-		}
-		span.status {
-			margin: auto;
-		}
-		.ant-table-row-expand-icon {
-			cursor: pointer;
-			display: inline-block;
-			width: 17px;
-			height: 17px;
-			text-align: center;
-			line-height: 14px;
-			border: 1px solid #e8e8e8;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-			background: transparent;
-		}
-		.ant-select-dropdown {
-			border-radius: 0;
-			font-size: 10px;
-			font-family: 'Roboto', 'Microsoft YaHei';
-			background: ${ColorStyles.CardBackgroundSolid};
-			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
-		}
-		.ant-select-dropdown-menu-item {
-			color: ${ColorStyles.TextBlackAlphaLL};
-		}
-		.ant-select-dropdown-menu-item:hover {
-			background: ${ColorStyles.HoverBackgroundSolid};
-		}
-		.ant-select-dropdown-menu-item-selected, .ant-select-dropdown-menu-item-selected:hover {
-			color: ${ColorStyles.TextBlackAlpha};
-			background: ${ColorStyles.SelectBackgroundSolid};
-			font-weight: 500;
-		}
-		.ant-select-dropdown-menu-item:first-child, .ant-select-dropdown-menu-item:last-child {
-			border-radius: 0;
-		}
-		.locale-select {
-			display: flex;
-			align-items: center;
-			margin-left: 10px;
-			.ant-select-selection-selected-value {
-				width: 72px;
-			}
-		}
-		.locale-img {
-			width: 14px;
-			height: 14px;
-			margin-right: 2px;
-		}
-		.ant-table-fixed-header .ant-table-scroll .ant-table-header {
-			overflow: none;
-			padding-bottom: 20px;
-			margin-bottom: 0px;
-			opacity: 0.9999;
-		}
-		.ant-card-wider-padding .ant-card-head{
-			padding: 0 16px;
-		}
-		.ant-card-wider-padding .ant-card-body{
-			padding: 0px 16px 16px 16px;
-		}
-		.ant-card-head-wrapper {
-			border-bottom: 1px solid rgba(255,255,255,.05);
-		}
-		.card-disable {
-			pointer-events: none !important;
-			opacity: 0.5;
-		}
-		.ant-time-picker-input {
-			color: #fff;
-			background-color: transparent;
-			border: none;
-			border-radius: 4px;
-			text-align: center;
-		}
-		.ant-time-picker-icon .ant-time-picker-clock-icon {
-			color: transparent;
-		}
-		.ant-input {
-			color: #fff;
-			background-color: transparent;
-			padding: 0px 4px;
-			border: none;
-		}
-		.ant-table-header {
-			margin-bottom: 0px;
-			opacity: 0.9999;
-			overflow: hidden;
-			background: transparent;
-		}
-		.ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
-			position: relative;
-			background: transparent;
-		}
-		.ant-table-fixed-header .ant-table-scroll .ant-table-header {
-			overflow: none;
-			padding-bottom: 20px;
-			margin-bottom: 0px;
-			opacity: 0.9999;
-		}
-		.ant-table-tbody > tr:hover > td{
-			background-color:rgba(116,255,252,0.5) ! important;
-		}
-	}
-`
 ] as any);
