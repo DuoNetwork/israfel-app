@@ -12,6 +12,7 @@ interface IProps {
 	pair: string;
 	ethBalance: IEthBalance;
 	tokenBalance: ITokenBalance;
+	step: number;
 }
 
 interface IState {
@@ -62,6 +63,13 @@ export default class OrderCard extends React.Component<IProps, IState> {
 			);
 	};
 
+	private handleBlurChange(e: string) {
+		const step = this.props.step;
+		this.setState({
+			price: (Math.round(Number(e) / step) * step).toString()
+		});
+	}
+
 	private onChange = (e: number) => {
 		this.setState({
 			value: e
@@ -89,7 +97,7 @@ export default class OrderCard extends React.Component<IProps, IState> {
 		});
 
 	public render() {
-		const { ethBalance, tokenBalance } = this.props;
+		const { ethBalance, tokenBalance, step } = this.props;
 		const { isBid, price, amount } = this.state;
 		const approveRequired = isBid
 			? !ethBalance.allowance || ethBalance.allowance < ethBalance.weth
@@ -160,9 +168,12 @@ export default class OrderCard extends React.Component<IProps, IState> {
 												width="100%"
 												placeholder="Price"
 												value={price}
+												type={'number'}
+												step={step}
 												onChange={e =>
 													this.handlePriceInputChange(e.target.value)
 												}
+												onBlur={e => this.handleBlurChange(e.target.value)}
 											/>
 										</li>,
 										<li key={CST.TH_AMT} className={'input-line'}>

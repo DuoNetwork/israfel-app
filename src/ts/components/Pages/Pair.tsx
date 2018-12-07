@@ -72,13 +72,18 @@ export default class Pair extends React.Component<IProps> {
 					<Header />
 					<Spin spinning={!this.props.connection} tip="loading...">
 						<SDivFlexCenter key={1} center horizontal>
-							<OrderHistoryCard orderHistory={orderHistory} locale={locale} account={account}/>
+							<OrderHistoryCard
+								orderHistory={orderHistory}
+								locale={locale}
+								account={account}
+							/>
 							<Affix offsetTop={10}>
 								<OrderCard
 									account={account}
 									pair={pair}
 									ethBalance={ethBalance}
 									tokenBalance={tokenBalance}
+									step={3}
 								/>
 							</Affix>
 						</SDivFlexCenter>
