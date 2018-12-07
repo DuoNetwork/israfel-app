@@ -191,3 +191,7 @@ path.domain {
 .log-out-button:hover {
 	color: rgba(255, 255, 255, 1);
 }
+
+.ant-radio-inner:before {
+	background-image: url('../images/icons/check.svg');
+}

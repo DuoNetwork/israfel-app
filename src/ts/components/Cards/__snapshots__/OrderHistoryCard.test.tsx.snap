@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
+<Styled(Card)
+  margin="0 10px 0 10px"
+  title={
+    <styled.div>
+      ORDER HISTORY
+    </styled.div>
+  }
+  width="760px"
+>
+  <styled.div>
+    <Table
+      bordered={false}
+      className=""
+      dataSource={
+        Array [
+          Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                style={
+                  Object {
+                    "color": "#f5222d",
+                  }
+                }
+              >
+                cancel
+              </a>
+            </Popconfirm>,
+            "Amount": 123,
+            "Balance": 123,
+            "Expiry": "1970-01-01 07:30",
+            "Fee": "123 test",
+            "Fill": 123,
+            "Order Hash": "tesst123",
+            "Price": 123,
+            "Side": "Buy",
+            "children": Array [],
+            "key": 1233,
+          },
+          Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                style={
+                  Object {
+                    "color": "#f5222d",
+                  }
+                }
+              >
+                cancel
+              </a>
+            </Popconfirm>,
+            "Amount": 123,
+            "Balance": 123,
+            "Expiry": "1970-01-01 07:30",
+            "Fee": "123 test",
+            "Fill": 123,
+            "Order Hash": "test",
+            "Price": 123,
+            "Side": "Sell",
+            "children": Array [
+              Object {
+                "Actions": null,
+                "Amount": 123,
+                "Balance": 123,
+                "Expiry": "1970-01-01 07:30",
+                "Fee": "123 test",
+                "Fill": 123,
+                "Order Hash": "test",
+                "Price": 123,
+                "Side": "Sell",
+                "key": 123,
+              },
+            ],
+            "key": 1234,
+          },
+        ]
+      }
+      indentSize={20}
+      loading={false}
+      locale={Object {}}
+      pagination={false}
+      prefixCls="ant-table"
+      rowKey="key"
+      showHeader={true}
+      size="default"
+      style={
+        Object {
+          "width": "760px",
+        }
+      }
+      useFixedHeader={false}
+    >
+      <Column
+        dataIndex="Side"
+        key="Side"
+        title="Side"
+      />
+      <Column
+        dataIndex="Price"
+        key="Price"
+        title="Price"
+      />
+      <Column
+        dataIndex="Amount"
+        key="Amount"
+        title="Amount"
+      />
+      <Column
+        dataIndex="Balance"
+        key="Balance"
+        title="Balance"
+      />
+      <Column
+        dataIndex="Fill"
+        key="Fill"
+        title="Fill"
+      />
+      <Column
+        dataIndex="Fee"
+        key="Fee"
+        title="Fee"
+      />
+      <Column
+        dataIndex="Expiry"
+        key="Expiry"
+        title="Expiry"
+      />
+      <Column
+        dataIndex="Actions"
+        key="Actions"
+        title="Actions"
+      />
+    </Table>
+  </styled.div>
+</Styled(Card)>
+`;
