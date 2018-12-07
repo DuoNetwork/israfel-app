@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined Shape</title>
+    <desc>Created with Sketch.</desc>
+    <g id="New-Webapp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-2" transform="translate(-1195.000000, -82.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Conversion" transform="translate(820.000000, 70.000000)">
+                <g id="Header">
+                    <g id="Group-13" transform="translate(375.000000, 12.000000)">
+                        <path d="M8,16 C3.581722,16 0,12.418278 0,8 C0,3.581722 3.581722,0 8,0 C12.418278,0 16,3.581722 16,8 C16,12.418278 12.418278,16 8,16 Z M8,6.11438192 L5.17157288,3.28595479 L3.28595479,5.17157288 L6.11438192,8 L3.28595479,10.8284271 L5.17157288,12.7140452 L8,9.88561808 L10.8284271,12.7140452 L12.7140452,10.8284271 L9.88561808,8 L12.7140452,5.17157288 L10.8284271,3.28595479 L8,6.11438192 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

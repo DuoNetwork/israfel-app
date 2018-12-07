@@ -7,11 +7,12 @@ import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 interface IProps {
 	title: string;
 	margin: string;
+	toggleConvertDisplay: () => void;
 }
 
 export default class Contract2in1Card extends React.Component<IProps> {
 	public render() {
-		const { title, margin } = this.props;
+		const { title, margin, toggleConvertDisplay } = this.props;
 		return (
 			<SCard
 				title={<SCardTitle>{title.toUpperCase()}</SCardTitle>}
@@ -24,7 +25,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							<ul>
 								<li>
 									<span className="title">{CST.TH_EXPIRY}</span>
-									<span className="content">1,234,567</span>
+									<span className="content">2018-12-12 12:05</span>
 								</li>
 								<li>
 									<span className="title">{CST.TH_COLLATERAL}</span>
@@ -42,7 +43,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							padding: '0px 10px'
 						}}
 					>
-						<SButton>{CST.TH_CONVERT.toUpperCase()}</SButton>
+						<SButton onClick={toggleConvertDisplay}>{CST.TH_CONVERT.toUpperCase()}</SButton>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">

@@ -8,6 +8,7 @@ export interface ICardProps {
 	width?: string;
 	margin?: string;
 	inlinetype?: string;
+	noBodymargin?: boolean;
 }
 
 export const SCard = styled(Card)`
@@ -30,10 +31,14 @@ export const SCard = styled(Card)`
 			.ant-card-head-title {
 				padding: 10px 0 !important;
 			}
+			.ant-card-extra {
+				padding: 9px 0;
+				height: 40px;
+			}
 		}
 	}
 	& > .ant-card-body {
-		padding: 10px !important;
+		padding: ${(props: ICardProps) => (props.noBodymargin ? '0' : '10px')} !important;
 	}
 `;
 
@@ -66,12 +71,15 @@ export const SCardTitleSelector = styled(Select as any)`
 		box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
 	}
 `;
+export interface ISButtonProps {
+	width?: string;
+}
 
 export const SButton = styled.button`
 	cursor: pointer;
 	outline: none;
 	height: 30px;
-	width: 100%;
+	width: ${(props: ISButtonProps) => (props.width ? props.width : '100%')};
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -378,20 +386,24 @@ export interface ICardListProps {
 	noMargin?: boolean;
 	fixWidth?: boolean;
 	width?: string;
+	noUlBorder?: boolean;
+	noLiBorder?: boolean;
 }
 export const SCardList = styled.div`
 	width: ${(props: ICardListProps) => (props.width ? props.width : '100%')};
 	.status-list-wrapper {
 		width: 100%;
+		overflow: hidden;
 	}
 	.status-list-wrapper > ul:last-child {
 		margin: ${(props: ICardListProps) => (props.noMargin ? '0 0 0 0 !important' : '10px 0')};
 	}
 	.status-list-wrapper > ul {
+		transition: all 0.3s;
 		list-style: none;
 		margin: 10px 0;
 		padding: 0;
-		border: 1px solid;
+		border: ${(props: ICardListProps) => (props.noUlBorder ? 'none' : '1px solid')};
 		border-color: ${ColorStyles.BorderWhite1};
 		li:nth-child(even) {
 			background-color: ${ColorStyles.ListHighlight};
@@ -429,7 +441,8 @@ export const SCardList = styled.div`
 			flex-direction: row;
 			justify-content: space-between;
 			padding: 5px;
-			border-bottom: 1px solid ${ColorStyles.BorderWhite1};
+			border-bottom: ${(props: ICardListProps) =>
+				props.noLiBorder ? 'none' : `1px solid ${ColorStyles.BorderWhite1}`};
 			.title {
 				color: ${ColorStyles.TextBlackAlpha};
 			}
@@ -476,6 +489,18 @@ export const SCardList = styled.div`
 				color: ${ColorStyles.TextBlackAlpha};
 				border-color: ${ColorStyles.BorderWhite6};
 			}
+		}
+		.waring-expand-button {
+			cursor: pointer;
+			color: ${ColorStyles.TextBlackAlpha};
+			font-size: 12px;
+			transition: all 0.2s;
+			span {
+				display: flex;
+			}
+		}
+		.waring-expand-button:hover {
+			background: ${ColorStyles.MainColorShadow};
 		}
 		li:last-child {
 			border-bottom: none;
@@ -913,6 +938,9 @@ injectGlobal([
 			.ant-radio-checked:after {
 				border: 1px solid ${ColorStyles.MainColor};
 				border-radius: 2px;
+			}
+			.ant-slider-mark {
+				font-size: 10px;
 			}
 		}
 	`
