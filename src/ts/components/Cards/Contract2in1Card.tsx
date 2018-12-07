@@ -19,7 +19,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 				margin={margin}
 			>
 				<SDivFlexCenter horizontal>
-					<SCardList noMargin width='66%'>
+					<SCardList noMargin width="66%">
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
@@ -33,22 +33,38 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							</ul>
 						</div>
 					</SCardList>
-					<div style={{width: '34%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0px 10px'}}>
+					<div
+						style={{
+							width: '34%',
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							padding: '0px 10px'
+						}}
+					>
 						<SButton>{CST.TH_CONVERT.toUpperCase()}</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal height='130px' padding='10px 0'>
-					<div style={{width: '66%'}}>
-						<img src={temp} style={{width: '100%', height: '100%'}} />
+				<SDivFlexCenter horizontal height="130px" padding="10px 0">
+					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
+						<img src={temp} style={{ width: '100%', height: '100%' }} />
 					</div>
-					<div style={{width: '34%', padding: '0px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-						<SCardList noMargin width='100%'>
+					<div
+						style={{
+							width: '34%',
+							padding: '0px 10px',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-between'
+						}}
+					>
+						<SCardList noMargin width="100%">
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
 										<span className="title">aETH</span>
 									</li>
-									<li style={{flexDirection: 'row-reverse'}}>
+									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">1,234,567</span>
 									</li>
 								</ul>
@@ -57,18 +73,26 @@ export default class Contract2in1Card extends React.Component<IProps> {
 						<SButton>TRADE aETH</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal height='130px' padding='10px 0'>
-					<div style={{width: '66%'}}>
-						<img src={temp} style={{width: '100%', height: '100%'}} />
+				<SDivFlexCenter horizontal height="130px" padding="10px 0">
+					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
+						<img src={temp} style={{ width: '100%', height: '100%' }} />
 					</div>
-					<div style={{width: '34%', padding: '0px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-						<SCardList noMargin width='100%'>
+					<div
+						style={{
+							width: '34%',
+							padding: '0px 10px',
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-between'
+						}}
+					>
+						<SCardList noMargin width="100%">
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
 										<span className="title">bETH</span>
 									</li>
-									<li style={{flexDirection: 'row-reverse'}}>
+									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">1,234,567</span>
 									</li>
 								</ul>
