@@ -25,7 +25,7 @@ export interface ILocaleText {
 	RU: string;
 	JP: string;
 	[key: string]: string;
-};
+}
 export const TH_ETH = 'Eth';
 export const TH_WETH = 'Weth';
 export const TH_ALLOWANCE = 'Allowance';
@@ -33,7 +33,7 @@ export const TH_SUBMIT = 'Submit';
 export const TH_APPROVE = 'Approve';
 export const TH_CLEAR = 'Clear';
 export const TH_ORDER = 'Order';
-export const TH_HISTORY = 'History'
+export const TH_HISTORY = 'History';
 export const TH_LOADING = 'Loading';
 export const TH_TRADE = 'Trades';
 export const TH_SELL = 'Sell';
@@ -57,6 +57,8 @@ export const TH_INFO = 'Info';
 export const TH_HOSTNAME = 'Hostname';
 export const TH_COLLATERAL = 'Collateral';
 export const TH_CONVERT = 'Convert';
+export const TH_CREATE = 'Create';
+export const TH_REDEEM = 'Redeem';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {

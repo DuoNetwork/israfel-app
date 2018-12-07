@@ -32,7 +32,7 @@ export const SCard = styled(Card)`
 				padding: 10px 0 !important;
 			}
 			.ant-card-extra {
-				padding: 9px 0;
+				padding: 11px 0;
 				height: 40px;
 			}
 		}

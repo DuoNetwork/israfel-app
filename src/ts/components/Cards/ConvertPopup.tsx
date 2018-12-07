@@ -1,4 +1,5 @@
 import close from 'images/icons/close.svg';
+import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -21,7 +22,7 @@ interface IProps {
 
 interface IState {
 	isExpand: boolean;
-	isBid: boolean;
+	isCreate: boolean;
 	amount1: string;
 	amount2: string;
 	isExtraInput: boolean;
@@ -32,7 +33,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			isExpand: false,
-			isBid: true,
+			isCreate: true,
 			amount1: '',
 			amount2: '',
 			isExtraInput: false
@@ -40,7 +41,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 	}
 	private handleSideChange = () =>
 		this.setState({
-			isBid: !this.state.isBid
+			isCreate: !this.state.isCreate
 		});
 	private handleExpandChange = () =>
 		this.setState({
@@ -62,7 +63,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 		});
 	public render() {
 		const { title, toggleDisplay, display } = this.props;
-		const { isBid, isExpand, amount1, amount2, isExtraInput } = this.state;
+		const { isCreate, isExpand, amount1, amount2, isExtraInput } = this.state;
 		const marks = {
 			0: {
 				label: <strong>0%</strong>
@@ -88,7 +89,12 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 					width="400px"
 					className="popup-card"
 					noBodymargin
-					extra={<img className='cardpopup-close' src={close} onClick={toggleDisplay} />}
+					extra={
+						<SDivFlexCenter horizontal width="40px">
+							<img className="cardpopup-close" src={help} />
+							<img className="cardpopup-close" src={close} onClick={toggleDisplay} />
+						</SDivFlexCenter>
+					}
 				>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
@@ -152,12 +158,12 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 					</SCardList>
 					<SCardConversionForm>
 						<SDivFlexCenter horizontal width="100%" padding="10px;">
-							{[CST.TH_BUY, CST.TH_SELL].map(side => (
+							{[CST.TH_CREATE, CST.TH_REDEEM].map(side => (
 								<button
 									key={side}
 									className={
-										(isBid && side === CST.TH_BUY) ||
-										(!isBid && side === CST.TH_SELL)
+										(isCreate && side === CST.TH_CREATE) ||
+										(!isCreate && side === CST.TH_REDEEM)
 											? 'conv-button selected'
 											: 'conv-button non-select'
 									}
@@ -182,7 +188,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 									>
 										<SInput
 											width="100%"
-											placeholder="ETH Amount"
+											placeholder={(isCreate ? 'ETH ' : 'Token ') + 'Amount'}
 											value={amount1}
 											onChange={e =>
 												this.handleAmount1InputChange(e.target.value)
@@ -202,13 +208,12 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 									</li>
 									<li
 										className="waring-expand-button"
-										style={{ padding: '0 15px' }}
+										style={{ padding: '0 10px 0 15px' }}
 										onClick={() => this.handleExtraInputChange()}
 									>
 										<span>
-											<img src={waring} />
-											Paid with ETH, click to paid with WETH (Pannel{' '}
-											{isExtraInput ? 'Opened' : 'Closed'})
+											<img src={waring} style={{marginRight: 2}}/>
+											{isCreate ? 'Create from ' : 'Redeem to '} ETH, click to {isCreate ? 'create from ' : 'redeem to '} WETH
 										</span>
 									</li>
 								</ul>
@@ -229,7 +234,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 									>
 										<SInput
 											width="100%"
-											placeholder="WETH Amount"
+											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
 											value={amount2}
 											onChange={e =>
 												this.handleAmount2InputChange(e.target.value)
