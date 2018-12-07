@@ -60,6 +60,7 @@ export const TH_CONVERT = 'Convert';
 export const TH_CREATE = 'Create';
 export const TH_REDEEM = 'Redeem';
 export const TH_PLACEORDER = 'Place Order';
+export const TH_CUSTODIAN = 'Custodian';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {

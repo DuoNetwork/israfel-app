@@ -17,6 +17,7 @@ export interface IDivFlexCenterProps {
 	paddingRight?: string;
 	paddingTop?: string;
 	paddingBottom?: string;
+	rowInv?: boolean;
 }
 
 export const SHeader = styled(Header)`
@@ -40,7 +41,7 @@ export const SDivFlexCenter = styled.div`
 	display: flex;
 	width: ${(props: IDivFlexCenterProps) => props.width};
 	height: ${(props: IDivFlexCenterProps) => props.height};
-	flex-direction: ${(props: IDivFlexCenterProps) => (props.horizontal ? 'row' : 'column')};
+	flex-direction: ${(props: IDivFlexCenterProps) => (props.horizontal ? (props.rowInv ? 'row-reverse' : 'row') : 'column')};
 	justify-content: ${(props: IDivFlexCenterProps) => (props.noJust ? null : props.center ? 'center' : 'space-between')};
 	padding: ${(props: IDivFlexCenterProps) => (props.padding)};
 	padding-left: ${(props: IDivFlexCenterProps) => (props.padding ? null : props.paddingLeft)};

@@ -8,11 +8,12 @@ interface IProps {
 	title: string;
 	margin: string;
 	toggleConvertDisplay: () => void;
+	toggleTradeDisplay: () => void;
 }
 
 export default class Contract2in1Card extends React.Component<IProps> {
 	public render() {
-		const { title, margin, toggleConvertDisplay } = this.props;
+		const { title, margin, toggleConvertDisplay, toggleTradeDisplay } = this.props;
 		return (
 			<SCard
 				title={<SCardTitle>{title.toUpperCase()}</SCardTitle>}
@@ -71,7 +72,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton>TRADE aETH</SButton>
+						<SButton onClick={toggleTradeDisplay}>TRADE aETH</SButton>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
@@ -99,7 +100,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton>TRADE bETH</SButton>
+						<SButton onClick={toggleTradeDisplay}>TRADE bETH</SButton>
 					</div>
 				</SDivFlexCenter>
 			</SCard>

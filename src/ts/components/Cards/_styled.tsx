@@ -452,6 +452,10 @@ export const SCardList = styled.div`
 			.content {
 				color: ${ColorStyles.TextBlack};
 			}
+			.des {
+				color: ${ColorStyles.TextBlackAlphaL};
+				font-size: 12px;
+			}
 			.percent-button {
 				outline: none;
 				cursor: pointer;
@@ -941,6 +945,9 @@ injectGlobal([
 			}
 			.ant-slider-mark {
 				font-size: 10px;
+			}
+			.ant-radio-wrapper:last-child {
+				margin-right: 0 !important;
 			}
 		}
 	`
