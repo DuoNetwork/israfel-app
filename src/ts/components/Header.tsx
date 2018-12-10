@@ -2,6 +2,8 @@ import duoIcon from 'images/DUO_icon.png';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as CST from 'ts/common/constants';
+import { IEthBalance } from 'ts/common/types';
+import util from 'ts/common/util';
 import { SDivFlexCenter, SHeader } from './_styled';
 //import LocaleSelect from './Common/LocaleSelect';
 
@@ -9,12 +11,13 @@ interface IProps {
 	location: object;
 	network: number;
 	locale: string;
+	ethBalance: IEthBalance;
 	updateLocale: (locale: string) => any;
 }
 
 export default class Header extends React.Component<IProps> {
 	public render() {
-		const { network } = this.props;
+		const { network, ethBalance } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
 		//const path = (location as any).pathname.toLowerCase();
 		return (
@@ -29,11 +32,15 @@ export default class Header extends React.Component<IProps> {
 						<div className="nav-bal-wrapper">
 							<div className="nav-bal-item">
 								<div>{CST.TH_ETH.toUpperCase()}</div>
-								<div className="nav-bal-value">123,234.12</div>
+								<div className="nav-bal-value">
+									{util.formatBalance(ethBalance.eth)}
+								</div>
 							</div>
 							<div className="nav-bal-item">
 								<div>{CST.TH_WETH.toUpperCase()}</div>
-								<div className="nav-bal-value">123,234.12</div>
+								<div className="nav-bal-value">
+									{util.formatBalance(ethBalance.weth)}
+								</div>
 							</div>
 						</div>
 					</div>

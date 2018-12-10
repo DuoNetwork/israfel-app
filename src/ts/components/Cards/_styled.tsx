@@ -86,6 +86,7 @@ export const SButton = styled.button`
 	border: 1px solid ${ColorStyles.MainColor};
 	border-radius: 2px;
 	color: ${ColorStyles.MainColor};
+	background-color: transparent;
 	font-size: 14px;
 	transition: all 0.2s;
 	&:hover {

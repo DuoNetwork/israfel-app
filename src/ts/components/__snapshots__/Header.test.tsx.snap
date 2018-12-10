@@ -38,7 +38,7 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           <div
             className="nav-bal-value"
           >
-            123,234.12
+            123.0
           </div>
         </div>
         <div
@@ -50,7 +50,7 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           <div
             className="nav-bal-value"
           >
-            123,234.12
+            456.0
           </div>
         </div>
       </div>

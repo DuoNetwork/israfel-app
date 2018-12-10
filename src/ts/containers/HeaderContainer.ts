@@ -9,7 +9,8 @@ import Header from 'ts/components/Header';
 function mapStateToProps(state: IState) {
 	return {
 		locale: state.ui.locale,
-		network: state.web3.network
+		network: state.web3.network,
+		ethBalance: state.web3.ethBalance
 	};
 }
 

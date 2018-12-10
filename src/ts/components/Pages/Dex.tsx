@@ -4,9 +4,9 @@ import * as React from 'react';
 // import web3Util from 'ts/common/web3Util';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
-import Contract2in1Card from '../Cards/Contract2in1Card';
-import CovertPopup from '../Cards/ConvertPopup';
-import TradePopup from '../Cards/TradePopup';
+import ConvertCard from '../Cards/ConvertCard';
+import CustodianCard from '../Cards/CustodianCard';
+import TradeCard from '../Cards/TradeCard';
 
 interface IState {
 	displayConvert: boolean;
@@ -34,39 +34,39 @@ export default class Dex extends React.Component<{}, IState> {
 				<div className="App">
 					<Header />
 					<SDivFlexCenter center horizontal marginBottom="10px;">
-						<Contract2in1Card
-							toggleConvertDisplay={this.toggleConvert}
-							toggleTradeDisplay={this.toggleTrade}
-							title="Beethoven M19"
-							margin="0 5px 0 0"
-						/>
-						<Contract2in1Card
+						<CustodianCard
 							toggleConvertDisplay={this.toggleConvert}
 							toggleTradeDisplay={this.toggleTrade}
 							title="Beethoven PERPETUAL"
 							margin="0 0 0 5px"
 						/>
-					</SDivFlexCenter>
-					<SDivFlexCenter center horizontal>
-						<Contract2in1Card
+						<CustodianCard
 							toggleConvertDisplay={this.toggleConvert}
 							toggleTradeDisplay={this.toggleTrade}
-							title="Mozart M19"
+							title="Beethoven M19"
 							margin="0 5px 0 0"
 						/>
-						<Contract2in1Card
+					</SDivFlexCenter>
+					<SDivFlexCenter center horizontal>
+						<CustodianCard
 							toggleConvertDisplay={this.toggleConvert}
 							toggleTradeDisplay={this.toggleTrade}
 							title="Mozart PERPETUAL"
 							margin="0 0 0 5px"
 						/>
+						<CustodianCard
+							toggleConvertDisplay={this.toggleConvert}
+							toggleTradeDisplay={this.toggleTrade}
+							title="Mozart M19"
+							margin="0 5px 0 0"
+						/>
 					</SDivFlexCenter>
-					<CovertPopup
+					<ConvertCard
 						title="Beethoven M19"
 						toggleDisplay={this.toggleConvert}
 						display={displayConvert}
 					/>
-					<TradePopup
+					<TradeCard
 						title="Beethoven M19"
 						toggleDisplay={this.toggleTrade}
 						display={displayTrade}
