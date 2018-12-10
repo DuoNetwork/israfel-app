@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import PriceChart from 'ts/components/Charts/PriceChart';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
-import temp from '../../../images/temp.png';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 
@@ -54,7 +53,8 @@ export default class Contract2in1Card extends React.Component<IProps> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
-						<img src={temp} style={{ width: '100%', height: '100%' }} />
+						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} name={title + '1'} isA={true}/>
+
 					</div>
 					<div
 						style={{
@@ -82,7 +82,8 @@ export default class Contract2in1Card extends React.Component<IProps> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
-						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} />
+						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} name={title + '2'} isA={false}/>
+
 					</div>
 					<div
 						style={{

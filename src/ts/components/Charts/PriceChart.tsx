@@ -1,16 +1,15 @@
 import * as d3 from 'd3';
 import moment from 'moment';
 import * as React from 'react';
-// import { ColorStyles } from 'ts/common/styles';
+import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 
-const margin = { top: 5, right: 5, bottom: 5, left: 5 };
+const margin = { top: 5, right: 5, bottom: 30, left: 25 };
 const width = 375 - margin.left - margin.right;
 const height = 110 - margin.top - margin.bottom;
 
-function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number) {
+function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, name: string, isA: boolean) {
 	if (!sourceData.length) {
-		console.log(timeStep);
 		d3.selectAll('.loading').remove();
 		d3.select(el)
 			.append('div')
@@ -21,20 +20,16 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number) 
 		return;
 	}
 	// //Establish SVG Playground
-	// console.log("1234567890");
-	console.log("el");
-	console.log(el);
-	// console.log(sourceData);
-	d3.selectAll('.loading').remove();
-	d3.selectAll('#timeserieschart').remove();
-	const maxNumber = d3.max(sourceData.map(d => d.navA)) || 0;
-	const miniNumber = d3.min(sourceData.map(d => d.navA)) || 0;
+	d3.selectAll('.loading' + name).remove();
+	d3.selectAll('#timeserieschart' + name).remove();
+	const maxNumber = d3.max(sourceData.map(d => isA ? d.navA : d.navB)) || 0;
+	const miniNumber = d3.min(sourceData.map(d => isA ? d.navA : d.navB)) || 0;
 	const maxTimestamp = d3.max(sourceData.map(d => d.timestamp)) || 0;
 	const miniTimestamp = d3.min(sourceData.map(d => d.timestamp)) || 0;
 	const svg = d3
 		.select(el)
 		.append('svg')
-		.attr('id', 'timeserieschart')
+		.attr('id', 'timeserieschart' + name)
 		.attr('width', width + margin.left + margin.right)
 		.attr('height', height + margin.top + margin.bottom);
 	const xScale = d3
@@ -44,7 +39,7 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number) 
 	//ETH Linear YScale
 	const ethYScale = d3
 		.scaleLinear()
-		.domain([miniNumber * 0.9999995, maxNumber * 1.00000005])
+		.domain([miniNumber * 0.9, maxNumber * 1.1])
 		.range([height, 0]);
 	//Axis
 	const formatString = (step: number, date: number) => {
@@ -61,75 +56,91 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number) 
 	const xAxis = d3
 		.axisBottom(xScale)
 		.ticks(6)
+		.tickSize(2)
 		.tickFormat(zoomFormat as any);
 	// .tickFormat(zoomFormat as any);
 	const lyAxis = d3
 		.axisLeft(ethYScale)
-		.ticks(6)
-		.tickFormat(d =>
-			d > 1
-				? d3
-						.format(',.5s')(d)
-						.toString() || ''
-				: d3
-						.format(',.5f')(d)
-						.toString() || ''
+		.tickSize(3)
+		.ticks(5)
+		.tickFormat(
+			d =>
+				d3
+					.format(',.2f')(d)
+					.toString() || ''
 		);
 	//Grid
 	const yGrid = d3
 		.axisLeft(ethYScale)
-		.ticks(10)
+		.ticks(5)
 		.tickSize(-width)
 		.tickFormat(() => '');
-	const chart = d3
-		.select(el)
-		.select('#timeserieschart')
+	const chart = svg
 		.append('g')
-		.attr('class', 'graph-area')
+		.attr('class', 'graph-area' + name)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 	const aX = chart
 		.append('g')
-		.attr('class', 'x-axis')
+		.attr('class', 'x-axis' + name)
 		.attr('transform', 'translate(0,' + height + ')')
 		.call(xAxis as any);
-	aX.selectAll('text').style('text-anchor', 'middle');
-	chart
+	aX.selectAll('text')
+		.style('text-anchor', 'middle')
+		.style('font-size', '8px')
+		.style('color', ColorStyles.TextBlackAlphaLL);
+	aX.selectAll('.tick')
+		.selectAll('line')
+		.attr('stroke', ColorStyles.BorderWhite1);
+	aX.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
+	const aY = chart
 		.append('g')
-		.attr('class', 'ly-axis')
+		.attr('class', 'ly-axis' + name)
 		.call(lyAxis as any);
+	aY.selectAll('text')
+		.style('font-size', '8px')
+		.style('color', ColorStyles.TextBlackAlphaLL);
+	aY.selectAll('.tick')
+		.selectAll('line')
+		.attr('stroke', ColorStyles.BorderWhite1);
+	aY.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
 	chart
 		.append('defs')
 		.append('clipPath')
-		.attr('id', 'clip')
+		.attr('id', 'clip' + name)
 		.append('rect')
 		.attr('x', 1)
 		.attr('y', 0)
 		.attr('width', width - 1)
 		.attr('height', height);
-	chart
+	const yGridLines = chart
 		.append('g')
-		.attr('class', 'y-grid')
+		.attr('class', 'y-grid' + name)
 		.style('stroke-dasharray', '3, 3')
 		.call(yGrid as any);
+	yGridLines
+		.selectAll('.tick')
+		.selectAll('line')
+		.attr('stroke', ColorStyles.BorderWhite1);
+	yGridLines.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
 	// Chart Data
 	const chartdata = chart
 		.append('g')
-		.attr('class', 'chart-data')
-		.attr('clip-path', 'url(#clip)');
+		.attr('class', 'chart-data' + name)
+		.attr('clip-path', `url(#${'clip' + name})`);
 	const line = d3
 		.line<any>()
 		.x(d => {
 			return xScale(d.timestamp);
 		})
 		.y(d => {
-			return ethYScale(d.navA);
+			return ethYScale(isA ? d.navA : d.navB);
 		});
-	const ohlc = chartdata.append('g').attr('class', 'ohlc');
+	const ohlc = chartdata.append('g').attr('class', 'ohlc' + name);
 	ohlc.selectAll('g')
 		.data(sourceData)
 		.enter()
 		.append('g');
-	const segments = svg.append('g').attr('class', 'segments');
+	const segments = svg.append('g').attr('class', 'segments' + name);
 	segments
 		.selectAll('g')
 		.data(sourceData)
@@ -138,25 +149,27 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number) 
 	const segBar = segments.selectAll('g');
 	segBar
 		.append('circle')
-		.attr('class', 'segdot-eth')
+		.attr('class', 'segdot-eth' + name)
 		.attr('cx', (d: any) => xScale(d.timestamp))
-		.attr('cy', (d: any) => ethYScale(d.navA))
+		.attr('cy', (d: any) => ethYScale(isA ? d.navA : d.navB))
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-		.attr('r', 2)
-		.style('fill', 'black');
+		.attr('r', 1)
+		.style('fill', isA ? ColorStyles.TextGreenAlphaL : ColorStyles.TextRedAlphaL);
 	svg.append('path')
 		.datum(sourceData)
-		.attr('class', 'line')
+		.attr('class', 'line' + name)
 		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
-		.attr('stroke', 'red')
-		.attr('stroke-width', 1);
+		.attr('stroke', isA ? ColorStyles.TextGreenAlphaL : ColorStyles.TextRedAlphaL)
+		.attr('stroke-width', 2);
 }
 
 interface IProps {
 	prices: any[];
 	timeStep: number;
+	name: string;
+	isA: boolean;
 }
 
 export default class TimeSeriesChart extends React.Component<IProps> {
@@ -167,21 +180,25 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, timeStep } = this.props;
-		console.log("price");
-		console.log(prices);
-		drawLines(this.chartRef.current as Element, prices, timeStep);
+		const { prices, timeStep, name, isA } = this.props;
+		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA );
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, timeStep } = nextProps;
+		const { prices, timeStep, name, isA } = nextProps;
 		if (JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices))
-			drawLines(this.chartRef.current as Element, prices, timeStep);
+			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
 
 		return false;
 	}
 
 	public render() {
-		return <div className="chart-wrapper" style={{ width: width, height: height}} ref={this.chartRef} />;
+		return (
+			<div
+				className="chart-wrapper"
+				style={{ width: width, height: height }}
+				ref={this.chartRef}
+			/>
+		);
 	}
 }
