@@ -33,9 +33,9 @@ module.exports = {
 			filename: 'index.html'
 		}),
 		new BundleAnalyzerPlugin({
-			analyzerMode: "disabled",
-			reportFilename: "report.html",
-			generateStatsFile: true,
+			analyzerMode: 'disabled',
+			reportFilename: 'report.html',
+			generateStatsFile: true
 		})
 	],
 	optimization: {
@@ -50,6 +50,11 @@ module.exports = {
 					name: 'relayer',
 					priority: 10
 				},
+				'duo-contract-wrapper': {
+					test: /duo-contract-wrapper[\\/]node_modules[\\/]/,
+					name: 'duo-contract-wrapper',
+					priority: 10
+				},
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
 					name: 'd3',
@@ -58,6 +63,11 @@ module.exports = {
 				ethers: {
 					test: /[\\/]node_modules[\\/]ethers/,
 					name: 'ethers',
+					priority: 100
+				},
+				'0x': {
+					test: /[\\/]node_modules[\\/]@0x/,
+					name: '0x',
 					priority: 100
 				},
 				bn: {
@@ -78,11 +88,6 @@ module.exports = {
 				react: {
 					test: /[\\/]node_modules[\\/]react/,
 					name: 'react',
-					priority: 100
-				},
-				'0x': {
-					test: /[\\/]node_modules[\\/]@0x/,
-					name: '0x',
 					priority: 100
 				},
 				ant: {
@@ -124,7 +129,8 @@ module.exports = {
 		}
 	},
 	module: {
-		rules: [{
+		rules: [
+			{
 				enforce: 'pre',
 				test: /\.tsx?$/,
 				include: path.join(__dirname, 'src'),
@@ -154,12 +160,14 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|jpeg|png|gif|svg)(\?.*)?$/,
-				use: [{
-					loader: 'url-loader',
-					options: {
-						limit: 20480
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 20480
+						}
 					}
-				}]
+				]
 			},
 			{
 				test: /\.(xlsm|csv|ico|eot|otf|webp|ttf|ttc|woff|woff2|pdf)(\?.*)?$/,
@@ -173,7 +181,7 @@ module.exports = {
 			moment: path.resolve('./node_modules/moment'),
 			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
 			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
-			immutable: path.resolve('./node_modules/immutable'),
+			immutable: path.resolve('./node_modules/immutable')
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
