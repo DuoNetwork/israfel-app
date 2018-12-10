@@ -108,7 +108,6 @@ class WsUtil {
 				(orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
 			);
 		} else {
-			console.log(orderBookResponse as IWsOrderBookResponse);
 			this.latestVersionNumber = (orderBookResponse as IWsOrderBookResponse).orderBookSnapshot
 				? (orderBookResponse as IWsOrderBookResponse).orderBookSnapshot.version
 				: 0;
@@ -120,8 +119,6 @@ class WsUtil {
 
 	public handleMessage(message: string) {
 		const res: IWsResponse = JSON.parse(message);
-		console.log('res');
-		console.log(res);
 		if (res.method !== CST.WS_UNSUB)
 			switch (res.channel) {
 				case CST.DB_ORDERS:
@@ -261,7 +258,6 @@ class WsUtil {
 			orderHash: orderHash,
 			signature: signature
 		};
-		console.log(msg);
 		this.ws.send(JSON.stringify(msg));
 	}
 
