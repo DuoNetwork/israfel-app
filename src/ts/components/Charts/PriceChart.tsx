@@ -5,7 +5,7 @@ import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 
 const margin = { top: 5, right: 5, bottom: 30, left: 25 };
-const width = 375 - margin.left - margin.right;
+const width = 222 - margin.left - margin.right;
 const height = 110 - margin.top - margin.bottom;
 
 function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, name: string, isA: boolean) {
@@ -154,14 +154,14 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, 
 		.attr('cy', (d: any) => ethYScale(isA ? d.navA : d.navB))
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('r', 1)
-		.style('fill', isA ? ColorStyles.TextGreenAlphaL : ColorStyles.TextRedAlphaL);
+		.style('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
 	svg.append('path')
 		.datum(sourceData)
 		.attr('class', 'line' + name)
 		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
-		.attr('stroke', isA ? ColorStyles.TextGreenAlphaL : ColorStyles.TextRedAlphaL)
+		.attr('stroke', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar)
 		.attr('stroke-width', 2);
 }
 

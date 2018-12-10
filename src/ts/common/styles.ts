@@ -67,4 +67,9 @@ export const ColorStyles = {
 	ButtonHoverWhite4: 'rgba(255,255,255,0.4)',
 	ButtonHoverWhite3: 'rgba(255,255,255,0.3)',
 	ButtonHoverWhite1: 'rgba(255,255,255,0.1)',
+	// token colors
+	BeethovenTokenAColor: 'rgba(105,188,255,0.8)',
+	BeethovenTokenBCollar: 'rgba(245,122,15,0.8)',
+	MozartTokenAColor: '',
+	MozartTokenBColor: '',
 };

@@ -39,7 +39,7 @@ export default class CustodianCard extends React.Component<IProps> {
 		return (
 			<SCard
 				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
-				width="595px"
+				width="360px"
 				margin={margin}
 			>
 				<SDivFlexCenter horizontal>
@@ -71,7 +71,12 @@ export default class CustodianCard extends React.Component<IProps> {
 						}}
 					>
 						<SButton onClick={toggleConvertDisplay}>
-							{CST.TH_CONVERT}
+							{tokenBalances[aCode] &&
+							tokenBalances[bCode] &&
+							tokenBalances[aCode].balance &&
+							tokenBalances[bCode].balance
+								? CST.TH_CONVERT
+								: CST.TH_GET_BOTH}
 						</SButton>
 					</div>
 				</SDivFlexCenter>
@@ -109,7 +114,11 @@ export default class CustodianCard extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>{CST.TH_TRADE + ' ' + aCode}</SButton>
+						<SButton onClick={toggleTradeDisplay}>
+							{tokenBalances[aCode] && tokenBalances[aCode].balance
+								? CST.TH_TRADE
+								: CST.TH_GET}
+						</SButton>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
@@ -146,7 +155,11 @@ export default class CustodianCard extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>{CST.TH_TRADE + ' ' + bCode}</SButton>
+						<SButton onClick={toggleTradeDisplay}>
+							{tokenBalances[bCode] && tokenBalances[bCode].balance
+								? CST.TH_TRADE
+								: CST.TH_GET}
+						</SButton>
 					</div>
 				</SDivFlexCenter>
 			</SCard>

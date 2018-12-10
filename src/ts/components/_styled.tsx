@@ -22,7 +22,7 @@ export interface IDivFlexCenterProps {
 
 export const SHeader = styled(Header)`
 	width: 100% !important;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.20);
 	display: flex !important;
 	align-items: center !important;

@@ -65,16 +65,6 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           replace={false}
           to="/status"
         >
-          ACCOUNT
-        </Link>
-      </div>
-      <div
-        className="nav-button-wrapper"
-      >
-        <Link
-          replace={false}
-          to="/status"
-        >
           STATUS
         </Link>
       </div>

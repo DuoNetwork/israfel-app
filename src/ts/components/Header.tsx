@@ -53,9 +53,9 @@ export default class Header extends React.Component<IProps> {
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
-						<div className="nav-button-wrapper">
+						{/* <div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.AC_ACCOUNT.toUpperCase()}</Link>
-						</div>
+						</div> */}
 						<div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
 						</div>

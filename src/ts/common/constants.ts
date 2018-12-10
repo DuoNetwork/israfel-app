@@ -41,7 +41,7 @@ export const TH_CLEAR = 'Clear';
 export const TH_ORDER = 'Order';
 export const TH_HISTORY = 'History';
 export const TH_LOADING = 'Loading';
-export const TH_TRADE = 'Trades';
+export const TH_TRADE = 'Trade';
 export const TH_SELL = 'Sell';
 export const TH_BUY = 'Buy';
 export const TH_PX = 'Price';
@@ -69,6 +69,8 @@ export const TH_PLACEORDER = 'Place Order';
 export const TH_CUSTODIAN = 'Custodian';
 export const TH_MATURITY = 'Maturity';
 export const TH_PERPETUAL = 'Perpetual';
+export const TH_GET = 'Get';
+export const TH_GET_BOTH = 'Get Both';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {

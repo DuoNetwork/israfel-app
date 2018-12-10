@@ -56,7 +56,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			<Layout>
 				<div className="App">
 					<Header />
-					<SDivFlexCenter center horizontal marginBottom="10px;">
+					<SDivFlexCenter center horizontal marginBottom="20px;">
 						{beethovenList.map(c => (
 							<CustodianCard
 								key={c}
@@ -64,7 +64,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								toggleConvertDisplay={this.toggleConvert}
 								toggleTradeDisplay={this.toggleTrade}
 								info={custodians[c]}
-								margin="0 5px 0 0"
+								margin="0 20px 0 0"
 								acceptedPrices={acceptedPrices[c]}
 								tokenBalances={tokenBalances}
 							/>
@@ -78,7 +78,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								toggleConvertDisplay={this.toggleConvert}
 								toggleTradeDisplay={this.toggleTrade}
 								info={custodians[c]}
-								margin="0 5px 0 0"
+								margin="0 20px 0 0"
 								acceptedPrices={acceptedPrices[c]}
 								tokenBalances={tokenBalances}
 							/>
