@@ -65,7 +65,6 @@ describe('actions', () => {
 	test('tokenBalanceUpdate', () => {
 		expect(
 			web3Actions.tokenBalanceUpdate('code', {
-				custodian: 'custodian',
 				balance: 123,
 				allowance: 456
 			})
@@ -80,7 +79,6 @@ describe('actions', () => {
 			ws: {
 				tokens: [
 					{
-						custodian: 'custodian',
 						code: 'code'
 					}
 				]
@@ -130,13 +128,13 @@ describe('actions', () => {
 		);
 	});
 
-	test('custodianStateUpdate', () => {
+	test('custodianUpdate', () => {
 		expect(
-			web3Actions.custodianStateUpdate('custodian', 'custodianState' as any)
+			web3Actions.custodianUpdate('custodian', 'custodianCode', 'custodianStates' as any)
 		).toMatchSnapshot();
 	});
 
-	test('getCustodianStates', () => {
+	test('getCustodians', () => {
 		const store: any = mockStore({
 			ws: {
 				tokens: [
@@ -148,9 +146,10 @@ describe('actions', () => {
 			}
 		});
 		dualClassWrappers['custodian'] = {
-			getStates: jest.fn(() => Promise.resolve('custodianState'))
+			getStates: jest.fn(() => Promise.resolve('custodianStates')),
+			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
 		} as any;
-		store.dispatch(web3Actions.getCustodianStates());
+		store.dispatch(web3Actions.getCustodians());
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -180,7 +179,8 @@ describe('actions', () => {
 		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
 		web3Util.getCurrentAddress = jest.fn(() => Promise.resolve('0x0'));
 		dualClassWrappers['custodian'] = {
-			getStates: jest.fn(() => Promise.resolve('custodianState'))
+			getStates: jest.fn(() => Promise.resolve('custodianStates')),
+			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
 		} as any;
 		store.dispatch(web3Actions.refresh());
 		return new Promise(resolve =>

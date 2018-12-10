@@ -17,7 +17,7 @@ Object {
   },
   "web3": Object {
     "account": "0x0000000000000000000000000000000000000000",
-    "custodianStates": Object {},
+    "custodians": Object {},
     "ethBalance": Object {
       "allowance": 0,
       "eth": 0,

@@ -50,11 +50,12 @@ describe('web3 reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('custodianState', () => {
+	test('custodian', () => {
 		state = web3Reducer(state, {
-			type: CST.AC_CTD_STATE,
+			type: CST.AC_CUSTODIAN,
+			code: 'custodianCode',
 			custodian: 'custodian',
-			state: 'custodianState'
+			states: 'custodianStates'
 		});
 		expect(state).toMatchSnapshot();
 	});

@@ -19,7 +19,7 @@ export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
 export const AC_OB_SUB = 'orderBookSubscription';
 export const AC_ETH_BALANCE = 'ethBalance';
 export const AC_TOKEN_BALANCE = 'tokenBalance';
-export const AC_CTD_STATE = 'custodianState';
+export const AC_CUSTODIAN = 'custodian';
 
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';
@@ -67,6 +67,8 @@ export const TH_CREATE = 'Create';
 export const TH_REDEEM = 'Redeem';
 export const TH_PLACEORDER = 'Place Order';
 export const TH_CUSTODIAN = 'Custodian';
+export const TH_MATURITY = 'Maturity';
+export const TH_PERPETUAL = 'Perpetual';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {

@@ -7,11 +7,12 @@ Object {
 }
 `;
 
-exports[`actions custodianStateUpdate 1`] = `
+exports[`actions custodianUpdate 1`] = `
 Object {
+  "code": "custodianCode",
   "custodian": "custodian",
-  "state": "custodianState",
-  "type": "custodianState",
+  "states": "custodianStates",
+  "type": "custodian",
 }
 `;
 
@@ -49,7 +50,6 @@ Array [
     "balance": Object {
       "allowance": 333,
       "balance": 222,
-      "custodian": "custodian",
     },
     "code": "code",
     "type": "tokenBalance",
@@ -93,12 +93,13 @@ Array [
 
 exports[`actions getBalances dummy 1`] = `Array []`;
 
-exports[`actions getCustodianStates 1`] = `
+exports[`actions getCustodians 1`] = `
 Array [
   Object {
+    "code": "custodianCode",
     "custodian": "custodian",
-    "state": "custodianState",
-    "type": "custodianState",
+    "states": "custodianStates",
+    "type": "custodian",
   },
 ]
 `;
@@ -130,9 +131,10 @@ Array [
     "value": "0x0",
   },
   Object {
+    "code": "custodianCode",
     "custodian": "custodian",
-    "state": "custodianState",
-    "type": "custodianState",
+    "states": "custodianStates",
+    "type": "custodian",
   },
   Object {
     "type": "ethBalance",
@@ -146,7 +148,6 @@ Array [
     "balance": Object {
       "allowance": 333,
       "balance": 222,
-      "custodian": "custodian",
     },
     "code": "code",
     "type": "tokenBalance",
@@ -159,7 +160,6 @@ Object {
   "balance": Object {
     "allowance": 456,
     "balance": 123,
-    "custodian": "custodian",
   },
   "code": "code",
   "type": "tokenBalance",

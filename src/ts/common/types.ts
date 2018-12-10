@@ -31,9 +31,9 @@ export interface IWeb3State {
 	readonly tokenBalances: {
 		[code: string]: ITokenBalance;
 	};
-	readonly custodianStates: {
-		[custodian: string]: IDualClassStates
-	}
+	readonly custodians: {
+		[custodian: string]: ICustodianInfo;
+	};
 }
 
 export interface IWsState {
@@ -50,7 +50,11 @@ export interface IEthBalance {
 }
 
 export interface ITokenBalance {
-	custodian: string;
 	balance: number;
 	allowance: number;
+}
+
+export interface ICustodianInfo {
+	code: string;
+	states: IDualClassStates;
 }

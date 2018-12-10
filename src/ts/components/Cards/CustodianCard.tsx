@@ -1,24 +1,43 @@
+import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
+import { IAcceptedPrice, ICustodianInfo, ITokenBalance } from 'ts/common/types';
 import PriceChart from 'ts/components/Charts/PriceChart';
-import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {
-	title: string;
+	type: string;
+	tokenBalances: { [code: string]: ITokenBalance };
+	info: ICustodianInfo;
 	margin: string;
 	acceptedPrices: IAcceptedPrice[];
 	toggleConvertDisplay: () => void;
 	toggleTradeDisplay: () => void;
 }
 
-export default class Contract2in1Card extends React.Component<IProps> {
+export default class CustodianCard extends React.Component<IProps> {
 	public render() {
-		const { title, margin, toggleConvertDisplay, toggleTradeDisplay } = this.props;
+		const {
+			type,
+			info,
+			margin,
+			toggleConvertDisplay,
+			toggleTradeDisplay,
+			tokenBalances
+		} = this.props;
+		const contractCode = info.code;
+		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
+		const maturity = info.states.maturity
+			? moment(info.states.maturity).format('YYYY-MM-DD HH:mm')
+			: CST.TH_PERPETUAL;
+		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
+		const aCode = contractAddress ? contractAddress.aToken.code : '';
+		const bCode = contractAddress ? contractAddress.bToken.code : '';
 		return (
 			<SCard
-				title={<SCardTitle>{title.toUpperCase()}</SCardTitle>}
+				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
 				width="595px"
 				margin={margin}
 			>
@@ -27,12 +46,12 @@ export default class Contract2in1Card extends React.Component<IProps> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
-									<span className="title">{CST.TH_EXPIRY}</span>
-									<span className="content">2018-12-12 12:05</span>
+									<span className="title">{CST.TH_MATURITY}</span>
+									<span className="content">{maturity}</span>
 								</li>
 								<li>
 									<span className="title">{CST.TH_COLLATERAL}</span>
-									<span className="content">1,234,567</span>
+									<span className="content">{info.states.ethCollateral + ' ' + CST.TH_ETH}</span>
 								</li>
 							</ul>
 						</div>
@@ -53,8 +72,12 @@ export default class Contract2in1Card extends React.Component<IProps> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
-						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} name={title + '1'} isA={true}/>
-
+						<PriceChart
+							prices={this.props.acceptedPrices}
+							timeStep={6000}
+							name={aCode}
+							isA={true}
+						/>
 					</div>
 					<div
 						style={{
@@ -69,21 +92,29 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
-										<span className="title">aETH</span>
+										<span className="title">{aCode}</span>
 									</li>
 									<li style={{ flexDirection: 'row-reverse' }}>
-										<span className="content">1,234,567</span>
+										<span className="content">
+											{tokenBalances[aCode]
+												? tokenBalances[aCode].balance
+												: 0}
+										</span>
 									</li>
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>TRADE aETH</SButton>
+						<SButton onClick={toggleTradeDisplay}>{CST.TH_TRADE + ' ' + aCode}</SButton>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
-						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} name={title + '2'} isA={false}/>
-
+						<PriceChart
+							prices={this.props.acceptedPrices}
+							timeStep={6000}
+							name={bCode}
+							isA={false}
+						/>
 					</div>
 					<div
 						style={{
@@ -98,15 +129,19 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
-										<span className="title">bETH</span>
+										<span className="title">{bCode}</span>
 									</li>
 									<li style={{ flexDirection: 'row-reverse' }}>
-										<span className="content">1,234,567</span>
+										<span className="content">
+											{tokenBalances[bCode]
+												? tokenBalances[bCode].balance
+												: 0}
+										</span>
 									</li>
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>TRADE bETH</SButton>
+						<SButton onClick={toggleTradeDisplay}>{CST.TH_TRADE + ' ' + bCode}</SButton>
 					</div>
 				</SDivFlexCenter>
 			</SCard>

@@ -5,7 +5,7 @@ import * as CST from './constants';
 
 const provider =
 	(__KOVAN__ ? CST.PROVIDER_INFURA_KOVAN : CST.PROVIDER_INFURA_MAIN) + '/' + infura.token;
-const duoWeb3Wrapper = new Web3Wrapper(window, '', provider, !__KOVAN__);
+export const duoWeb3Wrapper = new Web3Wrapper(window, '', provider, !__KOVAN__);
 export const dualClassWrappers: { [custodian: string]: DualClassWrapper } = {};
 export const getDualClassWrapper = (custodian: string) => {
 	if (!dualClassWrappers[custodian])

@@ -1,15 +1,17 @@
 import { Layout } from 'antd';
 import * as React from 'react';
+import * as CST from 'ts/common/constants';
+import { IAcceptedPrice, ICustodianInfo, ITokenBalance } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
-import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
-import * as relayerTypes from '../../../../../israfel-relayer/src/common/types';
 import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
 import TradeCard from '../Cards/TradeCard';
+// import PriceChart from '../Charts/PriceChart';
 interface IProps {
-	tokens: relayerTypes.IToken[];
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
+	custodians: { [custodian: string]: ICustodianInfo };
+	tokenBalances: { [code: string]: ITokenBalance };
 }
 
 interface IState {
@@ -38,45 +40,49 @@ export default class Dex extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		// const { tokens } = this.props;
-		const { acceptedPrices } = this.props;
+		const { acceptedPrices, custodians, tokenBalances } = this.props;
 		const { displayConvert, displayTrade } = this.state;
-		console.log(acceptedPrices);
+		const beethovenList: string[] = [];
+		const mozartList: string[] = [];
+		for (const custodian in custodians) {
+			const info = custodians[custodian];
+			const code = info.code.toLowerCase();
+			if (code.startsWith(CST.BEETHOVEN.toLowerCase())) beethovenList.push(custodian);
+			else if (code.startsWith(CST.MOZART.toLowerCase())) mozartList.push(custodian);
+		}
+		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
+		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		return (
 			<Layout>
 				<div className="App">
 					<Header />
 					<SDivFlexCenter center horizontal marginBottom="10px;">
-						<CustodianCard
-							toggleConvertDisplay={this.toggleConvert}
-							toggleTradeDisplay={this.toggleTrade}
-							title="Beethoven M19"
-							margin="0 5px 0 0"
-							acceptedPrices={acceptedPrices[Object.keys(acceptedPrices)[0] as any]}
-						/>
-						<CustodianCard
-							toggleConvertDisplay={this.toggleConvert}
-							toggleTradeDisplay={this.toggleTrade}
-							title="Beethoven PERPETUAL"
-							margin="0 0 0 5px"
-							acceptedPrices={acceptedPrices[Object.keys(acceptedPrices)[1] as any]}
-						/>
+						{beethovenList.map(c => (
+							<CustodianCard
+								key={c}
+								type={CST.BEETHOVEN}
+								toggleConvertDisplay={this.toggleConvert}
+								toggleTradeDisplay={this.toggleTrade}
+								info={custodians[c]}
+								margin="0 5px 0 0"
+								acceptedPrices={acceptedPrices[c]}
+								tokenBalances={tokenBalances}
+							/>
+						))}
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal>
-						<CustodianCard
-							toggleConvertDisplay={this.toggleConvert}
-							toggleTradeDisplay={this.toggleTrade}
-							title="Beethoven M19"
-							margin="0 5px 0 0"
-							acceptedPrices={acceptedPrices[Object.keys(acceptedPrices)[2] as any]}
-						/>
-						<CustodianCard
-							toggleConvertDisplay={this.toggleConvert}
-							toggleTradeDisplay={this.toggleTrade}
-							title="Mozart PERPETUAL"
-							margin="0 0 0 5px"
-							acceptedPrices={acceptedPrices[Object.keys(acceptedPrices)[3] as any]}
-						/>
+						{mozartList.map(c => (
+							<CustodianCard
+								key={c}
+								type={CST.MOZART}
+								toggleConvertDisplay={this.toggleConvert}
+								toggleTradeDisplay={this.toggleTrade}
+								info={custodians[c]}
+								margin="0 5px 0 0"
+								acceptedPrices={acceptedPrices[c]}
+								tokenBalances={tokenBalances}
+							/>
+						))}
 					</SDivFlexCenter>
 					<ConvertCard
 						title="Beethoven M19"
@@ -89,6 +95,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						display={displayTrade}
 					/>
 				</div>
+				{/* <PriceChart timeStep={60000} prices={data} /> */}
 			</Layout>
 		);
 	}

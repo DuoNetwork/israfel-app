@@ -58,7 +58,6 @@ export function getBalances(): VoidThunkAction {
 			for (const token of tokens)
 				dispatch(
 					tokenBalanceUpdate(token.code, {
-						custodian: token.custodian,
 						balance: await web3Util.getTokenBalance(token.code, account),
 						allowance: await web3Util.getProxyTokenAllowance(token.code, account)
 					})
@@ -67,15 +66,16 @@ export function getBalances(): VoidThunkAction {
 	};
 }
 
-export function custodianStateUpdate(custodian: string, state: IDualClassStates) {
+export function custodianUpdate(custodian: string, code: string, states: IDualClassStates) {
 	return {
-		type: CST.AC_CTD_STATE,
+		type: CST.AC_CUSTODIAN,
 		custodian: custodian,
-		state: state
+		code: code,
+		states: states
 	};
 }
 
-export function getCustodianStates(): VoidThunkAction {
+export function getCustodians(): VoidThunkAction {
 	return async (dispatch, getState) => {
 		const tokens = getState().ws.tokens;
 		const custodians: string[] = [];
@@ -84,7 +84,10 @@ export function getCustodianStates(): VoidThunkAction {
 		});
 		for (const custodian of custodians) {
 			const cw = getDualClassWrapper(custodian);
-			if (cw) dispatch(custodianStateUpdate(custodian, await cw.getStates()));
+			if (cw)
+				dispatch(
+					custodianUpdate(custodian, await cw.getContractCode(), await cw.getStates())
+				);
 		}
 	};
 }
@@ -94,6 +97,6 @@ export function refresh(): VoidThunkAction {
 		dispatch(getNetwork());
 		await dispatch(getAccount());
 		dispatch(getBalances());
-		dispatch(getCustodianStates());
+		dispatch(getCustodians());
 	};
 }
