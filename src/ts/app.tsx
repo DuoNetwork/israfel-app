@@ -24,9 +24,10 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 store.dispatch(web3Actions.refresh());
 setInterval(() => store.dispatch(web3Actions.refresh()), 15000);
 
-wsUtil.onInfoUpdate((tokens, status, acceptedPrices) =>
-	store.dispatch(wsActions.infoUpdate(tokens, status, acceptedPrices))
-);
+wsUtil.onInfoUpdate((tokens, status, acceptedPrices) => {
+	store.dispatch(wsActions.infoUpdate(tokens, status, acceptedPrices));
+	store.dispatch(web3Actions.refresh());
+});
 wsUtil.onOrder(
 	userOrders => store.dispatch(dexActions.orderHistoryUpdate(userOrders)),
 	userOrder => store.dispatch(dexActions.orderUpdate(userOrder)),
@@ -44,8 +45,7 @@ wsUtil.onConnection(
 );
 
 wsUtil.connectToRelayer();
-if ((window as any).ethereum)
-	(window as any).ethereum.enable();
+if ((window as any).ethereum) (window as any).ethereum.enable();
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>

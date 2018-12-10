@@ -9,6 +9,7 @@ Object {
     "weth": 0,
   },
   "network": 0,
+  "tokenBalances": Object {},
 }
 `;
 
@@ -21,6 +22,7 @@ Object {
     "weth": 0,
   },
   "network": 0,
+  "tokenBalances": Object {},
 }
 `;
 
@@ -33,6 +35,7 @@ Object {
     "weth": 456,
   },
   "network": 123,
+  "tokenBalances": Object {},
 }
 `;
 
@@ -45,5 +48,25 @@ Object {
     "weth": 0,
   },
   "network": 123,
+  "tokenBalances": Object {},
+}
+`;
+
+exports[`web3 reducer tokenBalance 1`] = `
+Object {
+  "account": "test",
+  "ethBalance": Object {
+    "allowance": 789,
+    "eth": 123,
+    "weth": 456,
+  },
+  "network": 123,
+  "tokenBalances": Object {
+    "code": Object {
+      "allowance": 789,
+      "balance": 123,
+      "custodian": "custodian",
+    },
+  },
 }
 `;

@@ -253,7 +253,7 @@ test('addOrder bid', async () => {
 		true,
 		1234567890,
 		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000 }
+		{ balance: 10000, allowance: 10000, custodian: 'custodian' }
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
@@ -291,7 +291,7 @@ test('addOrder ask', async () => {
 		false,
 		1234567890,
 		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000 }
+		{ balance: 10000, allowance: 10000, custodian: 'custodian' }
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();

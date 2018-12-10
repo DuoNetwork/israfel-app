@@ -1,4 +1,10 @@
 export * from '../../../../israfel-relayer/src/common/constants';
+export {
+	BEETHOVEN,
+	MOZART,
+	TENOR_M19,
+	TENOR_PPT
+} from '../../../../duo-admin/src/common/constants';
 
 export const AC_ACCOUNT = 'account';
 export const AC_NETWORK = 'network';
@@ -11,7 +17,6 @@ export const AC_CONNECTION = 'connection';
 export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
 export const AC_OB_SUB = 'orderBookSubscription';
-export const AC_USER_SUB = 'userSubscription';
 export const AC_ETH_BALANCE = 'ethBalance';
 export const AC_TOKEN_BALANCE = 'tokenBalance';
 

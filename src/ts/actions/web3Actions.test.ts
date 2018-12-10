@@ -59,16 +59,30 @@ describe('actions', () => {
 		})).toMatchSnapshot();
 	});
 
-	test('getBalance dummy', () => {
+	test('tokenBalanceUpdate', () => {
+		expect(web3Actions.tokenBalanceUpdate('code', {
+			custodian: 'custodian',
+			balance: 123,
+			allowance: 456
+		})).toMatchSnapshot();
+	});
+
+	test('getBalances dummy', () => {
 		const store: any = mockStore({
 			web3: {
 				account: CST.DUMMY_ADDR
+			},
+			ws: {
+				tokens: [{
+					custodian: 'custodian',
+					code: 'code'
+				}]
 			}
 		});
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
-		store.dispatch(web3Actions.getBalance());
+		store.dispatch(web3Actions.getBalances());
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -84,12 +98,18 @@ describe('actions', () => {
 		const store: any = mockStore({
 			web3: {
 				account: '0xAccount'
+			},
+			ws: {
+				tokens: [{
+					custodian: 'custodian',
+					code: 'code'
+				}]
 			}
 		});
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
-		store.dispatch(web3Actions.getBalance());
+		store.dispatch(web3Actions.getBalances());
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -105,6 +125,12 @@ describe('actions', () => {
 		const store: any = mockStore({
 			web3: {
 				account: '0xAccount'
+			},
+			ws: {
+				tokens: [{
+					custodian: 'custodian',
+					code: 'code'
+				}]
 			}
 		});
 		web3Util.getCurrentNetwork = jest.fn(() => Promise.resolve(123));

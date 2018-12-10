@@ -37,6 +37,19 @@ describe('web3 reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('tokenBalance', () => {
+		state = web3Reducer(state, {
+			type: CST.AC_TOKEN_BALANCE,
+			code: 'code',
+			balance: {
+				custodian: 'custodian',
+				balance: 123,
+				allowance: 789
+			}
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	// test('gasPrice', () => {
 	// 	state = web3Reducer(state, {
 	// 		type: CST.AC_GAS_PX,

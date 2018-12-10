@@ -11,11 +11,6 @@ Object {
     },
     "orderBookSubscription": "",
     "orderHistory": Array [],
-    "tokenBalance": Object {
-      "allowance": 0,
-      "balance": 0,
-    },
-    "userSubscription": 0,
   },
   "ui": Object {
     "locale": "EN",
@@ -28,6 +23,7 @@ Object {
       "weth": 0,
     },
     "network": 0,
+    "tokenBalances": Object {},
   },
   "ws": Object {
     "acceptedPrices": Object {},

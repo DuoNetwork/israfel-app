@@ -1,15 +1,15 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import {
+	IDexState,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
-	IPairState,
 	IUserOrder
 } from 'ts/common/types';
 import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
-export const initialState: IPairState = {
+export const initialState: IDexState = {
 	orderHistory: [],
 	orderBookSnapshot: {
 		pair: 'pair',
@@ -17,15 +17,10 @@ export const initialState: IPairState = {
 		bids: [],
 		asks: []
 	},
-	orderBookSubscription: '',
-	userSubscription: 0,
-	tokenBalance: {
-		balance: 0,
-		allowance: 0
-	}
+	orderBookSubscription: ''
 };
 
-export function dexReducer(state: IPairState = initialState, action: AnyAction): IPairState {
+export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
 	switch (action.type) {
 		case CST.AC_ORDER_HISTORY:
 			return Object.assign({}, state, {
@@ -53,11 +48,7 @@ export function dexReducer(state: IPairState = initialState, action: AnyAction):
 				const orderBook: IOrderBookSnapshot = JSON.parse(
 					JSON.stringify(state.orderBookSnapshot)
 				);
-				console.log("1234567890");
-				console.log("OrderBook");
-				console.log(orderBook);
 				orderBookUtil.updateOrderBookSnapshot(orderBook, obUpdate);
-				console.log(orderBook);
 				return Object.assign({}, state, {
 					orderBookSnapshot: orderBook
 				});
@@ -85,27 +76,6 @@ export function dexReducer(state: IPairState = initialState, action: AnyAction):
 					orderBookSubscription: ''
 				};
 			}
-		case CST.AC_USER_SUB:
-			if (action.value)
-				return Object.assign({}, state, {
-					userSubscription: action.value
-				});
-			else {
-				const { tokenBalance, userSubscription, ...restUo } = state;
-				if (userSubscription) window.clearInterval(userSubscription);
-				return {
-					...restUo,
-					userSubscription: 0,
-					tokenBalance: {
-						balance: 0,
-						allowance: 0
-					}
-				};
-			}
-		case CST.AC_TOKEN_BALANCE:
-			return Object.assign({}, state, {
-				tokenBalance: action.value
-			});
 		default:
 			return state;
 	}

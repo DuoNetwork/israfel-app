@@ -20,6 +20,11 @@ export default class Dex extends React.Component<{}, IState> {
 			displayTrade: false
 		};
 	}
+
+	public componentDidMount() {
+		document.title = 'DUO | Trustless Derivatives';
+	}
+
 	public toggleConvert = () => {
 		this.setState({ displayConvert: !this.state.displayConvert });
 	};

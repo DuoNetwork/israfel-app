@@ -37,6 +37,15 @@ Array [
       "weth": 222,
     },
   },
+  Object {
+    "balance": Object {
+      "allowance": 333,
+      "balance": 222,
+      "custodian": "custodian",
+    },
+    "code": "code",
+    "type": "tokenBalance",
+  },
 ]
 `;
 
@@ -54,6 +63,10 @@ Array [
     "WETH",
     "0xAccount",
   ],
+  Array [
+    "code",
+    "0xAccount",
+  ],
 ]
 `;
 
@@ -63,10 +76,14 @@ Array [
     "WETH",
     "0xAccount",
   ],
+  Array [
+    "code",
+    "0xAccount",
+  ],
 ]
 `;
 
-exports[`actions getBalance dummy 1`] = `Array []`;
+exports[`actions getBalances dummy 1`] = `Array []`;
 
 exports[`actions getNetwork 1`] = `
 Array [
@@ -102,5 +119,26 @@ Array [
       "weth": 222,
     },
   },
+  Object {
+    "balance": Object {
+      "allowance": 333,
+      "balance": 222,
+      "custodian": "custodian",
+    },
+    "code": "code",
+    "type": "tokenBalance",
+  },
 ]
+`;
+
+exports[`actions tokenBalanceUpdate 1`] = `
+Object {
+  "balance": Object {
+    "allowance": 456,
+    "balance": 123,
+    "custodian": "custodian",
+  },
+  "code": "code",
+  "type": "tokenBalance",
+}
 `;

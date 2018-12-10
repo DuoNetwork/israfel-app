@@ -15,7 +15,8 @@ describe('BalanceCard Test', () => {
 		};
 		const tokenBalance = {
 			balance: 123,
-			allowance: 123
+			allowance: 123,
+			custodian: 'custodian'
 		};
 		it('Test Snapshot', () => {
 			const wrapper = shallow(

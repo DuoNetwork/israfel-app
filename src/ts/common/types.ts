@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-export { IAcceptedPrice } from '../../../../duo-admin/src/common/types';
+export { IAcceptedPrice, ICustodianWrappers } from '../../../../duo-admin/src/common/types';
 import { IAcceptedPrice } from '../../../../duo-admin/src/common/types';
 export * from '../../../../israfel-relayer/src/common/types';
 import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
@@ -8,18 +8,16 @@ import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
-	readonly dex: IPairState;
+	readonly dex: IDexState;
 	readonly ui: IUIState;
 	readonly web3: IWeb3State;
 	readonly ws: IWsState;
 }
 
-export interface IPairState {
+export interface IDexState {
 	readonly orderHistory: relayerTypes.IUserOrder[];
 	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 	readonly orderBookSubscription: string;
-	readonly userSubscription: number;
-	readonly tokenBalance: ITokenBalance;
 }
 
 export interface IUIState {
@@ -30,6 +28,9 @@ export interface IWeb3State {
 	readonly account: string;
 	readonly network: number;
 	readonly ethBalance: IEthBalance;
+	readonly tokenBalances: {
+		[code: string]: ITokenBalance;
+	};
 }
 
 export interface IWsState {
@@ -46,6 +47,7 @@ export interface IEthBalance {
 }
 
 export interface ITokenBalance {
+	custodian: string;
 	balance: number;
 	allowance: number;
 }
