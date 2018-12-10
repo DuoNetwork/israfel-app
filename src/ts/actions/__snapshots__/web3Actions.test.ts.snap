@@ -36,7 +36,7 @@ Array [
 ]
 `;
 
-exports[`actions getBalance 1`] = `
+exports[`actions getCustodianBalances 1`] = `
 Array [
   Object {
     "type": "ethBalance",
@@ -45,6 +45,12 @@ Array [
       "eth": 111,
       "weth": 222,
     },
+  },
+  Object {
+    "code": "custodianCode",
+    "custodian": "custodian",
+    "states": "custodianStates",
+    "type": "custodian",
   },
   Object {
     "balance": Object {
@@ -57,7 +63,7 @@ Array [
 ]
 `;
 
-exports[`actions getBalance 2`] = `
+exports[`actions getCustodianBalances 2`] = `
 Array [
   Array [
     "0xAccount",
@@ -65,20 +71,7 @@ Array [
 ]
 `;
 
-exports[`actions getBalance 3`] = `
-Array [
-  Array [
-    "WETH",
-    "0xAccount",
-  ],
-  Array [
-    "code",
-    "0xAccount",
-  ],
-]
-`;
-
-exports[`actions getBalance 4`] = `
+exports[`actions getCustodianBalances 3`] = `
 Array [
   Array [
     "WETH",
@@ -91,9 +84,20 @@ Array [
 ]
 `;
 
-exports[`actions getBalances dummy 1`] = `Array []`;
+exports[`actions getCustodianBalances 4`] = `
+Array [
+  Array [
+    "WETH",
+    "0xAccount",
+  ],
+  Array [
+    "code",
+    "0xAccount",
+  ],
+]
+`;
 
-exports[`actions getCustodians 1`] = `
+exports[`actions getCustodianBalances dummy 1`] = `
 Array [
   Object {
     "code": "custodianCode",
@@ -131,18 +135,18 @@ Array [
     "value": "0x0",
   },
   Object {
-    "code": "custodianCode",
-    "custodian": "custodian",
-    "states": "custodianStates",
-    "type": "custodian",
-  },
-  Object {
     "type": "ethBalance",
     "value": Object {
       "allowance": 333,
       "eth": 111,
       "weth": 222,
     },
+  },
+  Object {
+    "code": "custodianCode",
+    "custodian": "custodian",
+    "states": "custodianStates",
+    "type": "custodian",
   },
   Object {
     "balance": Object {

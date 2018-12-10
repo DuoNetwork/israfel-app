@@ -43,29 +43,6 @@ export function tokenBalanceUpdate(code: string, balance: ITokenBalance) {
 	};
 }
 
-export function getBalances(): VoidThunkAction {
-	return async (dispatch, getState) => {
-		const account = getState().web3.account;
-		const tokens = getState().ws.tokens;
-		if (account !== CST.DUMMY_ADDR) {
-			dispatch(
-				ethBalanceUpdate({
-					eth: await web3Util.getEthBalance(account),
-					weth: await web3Util.getTokenBalance(CST.TOKEN_WETH, account),
-					allowance: await web3Util.getProxyTokenAllowance(CST.TOKEN_WETH, account)
-				})
-			);
-			for (const token of tokens)
-				dispatch(
-					tokenBalanceUpdate(token.code, {
-						balance: await web3Util.getTokenBalance(token.code, account),
-						allowance: await web3Util.getProxyTokenAllowance(token.code, account)
-					})
-				);
-		}
-	};
-}
-
 export function custodianUpdate(custodian: string, code: string, states: IDualClassStates) {
 	return {
 		type: CST.AC_CUSTODIAN,
@@ -75,18 +52,46 @@ export function custodianUpdate(custodian: string, code: string, states: IDualCl
 	};
 }
 
-export function getCustodians(): VoidThunkAction {
-	return async (dispatch, getState) => {
+export function getCustodianBalances(): VoidThunkAction {
+	return (dispatch, getState) => {
+		const account = getState().web3.account;
 		const tokens = getState().ws.tokens;
-		const custodians: string[] = [];
-		tokens.forEach(t => {
-			if (!custodians.includes(t.custodian)) custodians.push(t.custodian);
-		});
-		for (const custodian of custodians) {
-			const cw = getDualClassWrapper(custodian);
-			if (cw)
+		const processedCustodian: { [custodian: string]: boolean } = {};
+		if (account !== CST.DUMMY_ADDR)
+			Promise.all([
+				web3Util.getEthBalance(account),
+				web3Util.getTokenBalance(CST.TOKEN_WETH, account),
+				web3Util.getProxyTokenAllowance(CST.TOKEN_WETH, account)
+			]).then(result =>
 				dispatch(
-					custodianUpdate(custodian, await cw.getContractCode(), await cw.getStates())
+					ethBalanceUpdate({
+						eth: result[0],
+						weth: result[1],
+						allowance: result[2]
+					})
+				)
+			);
+
+		for (const token of tokens) {
+			if (!processedCustodian[token.custodian]) {
+				const cw = getDualClassWrapper(token.custodian);
+				if (cw)
+					Promise.all([cw.getContractCode(), cw.getStates()]).then(result =>
+						dispatch(custodianUpdate(token.custodian, result[0], result[1]))
+					);
+				processedCustodian[token.custodian] = true;
+			}
+			if (account !== CST.DUMMY_ADDR)
+				Promise.all([
+					web3Util.getTokenBalance(token.code, account),
+					web3Util.getProxyTokenAllowance(token.code, account)
+				]).then(result =>
+					dispatch(
+						tokenBalanceUpdate(token.code, {
+							balance: result[0],
+							allowance: result[1]
+						})
+					)
 				);
 		}
 	};
@@ -96,7 +101,6 @@ export function refresh(): VoidThunkAction {
 	return async dispatch => {
 		dispatch(getNetwork());
 		await dispatch(getAccount());
-		dispatch(getBalances());
-		dispatch(getCustodians());
+		dispatch(getCustodianBalances());
 	};
 }

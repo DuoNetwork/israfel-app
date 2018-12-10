@@ -71,7 +71,13 @@ describe('actions', () => {
 		).toMatchSnapshot();
 	});
 
-	test('getBalances dummy', () => {
+	test('custodianUpdate', () => {
+		expect(
+			web3Actions.custodianUpdate('custodian', 'custodianCode', 'custodianStates' as any)
+		).toMatchSnapshot();
+	});
+
+	test('getCustodianBalances dummy', () => {
 		const store: any = mockStore({
 			web3: {
 				account: CST.DUMMY_ADDR
@@ -79,6 +85,7 @@ describe('actions', () => {
 			ws: {
 				tokens: [
 					{
+						custodian: 'custodian',
 						code: 'code'
 					}
 				]
@@ -87,19 +94,24 @@ describe('actions', () => {
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
-		store.dispatch(web3Actions.getBalances());
+		dualClassWrappers['custodian'] = {
+			getStates: jest.fn(() => Promise.resolve('custodianStates')),
+			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
+		} as any;
+		store.dispatch(web3Actions.getCustodianBalances());
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect(web3Util.getEthBalance as jest.Mock).not.toBeCalled();
 				expect(web3Util.getTokenBalance as jest.Mock).not.toBeCalled();
 				expect(web3Util.getProxyTokenAllowance as jest.Mock).not.toBeCalled();
+				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
 		);
 	});
 
-	test('getBalance', () => {
+	test('getCustodianBalances', () => {
 		const store: any = mockStore({
 			web3: {
 				account: '0xAccount'
@@ -116,43 +128,17 @@ describe('actions', () => {
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
-		store.dispatch(web3Actions.getBalances());
+		dualClassWrappers['custodian'] = {
+			getStates: jest.fn(() => Promise.resolve('custodianStates')),
+			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
+		} as any;
+		store.dispatch(web3Actions.getCustodianBalances());
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect((web3Util.getEthBalance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect((web3Util.getTokenBalance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect((web3Util.getProxyTokenAllowance as jest.Mock).mock.calls).toMatchSnapshot();
-				resolve();
-			}, 0)
-		);
-	});
-
-	test('custodianUpdate', () => {
-		expect(
-			web3Actions.custodianUpdate('custodian', 'custodianCode', 'custodianStates' as any)
-		).toMatchSnapshot();
-	});
-
-	test('getCustodians', () => {
-		const store: any = mockStore({
-			ws: {
-				tokens: [
-					{
-						custodian: 'custodian',
-						code: 'code'
-					}
-				]
-			}
-		});
-		dualClassWrappers['custodian'] = {
-			getStates: jest.fn(() => Promise.resolve('custodianStates')),
-			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
-		} as any;
-		store.dispatch(web3Actions.getCustodians());
-		return new Promise(resolve =>
-			setTimeout(() => {
-				expect(store.getActions()).toMatchSnapshot();
 				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
