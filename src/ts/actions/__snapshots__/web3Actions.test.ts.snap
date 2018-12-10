@@ -7,6 +7,14 @@ Object {
 }
 `;
 
+exports[`actions custodianStateUpdate 1`] = `
+Object {
+  "custodian": "custodian",
+  "state": "custodianState",
+  "type": "custodianState",
+}
+`;
+
 exports[`actions ethBalanceUpdate 1`] = `
 Object {
   "type": "ethBalance",
@@ -85,6 +93,16 @@ Array [
 
 exports[`actions getBalances dummy 1`] = `Array []`;
 
+exports[`actions getCustodianStates 1`] = `
+Array [
+  Object {
+    "custodian": "custodian",
+    "state": "custodianState",
+    "type": "custodianState",
+  },
+]
+`;
+
 exports[`actions getNetwork 1`] = `
 Array [
   Object {
@@ -110,6 +128,11 @@ Array [
   Object {
     "type": "account",
     "value": "0x0",
+  },
+  Object {
+    "custodian": "custodian",
+    "state": "custodianState",
+    "type": "custodianState",
   },
   Object {
     "type": "ethBalance",

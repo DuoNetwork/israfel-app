@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-export { IAcceptedPrice, ICustodianWrappers } from '../../../../duo-admin/src/common/types';
-import { IAcceptedPrice } from '../../../../duo-admin/src/common/types';
+export { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
+import { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
 export * from '../../../../israfel-relayer/src/common/types';
 import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 
@@ -31,6 +31,9 @@ export interface IWeb3State {
 	readonly tokenBalances: {
 		[code: string]: ITokenBalance;
 	};
+	readonly custodianStates: {
+		[custodian: string]: IDualClassStates
+	}
 }
 
 export interface IWsState {

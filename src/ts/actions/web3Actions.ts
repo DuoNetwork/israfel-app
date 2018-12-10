@@ -1,5 +1,6 @@
 import * as CST from 'ts/common/constants';
-import { IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
+import { getDualClassWrapper } from 'ts/common/duoWrapper';
+import { IDualClassStates, IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 
 export function accountUpdate(account: string) {
@@ -66,10 +67,33 @@ export function getBalances(): VoidThunkAction {
 	};
 }
 
+export function custodianStateUpdate(custodian: string, state: IDualClassStates) {
+	return {
+		type: CST.AC_CTD_STATE,
+		custodian: custodian,
+		state: state
+	};
+}
+
+export function getCustodianStates(): VoidThunkAction {
+	return async (dispatch, getState) => {
+		const tokens = getState().ws.tokens;
+		const custodians: string[] = [];
+		tokens.forEach(t => {
+			if (!custodians.includes(t.custodian)) custodians.push(t.custodian);
+		});
+		for (const custodian of custodians) {
+			const cw = getDualClassWrapper(custodian);
+			if (cw) dispatch(custodianStateUpdate(custodian, await cw.getStates()));
+		}
+	};
+}
+
 export function refresh(): VoidThunkAction {
 	return async dispatch => {
 		dispatch(getNetwork());
 		await dispatch(getAccount());
 		dispatch(getBalances());
+		dispatch(getCustodianStates());
 	};
 }

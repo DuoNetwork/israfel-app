@@ -3,6 +3,7 @@
 exports[`web3 reducer account 1`] = `
 Object {
   "account": "test",
+  "custodianStates": Object {},
   "ethBalance": Object {
     "allowance": 0,
     "eth": 0,
@@ -13,9 +14,32 @@ Object {
 }
 `;
 
+exports[`web3 reducer custodianState 1`] = `
+Object {
+  "account": "test",
+  "custodianStates": Object {
+    "custodian": "custodianState",
+  },
+  "ethBalance": Object {
+    "allowance": 789,
+    "eth": 123,
+    "weth": 456,
+  },
+  "network": 123,
+  "tokenBalances": Object {
+    "code": Object {
+      "allowance": 789,
+      "balance": 123,
+      "custodian": "custodian",
+    },
+  },
+}
+`;
+
 exports[`web3 reducer default 1`] = `
 Object {
   "account": "0x0000000000000000000000000000000000000000",
+  "custodianStates": Object {},
   "ethBalance": Object {
     "allowance": 0,
     "eth": 0,
@@ -29,6 +53,7 @@ Object {
 exports[`web3 reducer ethBalance 1`] = `
 Object {
   "account": "test",
+  "custodianStates": Object {},
   "ethBalance": Object {
     "allowance": 789,
     "eth": 123,
@@ -42,6 +67,7 @@ Object {
 exports[`web3 reducer network 1`] = `
 Object {
   "account": "test",
+  "custodianStates": Object {},
   "ethBalance": Object {
     "allowance": 0,
     "eth": 0,
@@ -55,6 +81,7 @@ Object {
 exports[`web3 reducer tokenBalance 1`] = `
 Object {
   "account": "test",
+  "custodianStates": Object {},
   "ethBalance": Object {
     "allowance": 789,
     "eth": 123,

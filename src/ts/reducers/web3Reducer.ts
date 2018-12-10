@@ -10,7 +10,8 @@ export const initialState: IWeb3State = {
 		weth: 0,
 		allowance: 0
 	},
-	tokenBalances: {}
+	tokenBalances: {},
+	custodianStates: {}
 	// gasPrice: 0
 };
 
@@ -26,6 +27,12 @@ export function web3Reducer(state: IWeb3State = initialState, action: AnyAction)
 			return Object.assign({}, state, {
 				tokenBalances: Object.assign({}, state.tokenBalances, {
 					[action.code]: action.balance
+				})
+			});
+		case CST.AC_CTD_STATE:
+			return Object.assign({}, state, {
+				custodianStates: Object.assign({}, state.custodianStates, {
+					[action.custodian]: action.state
 				})
 			});
 		default:

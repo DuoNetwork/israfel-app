@@ -50,6 +50,15 @@ describe('web3 reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('custodianState', () => {
+		state = web3Reducer(state, {
+			type: CST.AC_CTD_STATE,
+			custodian: 'custodian',
+			state: 'custodianState'
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	// test('gasPrice', () => {
 	// 	state = web3Reducer(state, {
 	// 		type: CST.AC_GAS_PX,
