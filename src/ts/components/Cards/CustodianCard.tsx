@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import PriceChart from 'ts/components/Charts/PriceChart';
+import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import temp from '../../../images/temp.png';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
@@ -7,6 +9,7 @@ import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 interface IProps {
 	title: string;
 	margin: string;
+	acceptedPrices: IAcceptedPrice[];
 	toggleConvertDisplay: () => void;
 	toggleTradeDisplay: () => void;
 }
@@ -44,7 +47,9 @@ export default class Contract2in1Card extends React.Component<IProps> {
 							padding: '0px 10px'
 						}}
 					>
-						<SButton onClick={toggleConvertDisplay}>{CST.TH_CONVERT.toUpperCase()}</SButton>
+						<SButton onClick={toggleConvertDisplay}>
+							{CST.TH_CONVERT.toUpperCase()}
+						</SButton>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
@@ -77,7 +82,7 @@ export default class Contract2in1Card extends React.Component<IProps> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
-						<img src={temp} style={{ width: '100%', height: '100%' }} />
+						<PriceChart prices={this.props.acceptedPrices} timeStep={6000} />
 					</div>
 					<div
 						style={{
