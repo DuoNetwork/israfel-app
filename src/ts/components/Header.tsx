@@ -31,13 +31,13 @@ export default class Header extends React.Component<IProps> {
 						</Link>
 						<div className="nav-bal-wrapper">
 							<div className="nav-bal-item">
-								<div>{CST.TH_ETH.toUpperCase()}</div>
+								<div>{CST.TH_ETH}</div>
 								<div className="nav-bal-value">
 									{util.formatBalance(ethBalance.eth)}
 								</div>
 							</div>
 							<div className="nav-bal-item">
-								<div>{CST.TH_WETH.toUpperCase()}</div>
+								<div>{CST.TH_WETH}</div>
 								<div className="nav-bal-value">
 									{util.formatBalance(ethBalance.weth)}
 								</div>

@@ -31,7 +31,7 @@ interface IState {
 	expire: number;
 }
 
-export default class TradePopup extends React.Component<IProps, IState> {
+export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
@@ -192,7 +192,6 @@ export default class TradePopup extends React.Component<IProps, IState> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li
-										key={CST.TH_AMT}
 										className={'input-line'}
 										style={{
 											padding: '0 10px',
@@ -209,7 +208,6 @@ export default class TradePopup extends React.Component<IProps, IState> {
 										/>
 									</li>
 									<li
-										key={''}
 										className={'input-line'}
 										style={{
 											padding: '5px 15px',
@@ -221,7 +219,6 @@ export default class TradePopup extends React.Component<IProps, IState> {
 										</span>
 									</li>
 									<li
-										key={CST.TH_AMT}
 										className={'input-line'}
 										style={{ padding: '0 10px', marginBottom: 0 }}
 									>
@@ -234,22 +231,14 @@ export default class TradePopup extends React.Component<IProps, IState> {
 											}
 										/>
 									</li>
-									<li
-										key={''}
-										className={'input-line'}
-										style={{ padding: '0 15px' }}
-									>
+									<li className={'input-line'} style={{ padding: '0 15px' }}>
 										<SSlider marks={marks} step={10} defaultValue={0} />
 									</li>
-									<li key={CST.TH_EXPIRY} className='input-line' style={{ padding: '0 15px' }}>
+									<li className="input-line" style={{ padding: '0 15px' }}>
 										<span className="title" style={{ width: 200 }}>
 											{CST.TH_EXPIRY}
 										</span>
-										<SDivFlexCenter
-											horizontal
-											width="60%"
-											rowInv
-										>
+										<SDivFlexCenter horizontal width="60%" rowInv>
 											<RadioGroup
 												onChange={e => this.onExpireChange(e.target.value)}
 												value={expire}

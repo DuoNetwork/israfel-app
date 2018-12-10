@@ -32,8 +32,8 @@ export interface ILocaleText {
 	JP: string;
 	[key: string]: string;
 }
-export const TH_ETH = 'Eth';
-export const TH_WETH = 'Weth';
+export const TH_ETH = 'ETH';
+export const TH_WETH = 'WETH';
 export const TH_ALLOWANCE = 'Allowance';
 export const TH_SUBMIT = 'Submit';
 export const TH_APPROVE = 'Approve';

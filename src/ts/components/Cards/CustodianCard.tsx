@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
 import { IAcceptedPrice, ICustodianInfo, ITokenBalance } from 'ts/common/types';
+import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
@@ -51,7 +52,11 @@ export default class CustodianCard extends React.Component<IProps> {
 								</li>
 								<li>
 									<span className="title">{CST.TH_COLLATERAL}</span>
-									<span className="content">{info.states.ethCollateral + ' ' + CST.TH_ETH}</span>
+									<span className="content">
+										{util.formatBalance(info.states.ethCollateral) +
+											' ' +
+											CST.TH_ETH}
+									</span>
 								</li>
 							</ul>
 						</div>
@@ -66,7 +71,7 @@ export default class CustodianCard extends React.Component<IProps> {
 						}}
 					>
 						<SButton onClick={toggleConvertDisplay}>
-							{CST.TH_CONVERT.toUpperCase()}
+							{CST.TH_CONVERT}
 						</SButton>
 					</div>
 				</SDivFlexCenter>
@@ -97,7 +102,7 @@ export default class CustodianCard extends React.Component<IProps> {
 									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">
 											{tokenBalances[aCode]
-												? tokenBalances[aCode].balance
+												? util.formatBalance(tokenBalances[aCode].balance)
 												: 0}
 										</span>
 									</li>
@@ -134,7 +139,7 @@ export default class CustodianCard extends React.Component<IProps> {
 									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">
 											{tokenBalances[bCode]
-												? tokenBalances[bCode].balance
+												? util.formatBalance(tokenBalances[bCode].balance)
 												: 0}
 										</span>
 									</li>

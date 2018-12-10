@@ -29,7 +29,7 @@ interface IState {
 	display: boolean;
 }
 
-export default class ConvertPopup extends React.Component<IProps, IState> {
+export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
@@ -193,7 +193,6 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li
-										key={CST.TH_AMT}
 										className={'input-line'}
 										style={{
 											padding: '0 10px',
@@ -212,7 +211,6 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 										/>
 									</li>
 									<li
-										key={''}
 										className={'input-line'}
 										style={{
 											padding: '0 15px',
@@ -245,7 +243,6 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 									}}
 								>
 									<li
-										key={CST.TH_AMT}
 										className={'input-line'}
 										style={{ padding: '0 10px', marginBottom: 0 }}
 									>
@@ -258,11 +255,7 @@ export default class ConvertPopup extends React.Component<IProps, IState> {
 											}
 										/>
 									</li>
-									<li
-										key={''}
-										className={'input-line'}
-										style={{ padding: '0 15px' }}
-									>
+									<li className={'input-line'} style={{ padding: '0 15px' }}>
 										<SSlider marks={marks} step={10} defaultValue={0} />
 									</li>
 								</ul>

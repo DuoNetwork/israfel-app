@@ -17,12 +17,12 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
   >
     <BalanceInfo
       icon={null}
-      name="Eth"
+      name="ETH"
       value={123}
     />
     <BalanceInfo
       icon={null}
-      name="Weth"
+      name="WETH"
       value={123}
     />
     <BalanceInfo
