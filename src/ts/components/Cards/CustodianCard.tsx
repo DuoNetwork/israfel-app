@@ -14,7 +14,7 @@ interface IProps {
 	info: ICustodianInfo;
 	margin: string;
 	acceptedPrices: IAcceptedPrice[];
-	handleConvert: (custodian: string) => void;
+	handleConvert: (custodian: string, aToken: string, bToken: string) => void;
 	handleTrade: (token: string) => void;
 }
 
@@ -87,7 +87,11 @@ export default class CustodianCard extends React.Component<IProps> {
 							padding: '0px 10px'
 						}}
 					>
-						<SButton onClick={() => handleConvert(contractAddress.custodian.address)}>
+						<SButton
+							onClick={() =>
+								handleConvert(contractAddress.custodian.address, aCode, bCode)
+							}
+						>
 							{tokenBalances[aCode] &&
 							tokenBalances[bCode] &&
 							tokenBalances[aCode].balance &&
