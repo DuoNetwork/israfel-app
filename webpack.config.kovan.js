@@ -70,11 +70,31 @@ module.exports = {
 				'0x': {
 					test: /[\\/]node_modules[\\/]@0x/,
 					name: '0x',
+					priority: 90
+				},
+				'0x-contract-wrappers': {
+					test: /[\\/]node_modules[\\/]@0x[\\/]contract-wrappers/,
+					name: '0x-contract-wrappers',
+					priority: 100
+				},
+				'0x-abi-gen-wrappers': {
+					test: /[\\/]node_modules[\\/]@0x[\\/]abi-gen-wrappers/,
+					name: '0x-abi-gen-wrappers',
+					priority: 100
+				},
+				lodash: {
+					test: /[\\/]node_modules[\\/]lodash/,
+					name: 'lodash',
 					priority: 100
 				},
 				bn: {
 					test: /[\\/]node_modules[\\/]bn/,
 					name: 'bn',
+					priority: 100
+				},
+				elliptic: {
+					test: /[\\/]node_modules[\\/]elliptic/,
+					name: 'elliptic',
 					priority: 100
 				},
 				immutable: {
@@ -120,6 +140,16 @@ module.exports = {
 				draftjs: {
 					test: /[\\/]node_modules[\\/]draft-js/,
 					name: 'draft-js',
+					priority: 100
+				},
+				unorm: {
+					test: /[\\/]node_modules[\\/]unorm/,
+					name: 'unorm',
+					priority: 100
+				},
+				bip39: {
+					test: /[\\/]node_modules[\\/]bip39/,
+					name: 'bip39',
 					priority: 100
 				},
 				commons: {
@@ -183,7 +213,21 @@ module.exports = {
 			moment: path.resolve('./node_modules/moment'),
 			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
 			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
-			immutable: path.resolve('./node_modules/immutable')
+			'bignumber.js': path.resolve('../israfel-relayer/node_modules/bignumber.js'),
+			immutable: path.resolve('./node_modules/immutable'),
+			elliptic: path.resolve('./node_modules/elliptic'),
+			lodash: path.resolve('./node_modules/lodash'),
+			underscore: path.resolve('../israfel-relayer/node_modules/underscore'),
+			'@0x/contract-artifacts': path.resolve(
+				'../israfel-relayer/node_modules/@0x/contract-wrappers/node_modules/@0x/contract-artifacts'
+			),
+			'web3-eth-accounts': path.resolve(
+				'../duo-contract-wrapper/node_modules/web3-eth-accounts'
+			),
+			'web3-eth-contract': path.resolve(
+				'../duo-contract-wrapper/node_modules/web3-eth-contract'
+			),
+			'web3-eth': path.resolve('../duo-contract-wrapper/node_modules/web3-eth')
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
