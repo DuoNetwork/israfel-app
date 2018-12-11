@@ -132,8 +132,8 @@ function drawLines(
 	const text = svg
 		.append('text')
 		.attr('text-anchor', 'middle')
-		.attr('transform', 'translate(50, 20)')
-		.attr('class', 'label' + name) //easy to style with CSS
+		.attr('transform', 'translate(' + (width - 20) + ', 10)')
+		.attr('class', 'label' + name)
 		.text(label);
 	text.style('text-anchor', 'middle')
 		.style('font-size', '12px')
