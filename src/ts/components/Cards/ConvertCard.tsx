@@ -405,7 +405,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								</ul>
 							</div>
 						</SCardList>
-						(
 						<SCardList noUlBorder noLiBorder>
 							<div className="status-list-wrapper">
 								<ul
@@ -439,7 +438,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								</ul>
 							</div>
 						</SCardList>
-						)
 					</SCardConversionForm>
 					<div className="convert-popup-des">
 						Description Description Description $ 1,000 USD,Description sdadd
