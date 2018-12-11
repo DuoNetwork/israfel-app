@@ -22,11 +22,11 @@ function drawLines(
 			.append('div')
 			.attr('class', 'loading')
 			.html(
-				'<span>Loading...</span><img class="loading-img" src="../../../images/abc.gif" />'
+				'<span>Loading...</span>'
 			);
 		return;
 	}
-	// //Establish SVG Playground
+	//Establish SVG Playground
 	d3.selectAll('.loading' + name).remove();
 	d3.selectAll('#timeserieschart' + name).remove();
 	const maxNumber = d3.max(sourceData.map(d => (isA ? d.navA : d.navB))) || 0;
@@ -65,7 +65,6 @@ function drawLines(
 		.ticks(6)
 		.tickSize(2)
 		.tickFormat(zoomFormat as any);
-	// .tickFormat(zoomFormat as any);
 	const lyAxis = d3
 		.axisLeft(ethYScale)
 		.tickSize(3)
@@ -137,12 +136,6 @@ function drawLines(
 		.text(label)
 		.style('font-size', '10px')
 		.style('fill', ColorStyles.TextBlackAlphaLL);
-	// chart
-	// 	.append('g')
-	// 	.attr('class', 'placeHolder' + name)
-	// 	.append("text")
-	// 	.call("PlaceHolder" as any);
-	// Chart Data
 	const chartdata = chart
 		.append('g')
 		.attr('class', 'chart-data' + name)
