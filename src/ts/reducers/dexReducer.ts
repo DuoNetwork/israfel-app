@@ -4,13 +4,13 @@ import {
 	IDexState,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
-	IUserOrder
+	// IUserOrder
 } from 'ts/common/types';
 import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
 export const initialState: IDexState = {
-	orderHistory: [],
+	// orderHistory: [],
 	orderBookSnapshot: {
 		pair: 'pair',
 		version: 0,
@@ -22,20 +22,20 @@ export const initialState: IDexState = {
 
 export function dexReducer(state: IDexState = initialState, action: AnyAction): IDexState {
 	switch (action.type) {
-		case CST.AC_ORDER_HISTORY:
-			return Object.assign({}, state, {
-				orderHistory: action.value
-			});
-		case CST.AC_ORDER:
-			const newOrder: IUserOrder = action.value;
-			return Object.assign({}, state, {
-				orderHistory: [
-					...state.orderHistory.filter(
-						o => o.currentSequence !== newOrder.currentSequence
-					),
-					newOrder
-				]
-			});
+		// case CST.AC_ORDER_HISTORY:
+		// 	return Object.assign({}, state, {
+		// 		orderHistory: action.value
+		// 	});
+		// case CST.AC_ORDER:
+		// 	const newOrder: IUserOrder = action.value;
+		// 	return Object.assign({}, state, {
+		// 		orderHistory: [
+		// 			...state.orderHistory.filter(
+		// 				o => o.currentSequence !== newOrder.currentSequence
+		// 			),
+		// 			newOrder
+		// 		]
+		// 	});
 		case CST.AC_OB_SNAPSHOT:
 			if (state.orderBookSubscription === action.value.pair)
 				return Object.assign({}, state, {
@@ -59,14 +59,17 @@ export function dexReducer(state: IDexState = initialState, action: AnyAction): 
 					orderBookSubscription: action.pair
 				});
 			else {
-				const { orderHistory, orderBookSnapshot, orderBookSubscription, ...restOb } = state;
-				if (orderBookSubscription) {
-					wsUtil.unsubscribeOrderBook(orderBookSubscription);
-					wsUtil.unsubscribeOrderHistory(action.account, orderBookSubscription);
-				}
+				const {
+					/*orderHistory,*/ orderBookSnapshot,
+					orderBookSubscription,
+					...restOb
+				} = state;
+				if (orderBookSubscription) wsUtil.unsubscribeOrderBook(orderBookSubscription);
+				// wsUtil.unsubscribeOrderHistory(action.account, orderBookSubscription);
+
 				return {
 					...restOb,
-					orderHistory: [],
+					// orderHistory: [],
 					orderBookSnapshot: {
 						pair: 'pair',
 						version: 0,

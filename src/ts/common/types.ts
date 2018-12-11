@@ -15,7 +15,7 @@ export interface IState {
 }
 
 export interface IDexState {
-	readonly orderHistory: relayerTypes.IUserOrder[];
+	// readonly orderHistory: relayerTypes.IUserOrder[];
 	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
 	readonly orderBookSubscription: string;
 }

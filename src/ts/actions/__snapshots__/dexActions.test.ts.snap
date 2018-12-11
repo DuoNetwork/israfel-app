@@ -26,26 +26,6 @@ Object {
 }
 `;
 
-exports[`actions orderHistoryUpdate 1`] = `
-Object {
-  "type": "orderHistory",
-  "value": Array [
-    Object {
-      "test": "test",
-    },
-  ],
-}
-`;
-
-exports[`actions orderUpdate 1`] = `
-Object {
-  "type": "order",
-  "value": Object {
-    "test": "test",
-  },
-}
-`;
-
 exports[`actions subscribe 1`] = `
 Array [
   Object {
@@ -64,15 +44,6 @@ Array [
 exports[`actions subscribe 2`] = `
 Array [
   Array [
-    "pair",
-  ],
-]
-`;
-
-exports[`actions subscribe 3`] = `
-Array [
-  Array [
-    "0xAccount",
     "pair",
   ],
 ]
@@ -100,5 +71,3 @@ Array [
   ],
 ]
 `;
-
-exports[`actions subscribe dummy account 3`] = `Array []`;

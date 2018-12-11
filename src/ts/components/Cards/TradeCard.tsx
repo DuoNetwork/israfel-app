@@ -5,7 +5,7 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IEthBalance, IToken, ITokenBalance } from 'ts/common/types';
+import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import {
@@ -24,6 +24,7 @@ interface IProps {
 	tokenInfo?: IToken;
 	tokenBalance?: ITokenBalance;
 	ethBalance: IEthBalance;
+	orderBook: IOrderBookSnapshot;
 	handleClose: () => void;
 }
 
@@ -34,6 +35,24 @@ interface IState {
 	amount: string;
 	expiry: number;
 }
+
+const marks = {
+	0: {
+		label: <strong>0%</strong>
+	},
+	25: {
+		label: <strong>25%</strong>
+	},
+	50: {
+		label: <strong>50%</strong>
+	},
+	75: {
+		label: <strong>75%</strong>
+	},
+	100: {
+		label: <strong>100%</strong>
+	}
+};
 
 export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -79,32 +98,22 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			amount: value
 		});
 	public render() {
-		const { token, handleClose, tokenBalance, ethBalance } = this.props;
+		const { token, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
-		const marks = {
-			0: {
-				label: <strong>0%</strong>
-			},
-			25: {
-				label: <strong>25%</strong>
-			},
-			50: {
-				label: <strong>50%</strong>
-			},
-			75: {
-				label: <strong>75%</strong>
-			},
-			100: {
-				label: <strong>100%</strong>
-			}
-		};
-		const orderbooks = [
-			{ price: 100, amount: 1234 },
-			{ price: 100, amount: 1234 },
-			{ price: 100, amount: 1234 },
-			{ price: 100, amount: 1234 },
-			{ price: 100, amount: 1234 }
-		];
+		const bidsToRender = orderBook.bids.slice(0, 3);
+		while (bidsToRender.length < 3)
+			bidsToRender.push({
+				balance: 0,
+				count: 0,
+				price: 0
+			});
+		const asksToRender = orderBook.asks.slice(0, 3);
+		while (asksToRender.length < 3)
+			asksToRender.push({
+				balance: 0,
+				count: 0,
+				price: 0
+			});
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -151,14 +160,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul style={{ opacity: isBid ? 1 : 0.5 }}>
-									<li style={{ justifyContent: 'center' }}>Bid</li>
-									{orderbooks.map((item, i) => (
+									<li style={{ justifyContent: 'center' }}>{CST.TH_BID}</li>
+									{bidsToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
 											<span className="content">
-												{d3.format(',.2f')(item.amount)}
+												{item.balance
+													? d3.format(',.2f')(item.balance)
+													: '-'}
 											</span>
 											<span className="title">
-												{d3.format(',.2f')(item.price)}
+												{item.price ? d3.format(',.2f')(item.price) : '-'}
 											</span>
 										</li>
 									))}
@@ -168,14 +179,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul style={{ marginLeft: -1, opacity: isBid ? 0.5 : 1 }}>
-									<li style={{ justifyContent: 'center' }}>Ask</li>
-									{orderbooks.map((item, i) => (
+									<li style={{ justifyContent: 'center' }}>{CST.TH_ASK}</li>
+									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
 											<span className="title">
-												{d3.format(',.2f')(item.price)}
+												{item.price ? d3.format(',.2f')(item.price) : '-'}
 											</span>
 											<span className="content">
-												{d3.format(',.2f')(item.amount)}
+												{item.balance
+													? d3.format(',.2f')(item.balance)
+													: '-'}
 											</span>
 										</li>
 									))}

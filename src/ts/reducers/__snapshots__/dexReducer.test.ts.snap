@@ -9,29 +9,6 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "orderHistory": Array [],
-}
-`;
-
-exports[`dex reducer order 1`] = `
-Object {
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
 }
 `;
 
@@ -48,16 +25,6 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
 }
 `;
 
@@ -74,16 +41,6 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
 }
 `;
 
@@ -96,22 +53,12 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "orderHistory": Array [],
 }
 `;
 
 exports[`dex reducer orderBookSubscription off 2`] = `
 Array [
   Array [
-    "pair",
-  ],
-]
-`;
-
-exports[`dex reducer orderBookSubscription off 3`] = `
-Array [
-  Array [
-    "account",
     "pair",
   ],
 ]
@@ -126,7 +73,6 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "",
-  "orderHistory": Array [],
 }
 `;
 
@@ -139,16 +85,6 @@ Object {
     "version": 0,
   },
   "orderBookSubscription": "pair",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
 }
 `;
 
@@ -165,16 +101,6 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
 }
 `;
 
@@ -211,37 +137,5 @@ Object {
     "version": 123,
   },
   "orderBookSubscription": "pair",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrder": "from single order",
-    },
-  ],
-}
-`;
-
-exports[`dex reducer orderHistory 1`] = `
-Object {
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "orderHistory": Array [
-    Object {
-      "currentSequence": 123,
-      "userOrders": "fromList",
-    },
-    Object {
-      "currentSequence": 456,
-      "userOrders": "fromList",
-    },
-  ],
 }
 `;

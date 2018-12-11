@@ -10,7 +10,6 @@ Object {
       "version": 0,
     },
     "orderBookSubscription": "",
-    "orderHistory": Array [],
   },
   "ui": Object {
     "locale": "EN",

@@ -11,30 +11,30 @@ describe('dex reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('orderHistory', () => {
-		state = dexReducer(state, {
-			type: CST.AC_ORDER_HISTORY,
-			value: [
-				{
-					userOrders: 'fromList',
-					currentSequence: 123
-				},
-				{
-					userOrders: 'fromList',
-					currentSequence: 456
-				}
-			]
-		});
-		expect(state).toMatchSnapshot();
-	});
+	// test('orderHistory', () => {
+	// 	state = dexReducer(state, {
+	// 		type: CST.AC_ORDER_HISTORY,
+	// 		value: [
+	// 			{
+	// 				userOrders: 'fromList',
+	// 				currentSequence: 123
+	// 			},
+	// 			{
+	// 				userOrders: 'fromList',
+	// 				currentSequence: 456
+	// 			}
+	// 		]
+	// 	});
+	// 	expect(state).toMatchSnapshot();
+	// });
 
-	test('order', () => {
-		state = dexReducer(state, {
-			type: CST.AC_ORDER,
-			value: { userOrder: 'from single order', currentSequence: 456 }
-		});
-		expect(state).toMatchSnapshot();
-	});
+	// test('order', () => {
+	// 	state = dexReducer(state, {
+	// 		type: CST.AC_ORDER,
+	// 		value: { userOrder: 'from single order', currentSequence: 456 }
+	// 	});
+	// 	expect(state).toMatchSnapshot();
+	// });
 
 	test('orderBookSubscription on', () => {
 		state = dexReducer(state, {
@@ -97,7 +97,7 @@ describe('dex reducer', () => {
 
 	test('orderBookSubscription off', () => {
 		wsUtil.unsubscribeOrderBook = jest.fn();
-		wsUtil.unsubscribeOrderHistory = jest.fn();
+		// wsUtil.unsubscribeOrderHistory = jest.fn();
 		state = dexReducer(state, {
 			type: CST.AC_OB_SUB,
 			account: 'account',
@@ -105,12 +105,12 @@ describe('dex reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 		expect((wsUtil.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-		expect((wsUtil.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
+		// expect((wsUtil.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderBookSubscription off again', () => {
 		wsUtil.unsubscribeOrderBook = jest.fn();
-		wsUtil.unsubscribeOrderHistory = jest.fn();
+		// wsUtil.unsubscribeOrderHistory = jest.fn();
 		state = dexReducer(state, {
 			type: CST.AC_OB_SUB,
 			account: 'account',
@@ -118,6 +118,6 @@ describe('dex reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
-		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
+		// expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
 	});
 });

@@ -29,8 +29,8 @@ wsUtil.onInfoUpdate((tokens, status, acceptedPrices) => {
 	store.dispatch(web3Actions.refresh());
 });
 wsUtil.onOrder(
-	userOrders => store.dispatch(dexActions.orderHistoryUpdate(userOrders)),
-	userOrder => store.dispatch(dexActions.orderUpdate(userOrder)),
+	userOrders => console.log(userOrders), //store.dispatch(dexActions.orderHistoryUpdate(userOrders)),
+	userOrder => console.log(userOrder), // store.dispatch(dexActions.orderUpdate(userOrder)),
 	(method, orderHash, error) => alert(method + orderHash + error)
 );
 wsUtil.onOrderBook(

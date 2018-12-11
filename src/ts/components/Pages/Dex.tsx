@@ -1,7 +1,14 @@
-import { Layout } from 'antd';
+import { Layout, Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IAcceptedPrice, ICustodianInfo, IEthBalance, IToken, ITokenBalance } from 'ts/common/types';
+import {
+	IAcceptedPrice,
+	ICustodianInfo,
+	IEthBalance,
+	IOrderBookSnapshot,
+	IToken,
+	ITokenBalance
+} from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
@@ -14,6 +21,10 @@ interface IProps {
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
+	orderBook: IOrderBookSnapshot;
+	connection: boolean;
+	subscribe: (pair: string) => any;
+	unsubscribe: () => any;
 }
 
 interface IState {
@@ -36,10 +47,24 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian });
 
-	public handleTrade = (token: string) => this.setState({ tradeToken: token });
+	public handleTrade = (token: string) => {
+		if (!token)
+			this.props.unsubscribe();
+		else
+			this.props.subscribe(token);
+		this.setState({ tradeToken: token })
+	};
 
 	public render() {
-		const { tokens, acceptedPrices, custodians, custodianTokenBalances, ethBalance } = this.props;
+		const {
+			tokens,
+			acceptedPrices,
+			custodians,
+			custodianTokenBalances,
+			ethBalance,
+			connection,
+			orderBook
+		} = this.props;
 		const { convertCustodian, tradeToken } = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
@@ -52,53 +77,57 @@ export default class Dex extends React.Component<IProps, IState> {
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		const tradeTokenInfo = tokens.find(t => t.code === tradeToken);
-		const tradeTokenBalance = tradeTokenInfo ? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken] : undefined;
+		const tradeTokenBalance = tradeTokenInfo
+			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
+			: undefined;
 		return (
 			<Layout>
 				<div className="App">
 					<Header />
-					<SDivFlexCenter center horizontal marginBottom="20px;">
-						{beethovenList.map(c => (
-							<CustodianCard
-								key={c}
-								type={CST.BEETHOVEN}
-								handleConvert={this.handleConvert}
-								handleTrade={this.handleTrade}
-								info={custodians[c]}
-								margin="0 20px 0 0"
-								acceptedPrices={acceptedPrices[c]}
-								tokenBalances={custodianTokenBalances[c] || {}}
-							/>
-						))}
-					</SDivFlexCenter>
-					<SDivFlexCenter center horizontal>
-						{mozartList.map(c => (
-							<CustodianCard
-								key={c}
-								type={CST.MOZART}
-								handleConvert={this.handleConvert}
-								handleTrade={this.handleTrade}
-								info={custodians[c]}
-								margin="0 20px 0 0"
-								acceptedPrices={acceptedPrices[c]}
-								tokenBalances={custodianTokenBalances[c] || {}}
-							/>
-						))}
-					</SDivFlexCenter>
-					<ConvertCard
-						custodian={convertCustodian}
-						info={custodians[convertCustodian]}
-						handleClose={() => this.handleConvert('')}
-					/>
-					<TradeCard
-						token={tradeToken}
-						tokenInfo={tradeTokenInfo}
-						tokenBalance={tradeTokenBalance}
-						ethBalance={ethBalance}
-						handleClose={() => this.handleTrade('')}
-					/>
+					<Spin spinning={!connection} tip="loading...">
+						<SDivFlexCenter center horizontal marginBottom="20px;">
+							{beethovenList.map(c => (
+								<CustodianCard
+									key={c}
+									type={CST.BEETHOVEN}
+									handleConvert={this.handleConvert}
+									handleTrade={this.handleTrade}
+									info={custodians[c]}
+									margin="0 20px 0 0"
+									acceptedPrices={acceptedPrices[c]}
+									tokenBalances={custodianTokenBalances[c] || {}}
+								/>
+							))}
+						</SDivFlexCenter>
+						<SDivFlexCenter center horizontal>
+							{mozartList.map(c => (
+								<CustodianCard
+									key={c}
+									type={CST.MOZART}
+									handleConvert={this.handleConvert}
+									handleTrade={this.handleTrade}
+									info={custodians[c]}
+									margin="0 20px 0 0"
+									acceptedPrices={acceptedPrices[c]}
+									tokenBalances={custodianTokenBalances[c] || {}}
+								/>
+							))}
+						</SDivFlexCenter>
+						<ConvertCard
+							custodian={convertCustodian}
+							info={custodians[convertCustodian]}
+							handleClose={() => this.handleConvert('')}
+						/>
+						<TradeCard
+							token={tradeToken}
+							tokenInfo={tradeTokenInfo}
+							tokenBalance={tradeTokenBalance}
+							ethBalance={ethBalance}
+							orderBook={orderBook}
+							handleClose={() => this.handleTrade('')}
+						/>
+					</Spin>
 				</div>
-				{/* <PriceChart timeStep={60000} prices={data} /> */}
 			</Layout>
 		);
 	}

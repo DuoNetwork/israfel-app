@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import * as dexActions from '../../actions/dexActions';
-import { IState } from '../../common/types';
-import Pair from '../../components/Pages/Pair';
+import * as dexActions from 'ts/actions/dexActions';
+import { IState } from 'ts/common/types';
+import Pair from 'ts/components/Pages/Pair';
 
 function mapStateToProps(state: IState/*, ownProps: any*/) {
 	// const code = ownProps.pair.split('|')[0];
 	return {
 		locale: state.ui.locale,
 		account: state.web3.account,
-		orderHistory: state.dex.orderHistory,
+		orderHistory: [], //state.dex.orderHistory,
 		orderBook: state.dex.orderBookSnapshot,
 		ethBalance: state.web3.ethBalance,
 		tokenBalance: /*state.web3.tokenBalances[code] ||*/ {
