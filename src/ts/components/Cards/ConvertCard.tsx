@@ -6,6 +6,7 @@ import * as CST from 'ts/common/constants';
 import { getDualClassWrapper } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -138,16 +139,28 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethAmount: ''
 		});
 
+	// TODO： approve WETH allowance
+	// private handleApprove = () => {
+	// };
+
 	private handleSubmit = async () => {
 		const { account, custodian, handleClose, info } = this.props;
-		const { isCreate, amount } = this.state;
+		const { isCreate, amount, wethCreate } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
 			alert('missing data');
 			return;
 		}
 
-		if (isCreate) await cw.create(account, Number(amount), hash => alert(hash));
+		if (isCreate)
+			if (wethCreate)
+				await cw.createWithWETH(
+					account,
+					Number(amount),
+					web3Util.contractAddresses.etherToken,
+					hash => alert(hash)
+				);
+			else await cw.create(account, Number(amount), hash => alert(hash));
 		else
 			await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
 				alert(hash)
@@ -181,6 +194,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					tokenBalances[bToken].balance / info.states.alpha
 			)
 			: 0;
+
+		// const approveRequired = isCreate && wethCreate && ethBalance.allowance <= 0;
+
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -389,6 +405,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								</ul>
 							</div>
 						</SCardList>
+						(
 						<SCardList noUlBorder noLiBorder>
 							<div className="status-list-wrapper">
 								<ul
@@ -422,6 +439,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								</ul>
 							</div>
 						</SCardList>
+						)
 					</SCardConversionForm>
 					<div className="convert-popup-des">
 						Description Description Description $ 1,000 USD,Description sdadd
