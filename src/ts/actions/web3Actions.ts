@@ -35,10 +35,11 @@ export function ethBalanceUpdate(balance: IEthBalance) {
 	};
 }
 
-export function tokenBalanceUpdate(code: string, balance: ITokenBalance) {
+export function tokenBalanceUpdate(code: string, custodian: string, balance: ITokenBalance) {
 	return {
 		type: CST.AC_TOKEN_BALANCE,
 		code: code,
+		custodian: custodian,
 		balance: balance
 	};
 }
@@ -87,7 +88,7 @@ export function getCustodianBalances(): VoidThunkAction {
 					web3Util.getProxyTokenAllowance(token.code, account)
 				]).then(result =>
 					dispatch(
-						tokenBalanceUpdate(token.code, {
+						tokenBalanceUpdate(token.code, token.custodian, {
 							balance: result[0],
 							allowance: result[1]
 						})

@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IAcceptedPrice, ICustodianInfo, ITokenBalance } from 'ts/common/types';
+import { IAcceptedPrice, ICustodianInfo, IEthBalance, IToken, ITokenBalance } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
@@ -9,22 +9,24 @@ import CustodianCard from '../Cards/CustodianCard';
 import TradeCard from '../Cards/TradeCard';
 // import PriceChart from '../Charts/PriceChart';
 interface IProps {
+	ethBalance: IEthBalance;
+	tokens: IToken[];
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	custodians: { [custodian: string]: ICustodianInfo };
-	tokenBalances: { [code: string]: ITokenBalance };
+	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 }
 
 interface IState {
-	displayConvert: boolean;
-	displayTrade: boolean;
+	convertCustodian: string;
+	tradeToken: string;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			displayConvert: false,
-			displayTrade: false
+			convertCustodian: '',
+			tradeToken: ''
 		};
 	}
 
@@ -32,16 +34,13 @@ export default class Dex extends React.Component<IProps, IState> {
 		document.title = 'DUO | Trustless Derivatives';
 	}
 
-	public toggleConvert = () => {
-		this.setState({ displayConvert: !this.state.displayConvert });
-	};
-	public toggleTrade = () => {
-		this.setState({ displayTrade: !this.state.displayTrade });
-	};
+	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian });
+
+	public handleTrade = (token: string) => this.setState({ tradeToken: token });
 
 	public render() {
-		const { acceptedPrices, custodians, tokenBalances } = this.props;
-		const { displayConvert, displayTrade } = this.state;
+		const { tokens, acceptedPrices, custodians, custodianTokenBalances, ethBalance } = this.props;
+		const { convertCustodian, tradeToken } = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		for (const custodian in custodians) {
@@ -52,6 +51,8 @@ export default class Dex extends React.Component<IProps, IState> {
 		}
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
+		const tradeTokenInfo = tokens.find(t => t.code === tradeToken);
+		const tradeTokenBalance = tradeTokenInfo ? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken] : undefined;
 		return (
 			<Layout>
 				<div className="App">
@@ -61,12 +62,12 @@ export default class Dex extends React.Component<IProps, IState> {
 							<CustodianCard
 								key={c}
 								type={CST.BEETHOVEN}
-								toggleConvertDisplay={this.toggleConvert}
-								toggleTradeDisplay={this.toggleTrade}
+								handleConvert={this.handleConvert}
+								handleTrade={this.handleTrade}
 								info={custodians[c]}
 								margin="0 20px 0 0"
 								acceptedPrices={acceptedPrices[c]}
-								tokenBalances={tokenBalances}
+								tokenBalances={custodianTokenBalances[c] || {}}
 							/>
 						))}
 					</SDivFlexCenter>
@@ -75,24 +76,26 @@ export default class Dex extends React.Component<IProps, IState> {
 							<CustodianCard
 								key={c}
 								type={CST.MOZART}
-								toggleConvertDisplay={this.toggleConvert}
-								toggleTradeDisplay={this.toggleTrade}
+								handleConvert={this.handleConvert}
+								handleTrade={this.handleTrade}
 								info={custodians[c]}
 								margin="0 20px 0 0"
 								acceptedPrices={acceptedPrices[c]}
-								tokenBalances={tokenBalances}
+								tokenBalances={custodianTokenBalances[c] || {}}
 							/>
 						))}
 					</SDivFlexCenter>
 					<ConvertCard
-						title="Beethoven M19"
-						toggleDisplay={this.toggleConvert}
-						display={displayConvert}
+						custodian={convertCustodian}
+						info={custodians[convertCustodian]}
+						handleClose={() => this.handleConvert('')}
 					/>
 					<TradeCard
-						title="Beethoven M19"
-						toggleDisplay={this.toggleTrade}
-						display={displayTrade}
+						token={tradeToken}
+						tokenInfo={tradeTokenInfo}
+						tokenBalance={tradeTokenBalance}
+						ethBalance={ethBalance}
+						handleClose={() => this.handleTrade('')}
 					/>
 				</div>
 				{/* <PriceChart timeStep={60000} prices={data} /> */}

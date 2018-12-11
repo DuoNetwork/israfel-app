@@ -5,6 +5,8 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { IEthBalance, IToken, ITokenBalance } from 'ts/common/types';
+import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -18,17 +20,19 @@ import {
 const RadioGroup = Radio.Group;
 
 interface IProps {
-	title: string;
-	toggleDisplay: () => void;
-	display: boolean;
+	token: string;
+	tokenInfo?: IToken;
+	tokenBalance?: ITokenBalance;
+	ethBalance: IEthBalance;
+	handleClose: () => void;
 }
 
 interface IState {
+	token: string;
 	isBid: boolean;
 	price: string;
 	amount: string;
-	display: boolean;
-	expire: number;
+	expiry: number;
 }
 
 export default class TradeCard extends React.Component<IProps, IState> {
@@ -38,25 +42,27 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			isBid: true,
 			price: '',
 			amount: '',
-			display: props.display,
-			expire: 1
+			token: props.token,
+			expiry: 1
 		};
 	}
+
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.display !== prevState.display)
+		if (nextProps.token !== prevState.token)
 			return {
 				isBid: true,
 				price: '',
 				amount: '',
-				expire: 1,
-				display: nextProps.display
+				expiry: 1,
+				token: nextProps.token
 			};
 
 		return null;
 	}
-	private onExpireChange = (e: number) => {
+
+	private onexpiryChange = (e: number) => {
 		this.setState({
-			expire: e
+			expiry: e
 		});
 	};
 
@@ -73,8 +79,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			amount: value
 		});
 	public render() {
-		const { title, toggleDisplay, display } = this.props;
-		const { isBid, price, amount, expire } = this.state;
+		const { token, handleClose, tokenBalance, ethBalance } = this.props;
+		const { isBid, price, amount, expiry } = this.state;
 		const marks = {
 			0: {
 				label: <strong>0%</strong>
@@ -100,37 +106,43 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			{ price: 100, amount: 1234 }
 		];
 		return (
-			<div style={{ display: display ? 'block' : 'none' }}>
-				<div className="popup-bg" onClick={toggleDisplay} />
+			<div style={{ display: !!token ? 'block' : 'none' }}>
+				<div className="popup-bg" onClick={handleClose} />
 				<SCard
-					title={<SCardTitle>{CST.TH_PLACEORDER.toUpperCase()}</SCardTitle>}
+					title={
+						<SCardTitle>
+							{CST.TH_TRADE.toUpperCase() + ' ' + token + '/' + CST.TH_WETH}
+						</SCardTitle>
+					}
 					width="400px"
 					className="popup-card"
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
 							<img className="cardpopup-close" src={help} />
-							<img className="cardpopup-close" src={close} onClick={toggleDisplay} />
+							<img className="cardpopup-close" src={close} onClick={handleClose} />
 						</SDivFlexCenter>
 					}
 				>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{CST.TH_CUSTODIAN}</span>
-									<span className="content">{title}</span>
-								</li>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
 									{CST.TH_BALANCE}
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Token A</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{token}</span>
+									<span className="content">
+										{tokenBalance
+											? util.formatBalance(tokenBalance.balance)
+											: 0}
+									</span>
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Token B</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{CST.TH_WETH}</span>
+									<span className="content">
+										{util.formatBalance(ethBalance.weth)}
+									</span>
 								</li>
 							</ul>
 						</div>
@@ -240,8 +252,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										</span>
 										<SDivFlexCenter horizontal width="60%" rowInv>
 											<RadioGroup
-												onChange={e => this.onExpireChange(e.target.value)}
-												value={expire}
+												onChange={e => this.onexpiryChange(e.target.value)}
+												value={expiry}
 											>
 												<Radio value={1}>Day</Radio>
 												<Radio value={2}>Month</Radio>
@@ -259,7 +271,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					</div>
 					<SDivFlexCenter horizontal width="100%" padding="10px">
 						<SButton
-							onClick={() => this.setState({ price: '', amount: '', expire: 1 })}
+							onClick={() => this.setState({ price: '', amount: '', expiry: 1 })}
 							width="49%"
 						>
 							RESET

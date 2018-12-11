@@ -64,7 +64,7 @@ describe('actions', () => {
 
 	test('tokenBalanceUpdate', () => {
 		expect(
-			web3Actions.tokenBalanceUpdate('code', {
+			web3Actions.tokenBalanceUpdate('code', 'custodian', {
 				balance: 123,
 				allowance: 456
 			})

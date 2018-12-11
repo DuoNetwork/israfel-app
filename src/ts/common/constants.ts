@@ -65,7 +65,6 @@ export const TH_COLLATERAL = 'Collateral';
 export const TH_CONVERT = 'Convert';
 export const TH_CREATE = 'Create';
 export const TH_REDEEM = 'Redeem';
-export const TH_PLACEORDER = 'Place Order';
 export const TH_CUSTODIAN = 'Custodian';
 export const TH_MATURITY = 'Maturity';
 export const TH_PERPETUAL = 'Perpetual';

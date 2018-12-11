@@ -5,16 +5,15 @@ import * as dexActions from '../../actions/dexActions';
 import { IState } from '../../common/types';
 import Pair from '../../components/Pages/Pair';
 
-function mapStateToProps(state: IState, ownProps: any) {
-	const code = ownProps.pair.split('|')[0];
+function mapStateToProps(state: IState/*, ownProps: any*/) {
+	// const code = ownProps.pair.split('|')[0];
 	return {
 		locale: state.ui.locale,
 		account: state.web3.account,
 		orderHistory: state.dex.orderHistory,
 		orderBook: state.dex.orderBookSnapshot,
 		ethBalance: state.web3.ethBalance,
-		tokenBalance: state.web3.tokenBalances[code] || {
-			custodian: '',
+		tokenBalance: /*state.web3.tokenBalances[code] ||*/ {
 			balance: 0,
 			allowance: 0
 		},

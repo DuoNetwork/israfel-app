@@ -3,6 +3,7 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { ICustodianInfo } from 'ts/common/types';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -15,41 +16,41 @@ import {
 } from './_styled';
 
 interface IProps {
-	title: string;
-	toggleDisplay: () => void;
-	display: boolean;
+	custodian: string;
+	info?: ICustodianInfo
+	handleClose: () => void;
 }
 
 interface IState {
+	custodian: string;
 	isExpand: boolean;
 	isCreate: boolean;
 	amount1: string;
 	amount2: string;
 	isExtraInput: boolean;
-	display: boolean;
 }
 
 export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			custodian: props.custodian,
 			isExpand: false,
 			isCreate: true,
 			amount1: '',
 			amount2: '',
-			isExtraInput: false,
-			display: props.display
+			isExtraInput: false
 		};
 	}
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.display !== prevState.display)
+		if (nextProps.custodian !== prevState.custodian)
 			return {
+				custodian: nextProps.custodian,
 				isExpand: false,
 				isCreate: true,
 				amount1: '',
 				amount2: '',
 				isExtraInput: false,
-				display: nextProps.display
 			};
 
 		return null;
@@ -78,7 +79,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			amount2: value
 		});
 	public render() {
-		const { title, toggleDisplay, display } = this.props;
+		const { handleClose, custodian, info } = this.props;
 		const { isCreate, isExpand, amount1, amount2, isExtraInput } = this.state;
 		const marks = {
 			0: {
@@ -98,8 +99,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			}
 		};
 		return (
-			<div style={{ display: display ? 'block' : 'none' }}>
-				<div className="popup-bg" onClick={toggleDisplay} />
+			<div style={{ display: !!custodian ? 'block' : 'none' }}>
+				<div className="popup-bg" onClick={handleClose} />
 				<SCard
 					title={<SCardTitle>{CST.TH_CONVERT.toUpperCase()}</SCardTitle>}
 					width="400px"
@@ -108,7 +109,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					extra={
 						<SDivFlexCenter horizontal width="40px">
 							<img className="cardpopup-close" src={help} />
-							<img className="cardpopup-close" src={close} onClick={toggleDisplay} />
+							<img className="cardpopup-close" src={close} onClick={handleClose} />
 						</SDivFlexCenter>
 					}
 				>
@@ -116,7 +117,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{title}
+									{info ? info.code : ''}
 								</li>
 								<li style={{ padding: '5px 15px' }}>
 									<span className="title">Param 1</span>

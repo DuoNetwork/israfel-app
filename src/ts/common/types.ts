@@ -28,8 +28,10 @@ export interface IWeb3State {
 	readonly account: string;
 	readonly network: number;
 	readonly ethBalance: IEthBalance;
-	readonly tokenBalances: {
-		[code: string]: ITokenBalance;
+	readonly custodianTokenBalances: {
+		[custodian: string]: {
+			[code: string]: ITokenBalance;
+		};
 	};
 	readonly custodians: {
 		[custodian: string]: ICustodianInfo;

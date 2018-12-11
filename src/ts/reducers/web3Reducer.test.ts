@@ -41,8 +41,8 @@ describe('web3 reducer', () => {
 		state = web3Reducer(state, {
 			type: CST.AC_TOKEN_BALANCE,
 			code: 'code',
+			custodian: 'custodian',
 			balance: {
-				custodian: 'custodian',
 				balance: 123,
 				allowance: 789
 			}

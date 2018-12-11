@@ -14,8 +14,8 @@ interface IProps {
 	info: ICustodianInfo;
 	margin: string;
 	acceptedPrices: IAcceptedPrice[];
-	toggleConvertDisplay: () => void;
-	toggleTradeDisplay: () => void;
+	handleConvert: (custodian: string) => void;
+	handleTrade: (token: string) => void;
 }
 
 export default class CustodianCard extends React.Component<IProps> {
@@ -24,8 +24,8 @@ export default class CustodianCard extends React.Component<IProps> {
 			type,
 			info,
 			margin,
-			toggleConvertDisplay,
-			toggleTradeDisplay,
+			handleConvert,
+			handleTrade,
 			tokenBalances
 		} = this.props;
 		const contractCode = info.code;
@@ -70,7 +70,7 @@ export default class CustodianCard extends React.Component<IProps> {
 							padding: '0px 10px'
 						}}
 					>
-						<SButton onClick={toggleConvertDisplay}>
+						<SButton onClick={() => handleConvert(contractAddress.custodian.address)}>
 							{tokenBalances[aCode] &&
 							tokenBalances[bCode] &&
 							tokenBalances[aCode].balance &&
@@ -115,7 +115,7 @@ export default class CustodianCard extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>
+						<SButton onClick={() => handleTrade(aCode)}>
 							{tokenBalances[aCode] && tokenBalances[aCode].balance
 								? CST.TH_TRADE
 								: CST.TH_GET}
@@ -157,7 +157,7 @@ export default class CustodianCard extends React.Component<IProps> {
 								</ul>
 							</div>
 						</SCardList>
-						<SButton onClick={toggleTradeDisplay}>
+						<SButton onClick={() => handleTrade(bCode)}>
 							{tokenBalances[bCode] && tokenBalances[bCode].balance
 								? CST.TH_TRADE
 								: CST.TH_GET}
