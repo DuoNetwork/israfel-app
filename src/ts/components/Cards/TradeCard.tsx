@@ -87,9 +87,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	};
 
 	private handlePriceBlurInputChange(e: string) {
-		const stepPrice = this.props.tokenInfo ? this.props.tokenInfo.precisions[CST.TH_WETH] : undefined;
+		const stepPrice = this.props.tokenInfo
+			? this.props.tokenInfo.precisions[CST.TH_WETH]
+			: undefined;
 		this.setState({
-			price: stepPrice ? (Math.round(Number(e) / stepPrice) * stepPrice).toString() : this.state.price
+			price: stepPrice
+				? (Math.round(Number(e) / stepPrice) * stepPrice).toString()
+				: this.state.price
 		});
 	}
 
@@ -113,10 +117,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
 	};
 
-	private handleAmountInputChange = (value: string) =>
+	private handleAmountInputChange = (value: string, limit: number) =>
 		this.setState({
-			amount: value
+			amount: Math.min(Number(value), limit) + ''
 		});
+
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
@@ -137,6 +142,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const approveRequired = isBid
 			? !ethBalance.allowance
 			: tokenBalance && !tokenBalance.allowance;
+		const limit = price
+			? isBid
+				? ethBalance.weth / Number(price)
+				: tokenBalance
+				? tokenBalance.balance
+				: 0
+			: 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -239,16 +251,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						{approveRequired ? (
 							<div className="pop-up-new">
 								<li>
-									<p style={{ paddingTop: "50px", textAlign: 'center' }}>
+									<p style={{ paddingTop: '50px', textAlign: 'center' }}>
 										Not enough allowance, please approve first
 									</p>
 								</li>
 								<li style={{ padding: '10px 100px 5px 100px' }}>
-									<SButton
-										onClick={this.handleApprove}
-									>
-										{CST.TH_APPROVE}
-									</SButton>
+									<SButton onClick={this.handleApprove}>{CST.TH_APPROVE}</SButton>
 								</li>
 							</div>
 						) : null}
@@ -302,7 +310,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											type="number"
 											step={tokenInfo ? tokenInfo.denomination : undefined}
 											onChange={e =>
-												this.handleAmountInputChange(e.target.value)
+												this.handleAmountInputChange(e.target.value, limit)
 											}
 											onBlur={e =>
 												this.handleAmountBlurChange(e.target.value)
