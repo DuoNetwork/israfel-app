@@ -87,6 +87,7 @@ export default class CustodianCard extends React.Component<IProps> {
 							timeStep={6000}
 							name={aCode}
 							isA={true}
+							label={"label1"}
 						/>
 					</div>
 					<div
@@ -128,6 +129,7 @@ export default class CustodianCard extends React.Component<IProps> {
 							timeStep={6000}
 							name={bCode}
 							isA={false}
+							label={"label2"}
 						/>
 					</div>
 					<div

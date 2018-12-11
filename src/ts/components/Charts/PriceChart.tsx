@@ -8,7 +8,14 @@ const margin = { top: 5, right: 5, bottom: 30, left: 25 };
 const width = 222 - margin.left - margin.right;
 const height = 110 - margin.top - margin.bottom;
 
-function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, name: string, isA: boolean) {
+function drawLines(
+	el: Element,
+	sourceData: IAcceptedPrice[],
+	timeStep: number,
+	name: string,
+	isA: boolean,
+	label: string
+) {
 	if (!sourceData.length) {
 		d3.selectAll('.loading').remove();
 		d3.select(el)
@@ -22,8 +29,8 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, 
 	// //Establish SVG Playground
 	d3.selectAll('.loading' + name).remove();
 	d3.selectAll('#timeserieschart' + name).remove();
-	const maxNumber = d3.max(sourceData.map(d => isA ? d.navA : d.navB)) || 0;
-	const miniNumber = d3.min(sourceData.map(d => isA ? d.navA : d.navB)) || 0;
+	const maxNumber = d3.max(sourceData.map(d => (isA ? d.navA : d.navB))) || 0;
+	const miniNumber = d3.min(sourceData.map(d => (isA ? d.navA : d.navB))) || 0;
 	const maxTimestamp = d3.max(sourceData.map(d => d.timestamp)) || 0;
 	const miniTimestamp = d3.min(sourceData.map(d => d.timestamp)) || 0;
 	const svg = d3
@@ -122,6 +129,20 @@ function drawLines(el: Element, sourceData: IAcceptedPrice[], timeStep: number, 
 		.selectAll('line')
 		.attr('stroke', ColorStyles.BorderWhite1);
 	yGridLines.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
+	const text = svg
+		.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(50, 20)')
+		.attr('class', 'label' + name) //easy to style with CSS
+		.text(label);
+	text.style('text-anchor', 'middle')
+		.style('font-size', '12px')
+		.style('color', ColorStyles.TextBlackAlphaLL);
+	// chart
+	// 	.append('g')
+	// 	.attr('class', 'placeHolder' + name)
+	// 	.append("text")
+	// 	.call("PlaceHolder" as any);
 	// Chart Data
 	const chartdata = chart
 		.append('g')
@@ -170,6 +191,7 @@ interface IProps {
 	timeStep: number;
 	name: string;
 	isA: boolean;
+	label: string;
 }
 
 export default class TimeSeriesChart extends React.Component<IProps> {
@@ -180,14 +202,14 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, timeStep, name, isA } = this.props;
-		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA );
+		const { prices, timeStep, name, isA, label } = this.props;
+		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA, label);
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, timeStep, name, isA } = nextProps;
+		const { prices, timeStep, name, isA, label } = nextProps;
 		if (JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices))
-			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
+			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA, label);
 
 		return false;
 	}
