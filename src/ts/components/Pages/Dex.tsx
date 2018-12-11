@@ -14,7 +14,6 @@ import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
 import TradeCard from '../Cards/TradeCard';
-// import PriceChart from '../Charts/PriceChart';
 interface IProps {
 	ethBalance: IEthBalance;
 	tokens: IToken[];
@@ -125,6 +124,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							ethBalance={ethBalance}
 							orderBook={orderBook}
 							handleClose={() => this.handleTrade('')}
+							pair={this.props.orderBook.pair}
 						/>
 					</Spin>
 				</div>

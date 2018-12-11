@@ -7,6 +7,7 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+import web3Util from '../../common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -26,6 +27,7 @@ interface IProps {
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
 	handleClose: () => void;
+	pair: string;
 }
 
 interface IState {
@@ -93,6 +95,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		this.setState({
 			price: value
 		});
+	private handleApprove = () => {
+		const { pair } = this.props;
+		const { isBid } = this.state;
+		console.log(pair);
+		const [code1, code2] = pair.split('|');
+		web3Util.setUnlimitedTokenAllowance(isBid ? code2 : code1);
+	};
 	private handleAmountInputChange = (value: string) =>
 		this.setState({
 			amount: value
@@ -114,6 +123,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				count: 0,
 				price: 0
 			});
+		const approveRequired = isBid
+			? !ethBalance.allowance || ethBalance.allowance < ethBalance.weth
+			: !tokenBalance || !tokenBalance.allowance || tokenBalance.allowance < tokenBalance.balance;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -213,6 +225,24 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								</button>
 							))}
 						</SDivFlexCenter>
+						{approveRequired && (
+							<div className="pop-up-new">
+								<li style={{ padding: '50px 15px 5px 15px' }}>
+									<SButton
+										style={{
+											width: '60%',
+											margin: 'auto',
+											background: 'rgba(42,181,202,1)',
+											color: 'rgba(255,255,255,1)',
+											boxShadow: '0 0 4px 1px rgba(42,181,202,.2)'
+										}}
+										onClick={this.handleApprove}
+									>
+										{CST.TH_APPROVE}
+									</SButton>
+								</li>
+							</div>
+						)}
 						<SCardList noUlBorder noLiBorder>
 							<div className="status-list-wrapper">
 								<ul>
