@@ -75,6 +75,8 @@ export const TH_PA = ' p.a.';
 export const TH_X_LEV = 'x leverage';
 export const TH_BID = 'Bid';
 export const TH_ASK = 'Ask';
+export const TH_TOTAL_SUPPLY = 'Total Supply';
+export const TH_CONV_RATIO = 'Conversion Ratio';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {

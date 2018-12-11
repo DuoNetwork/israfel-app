@@ -3,7 +3,7 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { ICustodianInfo } from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import {
@@ -18,6 +18,10 @@ import {
 
 interface IProps {
 	custodian: string;
+	aToken: string;
+	bToken: string;
+	tokenBalances?: { [code: string]: ITokenBalance };
+	ethBalance: IEthBalance;
 	info?: ICustodianInfo;
 	handleClose: () => void;
 }
@@ -101,8 +105,20 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 
 	public render() {
-		const { handleClose, custodian, info } = this.props;
+		const {
+			handleClose,
+			custodian,
+			info,
+			aToken,
+			bToken,
+			tokenBalances,
+			ethBalance
+		} = this.props;
 		const { isCreate, infoExpand, ethAmount, wethAmount, wethCreate } = this.state;
+		const bTokenPerETH = info
+			? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha)
+			: 0;
+		const aTokenPerETH = info ? bTokenPerETH * info.states.alpha : 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -126,8 +142,68 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
+									{CST.TH_BALANCE}
+								</li>
+								<li style={{ padding: '5px 15px' }}>
+									<span className="title">
+										{wethCreate ? CST.TH_WETH : CST.TH_ETH}
+									</span>
+									<span className="content">
+										{util.formatBalance(
+											wethCreate ? ethBalance.weth : ethBalance.eth
+										)}
+									</span>
+								</li>
+								<li style={{ padding: '5px 15px' }}>
+									<span className="title">{aToken}</span>
+									<span className="content">
+										{util.formatBalance(
+											tokenBalances && tokenBalances[aToken]
+												? tokenBalances[aToken].balance
+												: 0
+										)}
+									</span>
+								</li>
+								<li style={{ padding: '5px 15px' }}>
+									<span className="title">{bToken}</span>
+									<span className="content">
+										{util.formatBalance(
+											tokenBalances && tokenBalances[bToken]
+												? tokenBalances[bToken].balance
+												: 0
+										)}
+									</span>
+								</li>
+							</ul>
+						</div>
+					</SCardList>
+					<SCardList noMargin width="100%">
+						<div className="status-list-wrapper">
+							<ul>
+								<li className="block-title" style={{ padding: '5px 15px' }}>
 									{CST.TH_CUSTODIAN}
 								</li>
+								<li style={{ padding: '5px 15px' }}>
+									<span className="title">{CST.TH_CONV_RATIO}</span>
+									<span className="content">{`1 ${
+										CST.TH_ETH
+									} = ${util.formatNumber(
+										aTokenPerETH
+									)} ${aToken.substring(0, 1)} + ${util.formatNumber(
+										bTokenPerETH
+									)} ${bToken.substring(0, 1)}`}</span>
+								</li>
+							</ul>
+						</div>
+					</SCardList>
+					<SCardList>
+						<div className="status-list-wrapper">
+							<ul
+								style={{
+									margin: '-1px 0',
+									height: infoExpand ? '128px' : '0px'
+								}}
+							>
 								<li style={{ padding: '5px 15px' }}>
 									<span className="title">{CST.TH_MATURITY}</span>
 									<span className="content">
@@ -143,35 +219,20 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									</span>
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 3</span>
-									<span className="content">1,234,567</span>
-								</li>
-							</ul>
-						</div>
-					</SCardList>
-					<SCardList>
-						<div className="status-list-wrapper">
-							<ul
-								style={{
-									margin: '-1px 0',
-									height: infoExpand ? '128px' : '0px'
-								}}
-							>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 4</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{CST.TH_TOTAL_SUPPLY}</span>
+									<span className="content">
+										{util.formatBalance(info ? info.states.totalSupplyA : 0) +
+											' ' +
+											aToken}
+									</span>
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 5</span>
-									<span className="content">1,234,567</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 6</span>
-									<span className="content">1,234,567</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 7</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{''}</span>
+									<span className="content">
+										{util.formatBalance(info ? info.states.totalSupplyB : 0) +
+											' ' +
+											bToken}
+									</span>
 								</li>
 							</ul>
 						</div>

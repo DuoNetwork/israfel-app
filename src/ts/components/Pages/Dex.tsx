@@ -28,6 +28,8 @@ interface IProps {
 
 interface IState {
 	convertCustodian: string;
+	convertAToken: string;
+	convertBToken: string;
 	tradeToken: string;
 }
 
@@ -36,6 +38,8 @@ export default class Dex extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			convertCustodian: '',
+			convertAToken: '',
+			convertBToken: '',
 			tradeToken: ''
 		};
 	}
@@ -44,7 +48,12 @@ export default class Dex extends React.Component<IProps, IState> {
 		document.title = 'DUO | Trustless Derivatives';
 	}
 
-	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian.toLocaleLowerCase() });
+	public handleConvert = (custodian: string, aToken: string, bToken: string) =>
+		this.setState({
+			convertCustodian: custodian.toLocaleLowerCase(),
+			convertAToken: aToken,
+			convertBToken: bToken
+		});
 
 	public handleTrade = (token: string) => {
 		if (!token) this.props.unsubscribe();
@@ -62,7 +71,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			connection,
 			orderBook
 		} = this.props;
-		const { convertCustodian, tradeToken } = this.state;
+		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		for (const custodian in custodians) {
@@ -111,9 +120,13 @@ export default class Dex extends React.Component<IProps, IState> {
 							))}
 						</SDivFlexCenter>
 						<ConvertCard
+							tokenBalances={custodianTokenBalances[convertCustodian]}
+							ethBalance={ethBalance}
 							custodian={convertCustodian}
+							aToken={convertAToken}
+							bToken={convertBToken}
 							info={custodians[convertCustodian]}
-							handleClose={() => this.handleConvert('')}
+							handleClose={() => this.handleConvert('', '', '')}
 						/>
 						<TradeCard
 							token={tradeToken}
