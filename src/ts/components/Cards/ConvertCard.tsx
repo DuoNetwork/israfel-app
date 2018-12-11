@@ -94,21 +94,35 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			infoExpand: !this.state.infoExpand
 		});
 
-	private handleAmountInputChange = (value: string, limit: number) =>
+	private handleAmountBlurChange = (value: string, limit: number) => {
 		this.setState({
-			amount: Math.min(Number(value), limit) + ''
+			amount: Math.min(Math.max(Number(value), 0), limit) + ''
+		});
+	};
+
+	private handleAmountInputChange = (value: string) => {
+		console.log(value);
+		this.setState({
+			amount: value
+		});
+	};
+
+	private handleWethAmountInputBlurChange = (value: string, limit: number) =>
+		this.setState({
+			wethAmount: Math.min(Math.max(Number(value), 0), limit) + ''
 		});
 
-	private handleWethAmountInputChange = (value: string, limit: number) =>
+	private handleWethAmountInputChange = (value: string) => {
 		this.setState({
-			wethAmount: Math.min(Number(value), limit) + ''
+			wethAmount: value
 		});
+	};
 
 	private handleWethCreateChange = () =>
 		this.setState({
 			wethCreate: !this.state.wethCreate,
 			amount: '',
-			wethAmount: '',
+			wethAmount: ''
 		});
 
 	public render() {
@@ -299,14 +313,17 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									>
 										<SInput
 											width="100%"
+											value={amount}
 											placeholder={
 												(isCreate ? CST.TH_ETH : aToken) +
-												' ' +
+												'' +
 												CST.TH_AMOUNT
 											}
-											value={amount}
 											onChange={e =>
-												this.handleAmountInputChange(e.target.value, limit)
+												this.handleAmountInputChange(e.target.value)
+											}
+											onBlur={e =>
+												this.handleAmountBlurChange(e.target.value, limit)
 											}
 										/>
 									</li>
@@ -357,10 +374,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											width="100%"
 											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
 											value={wethAmount}
-											onChange={e =>
-												this.handleWethAmountInputChange(
+											onBlur={e =>
+												this.handleWethAmountInputBlurChange(
 													e.target.value,
 													limit
+												)
+											}
+											onChange={e =>
+												this.handleWethAmountInputChange(
+													e.target.value
 												)
 											}
 										/>
