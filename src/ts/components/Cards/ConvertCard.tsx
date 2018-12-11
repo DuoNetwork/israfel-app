@@ -95,9 +95,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 
 	private handleAmountBlurChange = (value: string, limit: number) => {
-		this.setState({
-			amount: Math.min(Math.max(Number(value), 0), limit) + ''
-		});
+		if (value.match(CST.RX_NUM_P))
+			this.setState({
+				amount: Math.min(Number(value), limit) + ''
+			});
+		else
+			this.setState({
+				amount: ''
+			});
 	};
 
 	private handleAmountInputChange = (value: string) => {
@@ -107,10 +112,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 	};
 
-	private handleWethAmountInputBlurChange = (value: string, limit: number) =>
-		this.setState({
-			wethAmount: Math.min(Math.max(Number(value), 0), limit) + ''
-		});
+	private handleWethAmountInputBlurChange = (value: string, limit: number) => {
+		if (value.match(CST.RX_NUM_P))
+			this.setState({
+				wethAmount: Math.min(Number(value), limit) + ''
+			});
+		else
+			this.setState({
+				wethAmount: ''
+			});
+	};
 
 	private handleWethAmountInputChange = (value: string) => {
 		this.setState({
@@ -381,9 +392,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												)
 											}
 											onChange={e =>
-												this.handleWethAmountInputChange(
-													e.target.value
-												)
+												this.handleWethAmountInputChange(e.target.value)
 											}
 										/>
 									</li>
