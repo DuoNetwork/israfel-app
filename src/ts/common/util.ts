@@ -2,7 +2,7 @@
 // import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
 import * as d3 from 'd3';
 import moment from 'moment';
-// import * as CST from './constants';
+import * as CST from './constants';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
@@ -48,6 +48,12 @@ class Util {
 			.format(',.4s')(num)
 			.toUpperCase()
 			.replace(/G/g, 'B');
+	}
+
+	public formatMaturity(maturity: number) {
+		return maturity
+			? moment(maturity).format('YYYY-MM-DD HH:mm')
+			: CST.TH_PERPETUAL
 	}
 }
 
