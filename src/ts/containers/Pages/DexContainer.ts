@@ -8,6 +8,7 @@ import Dex from 'ts/components/Pages/Dex';
 
 function mapStateToProps(state: IState) {
 	return {
+		account: state.web3.account,
 		tokens: state.ws.tokens,
 		acceptedPrices: state.ws.acceptedPrices,
 		custodians: state.web3.custodians,

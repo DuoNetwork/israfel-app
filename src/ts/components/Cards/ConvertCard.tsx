@@ -3,6 +3,7 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { getDualClassWrapper } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
@@ -17,6 +18,7 @@ import {
 } from './_styled';
 
 interface IProps {
+	account: string;
 	custodian: string;
 	aToken: string;
 	bToken: string;
@@ -135,6 +137,24 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			amount: '',
 			wethAmount: ''
 		});
+
+	private handleSubmit = async () => {
+		const { account, custodian, handleClose, info } = this.props;
+		const { isCreate, amount } = this.state;
+		const cw = getDualClassWrapper(custodian);
+		if (!info || !cw) {
+			alert('missing data');
+			return;
+		}
+
+		if (isCreate) await cw.create(account, Number(amount), hash => alert(hash));
+		else
+			await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
+				alert(hash)
+			);
+
+		handleClose();
+	};
 
 	public render() {
 		const {
@@ -415,7 +435,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						>
 							{CST.TH_RESET}
 						</SButton>
-						<SButton width="49%">{CST.TH_SUBMIT}</SButton>
+						<SButton width="49%" onClick={this.handleSubmit}>
+							{CST.TH_SUBMIT}
+						</SButton>
 					</SDivFlexCenter>
 				</SCard>
 			</div>

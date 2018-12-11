@@ -14,7 +14,9 @@ import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
 import TradeCard from '../Cards/TradeCard';
+
 interface IProps {
+	account: string;
 	ethBalance: IEthBalance;
 	tokens: IToken[];
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
@@ -63,6 +65,7 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public render() {
 		const {
+			account,
 			tokens,
 			acceptedPrices,
 			custodians,
@@ -120,6 +123,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							))}
 						</SDivFlexCenter>
 						<ConvertCard
+							account={account}
 							tokenBalances={custodianTokenBalances[convertCustodian]}
 							ethBalance={ethBalance}
 							custodian={convertCustodian}
