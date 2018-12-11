@@ -86,6 +86,20 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 
+	private handlePriceBlurInputChange(e: string) {
+		const stepPrice = this.props.tokenInfo ? this.props.tokenInfo.precisions[CST.TH_WETH] : undefined;
+		this.setState({
+			price: stepPrice ? (Math.round(Number(e) / stepPrice) * stepPrice).toString() : this.state.price
+		});
+	}
+
+	private handleAmountBlurChange(e: string) {
+		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
+		this.setState({
+			amount: step ? (Math.round(Number(e) / step) * step).toString() : this.state.amount
+		});
+	}
+
 	private handleSideChange = () =>
 		this.setState({
 			isBid: !this.state.isBid
@@ -104,7 +118,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			amount: value
 		});
 	public render() {
-		const { token, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
+		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
@@ -224,15 +238,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 						{approveRequired ? (
 							<div className="pop-up-new">
-								<li style={{ padding: '50px 15px 5px 15px' }}>
+								<li>
+									<p style={{ paddingTop: "50px", textAlign: 'center' }}>
+										Not enough allowance, please approve first
+									</p>
+								</li>
+								<li style={{ padding: '10px 100px 5px 100px' }}>
 									<SButton
-										style={{
-											width: '60%',
-											margin: 'auto',
-											background: 'rgba(42,181,202,1)',
-											color: 'rgba(255,255,255,1)',
-											boxShadow: '0 0 4px 1px rgba(42,181,202,.2)'
-										}}
 										onClick={this.handleApprove}
 									>
 										{CST.TH_APPROVE}
@@ -254,8 +266,17 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											width="100%"
 											placeholder="Price"
 											value={price}
+											type="number"
+											step={
+												tokenInfo
+													? tokenInfo.precisions[CST.TH_WETH]
+													: undefined
+											}
 											onChange={e =>
 												this.handlePriceInputChange(e.target.value)
+											}
+											onBlur={e =>
+												this.handlePriceBlurInputChange(e.target.value)
 											}
 										/>
 									</li>
@@ -278,8 +299,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											width="100%"
 											placeholder="Amount"
 											value={amount}
+											type="number"
+											step={tokenInfo ? tokenInfo.denomination : undefined}
 											onChange={e =>
 												this.handleAmountInputChange(e.target.value)
+											}
+											onBlur={e =>
+												this.handleAmountBlurChange(e.target.value)
 											}
 										/>
 									</li>
