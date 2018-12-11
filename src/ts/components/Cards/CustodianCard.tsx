@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -26,7 +27,8 @@ export default class CustodianCard extends React.Component<IProps> {
 			margin,
 			handleConvert,
 			handleTrade,
-			tokenBalances
+			tokenBalances,
+			acceptedPrices
 		} = this.props;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
@@ -36,6 +38,24 @@ export default class CustodianCard extends React.Component<IProps> {
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
+		const lastAcceptedPrice = acceptedPrices.length
+			? acceptedPrices[acceptedPrices.length - 1]
+			: null;
+		const aLabel =
+			type === CST.BEETHOVEN
+				? d3.format('.2%')(
+						(info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1)
+				) + CST.TH_PA
+				: d3.format('.2f')(lastAcceptedPrice ? 2 - lastAcceptedPrice.navA : 0) +
+				CST.TH_X_LEV;
+		const bLabel =
+			d3.format('.2f')(
+				lastAcceptedPrice
+					? ((type === CST.BEETHOVEN ? 1 : 2) * info.states.alpha +
+							lastAcceptedPrice.navB) /
+							lastAcceptedPrice.navB
+					: 0
+			) + CST.TH_X_LEV;
 		return (
 			<SCard
 				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
@@ -83,11 +103,11 @@ export default class CustodianCard extends React.Component<IProps> {
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
 						<PriceChart
-							prices={this.props.acceptedPrices}
+							prices={acceptedPrices}
 							timeStep={6000}
 							name={aCode}
 							isA={true}
-							label={"label1"}
+							label={aLabel}
 						/>
 					</div>
 					<div
@@ -125,11 +145,11 @@ export default class CustodianCard extends React.Component<IProps> {
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
 						<PriceChart
-							prices={this.props.acceptedPrices}
+							prices={acceptedPrices}
 							timeStep={6000}
 							name={bCode}
 							isA={false}
-							label={"label2"}
+							label={bLabel}
 						/>
 					</div>
 					<div

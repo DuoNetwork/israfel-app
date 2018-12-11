@@ -70,6 +70,8 @@ export const TH_MATURITY = 'Maturity';
 export const TH_PERPETUAL = 'Perpetual';
 export const TH_GET = 'Get';
 export const TH_GET_BOTH = 'Get Both';
+export const TH_PA = ' p.a.';
+export const TH_X_LEV = 'x leverage';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
