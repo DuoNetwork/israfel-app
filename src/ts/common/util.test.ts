@@ -44,3 +44,15 @@ test('getUTCNowTimestamp Long Ago', () => {
 test('convertSecond', () => {
 	expect(util.convertSecond('12:1:1')).toEqual(43261);
 });
+
+test('getExpiryTimeStamp', () => {
+	util.getUTCNowTimestamp = jest.fn(() => 1544519089000);
+	expect(util.getExpiryTimestamp(false)).toBe(1544601600000);
+	expect(util.getExpiryTimestamp(true)).toBe(1545984000000);
+	util.getUTCNowTimestamp = jest.fn(() => 1544493600000);
+	expect(util.getExpiryTimestamp(false)).toBe(1544515200000);
+	util.getUTCNowTimestamp = jest.fn(() => 1546041600000);
+	expect(util.getExpiryTimestamp(true)).toBe(1548403200000);
+	util.getUTCNowTimestamp = jest.fn(() => 1546214400000);
+	expect(util.getExpiryTimestamp(true)).toBe(1548403200000);
+});
