@@ -30,7 +30,7 @@ interface IState {
 	custodian: string;
 	infoExpand: boolean;
 	isCreate: boolean;
-	ethAmount: string;
+	amount: string;
 	wethAmount: string;
 	wethCreate: boolean;
 }
@@ -60,7 +60,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			custodian: props.custodian,
 			infoExpand: false,
 			isCreate: true,
-			ethAmount: '',
+			amount: '',
 			wethAmount: '',
 			wethCreate: false
 		};
@@ -69,11 +69,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		if (nextProps.custodian !== prevState.custodian)
 			return {
 				custodian: nextProps.custodian,
-				expand: false,
+				infoExpand: false,
 				isCreate: true,
-				amount1: '',
-				amount2: '',
-				isExtraInput: false
+				amount: '',
+				amountError: '',
+				wethAmount: '',
+				wethAmountError: '',
+				wethCreate: false
 			};
 
 		return null;
@@ -81,7 +83,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleSideChange = () =>
 		this.setState({
-			isCreate: !this.state.isCreate
+			isCreate: !this.state.isCreate,
+			wethCreate: false,
+			amount: '',
+			wethAmount: ''
 		});
 
 	private handleInfoExpandChange = () =>
@@ -89,19 +94,21 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			infoExpand: !this.state.infoExpand
 		});
 
-	private handleEthAmountInputChange = (value: string) =>
+	private handleAmountInputChange = (value: string, limit: number) =>
 		this.setState({
-			ethAmount: value
+			amount: Math.min(Number(value), limit) + ''
 		});
 
-	private handleWethAmountInputChange = (value: string) =>
+	private handleWethAmountInputChange = (value: string, limit: number) =>
 		this.setState({
-			wethAmount: value
+			wethAmount: Math.min(Number(value), limit) + ''
 		});
 
 	private handleWethCreateChange = () =>
 		this.setState({
-			wethCreate: !this.state.wethCreate
+			wethCreate: !this.state.wethCreate,
+			amount: '',
+			wethAmount: '',
 		});
 
 	public render() {
@@ -114,11 +121,21 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			tokenBalances,
 			ethBalance
 		} = this.props;
-		const { isCreate, infoExpand, ethAmount, wethAmount, wethCreate } = this.state;
+		const { isCreate, infoExpand, amount, wethAmount, wethCreate } = this.state;
 		const bTokenPerETH = info
 			? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha)
 			: 0;
 		const aTokenPerETH = info ? bTokenPerETH * info.states.alpha : 0;
+		const limit = isCreate
+			? wethCreate
+				? ethBalance.weth
+				: Math.round(ethBalance.eth * 99) / 100
+			: tokenBalances && info
+			? Math.min(
+					tokenBalances[aToken].balance,
+					tokenBalances[bToken].balance / info.states.alpha
+			)
+			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -187,11 +204,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									<span className="title">{CST.TH_CONV_RATIO}</span>
 									<span className="content">{`1 ${
 										CST.TH_ETH
-									} = ${util.formatNumber(
-										aTokenPerETH
-									)} ${aToken.substring(0, 1)} + ${util.formatNumber(
-										bTokenPerETH
-									)} ${bToken.substring(0, 1)}`}</span>
+									} = ${util.formatNumber(aTokenPerETH)} ${aToken.substring(
+										0,
+										1
+									)} + ${util.formatNumber(bTokenPerETH)} ${bToken.substring(
+										0,
+										1
+									)}`}</span>
 								</li>
 							</ul>
 						</div>
@@ -280,10 +299,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									>
 										<SInput
 											width="100%"
-											placeholder={(isCreate ? 'ETH ' : 'Token ') + 'Amount'}
-											value={ethAmount}
+											placeholder={
+												(isCreate ? CST.TH_ETH : aToken) +
+												' ' +
+												CST.TH_AMOUNT
+											}
+											value={amount}
 											onChange={e =>
-												this.handleEthAmountInputChange(e.target.value)
+												this.handleAmountInputChange(e.target.value, limit)
 											}
 										/>
 									</li>
@@ -297,17 +320,24 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									>
 										<SSlider marks={marks} step={10} defaultValue={0} />
 									</li>
-									<li
-										className="waring-expand-button"
-										style={{ padding: '0 10px 0 15px' }}
-										onClick={() => this.handleWethCreateChange()}
-									>
-										<span>
-											<img src={waring} style={{ marginRight: 2 }} />
-											{isCreate ? 'Create from ' : 'Redeem to '} ETH, click to{' '}
-											{isCreate ? 'create from ' : 'redeem to '} WETH
-										</span>
-									</li>
+									{isCreate ? (
+										<li
+											className="waring-expand-button"
+											style={{ padding: '0 10px 0 15px' }}
+											onClick={() => this.handleWethCreateChange()}
+										>
+											<span>
+												<img src={waring} style={{ marginRight: 2 }} />
+												{`Click to create with ${
+													wethCreate ? CST.TH_ETH : CST.TH_WETH
+												}`}
+											</span>
+										</li>
+									) : (
+										<li style={{ padding: '0 10px 0 15px' }}>
+											<span style={{ height: 18, width: '100%' }} />
+										</li>
+									)}
 								</ul>
 							</div>
 						</SCardList>
@@ -316,7 +346,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								<ul
 									style={{
 										margin: '0',
-										height: wethCreate ? '90px' : '0px'
+										height: wethCreate && isCreate ? '90px' : '0px'
 									}}
 								>
 									<li
@@ -328,7 +358,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
 											value={wethAmount}
 											onChange={e =>
-												this.handleWethAmountInputChange(e.target.value)
+												this.handleWethAmountInputChange(
+													e.target.value,
+													limit
+												)
 											}
 										/>
 									</li>
@@ -346,7 +379,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					</div>
 					<SDivFlexCenter horizontal width="100%" padding="10px">
 						<SButton
-							onClick={() => this.setState({ ethAmount: '', wethAmount: '' })}
+							onClick={() => this.setState({ amount: '', wethAmount: '' })}
 							width="49%"
 						>
 							{CST.TH_RESET}

@@ -21,6 +21,10 @@ export const AC_ETH_BALANCE = 'ethBalance';
 export const AC_TOKEN_BALANCE = 'tokenBalance';
 export const AC_CUSTODIAN = 'custodian';
 
+export const RX_NUM = /^-?[0-9]+(\.[0-9]+)?$/;
+export const RX_NUM_P = /^[0-9]+(\.[0-9]+)?$/;
+export const RX_INTEGER = /^[0-9]+?$/;
+
 export const LOCALE_CN = 'CN';
 export const LOCALE_EN = 'EN';
 export const LOCALE_RU = 'RU';
@@ -77,6 +81,7 @@ export const TH_BID = 'Bid';
 export const TH_ASK = 'Ask';
 export const TH_TOTAL_SUPPLY = 'Total Supply';
 export const TH_CONV_RATIO = 'Conversion Ratio';
+export const TH_AMOUNT = 'Amount';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
