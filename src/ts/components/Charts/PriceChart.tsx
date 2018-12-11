@@ -129,15 +129,14 @@ function drawLines(
 		.selectAll('line')
 		.attr('stroke', ColorStyles.BorderWhite1);
 	yGridLines.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
-	const text = svg
+	svg
 		.append('text')
-		.attr('text-anchor', 'middle')
-		.attr('transform', 'translate(' + (width - 20) + ', 10)')
+		.attr('text-anchor', 'end')
+		.attr('transform', 'translate(' + (width + margin.left - 2) + ', 3)')
 		.attr('class', 'label' + name)
-		.text(label);
-	text.style('text-anchor', 'middle')
-		.style('font-size', '12px')
-		.style('color', ColorStyles.TextBlackAlphaLL);
+		.text(label)
+		.style('font-size', '10px')
+		.style('fill', ColorStyles.TextBlackAlphaLL);
 	// chart
 	// 	.append('g')
 	// 	.attr('class', 'placeHolder' + name)

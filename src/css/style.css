@@ -81,6 +81,9 @@ body {
 }
 
 /* D3 Test Graph */
+svg {
+	overflow: visible !important;
+}
 .d3-test-graph {
 	width: 640px;
 	height: 424px;
