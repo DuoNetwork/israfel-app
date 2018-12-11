@@ -47,11 +47,9 @@ export default class Dex extends React.Component<IProps, IState> {
 	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian });
 
 	public handleTrade = (token: string) => {
-		if (!token)
-			this.props.unsubscribe();
-		else
-			this.props.subscribe(token);
-		this.setState({ tradeToken: token })
+		if (!token) this.props.unsubscribe();
+		else this.props.subscribe(token);
+		this.setState({ tradeToken: token });
 	};
 
 	public render() {
@@ -84,7 +82,7 @@ export default class Dex extends React.Component<IProps, IState> {
 				<div className="App">
 					<Header />
 					<Spin spinning={!connection} tip="loading...">
-						<SDivFlexCenter center horizontal marginBottom="20px;">
+						<SDivFlexCenter center horizontal marginBottom="20px" style={{ paddingTop: '20px' }}>
 							{beethovenList.map(c => (
 								<CustodianCard
 									key={c}
