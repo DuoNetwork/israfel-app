@@ -4,6 +4,7 @@ import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ICustodianInfo } from 'ts/common/types';
+import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -17,40 +18,58 @@ import {
 
 interface IProps {
 	custodian: string;
-	info?: ICustodianInfo
+	info?: ICustodianInfo;
 	handleClose: () => void;
 }
 
 interface IState {
 	custodian: string;
-	isExpand: boolean;
+	infoExpand: boolean;
 	isCreate: boolean;
-	amount1: string;
-	amount2: string;
-	isExtraInput: boolean;
+	ethAmount: string;
+	wethAmount: string;
+	wethCreate: boolean;
 }
+
+const marks = {
+	0: {
+		label: <strong>0%</strong>
+	},
+	25: {
+		label: <strong>25%</strong>
+	},
+	50: {
+		label: <strong>50%</strong>
+	},
+	75: {
+		label: <strong>75%</strong>
+	},
+	100: {
+		label: <strong>100%</strong>
+	}
+};
 
 export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			custodian: props.custodian,
-			isExpand: false,
+			infoExpand: false,
 			isCreate: true,
-			amount1: '',
-			amount2: '',
-			isExtraInput: false
+			ethAmount: '',
+			wethAmount: '',
+			wethCreate: false
 		};
 	}
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.custodian !== prevState.custodian)
 			return {
 				custodian: nextProps.custodian,
-				isExpand: false,
+				expand: false,
 				isCreate: true,
 				amount1: '',
 				amount2: '',
-				isExtraInput: false,
+				isExtraInput: false
 			};
 
 		return null;
@@ -60,49 +79,39 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			isCreate: !this.state.isCreate
 		});
-	private handleExpandChange = () =>
+
+	private handleInfoExpandChange = () =>
 		this.setState({
-			isExpand: !this.state.isExpand
+			infoExpand: !this.state.infoExpand
 		});
-	private handleExtraInputChange = () =>
+
+	private handleEthAmountInputChange = (value: string) =>
 		this.setState({
-			isExtraInput: !this.state.isExtraInput,
-			amount1: '',
-			amount2: ''
+			ethAmount: value
 		});
-	private handleAmount1InputChange = (value: string) =>
+
+	private handleWethAmountInputChange = (value: string) =>
 		this.setState({
-			amount1: value
+			wethAmount: value
 		});
-	private handleAmount2InputChange = (value: string) =>
+
+	private handleWethCreateChange = () =>
 		this.setState({
-			amount2: value
+			wethCreate: !this.state.wethCreate
 		});
+
 	public render() {
 		const { handleClose, custodian, info } = this.props;
-		const { isCreate, isExpand, amount1, amount2, isExtraInput } = this.state;
-		const marks = {
-			0: {
-				label: <strong>0%</strong>
-			},
-			25: {
-				label: <strong>25%</strong>
-			},
-			50: {
-				label: <strong>50%</strong>
-			},
-			75: {
-				label: <strong>75%</strong>
-			},
-			100: {
-				label: <strong>100%</strong>
-			}
-		};
+		const { isCreate, infoExpand, ethAmount, wethAmount, wethCreate } = this.state;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
 				<SCard
-					title={<SCardTitle>{CST.TH_CONVERT.toUpperCase()}</SCardTitle>}
+					title={
+						<SCardTitle>
+							{CST.TH_CONVERT + (info ? ' ' + info.code.split('-')[0] : '')}
+						</SCardTitle>
+					}
 					width="400px"
 					className="popup-card"
 					noBodymargin
@@ -117,15 +126,21 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{info ? info.code : ''}
+									{CST.TH_CUSTODIAN}
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 1</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{CST.TH_MATURITY}</span>
+									<span className="content">
+										{util.formatMaturity(info ? info.states.maturity : 0)}
+									</span>
 								</li>
 								<li style={{ padding: '5px 15px' }}>
-									<span className="title">Param 2</span>
-									<span className="content">1,234,567</span>
+									<span className="title">{CST.TH_COLLATERAL}</span>
+									<span className="content">
+										{util.formatBalance(info ? info.states.ethCollateral : 0) +
+											' ' +
+											CST.TH_ETH}
+									</span>
 								</li>
 								<li style={{ padding: '5px 15px' }}>
 									<span className="title">Param 3</span>
@@ -139,7 +154,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							<ul
 								style={{
 									margin: '-1px 0',
-									height: isExpand ? '128px' : '0px'
+									height: infoExpand ? '128px' : '0px'
 								}}
 							>
 								<li style={{ padding: '5px 15px' }}>
@@ -163,12 +178,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<SCardList>
 						<div className="status-list-wrapper">
-							<ul style={{ margin: !isExpand ? '-1px 0 0 0' : '0' }}>
+							<ul style={{ margin: !infoExpand ? '-1px 0 0 0' : '0' }}>
 								<li
-									onClick={() => this.handleExpandChange()}
+									onClick={() => this.handleInfoExpandChange()}
 									className="list-expand-button"
 								>
-									{isExpand ? '∧' : '···'}
+									{infoExpand ? '∧' : '···'}
 								</li>
 							</ul>
 						</div>
@@ -198,16 +213,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										style={{
 											padding: '0 10px',
 											marginBottom: 0,
-											pointerEvents: isExtraInput ? 'none' : 'auto',
-											opacity: isExtraInput ? 0.3 : 1
+											pointerEvents: wethCreate ? 'none' : 'auto',
+											opacity: wethCreate ? 0.3 : 1
 										}}
 									>
 										<SInput
 											width="100%"
 											placeholder={(isCreate ? 'ETH ' : 'Token ') + 'Amount'}
-											value={amount1}
+											value={ethAmount}
 											onChange={e =>
-												this.handleAmount1InputChange(e.target.value)
+												this.handleEthAmountInputChange(e.target.value)
 											}
 										/>
 									</li>
@@ -215,8 +230,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										className={'input-line'}
 										style={{
 											padding: '0 15px',
-											pointerEvents: isExtraInput ? 'none' : 'auto',
-											opacity: isExtraInput ? 0.3 : 1
+											pointerEvents: wethCreate ? 'none' : 'auto',
+											opacity: wethCreate ? 0.3 : 1
 										}}
 									>
 										<SSlider marks={marks} step={10} defaultValue={0} />
@@ -224,7 +239,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									<li
 										className="waring-expand-button"
 										style={{ padding: '0 10px 0 15px' }}
-										onClick={() => this.handleExtraInputChange()}
+										onClick={() => this.handleWethCreateChange()}
 									>
 										<span>
 											<img src={waring} style={{ marginRight: 2 }} />
@@ -240,7 +255,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								<ul
 									style={{
 										margin: '0',
-										height: isExtraInput ? '90px' : '0px'
+										height: wethCreate ? '90px' : '0px'
 									}}
 								>
 									<li
@@ -250,9 +265,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										<SInput
 											width="100%"
 											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
-											value={amount2}
+											value={wethAmount}
 											onChange={e =>
-												this.handleAmount2InputChange(e.target.value)
+												this.handleWethAmountInputChange(e.target.value)
 											}
 										/>
 									</li>
@@ -270,12 +285,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					</div>
 					<SDivFlexCenter horizontal width="100%" padding="10px">
 						<SButton
-							onClick={() => this.setState({ amount1: '', amount2: '' })}
+							onClick={() => this.setState({ ethAmount: '', wethAmount: '' })}
 							width="49%"
 						>
-							RESET
+							{CST.TH_RESET}
 						</SButton>
-						<SButton width="49%">SUBMIT</SButton>
+						<SButton width="49%">{CST.TH_SUBMIT}</SButton>
 					</SDivFlexCenter>
 				</SCard>
 			</div>

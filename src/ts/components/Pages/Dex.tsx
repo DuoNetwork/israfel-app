@@ -44,7 +44,7 @@ export default class Dex extends React.Component<IProps, IState> {
 		document.title = 'DUO | Trustless Derivatives';
 	}
 
-	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian });
+	public handleConvert = (custodian: string) => this.setState({ convertCustodian: custodian.toLocaleLowerCase() });
 
 	public handleTrade = (token: string) => {
 		if (!token)
@@ -124,7 +124,6 @@ export default class Dex extends React.Component<IProps, IState> {
 							ethBalance={ethBalance}
 							orderBook={orderBook}
 							handleClose={() => this.handleTrade('')}
-							pair={this.props.orderBook.pair}
 						/>
 					</Spin>
 				</div>

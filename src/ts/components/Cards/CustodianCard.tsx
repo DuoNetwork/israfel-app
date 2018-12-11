@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
@@ -32,9 +31,7 @@ export default class CustodianCard extends React.Component<IProps> {
 		} = this.props;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
-		const maturity = info.states.maturity
-			? moment(info.states.maturity).format('YYYY-MM-DD HH:mm')
-			: CST.TH_PERPETUAL;
+		const maturity = util.formatMaturity(info.states.maturity);
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';

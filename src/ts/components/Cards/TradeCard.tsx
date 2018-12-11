@@ -27,7 +27,6 @@ interface IProps {
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
 	handleClose: () => void;
-	pair: string;
 }
 
 interface IState {
@@ -96,12 +95,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			price: value
 		});
 	private handleApprove = () => {
-		const { pair } = this.props;
 		const { isBid } = this.state;
-		console.log(pair);
-		const [code1, code2] = pair.split('|');
-		web3Util.setUnlimitedTokenAllowance(isBid ? code2 : code1);
+		web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
 	};
+
 	private handleAmountInputChange = (value: string) =>
 		this.setState({
 			amount: value
@@ -124,8 +121,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				price: 0
 			});
 		const approveRequired = isBid
-			? !ethBalance.allowance || ethBalance.allowance < ethBalance.weth
-			: !tokenBalance || !tokenBalance.allowance || tokenBalance.allowance < tokenBalance.balance;
+			? !ethBalance.allowance
+			: tokenBalance && !tokenBalance.allowance;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
 				<div className="popup-bg" onClick={handleClose} />
@@ -225,7 +222,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								</button>
 							))}
 						</SDivFlexCenter>
-						{approveRequired && (
+						{approveRequired ? (
 							<div className="pop-up-new">
 								<li style={{ padding: '50px 15px 5px 15px' }}>
 									<SButton
@@ -242,7 +239,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									</SButton>
 								</li>
 							</div>
-						)}
+						) : null}
 						<SCardList noUlBorder noLiBorder>
 							<div className="status-list-wrapper">
 								<ul>
