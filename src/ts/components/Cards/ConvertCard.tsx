@@ -508,7 +508,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												opacity: wethCreate ? 0.3 : 1
 											}}
 										>
+											<span className="input-des">Amount</span>
 											<SInput
+												right
 												disabled={limit === 0}
 												width="100%"
 												value={amount}
@@ -572,7 +574,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											className={'input-line'}
 											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
+											{wethCreate && isCreate ? <span className="input-des">Amount</span> : null}
 											<SInput
+												right
 												width="100%"
 												placeholder={
 													(isCreate ? 'WETH ' : 'Token ') + 'Amount'

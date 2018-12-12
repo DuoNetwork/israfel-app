@@ -256,3 +256,9 @@ svg {
 .cardpopup-close:hover {
 	opacity: 1;
 }
+.input-des{
+	position: absolute;
+	left: 20px;
+	opacity: 0.6;
+	pointer-events: none;
+}

@@ -758,7 +758,7 @@ export interface ISInputProps {
 }
 export const SInput = styled.input`
 	outline: none;
-	font-size: ${(props: ISInputProps) => (props.small ? '9px' : '12px')};
+	font-size: ${(props: ISInputProps) => (props.small ? '9px' : '14px')};
 	background: ${ColorStyles.CardBackgroundSolid};
 	box-shadow: none;
 	color: ${ColorStyles.TextBlackAlpha};
