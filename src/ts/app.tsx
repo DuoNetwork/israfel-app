@@ -18,6 +18,7 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	) {
 		store.dispatch(web3Actions.accountUpdate(addr));
 		store.dispatch(web3Actions.networkUpdate(network));
+		store.dispatch(web3Actions.refresh());
 	}
 });
 

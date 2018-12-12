@@ -3,7 +3,7 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { getDualClassWrapper } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper, getDualClassWrapper } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
@@ -36,6 +36,8 @@ interface IState {
 	amount: string;
 	wethAmount: string;
 	wethCreate: boolean;
+	allowance: number;
+	loading: boolean;
 }
 
 const marks = {
@@ -65,9 +67,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			isCreate: true,
 			amount: '',
 			wethAmount: '',
-			wethCreate: false
+			wethCreate: false,
+			allowance: 0,
+			loading: false
 		};
 	}
+
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.custodian !== prevState.custodian)
 			return {
@@ -78,7 +83,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				amountError: '',
 				wethAmount: '',
 				wethAmountError: '',
-				wethCreate: false
+				wethCreate: false,
+				allowance: 0,
+				loading: false
 			};
 
 		return null;
@@ -132,16 +139,56 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 	};
 
-	private handleWethCreateChange = () =>
+	private handleWethCreateChange = () => {
+		if (!this.state.wethCreate) {
+			const { account, custodian } = this.props;
+			duoWeb3Wrapper
+				.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+				.then(allownace => {
+					this.setState({
+						allowance: allownace,
+						loading: false
+					});
+				});
+		}
+
 		this.setState({
 			wethCreate: !this.state.wethCreate,
 			amount: '',
-			wethAmount: ''
+			wethAmount: '',
+			allowance: 0,
+			loading: true
 		});
+	};
 
-	// TODO： approve WETH allowance
-	// private handleApprove = () => {
-	// };
+	private handleWETHApprove = async () => {
+		this.setState({ loading: true });
+		const { account, custodian } = this.props;
+		try {
+			await duoWeb3Wrapper.erc20Approve(
+				web3Util.contractAddresses.etherToken,
+				account,
+				custodian,
+				0,
+				true
+			);
+			const interval = setInterval(() => {
+				duoWeb3Wrapper
+				.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+				.then(allownace => {
+					if (allownace) {
+						this.setState({
+							allowance: allownace,
+							loading: false
+						});
+						clearInterval(interval)
+					}
+				});
+			}, 10000);
+		} catch (error) {
+			this.setState({ loading: false });
+		}
+	};
 
 	private handleSubmit = async () => {
 		const { account, custodian, handleClose, info } = this.props;
@@ -179,7 +226,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			tokenBalances,
 			ethBalance
 		} = this.props;
-		const { isCreate, infoExpand, amount, wethAmount, wethCreate } = this.state;
+		const {
+			isCreate,
+			infoExpand,
+			amount,
+			wethAmount,
+			wethCreate,
+			allowance,
+			loading
+		} = this.state;
 		const bTokenPerETH = info
 			? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha)
 			: 0;
@@ -413,28 +468,45 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										height: wethCreate && isCreate ? '90px' : '0px'
 									}}
 								>
-									<li
-										className={'input-line'}
-										style={{ padding: '0 10px', marginBottom: 0 }}
-									>
-										<SInput
-											width="100%"
-											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
-											value={wethAmount}
-											onBlur={e =>
-												this.handleWethAmountInputBlurChange(
-													e.target.value,
-													limit
-												)
-											}
-											onChange={e =>
-												this.handleWethAmountInputChange(e.target.value)
-											}
-										/>
-									</li>
-									<li className={'input-line'} style={{ padding: '0 15px' }}>
-										<SSlider marks={marks} step={10} defaultValue={0} />
-									</li>
+									{loading ? (
+										'loading'
+									) : allowance ? (
+										[
+											<li
+												key="input"
+												className={'input-line'}
+												style={{ padding: '0 10px', marginBottom: 0 }}
+											>
+												<SInput
+													width="100%"
+													placeholder={
+														(isCreate ? 'WETH ' : 'Token ') + 'Amount'
+													}
+													value={wethAmount}
+													onBlur={e =>
+														this.handleWethAmountInputBlurChange(
+															e.target.value,
+															limit
+														)
+													}
+													onChange={e =>
+														this.handleWethAmountInputChange(
+															e.target.value
+														)
+													}
+												/>
+											</li>,
+											<li
+												key="slider"
+												className={'input-line'}
+												style={{ padding: '0 15px' }}
+											>
+												<SSlider marks={marks} step={10} defaultValue={0} />
+											</li>
+										]
+									) : (
+										<button onClick={this.handleWETHApprove}>Approve</button>
+									)}
 								</ul>
 							</div>
 						</SCardList>
