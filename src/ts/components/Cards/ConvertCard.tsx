@@ -254,7 +254,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleSliderChange(e: string, limit: number) {
 		this.setState({
-			amount: (limit * Number(e) / 100).toString(),
+			amount: (limit * Number(e) / 100).toFixed(6),
 			sliderValue: Number(e)
 		});
 	}

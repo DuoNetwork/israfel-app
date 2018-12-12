@@ -1,5 +1,6 @@
 //import waring from 'images/icons/waring.svg';
 import { Radio } from 'antd';
+import { Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
@@ -272,135 +273,146 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</div>
 						</SCardList>
 					</SDivFlexCenter>
-					<SCardConversionForm>
-						<SDivFlexCenter horizontal width="100%" padding="10px;">
-							{[CST.TH_BUY, CST.TH_SELL].map(side => (
-								<button
-									key={side}
-									className={
-										(isBid && side === CST.TH_BUY) ||
-										(!isBid && side === CST.TH_SELL)
-											? 'conv-button selected'
-											: 'conv-button non-select'
-									}
-									onClick={() => this.handleSideChange()}
-								>
-									{side.toUpperCase()}
-								</button>
-							))}
+					<Spin spinning={loading} tip="loading...">
+						<SCardConversionForm>
+							<SDivFlexCenter horizontal width="100%" padding="10px;">
+								{[CST.TH_BUY, CST.TH_SELL].map(side => (
+									<button
+										key={side}
+										className={
+											(isBid && side === CST.TH_BUY) ||
+											(!isBid && side === CST.TH_SELL)
+												? 'conv-button selected'
+												: 'conv-button non-select'
+										}
+										onClick={() => this.handleSideChange()}
+									>
+										{side.toUpperCase()}
+									</button>
+								))}
+							</SDivFlexCenter>
+							{approveRequired && !loading ? (
+								<div className="pop-up-new">
+									<li>
+										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
+											Not enough allowance, please approve first
+										</p>
+									</li>
+									<li style={{ padding: '10px 100px 5px 100px' }}>
+										<SButton onClick={this.handleApprove} >
+											{CST.TH_APPROVE}
+										</SButton>
+									</li>
+								</div>
+							) : null}
+							<SCardList noUlBorder noLiBorder>
+								<div className="status-list-wrapper">
+									<ul>
+										<li
+											className={'input-line'}
+											style={{
+												padding: '0 10px',
+												marginBottom: 0
+											}}
+										>
+											<SInput
+												width="100%"
+												placeholder="Price"
+												value={this.state.price}
+												type="number"
+												step={
+													tokenInfo
+														? tokenInfo.precisions[CST.TH_WETH]
+														: undefined
+												}
+												onChange={e =>
+													this.handlePriceInputChange(e.target.value)
+												}
+												onBlur={e =>
+													this.handlePriceBlurInputChange(e.target.value)
+												}
+											/>
+										</li>
+										<li
+											className={'input-line'}
+											style={{
+												padding: '5px 15px',
+												flexDirection: 'row-reverse'
+											}}
+										>
+											<span className="des">
+												Description Description Description $ 1,000 USD{' '}
+											</span>
+										</li>
+										<li
+											className={'input-line'}
+											style={{ padding: '0 10px', marginBottom: 0 }}
+										>
+											<SInput
+												disabled={price === ''}
+												width="100%"
+												placeholder="Amount"
+												value={amount}
+												type="number"
+												step={
+													tokenInfo ? tokenInfo.denomination : undefined
+												}
+												onChange={e =>
+													this.handleAmountInputChange(e.target.value)
+												}
+												onBlur={e =>
+													this.handleAmountBlurChange(
+														e.target.value,
+														limit
+													)
+												}
+											/>
+										</li>
+										<li className={'input-line'} style={{ padding: '0 15px' }}>
+											<SSlider
+												marks={marks}
+												step={10}
+												defaultValue={0}
+												onChange={(e: any) =>
+													this.handleSliderChange(e, limit)
+												}
+											/>
+										</li>
+										<li className="input-line" style={{ padding: '0 15px' }}>
+											<span className="title" style={{ width: 200 }}>
+												{CST.TH_EXPIRY}
+											</span>
+											<SDivFlexCenter horizontal width="60%" rowInv>
+												<RadioGroup
+													onChange={e =>
+														this.onexpiryChange(e.target.value)
+													}
+													value={expiry}
+												>
+													<Radio value={1}>Day</Radio>
+													<Radio value={2}>Month</Radio>
+												</RadioGroup>
+											</SDivFlexCenter>
+										</li>
+									</ul>
+								</div>
+							</SCardList>
+						</SCardConversionForm>
+						<div className="convert-popup-des">
+							Description Description Description $ 1,000 USD,Description sdadd
+							Description $ 1,000 USD Description Description asd adads $ 1,000 US
+							asdad adasd a asd.
+						</div>
+						<SDivFlexCenter horizontal width="100%" padding="10px">
+							<SButton
+								onClick={() => this.setState({ price: '', amount: '', expiry: 1 })}
+								width="49%"
+							>
+								RESET
+							</SButton>
+							<SButton width="49%">SUBMIT</SButton>
 						</SDivFlexCenter>
-						{approveRequired ? (
-							<div className="pop-up-new">
-								<li>
-									<p style={{ paddingTop: '50px', textAlign: 'center' }}>
-										{loading
-											? 'Wating for approval'
-											: 'Not enough allowance, please approve first'}
-									</p>
-								</li>
-								<li style={{ padding: '10px 100px 5px 100px' }}>
-									<SButton onClick={this.handleApprove}>{CST.TH_APPROVE}</SButton>
-								</li>
-							</div>
-						) : null}
-						<SCardList noUlBorder noLiBorder>
-							<div className="status-list-wrapper">
-								<ul>
-									<li
-										className={'input-line'}
-										style={{
-											padding: '0 10px',
-											marginBottom: 0
-										}}
-									>
-										<SInput
-											width="100%"
-											placeholder="Price"
-											value={this.state.price}
-											type="number"
-											step={
-												tokenInfo
-													? tokenInfo.precisions[CST.TH_WETH]
-													: undefined
-											}
-											onChange={e =>
-												this.handlePriceInputChange(e.target.value)
-											}
-											onBlur={e =>
-												this.handlePriceBlurInputChange(e.target.value)
-											}
-										/>
-									</li>
-									<li
-										className={'input-line'}
-										style={{
-											padding: '5px 15px',
-											flexDirection: 'row-reverse'
-										}}
-									>
-										<span className="des">
-											Description Description Description $ 1,000 USD{' '}
-										</span>
-									</li>
-									<li
-										className={'input-line'}
-										style={{ padding: '0 10px', marginBottom: 0 }}
-									>
-										<SInput
-											disabled={price === ''}
-											width="100%"
-											placeholder="Amount"
-											value={amount}
-											type="number"
-											step={tokenInfo ? tokenInfo.denomination : undefined}
-											onChange={e =>
-												this.handleAmountInputChange(e.target.value)
-											}
-											onBlur={e =>
-												this.handleAmountBlurChange(e.target.value, limit)
-											}
-										/>
-									</li>
-									<li className={'input-line'} style={{ padding: '0 15px' }}>
-										<SSlider
-											marks={marks}
-											step={10}
-											defaultValue={0}
-											onChange={(e: any) => this.handleSliderChange(e, limit)}
-										/>
-									</li>
-									<li className="input-line" style={{ padding: '0 15px' }}>
-										<span className="title" style={{ width: 200 }}>
-											{CST.TH_EXPIRY}
-										</span>
-										<SDivFlexCenter horizontal width="60%" rowInv>
-											<RadioGroup
-												onChange={e => this.onexpiryChange(e.target.value)}
-												value={expiry}
-											>
-												<Radio value={1}>Day</Radio>
-												<Radio value={2}>Month</Radio>
-											</RadioGroup>
-										</SDivFlexCenter>
-									</li>
-								</ul>
-							</div>
-						</SCardList>
-					</SCardConversionForm>
-					<div className="convert-popup-des">
-						Description Description Description $ 1,000 USD,Description sdadd
-						Description $ 1,000 USD Description Description asd adads $ 1,000 US asdad
-						adasd a asd.
-					</div>
-					<SDivFlexCenter horizontal width="100%" padding="10px">
-						<SButton
-							onClick={() => this.setState({ price: '', amount: '', expiry: 1 })}
-							width="49%"
-						>
-							RESET
-						</SButton>
-						<SButton width="49%">SUBMIT</SButton>
-					</SDivFlexCenter>
+					</Spin>
 				</SCard>
 			</div>
 		);
