@@ -40,6 +40,7 @@ interface IState {
 	allowance: number;
 	loading: boolean;
 	description: string;
+	sliderValue: number;
 }
 
 const marks = {
@@ -78,7 +79,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate: false,
 			allowance: 0,
 			loading: false,
-			description: `Create ${props.aToken} and ${props.bToken} with ETH`
+			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
+			sliderValue: 0
 		};
 	}
 
@@ -146,7 +148,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								amountNum / aTokenPerETH
 						  )} ETH with ${util.formatBalance(
 								(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						  )} ETH fee`
+						  )} ETH fee`,
+				sliderValue: amountNum / limit * 100
 			});
 		} else
 			this.setState({
@@ -245,9 +248,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					});
 			}, 10000);
 		} catch (error) {
-			this.setState({ loading: false });
+			this.setState({ loading: false })
 		}
-	};
+	}
+
+	private handleSliderChange(e: string, limit: number) {
+		this.setState({
+			amount: (limit * Number(e) / 100).toString(),
+			sliderValue: Number(e)
+		});
+	}
 
 	private handleSubmit = async () => {
 		const { account, custodian, handleClose, info } = this.props;
@@ -293,7 +303,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate,
 			allowance,
 			loading,
-			description
+			description,
+			sliderValue
 		} = this.state;
 		const bTokenPerETH = getBTokenPerETH(info);
 		const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
@@ -496,7 +507,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												opacity: wethCreate ? 0.3 : 1
 											}}
 										>
-											<SSlider marks={marks} step={10} defaultValue={0} />
+											<SSlider
+												marks={marks}
+												step={1}
+												value={sliderValue}
+												defaultValue={55.2}
+												onChange={(e: any) =>
+													this.handleSliderChange(e, limit)
+												}
+											/>
 										</li>
 										{isCreate ? (
 											<li
@@ -551,7 +570,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										<li className={'input-line'} style={{ padding: '0 15px' }}>
 											<SSlider marks={marks} step={10} defaultValue={0} />
 										</li>
-										{(!allowance && !loading) && (wethCreate && isCreate) ? (
+										{!allowance && !loading && (wethCreate && isCreate) ? (
 											<div
 												className="pop-up-convert"
 												style={{
