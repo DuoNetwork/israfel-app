@@ -3,8 +3,10 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { duoWeb3Wrapper, getDualClassWrapper } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -17,6 +19,7 @@ import {
 } from './_styled';
 
 interface IProps {
+	account: string;
 	custodian: string;
 	aToken: string;
 	bToken: string;
@@ -33,6 +36,9 @@ interface IState {
 	amount: string;
 	wethAmount: string;
 	wethCreate: boolean;
+	allowance: number;
+	loading: boolean;
+	description: string;
 }
 
 const marks = {
@@ -53,6 +59,12 @@ const marks = {
 	}
 };
 
+const getBTokenPerETH = (info?: ICustodianInfo) =>
+	info ? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha) : 0;
+
+const getATokenPerETH = (bTokenPerETH: number, info?: ICustodianInfo) =>
+	info ? bTokenPerETH * info.states.alpha : 0;
+
 export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -62,9 +74,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			isCreate: true,
 			amount: '',
 			wethAmount: '',
-			wethCreate: false
+			wethCreate: false,
+			allowance: 0,
+			loading: false,
+			description: `Create ${props.aToken} and ${props.bToken} with ETH`
 		};
 	}
+
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.custodian !== prevState.custodian)
 			return {
@@ -75,7 +91,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				amountError: '',
 				wethAmount: '',
 				wethAmountError: '',
-				wethCreate: false
+				wethCreate: false,
+				allowance: 0,
+				loading: false,
+				description: `Create ${nextProps.aToken} and ${nextProps.bToken} with ETH`
 			};
 
 		return null;
@@ -86,7 +105,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			isCreate: !this.state.isCreate,
 			wethCreate: false,
 			amount: '',
-			wethAmount: ''
+			wethAmount: '',
+			description: this.state.isCreate
+				? `Redeem ETH from ${this.props.aToken} and ${this.props.bToken}`
+				: `Create ${this.props.aToken} and ${this.props.bToken} with ETH`
 		});
 
 	private handleInfoExpandChange = () =>
@@ -95,9 +117,41 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 
 	private handleAmountBlurChange = (value: string, limit: number) => {
-		this.setState({
-			amount: Math.min(Math.max(Number(value), 0), limit) + ''
-		});
+		const { info, aToken, bToken } = this.props;
+		const { isCreate } = this.state;
+		const defaultDescription = isCreate
+			? `Create ${aToken} and ${bToken} with ETH`
+			: `Redeem ETH from ${aToken} and ${bToken}`
+		if (value.match(CST.RX_NUM_P)) {
+			const amountNum = Math.min(Number(value), limit);
+			const bTokenPerETH = getBTokenPerETH(info);
+			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
+			this.setState({
+				amount: amountNum + '',
+				description:
+					!amountNum || !info
+						? defaultDescription
+						: isCreate
+						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
+								amountNum * aTokenPerETH
+						)} ${aToken} ${util.formatBalance(
+								amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+								amountNum * info.states.createCommRate
+						)} ETH fee`
+						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
+								amountNum / info.states.alpha
+						)} ${bToken} --> ${util.formatBalance(
+								amountNum / aTokenPerETH
+						)} ETH with ${util.formatBalance(
+								(amountNum / aTokenPerETH) * info.states.redeemCommRate
+						)} ETH fee`
+			});
+		} else
+			this.setState({
+				amount: '',
+				description: defaultDescription
+			});
 	};
 
 	private handleAmountInputChange = (value: string) => {
@@ -107,10 +161,32 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 	};
 
-	private handleWethAmountInputBlurChange = (value: string, limit: number) =>
-		this.setState({
-			wethAmount: Math.min(Math.max(Number(value), 0), limit) + ''
-		});
+	private handleWethAmountInputBlurChange = (value: string, limit: number) => {
+		const { info, aToken, bToken } = this.props;
+		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`
+		if (value.match(CST.RX_NUM_P)) {
+			const amountNum = Math.min(Number(value), limit);
+			const bTokenPerETH = getBTokenPerETH(info);
+			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
+			this.setState({
+				wethAmount: Math.min(Number(value), limit) + '',
+				description:
+					!amountNum || !info
+						? defaultDescription
+						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
+								amountNum * aTokenPerETH
+						)} ${aToken} ${util.formatBalance(
+								amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+								amountNum * info.states.createCommRate
+						)} ${CST.TH_ETH} fee`
+			});
+		} else
+			this.setState({
+				wethAmount: '',
+				description: defaultDescription
+			});
+	};
 
 	private handleWethAmountInputChange = (value: string) => {
 		this.setState({
@@ -118,12 +194,85 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 	};
 
-	private handleWethCreateChange = () =>
+	private handleWethCreateChange = () => {
+		if (!this.state.wethCreate) {
+			const { account, custodian } = this.props;
+			duoWeb3Wrapper
+				.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+				.then(allownace => {
+					this.setState({
+						allowance: allownace,
+						loading: false
+					});
+				});
+		}
+
 		this.setState({
 			wethCreate: !this.state.wethCreate,
 			amount: '',
-			wethAmount: ''
+			wethAmount: '',
+			allowance: 0,
+			loading: true,
+			description: `Create ${this.props.aToken} and ${this.props.bToken} with ${
+				this.state.wethCreate ? CST.TH_ETH : CST.TH_WETH
+			}`
 		});
+	};
+
+	private handleWETHApprove = async () => {
+		this.setState({ loading: true });
+		const { account, custodian } = this.props;
+		try {
+			await duoWeb3Wrapper.erc20Approve(
+				web3Util.contractAddresses.etherToken,
+				account,
+				custodian,
+				0,
+				true
+			);
+			const interval = setInterval(() => {
+				duoWeb3Wrapper
+					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+					.then(allownace => {
+						if (allownace) {
+							this.setState({
+								allowance: allownace,
+								loading: false
+							});
+							clearInterval(interval);
+						}
+					});
+			}, 10000);
+		} catch (error) {
+			this.setState({ loading: false });
+		}
+	};
+
+	private handleSubmit = async () => {
+		const { account, custodian, handleClose, info } = this.props;
+		const { isCreate, amount, wethCreate } = this.state;
+		const cw = getDualClassWrapper(custodian);
+		if (!info || !cw) {
+			alert('missing data');
+			return;
+		}
+
+		if (isCreate)
+			if (wethCreate)
+				await cw.createWithWETH(
+					account,
+					Number(amount),
+					web3Util.contractAddresses.etherToken,
+					hash => alert(hash)
+				);
+			else await cw.create(account, Number(amount), hash => alert(hash));
+		else
+			await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
+				alert(hash)
+			);
+
+		handleClose();
+	};
 
 	public render() {
 		const {
@@ -135,11 +284,18 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			tokenBalances,
 			ethBalance
 		} = this.props;
-		const { isCreate, infoExpand, amount, wethAmount, wethCreate } = this.state;
-		const bTokenPerETH = info
-			? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha)
-			: 0;
-		const aTokenPerETH = info ? bTokenPerETH * info.states.alpha : 0;
+		const {
+			isCreate,
+			infoExpand,
+			amount,
+			wethAmount,
+			wethCreate,
+			allowance,
+			loading,
+			description
+		} = this.state;
+		const bTokenPerETH = getBTokenPerETH(info);
+		const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
 		const limit = isCreate
 			? wethCreate
 				? ethBalance.weth
@@ -366,39 +522,50 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										height: wethCreate && isCreate ? '90px' : '0px'
 									}}
 								>
-									<li
-										className={'input-line'}
-										style={{ padding: '0 10px', marginBottom: 0 }}
-									>
-										<SInput
-											width="100%"
-											placeholder={(isCreate ? 'WETH ' : 'Token ') + 'Amount'}
-											value={wethAmount}
-											onBlur={e =>
-												this.handleWethAmountInputBlurChange(
-													e.target.value,
-													limit
-												)
-											}
-											onChange={e =>
-												this.handleWethAmountInputChange(
-													e.target.value
-												)
-											}
-										/>
-									</li>
-									<li className={'input-line'} style={{ padding: '0 15px' }}>
-										<SSlider marks={marks} step={10} defaultValue={0} />
-									</li>
+									{loading ? (
+										'loading'
+									) : allowance ? (
+										[
+											<li
+												key="input"
+												className={'input-line'}
+												style={{ padding: '0 10px', marginBottom: 0 }}
+											>
+												<SInput
+													width="100%"
+													placeholder={
+														(isCreate ? 'WETH ' : 'Token ') + 'Amount'
+													}
+													value={wethAmount}
+													onBlur={e =>
+														this.handleWethAmountInputBlurChange(
+															e.target.value,
+															limit
+														)
+													}
+													onChange={e =>
+														this.handleWethAmountInputChange(
+															e.target.value
+														)
+													}
+												/>
+											</li>,
+											<li
+												key="slider"
+												className={'input-line'}
+												style={{ padding: '0 15px' }}
+											>
+												<SSlider marks={marks} step={10} defaultValue={0} />
+											</li>
+										]
+									) : (
+										<button onClick={this.handleWETHApprove}>Approve</button>
+									)}
 								</ul>
 							</div>
 						</SCardList>
 					</SCardConversionForm>
-					<div className="convert-popup-des">
-						Description Description Description $ 1,000 USD,Description sdadd
-						Description $ 1,000 USD Description Description asd adads $ 1,000 US asdad
-						adasd a asd.
-					</div>
+					<div className="convert-popup-des">{description}</div>
 					<SDivFlexCenter horizontal width="100%" padding="10px">
 						<SButton
 							onClick={() => this.setState({ amount: '', wethAmount: '' })}
@@ -406,7 +573,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						>
 							{CST.TH_RESET}
 						</SButton>
-						<SButton width="49%">{CST.TH_SUBMIT}</SButton>
+						<SButton width="49%" onClick={this.handleSubmit}>
+							{CST.TH_SUBMIT}
+						</SButton>
 					</SDivFlexCenter>
 				</SCard>
 			</div>
