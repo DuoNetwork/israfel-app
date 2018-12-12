@@ -348,7 +348,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
-				<div className="popup-bg" onClick={handleClose} />
+				<div className="popup-bg"/>
 				<SCard
 					title={
 						<SCardTitle>

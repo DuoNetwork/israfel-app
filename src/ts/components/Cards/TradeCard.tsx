@@ -345,7 +345,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
-				<div className="popup-bg" onClick={handleClose} />
+				<div className="popup-bg"/>
 				<SCard
 					title={
 						<SCardTitle>
