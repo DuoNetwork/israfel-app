@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-export { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
-import { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
+export { IDualClassStates } from '../../../../duo-admin/src/common/types';
+import { IDualClassStates } from '../../../../duo-admin/src/common/types';
 export * from '../../../../israfel-relayer/src/common/types';
 import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 
@@ -42,7 +42,8 @@ export interface IWsState {
 	readonly connection: boolean;
 	readonly tokens: relayerTypes.IToken[];
 	readonly status: relayerTypes.IStatus[];
-	readonly acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
+	readonly acceptedPrices: { [custodian: string]: relayerTypes.IAcceptedPrice[] };
+	readonly exchangePrices: { [source: string]: relayerTypes.IPrice[] };
 }
 
 export interface IEthBalance {

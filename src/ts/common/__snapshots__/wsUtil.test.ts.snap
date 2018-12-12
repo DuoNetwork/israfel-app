@@ -90,6 +90,7 @@ Array [
     "tokens",
     "status",
     "acceptedPrices",
+    "exchangePrices",
   ],
 ]
 `;

@@ -22,7 +22,8 @@ describe('ws reducer', () => {
 			type: CST.AC_INFO,
 			tokens: ['token1'],
 			status: ['status1'],
-			acceptedPrices: {custodian: ['acceptedPrices']}
+			acceptedPrices: { custodian: ['acceptedPrices'] },
+			exchangePrices: { source: ['exchangePrices'] }
 		});
 		expect(state).toMatchSnapshot();
 	});

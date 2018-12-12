@@ -178,7 +178,8 @@ test('handleMessage info', () => {
 			channel: CST.WS_INFO,
 			tokens: 'tokens',
 			processStatus: 'status',
-			acceptedPrices: 'acceptedPrices'
+			acceptedPrices: 'acceptedPrices',
+			exchangePrices: 'exchangePrices'
 		})
 	);
 	expect(wsUtil.handleOrderResponse as jest.Mock).not.toBeCalled();

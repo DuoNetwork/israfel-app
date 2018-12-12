@@ -28,6 +28,7 @@ Object {
   "ws": Object {
     "acceptedPrices": Object {},
     "connection": false,
+    "exchangePrices": Object {},
     "status": Array [],
     "tokens": Array [],
   },

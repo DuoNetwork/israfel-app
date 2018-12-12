@@ -7,9 +7,16 @@ describe('actions', () => {
 
 	test('infoUpdate', () => {
 		expect(
-			wsActions.infoUpdate(['token1'] as any, ['status1'] as any, {
-				custodian: ['acceptPrices'] as any
-			})
+			wsActions.infoUpdate(
+				['token1'] as any,
+				['status1'] as any,
+				{
+					custodian: ['acceptPrices'] as any
+				},
+				{
+					source: ['exchangePrices'] as any
+				}
+			)
 		).toMatchSnapshot();
 	});
 });

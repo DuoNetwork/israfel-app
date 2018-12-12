@@ -4,6 +4,7 @@ exports[`ws reducer connection 1`] = `
 Object {
   "acceptedPrices": Object {},
   "connection": true,
+  "exchangePrices": Object {},
   "status": Array [],
   "tokens": Array [],
 }
@@ -13,6 +14,7 @@ exports[`ws reducer default 1`] = `
 Object {
   "acceptedPrices": Object {},
   "connection": false,
+  "exchangePrices": Object {},
   "status": Array [],
   "tokens": Array [],
 }
@@ -26,6 +28,11 @@ Object {
     ],
   },
   "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
   "status": Array [
     "status1",
   ],

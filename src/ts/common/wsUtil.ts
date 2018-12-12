@@ -6,6 +6,7 @@ import {
 	IEthBalance,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IPrice,
 	IStatus,
 	IToken,
 	ITokenBalance,
@@ -32,7 +33,8 @@ class WsUtil {
 	private handleInfoUpdate: (
 		tokens: IToken[],
 		status: IStatus[],
-		acceptedPrices: { [custodian: string]: IAcceptedPrice[] }
+		acceptedPrices: { [custodian: string]: IAcceptedPrice[] },
+		exchangePrices: { [source: string]: IPrice[] }
 	) => any = () => ({});
 	private handleOrderUpdate: (userOrder: IUserOrder) => any = () => ({});
 	private handleOrderHistoryUpdate: (userOrders: IUserOrder[]) => any = () => ({});
@@ -128,9 +130,14 @@ class WsUtil {
 					this.handleOrderBookResponse(res);
 					break;
 				case CST.WS_INFO:
-					const { tokens, processStatus, acceptedPrices } = res as IWsInfoResponse;
+					const {
+						tokens,
+						processStatus,
+						acceptedPrices,
+						exchangePrices
+					} = res as IWsInfoResponse;
 					web3Util.setTokens(tokens);
-					this.handleInfoUpdate(tokens, processStatus, acceptedPrices);
+					this.handleInfoUpdate(tokens, processStatus, acceptedPrices, exchangePrices);
 					break;
 				default:
 					break;
@@ -290,7 +297,8 @@ class WsUtil {
 		handleInfoUpdate: (
 			tokens: IToken[],
 			status: IStatus[],
-			acceptedPrices: { [custodian: string]: IAcceptedPrice[] }
+			acceptedPrices: { [custodian: string]: IAcceptedPrice[] },
+			exchangePrices: { [source: string]: IPrice[] }
 		) => any
 	) {
 		this.handleInfoUpdate = handleInfoUpdate;

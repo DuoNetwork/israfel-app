@@ -6,7 +6,8 @@ export const initialState: IWsState = {
 	connection: false,
 	tokens: [],
 	status: [],
-	acceptedPrices: {}
+	acceptedPrices: {},
+	exchangePrices: {}
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
@@ -19,7 +20,8 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 			return Object.assign({}, state, {
 				tokens: action.tokens,
 				status: action.status,
-				acceptedPrices: action.acceptedPrices
+				acceptedPrices: action.acceptedPrices,
+				exchangePrices: action.exchangePrices
 			});
 		default:
 			return state;
