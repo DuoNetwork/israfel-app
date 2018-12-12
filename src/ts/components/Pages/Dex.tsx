@@ -108,7 +108,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								/>
 							))}
 						</SDivFlexCenter>
-						<SDivFlexCenter center horizontal>
+						<SDivFlexCenter center horizontal marginBottom="60px">
 							{mozartList.map(c => (
 								<CustodianCard
 									key={c}
