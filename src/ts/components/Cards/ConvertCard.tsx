@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { notification, Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
@@ -18,7 +18,16 @@ import {
 	SInput,
 	SSlider
 } from './_styled';
-
+const openNotification = (tx: string) => {
+	const btn = <SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>View Transaction on Etherscan</SButton>;
+	const args = {
+		message: 'Transaction Sent',
+		description: 'Transaction hash: ' + tx,
+		duration: 0,
+		btn
+	};
+	notification.open(args);
+};
 interface IProps {
 	account: string;
 	custodian: string;
@@ -137,18 +146,18 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						  )} ${aToken} ${util.formatBalance(
-								amountNum * bTokenPerETH
-						  )} ${bToken} with ${util.formatBalance(
-								amountNum * info.states.createCommRate
-						  )} ETH fee`
-						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
-								amountNum / info.states.alpha
-						  )} ${bToken} --> ${util.formatBalance(
-								amountNum / aTokenPerETH
-						  )} ETH with ${util.formatBalance(
-								(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						  )} ETH fee`,
+						)} ${aToken} ${util.formatBalance(
+							amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+							amountNum * info.states.createCommRate
+						)} ETH fee`
+					: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
+							amountNum / info.states.alpha
+						)} ${bToken} --> ${util.formatBalance(
+							amountNum / aTokenPerETH
+						)} ETH with ${util.formatBalance(
+							(amountNum / aTokenPerETH) * info.states.redeemCommRate
+						)} ETH fee`,
 				sliderValue: (amountNum / limit) * 100
 			});
 		} else
@@ -178,11 +187,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						  )} ${aToken} ${util.formatBalance(
-								amountNum * bTokenPerETH
-						  )} ${bToken} with ${util.formatBalance(
-								amountNum * info.states.createCommRate
-						  )} ${CST.TH_ETH} fee`
+						)} ${aToken} ${util.formatBalance(
+							amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+							amountNum * info.states.createCommRate
+						)} ${CST.TH_ETH} fee`
 			});
 		} else
 			this.setState({
@@ -226,13 +235,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({ loading: true });
 		const { account, custodian } = this.props;
 		try {
-			await duoWeb3Wrapper.erc20Approve(
+			const tx = await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
 				true
 			);
+			openNotification(tx);
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -315,7 +325,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>

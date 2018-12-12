@@ -1,6 +1,5 @@
 //import waring from 'images/icons/waring.svg';
-import { Radio } from 'antd';
-import { Spin } from 'antd';
+import { notification, Radio, Spin} from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
@@ -20,6 +19,16 @@ import {
 	SSlider
 } from './_styled';
 const RadioGroup = Radio.Group;
+const openNotification = (tx: string) => {
+	const btn = <SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>View Transaction on Etherscan</SButton>;
+	const args = {
+		message: 'Transaction Sent',
+		description: 'Transaction hash: ' + tx,
+		duration: 0,
+		btn
+	};
+	notification.open(args);
+};
 
 interface IProps {
 	token: string;
@@ -68,7 +77,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			token: props.token,
 			expiry: 1,
 			loading: false,
-			sliderValue: 0,
+			sliderValue: 0
 		};
 	}
 
@@ -136,7 +145,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				amount: step
 					? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(2)
 					: this.state.amount,
-				sliderValue: Number(e) / limit * 100
+				sliderValue: (Number(e) / limit) * 100
 			});
 		else
 			this.setState({
@@ -158,7 +167,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		this.setState({ loading: true });
 		try {
 			const { isBid } = this.state;
-			await web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
+			const tx = await web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
+			openNotification(tx);
 		} catch (error) {
 			this.setState({ loading: false });
 		}
@@ -373,13 +383,18 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												}
 											/>
 										</li>
-										<li className={'input-line'} style={{ padding: '0px 15px' }}>
+										<li
+											className={'input-line'}
+											style={{ padding: '0px 15px' }}
+										>
 											<SSlider
 												value={sliderValue}
 												marks={marks}
 												step={1}
 												defaultValue={0}
-												onChange={(e: any) => this.handleSliderChange(e, limit)}
+												onChange={(e: any) =>
+													this.handleSliderChange(e, limit)
+												}
 											/>
 										</li>
 										<li className="input-line" style={{ padding: '0 15px' }}>

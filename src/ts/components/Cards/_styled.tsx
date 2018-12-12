@@ -958,6 +958,12 @@ injectGlobal([
 			.ant-spin-dot i {
 				background-color: ${ColorStyles.MainColor};
 			}
+			.ant-notification {
+				width: auto;
+			}
+			.ant-notification-notice-description {
+				font-size: 12px;
+			}
 		}
 	`
 ] as any);
