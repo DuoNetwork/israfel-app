@@ -950,6 +950,12 @@ injectGlobal([
 			.ant-radio-wrapper:last-child {
 				margin-right: 0 !important;
 			}
+			.ant-spin {
+				color: ${ColorStyles.MainColor};
+			}
+			.ant-spin-dot i {
+				background-color: ${ColorStyles.MainColor};
+			}
 		}
 	`
 ] as any);
