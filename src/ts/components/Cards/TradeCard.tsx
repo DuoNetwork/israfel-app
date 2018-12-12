@@ -37,6 +37,7 @@ interface IState {
 	amount: string;
 	expiry: number;
 	loading: boolean;
+	sliderValue: number;
 }
 
 const marks = {
@@ -66,7 +67,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			amount: '',
 			token: props.token,
 			expiry: 1,
-			loading: false
+			loading: false,
+			sliderValue: 0,
 		};
 	}
 
@@ -104,8 +106,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
 		this.setState({
 			amount: step
-				? Math.floor((limit * (Number(e) / 100)) / step) * step + ''
-				: limit * (Number(e) / 100) + ''
+				? (Math.floor((limit * Number(e)) / 100 / step) * step).toFixed(2)
+				: (limit * (Number(e) / 100)).toFixed(2),
+			sliderValue: Number(e)
 		});
 	}
 
@@ -132,11 +135,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.setState({
 				amount: step
 					? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(2)
-					: this.state.amount
+					: this.state.amount,
+				sliderValue: Number(e) / limit * 100
 			});
 		else
 			this.setState({
-				amount: ''
+				amount: '',
+				sliderValue: 0
 			});
 	}
 
@@ -166,7 +171,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
-		const { isBid, price, amount, expiry, loading } = this.state;
+		const { isBid, price, amount, expiry, loading, sliderValue } = this.state;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
 			bidsToRender.push({
@@ -299,7 +304,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										</p>
 									</li>
 									<li style={{ padding: '10px 100px 5px 100px' }}>
-										<SButton onClick={this.handleApprove} >
+										<SButton onClick={this.handleApprove}>
 											{CST.TH_APPROVE}
 										</SButton>
 									</li>
@@ -368,14 +373,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												}
 											/>
 										</li>
-										<li className={'input-line'} style={{ padding: '0 15px' }}>
+										<li className={'input-line'} style={{ padding: '0px 15px' }}>
 											<SSlider
+												value={sliderValue}
 												marks={marks}
-												step={10}
+												step={1}
 												defaultValue={0}
-												onChange={(e: any) =>
-													this.handleSliderChange(e, limit)
-												}
+												onChange={(e: any) => this.handleSliderChange(e, limit)}
 											/>
 										</li>
 										<li className="input-line" style={{ padding: '0 15px' }}>
