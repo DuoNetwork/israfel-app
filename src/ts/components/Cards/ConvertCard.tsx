@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
@@ -39,6 +40,7 @@ interface IState {
 	allowance: number;
 	loading: boolean;
 	description: string;
+	sliderValue: number;
 }
 
 const marks = {
@@ -77,7 +79,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate: false,
 			allowance: 0,
 			loading: false,
-			description: `Create ${props.aToken} and ${props.bToken} with ETH`
+			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
+			sliderValue: 0
 		};
 	}
 
@@ -121,7 +124,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		const { isCreate } = this.state;
 		const defaultDescription = isCreate
 			? `Create ${aToken} and ${bToken} with ETH`
-			: `Redeem ETH from ${aToken} and ${bToken}`
+			: `Redeem ETH from ${aToken} and ${bToken}`;
 		if (value.match(CST.RX_NUM_P)) {
 			const amountNum = Math.min(Number(value), limit);
 			const bTokenPerETH = getBTokenPerETH(info);
@@ -134,18 +137,19 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
+						  )} ${aToken} ${util.formatBalance(
 								amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
+						  )} ${bToken} with ${util.formatBalance(
 								amountNum * info.states.createCommRate
-						)} ETH fee`
+						  )} ETH fee`
 						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
 								amountNum / info.states.alpha
-						)} ${bToken} --> ${util.formatBalance(
+						  )} ${bToken} --> ${util.formatBalance(
 								amountNum / aTokenPerETH
-						)} ETH with ${util.formatBalance(
+						  )} ETH with ${util.formatBalance(
 								(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						)} ETH fee`
+						  )} ETH fee`,
+				sliderValue: amountNum / limit * 100
 			});
 		} else
 			this.setState({
@@ -163,7 +167,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleWethAmountInputBlurChange = (value: string, limit: number) => {
 		const { info, aToken, bToken } = this.props;
-		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`
+		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`;
 		if (value.match(CST.RX_NUM_P)) {
 			const amountNum = Math.min(Number(value), limit);
 			const bTokenPerETH = getBTokenPerETH(info);
@@ -175,11 +179,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
+						  )} ${aToken} ${util.formatBalance(
 								amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
+						  )} ${bToken} with ${util.formatBalance(
 								amountNum * info.states.createCommRate
-						)} ${CST.TH_ETH} fee`
+						  )} ${CST.TH_ETH} fee`
 			});
 		} else
 			this.setState({
@@ -244,9 +248,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					});
 			}, 10000);
 		} catch (error) {
-			this.setState({ loading: false });
+			this.setState({ loading: false })
 		}
-	};
+	}
+
+	private handleSliderChange(e: string, limit: number) {
+		this.setState({
+			amount: (limit * Number(e) / 100).toString(),
+			sliderValue: Number(e)
+		});
+	}
 
 	private handleSubmit = async () => {
 		const { account, custodian, handleClose, info } = this.props;
@@ -292,7 +303,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate,
 			allowance,
 			loading,
-			description
+			description,
+			sliderValue
 		} = this.state;
 		const bTokenPerETH = getBTokenPerETH(info);
 		const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
@@ -304,7 +316,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -438,145 +450,164 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							</ul>
 						</div>
 					</SCardList>
-					<SCardConversionForm>
-						<SDivFlexCenter horizontal width="100%" padding="10px;">
-							{[CST.TH_CREATE, CST.TH_REDEEM].map(side => (
-								<button
-									key={side}
-									className={
-										(isCreate && side === CST.TH_CREATE) ||
-										(!isCreate && side === CST.TH_REDEEM)
-											? 'conv-button selected'
-											: 'conv-button non-select'
-									}
-									onClick={() => this.handleSideChange()}
-								>
-									{side.toUpperCase()}
-								</button>
-							))}
-						</SDivFlexCenter>
-						<SCardList noUlBorder noLiBorder>
-							<div className="status-list-wrapper">
-								<ul>
-									<li
-										className={'input-line'}
-										style={{
-											padding: '0 10px',
-											marginBottom: 0,
-											pointerEvents: wethCreate ? 'none' : 'auto',
-											opacity: wethCreate ? 0.3 : 1
-										}}
+					<Spin spinning={loading && (wethCreate && isCreate)} tip="loading...">
+						<SCardConversionForm>
+							<SDivFlexCenter horizontal width="100%" padding="10px;">
+								{[CST.TH_CREATE, CST.TH_REDEEM].map(side => (
+									<button
+										key={side}
+										className={
+											(isCreate && side === CST.TH_CREATE) ||
+											(!isCreate && side === CST.TH_REDEEM)
+												? 'conv-button selected'
+												: 'conv-button non-select'
+										}
+										onClick={() => this.handleSideChange()}
 									>
-										<SInput
-											width="100%"
-											value={amount}
-											placeholder={
-												(isCreate ? CST.TH_ETH : aToken) +
-												'' +
-												CST.TH_AMOUNT
-											}
-											onChange={e =>
-												this.handleAmountInputChange(e.target.value)
-											}
-											onBlur={e =>
-												this.handleAmountBlurChange(e.target.value, limit)
-											}
-										/>
-									</li>
-									<li
-										className={'input-line'}
-										style={{
-											padding: '0 15px',
-											pointerEvents: wethCreate ? 'none' : 'auto',
-											opacity: wethCreate ? 0.3 : 1
-										}}
-									>
-										<SSlider marks={marks} step={10} defaultValue={0} />
-									</li>
-									{isCreate ? (
+										{side.toUpperCase()}
+									</button>
+								))}
+							</SDivFlexCenter>
+							<SCardList noUlBorder noLiBorder>
+								<div className="status-list-wrapper">
+									<ul>
 										<li
-											className="waring-expand-button"
-											style={{ padding: '0 10px 0 15px' }}
-											onClick={() => this.handleWethCreateChange()}
+											className={'input-line'}
+											style={{
+												padding: '0 10px',
+												marginBottom: 0,
+												pointerEvents: wethCreate ? 'none' : 'auto',
+												opacity: wethCreate ? 0.3 : 1
+											}}
 										>
-											<span>
-												<img src={waring} style={{ marginRight: 2 }} />
-												{`Click to create with ${
-													wethCreate ? CST.TH_ETH : CST.TH_WETH
-												}`}
-											</span>
+											<SInput
+												width="100%"
+												value={amount}
+												placeholder={
+													(isCreate ? CST.TH_ETH : aToken) +
+													'' +
+													CST.TH_AMOUNT
+												}
+												onChange={e =>
+													this.handleAmountInputChange(e.target.value)
+												}
+												onBlur={e =>
+													this.handleAmountBlurChange(
+														e.target.value,
+														limit
+													)
+												}
+											/>
 										</li>
-									) : (
-										<li style={{ padding: '0 10px 0 15px' }}>
-											<span style={{ height: 18, width: '100%' }} />
+										<li
+											className={'input-line'}
+											style={{
+												padding: '0 15px',
+												pointerEvents: wethCreate ? 'none' : 'auto',
+												opacity: wethCreate ? 0.3 : 1
+											}}
+										>
+											<SSlider
+												marks={marks}
+												step={1}
+												value={sliderValue}
+												defaultValue={55.2}
+												onChange={(e: any) =>
+													this.handleSliderChange(e, limit)
+												}
+											/>
 										</li>
-									)}
-								</ul>
-							</div>
-						</SCardList>
-						<SCardList noUlBorder noLiBorder>
-							<div className="status-list-wrapper">
-								<ul
-									style={{
-										margin: '0',
-										height: wethCreate && isCreate ? '90px' : '0px'
-									}}
-								>
-									{loading ? (
-										'loading'
-									) : allowance ? (
-										[
+										{isCreate ? (
 											<li
-												key="input"
-												className={'input-line'}
-												style={{ padding: '0 10px', marginBottom: 0 }}
+												className="waring-expand-button"
+												style={{ padding: '0 10px 0 15px' }}
+												onClick={() => this.handleWethCreateChange()}
 											>
-												<SInput
-													width="100%"
-													placeholder={
-														(isCreate ? 'WETH ' : 'Token ') + 'Amount'
-													}
-													value={wethAmount}
-													onBlur={e =>
-														this.handleWethAmountInputBlurChange(
-															e.target.value,
-															limit
-														)
-													}
-													onChange={e =>
-														this.handleWethAmountInputChange(
-															e.target.value
-														)
-													}
-												/>
-											</li>,
-											<li
-												key="slider"
-												className={'input-line'}
-												style={{ padding: '0 15px' }}
-											>
-												<SSlider marks={marks} step={10} defaultValue={0} />
+												<span>
+													<img src={waring} style={{ marginRight: 2 }} />
+													{`Click to create with ${
+														wethCreate ? CST.TH_ETH : CST.TH_WETH
+													}`}
+												</span>
 											</li>
-										]
-									) : (
-										<button onClick={this.handleWETHApprove}>Approve</button>
-									)}
-								</ul>
-							</div>
-						</SCardList>
-					</SCardConversionForm>
-					<div className="convert-popup-des">{description}</div>
-					<SDivFlexCenter horizontal width="100%" padding="10px">
-						<SButton
-							onClick={() => this.setState({ amount: '', wethAmount: '' })}
-							width="49%"
-						>
-							{CST.TH_RESET}
-						</SButton>
-						<SButton width="49%" onClick={this.handleSubmit}>
-							{CST.TH_SUBMIT}
-						</SButton>
-					</SDivFlexCenter>
+										) : (
+											<li style={{ padding: '0 10px 0 15px' }}>
+												<span style={{ height: 18, width: '100%' }} />
+											</li>
+										)}
+									</ul>
+								</div>
+							</SCardList>
+							<SCardList noUlBorder noLiBorder>
+								<div className="status-list-wrapper">
+									<ul
+										style={{
+											margin: '0',
+											height: wethCreate && isCreate ? '90px' : '0px'
+										}}
+									>
+										<li
+											className={'input-line'}
+											style={{ padding: '0 10px', marginBottom: 0 }}
+										>
+											<SInput
+												width="100%"
+												placeholder={
+													(isCreate ? 'WETH ' : 'Token ') + 'Amount'
+												}
+												value={wethAmount}
+												onBlur={e =>
+													this.handleWethAmountInputBlurChange(
+														e.target.value,
+														limit
+													)
+												}
+												onChange={e =>
+													this.handleWethAmountInputChange(e.target.value)
+												}
+											/>
+										</li>
+										<li className={'input-line'} style={{ padding: '0 15px' }}>
+											<SSlider marks={marks} step={10} defaultValue={0} />
+										</li>
+										{!allowance && !loading && (wethCreate && isCreate) ? (
+											<div
+												className="pop-up-convert"
+												style={{
+													top: infoExpand ? '388px' : '260px'
+												}}
+											>
+												<li
+													style={{
+														position: 'fixed',
+														top: infoExpand ? '588px' : '460px',
+														width: '100%',
+														padding: '0 100px'
+													}}
+												>
+													<SButton onClick={this.handleWETHApprove}>
+														{CST.TH_APPROVE}
+													</SButton>
+												</li>
+											</div>
+										) : null}
+									</ul>
+								</div>
+							</SCardList>
+						</SCardConversionForm>
+						<div className="convert-popup-des">{description}</div>
+						<SDivFlexCenter horizontal width="100%" padding="10px">
+							<SButton
+								onClick={() => this.setState({ amount: '', wethAmount: '' })}
+								width="49%"
+							>
+								{CST.TH_RESET}
+							</SButton>
+							<SButton width="49%" onClick={this.handleSubmit}>
+								{CST.TH_SUBMIT}
+							</SButton>
+						</SDivFlexCenter>
+					</Spin>
 				</SCard>
 			</div>
 		);
