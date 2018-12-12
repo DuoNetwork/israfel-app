@@ -137,19 +137,19 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
+						  )} ${aToken} ${util.formatBalance(
 								amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
+						  )} ${bToken} with ${util.formatBalance(
 								amountNum * info.states.createCommRate
-						)} ETH fee`
+						  )} ETH fee`
 						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
 								amountNum / info.states.alpha
-						)} ${bToken} --> ${util.formatBalance(
+						  )} ${bToken} --> ${util.formatBalance(
 								amountNum / aTokenPerETH
-						)} ETH with ${util.formatBalance(
+						  )} ETH with ${util.formatBalance(
 								(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						)} ETH fee`,
-				sliderValue: amountNum / limit * 100
+						  )} ETH fee`,
+				sliderValue: (amountNum / limit) * 100
 			});
 		} else
 			this.setState({
@@ -159,7 +159,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	};
 
 	private handleAmountInputChange = (value: string) => {
-		console.log(value);
 		this.setState({
 			amount: value
 		});
@@ -179,11 +178,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
+						  )} ${aToken} ${util.formatBalance(
 								amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
+						  )} ${bToken} with ${util.formatBalance(
 								amountNum * info.states.createCommRate
-						)} ${CST.TH_ETH} fee`
+						  )} ${CST.TH_ETH} fee`
 			});
 		} else
 			this.setState({
@@ -248,13 +247,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					});
 			}, 10000);
 		} catch (error) {
-			this.setState({ loading: false })
+			this.setState({ loading: false });
 		}
-	}
+	};
 
 	private handleSliderChange(e: string, limit: number) {
 		this.setState({
-			amount: (limit * Number(e) / 100).toFixed(6),
+			amount: ((limit * Number(e)) / 100).toFixed(6),
 			sliderValue: Number(e)
 		});
 	}
@@ -316,7 +315,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -327,7 +326,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							{CST.TH_CONVERT + (info ? ' ' + info.code.split('-')[0] : '')}
 						</SCardTitle>
 					}
-					width="400px"
+					width="360px"
 					className="popup-card"
 					noBodymargin
 					extra={
@@ -481,6 +480,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											}}
 										>
 											<SInput
+												disabled={limit === 0}
 												width="100%"
 												value={amount}
 												placeholder={
@@ -508,33 +508,26 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											}}
 										>
 											<SSlider
+												disabled={limit === 0}
 												marks={marks}
 												step={1}
 												value={sliderValue}
-												defaultValue={55.2}
+												defaultValue={0}
 												onChange={(e: any) =>
 													this.handleSliderChange(e, limit)
 												}
 											/>
 										</li>
-										{isCreate ? (
-											<li
-												className="waring-expand-button"
-												style={{ padding: '0 10px 0 15px' }}
-												onClick={() => this.handleWethCreateChange()}
-											>
-												<span>
-													<img src={waring} style={{ marginRight: 2 }} />
-													{`Click to create with ${
-														wethCreate ? CST.TH_ETH : CST.TH_WETH
-													}`}
-												</span>
-											</li>
-										) : (
-											<li style={{ padding: '0 10px 0 15px' }}>
-												<span style={{ height: 18, width: '100%' }} />
-											</li>
-										)}
+										<li
+											className="waring-expand-button"
+											style={{ padding: '0 10px 0 15px' }}
+											onClick={() => this.handleWethCreateChange()}
+										>
+											<span style={{ opacity: isCreate ? 100 : 0 }}>
+												<img src={waring} style={{ marginRight: 2 }} />
+												{`Click to create with ${CST.TH_ETH}`}
+											</span>
+										</li>
 									</ul>
 								</div>
 							</SCardList>
@@ -598,12 +591,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						<div className="convert-popup-des">{description}</div>
 						<SDivFlexCenter horizontal width="100%" padding="10px">
 							<SButton
+								disable={limit === 0}
 								onClick={() => this.setState({ amount: '', wethAmount: '' })}
 								width="49%"
 							>
 								{CST.TH_RESET}
 							</SButton>
-							<SButton width="49%" onClick={this.handleSubmit}>
+							<SButton disable={limit === 0} width="49%" onClick={this.handleSubmit}>
 								{CST.TH_SUBMIT}
 							</SButton>
 						</SDivFlexCenter>

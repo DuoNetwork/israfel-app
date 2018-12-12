@@ -73,9 +73,11 @@ export const SCardTitleSelector = styled(Select as any)`
 `;
 export interface ISButtonProps {
 	width?: string;
+	disable?: boolean;
 }
 
 export const SButton = styled.button`
+	pointer-events: ${(props: ISButtonProps) => (props.disable ? 'none' : 'auto' )};
 	cursor: pointer;
 	outline: none;
 	height: 30px;
