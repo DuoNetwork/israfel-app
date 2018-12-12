@@ -117,9 +117,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 
 	private handleAmountBlurChange = (value: string, limit: number) => {
+		const { info, aToken, bToken } = this.props;
+		const { isCreate } = this.state;
+		const defaultDescription = isCreate
+			? `Create ${aToken} and ${bToken} with ETH`
+			: `Redeem ETH from ${aToken} and ${bToken}`
 		if (value.match(CST.RX_NUM_P)) {
-			const { info, aToken, bToken } = this.props;
-			const { isCreate } = this.state;
 			const amountNum = Math.min(Number(value), limit);
 			const bTokenPerETH = getBTokenPerETH(info);
 			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
@@ -127,7 +130,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				amount: amountNum + '',
 				description:
 					!amountNum || !info
-						? ''
+						? defaultDescription
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
@@ -147,9 +150,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		} else
 			this.setState({
 				amount: '',
-				description: this.state.isCreate
-					? `Create ${this.props.aToken} and ${this.props.bToken} with ETH`
-					: `Redeem ETH from ${this.props.aToken} and ${this.props.bToken}`
+				description: defaultDescription
 			});
 	};
 
@@ -161,8 +162,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	};
 
 	private handleWethAmountInputBlurChange = (value: string, limit: number) => {
+		const { info, aToken, bToken } = this.props;
+		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`
 		if (value.match(CST.RX_NUM_P)) {
-			const { info, aToken, bToken } = this.props;
 			const amountNum = Math.min(Number(value), limit);
 			const bTokenPerETH = getBTokenPerETH(info);
 			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
@@ -170,7 +172,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				wethAmount: Math.min(Number(value), limit) + '',
 				description:
 					!amountNum || !info
-						? ''
+						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
 						)} ${aToken} ${util.formatBalance(
@@ -182,7 +184,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		} else
 			this.setState({
 				wethAmount: '',
-				description: `Create ${this.props.aToken} and ${this.props.bToken} with WETH`
+				description: defaultDescription
 			});
 	};
 
