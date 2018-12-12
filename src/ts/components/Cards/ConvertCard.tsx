@@ -250,7 +250,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleSubmit = async () => {
 		const { account, custodian, handleClose, info } = this.props;
-		const { isCreate, amount, wethCreate } = this.state;
+		const { isCreate, amount, wethCreate, wethAmount } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
 			alert('missing data');
@@ -261,7 +261,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			if (wethCreate)
 				await cw.createWithWETH(
 					account,
-					Number(amount),
+					Number(wethAmount),
 					web3Util.contractAddresses.etherToken,
 					hash => alert(hash)
 				);
