@@ -388,6 +388,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											style={{ padding: '0px 15px' }}
 										>
 											<SSlider
+												disabled={price === ''}
 												value={sliderValue}
 												marks={marks}
 												step={1}

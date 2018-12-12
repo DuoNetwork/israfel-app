@@ -50,6 +50,7 @@ interface IState {
 	loading: boolean;
 	description: string;
 	sliderValue: number;
+	sliderWETH: number;
 }
 
 const marks = {
@@ -89,7 +90,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			allowance: 0,
 			loading: false,
 			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
-			sliderValue: 0
+			sliderValue: 0,
+			sliderWETH: 0
 		};
 	}
 
@@ -100,6 +102,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				infoExpand: false,
 				isCreate: true,
 				amount: '',
+				sliderValue: 0,
+				sliderWETH: 0,
 				amountError: '',
 				wethAmount: '',
 				wethAmountError: '',
@@ -117,6 +121,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			isCreate: !this.state.isCreate,
 			wethCreate: false,
 			amount: '',
+			sliderValue: 0,
+			sliderWETH: 0,
 			wethAmount: '',
 			description: this.state.isCreate
 				? `Redeem ETH from ${this.props.aToken} and ${this.props.bToken}`
@@ -163,6 +169,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		} else
 			this.setState({
 				amount: '',
+				sliderValue: 0,
 				description: defaultDescription
 			});
 	};
@@ -191,11 +198,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							amountNum * bTokenPerETH
 						)} ${bToken} with ${util.formatBalance(
 							amountNum * info.states.createCommRate
-						)} ${CST.TH_ETH} fee`
+						)} ${CST.TH_ETH} fee`,
+				sliderWETH: (amountNum / limit) * 100
 			});
 		} else
 			this.setState({
 				wethAmount: '',
+				sliderWETH: 0,
 				description: defaultDescription
 			});
 	};
@@ -205,6 +214,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethAmount: value
 		});
 	};
+
+	private handleSliderWETHChange(e: string, limit: number) {
+		this.setState({
+			wethAmount: ((limit * Number(e)) / 100).toFixed(6),
+			sliderWETH: Number(e)
+		});
+	}
 
 	private handleWethCreateChange = () => {
 		if (!this.state.wethCreate) {
@@ -222,7 +238,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			wethCreate: !this.state.wethCreate,
 			amount: '',
+			sliderValue: 0,
 			wethAmount: '',
+			sliderWETH: 0,
 			allowance: 0,
 			loading: true,
 			description: `Create ${this.props.aToken} and ${this.props.bToken} with ${
@@ -313,7 +331,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			allowance,
 			loading,
 			description,
-			sliderValue
+			sliderValue,
+			sliderWETH
 		} = this.state;
 		const bTokenPerETH = getBTokenPerETH(info);
 		const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
@@ -571,7 +590,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											/>
 										</li>
 										<li className={'input-line'} style={{ padding: '0 15px' }}>
-											<SSlider marks={marks} step={10} defaultValue={0} />
+											<SSlider
+												disabled={limit === 0}
+												marks={marks}
+												step={1}
+												value={sliderWETH}
+												defaultValue={0}
+												onChange={(e: any) => this.handleSliderWETHChange(e, limit)
+											}
+											/>
 										</li>
 										{!allowance && !loading && (wethCreate && isCreate) ? (
 											<div
@@ -602,7 +629,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						<SDivFlexCenter horizontal width="100%" padding="10px">
 							<SButton
 								disable={limit === 0}
-								onClick={() => this.setState({ amount: '', wethAmount: '' })}
+								onClick={() =>
+									this.setState({ amount: '', wethAmount: '', sliderValue: 0, sliderWETH: 0 })
+								}
 								width="49%"
 							>
 								{CST.TH_RESET}
