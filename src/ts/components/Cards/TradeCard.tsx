@@ -86,22 +86,43 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 
+	private handleSliderChange(e: string, limit: number) {
+		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
+		this.setState({
+			amount: step ? (Math.floor(limit * (Number(e) / 100) / step) * step) + '' : limit * (Number(e) / 100) + ''
+		});
+	}
+
 	private handlePriceBlurInputChange(e: string) {
 		const stepPrice = this.props.tokenInfo
 			? this.props.tokenInfo.precisions[CST.TH_WETH]
 			: undefined;
-		this.setState({
-			price: stepPrice
-				? (Math.round(Number(e) / stepPrice) * stepPrice).toString()
-				: this.state.price
-		});
+		if (e.match(CST.RX_NUM_P))
+			this.setState({
+				price: stepPrice
+					? (Math.round(Number(e) / stepPrice) * stepPrice).toFixed(6)
+					: this.state.price
+			});
+		else
+			this.setState({
+				price: ''
+			});
 	}
 
-	private handleAmountBlurChange(e: string) {
+	private handleAmountBlurChange(e: string, limit: number) {
 		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
-		this.setState({
-			amount: step ? (Math.round(Number(e) / step) * step).toString() : this.state.amount
-		});
+		if (step) console.log((Math.floor(Math.min(Number(e), limit) / step) * step));
+		if (e.match(CST.RX_NUM_P))
+			this.setState({
+				amount: step
+					? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(2)
+					: this.state.amount
+			});
+		else
+			this.setState({
+				amount: ''
+			});
+
 	}
 
 	private handleSideChange = () =>
@@ -112,14 +133,15 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		this.setState({
 			price: value
 		});
+
 	private handleApprove = () => {
 		const { isBid } = this.state;
 		web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
 	};
 
-	private handleAmountInputChange = (value: string, limit: number) =>
+	private handleAmountInputChange = (value: string) =>
 		this.setState({
-			amount: Math.min(Number(value), limit) + ''
+			amount: value
 		});
 
 	public render() {
@@ -273,7 +295,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<SInput
 											width="100%"
 											placeholder="Price"
-											value={price}
+											value={this.state.price}
 											type="number"
 											step={
 												tokenInfo
@@ -304,21 +326,27 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										style={{ padding: '0 10px', marginBottom: 0 }}
 									>
 										<SInput
+											disabled={price === ''}
 											width="100%"
 											placeholder="Amount"
 											value={amount}
 											type="number"
 											step={tokenInfo ? tokenInfo.denomination : undefined}
 											onChange={e =>
-												this.handleAmountInputChange(e.target.value, limit)
+												this.handleAmountInputChange(e.target.value)
 											}
 											onBlur={e =>
-												this.handleAmountBlurChange(e.target.value)
+												this.handleAmountBlurChange(e.target.value, limit)
 											}
 										/>
 									</li>
 									<li className={'input-line'} style={{ padding: '0 15px' }}>
-										<SSlider marks={marks} step={10} defaultValue={0} />
+										<SSlider
+											marks={marks}
+											step={10}
+											defaultValue={0}
+											onChange={(e: any) => this.handleSliderChange(e, limit)}
+										/>
 									</li>
 									<li className="input-line" style={{ padding: '0 15px' }}>
 										<span className="title" style={{ width: 200 }}>
