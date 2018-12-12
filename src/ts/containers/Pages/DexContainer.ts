@@ -7,6 +7,7 @@ import { IState } from 'ts/common/types';
 import Dex from 'ts/components/Pages/Dex';
 
 function mapStateToProps(state: IState) {
+	const krakenPrices = state.ws.exchangePrices['kraken'];
 	return {
 		account: state.web3.account,
 		tokens: state.ws.tokens,
@@ -15,7 +16,8 @@ function mapStateToProps(state: IState) {
 		custodianTokenBalances: state.web3.custodianTokenBalances,
 		ethBalance: state.web3.ethBalance,
 		orderBook: state.dex.orderBookSnapshot,
-		connection: state.ws.connection
+		connection: state.ws.connection,
+		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0
 	};
 }
 

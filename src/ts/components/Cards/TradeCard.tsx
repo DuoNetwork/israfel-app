@@ -1,8 +1,8 @@
-//import waring from 'images/icons/waring.svg';
-import { notification, Radio, Spin} from 'antd';
+import { notification, Radio, Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
+import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
@@ -20,7 +20,15 @@ import {
 } from './_styled';
 const RadioGroup = Radio.Group;
 const openNotification = (tx: string) => {
-	const btn = <SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>View Transaction on Etherscan</SButton>;
+	const btn = (
+		<SButton
+			onClick={() =>
+				window.open(`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`, '_blank')
+			}
+		>
+			View Transaction on Etherscan
+		</SButton>
+	);
 	const args = {
 		message: 'Transaction Sent',
 		description: 'Transaction hash: ' + tx,
@@ -36,6 +44,7 @@ interface IProps {
 	tokenBalance?: ITokenBalance;
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
+	ethPrice: number;
 	handleClose: () => void;
 }
 
@@ -47,6 +56,10 @@ interface IState {
 	expiry: number;
 	loading: boolean;
 	sliderValue: number;
+	priceDescription: string;
+	tradeDescription: string;
+	feeDescription: string;
+	expiryDescription: string;
 }
 
 const marks = {
@@ -67,29 +80,82 @@ const marks = {
 	}
 };
 
+const getPriceDescription = (price: string, ethPrice: number) => {
+	const priceNum = Number(price);
+	if (price && priceNum) return `approx. ${util.formatNumber(priceNum * ethPrice)} USD`;
+
+	return 'estimated USD price';
+};
+
+const getTradeDescription = (
+	token: string,
+	isBid: boolean,
+	price: string,
+	amount: string,
+	tokenInfo?: IToken
+) => {
+	const amountNum = Number(amount);
+	const priceNum = Number(price);
+	if (!tokenInfo || !amount || !price || !priceNum || !amountNum)
+		return isBid ? `Buy ${token} with WETH` : `Sell ${token} for WETH`;
+	return isBid
+		? `Buy ${amount} ${token} with ${util.formatBalance(amountNum * priceNum)} WETH`
+		: `Sell ${amount} ${token} for ${util.formatBalance(amountNum * priceNum)} WETH`;
+};
+
+const getFeeDescription = (token: string, price: string, amount: string, tokenInfo?: IToken) => {
+	const amountNum = Number(amount);
+	const priceNum = Number(price);
+	const feeSchedule = tokenInfo ? tokenInfo.feeSchedules[CST.TH_WETH] : null;
+	const fee = feeSchedule
+		? Math.max(
+				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
+				feeSchedule.minimum
+		)
+		: 0;
+	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
+};
+const getExpiryDescription = (isMonth: boolean) =>
+	`Order Valid till ${moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm')}`;
+
 export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			token: props.token,
 			isBid: true,
 			price: '',
 			amount: '',
-			token: props.token,
 			expiry: 1,
 			loading: false,
-			sliderValue: 0
+			sliderValue: 0,
+			priceDescription: getPriceDescription('', props.ethPrice),
+			tradeDescription: getTradeDescription(props.token, true, '', '', props.tokenInfo),
+			feeDescription: getFeeDescription(props.token, '', '', props.tokenInfo),
+			expiryDescription: getExpiryDescription(false)
 		};
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.token !== prevState.token)
 			return {
+				token: nextProps.token,
 				isBid: true,
 				price: '',
 				amount: '',
 				expiry: 1,
-				token: nextProps.token,
-				loading: false
+				loading: false,
+				sliderValue: 0,
+				priceDescription: getPriceDescription('', nextProps.ethPrice),
+				tradeDescription: getTradeDescription(
+					nextProps.token,
+					true,
+					'',
+					'',
+					nextProps.tokenInfo
+				),
+				feeDescription: getFeeDescription(nextProps.token, '', '', nextProps.tokenInfo),
+				expiryDescription: getExpiryDescription(false)
 			};
 
 		// check for allowance
@@ -105,59 +171,100 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		return null;
 	}
 
-	private onexpiryChange = (e: number) => {
+	private handleExpiryChange = (e: number) =>
 		this.setState({
-			expiry: e
+			expiry: e,
+			expiryDescription: getExpiryDescription(e === 2)
 		});
-	};
 
 	private handleSliderChange(e: string, limit: number) {
-		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
+		const { tokenInfo, token } = this.props;
+		const { isBid, price, expiry } = this.state;
+		const step = tokenInfo ? tokenInfo.denomination : null;
+		const decimal = step && step < 1 ? (step + '').length - 2 : 0;
+		const amount = step
+			? (Math.floor((limit * Number(e)) / 100 / step) * step).toFixed(decimal)
+			: (limit * (Number(e) / 100)).toFixed(decimal);
 		this.setState({
-			amount: step
-				? (Math.floor((limit * Number(e)) / 100 / step) * step).toFixed(2)
-				: (limit * (Number(e) / 100)).toFixed(2),
-			sliderValue: Number(e)
+			amount: amount,
+			sliderValue: Number(e),
+			tradeDescription: getTradeDescription(token, isBid, price, amount, tokenInfo),
+			feeDescription: getFeeDescription(token, price, amount, tokenInfo),
+			expiryDescription: getExpiryDescription(expiry === 2)
 		});
 	}
 
 	private handlePriceBlurInputChange(e: string) {
-		const stepPrice = this.props.tokenInfo
-			? this.props.tokenInfo.precisions[CST.TH_WETH]
-			: undefined;
-		if (e.match(CST.RX_NUM_P))
+		const { tokenInfo, ethPrice, token } = this.props;
+		const { isBid, amount, expiry } = this.state;
+
+		if (e.match(CST.RX_NUM_P)) {
+			const stepPrice = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : null;
+			const decimal = stepPrice && stepPrice < 1 ? (stepPrice + '').length - 2 : 0;
+			const price = stepPrice
+				? (Math.round(Number(e) / stepPrice) * stepPrice).toFixed(decimal)
+				: this.state.price;
 			this.setState({
-				price: stepPrice
-					? (Math.round(Number(e) / stepPrice) * stepPrice).toFixed(6)
-					: this.state.price
+				price: price,
+				priceDescription: getPriceDescription(price, ethPrice),
+				tradeDescription: getTradeDescription(token, isBid, price, amount, tokenInfo),
+				feeDescription: getFeeDescription(token, price, amount, tokenInfo),
+				expiryDescription: getExpiryDescription(expiry === 2)
 			});
-		else
+		} else
 			this.setState({
-				price: ''
+				price: '',
+				amount: '',
+				sliderValue: 0,
+				priceDescription: getPriceDescription('', ethPrice),
+				tradeDescription: getTradeDescription(token, isBid, '', '', tokenInfo),
+				feeDescription: getFeeDescription(token, '', '', tokenInfo),
+				expiryDescription: getExpiryDescription(expiry === 2)
 			});
 	}
 
 	private handleAmountBlurChange(e: string, limit: number) {
-		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
-		if (step) console.log(Math.floor(Math.min(Number(e), limit) / step) * step);
-		if (e.match(CST.RX_NUM_P))
+		const { tokenInfo, token } = this.props;
+		const { isBid, price, expiry } = this.state;
+		if (e.match(CST.RX_NUM_P)) {
+			const step = tokenInfo ? tokenInfo.denomination : null;
+			const decimal = step && step < 1 ? (step + '').length - 2 : 0;
+			const amount = step
+				? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(
+						decimal
+				)
+				: this.state.amount;
 			this.setState({
-				amount: step
-					? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(2)
-					: this.state.amount,
-				sliderValue: (Number(e) / limit) * 100
+				amount: amount,
+				sliderValue: (Number(e) / limit) * 100,
+				tradeDescription: getTradeDescription(token, isBid, price, amount, tokenInfo),
+				feeDescription: getFeeDescription(token, price, amount, tokenInfo),
+				expiryDescription: getExpiryDescription(expiry === 2)
 			});
-		else
+		} else
 			this.setState({
 				amount: '',
-				sliderValue: 0
+				sliderValue: 0,
+				tradeDescription: getTradeDescription(token, isBid, price, '', tokenInfo),
+				feeDescription: getFeeDescription(token, price, '', tokenInfo),
+				expiryDescription: getExpiryDescription(expiry === 2)
 			});
 	}
 
-	private handleSideChange = () =>
+	private handleSideChange = () => {
+		const { tokenInfo, ethPrice, token } = this.props;
+		const { isBid, price, expiry } = this.state;
 		this.setState({
-			isBid: !this.state.isBid
+			isBid: !isBid,
+			amount: '',
+			sliderValue: 0,
+			priceDescription: getPriceDescription(price, ethPrice),
+			tradeDescription: getTradeDescription(token, !isBid, price, '', tokenInfo),
+			feeDescription: getFeeDescription(token, price, '', tokenInfo),
+			expiryDescription: getExpiryDescription(expiry === 2)
 		});
+	};
+
 	private handlePriceInputChange = (value: string) =>
 		this.setState({
 			price: value
@@ -179,9 +286,39 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			amount: value
 		});
 
+	private handleReset = () =>
+		this.setState({
+			isBid: true,
+			price: '',
+			amount: '',
+			expiry: 1,
+			sliderValue: 0,
+			priceDescription: getPriceDescription('', this.props.ethPrice),
+			tradeDescription: getTradeDescription(
+				this.props.token,
+				true,
+				'',
+				'',
+				this.props.tokenInfo
+			),
+			feeDescription: getFeeDescription(this.props.token, '', '', this.props.tokenInfo),
+			expiryDescription: getExpiryDescription(false)
+		});
+
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
-		const { isBid, price, amount, expiry, loading, sliderValue } = this.state;
+		const {
+			isBid,
+			price,
+			amount,
+			expiry,
+			loading,
+			sliderValue,
+			priceDescription,
+			tradeDescription,
+			feeDescription,
+			expiryDescription
+		} = this.state;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
 			bidsToRender.push({
@@ -355,9 +492,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												flexDirection: 'row-reverse'
 											}}
 										>
-											<span className="des">
-												Description Description Description $ 1,000 USD{' '}
-											</span>
+											<span className="des">{priceDescription}</span>
 										</li>
 										<li
 											className={'input-line'}
@@ -405,7 +540,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<SDivFlexCenter horizontal width="60%" rowInv>
 												<RadioGroup
 													onChange={e =>
-														this.onexpiryChange(e.target.value)
+														this.handleExpiryChange(e.target.value)
 													}
 													value={expiry}
 												>
@@ -418,19 +553,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								</div>
 							</SCardList>
 						</SCardConversionForm>
-						<div className="convert-popup-des">
-							Description Description Description $ 1,000 USD,Description sdadd
-							Description $ 1,000 USD Description Description asd adads $ 1,000 US
-							asdad adasd a asd.
-						</div>
+						<div className="convert-popup-des">{tradeDescription}</div>
+						<div className="convert-popup-des">{feeDescription}</div>
+						<div className="convert-popup-des">{expiryDescription}</div>
 						<SDivFlexCenter horizontal width="100%" padding="10px">
-							<SButton
-								onClick={() => this.setState({ price: '', amount: '', expiry: 1 })}
-								width="49%"
-							>
-								RESET
+							<SButton onClick={this.handleReset} width="49%">
+								{CST.TH_RESET}
 							</SButton>
-							<SButton width="49%">SUBMIT</SButton>
+							<SButton width="49%">{CST.TH_SUBMIT}</SButton>
 						</SDivFlexCenter>
 					</Spin>
 				</SCard>

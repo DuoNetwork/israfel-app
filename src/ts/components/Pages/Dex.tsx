@@ -20,6 +20,7 @@ interface IProps {
 	ethBalance: IEthBalance;
 	tokens: IToken[];
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
+	ethPrice: number;
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBook: IOrderBookSnapshot;
@@ -72,7 +73,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			custodianTokenBalances,
 			ethBalance,
 			connection,
-			orderBook
+			orderBook,
+			ethPrice
 		} = this.props;
 		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
 		const beethovenList: string[] = [];
@@ -138,6 +140,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							tokenBalance={tradeTokenBalance}
 							ethBalance={ethBalance}
 							orderBook={orderBook}
+							ethPrice={ethPrice}
 							handleClose={() => this.handleTrade('')}
 						/>
 					</Spin>
