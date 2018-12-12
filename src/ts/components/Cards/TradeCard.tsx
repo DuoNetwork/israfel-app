@@ -35,6 +35,7 @@ interface IState {
 	price: string;
 	amount: string;
 	expiry: number;
+	loading: boolean;
 }
 
 const marks = {
@@ -63,7 +64,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			price: '',
 			amount: '',
 			token: props.token,
-			expiry: 1
+			expiry: 1,
+			loading: false
 		};
 	}
 
@@ -74,7 +76,18 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				price: '',
 				amount: '',
 				expiry: 1,
-				token: nextProps.token
+				token: nextProps.token,
+				loading: false
+			};
+
+		// check for allowance
+		if (
+			prevState.loading &&
+			((prevState.isBid && nextProps.ethBalance.allowance) ||
+				(!prevState.isBid && nextProps.tokenBalance && nextProps.tokenBalance.allowance))
+		)
+			return {
+				loading: false
 			};
 
 		return null;
@@ -89,7 +102,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	private handleSliderChange(e: string, limit: number) {
 		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
 		this.setState({
-			amount: step ? (Math.floor(limit * (Number(e) / 100) / step) * step) + '' : limit * (Number(e) / 100) + ''
+			amount: step
+				? Math.floor((limit * (Number(e) / 100)) / step) * step + ''
+				: limit * (Number(e) / 100) + ''
 		});
 	}
 
@@ -111,7 +126,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 	private handleAmountBlurChange(e: string, limit: number) {
 		const step = this.props.tokenInfo ? this.props.tokenInfo.denomination : undefined;
-		if (step) console.log((Math.floor(Math.min(Number(e), limit) / step) * step));
+		if (step) console.log(Math.floor(Math.min(Number(e), limit) / step) * step);
 		if (e.match(CST.RX_NUM_P))
 			this.setState({
 				amount: step
@@ -122,7 +137,6 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.setState({
 				amount: ''
 			});
-
 	}
 
 	private handleSideChange = () =>
@@ -134,9 +148,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			price: value
 		});
 
-	private handleApprove = () => {
-		const { isBid } = this.state;
-		web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
+	private handleApprove = async () => {
+		this.setState({ loading: true });
+		try {
+			const { isBid } = this.state;
+			await web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
+		} catch (error) {
+			this.setState({ loading: false });
+		}
 	};
 
 	private handleAmountInputChange = (value: string) =>
@@ -146,7 +165,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
-		const { isBid, price, amount, expiry } = this.state;
+		const { isBid, price, amount, expiry, loading } = this.state;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
 			bidsToRender.push({
@@ -274,7 +293,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<div className="pop-up-new">
 								<li>
 									<p style={{ paddingTop: '50px', textAlign: 'center' }}>
-										Not enough allowance, please approve first
+										{loading
+											? 'Wating for approval'
+											: 'Not enough allowance, please approve first'}
 									</p>
 								</li>
 								<li style={{ padding: '10px 100px 5px 100px' }}>

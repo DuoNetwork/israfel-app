@@ -23,7 +23,7 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 });
 
 store.dispatch(web3Actions.refresh());
-setInterval(() => store.dispatch(web3Actions.refresh()), 15000);
+setInterval(() => store.dispatch(web3Actions.refresh()), 10000);
 
 wsUtil.onInfoUpdate((tokens, status, acceptedPrices) => {
 	store.dispatch(wsActions.infoUpdate(tokens, status, acceptedPrices));
