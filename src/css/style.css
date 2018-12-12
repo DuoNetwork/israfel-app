@@ -195,11 +195,11 @@ svg {
 }
 
 .popup-bg {
-	position: absolute;
-	top: -60px;
+	position: fixed;
+	top: 0px;
 	left: 0;
 	background: rgba(0, 0, 0, .5);
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	z-index: 10;
 }
