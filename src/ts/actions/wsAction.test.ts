@@ -26,13 +26,17 @@ describe('actions', () => {
 		).toMatchSnapshot();
 	});
 
-	// test('orderUpdate', () => {
-	// 	expect(wsActions.orderUpdate({ test: 'test' } as any)).toMatchSnapshot();
-	// });
+	test('orderUpdate', () => {
+		expect(wsActions.orderUpdate({ test: 'test' } as any)).toMatchSnapshot();
+	});
 
-	// test('orderHistoryUpdate', () => {
-	// 	expect(dexActions.orderHistoryUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
-	// });
+	test('orderHistoryUpdate', () => {
+		expect(wsActions.orderHistoryUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
+	});
+
+	test('orderSubscriptionUpdate', () => {
+		expect(wsActions.orderSubscriptionUpdate('account')).toMatchSnapshot();
+	});
 
 	test('orderBookSnapshotUpdate', () => {
 		expect(wsActions.orderBookSnapshotUpdate({ test: 'test' } as any)).toMatchSnapshot();
@@ -46,11 +50,11 @@ describe('actions', () => {
 		expect(wsActions.orderBookSubscriptionUpdate('pair')).toMatchSnapshot();
 	});
 
-	test('subscribe', () => {
+	test('subscribeOrderBook', () => {
 		window.setInterval = jest.fn(() => 123);
 		const store: any = mockStore({});
 		wsUtil.subscribeOrderBook = jest.fn();
-		store.dispatch(wsActions.subscribe('pair'));
+		store.dispatch(wsActions.subscribeOrderBook('pair'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();

@@ -178,7 +178,7 @@ Array [
 exports[`subscribeOrderHistory 1`] = `
 Array [
   Array [
-    "{\\"method\\":\\"subscribe\\",\\"channel\\":\\"orders\\",\\"pair\\":\\"pair\\",\\"account\\":\\"0x48bacb9266a570d521063ef5dd96e61686dbe788\\"}",
+    "{\\"method\\":\\"subscribe\\",\\"channel\\":\\"orders\\",\\"pair\\":\\"\\",\\"account\\":\\"0x48bacb9266a570d521063ef5dd96e61686dbe788\\"}",
   ],
 ]
 `;
@@ -194,7 +194,7 @@ Array [
 exports[`unsubscribeOrderHistory 1`] = `
 Array [
   Array [
-    "{\\"method\\":\\"unsubscribe\\",\\"channel\\":\\"orders\\",\\"pair\\":\\"pair\\",\\"account\\":\\"account\\"}",
+    "{\\"method\\":\\"unsubscribe\\",\\"channel\\":\\"orders\\",\\"pair\\":\\"\\",\\"account\\":\\"account\\"}",
   ],
 ]
 `;

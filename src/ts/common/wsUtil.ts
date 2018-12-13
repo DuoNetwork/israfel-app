@@ -163,7 +163,7 @@ class WsUtil {
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public subscribeOrderHistory(account: string, pair: string) {
+	public subscribeOrderHistory(account: string) {
 		if (!this.ws) return;
 
 		if (!web3Util.isValidAddress(account)) return;
@@ -171,19 +171,19 @@ class WsUtil {
 		const msg: IWsOrderHistoryRequest = {
 			method: CST.WS_SUB,
 			channel: CST.DB_ORDERS,
-			pair: pair,
+			pair: '',
 			account: account
 		};
 		this.ws.send(JSON.stringify(msg));
 	}
 
-	public unsubscribeOrderHistory(account: string, pair: string) {
+	public unsubscribeOrderHistory(account: string) {
 		if (!this.ws) return;
 
 		const msg: IWsOrderHistoryRequest = {
 			method: CST.WS_UNSUB,
 			channel: CST.DB_ORDERS,
-			pair: pair,
+			pair: '',
 			account: account
 		};
 		this.ws.send(JSON.stringify(msg));

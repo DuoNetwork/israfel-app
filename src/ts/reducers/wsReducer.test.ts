@@ -33,7 +33,6 @@ describe('ws reducer', () => {
 	test('orderBookSubscription on', () => {
 		state = wsReducer(state, {
 			type: CST.AC_OB_SUB,
-			account: 'account',
 			pair: 'pair'
 		});
 		expect(state).toMatchSnapshot();
@@ -111,28 +110,51 @@ describe('ws reducer', () => {
 		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
 	});
 
-	// test('orderHistory', () => {
-	// 	state = dexReducer(state, {
-	// 		type: CST.AC_ORDER_HISTORY,
-	// 		value: [
-	// 			{
-	// 				userOrders: 'fromList',
-	// 				currentSequence: 123
-	// 			},
-	// 			{
-	// 				userOrders: 'fromList',
-	// 				currentSequence: 456
-	// 			}
-	// 		]
-	// 	});
-	// 	expect(state).toMatchSnapshot();
-	// });
+	test('orderSubscription on', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_SUB,
+			account: 'account'
+		});
+		expect(state).toMatchSnapshot();
+	});
 
-	// test('order', () => {
-	// 	state = dexReducer(state, {
-	// 		type: CST.AC_ORDER,
-	// 		value: { userOrder: 'from single order', currentSequence: 456 }
-	// 	});
-	// 	expect(state).toMatchSnapshot();
-	// });
+	test('orderHistory', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_HISTORY,
+			value: [
+				{
+					userOrders: 'fromList',
+					pair: 'pair1',
+					currentSequence: 123
+				},
+				{
+					userOrders: 'fromList',
+					pair: 'pair1',
+					currentSequence: 456
+				},
+				{
+					userOrders: 'fromList',
+					pair: 'pair2',
+					currentSequence: 789
+				}
+			]
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('order', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER,
+			value: { userOrder: 'from single order', pair: 'pair1', currentSequence: 456 }
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('orderSubscription off', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_SUB,
+			account: ''
+		});
+		expect(state).toMatchSnapshot();
+	});
 });

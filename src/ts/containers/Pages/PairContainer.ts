@@ -23,7 +23,7 @@ function mapStateToProps(state: IState /*, ownProps: any*/) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
-		subscribe: (pair: string) => dispatch(wsActions.subscribe(pair)),
+		subscribe: (pair: string) => dispatch(wsActions.subscribeOrderBook(pair)),
 		unsubscribe: () => dispatch(wsActions.orderBookSubscriptionUpdate(''))
 	};
 }

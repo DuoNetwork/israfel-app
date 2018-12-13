@@ -1,6 +1,11 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
-import { IOrderBookSnapshot, IOrderBookSnapshotUpdate, IWsState } from 'ts/common/types';
+import {
+	IOrderBookSnapshot,
+	IOrderBookSnapshotUpdate,
+	IUserOrder,
+	IWsState
+} from 'ts/common/types';
 import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
@@ -17,7 +22,8 @@ export const initialState: IWsState = {
 		asks: []
 	},
 	orderBookSubscription: '',
-	orderHistory: {}
+	orderHistory: {},
+	orderSubscription: ''
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
@@ -70,20 +76,51 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 					orderBookSubscription: ''
 				};
 			}
-		// case CST.AC_ORDER_HISTORY:
-		// 	return Object.assign({}, state, {
-		// 		orderHistory: action.value
-		// 	});
-		// case CST.AC_ORDER:
-		// 	const newOrder: IUserOrder = action.value;
-		// 	return Object.assign({}, state, {
-		// 		orderHistory: [
-		// 			...state.orderHistory.filter(
-		// 				o => o.currentSequence !== newOrder.currentSequence
-		// 			),
-		// 			newOrder
-		// 		]
-		// 	});
+		case CST.AC_ORDER_HISTORY:
+			if ((action.value as IUserOrder[]).length) {
+				const orderHistory: { [pair: string]: IUserOrder[] } = {};
+				(action.value as IUserOrder[]).forEach(o => {
+					if (!orderHistory[o.pair]) orderHistory[o.pair] = [];
+					orderHistory[o.pair].push(o);
+				});
+				return Object.assign({}, state, {
+					orderHistory: orderHistory
+				});
+			} else return state;
+		case CST.AC_ORDER:
+			const newOrder: IUserOrder = action.value;
+			if (state.orderHistory[newOrder.pair])
+				return Object.assign({}, state, {
+					orderHistory: Object.assign({}, state.orderHistory, {
+						[newOrder.pair]: [
+							...state.orderHistory[newOrder.pair].filter(
+								o => o.currentSequence !== newOrder.currentSequence
+							),
+							newOrder
+						]
+					})
+				});
+			else
+				return Object.assign({}, state, {
+					orderHistory: Object.assign({}, state.orderHistory, {
+						[newOrder.pair]: [newOrder]
+					})
+				});
+		case CST.AC_ORDER_SUB:
+			if (action.account)
+				return Object.assign({}, state, {
+					orderSubscription: action.account
+				});
+			else {
+				const { orderHistory, orderSubscription, ...restOrder } = state;
+				if (orderSubscription) wsUtil.unsubscribeOrderHistory(orderSubscription);
+
+				return {
+					...restOrder,
+					orderHistory: {},
+					orderSubscription: ''
+				};
+			}
 		default:
 			return state;
 	}

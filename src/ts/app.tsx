@@ -1,4 +1,4 @@
-import {notification} from 'antd';
+import { notification } from 'antd';
 import 'css/style.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';

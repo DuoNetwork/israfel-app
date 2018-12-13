@@ -28,6 +28,7 @@ Object {
     },
     "orderBookSubscription": "",
     "orderHistory": Object {},
+    "orderSubscription": "",
     "status": Array [],
     "tokens": Array [],
   },

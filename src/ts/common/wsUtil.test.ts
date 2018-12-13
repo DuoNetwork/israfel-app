@@ -204,21 +204,21 @@ test('unsubscribeOrderBook', () => {
 test('subscribeOrderHistory invalid address', () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
-	wsUtil.subscribeOrderHistory('account', 'pair');
+	wsUtil.subscribeOrderHistory('account');
 	expect(send).not.toBeCalled();
 });
 
 test('subscribeOrderHistory', () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
-	wsUtil.subscribeOrderHistory('0x48bacb9266a570d521063ef5dd96e61686dbe788', 'pair');
+	wsUtil.subscribeOrderHistory('0x48bacb9266a570d521063ef5dd96e61686dbe788');
 	expect(send.mock.calls).toMatchSnapshot();
 });
 
 test('unsubscribeOrderHistory', () => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
-	wsUtil.unsubscribeOrderHistory('account', 'pair');
+	wsUtil.unsubscribeOrderHistory('account');
 	expect(send.mock.calls).toMatchSnapshot();
 });
 

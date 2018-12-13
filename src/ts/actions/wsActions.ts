@@ -54,6 +54,13 @@ export function orderBookUpdate(obUpdate: IOrderBookSnapshotUpdate) {
 	};
 }
 
+export function orderSubscriptionUpdate(account: string) {
+	return {
+		type: CST.AC_OB_SUB,
+		account: account
+	};
+}
+
 export function orderBookSubscriptionUpdate(pair: string) {
 	return {
 		type: CST.AC_OB_SUB,
@@ -68,7 +75,7 @@ export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
 	};
 }
 
-export function subscribe(pair: string): VoidThunkAction {
+export function subscribeOrderBook(pair: string): VoidThunkAction {
 	return dispatch => {
 		dispatch(orderBookSubscriptionUpdate(''));
 		dispatch(orderBookSubscriptionUpdate(pair));

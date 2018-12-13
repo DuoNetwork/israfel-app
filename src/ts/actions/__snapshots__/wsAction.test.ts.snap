@@ -54,7 +54,34 @@ Object {
 }
 `;
 
-exports[`actions subscribe 1`] = `
+exports[`actions orderHistoryUpdate 1`] = `
+Object {
+  "type": "orderHistory",
+  "value": Array [
+    Object {
+      "test": "test",
+    },
+  ],
+}
+`;
+
+exports[`actions orderSubscriptionUpdate 1`] = `
+Object {
+  "account": "account",
+  "type": "orderBookSubscription",
+}
+`;
+
+exports[`actions orderUpdate 1`] = `
+Object {
+  "type": "order",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions subscribeOrderBook 1`] = `
 Array [
   Object {
     "pair": "",
@@ -67,7 +94,7 @@ Array [
 ]
 `;
 
-exports[`actions subscribe 2`] = `
+exports[`actions subscribeOrderBook 2`] = `
 Array [
   Array [
     "pair",

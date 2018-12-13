@@ -13,6 +13,7 @@ export const AC_INFO = 'info';
 export const AC_LOCALE = 'locale';
 export const AC_ORDER = 'order';
 export const AC_ORDER_HISTORY = 'orderHistory';
+export const AC_ORDER_SUB = 'orderSubscription';
 export const AC_CONNECTION = 'connection';
 export const AC_OB_UPDATE = 'orderBookUpdate';
 export const AC_OB_SNAPSHOT = 'orderBookSnapshot';

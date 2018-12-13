@@ -25,8 +25,8 @@ interface IProps {
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBook: IOrderBookSnapshot;
 	connection: boolean;
-	subscribe: (pair: string) => any;
-	unsubscribe: () => any;
+	subscribeOrderBook: (pair: string) => any;
+	unsubscribeOrderBook: () => any;
 }
 
 interface IState {
@@ -59,8 +59,8 @@ export default class Dex extends React.Component<IProps, IState> {
 		});
 
 	public handleTrade = (token: string) => {
-		if (!token) this.props.unsubscribe();
-		else this.props.subscribe(token);
+		if (!token) this.props.unsubscribeOrderBook();
+		else this.props.subscribeOrderBook(token);
 		this.setState({ tradeToken: token });
 	};
 
