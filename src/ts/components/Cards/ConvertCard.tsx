@@ -52,6 +52,7 @@ interface IState {
 	wethCreate: boolean;
 	allowance: number;
 	loading: boolean;
+	submitting: boolean;
 	description: string;
 	sliderValue: number;
 	sliderWETH: number;
@@ -93,6 +94,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate: false,
 			allowance: 0,
 			loading: false,
+			submitting: false,
 			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
 			sliderValue: 0,
 			sliderWETH: 0
@@ -114,6 +116,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				wethCreate: false,
 				allowance: 0,
 				loading: false,
+				submitting: false,
 				description: `Create ${nextProps.aToken} and ${nextProps.bToken} with ETH`
 			};
 
@@ -291,28 +294,52 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	}
 
 	private handleSubmit = async () => {
+		this.setState({
+			submitting: true
+		});
 		const { account, custodian, handleClose, info } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
+			this.setState({
+				submitting: false
+			});
 			alert('missing data');
 			return;
 		}
 
 		if (isCreate)
 			if (wethCreate)
-				await cw.createWithWETH(
-					account,
-					Number(wethAmount),
-					web3Util.contractAddresses.etherToken,
-					hash => alert(hash)
-				);
-			else await cw.create(account, Number(amount), hash => alert(hash));
+				try {
+					await cw.createWithWETH(
+						account,
+						Number(wethAmount),
+						web3Util.contractAddresses.etherToken,
+						hash => alert(hash)
+					);
+				} catch (error) {
+					this.setState({
+						submitting: false
+					});
+				}
+			else
+				try {
+					await cw.create(account, Number(amount), hash => alert(hash));
+				} catch (e) {
+					this.setState({
+						submitting: false
+					});
+				}
 		else
-			await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
-				alert(hash)
-			);
-
+			try {
+				await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
+					alert(hash)
+				);
+			} catch (e) {
+				this.setState({
+					submitting: false
+				});
+			}
 		handleClose();
 	};
 
@@ -334,6 +361,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate,
 			allowance,
 			loading,
+			submitting,
 			description,
 			sliderValue,
 			sliderWETH
@@ -352,7 +380,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
-				<div className="popup-bg"/>
+				<div className="popup-bg" />
 				<SCard
 					title={
 						<SCardTitle>
@@ -482,7 +510,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							</ul>
 						</div>
 					</SCardList>
-					<Spin spinning={loading && (wethCreate && isCreate)} tip="loading...">
+					<Spin
+						spinning={(loading && (wethCreate && isCreate)) || submitting}
+						tip={submitting ? "Submitting..." : "Approving"}
+					>
 						<SCardConversionForm>
 							<SDivFlexCenter
 								horizontal
@@ -586,7 +617,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											className={'input-line'}
 											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
-											{wethCreate && isCreate ? <span className="input-des">Amount</span> : null}
+											{wethCreate && isCreate ? (
+												<span className="input-des">Amount</span>
+											) : null}
 											<SInput
 												right
 												width="100%"
