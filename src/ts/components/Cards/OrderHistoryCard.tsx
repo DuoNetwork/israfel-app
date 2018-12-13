@@ -89,14 +89,14 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 						-a.initialSequence + b.initialSequence ||
 						-a.currentSequence + b.currentSequence
 				);
-				if (pairHistory[0].type === 'terminate' && pairHistory[0].status === 'confirmed')
+				if (pairHistory[0].type === 'terminate')
 					parentRow = parseRow(pairHistory[0], true, account, false);
 				else parentRow = parseRow(pairHistory[0], true, account, true);
 				for (let i = 1; i < pairHistory.length; i++) {
 					const userOrder = pairHistory[i];
 					if (userOrder.orderHash !== parentRow[CST.TH_ORDER_HASH]) {
 						pairRow.children.push(parentRow);
-						if (userOrder.type === 'terminate' && userOrder.status === 'confirmed')
+						if (userOrder.type === 'terminate')
 							parentRow = parseRow(userOrder, true, account, false);
 						else parentRow = parseRow(userOrder, true, account, true);
 					} else parentRow.children.push(parseRow(userOrder, false, account, false));
