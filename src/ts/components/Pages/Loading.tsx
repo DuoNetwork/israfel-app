@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
 	public render() {
 		return (
 			<Layout>
-				<Header />
+				<Header toggleHistory={() => ({})} />
 				<SContent>
 					<div style={{ color: 'white' }}>Loading</div>
 				</SContent>

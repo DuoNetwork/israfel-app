@@ -40,6 +40,7 @@ interface IState {
 	convertAToken: string;
 	convertBToken: string;
 	tradeToken: string;
+	showHistory: boolean;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
@@ -50,7 +51,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertCustodian: '',
 			convertAToken: '',
 			convertBToken: '',
-			tradeToken: ''
+			tradeToken: '',
+			showHistory: false
 		};
 	}
 
@@ -88,6 +90,8 @@ export default class Dex extends React.Component<IProps, IState> {
 		this.setState({ tradeToken: token });
 	};
 
+	public toggleHistory = () => this.setState({ showHistory: !this.state.showHistory });
+
 	public render() {
 		const {
 			account,
@@ -101,7 +105,13 @@ export default class Dex extends React.Component<IProps, IState> {
 			ethPrice,
 			orderHistory
 		} = this.props;
-		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
+		const {
+			convertCustodian,
+			tradeToken,
+			convertAToken,
+			convertBToken,
+			showHistory
+		} = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		for (const custodian in custodians) {
@@ -119,7 +129,7 @@ export default class Dex extends React.Component<IProps, IState> {
 		return (
 			<Layout>
 				<div className="App">
-					<Header />
+					<Header toggleHistory={this.toggleHistory} />
 					<Spin spinning={!connection} tip="loading...">
 						<SDivFlexCenter
 							center
@@ -154,7 +164,11 @@ export default class Dex extends React.Component<IProps, IState> {
 								/>
 							))}
 						</SDivFlexCenter>
-						<OrderHistoryCard orderHistory={orderHistory} account={account}/>
+						<OrderHistoryCard
+							orderHistory={orderHistory}
+							account={account}
+							display={showHistory}
+						/>
 						<ConvertCard
 							account={account}
 							tokenBalances={custodianTokenBalances[convertCustodian]}

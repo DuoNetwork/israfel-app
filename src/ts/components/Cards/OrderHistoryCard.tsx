@@ -16,6 +16,7 @@ const Column = Table.Column;
 interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	account: string;
+	display: boolean;
 }
 
 const parsePairRow: (pair: string) => any = pair => {
@@ -76,7 +77,7 @@ const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: b
 
 export default class OrderHistoryCard extends React.Component<IProps> {
 	public render() {
-		const { orderHistory, account } = this.props;
+		const { orderHistory, account, display } = this.props;
 		const dataSource = [];
 		for (const pair in orderHistory) {
 			const pairHistory = orderHistory[pair];
@@ -109,11 +110,12 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 				title={
 					<SCardTitle>{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}</SCardTitle>
 				}
+				className={'order-history-card ' + (display ? 'history-show' : '')}
 				width="1080px"
 				margin="0 10px 0 10px"
 			>
 				<STableWrapper>
-					<Table dataSource={dataSource} pagination={false} style={{ width: '1080px' }}>
+					<Table dataSource={dataSource} pagination={false} style={{ width: '100%' }}>
 						{[
 							CST.TH_PAIR,
 							CST.TH_SIDE,

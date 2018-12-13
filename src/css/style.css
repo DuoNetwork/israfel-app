@@ -306,3 +306,15 @@ svg {
 		opacity: 1;
 	}
 }
+
+.order-history-card {
+	position: fixed;
+	top: 70px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	max-height: 0px;
+	transition: all .3s;
+}
+.history-show {
+	max-height: 300vh !important;
+}

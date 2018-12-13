@@ -61,6 +61,15 @@ exports[`Header Test User Login Test Snapshot 1`] = `
       <div
         className="nav-button-wrapper"
       >
+        <a
+          onClick={[Function]}
+        >
+          ORDERS
+        </a>
+      </div>
+      <div
+        className="nav-button-wrapper"
+      >
         <Link
           replace={false}
           to="/status"
