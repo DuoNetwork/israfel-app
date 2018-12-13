@@ -475,6 +475,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												width="100%"
 												value={this.state.price}
 												type="number"
+												min={0}
 												step={
 													tokenInfo
 														? tokenInfo.precisions[CST.TH_WETH]
@@ -506,6 +507,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												right
 												disabled={price === ''}
 												width="100%"
+												min={0}
 												value={amount}
 												type="number"
 												step={
@@ -527,13 +529,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											style={{ padding: '0px 15px' }}
 										>
 											<SSlider
-												disabled={price === ''}
+												disabled={price === '' || limit < 0.1}
 												value={sliderValue}
 												marks={marks}
 												step={1}
 												defaultValue={0}
-												onChange={(e: any) =>
-													this.handleSliderChange(e, limit)
+												onChange={(e: any) => this.handleSliderChange(e, limit)
 												}
 											/>
 										</li>
