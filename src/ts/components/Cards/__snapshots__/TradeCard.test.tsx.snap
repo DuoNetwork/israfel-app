@@ -1,0 +1,495 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        TRADE test/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Balance
+          </li>
+          <li
+            style={
+              Object {
+                "padding": "5px 15px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              test
+            </span>
+            <span
+              className="content"
+            >
+              123.0
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "padding": "5px 15px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              WETH
+            </span>
+            <span
+              className="content"
+            >
+              123.0
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <li
+              style={
+                Object {
+                  "justifyContent": "center",
+                }
+              }
+            >
+              Bid
+            </li>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 15px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.00
+              </span>
+              <span
+                className="title"
+              >
+                123.00
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 15px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 15px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul
+            style={
+              Object {
+                "marginLeft": -1,
+                "opacity": 0.5,
+              }
+            }
+          >
+            <li
+              style={
+                Object {
+                  "justifyContent": "center",
+                }
+              }
+            >
+              Ask
+            </li>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 15px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title"
+              >
+                123.00
+              </span>
+              <span
+                className="content"
+              >
+                123.00
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 15px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title"
+              >
+                -
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 15px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title"
+              >
+                -
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="loading..."
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            key="Buy"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            key="Sell"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  defaultValue={0}
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 200,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="60%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy test with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 test fee
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Order Valid till 2018-12-14 16:00
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          width="49%"
+        >
+          Submit
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
