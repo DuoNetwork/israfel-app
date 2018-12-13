@@ -1,7 +1,6 @@
-// import * as CST from './constants';
-// import { ICustodianPrice, IPriceStatus, ISourceData, IStatus } from './types';
 import * as d3 from 'd3';
 import moment from 'moment';
+import relayerUtil from '../../../../israfel-relayer/src/utils/util';
 import * as CST from './constants';
 
 class Util {
@@ -14,29 +13,13 @@ class Util {
 		else return 'Long Time Ago';
 	}
 
-	public convertSecond(time: string) {
-		const index = time.split(':');
-		let seconds = 0;
-		for (let i = 0; i < index.length; i++) {
-			seconds *= 60;
-			seconds += Number(index[i]);
-		}
-		return seconds;
-	}
-
-	public getUTCNowTimestamp() {
-		return moment().valueOf();
-	}
-
-	public round(num: number) {
-		return +(Math.floor((num + 'e+8') as any) + 'e-8');
-	}
-
-	public formatFixedNumber(num: number, precision: number) {
+	public formatFixedNumber(num: number, precision: number, takeFloor: boolean) {
 		const decimal = precision && precision < 1 ? (precision + '').length - 2 : 0;
-		return precision
-			? (Math.round(Number(num) / precision) * precision).toFixed(decimal)
-			: num + '';
+		const roundedNumber =
+			(takeFloor
+				? Math.floor(Number(num) / precision)
+				: Math.round(Number(num) / precision)) * precision;
+		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 
 	public formatBalance(num: number) {
@@ -61,45 +44,15 @@ class Util {
 		return maturity ? moment(maturity).format('YYYY-MM-DD HH:mm') : CST.TH_PERPETUAL;
 	}
 
-	public getMonthEndExpiry(timestamp: number) {
-		const dateObj = moment
-			.utc(timestamp)
-			.endOf('month')
-			.startOf('day');
-		const day = dateObj.day();
-		if (day === 6) dateObj.subtract(1, 'day');
-		else if (day < 5) dateObj.subtract(day + 2, 'day');
+	public getUTCNowTimestamp = relayerUtil.getUTCNowTimestamp;
 
-		dateObj.add(8, 'hour');
+	public round = relayerUtil.round;
 
-		return dateObj.valueOf();
-	}
+	public getDayExpiry = relayerUtil.getDayExpiry;
 
-	public getDayExpiry(timestamp: number) {
-		const dateObj = moment.utc(timestamp).startOf('day');
-		dateObj.add(8, 'hour');
+	public getMonthEndExpiry = relayerUtil.getMonthEndExpiry;
 
-		return dateObj.valueOf();
-	}
-
-	public getExpiryTimestamp(isMonth: boolean) {
-		const now = this.getUTCNowTimestamp();
-		if (isMonth) {
-			const thisMonthEndExpiry = this.getMonthEndExpiry(now);
-			if (now > thisMonthEndExpiry - 4 * 3600000)
-				return this.getMonthEndExpiry(
-					moment
-						.utc(thisMonthEndExpiry)
-						.add(1, 'week')
-						.valueOf()
-				);
-			return thisMonthEndExpiry;
-		} else {
-			const todayExpiry = this.getDayExpiry(now);
-			if (now > todayExpiry - 4 * 3600000) return todayExpiry + 24 * 3600000;
-			return todayExpiry;
-		}
-	}
+	public getExpiryTimestamp = relayerUtil.getExpiryTimestamp;
 }
 
 const util = new Util();

@@ -116,7 +116,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		  )
+		)
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -191,7 +191,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, expiry } = this.state;
 		const step = tokenInfo ? tokenInfo.denomination : null;
 		const amount = step
-			? util.formatFixedNumber((limit * Number(e)) / 100, step)
+			? util.formatFixedNumber((limit * Number(e)) / 100, step, true)
 			: limit * (Number(e) / 100) + '';
 		this.setState({
 			amount: amount,
@@ -209,7 +209,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P)) {
 			const stepPrice = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : null;
 			const price = stepPrice
-				? util.formatFixedNumber(Number(e), stepPrice)
+				? util.formatFixedNumber(Number(e), stepPrice, false)
 				: this.state.price;
 			this.setState({
 				price: price,
@@ -238,7 +238,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P)) {
 			const step = tokenInfo ? tokenInfo.denomination : null;
 			const amount = step
-				? util.formatFixedNumber(Math.min(Number(e), limit), step)
+				? util.formatFixedNumber(Math.min(Number(e), limit), step, true)
 				: this.state.amount;
 			this.setState({
 				amount: amount,
@@ -440,13 +440,18 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												{item.balance
 													? util.formatFixedNumber(
 															item.balance,
-															denomination
-													  )
+															denomination,
+															false
+													)
 													: '-'}
 											</span>
 											<span className="title">
 												{item.price
-													? util.formatFixedNumber(item.price, precision)
+													? util.formatFixedNumber(
+															item.price,
+															precision,
+															false
+													)
 													: '-'}
 											</span>
 										</li>
@@ -462,15 +467,20 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
 											<span className="title">
 												{item.price
-													? util.formatFixedNumber(item.price, precision)
+													? util.formatFixedNumber(
+															item.price,
+															precision,
+															false
+													)
 													: '-'}
 											</span>
 											<span className="content">
 												{item.balance
 													? util.formatFixedNumber(
 															item.balance,
-															denomination
-													  )
+															denomination,
+															false
+													)
 													: '-'}
 											</span>
 										</li>
