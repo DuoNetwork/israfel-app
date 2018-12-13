@@ -21,6 +21,7 @@ import {
 	IWsTerminateOrderRequest,
 	IWsUserOrderResponse
 } from './types';
+import util from './util';
 import web3Util from './web3Util';
 
 class WsUtil {
@@ -217,8 +218,8 @@ class WsUtil {
 			web3Util.relayerAddress,
 			isBid ? address2 : address1,
 			isBid ? address1 : address2,
-			amountAfterFee.makerAssetAmount,
-			amountAfterFee.takerAssetAmount,
+			util.round(amountAfterFee.makerAssetAmount),
+			util.round(amountAfterFee.takerAssetAmount),
 			Math.ceil(expiry / 1000)
 		);
 		const msg: IWsAddOrderRequest = {
