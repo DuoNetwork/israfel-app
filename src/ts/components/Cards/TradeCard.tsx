@@ -21,23 +21,35 @@ import {
 
 const RadioGroup = Radio.Group;
 
-const openNotification = (tx: string) => {
-	const btn = (
-		<SButton
-			onClick={() =>
-				window.open(`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`, '_blank')
-			}
-		>
-			View Transaction on Etherscan
-		</SButton>
-	);
-	const args = {
-		message: 'Transaction Sent',
-		description: 'Transaction hash: ' + tx,
-		duration: 0,
-		btn
-	};
-	notification.open(args);
+const openNotification = (type: string, tx: string) => {
+	let args = {};
+	if (type === 'error')
+		args = {
+			message: type.toUpperCase(),
+			description: tx,
+			duration: 3
+		};
+	else {
+		const btn = (
+			<SButton
+				onClick={() =>
+					window.open(
+						`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`,
+						'_blank'
+					)
+				}
+			>
+				View Transaction on Etherscan
+			</SButton>
+		);
+		args = {
+			message: 'Transaction Sent',
+			description: 'Transaction hash: ' + tx,
+			duration: 0,
+			btn
+		};
+	}
+	notification.open(args as any);
 };
 
 interface IProps {
@@ -116,7 +128,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -283,9 +295,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			const tx = await web3Util.setUnlimitedTokenAllowance(
 				isBid ? CST.TH_WETH : this.props.token
 			);
-			openNotification(tx);
+			openNotification('result', tx);
 		} catch (error) {
-			this.setState({ approving: false });
+			openNotification('error', error);
+			this.setState({
+				approving: false
+			});
 		}
 	};
 
@@ -339,7 +354,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		} catch (error) {
-			alert(error);
+			openNotification('error', error);
 			this.setState({
 				submitting: false
 			});
@@ -442,7 +457,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															item.balance,
 															denomination,
 															false
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title">
@@ -451,7 +466,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															item.price,
 															precision,
 															false
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
@@ -471,7 +486,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															item.price,
 															precision,
 															false
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="content">
@@ -480,7 +495,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															item.balance,
 															denomination,
 															false
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
