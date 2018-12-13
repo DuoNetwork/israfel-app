@@ -43,8 +43,11 @@ export default class CustodianCard extends React.Component<IProps> {
 				? d3.format('.2%')(
 						(info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1)
 				) + CST.TH_PA
-				: d3.format('.2f')(lastAcceptedPrice ? 2 - lastAcceptedPrice.navA : 0) +
-				CST.TH_X_LEV;
+				: d3.format('.2f')(
+						lastAcceptedPrice
+							? (lastAcceptedPrice.navA - 2) / lastAcceptedPrice.navA
+							: 0
+				) + CST.TH_X_LEV;
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
