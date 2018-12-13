@@ -19,7 +19,11 @@ import {
 	SSlider
 } from './_styled';
 const openNotification = (tx: string) => {
-	const btn = <SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>View Transaction on Etherscan</SButton>;
+	const btn = (
+		<SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>
+			View Transaction on Etherscan
+		</SButton>
+	);
 	const args = {
 		message: 'Transaction Sent',
 		description: 'Transaction hash: ' + tx,
@@ -152,18 +156,18 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
-							amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
-							amountNum * info.states.createCommRate
-						)} ETH fee`
-					: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
-							amountNum / info.states.alpha
-						)} ${bToken} --> ${util.formatBalance(
-							amountNum / aTokenPerETH
-						)} ETH with ${util.formatBalance(
-							(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						)} ETH fee`,
+						  )} ${aToken} ${util.formatBalance(
+								amountNum * bTokenPerETH
+						  )} ${bToken} with ${util.formatBalance(
+								amountNum * info.states.createCommRate
+						  )} ETH fee`
+						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
+								amountNum / info.states.alpha
+						  )} ${bToken} --> ${util.formatBalance(
+								amountNum / aTokenPerETH
+						  )} ETH with ${util.formatBalance(
+								(amountNum / aTokenPerETH) * info.states.redeemCommRate
+						  )} ETH fee`,
 				sliderValue: (amountNum / limit) * 100
 			});
 		} else
@@ -194,11 +198,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
-							amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
-							amountNum * info.states.createCommRate
-						)} ${CST.TH_ETH} fee`,
+						  )} ${aToken} ${util.formatBalance(
+								amountNum * bTokenPerETH
+						  )} ${bToken} with ${util.formatBalance(
+								amountNum * info.states.createCommRate
+						  )} ${CST.TH_ETH} fee`,
 				sliderWETH: (amountNum / limit) * 100
 			});
 		} else
@@ -344,7 +348,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -480,7 +484,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<Spin spinning={loading && (wethCreate && isCreate)} tip="loading...">
 						<SCardConversionForm>
-							<SDivFlexCenter horizontal width="100%" padding="10px;">
+							<SDivFlexCenter
+								horizontal
+								width="100%"
+								padding="10px"
+								style={{
+									opacity: wethCreate ? 0.3 : 1,
+									pointerEvents: wethCreate ? 'none' : 'auto'
+								}}
+							>
 								{[CST.TH_CREATE, CST.TH_REDEEM].map(side => (
 									<button
 										key={side}
@@ -596,15 +608,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												step={1}
 												value={sliderWETH}
 												defaultValue={0}
-												onChange={(e: any) => this.handleSliderWETHChange(e, limit)
-											}
+												onChange={(e: any) =>
+													this.handleSliderWETHChange(e, limit)
+												}
 											/>
 										</li>
 										{!allowance && !loading && (wethCreate && isCreate) ? (
 											<div
 												className="pop-up-convert"
 												style={{
-													top: infoExpand ? '388px' : '260px'
+													top: infoExpand ? '568px' : '440px'
 												}}
 											>
 												<li
@@ -630,7 +643,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							<SButton
 								disable={limit === 0}
 								onClick={() =>
-									this.setState({ amount: '', wethAmount: '', sliderValue: 0, sliderWETH: 0 })
+									this.setState({
+										amount: '',
+										wethAmount: '',
+										sliderValue: 0,
+										sliderWETH: 0
+									})
 								}
 								width="49%"
 							>
