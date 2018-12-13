@@ -1,6 +1,5 @@
 import * as CST from 'ts/common/constants';
 import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
-import util from './util';
 import web3Util from './web3Util';
 import wsUtil from './wsUtil';
 
@@ -245,16 +244,13 @@ test('addOrder bid', async () => {
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
 	}));
-	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 	await wsUtil.addOrder(
 		'account',
 		'code1|code2',
 		123,
 		456,
 		true,
-		1234567890,
-		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000 }
+		1234567890
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
@@ -283,16 +279,13 @@ test('addOrder ask', async () => {
 		orderHash: 'orderHash',
 		signedOrder: 'signedOrder'
 	}));
-	util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 	await wsUtil.addOrder(
 		'account',
 		'code1|code2',
 		123,
 		456,
 		false,
-		1234567890,
-		{ eth: 10000, weth: 10000, allowance: 10000 },
-		{ balance: 10000, allowance: 10000 }
+		1234567890
 	);
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();

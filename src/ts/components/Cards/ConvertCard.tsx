@@ -50,6 +50,7 @@ interface IProps {
 }
 
 interface IState {
+	account: string;
 	custodian: string;
 	infoExpand: boolean;
 	isCreate: boolean;
@@ -122,6 +123,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			account: props.account,
 			custodian: props.custodian,
 			infoExpand: false,
 			isCreate: true,
@@ -137,8 +139,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.custodian !== prevState.custodian)
+		if (nextProps.account !== prevState.account || nextProps.custodian !== prevState.custodian)
 			return {
+				account: nextProps.account,
 				custodian: nextProps.custodian,
 				infoExpand: false,
 				isCreate: true,
@@ -264,14 +267,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({ loading: true });
 		const { account, custodian } = this.props;
 		try {
-			const tx = await duoWeb3Wrapper.erc20Approve(
+			await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
+				(hash: string) => openNotification('Pending WETH approval.', hash),
 				true
 			);
-			openNotification('Pending WETH approval.', tx.transactionHash);
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -376,7 +379,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
-				<div className={"popup-bg " + (!!custodian ? 'popup-open-bg' : '') }/>
+				<div className={'popup-bg ' + (!!custodian ? 'popup-open-bg' : '')} />
 				<SCard
 					title={
 						<SCardTitle>
@@ -384,7 +387,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SCardTitle>
 					}
 					width="360px"
-					className={"popup-card " + (!!custodian ? 'popup-open' : '') }
+					className={'popup-card ' + (!!custodian ? 'popup-open' : '')}
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
