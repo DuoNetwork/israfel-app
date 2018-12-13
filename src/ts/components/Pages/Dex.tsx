@@ -135,6 +135,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							handleClose={() => this.handleConvert('', '', '')}
 						/>
 						<TradeCard
+							account={account}
 							token={tradeToken}
 							tokenInfo={tradeTokenInfo}
 							tokenBalance={tradeTokenBalance}

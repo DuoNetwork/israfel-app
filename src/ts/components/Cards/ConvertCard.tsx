@@ -50,6 +50,7 @@ interface IProps {
 }
 
 interface IState {
+	account: string;
 	custodian: string;
 	infoExpand: boolean;
 	isCreate: boolean;
@@ -122,6 +123,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			account: props.account,
 			custodian: props.custodian,
 			infoExpand: false,
 			isCreate: true,
@@ -137,8 +139,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.custodian !== prevState.custodian)
+		if (nextProps.account !== prevState.account || nextProps.custodian !== prevState.custodian)
 			return {
+				account: nextProps.account,
 				custodian: nextProps.custodian,
 				infoExpand: false,
 				isCreate: true,

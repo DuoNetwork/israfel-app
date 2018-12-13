@@ -7,6 +7,7 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+import wsUtil from 'ts/common/wsUtil';
 import web3Util from '../../common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
@@ -18,7 +19,9 @@ import {
 	SInput,
 	SSlider
 } from './_styled';
+
 const RadioGroup = Radio.Group;
+
 const openNotification = (tx: string) => {
 	const btn = (
 		<SButton
@@ -39,6 +42,7 @@ const openNotification = (tx: string) => {
 };
 
 interface IProps {
+	account: string;
 	token: string;
 	tokenInfo?: IToken;
 	tokenBalance?: ITokenBalance;
@@ -49,6 +53,7 @@ interface IProps {
 }
 
 interface IState {
+	account: string;
 	token: string;
 	isBid: boolean;
 	price: string;
@@ -122,6 +127,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			account: props.account,
 			token: props.token,
 			isBid: true,
 			price: '',
@@ -137,8 +143,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.token !== prevState.token)
+		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token)
 			return {
+				account: nextProps.account,
 				token: nextProps.token,
 				isBid: true,
 				price: '',
@@ -307,6 +314,27 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			expiryDescription: getExpiryDescription(false)
 		});
 
+	private handleSubmit = () => {
+		console.log('handleSubmit');
+		const { account, token } = this.props;
+		const { isBid, price, amount, expiry } = this.state;
+		wsUtil
+			.addOrder(
+				account,
+				token + '|' + CST.TH_WETH,
+				Number(price),
+				Number(amount),
+				isBid,
+				util.getExpiryTimestamp(expiry === 2)
+			)
+			.then(() =>
+				this.setState({
+					price: '',
+					amount: ''
+				})
+			);
+	};
+
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const {
@@ -340,14 +368,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			: tokenBalance && !tokenBalance.allowance;
 		const limit = price
 			? isBid
-				? ethBalance.weth / Number(price)
+				? Math.min(ethBalance.weth, ethBalance.allowance) / Number(price)
 				: tokenBalance
-				? tokenBalance.balance
+				? Math.min(tokenBalance.balance, tokenBalance.allowance)
 				: 0
 			: 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
-				<div className={"popup-bg " + (!!token ? 'popup-open-bg' : '') }/>
+				<div className={'popup-bg ' + (!!token ? 'popup-open-bg' : '')} />
 				<SCard
 					title={
 						<SCardTitle>
@@ -355,7 +383,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SCardTitle>
 					}
 					width="360px"
-					className={"popup-card " + (!!token ? 'popup-open' : '') }
+					className={'popup-card ' + (!!token ? 'popup-open' : '')}
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
@@ -534,7 +562,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												marks={marks}
 												step={1}
 												defaultValue={0}
-												onChange={(e: any) => this.handleSliderChange(e, limit)
+												onChange={(e: any) =>
+													this.handleSliderChange(e, limit)
 												}
 											/>
 										</li>
@@ -565,7 +594,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<SButton onClick={this.handleReset} width="49%">
 								{CST.TH_RESET}
 							</SButton>
-							<SButton width="49%">{CST.TH_SUBMIT}</SButton>
+							<SButton onClick={this.handleSubmit} width="49%">
+								{CST.TH_SUBMIT}
+							</SButton>
 						</SDivFlexCenter>
 					</Spin>
 				</SCard>

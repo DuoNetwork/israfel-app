@@ -3,13 +3,11 @@ import orderUtil from '../../../../israfel-relayer/src/utils/orderUtil';
 import * as CST from './constants';
 import {
 	IAcceptedPrice,
-	IEthBalance,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
 	IPrice,
 	IStatus,
 	IToken,
-	ITokenBalance,
 	IUserOrder,
 	IWsAddOrderRequest,
 	IWsInfoResponse,
@@ -23,7 +21,6 @@ import {
 	IWsTerminateOrderRequest,
 	IWsUserOrderResponse
 } from './types';
-import util from './util';
 import web3Util from './web3Util';
 
 class WsUtil {
@@ -61,12 +58,12 @@ class WsUtil {
 	}
 
 	public close() {
-		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
+		this.ws = new WebSocket(`wss://localhost:8080`);
 		this.ws.onclose = () => this.reconnect();
 	}
 
 	public connectToRelayer() {
-		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
+		this.ws = new WebSocket(`wss://localhost:8080`);
 		this.ws.onopen = () => {
 			console.log('reconnect');
 			this.reconnectionNumber = 0;
@@ -198,9 +195,7 @@ class WsUtil {
 		price: number,
 		amount: number,
 		isBid: boolean,
-		secondsToLive: number,
-		ethBalance: IEthBalance,
-		tokenBalance: ITokenBalance
+		expiry: number
 	) {
 		if (!this.ws) return;
 		if (!web3Util.isValidPair(pair)) throw new Error('Invalid pair');
@@ -216,25 +211,6 @@ class WsUtil {
 			isBid
 		);
 
-		if (isBid && amountAfterFee.takerAssetAmount < 1)
-			throw new Error('minimum purchase amount should be more than 1');
-		if (!isBid && amountAfterFee.makerAssetAmount < 1)
-			throw new Error('minimum sell amount should be more than 1');
-
-		if (
-			isBid &&
-			(amountAfterFee.makerAssetAmount >= ethBalance.weth ||
-				amountAfterFee.makerAssetAmount >= ethBalance.allowance)
-		)
-			throw new Error('Insufficient weth balance or allowance');
-
-		if (
-			!isBid &&
-			(amountAfterFee.makerAssetAmount >= tokenBalance.balance ||
-				amountAfterFee.makerAssetAmount >= tokenBalance.allowance)
-		)
-			throw new Error('Insufficient token balance or allowance');
-
 		const rawOrder = await web3Util.createRawOrder(
 			pair,
 			account,
@@ -243,7 +219,7 @@ class WsUtil {
 			isBid ? address1 : address2,
 			amountAfterFee.makerAssetAmount,
 			amountAfterFee.takerAssetAmount,
-			secondsToLive + Math.ceil(util.getUTCNowTimestamp() / 1000)
+			Math.ceil(expiry / 1000)
 		);
 		const msg: IWsAddOrderRequest = {
 			method: CST.DB_ADD,
