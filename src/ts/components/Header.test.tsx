@@ -12,7 +12,6 @@ describe('Header Test', () => {
 		it('Test Snapshot', () => {
 			const wrapper = shallow(
 				<Header
-					location={{ pathname: 'path' }}
 					locale={CST.LOCALE_EN}
 					network={CST.NETWORK_ID_KOVAN}
 					ethBalance={{
@@ -21,6 +20,7 @@ describe('Header Test', () => {
 						allowance: 789
 					}}
 					updateLocale={() => ({})}
+					toggleHistory={() => ({})}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

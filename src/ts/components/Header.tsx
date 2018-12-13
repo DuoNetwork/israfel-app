@@ -7,19 +7,18 @@ import util from 'ts/common/util';
 import { SDivFlexCenter, SHeader } from './_styled';
 //import LocaleSelect from './Common/LocaleSelect';
 
-interface IProps {
-	location: object;
+export interface IProps {
 	network: number;
 	locale: string;
 	ethBalance: IEthBalance;
 	updateLocale: (locale: string) => any;
+	toggleHistory: () => any;
 }
 
 export default class Header extends React.Component<IProps> {
 	public render() {
-		const { network, ethBalance } = this.props;
+		const { network, ethBalance, toggleHistory } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
-		//const path = (location as any).pathname.toLowerCase();
 		return (
 			<SHeader>
 				<SDivFlexCenter horizontal width={'1200px'} height={'60px'}>
@@ -53,9 +52,9 @@ export default class Header extends React.Component<IProps> {
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
-						{/* <div className="nav-button-wrapper">
-							<Link to={'/status'}>{CST.AC_ACCOUNT.toUpperCase()}</Link>
-						</div> */}
+						<div className="nav-button-wrapper">
+							<a onClick={toggleHistory}>ORDERS</a>
+						</div>
 						<div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
 						</div>

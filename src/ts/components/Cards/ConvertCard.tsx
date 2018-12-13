@@ -375,7 +375,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>

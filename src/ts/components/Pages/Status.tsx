@@ -18,7 +18,7 @@ export default class Status extends React.Component<IProps> {
 		const { status } = this.props;
 		return (
 			<Layout>
-				<Header />
+				<Header toggleHistory={() => ({})} />
 				<SContent>
 					<StatusCard status={status} />
 				</SContent>

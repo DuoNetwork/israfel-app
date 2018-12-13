@@ -8,8 +8,6 @@ import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import OrderBookCard from '../Cards/OrderBookCard';
-import OrderCard from '../Cards/OrderCard';
-import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import WrapEtherCard from '../Cards/WrapEtherCard';
 
 interface IProps {
@@ -59,31 +57,14 @@ export default class Pair extends React.Component<IProps> {
 	public render() {
 		const {
 			orderBook,
-			account,
-			pair,
 			ethBalance,
 			tokenBalance
 		} = this.props;
 		return (
 			<Layout>
 				<div className="App">
-					<Header />
+					<Header toggleHistory={() => ({})}/>
 					<Spin spinning={!this.props.connection} tip="loading...">
-						<SDivFlexCenter key={1} center horizontal>
-							<OrderHistoryCard
-								orderHistory={{}}
-								account={account}
-							/>
-							<Affix offsetTop={10}>
-								<OrderCard
-									account={account}
-									pair={pair}
-									ethBalance={ethBalance}
-									tokenBalance={tokenBalance}
-									step={3}
-								/>
-							</Affix>
-						</SDivFlexCenter>
 						<SDivFlexCenter key={2} center horizontal>
 							<Affix offsetTop={10}>
 								<WrapEtherCard />

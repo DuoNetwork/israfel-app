@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as uiActions from 'ts/actions/uiActions';
@@ -10,7 +10,7 @@ function mapStateToProps(state: IState) {
 	return {
 		locale: state.ui.locale,
 		network: state.web3.network,
-		ethBalance: state.web3.ethBalance
+		ethBalance: state.web3.ethBalance,
 	};
 }
 
@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 	};
 }
 
-export default withRouter(connect(
+export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Header) as any);
+)(Header);
