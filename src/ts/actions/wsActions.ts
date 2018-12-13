@@ -82,3 +82,13 @@ export function subscribeOrderBook(pair: string): VoidThunkAction {
 		wsUtil.subscribeOrderBook(pair);
 	};
 }
+
+export function subscribeOrder(account: string): VoidThunkAction {
+	return dispatch => {
+		dispatch(orderSubscriptionUpdate(''));
+		if (account && account !== CST.DUMMY_ADDR) {
+			dispatch(orderSubscriptionUpdate(account));
+			wsUtil.subscribeOrderHistory(account);
+		}
+	};
+}

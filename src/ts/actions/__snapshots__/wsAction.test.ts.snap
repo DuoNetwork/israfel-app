@@ -101,3 +101,33 @@ Array [
   ],
 ]
 `;
+
+exports[`actions subscribeOrderBook 3`] = `
+Array [
+  Object {
+    "account": "",
+    "type": "orderBookSubscription",
+  },
+  Object {
+    "account": "account",
+    "type": "orderBookSubscription",
+  },
+]
+`;
+
+exports[`actions subscribeOrderBook 4`] = `
+Array [
+  Array [
+    "account",
+  ],
+]
+`;
+
+exports[`actions subscribeOrderBook dummy account 1`] = `
+Array [
+  Object {
+    "account": "",
+    "type": "orderBookSubscription",
+  },
+]
+`;

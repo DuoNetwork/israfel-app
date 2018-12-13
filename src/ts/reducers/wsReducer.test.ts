@@ -118,6 +118,14 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('orderHistory empty', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_HISTORY,
+			value: []
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	test('orderHistory', () => {
 		state = wsReducer(state, {
 			type: CST.AC_ORDER_HISTORY,
@@ -150,7 +158,23 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('order new pair', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER,
+			value: { userOrder: 'from single order', pair: 'pair3', currentSequence: 999 }
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	test('orderSubscription off', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_SUB,
+			account: ''
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('orderSubscription again', () => {
 		state = wsReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''

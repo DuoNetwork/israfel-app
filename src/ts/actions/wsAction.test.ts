@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-// import * as CST from 'ts/common/constants';
+import * as CST from 'ts/common/constants';
 import wsUtil from 'ts/common/wsUtil';
 import * as wsActions from './wsActions';
 
@@ -51,7 +51,6 @@ describe('actions', () => {
 	});
 
 	test('subscribeOrderBook', () => {
-		window.setInterval = jest.fn(() => 123);
 		const store: any = mockStore({});
 		wsUtil.subscribeOrderBook = jest.fn();
 		store.dispatch(wsActions.subscribeOrderBook('pair'));
@@ -59,6 +58,32 @@ describe('actions', () => {
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+				resolve();
+			}, 0)
+		);
+	});
+
+	test('subscribeOrderBook dummy account', () => {
+		const store: any = mockStore({});
+		wsUtil.subscribeOrderHistory = jest.fn();
+		store.dispatch(wsActions.subscribeOrder(CST.DUMMY_ADDR));
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions()).toMatchSnapshot();
+				expect(wsUtil.subscribeOrderHistory as jest.Mock).not.toBeCalled();
+				resolve();
+			}, 0)
+		);
+	});
+
+	test('subscribeOrderBook', () => {
+		const store: any = mockStore({});
+		wsUtil.subscribeOrderHistory = jest.fn();
+		store.dispatch(wsActions.subscribeOrder('account'));
+		return new Promise(resolve =>
+			setTimeout(() => {
+				expect(store.getActions()).toMatchSnapshot();
+				expect((wsUtil.subscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
 				resolve();
 			}, 0)
 		);

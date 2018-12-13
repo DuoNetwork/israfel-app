@@ -25,7 +25,9 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 	return {
 		subscribeOrderBook: (token: string) =>
 			dispatch(wsActions.subscribeOrderBook(token + '|' + CST.TH_WETH)),
-		unsubscribeOrderBook: () => dispatch(wsActions.orderBookSubscriptionUpdate(''))
+		unsubscribeOrderBook: () => dispatch(wsActions.orderBookSubscriptionUpdate('')),
+		subscribeOrder: (account: string) => dispatch(wsActions.subscribeOrder(account)),
+		unsubscribeOrder: () => dispatch(wsActions.orderSubscriptionUpdate(''))
 	};
 }
 

@@ -27,9 +27,12 @@ interface IProps {
 	connection: boolean;
 	subscribeOrderBook: (pair: string) => any;
 	unsubscribeOrderBook: () => any;
+	subscribeOrder: (account: string) => any;
+	unsubscribeOrder: () => any;
 }
 
 interface IState {
+	account: string;
 	convertCustodian: string;
 	convertAToken: string;
 	convertBToken: string;
@@ -40,6 +43,7 @@ export default class Dex extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			account: props.account,
 			convertCustodian: '',
 			convertAToken: '',
 			convertBToken: '',
@@ -49,6 +53,23 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public componentDidMount() {
 		document.title = 'DUO | Trustless Derivatives';
+		this.props.subscribeOrder(this.props.account);
+	}
+
+	public static getDerivedStateFromProps(props: IProps, state: IState) {
+		if (props.account !== state.account) {
+			props.unsubscribeOrder();
+			props.subscribeOrder(props.account);
+			return {
+				account: props.account
+			};
+		}
+
+		return null;
+	}
+
+	public componentWillUnmount() {
+		this.props.unsubscribeOrder();
 	}
 
 	public handleConvert = (custodian: string, aToken: string, bToken: string) =>
@@ -96,7 +117,12 @@ export default class Dex extends React.Component<IProps, IState> {
 				<div className="App">
 					<Header />
 					<Spin spinning={!connection} tip="loading...">
-						<SDivFlexCenter center horizontal marginBottom="20px" style={{ paddingTop: '20px' }}>
+						<SDivFlexCenter
+							center
+							horizontal
+							marginBottom="20px"
+							style={{ paddingTop: '20px' }}
+						>
 							{beethovenList.map(c => (
 								<CustodianCard
 									key={c}
