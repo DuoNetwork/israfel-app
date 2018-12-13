@@ -213,6 +213,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				: this.state.price;
 			this.setState({
 				price: price,
+				amount: '0',
+				sliderValue: 0,
 				priceDescription: getPriceDescription(price, ethPrice),
 				tradeDescription: getTradeDescription(token, isBid, price, amount, tokenInfo),
 				feeDescription: getFeeDescription(token, price, amount, tokenInfo),
