@@ -1,5 +1,4 @@
 import { notification, Radio, Spin } from 'antd';
-import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import moment from 'moment';
@@ -188,10 +187,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { tokenInfo, token } = this.props;
 		const { isBid, price, expiry } = this.state;
 		const step = tokenInfo ? tokenInfo.denomination : null;
-		const decimal = step && step < 1 ? (step + '').length - 2 : 0;
 		const amount = step
-			? (Math.floor((limit * Number(e)) / 100 / step) * step).toFixed(decimal)
-			: (limit * (Number(e) / 100)).toFixed(decimal);
+			? util.formatFixedNumber((limit * Number(e)) / 100, step)
+			: limit * (Number(e) / 100) + '';
 		this.setState({
 			amount: amount,
 			sliderValue: Number(e),
@@ -207,9 +205,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 		if (e.match(CST.RX_NUM_P)) {
 			const stepPrice = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : null;
-			const decimal = stepPrice && stepPrice < 1 ? (stepPrice + '').length - 2 : 0;
 			const price = stepPrice
-				? (Math.round(Number(e) / stepPrice) * stepPrice).toFixed(decimal)
+				? util.formatFixedNumber(Number(e), stepPrice)
 				: this.state.price;
 			this.setState({
 				price: price,
@@ -235,11 +232,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, expiry } = this.state;
 		if (e.match(CST.RX_NUM_P)) {
 			const step = tokenInfo ? tokenInfo.denomination : null;
-			const decimal = step && step < 1 ? (step + '').length - 2 : 0;
 			const amount = step
-				? (Math.floor(Math.round(Math.min(Number(e), limit) / step)) * step).toFixed(
-						decimal
-				)
+				? util.formatFixedNumber(Math.min(Number(e), limit), step)
 				: this.state.amount;
 			this.setState({
 				amount: amount,
@@ -373,6 +367,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				? Math.min(tokenBalance.balance, tokenBalance.allowance)
 				: 0
 			: 0;
+		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
+		const denomination = tokenInfo ? tokenInfo.denomination : 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
 				<div className={'popup-bg ' + (!!token ? 'popup-open-bg' : '')} />
@@ -424,11 +420,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
 											<span className="content">
 												{item.balance
-													? d3.format(',.2f')(item.balance)
+													? util.formatFixedNumber(
+															item.balance,
+															denomination
+													)
 													: '-'}
 											</span>
 											<span className="title">
-												{item.price ? d3.format(',.2f')(item.price) : '-'}
+												{item.price
+													? util.formatFixedNumber(item.price, precision)
+													: '-'}
 											</span>
 										</li>
 									))}
@@ -442,11 +443,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
 											<span className="title">
-												{item.price ? d3.format(',.2f')(item.price) : '-'}
+												{item.price
+													? util.formatFixedNumber(item.price, precision)
+													: '-'}
 											</span>
 											<span className="content">
 												{item.balance
-													? d3.format(',.2f')(item.balance)
+													? util.formatFixedNumber(
+															item.balance,
+															denomination
+													)
 													: '-'}
 											</span>
 										</li>

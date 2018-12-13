@@ -32,6 +32,13 @@ class Util {
 		return +(Math.floor((num + 'e+8') as any) + 'e-8');
 	}
 
+	public formatFixedNumber(num: number, precision: number) {
+		const decimal = precision && precision < 1 ? (precision + '').length - 2 : 0;
+		return precision
+			? (Math.floor(Number(num) / precision) * precision).toFixed(decimal)
+			: num + '';
+	}
+
 	public formatBalance(num: number) {
 		if (Math.abs(num) < 1e-8) return '0.000';
 		return d3
