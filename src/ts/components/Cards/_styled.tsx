@@ -786,10 +786,9 @@ export const SInput = styled.input`
 `;
 
 export const STableWrapper = styled.div`
-	margin-top: 10px;
 	thead > tr > th {
 		background: ${ColorStyles.ListHighlight};
-		color: ${ColorStyles.TextBlackAlphaL};
+		color: ${ColorStyles.TextBlackAlpha};
 		border-bottom: 0;
 	}
 	tbody > tr:nth-child(even) > td {
@@ -804,7 +803,7 @@ export const STableWrapper = styled.div`
 	td {
 		cursor: pointer;
 		border-bottom: 0 !important;
-		color: ${ColorStyles.TextBlackAlphaL};
+		color: ${ColorStyles.TextBlackAlpha};
 	}
 	tr > .eth,
 	tr > .token-ab,
@@ -831,19 +830,14 @@ export const STableWrapper = styled.div`
 		}
 	}
 	.ant-table table {
-		border: 1px dashed;
-		border-color: ${ColorStyles.BorderWhite1};
-		border-radius: 0;
+		border: none;
 	}
 	.ant-table-placeholder {
-		width: 708px;
+		width: 100%;
 		background: none !important;
-		border-bottom: 1px dashed;
-		border-left: 1px dashed;
-		border-right: 1px dashed;
-		border-color: ${ColorStyles.BorderWhite1};
+		border: none;
 		border-radius: 0;
-		color: ${ColorStyles.TextBlackAlphaLL};
+		color: ${ColorStyles.TextBlackAlphaL};
 	}
 `;
 
@@ -963,6 +957,12 @@ injectGlobal([
 			}
 			.ant-notification-notice-description {
 				font-size: 12px;
+			}
+			.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td, .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row) > td, .ant-table-thead > tr:hover:not(.ant-table-expanded-row) > td, .ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+				background: ${ColorStyles.MainColorShadow};
+			}
+			.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+				padding: 12px 5px;
 			}
 		}
 	`

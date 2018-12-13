@@ -27,7 +27,7 @@ export default class StatusCard extends React.Component<IProps> {
 			<SCard
 				title={<SCardTitle>{CST.TH_STATUS.toUpperCase()}</SCardTitle>}
 				width="100%"
-				margin="0 0px 0 0"
+				margin="20px 0 0 0"
 				inlinetype="table"
 			>
 				<STableWrapper>
