@@ -116,7 +116,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -312,7 +312,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 
 	private handleSubmit = async () => {
-		const { account, token } = this.props;
+		const { account, token, tokenInfo, ethPrice } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		try {
 			this.setState({
@@ -329,6 +329,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.setState({
 				price: '',
 				amount: '',
+				expiry: 1,
+				priceDescription: getPriceDescription('', ethPrice),
+				tradeDescription: getTradeDescription(token, true, '', '', tokenInfo),
+				feeDescription: getFeeDescription(token, '', '', tokenInfo),
+				expiryDescription: getExpiryDescription(false),
 				submitting: false
 			});
 		} catch (error) {
@@ -434,7 +439,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title">
@@ -463,7 +468,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
@@ -614,7 +619,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<SButton onClick={this.handleReset} width="49%">
 								{CST.TH_RESET}
 							</SButton>
-							<SButton onClick={this.handleSubmit} width="49%">
+							<SButton
+								disable={Number(price) === 0 || Number(amount) === 0}
+								onClick={this.handleSubmit}
+								width="49%"
+							>
 								{CST.TH_SUBMIT}
 							</SButton>
 						</SDivFlexCenter>

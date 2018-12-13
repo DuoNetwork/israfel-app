@@ -484,6 +484,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           Reset
         </styled.button>
         <styled.button
+          disable={true}
           onClick={[Function]}
           width="49%"
         >

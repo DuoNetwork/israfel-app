@@ -375,7 +375,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -699,7 +699,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							>
 								{CST.TH_RESET}
 							</SButton>
-							<SButton disable={limit === 0} width="49%" onClick={this.handleSubmit}>
+							<SButton
+								disable={limit === 0 || Number(amount) === 0}
+								width="49%"
+								onClick={this.handleSubmit}
+							>
 								{CST.TH_SUBMIT}
 							</SButton>
 						</SDivFlexCenter>
