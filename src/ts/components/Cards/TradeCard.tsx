@@ -274,7 +274,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		this.setState({ loading: true });
 		try {
 			const { isBid } = this.state;
-			const tx = await web3Util.setUnlimitedTokenAllowance(isBid ? CST.TH_WETH : this.props.token);
+			const tx = await web3Util.setUnlimitedTokenAllowance(
+				isBid ? CST.TH_WETH : this.props.token
+			);
 			openNotification(tx);
 		} catch (error) {
 			this.setState({ loading: false });
@@ -345,14 +347,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
-				<div className="popup-bg" onClick={handleClose} />
+				<div className="popup-bg" />
 				<SCard
 					title={
 						<SCardTitle>
 							{CST.TH_TRADE.toUpperCase() + ' ' + token + '/' + CST.TH_WETH}
 						</SCardTitle>
 					}
-					width="400px"
+					width="360px"
 					className="popup-card"
 					noBodymargin
 					extra={
@@ -467,9 +469,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												marginBottom: 0
 											}}
 										>
+											<span className="input-des">Price</span>
 											<SInput
+												right
 												width="100%"
-												placeholder="Price"
 												value={this.state.price}
 												type="number"
 												step={
@@ -498,10 +501,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											className={'input-line'}
 											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
+											<span className="input-des">Amount</span>
 											<SInput
+												right
 												disabled={price === ''}
 												width="100%"
-												placeholder="Amount"
 												value={amount}
 												type="number"
 												step={
