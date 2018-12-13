@@ -28,3 +28,49 @@ Object {
   "type": "info",
 }
 `;
+
+exports[`actions orderBookSnapshotUpdate 1`] = `
+Object {
+  "type": "orderBookSnapshot",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions orderBookSubscriptionUpdate 1`] = `
+Object {
+  "pair": "pair",
+  "type": "orderBookSubscription",
+}
+`;
+
+exports[`actions orderBookUpdate 1`] = `
+Object {
+  "type": "orderBookUpdate",
+  "value": Object {
+    "test": "test",
+  },
+}
+`;
+
+exports[`actions subscribe 1`] = `
+Array [
+  Object {
+    "pair": "",
+    "type": "orderBookSubscription",
+  },
+  Object {
+    "pair": "pair",
+    "type": "orderBookSubscription",
+  },
+]
+`;
+
+exports[`actions subscribe 2`] = `
+Array [
+  Array [
+    "pair",
+  ],
+]
+`;

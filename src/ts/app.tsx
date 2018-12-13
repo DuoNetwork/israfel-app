@@ -4,7 +4,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import * as dexActions from './actions/dexActions';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
 import web3Util from './common/web3Util';
@@ -45,8 +44,8 @@ wsUtil.onOrder(
 	(method, orderHash, error) => openNotification('error', method + orderHash + error)
 );
 wsUtil.onOrderBook(
-	orderBookSnapshot => store.dispatch(dexActions.orderBookSnapshotUpdate(orderBookSnapshot)),
-	orderBookUpdate => store.dispatch(dexActions.orderBookUpdate(orderBookUpdate)),
+	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
+	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
 	(method, pair, error) => openNotification('error', method + pair + error)
 );
 

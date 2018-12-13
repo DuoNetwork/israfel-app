@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import * as dexActions from 'ts/actions/dexActions';
+import * as wsActions from 'ts/actions/wsActions';
 import { IState } from 'ts/common/types';
 import Pair from 'ts/components/Pages/Pair';
 
-function mapStateToProps(state: IState/*, ownProps: any*/) {
+function mapStateToProps(state: IState /*, ownProps: any*/) {
 	// const code = ownProps.pair.split('|')[0];
 	return {
 		locale: state.ui.locale,
 		account: state.web3.account,
 		orderHistory: [], //state.dex.orderHistory,
-		orderBook: state.dex.orderBookSnapshot,
+		orderBook: state.ws.orderBookSnapshot,
 		ethBalance: state.web3.ethBalance,
 		tokenBalance: /*state.web3.tokenBalances[code] ||*/ {
 			balance: 0,
@@ -23,9 +23,8 @@ function mapStateToProps(state: IState/*, ownProps: any*/) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
-		subscribe: (account: string, pair: string) => dispatch(dexActions.subscribe(account, pair)),
-		unsubscribe: (account: string) =>
-			dispatch(dexActions.orderBookSubscriptionUpdate(account, ''))
+		subscribe: (pair: string) => dispatch(wsActions.subscribe(pair)),
+		unsubscribe: () => dispatch(wsActions.orderBookSubscriptionUpdate(''))
 	};
 }
 

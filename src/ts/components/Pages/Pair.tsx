@@ -20,8 +20,8 @@ interface IProps {
 	tokenBalance: ITokenBalance;
 	orderHistory: IUserOrder[];
 	orderBook: IOrderBookSnapshot;
-	subscribe: (account: string, pair: string) => any;
-	unsubscribe: (account: string) => any;
+	subscribe: (pair: string) => any;
+	unsubscribe: () => any;
 	connection: boolean;
 }
 
@@ -40,13 +40,13 @@ export default class Pair extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		this.props.subscribe(this.props.account, this.props.pair);
+		this.props.subscribe(this.props.pair);
 	}
 
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
 		if (props.account !== state.account || props.pair !== state.pair) {
-			props.unsubscribe(state.account);
-			props.subscribe(props.account, props.pair);
+			props.unsubscribe();
+			props.subscribe(props.pair);
 			return {
 				account: props.account,
 				pair: props.pair

@@ -8,16 +8,9 @@ import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
-	readonly dex: IDexState;
 	readonly ui: IUIState;
 	readonly web3: IWeb3State;
 	readonly ws: IWsState;
-}
-
-export interface IDexState {
-	// readonly orderHistory: relayerTypes.IUserOrder[];
-	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
-	readonly orderBookSubscription: string;
 }
 
 export interface IUIState {
@@ -44,6 +37,9 @@ export interface IWsState {
 	readonly status: relayerTypes.IStatus[];
 	readonly acceptedPrices: { [custodian: string]: relayerTypes.IAcceptedPrice[] };
 	readonly exchangePrices: { [source: string]: relayerTypes.IPrice[] };
+	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
+	readonly orderBookSubscription: string;
+	readonly orderHistory: { [pair: string]: relayerTypes.IUserOrder[] };
 }
 
 export interface IEthBalance {
