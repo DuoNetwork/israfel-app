@@ -35,7 +35,7 @@ class Util {
 	public formatFixedNumber(num: number, precision: number) {
 		const decimal = precision && precision < 1 ? (precision + '').length - 2 : 0;
 		return precision
-			? (Math.floor(Number(num) / precision) * precision).toFixed(decimal)
+			? (Math.round(Number(num) / precision) * precision).toFixed(decimal)
 			: num + '';
 	}
 

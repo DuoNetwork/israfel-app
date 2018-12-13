@@ -308,11 +308,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			expiryDescription: getExpiryDescription(false)
 		});
 
-	private handleSubmit = () => {
-		console.log('handleSubmit');
+	private handleSubmit = async () => {
 		const { account, token } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
-		wsUtil
+		try {
+			this.setState({
+				loading: true
+			});
+			await wsUtil
 			.addOrder(
 				account,
 				token + '|' + CST.TH_WETH,
@@ -327,6 +330,15 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					amount: ''
 				})
 			);
+			this.setState({
+				loading: false
+			});
+		} catch (error) {
+			alert(error);
+			this.setState({
+				loading: false
+			});
+		}
 	};
 
 	public render() {

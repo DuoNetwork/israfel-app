@@ -21,7 +21,6 @@ import {
 	IWsTerminateOrderRequest,
 	IWsUserOrderResponse
 } from './types';
-import util from './util';
 import web3Util from './web3Util';
 
 class WsUtil {
@@ -199,10 +198,10 @@ class WsUtil {
 		expiry: number
 	) {
 		if (!this.ws) return;
-		if (!web3Util.isValidPair(pair)) throw new Error('Invalid pair');
+		if (!web3Util.isValidPair(pair)) throw new Error('invalid pair');
 		const [code1, code2] = pair.split('|');
 		const token1 = web3Util.getTokenByCode(code1);
-		if (!token1) throw new Error('Invalid pair');
+		if (!token1) throw new Error('invalid pair');
 		const address1 = token1.address;
 		const address2 = web3Util.getTokenAddressFromCode(code2);
 		const amountAfterFee = orderUtil.getAmountAfterFee(
@@ -212,14 +211,17 @@ class WsUtil {
 			isBid
 		);
 
+		if (!amountAfterFee.makerAssetAmount || !amountAfterFee.takerAssetAmount)
+			throw new Error('invalid amount');
+
 		const rawOrder = await web3Util.createRawOrder(
 			pair,
 			account,
 			web3Util.relayerAddress,
 			isBid ? address2 : address1,
 			isBid ? address1 : address2,
-			util.round(amountAfterFee.makerAssetAmount),
-			util.round(amountAfterFee.takerAssetAmount),
+			amountAfterFee.makerAssetAmount,
+			amountAfterFee.takerAssetAmount,
 			Math.ceil(expiry / 1000)
 		);
 		const msg: IWsAddOrderRequest = {
