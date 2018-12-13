@@ -18,20 +18,26 @@ import {
 	SInput,
 	SSlider
 } from './_styled';
-const openNotification = (tx: string) => {
+
+const openNotification = (description: string, tx: string) => {
 	const btn = (
-		<SButton onClick={() => window.open('https://kovan.etherscan.io/tx/' + tx, '_blank')}>
+		<SButton
+			onClick={() =>
+				window.open(`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`, '_blank')
+			}
+		>
 			View Transaction on Etherscan
 		</SButton>
 	);
 	const args = {
 		message: 'Transaction Sent',
-		description: 'Transaction hash: ' + tx,
+		description: description + ' Transaction hash: ' + tx,
 		duration: 0,
 		btn
 	};
 	notification.open(args);
 };
+
 interface IProps {
 	account: string;
 	custodian: string;
@@ -52,7 +58,6 @@ interface IState {
 	wethCreate: boolean;
 	allowance: number;
 	loading: boolean;
-	submitting: boolean;
 	description: string;
 	sliderValue: number;
 	sliderWETH: number;
@@ -82,6 +87,37 @@ const getBTokenPerETH = (info?: ICustodianInfo) =>
 const getATokenPerETH = (bTokenPerETH: number, info?: ICustodianInfo) =>
 	info ? bTokenPerETH * info.states.alpha : 0;
 
+const getDescription = (
+	wethCreate: boolean,
+	isCreate: boolean,
+	aToken: string,
+	bToken: string,
+	amount: number,
+	info?: ICustodianInfo
+) => {
+	const ethCode = wethCreate && isCreate ? CST.TH_WETH : CST.TH_ETH;
+	if (!amount || !info)
+		return isCreate
+			? `Create ${aToken} and ${bToken} with ${ethCode}`
+			: `Redeem ETH from ${aToken} and ${bToken}`;
+	const bTokenPerETH = getBTokenPerETH(info);
+	const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
+
+	const ethNum = isCreate ? amount : amount / aTokenPerETH;
+	const aTokenAmt = util.formatBalance(isCreate ? amount * aTokenPerETH : amount);
+	const bTokenAmt = util.formatBalance(
+		isCreate ? amount * bTokenPerETH : amount / info.states.alpha
+	);
+	const feeAmt = util.formatBalance(
+		ethNum * (isCreate ? info.states.createCommRate : info.states.redeemCommRate)
+	);
+	const ethAmt = util.formatBalance(ethNum);
+
+	return isCreate
+		? `${ethAmt} ${ethCode} --> ${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken} with ${feeAmt} ${ethCode} fee`
+		: `${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken} --> ${ethAmt} ${ethCode} with ${feeAmt} ${ethCode} fee`;
+};
+
 export default class ConvertCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -94,7 +130,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate: false,
 			allowance: 0,
 			loading: false,
-			submitting: false,
 			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
 			sliderValue: 0,
 			sliderWETH: 0
@@ -116,7 +151,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				wethCreate: false,
 				allowance: 0,
 				loading: false,
-				submitting: false,
 				description: `Create ${nextProps.aToken} and ${nextProps.bToken} with ETH`
 			};
 
@@ -149,28 +183,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: `Redeem ETH from ${aToken} and ${bToken}`;
 		if (value.match(CST.RX_NUM_P)) {
 			const amountNum = Math.min(Number(value), limit);
-			const bTokenPerETH = getBTokenPerETH(info);
-			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
 			this.setState({
 				amount: amountNum + '',
-				description:
-					!amountNum || !info
-						? defaultDescription
-						: isCreate
-						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
-								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
-							amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
-							amountNum * info.states.createCommRate
-						)} ETH fee`
-						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
-								amountNum / info.states.alpha
-						)} ${bToken} --> ${util.formatBalance(
-							amountNum / aTokenPerETH
-						)} ETH with ${util.formatBalance(
-							(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						)} ETH fee`,
+				description: getDescription(false, isCreate, aToken, bToken, amountNum, info),
 				sliderValue: (amountNum / limit) * 100
 			});
 		} else
@@ -192,20 +207,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`;
 		if (value.match(CST.RX_NUM_P)) {
 			const amountNum = Math.min(Number(value), limit);
-			const bTokenPerETH = getBTokenPerETH(info);
-			const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
 			this.setState({
 				wethAmount: Math.min(Number(value), limit) + '',
-				description:
-					!amountNum || !info
-						? defaultDescription
-						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
-								amountNum * aTokenPerETH
-						)} ${aToken} ${util.formatBalance(
-							amountNum * bTokenPerETH
-						)} ${bToken} with ${util.formatBalance(
-							amountNum * info.states.createCommRate
-						)} ${CST.TH_ETH} fee`,
+				description: getDescription(true, true, aToken, bToken, amountNum, info),
 				sliderWETH: (amountNum / limit) * 100
 			});
 		} else
@@ -249,7 +253,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethAmount: '',
 			sliderWETH: 0,
 			allowance: 0,
-			loading: true,
+			loading: !this.state.wethCreate,
 			description: `Create ${this.props.aToken} and ${this.props.bToken} with ${
 				this.state.wethCreate ? CST.TH_ETH : CST.TH_WETH
 			}`
@@ -267,7 +271,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				0,
 				true
 			);
-			openNotification(tx.transactionHash);
+			openNotification('Pending WETH approval.', tx.transactionHash);
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -295,52 +299,45 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleSubmit = async () => {
 		this.setState({
-			submitting: true
+			loading: true
 		});
 		const { account, custodian, handleClose, info } = this.props;
-		const { isCreate, amount, wethCreate, wethAmount } = this.state;
+		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
 			this.setState({
-				submitting: false
+				loading: false
 			});
 			alert('missing data');
 			return;
 		}
 
-		if (isCreate)
-			if (wethCreate)
-				try {
+		try {
+			const onTxHash = (hash: string) => {
+				openNotification(description, hash);
+				handleClose();
+			};
+			if (isCreate)
+				if (wethCreate)
 					await cw.createWithWETH(
 						account,
 						Number(wethAmount),
 						web3Util.contractAddresses.etherToken,
-						hash => alert(hash)
+						onTxHash
 					);
-				} catch (error) {
-					this.setState({
-						submitting: false
-					});
-				}
+				else await cw.create(account, Number(amount), onTxHash);
 			else
-				try {
-					await cw.create(account, Number(amount), hash => alert(hash));
-				} catch (e) {
-					this.setState({
-						submitting: false
-					});
-				}
-		else
-			try {
-				await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha, hash =>
-					alert(hash)
+				await cw.redeem(
+					account,
+					Number(amount),
+					Number(amount) / info.states.alpha,
+					onTxHash
 				);
-			} catch (e) {
-				this.setState({
-					submitting: false
-				});
-			}
-		handleClose();
+		} catch (error) {
+			this.setState({
+				loading: false
+			});
+		}
 	};
 
 	public render() {
@@ -361,7 +358,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			wethCreate,
 			allowance,
 			loading,
-			submitting,
 			description,
 			sliderValue,
 			sliderWETH
@@ -380,7 +376,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
-				<div className={"popup-bg " + (!!custodian ? 'popup-open-bg' : '')}/>
+				<div className="popup-bg" />
 				<SCard
 					title={
 						<SCardTitle>
@@ -388,7 +384,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SCardTitle>
 					}
 					width="360px"
-					className={'popup-card ' + (!!custodian ? 'popup-open' : '') }
+					className="popup-card"
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
@@ -511,8 +507,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</div>
 					</SCardList>
 					<Spin
-						spinning={(loading && (wethCreate && isCreate)) || submitting}
-						tip={submitting ? "Submitting..." : "Approving"}
+						spinning={loading}
+						tip={wethCreate && !allowance ? 'Approving' : 'Submitting...'}
 					>
 						<SCardConversionForm>
 							<SDivFlexCenter
@@ -551,17 +547,16 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												opacity: wethCreate ? 0.3 : 1
 											}}
 										>
-											<span className="input-des">Amount</span>
+											<span className="input-des">
+												{(isCreate ? CST.TH_ETH : aToken) +
+													' ' +
+													CST.TH_AMOUNT}
+											</span>
 											<SInput
 												right
 												disabled={limit === 0}
 												width="100%"
 												value={amount}
-												placeholder={
-													(isCreate ? CST.TH_ETH : aToken) +
-													'' +
-													CST.TH_AMOUNT
-												}
 												onChange={e =>
 													this.handleAmountInputChange(e.target.value)
 												}
@@ -594,12 +589,23 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										</li>
 										<li
 											className="waring-expand-button"
-											style={{ padding: '0 10px 0 15px' }}
-											onClick={() => this.handleWethCreateChange()}
+											style={{
+												padding: '0 10px 0 15px',
+												pointerEvents: isCreate ? 'auto' : 'none'
+											}}
+											onClick={() =>
+												isCreate && this.handleWethCreateChange()
+											}
 										>
-											<span style={{ opacity: isCreate ? 100 : 0 }}>
+											<span
+												style={{
+													opacity: isCreate ? 100 : 0
+												}}
+											>
 												<img src={waring} style={{ marginRight: 2 }} />
-												{`Click to create with ${CST.TH_ETH}`}
+												{`Click to create with ${
+													wethCreate ? CST.TH_ETH : CST.TH_WETH
+												}`}
 											</span>
 										</li>
 									</ul>
@@ -618,14 +624,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
 											{wethCreate && isCreate ? (
-												<span className="input-des">Amount</span>
+												<span className="input-des">
+													{CST.TH_WETH + ' ' + CST.TH_AMOUNT}
+												</span>
 											) : null}
 											<SInput
 												right
 												width="100%"
-												placeholder={
-													(isCreate ? 'WETH ' : 'Token ') + 'Amount'
-												}
 												value={wethAmount}
 												onBlur={e =>
 													this.handleWethAmountInputBlurChange(
