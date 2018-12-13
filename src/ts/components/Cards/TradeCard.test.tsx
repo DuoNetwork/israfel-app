@@ -53,6 +53,7 @@ describe('TradeCard Test', () => {
 		it('Test Snapshot', () => {
 			const wrapper = shallow(
 				<TradeCard
+					account={'account'}
 					token={token}
 					tokenInfo={tokenInfo}
 					tokenBalance={tokenBalance}

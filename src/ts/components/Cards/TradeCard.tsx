@@ -58,7 +58,8 @@ interface IState {
 	price: string;
 	amount: string;
 	expiry: number;
-	loading: boolean;
+	approving: boolean;
+	submitting: boolean;
 	sliderValue: number;
 	priceDescription: string;
 	tradeDescription: string;
@@ -132,7 +133,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			price: '',
 			amount: '',
 			expiry: 1,
-			loading: false,
+			approving: false,
+			submitting: false,
 			sliderValue: 0,
 			priceDescription: getPriceDescription('', props.ethPrice),
 			tradeDescription: getTradeDescription(props.token, true, '', '', props.tokenInfo),
@@ -150,7 +152,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				price: '',
 				amount: '',
 				expiry: 1,
-				loading: false,
+				approving: false,
+				submitting: false,
 				sliderValue: 0,
 				priceDescription: getPriceDescription('', nextProps.ethPrice),
 				tradeDescription: getTradeDescription(
@@ -166,12 +169,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 		// check for allowance
 		if (
-			prevState.loading &&
+			prevState.approving &&
 			((prevState.isBid && nextProps.ethBalance.allowance) ||
 				(!prevState.isBid && nextProps.tokenBalance && nextProps.tokenBalance.allowance))
 		)
 			return {
-				loading: false
+				approving: false
 			};
 
 		return null;
@@ -272,7 +275,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 
 	private handleApprove = async () => {
-		this.setState({ loading: true });
+		this.setState({ approving: true });
 		try {
 			const { isBid } = this.state;
 			const tx = await web3Util.setUnlimitedTokenAllowance(
@@ -280,7 +283,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			);
 			openNotification(tx);
 		} catch (error) {
-			this.setState({ loading: false });
+			this.setState({ approving: false });
 		}
 	};
 
@@ -313,30 +316,25 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, amount, expiry } = this.state;
 		try {
 			this.setState({
-				loading: true
+				submitting: true
 			});
-			await wsUtil
-			.addOrder(
+			await wsUtil.addOrder(
 				account,
 				token + '|' + CST.TH_WETH,
 				Number(price),
 				Number(amount),
 				isBid,
 				util.getExpiryTimestamp(expiry === 2)
-			)
-			.then(() =>
-				this.setState({
-					price: '',
-					amount: ''
-				})
 			);
 			this.setState({
-				loading: false
+				price: '',
+				amount: '',
+				submitting: false
 			});
 		} catch (error) {
 			alert(error);
 			this.setState({
-				loading: false
+				submitting: false
 			});
 		}
 	};
@@ -348,7 +346,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			price,
 			amount,
 			expiry,
-			loading,
+			approving,
+			submitting,
 			sliderValue,
 			priceDescription,
 			tradeDescription,
@@ -473,7 +472,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</div>
 						</SCardList>
 					</SDivFlexCenter>
-					<Spin spinning={loading} tip="loading...">
+					<Spin
+						spinning={approving || submitting}
+						tip={approving ? 'Pending Approval' : 'Pending Order Signature'}
+					>
 						<SCardConversionForm>
 							<SDivFlexCenter horizontal width="100%" padding="10px;">
 								{[CST.TH_BUY, CST.TH_SELL].map(side => (
@@ -491,7 +493,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									</button>
 								))}
 							</SDivFlexCenter>
-							{approveRequired && !loading ? (
+							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
 										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
@@ -515,7 +517,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												marginBottom: 0
 											}}
 										>
-											<span className="input-des">Price</span>
+											<span className="input-des">{CST.TH_PX}</span>
 											<SInput
 												right
 												width="100%"
@@ -548,7 +550,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											className={'input-line'}
 											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
-											<span className="input-des">Amount</span>
+											<span className="input-des">{CST.TH_AMOUNT}</span>
 											<SInput
 												right
 												disabled={price === ''}

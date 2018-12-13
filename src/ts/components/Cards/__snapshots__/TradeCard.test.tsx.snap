@@ -128,12 +128,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="content"
               >
-                123.00
+                123.0
               </span>
               <span
                 className="title"
               >
-                123.00
+                123.000000
               </span>
             </li>
             <li
@@ -209,12 +209,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title"
               >
-                123.00
+                123.000000
               </span>
               <span
                 className="content"
               >
-                123.00
+                123.0
               </span>
             </li>
             <li
@@ -263,7 +263,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="loading..."
+      tip="Pending Order Signature"
       wrapperClassName=""
     >
       <styled.div>
@@ -484,6 +484,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           Reset
         </styled.button>
         <styled.button
+          onClick={[Function]}
           width="49%"
         >
           Submit
