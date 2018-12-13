@@ -16,6 +16,7 @@ function mapStateToProps(state: IState) {
 		custodianTokenBalances: state.web3.custodianTokenBalances,
 		ethBalance: state.web3.ethBalance,
 		orderBook: state.ws.orderBookSnapshot,
+		orderHistory: state.ws.orderHistory,
 		connection: state.ws.connection,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0
 	};

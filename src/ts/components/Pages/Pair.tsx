@@ -58,8 +58,6 @@ export default class Pair extends React.Component<IProps> {
 
 	public render() {
 		const {
-			orderHistory,
-			locale,
 			orderBook,
 			account,
 			pair,
@@ -73,8 +71,7 @@ export default class Pair extends React.Component<IProps> {
 					<Spin spinning={!this.props.connection} tip="loading...">
 						<SDivFlexCenter key={1} center horizontal>
 							<OrderHistoryCard
-								orderHistory={orderHistory}
-								locale={locale}
+								orderHistory={{}}
 								account={account}
 							/>
 							<Affix offsetTop={10}>

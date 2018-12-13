@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { IToken } from 'ts/common/types';
 import Dex from 'ts/containers/pages/DexContainer';
-import Pair from 'ts/containers/Pages/PairContainer';
+// import Pair from 'ts/containers/Pages/PairContainer';
 import Status from 'ts/containers/Pages/StatusContainer';
 import Loading from './Pages/Loading';
 
@@ -15,7 +15,7 @@ export default class Israfel extends React.Component<IProps> {
 		return (
 			<Switch>
 				<Route path={'/status'} render={() => <Status />} />
-				{this.props.tokens.map(token => (
+				{/* {this.props.tokens.map(token => (
 					<Route
 						key={token.code}
 						path={`/${token.code}-WETH`}
@@ -26,7 +26,7 @@ export default class Israfel extends React.Component<IProps> {
 					<Route path={'/pairs'} render={() => <Pair pair={'B-PPT-I0|WETH'} />} />
 				) : (
 					<Route render={() => <Loading />} />
-				)}
+				)} */}
 				{this.props.tokens.length ? (
 					<Route render={() => <Dex />} />
 				) : (

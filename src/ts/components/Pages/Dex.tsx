@@ -7,12 +7,14 @@ import {
 	IEthBalance,
 	IOrderBookSnapshot,
 	IToken,
-	ITokenBalance
+	ITokenBalance,
+	IUserOrder
 } from 'ts/common/types';
 import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
+import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import TradeCard from '../Cards/TradeCard';
 
 interface IProps {
@@ -24,6 +26,7 @@ interface IProps {
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBook: IOrderBookSnapshot;
+	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
 	subscribeOrderBook: (pair: string) => any;
 	unsubscribeOrderBook: () => any;
@@ -95,7 +98,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			ethBalance,
 			connection,
 			orderBook,
-			ethPrice
+			ethPrice,
+			orderHistory
 		} = this.props;
 		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
 		const beethovenList: string[] = [];
@@ -150,6 +154,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								/>
 							))}
 						</SDivFlexCenter>
+						<OrderHistoryCard orderHistory={orderHistory} account={account}/>
 						<ConvertCard
 							account={account}
 							tokenBalances={custodianTokenBalances[convertCustodian]}
