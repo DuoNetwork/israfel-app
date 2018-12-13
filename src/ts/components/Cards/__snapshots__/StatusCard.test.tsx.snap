@@ -20,9 +20,10 @@ exports[`StatusCard Test Test Snapshot Test Snapshot 1`] = `
           Object {
             "Hostname": "test",
             "Info": 123,
+            "Pair": "test",
             "Process": "test",
             "Updated": "Long Time Ago",
-            "key": "testtest",
+            "key": "testtesttest",
           },
         ]
       }
@@ -40,6 +41,11 @@ exports[`StatusCard Test Test Snapshot Test Snapshot 1`] = `
         dataIndex="Process"
         key="Process"
         title="Process"
+      />
+      <Column
+        dataIndex="Pair"
+        key="Pair"
+        title="Pair"
       />
       <Column
         dataIndex="Updated"

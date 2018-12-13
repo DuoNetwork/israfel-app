@@ -159,18 +159,18 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						: isCreate
 						? `${util.formatBalance(amountNum)} ETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						  )} ${aToken} ${util.formatBalance(
-								amountNum * bTokenPerETH
-						  )} ${bToken} with ${util.formatBalance(
-								amountNum * info.states.createCommRate
-						  )} ETH fee`
+						)} ${aToken} ${util.formatBalance(
+							amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+							amountNum * info.states.createCommRate
+						)} ETH fee`
 						: `${util.formatBalance(amountNum)} ${aToken} ${util.formatBalance(
 								amountNum / info.states.alpha
-						  )} ${bToken} --> ${util.formatBalance(
-								amountNum / aTokenPerETH
-						  )} ETH with ${util.formatBalance(
-								(amountNum / aTokenPerETH) * info.states.redeemCommRate
-						  )} ETH fee`,
+						)} ${bToken} --> ${util.formatBalance(
+							amountNum / aTokenPerETH
+						)} ETH with ${util.formatBalance(
+							(amountNum / aTokenPerETH) * info.states.redeemCommRate
+						)} ETH fee`,
 				sliderValue: (amountNum / limit) * 100
 			});
 		} else
@@ -201,11 +201,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						? defaultDescription
 						: `${util.formatBalance(amountNum)} WETH --> ${util.formatBalance(
 								amountNum * aTokenPerETH
-						  )} ${aToken} ${util.formatBalance(
-								amountNum * bTokenPerETH
-						  )} ${bToken} with ${util.formatBalance(
-								amountNum * info.states.createCommRate
-						  )} ${CST.TH_ETH} fee`,
+						)} ${aToken} ${util.formatBalance(
+							amountNum * bTokenPerETH
+						)} ${bToken} with ${util.formatBalance(
+							amountNum * info.states.createCommRate
+						)} ${CST.TH_ETH} fee`,
 				sliderWETH: (amountNum / limit) * 100
 			});
 		} else
@@ -267,7 +267,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				0,
 				true
 			);
-			openNotification(tx);
+			openNotification(tx.transactionHash);
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -376,7 +376,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
