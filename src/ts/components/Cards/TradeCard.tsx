@@ -347,7 +347,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!token ? 'block' : 'none' }}>
-				<div className="popup-bg" />
+				<div className={"popup-bg " + (!!token ? 'popup-open-bg' : '') }/>
 				<SCard
 					title={
 						<SCardTitle>
@@ -355,7 +355,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SCardTitle>
 					}
 					width="360px"
-					className="popup-card"
+					className={"popup-card " + (!!token ? 'popup-open' : '') }
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
