@@ -63,6 +63,7 @@ export const TH_TIME = 'Time';
 export const TH_WRAP = 'Wrap';
 export const TH_UNWRAP = 'Unwrap';
 export const TH_PROCESS = 'Process';
+export const TH_PAIR = 'Pair';
 export const TH_UPDATED = 'Updated';
 export const TH_INFO = 'Info';
 export const TH_HOSTNAME = 'Hostname';
