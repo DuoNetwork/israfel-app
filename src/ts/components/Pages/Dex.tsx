@@ -104,7 +104,7 @@ export default class Dex extends React.Component<IProps, IState> {
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
-									margin="0 20px 0 0"
+									margin="0 10px"
 									acceptedPrices={acceptedPrices[c]}
 									tokenBalances={custodianTokenBalances[c] || {}}
 								/>
@@ -118,7 +118,7 @@ export default class Dex extends React.Component<IProps, IState> {
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
-									margin="0 20px 0 0"
+									margin="0 10px"
 									acceptedPrices={acceptedPrices[c]}
 									tokenBalances={custodianTokenBalances[c] || {}}
 								/>
