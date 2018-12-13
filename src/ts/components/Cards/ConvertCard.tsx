@@ -376,7 +376,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
-				<div className="popup-bg" />
+				<div className={"popup-bg " + (!!custodian ? 'popup-open-bg' : '') }/>
 				<SCard
 					title={
 						<SCardTitle>
@@ -384,7 +384,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SCardTitle>
 					}
 					width="360px"
-					className="popup-card"
+					className={"popup-card " + (!!custodian ? 'popup-open' : '') }
 					noBodymargin
 					extra={
 						<SDivFlexCenter horizontal width="40px">
