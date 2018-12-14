@@ -10,13 +10,13 @@ export default class Message extends React.Component<IProps> {
 	public shouldComponentUpdate(nextProps: IProps) {
 		const { level, message } = nextProps;
 
-		if (!level || !message)
+		if (!message)
 			return false;
 
-		(notification as any)[level].open({
+		((notification as any)[level] || notification.open)({
 			message: level.toUpperCase(),
 			description: message,
-			duration: 3
+			duration: 0
 		});
 
 		return false;

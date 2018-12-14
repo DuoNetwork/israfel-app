@@ -27,7 +27,7 @@ const openNotification = (type: string, tx: string) => {
 		args = {
 			message: type.toUpperCase(),
 			description: tx,
-			duration: 3
+			duration: 0
 		};
 	else {
 		const btn = (
