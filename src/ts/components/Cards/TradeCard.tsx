@@ -269,19 +269,35 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			});
 	}
 
-	private handleSideChange = () => {
+	private handleBuySideChange = () => {
 		const { tokenInfo, ethPrice, token } = this.props;
-		const { isBid, price, expiry } = this.state;
+		const { price, expiry } = this.state;
 		this.setState({
-			isBid: !isBid,
+			isBid: true,
 			amount: '',
 			sliderValue: 0,
+			price: '',
 			priceDescription: getPriceDescription(price, ethPrice),
-			tradeDescription: getTradeDescription(token, !isBid, price, '', tokenInfo),
+			tradeDescription: getTradeDescription(token, true, price, '', tokenInfo),
 			feeDescription: getFeeDescription(token, price, '', tokenInfo),
 			expiryDescription: getExpiryDescription(expiry === 2)
 		});
-	};
+	}
+
+	private handleSellSideChange = () => {
+		const { tokenInfo, ethPrice, token } = this.props;
+		const { price, expiry } = this.state;
+		this.setState({
+			isBid: false,
+			amount: '',
+			sliderValue: 0,
+			price: '',
+			priceDescription: getPriceDescription(price, ethPrice),
+			tradeDescription: getTradeDescription(token, false, price, '', tokenInfo),
+			feeDescription: getFeeDescription(token, price, '', tokenInfo),
+			expiryDescription: getExpiryDescription(expiry === 2)
+		});
+	}
 
 	private handlePriceInputChange = (value: string) => {
 		this.setState({
@@ -538,20 +554,22 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					>
 						<SCardConversionForm>
 							<SDivFlexCenter horizontal width="100%" padding="10px;">
-								{[CST.TH_BUY, CST.TH_SELL].map(side => (
-									<button
-										key={side}
-										className={
-											(isBid && side === CST.TH_BUY) ||
-											(!isBid && side === CST.TH_SELL)
-												? 'conv-button selected'
-												: 'conv-button non-select'
-										}
-										onClick={() => this.handleSideChange()}
-									>
-										{side.toUpperCase()}
-									</button>
-								))}
+								<button
+									className={
+										isBid ? 'conv-button selected' : 'conv-button non-select'
+									}
+									onClick={() => this.handleBuySideChange()}
+								>
+									{CST.TH_BUY.toUpperCase()}
+								</button>
+								<button
+									className={
+										!isBid ? 'conv-button selected' : 'conv-button non-select'
+									}
+									onClick={() => this.handleSellSideChange()}
+								>
+									{CST.TH_SELL.toUpperCase()}
+								</button>
 							</SDivFlexCenter>
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
