@@ -503,7 +503,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									{bidsToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
 											<span className="content">
-												{item.balance
+												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
 															item.balance,
 															denomination,
@@ -512,7 +512,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													: '-'}
 											</span>
 											<span className="title">
-												{item.price
+												{item.price && item.price > 0
 													? util.formatFixedNumber(
 															item.price,
 															precision,
@@ -537,7 +537,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
 											<span className="title">
-												{item.price
+												{item.price && item.price > 0
 													? util.formatFixedNumber(
 															item.price,
 															precision,
@@ -546,7 +546,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													: '-'}
 											</span>
 											<span className="content">
-												{item.balance
+												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
 															item.balance,
 															denomination,
