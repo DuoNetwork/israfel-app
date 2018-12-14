@@ -103,8 +103,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         >
           <ul>
             <li
+              onClick={[Function]}
               style={
                 Object {
+                  "cursor": "pointer",
                   "justifyContent": "center",
                 }
               }
@@ -126,12 +128,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 123.000000
               </span>
@@ -151,12 +147,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 -
               </span>
@@ -176,12 +166,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 -
               </span>
@@ -195,8 +179,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         >
           <ul>
             <li
+              onClick={[Function]}
               style={
                 Object {
+                  "cursor": "pointer",
                   "justifyContent": "center",
                 }
               }
@@ -213,12 +199,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 123.000000
               </span>
@@ -238,12 +218,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 -
               </span>
@@ -263,12 +237,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "cursor": "pointer",
-                  }
-                }
               >
                 -
               </span>

@@ -62,7 +62,7 @@ const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: b
 		[CST.TH_MATCHING]: uo.matching,
 		[CST.TH_FEE]: uo.fee + ' ' + uo.feeAsset,
 		[CST.TH_EXPIRY]: moment(uo.expiry).format('YYYY-MM-DD HH:mm'),
-		[CST.TH_STATUS]: uo.type,
+		[CST.TH_STATUS]: uo.type + '|' + uo.status,
 		[CST.TH_ORDER_HASH]: uo.orderHash,
 		[CST.TH_ACTIONS]:
 			isParent && isCancel ? (
