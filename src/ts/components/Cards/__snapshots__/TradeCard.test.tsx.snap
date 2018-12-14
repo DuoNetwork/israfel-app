@@ -101,13 +101,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
-          >
+          <ul>
             <li
               style={
                 Object {
@@ -132,6 +126,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 123.000000
               </span>
@@ -151,6 +151,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 -
               </span>
@@ -170,6 +176,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               </span>
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 -
               </span>
@@ -181,14 +193,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul
-            style={
-              Object {
-                "marginLeft": -1,
-                "opacity": 0.5,
-              }
-            }
-          >
+          <ul>
             <li
               style={
                 Object {
@@ -208,6 +213,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 123.000000
               </span>
@@ -227,6 +238,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 -
               </span>
@@ -246,6 +263,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="title"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "cursor": "pointer",
+                  }
+                }
               >
                 -
               </span>
@@ -274,14 +297,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         >
           <button
             className="conv-button selected"
-            key="Buy"
             onClick={[Function]}
           >
             BUY
           </button>
           <button
             className="conv-button non-select"
-            key="Sell"
             onClick={[Function]}
           >
             SELL
@@ -470,7 +491,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       <div
         className="convert-popup-des"
       >
-        Order Valid till 2018-12-14 16:00
+        Order Valid till 1970-01-16 16:00
       </div>
       <styled.div
         horizontal={true}

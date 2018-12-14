@@ -1,4 +1,4 @@
-import { notification } from 'antd';
+// import { notification } from 'antd';
 import 'css/style.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -11,14 +11,14 @@ import wsUtil from './common/wsUtil';
 import Israfel from './containers/IsrafelContainer';
 import store from './store/store';
 
-const openNotification = (type: string, description: string) => {
-	const args = {
-		message: type.toUpperCase(),
-		description: description,
-		duration: 3
-	};
-	(notification as any)[type].open(args);
-};
+// const openNotification = (type: string, description: string) => {
+// 	const args = {
+// 		message: type.toUpperCase(),
+// 		description: description,
+// 		duration: 3
+// 	};
+// 	(notification as any)[type].open(args);
+// };
 
 web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 	if (
@@ -41,12 +41,12 @@ wsUtil.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
 wsUtil.onOrder(
 	userOrders => store.dispatch(wsActions.orderHistoryUpdate(userOrders)),
 	userOrder => store.dispatch(wsActions.orderUpdate(userOrder)),
-	(method, orderHash, error) => openNotification('error', method + orderHash + error)
+	(method, orderHash, error) => alert(method + orderHash + error)
 );
 wsUtil.onOrderBook(
 	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
 	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
-	(method, pair, error) => openNotification('error', method + pair + error)
+	(method, pair, error) => alert(method + pair + error)
 );
 
 wsUtil.onConnection(

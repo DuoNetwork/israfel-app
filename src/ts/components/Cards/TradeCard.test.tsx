@@ -4,6 +4,7 @@
 
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import util from 'ts/common/util';
 import TradeCard from './TradeCard';
 
 describe('TradeCard Test', () => {
@@ -51,6 +52,7 @@ describe('TradeCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapper = shallow(
 				<TradeCard
 					account={'account'}
