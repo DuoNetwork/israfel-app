@@ -311,10 +311,10 @@ svg {
 	position: fixed;
 	top: 70px;
 	left: 50%;
-	transform: translate(-50%, 0);
-	max-height: 0px;
-	transition: all .3s;
+	transform-origin: top;
+	transform: translate(-50%, 0) scaleY(0);
+	transition: all .2s;
 }
 .history-show {
-	max-height: 300vh !important;
+	transform: translate(-50%, 0) scaleY(1);
 }
