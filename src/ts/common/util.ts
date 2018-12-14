@@ -13,12 +13,9 @@ class Util {
 		else return 'Long Time Ago';
 	}
 
-	public formatFixedNumber(num: number, precision: number, takeFloor: boolean) {
+	public formatFixedNumber(num: number, precision: number) {
 		const decimal = precision && precision < 1 ? (precision + '').length - 2 : 0;
-		const roundedNumber =
-			(takeFloor
-				? Math.floor(Number(num) / precision)
-				: Math.round(Number(num) / precision)) * precision;
+		const roundedNumber = Math.round(Number(num) / precision) * precision;
 		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 

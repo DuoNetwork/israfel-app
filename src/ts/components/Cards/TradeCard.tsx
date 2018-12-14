@@ -128,7 +128,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		  )
+		)
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -203,7 +203,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, expiry } = this.state;
 		const step = tokenInfo ? tokenInfo.denomination : null;
 		const amount = step
-			? util.formatFixedNumber((limit * Number(e)) / 100, step, true)
+			? util.formatFixedNumber((limit * Number(e)) / 100, step)
 			: limit * (Number(e) / 100) + '';
 		this.setState({
 			amount: amount,
@@ -221,7 +221,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P)) {
 			const stepPrice = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : null;
 			const price = stepPrice
-				? util.formatFixedNumber(Number(e), stepPrice, false)
+				? util.formatFixedNumber(Number(e), stepPrice)
 				: this.state.price;
 			this.setState({
 				price: price,
@@ -250,7 +250,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P)) {
 			const step = tokenInfo ? tokenInfo.denomination : null;
 			const amount = step
-				? util.formatFixedNumber(Math.min(Number(e), limit), step, true)
+				? util.formatFixedNumber(Math.min(Number(e), limit), step)
 				: this.state.amount;
 			this.setState({
 				amount: amount,
@@ -386,8 +386,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.handlePriceInputChange(
 				util.formatFixedNumber(
 					bidsToRender[0].price ? bidsToRender[0].price : 0,
-					precision,
-					false
+					precision
 				)
 			);
 	};
@@ -401,8 +400,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.handlePriceInputChange(
 				util.formatFixedNumber(
 					asksToRender[0].price ? asksToRender[0].price : 0,
-					precision,
-					false
+					precision
 				)
 			);
 	};
@@ -506,18 +504,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
 															item.balance,
-															denomination,
-															false
-													  )
+															denomination
+													)
 													: '-'}
 											</span>
 											<span className="title">
 												{item.price && item.price > 0
 													? util.formatFixedNumber(
 															item.price,
-															precision,
-															false
-													  )
+															precision
+													)
 													: '-'}
 											</span>
 										</li>
@@ -540,18 +536,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												{item.price && item.price > 0
 													? util.formatFixedNumber(
 															item.price,
-															precision,
-															false
-													  )
+															precision
+													)
 													: '-'}
 											</span>
 											<span className="content">
 												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
 															item.balance,
-															denomination,
-															false
-													  )
+															denomination
+													)
 													: '-'}
 											</span>
 										</li>
