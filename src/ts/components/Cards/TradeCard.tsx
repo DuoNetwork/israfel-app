@@ -282,7 +282,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription: getFeeDescription(token, price, '', tokenInfo),
 			expiryDescription: getExpiryDescription(expiry === 2)
 		});
-	}
+	};
 
 	private handleSellSideChange = () => {
 		const { tokenInfo, ethPrice, token } = this.props;
@@ -297,7 +297,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription: getFeeDescription(token, price, '', tokenInfo),
 			expiryDescription: getExpiryDescription(expiry === 2)
 		});
-	}
+	};
 
 	private handlePriceInputChange = (value: string) => {
 		this.setState({
@@ -375,6 +375,36 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		}
+	};
+
+	private handleBuyChange = () => {
+		const { tokenInfo, orderBook } = this.props;
+		const bidsToRender = orderBook.bids.slice(0, 3);
+		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
+		this.handleBuySideChange();
+		if (bidsToRender)
+			this.handlePriceInputChange(
+				util.formatFixedNumber(
+					bidsToRender[0].price ? bidsToRender[0].price : 0,
+					precision,
+					false
+				)
+			);
+	};
+
+	private handleSellChange = () => {
+		const { tokenInfo, orderBook } = this.props;
+		const asksToRender = orderBook.asks.slice(0, 3);
+		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
+		this.handleSellSideChange();
+		if (asksToRender)
+			this.handlePriceInputChange(
+				util.formatFixedNumber(
+					asksToRender[0].price ? asksToRender[0].price : 0,
+					precision,
+					false
+				)
+			);
 	};
 
 	public render() {
@@ -464,7 +494,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li style={{ justifyContent: 'center' }}>{CST.TH_BID}</li>
+									<li
+										style={{ justifyContent: 'center', cursor: 'pointer' }}
+										onClick={() => this.handleBuyChange()}
+									>
+										{CST.TH_BID}
+									</li>
 									{bidsToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
 											<span className="content">
@@ -476,21 +511,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													  )
 													: '-'}
 											</span>
-											<span
-												className="title"
-												style={{ cursor: 'pointer' }}
-												onClick={() =>
-													item.price
-														? this.handlePriceInputChange(
-																util.formatFixedNumber(
-																	item.price,
-																	precision,
-																	false
-																)
-														  )
-														: null
-												}
-											>
+											<span className="title">
 												{item.price
 													? util.formatFixedNumber(
 															item.price,
@@ -507,24 +528,15 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li style={{ justifyContent: 'center' }}>{CST.TH_ASK}</li>
+									<li
+										style={{ justifyContent: 'center', cursor: 'pointer' }}
+										onClick={() => this.handleSellChange()}
+									>
+										{CST.TH_ASK}
+									</li>
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
-											<span
-												className="title"
-												style={{ cursor: 'pointer' }}
-												onClick={() =>
-													item.price
-														? this.handlePriceInputChange(
-																util.formatFixedNumber(
-																	item.price,
-																	precision,
-																	false
-																)
-														  )
-														: null
-												}
-											>
+											<span className="title">
 												{item.price
 													? util.formatFixedNumber(
 															item.price,
@@ -574,7 +586,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
-										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
+										<p
+											style={{
+												paddingTop: '100px',
+												textAlign: 'center'
+											}}
+										>
 											Not enough allowance, please approve first
 										</p>
 									</li>
@@ -590,10 +607,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									<ul>
 										<li
 											className={'input-line'}
-											style={{
-												padding: '0 10px',
-												marginBottom: 0
-											}}
+											style={{ padding: '0 10px', marginBottom: 0 }}
 										>
 											<span className="input-des">{CST.TH_PX}</span>
 											<SInput
