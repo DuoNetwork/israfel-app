@@ -28,8 +28,10 @@ const parsePairRow: (pair: string) => any = pair => {
 		[CST.TH_AMT]: '',
 		[CST.TH_BALANCE]: '',
 		[CST.TH_FILL]: '',
+		[CST.TH_MATCHING]: '',
 		[CST.TH_FEE]: '',
 		[CST.TH_EXPIRY]: '',
+		[CST.TH_STATUS]: '',
 		[CST.TH_ORDER_HASH]: '',
 		[CST.TH_ACTIONS]: null,
 		children: []
@@ -57,8 +59,10 @@ const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: b
 		[CST.TH_AMT]: uo.amount,
 		[CST.TH_BALANCE]: uo.balance,
 		[CST.TH_FILL]: uo.fill,
+		[CST.TH_MATCHING]: uo.matching,
 		[CST.TH_FEE]: uo.fee + ' ' + uo.feeAsset,
 		[CST.TH_EXPIRY]: moment(uo.expiry).format('YYYY-MM-DD HH:mm'),
+		[CST.TH_STATUS]: uo.type,
 		[CST.TH_ORDER_HASH]: uo.orderHash,
 		[CST.TH_ACTIONS]:
 			isParent && isCancel ? (
@@ -123,8 +127,10 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 							CST.TH_AMT,
 							CST.TH_BALANCE,
 							CST.TH_FILL,
+							CST.TH_MATCHING,
 							CST.TH_FEE,
 							CST.TH_EXPIRY,
+							CST.TH_STATUS,
 							CST.TH_ACTIONS
 						].map(c => (
 							<Column key={c} title={c} dataIndex={c} />

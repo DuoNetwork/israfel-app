@@ -700,7 +700,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								{CST.TH_RESET}
 							</SButton>
 							<SButton
-								disable={limit === 0 || Number(amount) === 0}
+								disable={
+									limit === 0 ||
+									Number(isCreate && wethCreate ? wethAmount : amount) === 0
+								}
 								width="49%"
 								onClick={this.handleSubmit}
 							>

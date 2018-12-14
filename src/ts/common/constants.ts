@@ -54,6 +54,7 @@ export const TH_PX = 'Price';
 export const TH_AMT = 'Amount';
 export const TH_BALANCE = 'Balance';
 export const TH_FILL = 'Fill';
+export const TH_MATCHING = 'Matching';
 export const TH_SIDE = 'Side';
 export const TH_FEE = 'Fee';
 export const TH_STATUS = 'Status';
