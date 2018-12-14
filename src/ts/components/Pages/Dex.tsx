@@ -1,4 +1,4 @@
-import { Layout, Spin } from 'antd';
+import { Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import {
@@ -10,7 +10,6 @@ import {
 	ITokenBalance,
 	IUserOrder
 } from 'ts/common/types';
-import Header from 'ts/containers/HeaderContainer';
 import { SDivFlexCenter } from '../_styled';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
@@ -32,6 +31,7 @@ interface IProps {
 	unsubscribeOrderBook: () => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
+	showHistory: boolean
 }
 
 interface IState {
@@ -40,7 +40,6 @@ interface IState {
 	convertAToken: string;
 	convertBToken: string;
 	tradeToken: string;
-	showHistory: boolean;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
@@ -51,8 +50,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertCustodian: '',
 			convertAToken: '',
 			convertBToken: '',
-			tradeToken: '',
-			showHistory: false
+			tradeToken: ''
 		};
 	}
 
@@ -90,8 +88,6 @@ export default class Dex extends React.Component<IProps, IState> {
 		this.setState({ tradeToken: token });
 	};
 
-	public toggleHistory = () => this.setState({ showHistory: !this.state.showHistory });
-
 	public render() {
 		const {
 			account,
@@ -103,14 +99,14 @@ export default class Dex extends React.Component<IProps, IState> {
 			connection,
 			orderBook,
 			ethPrice,
-			orderHistory
+			orderHistory,
+			showHistory
 		} = this.props;
 		const {
 			convertCustodian,
 			tradeToken,
 			convertAToken,
-			convertBToken,
-			showHistory
+			convertBToken
 		} = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
@@ -127,71 +123,66 @@ export default class Dex extends React.Component<IProps, IState> {
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
 		return (
-			<Layout>
-				<div className="App">
-					<Header toggleHistory={this.toggleHistory} />
-					<Spin spinning={!connection} tip="loading...">
-						<SDivFlexCenter
-							center
-							horizontal
-							marginBottom="20px"
-							style={{ paddingTop: '20px' }}
-						>
-							{beethovenList.map(c => (
-								<CustodianCard
-									key={c}
-									type={CST.BEETHOVEN}
-									handleConvert={this.handleConvert}
-									handleTrade={this.handleTrade}
-									info={custodians[c]}
-									margin="0 10px"
-									acceptedPrices={acceptedPrices[c]}
-									tokenBalances={custodianTokenBalances[c] || {}}
-								/>
-							))}
-						</SDivFlexCenter>
-						<SDivFlexCenter center horizontal marginBottom="60px">
-							{mozartList.map(c => (
-								<CustodianCard
-									key={c}
-									type={CST.MOZART}
-									handleConvert={this.handleConvert}
-									handleTrade={this.handleTrade}
-									info={custodians[c]}
-									margin="0 10px"
-									acceptedPrices={acceptedPrices[c]}
-									tokenBalances={custodianTokenBalances[c] || {}}
-								/>
-							))}
-						</SDivFlexCenter>
-						<OrderHistoryCard
-							orderHistory={orderHistory}
-							account={account}
-							display={showHistory}
+			<Spin spinning={!connection} tip="loading...">
+				<SDivFlexCenter
+					center
+					horizontal
+					marginBottom="20px"
+					style={{ paddingTop: '20px' }}
+				>
+					{beethovenList.map(c => (
+						<CustodianCard
+							key={c}
+							type={CST.BEETHOVEN}
+							handleConvert={this.handleConvert}
+							handleTrade={this.handleTrade}
+							info={custodians[c]}
+							margin="0 10px"
+							acceptedPrices={acceptedPrices[c]}
+							tokenBalances={custodianTokenBalances[c] || {}}
 						/>
-						<ConvertCard
-							account={account}
-							tokenBalances={custodianTokenBalances[convertCustodian]}
-							ethBalance={ethBalance}
-							custodian={convertCustodian}
-							aToken={convertAToken}
-							bToken={convertBToken}
-							info={custodians[convertCustodian]}
-							handleClose={() => this.handleConvert('', '', '')}
+					))}
+				</SDivFlexCenter>
+				<SDivFlexCenter center horizontal marginBottom="60px">
+					{mozartList.map(c => (
+						<CustodianCard
+							key={c}
+							type={CST.MOZART}
+							handleConvert={this.handleConvert}
+							handleTrade={this.handleTrade}
+							info={custodians[c]}
+							margin="0 10px"
+							acceptedPrices={acceptedPrices[c]}
+							tokenBalances={custodianTokenBalances[c] || {}}
 						/>
-						<TradeCard
-							account={account}
-							token={tradeToken}
-							tokenInfo={tradeTokenInfo}
-							tokenBalance={tradeTokenBalance}
-							ethBalance={ethBalance}
-							orderBook={orderBook}
-							ethPrice={ethPrice}
-							handleClose={() => this.handleTrade('')}
-						/>
-					</Spin>
-				</div>
-			</Layout>
+					))}
+				</SDivFlexCenter>
+				<OrderHistoryCard
+					orderHistory={orderHistory}
+					account={account}
+					display={showHistory}
+				/>
+				<ConvertCard
+					account={account}
+					tokenBalances={custodianTokenBalances[convertCustodian]}
+					ethBalance={ethBalance}
+					custodian={convertCustodian}
+					aToken={convertAToken}
+					bToken={convertBToken}
+					info={custodians[convertCustodian]}
+					handleClose={() => this.handleConvert('', '', '')}
+				/>
+				<TradeCard
+					account={account}
+					token={tradeToken}
+					tokenInfo={tradeTokenInfo}
+					tokenBalance={tradeTokenBalance}
+					ethBalance={ethBalance}
+					orderBook={orderBook}
+					ethPrice={ethPrice}
+					handleClose={() => this.handleTrade('')}
+				/>
+			</Spin>
 		);
 	}
 }

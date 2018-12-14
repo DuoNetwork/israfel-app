@@ -20,6 +20,8 @@ Object {
     "acceptedPrices": Object {},
     "connection": false,
     "exchangePrices": Object {},
+    "level": "",
+    "message": "",
     "orderBookSnapshot": Object {
       "asks": Array [],
       "bids": Array [],

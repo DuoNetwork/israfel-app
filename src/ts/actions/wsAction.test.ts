@@ -88,4 +88,8 @@ describe('actions', () => {
 			}, 0)
 		);
 	});
+
+	test('messageUpdate', () => {
+		expect(wsActions.messageUpdate('level', 'message')).toMatchSnapshot();
+	});
 });

@@ -29,6 +29,14 @@ Object {
 }
 `;
 
+exports[`actions messageUpdate 1`] = `
+Object {
+  "level": "level",
+  "message": "message",
+  "type": "message",
+}
+`;
+
 exports[`actions orderBookSnapshotUpdate 1`] = `
 Object {
   "type": "orderBookSnapshot",

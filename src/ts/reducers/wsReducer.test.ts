@@ -181,4 +181,13 @@ describe('ws reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 	});
+
+	test('message', () => {
+		state = wsReducer(state, {
+			type: CST.AC_MESSAGE,
+			level: 'level',
+			message: ' message'
+		});
+		expect(state).toMatchSnapshot();
+	});
 });

@@ -41,6 +41,8 @@ export interface IWsState {
 	readonly orderBookSubscription: string;
 	readonly orderHistory: { [pair: string]: relayerTypes.IUserOrder[] };
 	readonly orderSubscription: string;
+	readonly level: string;
+	readonly message: string
 }
 
 export interface IEthBalance {

@@ -92,3 +92,11 @@ export function subscribeOrder(account: string): VoidThunkAction {
 		}
 	};
 }
+
+export function messageUpdate(level: string, message: string) {
+	return {
+		type: CST.AC_MESSAGE,
+		level: level,
+		message: message
+	};
+}
