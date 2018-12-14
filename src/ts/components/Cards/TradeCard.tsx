@@ -283,11 +283,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 
-	private handlePriceInputChange = (value: string) =>
+	private handlePriceInputChange = (value: string) => {
 		this.setState({
 			price: value
 		});
-
+	};
 	private handleApprove = async () => {
 		this.setState({ approving: true });
 		try {
@@ -447,7 +447,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
-								<ul style={{ opacity: isBid ? 1 : 0.5 }}>
+								<ul>
 									<li style={{ justifyContent: 'center' }}>{CST.TH_BID}</li>
 									{bidsToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
@@ -460,7 +460,21 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													  )
 													: '-'}
 											</span>
-											<span className="title">
+											<span
+												className="title"
+												style={{ cursor: 'pointer' }}
+												onClick={() =>
+													item.price
+														? this.handlePriceInputChange(
+																util.formatFixedNumber(
+																	item.price,
+																	precision,
+																	false
+																)
+														  )
+														: null
+												}
+											>
 												{item.price
 													? util.formatFixedNumber(
 															item.price,
@@ -476,11 +490,25 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SCardList>
 						<SCardList>
 							<div className="status-list-wrapper">
-								<ul style={{ marginLeft: -1, opacity: isBid ? 0.5 : 1 }}>
+								<ul>
 									<li style={{ justifyContent: 'center' }}>{CST.TH_ASK}</li>
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
-											<span className="title">
+											<span
+												className="title"
+												style={{ cursor: 'pointer' }}
+												onClick={() =>
+													item.price
+														? this.handlePriceInputChange(
+																util.formatFixedNumber(
+																	item.price,
+																	precision,
+																	false
+																)
+														  )
+														: null
+												}
+											>
 												{item.price
 													? util.formatFixedNumber(
 															item.price,
