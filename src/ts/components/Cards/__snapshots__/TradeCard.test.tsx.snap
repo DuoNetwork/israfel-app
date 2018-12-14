@@ -359,7 +359,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <Styled(Slider)
-                  defaultValue={0}
                   disabled={true}
                   marks={
                     Object {

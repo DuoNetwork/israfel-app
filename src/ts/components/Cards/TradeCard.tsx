@@ -135,6 +135,42 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 const getExpiryDescription = (isMonth: boolean) =>
 	`Order Valid till ${moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm')}`;
 
+const getLimit = (
+	price: string,
+	isBid: boolean,
+	ethBalance: IEthBalance,
+	tokenBalance?: ITokenBalance,
+	tokenInfo?: IToken
+) => {
+	const priceNum = Number(price);
+	if (!tokenInfo) return 0;
+	const feeSchedule = tokenInfo.feeSchedules[CST.TH_WETH];
+
+	if (!feeSchedule) return 0;
+
+	const availableETH = Math.min(ethBalance.weth, ethBalance.allowance);
+	const availableToken = tokenBalance
+		? Math.min(tokenBalance.balance, tokenBalance.allowance)
+		: 0;
+	if (feeSchedule.asset)
+		if (isBid) {
+			const fee = Math.max(
+				(availableETH / (1 + feeSchedule.rate)) * feeSchedule.rate,
+				feeSchedule.minimum
+			);
+			return Math.max(0, (availableETH - fee) / priceNum);
+		} else return availableToken;
+
+	if (isBid) return availableETH / priceNum;
+	else {
+		const fee = Math.max(
+			(availableToken / (1 + feeSchedule.rate)) * feeSchedule.rate,
+			feeSchedule.minimum
+		);
+		return Math.max(0, availableToken - fee);
+	}
+};
+
 export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -203,7 +239,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, expiry } = this.state;
 		const step = tokenInfo ? tokenInfo.denomination : null;
 		const amount = step
-			? util.formatFixedNumber((limit * Number(e)) / 100, step)
+			? util.formatFixedNumber(Math.max(0, (limit * Number(e)) / 100 - step), step)
 			: limit * (Number(e) / 100) + '';
 		this.setState({
 			amount: amount,
@@ -247,10 +283,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	private handleAmountBlurChange(e: string, limit: number) {
 		const { tokenInfo, token } = this.props;
 		const { isBid, price, expiry } = this.state;
-		if (e.match(CST.RX_NUM_P)) {
+		if (e.match(CST.RX_NUM_P) && Number(e)) {
 			const step = tokenInfo ? tokenInfo.denomination : null;
 			const amount = step
-				? util.formatFixedNumber(Math.min(Number(e), limit), step)
+				? util.formatFixedNumber(Math.min(Number(e), Math.max(limit - step, 0)), step)
 				: this.state.amount;
 			this.setState({
 				amount: amount,
@@ -269,31 +305,22 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			});
 	}
 
-	private handleBuySideChange = () => {
-		const { tokenInfo, ethPrice, token } = this.props;
-		const { price, expiry } = this.state;
+	private handleSideChange = (isBid: boolean) => {
+		const { tokenInfo, orderBook, ethPrice, token } = this.props;
+		const { expiry } = this.state;
+		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
+		const orders = (isBid ? orderBook.bids : orderBook.asks).slice(0, 1);
+		const price =
+			orders && orders.length
+				? util.formatFixedNumber(orders[0].price ? orders[0].price : 0, precision)
+				: '';
 		this.setState({
-			isBid: true,
+			isBid: isBid,
 			amount: '',
 			sliderValue: 0,
-			price: '',
+			price: price,
 			priceDescription: getPriceDescription(price, ethPrice),
-			tradeDescription: getTradeDescription(token, true, price, '', tokenInfo),
-			feeDescription: getFeeDescription(token, price, '', tokenInfo),
-			expiryDescription: getExpiryDescription(expiry === 2)
-		});
-	};
-
-	private handleSellSideChange = () => {
-		const { tokenInfo, ethPrice, token } = this.props;
-		const { price, expiry } = this.state;
-		this.setState({
-			isBid: false,
-			amount: '',
-			sliderValue: 0,
-			price: '',
-			priceDescription: getPriceDescription(price, ethPrice),
-			tradeDescription: getTradeDescription(token, false, price, '', tokenInfo),
+			tradeDescription: getTradeDescription(token, isBid, price, '', tokenInfo),
 			feeDescription: getFeeDescription(token, price, '', tokenInfo),
 			expiryDescription: getExpiryDescription(expiry === 2)
 		});
@@ -377,34 +404,6 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		}
 	};
 
-	private handleBuyChange = () => {
-		const { tokenInfo, orderBook } = this.props;
-		const bidsToRender = orderBook.bids.slice(0, 3);
-		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
-		this.handleBuySideChange();
-		if (bidsToRender)
-			this.handlePriceInputChange(
-				util.formatFixedNumber(
-					bidsToRender[0].price ? bidsToRender[0].price : 0,
-					precision
-				)
-			);
-	};
-
-	private handleSellChange = () => {
-		const { tokenInfo, orderBook } = this.props;
-		const asksToRender = orderBook.asks.slice(0, 3);
-		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
-		this.handleSellSideChange();
-		if (asksToRender)
-			this.handlePriceInputChange(
-				util.formatFixedNumber(
-					asksToRender[0].price ? asksToRender[0].price : 0,
-					precision
-				)
-			);
-	};
-
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const {
@@ -437,13 +436,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const approveRequired = isBid
 			? !ethBalance.allowance
 			: tokenBalance && !tokenBalance.allowance;
-		const limit = price
-			? isBid
-				? Math.min(ethBalance.weth, ethBalance.allowance) / Number(price)
-				: tokenBalance
-				? Math.min(tokenBalance.balance, tokenBalance.allowance)
-				: 0
-			: 0;
+		const limit = getLimit(price, isBid, ethBalance, tokenBalance, tokenInfo);
 		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
 		const denomination = tokenInfo ? tokenInfo.denomination : 0;
 		return (
@@ -494,7 +487,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								<ul>
 									<li
 										style={{ justifyContent: 'center', cursor: 'pointer' }}
-										onClick={() => this.handleBuyChange()}
+										onClick={() => this.handleSideChange(true)}
 									>
 										{CST.TH_BID}
 									</li>
@@ -510,10 +503,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											</span>
 											<span className="title">
 												{item.price && item.price > 0
-													? util.formatFixedNumber(
-															item.price,
-															precision
-													)
+													? util.formatFixedNumber(item.price, precision)
 													: '-'}
 											</span>
 										</li>
@@ -526,7 +516,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								<ul>
 									<li
 										style={{ justifyContent: 'center', cursor: 'pointer' }}
-										onClick={() => this.handleSellChange()}
+										onClick={() => this.handleSideChange(false)}
 									>
 										{CST.TH_ASK}
 									</li>
@@ -534,10 +524,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
 											<span className="title">
 												{item.price && item.price > 0
-													? util.formatFixedNumber(
-															item.price,
-															precision
-													)
+													? util.formatFixedNumber(item.price, precision)
 													: '-'}
 											</span>
 											<span className="content">
@@ -564,7 +551,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									className={
 										isBid ? 'conv-button selected' : 'conv-button non-select'
 									}
-									onClick={() => this.handleBuySideChange()}
+									onClick={() => this.handleSideChange(true)}
 								>
 									{CST.TH_BUY.toUpperCase()}
 								</button>
@@ -572,7 +559,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									className={
 										!isBid ? 'conv-button selected' : 'conv-button non-select'
 									}
-									onClick={() => this.handleSellSideChange()}
+									onClick={() => this.handleSideChange(false)}
 								>
 									{CST.TH_SELL.toUpperCase()}
 								</button>
@@ -663,11 +650,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											style={{ padding: '0px 15px' }}
 										>
 											<SSlider
-												disabled={price === '' || limit < 0.1}
-												value={sliderValue}
+												disabled={price === '' || !limit}
+												value={limit ? sliderValue : 0}
 												marks={marks}
 												step={1}
-												defaultValue={0}
 												onChange={(e: any) =>
 													this.handleSliderChange(e, limit)
 												}
