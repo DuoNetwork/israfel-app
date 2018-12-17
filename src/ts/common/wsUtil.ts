@@ -217,7 +217,6 @@ class WsUtil {
 		const rawOrder = await web3Util.createRawOrder(
 			pair,
 			account,
-			web3Util.relayerAddress,
 			isBid ? address2 : address1,
 			isBid ? address1 : address2,
 			amountAfterFee.makerAssetAmount,
