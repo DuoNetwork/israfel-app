@@ -8,8 +8,8 @@ import { IUserOrder } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
 // import util from '../../common/util';
-import { SCard, SCardTitle } from './_styled';
-import { STableWrapper } from './_styled';
+import { SCard, SCardTitle, STableWrapper } from './_styled';
+import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
 
@@ -20,19 +20,21 @@ interface IProps {
 
 interface IState {
 	showHistory: boolean;
+	details: IUserOrder[];
 }
 
 export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			showHistory: false
+			showHistory: false,
+			details: []
 		};
 	}
 
 	public render() {
 		const { orderHistory, account } = this.props;
-		const { showHistory } = this.state;
+		const { showHistory, details } = this.state;
 		const dataSource: object[] = [];
 		const liveOrders: { [orderHash: string]: IUserOrder[] } = {};
 		const pastOrders: { [orderHash: string]: IUserOrder[] } = {};
@@ -110,17 +112,31 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				}
 			>
 				<STableWrapper>
-					<Table dataSource={dataSource} pagination={false} style={{ width: '100%' }}>
+					<Table
+						dataSource={dataSource}
+						pagination={false}
+						style={{ width: '100%' }}
+						onRow={(record: { [key: string]: any }) => ({
+							onClick: () =>
+								this.setState({ details: record[CST.TH_HISTORY] as IUserOrder[] })
+						})}
+					>
 						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={140} />
 						<Column title={CST.TH_ORDER} dataIndex={CST.TH_ORDER} />
-						{showHistory ? null : <Column
-							key={CST.TH_ACTIONS}
-							title={''}
-							dataIndex={CST.TH_ACTIONS}
-							width={100}
-						/>}
+						{showHistory ? null : (
+							<Column
+								key={CST.TH_ACTIONS}
+								title={''}
+								dataIndex={CST.TH_ACTIONS}
+								width={100}
+							/>
+						)}
 					</Table>
 				</STableWrapper>
+				<OrderDetailCard
+					orders={details}
+					handleClose={() => this.setState({ details: [] })}
+				/>
 			</SCard>
 		);
 	}

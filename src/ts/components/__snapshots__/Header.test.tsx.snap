@@ -26,34 +26,6 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           />
         </div>
       </Link>
-      <div
-        className="nav-bal-wrapper"
-      >
-        <div
-          className="nav-bal-item"
-        >
-          <div>
-            ETH
-          </div>
-          <div
-            className="nav-bal-value"
-          >
-            123.0
-          </div>
-        </div>
-        <div
-          className="nav-bal-item"
-        >
-          <div>
-            WETH
-          </div>
-          <div
-            className="nav-bal-value"
-          >
-            456.0
-          </div>
-        </div>
-      </div>
     </div>
     <styled.div
       horizontal={true}
