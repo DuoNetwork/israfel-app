@@ -50,7 +50,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertAToken: '',
 			convertBToken: '',
 			tradeToken: '',
-			showBalances: false
+			showBalances: true
 		};
 	}
 
@@ -204,7 +204,8 @@ export default class Dex extends React.Component<IProps, IState> {
 					visible={showBalances}
 					account={account}
 					ethBalance={ethBalance}
-					tokens={tokens}
+					beethovenList={beethovenList}
+					mozartList={mozartList}
 					custodianTokenBalances={custodianTokenBalances}
 					handleClose={() => this.setState({ showBalances: !showBalances })}
 				/>

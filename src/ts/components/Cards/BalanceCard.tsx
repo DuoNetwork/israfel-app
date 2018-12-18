@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IEthBalance, IToken, ITokenBalance } from 'ts/common/types';
+import { IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
@@ -43,7 +43,8 @@ interface IProps {
 	visible: boolean;
 	account: string;
 	ethBalance: IEthBalance;
-	tokens: IToken[];
+	beethovenList: string[];
+	mozartList: string[];
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	handleClose: () => void;
 }
@@ -93,11 +94,49 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		const { handleClose, visible, ethBalance, custodianTokenBalances } = this.props;
+		const {
+			handleClose,
+			visible,
+			ethBalance,
+			custodianTokenBalances,
+			beethovenList,
+			mozartList
+		} = this.props;
 		const animated = visible ? 'animated' : '';
 
-		const tokens = [...this.props.tokens];
-		tokens.sort((a, b) => a.code.localeCompare(b.code));
+		const balanceLis: any[] = [];
+		beethovenList.forEach(c => {
+			const codes = Object.keys(custodianTokenBalances[c] || {});
+			codes.sort((a, b) => a.localeCompare(b));
+			codes.forEach(code =>
+				balanceLis.push(
+					<li key={code} style={{ padding: '5px 5px' }}>
+						<span className="title">{code}</span>
+						<span className="content">
+							{custodianTokenBalances[c] && custodianTokenBalances[c][code]
+								? util.formatBalance(custodianTokenBalances[c][code].balance)
+								: '-'}
+						</span>
+					</li>
+				)
+			);
+		});
+		mozartList.forEach(c => {
+			const codes = Object.keys(custodianTokenBalances[c] || {});
+			codes.sort((a, b) => -a.localeCompare(b));
+			codes.forEach(code =>
+				balanceLis.push(
+					<li key={code} style={{ padding: '5px 5px' }}>
+						<span className="title">{code}</span>
+						<span className="content">
+							{custodianTokenBalances[c] && custodianTokenBalances[c][code]
+								? util.formatBalance(custodianTokenBalances[c][code].balance)
+								: '-'}
+						</span>
+					</li>
+				)
+			);
+		});
 
 		return (
 			<div>
@@ -166,23 +205,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 							<SCardList noMargin>
 								<div className="status-list-wrapper">
 									<ul>
-										{tokens.map(token => (
-											<li key={token.code} style={{ padding: '5px 5px' }}>
-												<span className="title">{token.code}</span>
-												<span className="content">
-													{custodianTokenBalances[token.custodian] &&
-													custodianTokenBalances[token.custodian][
-														token.code
-													]
-														? util.formatBalance(
-																custodianTokenBalances[
-																	token.custodian
-																][token.code].balance
-														)
-														: '-'}
-												</span>
-											</li>
-										))}
+										{balanceLis}
 									</ul>
 								</div>
 							</SCardList>
