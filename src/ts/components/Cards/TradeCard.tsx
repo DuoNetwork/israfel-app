@@ -261,7 +261,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				: this.state.price;
 			this.setState({
 				price: price,
-				amount: '0',
+				amount: '',
 				sliderValue: 0,
 				priceDescription: getPriceDescription(price, ethPrice),
 				tradeDescription: getTradeDescription(token, isBid, price, amount, tokenInfo),
@@ -336,7 +336,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		try {
 			const { isBid } = this.state;
 			const tx = await web3Util.setUnlimitedTokenAllowance(
-				isBid ? CST.TH_WETH : this.props.token
+				isBid ? CST.TH_WETH : this.props.token,
+				this.props.account
 			);
 			openNotification('result', tx);
 		} catch (error) {
