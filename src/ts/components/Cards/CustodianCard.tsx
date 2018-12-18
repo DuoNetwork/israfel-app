@@ -20,7 +20,24 @@ interface IProps {
 	handleTrade: (token: string) => void;
 }
 
-export default class CustodianCard extends React.Component<IProps> {
+interface IState {
+	timeStep: number;
+}
+
+export default class CustodianCard extends React.Component<IProps, IState> {
+	constructor(props: IProps) {
+		super(props);
+		this.state = {
+			timeStep: 3600
+		};
+	}
+
+	private handleDayButtonClick(e: number) {
+		this.setState({
+			timeStep: e
+		})
+	}
+
 	public render() {
 		const {
 			type,
@@ -33,6 +50,7 @@ export default class CustodianCard extends React.Component<IProps> {
 			orderBooks,
 			ethPrice
 		} = this.props;
+		const { timeStep } = this.state;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
 		const maturity = util.formatMaturity(info.states.maturity);
@@ -46,12 +64,12 @@ export default class CustodianCard extends React.Component<IProps> {
 			type === CST.BEETHOVEN
 				? d3.format('.2%')(
 						(info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1)
-				) + CST.TH_PA
+				  ) + CST.TH_PA
 				: d3.format('.2f')(
 						lastAcceptedPrice
 							? (lastAcceptedPrice.navA - 2) / lastAcceptedPrice.navA
 							: 0
-				) + CST.TH_X_LEV;
+				  ) + CST.TH_X_LEV;
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
@@ -92,6 +110,10 @@ export default class CustodianCard extends React.Component<IProps> {
 											CST.TH_ETH}
 									</span>
 								</li>
+								<li>
+									<span className="title">aToken</span>
+									<span className="content">{aLabel}</span>
+								</li>
 							</ul>
 						</div>
 					</SCardList>
@@ -119,13 +141,12 @@ export default class CustodianCard extends React.Component<IProps> {
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
-					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
+					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}
-							timeStep={6000}
+							timeStep={timeStep}
 							name={aCode}
 							isA={true}
-							label={aLabel}
 						/>
 					</div>
 					<div
@@ -164,14 +185,25 @@ export default class CustodianCard extends React.Component<IProps> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
+				<SDivFlexCenter horizontal>
+					<SCardList noMargin width="66%">
+						<div className="status-list-wrapper">
+							<ul>
+								<li>
+									<span className="title">bToken</span>
+									<span className="content">{bLabel}</span>
+								</li>
+							</ul>
+						</div>
+					</SCardList>
+				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
-					<div style={{ width: '66%', border: '1px solid rgba(237,241,242,1)' }}>
+					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}
-							timeStep={6000}
+							timeStep={timeStep}
 							name={bCode}
 							isA={false}
-							label={bLabel}
 						/>
 					</div>
 					<div
@@ -209,6 +241,19 @@ export default class CustodianCard extends React.Component<IProps> {
 								: CST.TH_GET}
 						</SButton>
 					</div>
+				</SDivFlexCenter>
+				<SDivFlexCenter horizontal width="66%" padding="0">
+					{[1, 3, 7].map(pct => (
+						<SButton
+							key={pct + ''}
+							className={timeStep === 3600 * pct ? '' : 'day-Button'}
+							onClick={() =>
+								this.handleDayButtonClick(3600 * pct)
+							}
+						>
+							{pct + 'D'}
+						</SButton>
+					))}
 				</SDivFlexCenter>
 			</SCard>
 		);

@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
-import moment from 'moment';
+// import moment from 'moment';
 import * as React from 'react';
 import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
+import util from '../../common/util';
 
-const margin = { top: 5, right: 5, bottom: 30, left: 25 };
+const margin = { top: 5, right: 5, bottom: 10, left: 0 };
 const width = 222 - margin.left - margin.right;
 const height = 110 - margin.top - margin.bottom;
 
@@ -13,26 +14,26 @@ function drawLines(
 	sourceData: IAcceptedPrice[],
 	timeStep: number,
 	name: string,
-	isA: boolean,
-	label: string
+	isA: boolean
 ) {
 	if (!sourceData.length) {
 		d3.selectAll('.loading').remove();
 		d3.select(el)
 			.append('div')
 			.attr('class', 'loading')
-			.html(
-				'<span>Loading...</span>'
-			);
+			.html('<span>Loading...</span>');
 		return;
 	}
+	const now = util.getUTCNowTimestamp();
+	const beginningTime = now / 1000 - 24 * timeStep;
+	const source = sourceData.filter(a => a.timestamp / 1000 > beginningTime);
 	//Establish SVG Playground
 	d3.selectAll('.loading' + name).remove();
 	d3.selectAll('#timeserieschart' + name).remove();
-	const maxNumber = d3.max(sourceData.map(d => (isA ? d.navA : d.navB))) || 0;
-	const miniNumber = d3.min(sourceData.map(d => (isA ? d.navA : d.navB))) || 0;
-	const maxTimestamp = d3.max(sourceData.map(d => d.timestamp)) || 0;
-	const miniTimestamp = d3.min(sourceData.map(d => d.timestamp)) || 0;
+	const maxNumber = d3.max(source.map(d => (isA ? d.navA : d.navB))) || 0;
+	const miniNumber = d3.min(source.map(d => (isA ? d.navA : d.navB))) || 0;
+	const maxTimestamp = d3.max(source.map(d => d.timestamp)) || 0;
+	const miniTimestamp = d3.min(source.map(d => d.timestamp)) || 0;
 	const svg = d3
 		.select(el)
 		.append('svg')
@@ -48,67 +49,10 @@ function drawLines(
 		.scaleLinear()
 		.domain([miniNumber * 0.9, maxNumber * 1.1])
 		.range([height, 0]);
-	//Axis
-	const formatString = (step: number, date: number) => {
-		switch (step) {
-			case 60000:
-				return 'HH:mm';
-			case 600000:
-				return moment(date).format('HH') === '00' ? 'MM-DD' : 'HH:mm';
-			default:
-				return moment(date).format('HH') === '00' ? 'MM-DD' : 'HH:mm';
-		}
-	};
-	const zoomFormat = (date: number) => moment(date).format(formatString(timeStep, date));
-	const xAxis = d3
-		.axisBottom(xScale)
-		.ticks(6)
-		.tickSize(2)
-		.tickFormat(zoomFormat as any);
-	const lyAxis = d3
-		.axisLeft(ethYScale)
-		.tickSize(3)
-		.ticks(5)
-		.tickFormat(
-			d =>
-				d3
-					.format(',.2f')(d)
-					.toString() || ''
-		);
-	//Grid
-	const yGrid = d3
-		.axisLeft(ethYScale)
-		.ticks(5)
-		.tickSize(-width)
-		.tickFormat(() => '');
 	const chart = svg
 		.append('g')
 		.attr('class', 'graph-area' + name)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	const aX = chart
-		.append('g')
-		.attr('class', 'x-axis' + name)
-		.attr('transform', 'translate(0,' + height + ')')
-		.call(xAxis as any);
-	aX.selectAll('text')
-		.style('text-anchor', 'middle')
-		.style('font-size', '8px')
-		.style('color', ColorStyles.TextBlackAlphaLL);
-	aX.selectAll('.tick')
-		.selectAll('line')
-		.attr('stroke', ColorStyles.BorderWhite1);
-	aX.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
-	const aY = chart
-		.append('g')
-		.attr('class', 'ly-axis' + name)
-		.call(lyAxis as any);
-	aY.selectAll('text')
-		.style('font-size', '8px')
-		.style('color', ColorStyles.TextBlackAlphaLL);
-	aY.selectAll('.tick')
-		.selectAll('line')
-		.attr('stroke', ColorStyles.BorderWhite1);
-	aY.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
 	chart
 		.append('defs')
 		.append('clipPath')
@@ -118,24 +62,6 @@ function drawLines(
 		.attr('y', 0)
 		.attr('width', width - 1)
 		.attr('height', height);
-	const yGridLines = chart
-		.append('g')
-		.attr('class', 'y-grid' + name)
-		.style('stroke-dasharray', '3, 3')
-		.call(yGrid as any);
-	yGridLines
-		.selectAll('.tick')
-		.selectAll('line')
-		.attr('stroke', ColorStyles.BorderWhite1);
-	yGridLines.selectAll('.domain').attr('stroke', ColorStyles.BorderWhite1);
-	svg
-		.append('text')
-		.attr('text-anchor', 'end')
-		.attr('transform', 'translate(' + (width + margin.left - 2) + ', 3)')
-		.attr('class', 'label' + name)
-		.text(label)
-		.style('font-size', '10px')
-		.style('fill', ColorStyles.TextBlackAlphaLL);
 	const chartdata = chart
 		.append('g')
 		.attr('class', 'chart-data' + name)
@@ -148,15 +74,24 @@ function drawLines(
 		.y(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
+	const area = d3
+		.area<any>()
+		.x(d => {
+			return xScale(d.timestamp);
+		})
+		.y0(height)
+		.y1(d => {
+			return ethYScale(isA ? d.navA : d.navB);
+		});
 	const ohlc = chartdata.append('g').attr('class', 'ohlc' + name);
 	ohlc.selectAll('g')
-		.data(sourceData)
+		.data(source)
 		.enter()
 		.append('g');
 	const segments = svg.append('g').attr('class', 'segments' + name);
 	segments
 		.selectAll('g')
-		.data(sourceData)
+		.data(source)
 		.enter()
 		.append('g');
 	const segBar = segments.selectAll('g');
@@ -169,11 +104,15 @@ function drawLines(
 		.attr('r', 1)
 		.style('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
 	svg.append('path')
-		.datum(sourceData)
+		.datum(source)
 		.attr('class', 'line' + name)
 		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
+		.attr('fill', 'none')
+		.attr('class', 'area')
+		.attr('d', area)
+		.attr('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar)
 		.attr('stroke', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar)
 		.attr('stroke-width', 2);
 }
@@ -183,7 +122,6 @@ interface IProps {
 	timeStep: number;
 	name: string;
 	isA: boolean;
-	label: string;
 }
 
 export default class TimeSeriesChart extends React.Component<IProps> {
@@ -194,14 +132,17 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, timeStep, name, isA, label } = this.props;
-		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA, label);
+		const { prices, timeStep, name, isA } = this.props;
+		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, timeStep, name, isA, label } = nextProps;
-		if (JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices))
-			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA, label);
+		const { prices, timeStep, name, isA } = nextProps;
+		if (
+			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices)
+			|| JSON.stringify(nextProps.timeStep) !== JSON.stringify(this.props.timeStep)
+		)
+			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
 
 		return false;
 	}

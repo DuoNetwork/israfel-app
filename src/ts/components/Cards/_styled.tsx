@@ -1015,6 +1015,10 @@ injectGlobal([
 				color: ${ColorStyles.MainColor};
 				box-shadow: 0 0 4px 1px ${ColorStyles.MainColorShadow};
 			}
+			.day-Button {
+				border: none;
+				font-size: 12px;
+			}
 		}
 	`
 ] as any);

@@ -65,7 +65,6 @@ class WsUtil {
 	public connectToRelayer() {
 		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
 		this.ws.onopen = () => {
-			console.log('reconnect');
 			this.reconnectionNumber = 0;
 			this.handleConnected();
 		};
