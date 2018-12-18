@@ -19,6 +19,10 @@ class Util {
 		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 
+	public formatPriceShort(num: number) {
+		return d3.format('.4f')(num);
+	}
+
 	public formatBalance(num: number) {
 		if (Math.abs(num) < 1e-8) return '0.000';
 		return d3

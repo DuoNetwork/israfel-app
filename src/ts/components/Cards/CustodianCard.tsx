@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
-import { IAcceptedPrice, ICustodianInfo, ITokenBalance } from 'ts/common/types';
+import { IAcceptedPrice, ICustodianInfo, IOrderBookSnapshot, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
 import { SDivFlexCenter } from '../_styled';
@@ -11,9 +11,11 @@ import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 interface IProps {
 	type: string;
 	tokenBalances: { [code: string]: ITokenBalance };
+	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	info: ICustodianInfo;
 	margin: string;
 	acceptedPrices: IAcceptedPrice[];
+	ethPrice: number;
 	handleConvert: (custodian: string, aToken: string, bToken: string) => void;
 	handleTrade: (token: string) => void;
 }
@@ -27,7 +29,9 @@ export default class CustodianCard extends React.Component<IProps> {
 			handleConvert,
 			handleTrade,
 			tokenBalances,
-			acceptedPrices
+			acceptedPrices,
+			orderBooks,
+			ethPrice
 		} = this.props;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
@@ -56,6 +60,16 @@ export default class CustodianCard extends React.Component<IProps> {
 							lastAcceptedPrice.navB
 					: 0
 			) + CST.TH_X_LEV;
+		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
+		const bOrderBook = orderBooks[bCode + '|' + CST.TH_WETH];
+		const aBestBid =
+			aOrderBook && aOrderBook.bids.length ? aOrderBook.bids[0].price * ethPrice : 0;
+		const aBestAsk =
+			aOrderBook && aOrderBook.asks.length ? aOrderBook.asks[0].price * ethPrice : 0;
+		const bBestBid =
+			bOrderBook && bOrderBook.bids.length ? bOrderBook.bids[0].price * ethPrice : 0;
+		const bBestAsk =
+			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
 		return (
 			<SCard
 				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
@@ -127,7 +141,11 @@ export default class CustodianCard extends React.Component<IProps> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
-										<span className="title">{aCode}</span>
+										<span className="title">
+											{(aBestBid ? util.formatPriceShort(aBestBid) : '-') +
+												'/' +
+												(aBestAsk ? util.formatPriceShort(aBestAsk) : '-')}
+										</span>
 									</li>
 									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">
@@ -169,7 +187,11 @@ export default class CustodianCard extends React.Component<IProps> {
 							<div className="status-list-wrapper">
 								<ul>
 									<li>
-										<span className="title">{bCode}</span>
+										<span className="title">
+											{(bBestBid ? util.formatPriceShort(bBestBid) : '-') +
+												'/' +
+												(bBestAsk ? util.formatPriceShort(bBestAsk) : '-')}
+										</span>
 									</li>
 									<li style={{ flexDirection: 'row-reverse' }}>
 										<span className="content">
