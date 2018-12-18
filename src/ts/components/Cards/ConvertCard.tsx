@@ -96,6 +96,7 @@ const getDescription = (
 	amount: number,
 	info?: ICustodianInfo
 ) => {
+	console.log(amount);
 	const ethCode = wethCreate && isCreate ? CST.TH_WETH : CST.TH_ETH;
 	if (!amount || !info)
 		return isCreate
@@ -181,10 +182,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	private handleAmountBlurChange = (value: string, limit: number) => {
 		const { info, aToken, bToken } = this.props;
 		const { isCreate } = this.state;
-		const defaultDescription = isCreate
-			? `Create ${aToken} and ${bToken} with ETH`
-			: `Redeem ETH from ${aToken} and ${bToken}`;
-		if (value.match(CST.RX_NUM_P)) {
+		if (value.match(CST.RX_NUM_P) && limit) {
 			const amountNum = Math.min(Number(value), limit);
 			this.setState({
 				amount: amountNum + '',
@@ -195,7 +193,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			this.setState({
 				amount: '',
 				sliderValue: 0,
-				description: defaultDescription
+				description: isCreate
+					? `Create ${aToken} and ${bToken} with ETH`
+					: `Redeem ETH from ${aToken} and ${bToken}`
 			});
 	};
 
@@ -207,8 +207,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleWethAmountInputBlurChange = (value: string, limit: number) => {
 		const { info, aToken, bToken } = this.props;
-		const defaultDescription = `Create ${aToken} and ${bToken} with WETH`;
-		if (value.match(CST.RX_NUM_P)) {
+		if (value.match(CST.RX_NUM_P) && limit) {
 			const amountNum = Math.min(Number(value), limit);
 			this.setState({
 				wethAmount: Math.min(Number(value), limit) + '',
@@ -219,7 +218,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			this.setState({
 				wethAmount: '',
 				sliderWETH: 0,
-				description: defaultDescription
+				description: `Create ${aToken} and ${bToken} with WETH`
 			});
 	};
 
@@ -230,10 +229,20 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	};
 
 	private handleSliderWETHChange(e: string, limit: number) {
-		this.setState({
-			wethAmount: ((limit * Number(e)) / 100).toFixed(6),
-			sliderWETH: Number(e)
-		});
+		const { info, aToken, bToken } = this.props;
+		const amountNum = (limit * Number(e)) / 100;
+		if (amountNum)
+			this.setState({
+				wethAmount: util.formatBalance(amountNum),
+				description: getDescription(true, true, aToken, bToken, amountNum, info),
+				sliderWETH: Number(e)
+			});
+		else
+			this.setState({
+				wethAmount: '',
+				description: `Create ${aToken} and ${bToken} with WETH`,
+				sliderWETH: 0
+			});
 	}
 
 	private handleWethCreateChange = () => {
@@ -294,10 +303,23 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	};
 
 	private handleSliderChange(e: string, limit: number) {
-		this.setState({
-			amount: ((limit * Number(e)) / 100).toFixed(6),
-			sliderValue: Number(e)
-		});
+		const { info, aToken, bToken } = this.props;
+		const { isCreate } = this.state;
+		const amountNum = (limit * Number(e)) / 100;
+		if (amountNum)
+			this.setState({
+				amount: util.formatBalance(amountNum),
+				description: getDescription(false, isCreate, aToken, bToken, amountNum, info),
+				sliderValue: Number(e)
+			});
+		else
+			this.setState({
+				amount: '',
+				description: isCreate
+					? `Create ${aToken} and ${bToken} with ETH`
+					: `Redeem ETH from ${aToken} and ${bToken}`,
+				sliderValue: 0
+			});
 	}
 
 	private handleSubmit = async () => {
@@ -584,7 +606,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												marks={marks}
 												step={1}
 												value={sliderValue}
-												defaultValue={0}
 												onChange={(e: any) =>
 													this.handleSliderChange(e, limit)
 												}
@@ -594,7 +615,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											className="waring-expand-button"
 											style={{
 												padding: '0 10px 0 15px',
-												pointerEvents: isCreate ? 'auto' : 'none'
+												pointerEvents:
+													isCreate && ethBalance.weth ? 'auto' : 'none'
 											}}
 											onClick={() =>
 												isCreate && this.handleWethCreateChange()
@@ -602,7 +624,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										>
 											<span
 												style={{
-													opacity: isCreate ? 100 : 0
+													opacity: isCreate && ethBalance.weth ? 100 : 0
 												}}
 											>
 												<img src={waring} style={{ marginRight: 2 }} />
@@ -634,6 +656,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											<SInput
 												right
 												width="100%"
+												disabled={limit === 0}
 												value={wethAmount}
 												onBlur={e =>
 													this.handleWethAmountInputBlurChange(
@@ -652,7 +675,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												marks={marks}
 												step={1}
 												value={sliderWETH}
-												defaultValue={0}
 												onChange={(e: any) =>
 													this.handleSliderWETHChange(e, limit)
 												}
