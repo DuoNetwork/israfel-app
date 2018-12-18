@@ -117,14 +117,6 @@ svg {
 
 }
 
-.chart-wrapper {
-	width: 760px;
-	height: 400px;
-	margin-top: 10px;
-	border: 1px dashed;
-	border-color: rgba(255, 255, 255, 0.1);
-}
-
 .x-axis text,
 .ly-axis text,
 .ry-axis text {

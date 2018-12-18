@@ -5,7 +5,7 @@ import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import util from '../../common/util';
 
-const margin = { top: 5, right: 5, bottom: 10, left: 0 };
+const margin = { top: 0, right: 5, bottom: 0, left: 0 };
 const width = 222 - margin.left - margin.right;
 const height = 110 - margin.top - margin.bottom;
 
@@ -79,7 +79,7 @@ function drawLines(
 		.x(d => {
 			return xScale(d.timestamp);
 		})
-		.y0(margin.top)
+		.y0(0)
 		.y1(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
@@ -114,10 +114,7 @@ function drawLines(
 		.style('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
 	svg.append('path')
 		.datum(source)
-		.attr('class', 'line' + name)
-		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-		.attr('fill', 'none')
 		.attr('class', 'background')
 		.attr('d', background)
 		.attr('fill', ColorStyles.TextBlackAlphaLLL);
@@ -129,9 +126,7 @@ function drawLines(
 		.attr('fill', 'none')
 		.attr('class', 'area')
 		.attr('d', area)
-		.attr('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar)
-		.attr('stroke', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar)
-		.attr('stroke-width', 2);
+		.attr('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
 }
 
 interface IProps {
