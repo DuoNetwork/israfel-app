@@ -11,6 +11,7 @@ import {
 	IUserOrder
 } from 'ts/common/types';
 import { SDivFlexCenter } from '../_styled';
+import BalancePopUpCard from '../Cards/BalancePopUpCard';
 import ConvertCard from '../Cards/ConvertCard';
 import CustodianCard from '../Cards/CustodianCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
@@ -38,6 +39,7 @@ interface IState {
 	convertAToken: string;
 	convertBToken: string;
 	tradeToken: string;
+	BalancePopUpCardVisibiliy: boolean;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
@@ -48,7 +50,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertCustodian: '',
 			convertAToken: '',
 			convertBToken: '',
-			tradeToken: ''
+			tradeToken: '',
+			BalancePopUpCardVisibiliy: false
 		};
 	}
 
@@ -80,6 +83,12 @@ export default class Dex extends React.Component<IProps, IState> {
 		});
 
 	public handleTrade = (token: string) => this.setState({ tradeToken: token });
+
+	private handleBalancePopUpCard = () => {
+		this.setState({
+			BalancePopUpCardVisibiliy: !this.state.BalancePopUpCardVisibiliy
+		});
+	};
 
 	public render() {
 		const {
@@ -196,6 +205,11 @@ export default class Dex extends React.Component<IProps, IState> {
 					}
 					ethPrice={ethPrice}
 					handleClose={() => this.handleTrade('')}
+				/>
+				<BalancePopUpCard
+					visible={this.state.BalancePopUpCardVisibiliy}
+					handleClick={this.handleBalancePopUpCard}
+					ethBalance={ethBalance}
 				/>
 			</Spin>
 		);

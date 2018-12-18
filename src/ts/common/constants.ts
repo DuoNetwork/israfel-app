@@ -54,6 +54,8 @@ export const TH_BUY = 'Buy';
 export const TH_PX = 'Price';
 export const TH_AMT = 'Amount';
 export const TH_BALANCE = 'Balance';
+export const TH_OPEN_BALANCE = 'Open Balance';
+export const TH_CLOSE_BALANCE = 'Close Balance';
 export const TH_FILL = 'Fill';
 export const TH_MATCHING = 'Matching';
 export const TH_SIDE = 'Side';
@@ -84,6 +86,7 @@ export const TH_X_LEV = 'x leverage';
 export const TH_BID = 'Bid';
 export const TH_ASK = 'Ask';
 export const TH_TOTAL_SUPPLY = 'Total Supply';
+export const TH_TOTAL_ASSET = 'Total Assete';
 export const TH_CONV_RATIO = 'Conversion Ratio';
 export const TH_AMOUNT = 'Amount';
 

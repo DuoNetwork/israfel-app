@@ -77,7 +77,7 @@ export interface ISButtonProps {
 }
 
 export const SButton = styled.button`
-	pointer-events: ${(props: ISButtonProps) => (props.disable ? 'none' : 'auto' )};
+	pointer-events: ${(props: ISButtonProps) => (props.disable ? 'none' : 'auto')};
 	cursor: pointer;
 	outline: none;
 	height: 30px;
@@ -963,6 +963,57 @@ injectGlobal([
 			}
 			.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
 				padding: 12px 5px;
+			}
+			.panel-layer {
+				position: fixed;
+				top: 0;
+				right: 0;
+				left: 0;
+				bottom: 0;
+				z-index: 1;
+			}
+
+			.panel-wrap {
+				position: fixed;
+				top: 0;
+				right: -600px;
+				bottom: 0;
+				z-index: 2;
+				margin-top: 80px;
+				height: 790px;
+				overflow: auto;
+				width: 195px;
+				background: #ffffff;
+				border: 1px solid #dedede;
+				-webkit-box-shadow: -4px 0 11px 0 rgba(0,0,0,0.14);
+				box-shadow: -4px 0 11px 0 rgba(0,0,0,0.14);
+				border-radius: 8px 0 0 8px;
+				-webkit-transition: right .3s;
+				-o-transition: right .3s;
+				transition: right .3s;
+			}
+
+				// 打开时候的动画
+			.panel-wrap.animated {
+				right: 0;
+				-webkit-transition: right .5s;
+				-o-transition: right .5s;
+				transition: right .5s;
+			}
+			.rightFixed {
+				position: fixed;
+				width: 300px;
+				height: 31px;
+				right: -90px;
+				top: 450px;
+				-webkit-transform: rotate(90deg);
+				-ms-transform: rotate(90deg);
+				transform: rotate(90deg);
+			}
+			.rightFixed:hover {
+				background: ${ColorStyles.TextWhite};
+				color: ${ColorStyles.MainColor};
+				box-shadow: 0 0 4px 1px ${ColorStyles.MainColorShadow};
 			}
 		}
 	`
