@@ -13,25 +13,12 @@ interface IProps {
 	tokens: IToken[];
 }
 
-interface IState {
-	showHistory: boolean;
-}
-
-export default class Israfel extends React.Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-		this.state = {
-			showHistory: false
-		};
-	}
-
+export default class Israfel extends React.Component<IProps> {
 	public render() {
 		return (
 			<Layout>
 				<Message />
-				<Header
-					toggleHistory={() => this.setState({ showHistory: !this.state.showHistory })}
-				/>
+				<Header />
 				<SContent>
 					<Switch>
 						<Route path={'/status'} render={() => <Status />} />
@@ -47,7 +34,7 @@ export default class Israfel extends React.Component<IProps, IState> {
 						) : (
 							<Route render={() => <Loading />} />
 						)} */}
-						<Route render={() => <Dex showHistory={this.state.showHistory} />} />
+						<Route render={() => <Dex/>} />
 					</Switch>
 				</SContent>
 			</Layout>

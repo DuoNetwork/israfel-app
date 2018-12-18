@@ -20,7 +20,6 @@ describe('Header Test', () => {
 						allowance: 789
 					}}
 					updateLocale={() => ({})}
-					toggleHistory={() => ({})}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

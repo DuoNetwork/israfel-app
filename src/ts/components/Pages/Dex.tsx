@@ -30,7 +30,6 @@ interface IProps {
 	connection: boolean;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
-	showHistory: boolean;
 }
 
 interface IState {
@@ -101,8 +100,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			connection,
 			orderBooks,
 			ethPrice,
-			orderHistory,
-			showHistory
+			orderHistory
 		} = this.props;
 		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
 		const beethovenList: string[] = [];
@@ -150,7 +148,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						);
 					})}
 				</SDivFlexCenter>
-				<SDivFlexCenter center horizontal marginBottom="60px">
+				<SDivFlexCenter center horizontal marginBottom="20px">
 					{mozartList.map(c => {
 						const tbs = custodianTokenBalances[c] || {};
 						const obs: { [pair: string]: IOrderBookSnapshot } = {};
@@ -177,7 +175,6 @@ export default class Dex extends React.Component<IProps, IState> {
 				<OrderHistoryCard
 					orderHistory={orderHistory}
 					account={account}
-					display={showHistory}
 				/>
 				<ConvertCard
 					account={account}
