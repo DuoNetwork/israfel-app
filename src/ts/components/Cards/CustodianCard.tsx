@@ -35,7 +35,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 	private handleDayButtonClick(e: number) {
 		this.setState({
 			timeStep: e
-		})
+		});
 	}
 
 	public render() {
@@ -64,12 +64,12 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			type === CST.BEETHOVEN
 				? d3.format('.2%')(
 						(info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1)
-				  ) + CST.TH_PA
+				) + CST.TH_PA
 				: d3.format('.2f')(
 						lastAcceptedPrice
 							? (lastAcceptedPrice.navA - 2) / lastAcceptedPrice.navA
 							: 0
-				  ) + CST.TH_X_LEV;
+				) + CST.TH_X_LEV;
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
@@ -110,10 +110,6 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 											CST.TH_ETH}
 									</span>
 								</li>
-								<li>
-									<span className="title">aToken</span>
-									<span className="content">{aLabel}</span>
-								</li>
 							</ul>
 						</div>
 					</SCardList>
@@ -139,6 +135,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 								: CST.TH_GET_BOTH}
 						</SButton>
 					</div>
+				</SDivFlexCenter>
+				<SDivFlexCenter horizontal>
+					{aCode + ' ' + aLabel}
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
@@ -168,13 +167,6 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 												(aBestAsk ? util.formatPriceShort(aBestAsk) : '-')}
 										</span>
 									</li>
-									<li style={{ flexDirection: 'row-reverse' }}>
-										<span className="content">
-											{tokenBalances[aCode]
-												? util.formatBalance(tokenBalances[aCode].balance)
-												: 0}
-										</span>
-									</li>
 								</ul>
 							</div>
 						</SCardList>
@@ -186,16 +178,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal>
-					<SCardList noMargin width="66%">
-						<div className="status-list-wrapper">
-							<ul>
-								<li>
-									<span className="title">bToken</span>
-									<span className="content">{bLabel}</span>
-								</li>
-							</ul>
-						</div>
-					</SCardList>
+					{bCode + ' ' + bLabel}
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
@@ -225,13 +208,6 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 												(bBestAsk ? util.formatPriceShort(bBestAsk) : '-')}
 										</span>
 									</li>
-									<li style={{ flexDirection: 'row-reverse' }}>
-										<span className="content">
-											{tokenBalances[bCode]
-												? util.formatBalance(tokenBalances[bCode].balance)
-												: 0}
-										</span>
-									</li>
 								</ul>
 							</div>
 						</SCardList>
@@ -247,9 +223,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<SButton
 							key={pct + ''}
 							className={timeStep === 3600 * pct ? '' : 'day-Button'}
-							onClick={() =>
-								this.handleDayButtonClick(3600 * pct)
-							}
+							onClick={() => this.handleDayButtonClick(3600 * pct)}
 						>
 							{pct + 'D'}
 						</SButton>
