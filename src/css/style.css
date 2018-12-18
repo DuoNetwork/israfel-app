@@ -307,7 +307,7 @@ svg {
 	}
 }
 
-.order-history-card {
+/* .order-history-card {
 	position: fixed;
 	top: 70px;
 	left: 50%;
@@ -317,4 +317,4 @@ svg {
 }
 .history-show {
 	transform: translate(-50%, 0) scaleY(1);
-}
+} */

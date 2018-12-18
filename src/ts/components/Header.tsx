@@ -12,12 +12,11 @@ export interface IProps {
 	locale: string;
 	ethBalance: IEthBalance;
 	updateLocale: (locale: string) => any;
-	toggleHistory: () => any;
 }
 
 export default class Header extends React.Component<IProps> {
 	public render() {
-		const { network, ethBalance, toggleHistory } = this.props;
+		const { network, ethBalance } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
 		return (
 			<SHeader>
@@ -52,9 +51,7 @@ export default class Header extends React.Component<IProps> {
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
-						<div className="nav-button-wrapper">
-							<a onClick={toggleHistory}>ORDERS</a>
-						</div>
+						<div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div>
 						<div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
 						</div>

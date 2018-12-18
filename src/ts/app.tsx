@@ -30,7 +30,10 @@ wsUtil.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
 });
 wsUtil.onOrder(
 	userOrders => store.dispatch(wsActions.orderHistoryUpdate(userOrders)),
-	userOrder => store.dispatch(wsActions.orderUpdate(userOrder)),
+	userOrder => {
+		store.dispatch(wsActions.orderUpdate(userOrder));
+		store.dispatch(wsActions.messageUpdate('info', JSON.stringify(userOrder)));
+	},
 	(method, orderHash, error) =>
 		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error))
 );

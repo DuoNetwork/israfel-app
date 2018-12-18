@@ -61,11 +61,7 @@ exports[`Header Test User Login Test Snapshot 1`] = `
       <div
         className="nav-button-wrapper"
       >
-        <a
-          onClick={[Function]}
-        >
-          ORDERS
-        </a>
+        ORDERS
       </div>
       <div
         className="nav-button-wrapper"
