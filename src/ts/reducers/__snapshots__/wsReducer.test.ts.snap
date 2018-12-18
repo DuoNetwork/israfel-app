@@ -200,14 +200,14 @@ Object {
   "orderHistory": Object {
     "pair1": Array [
       Object {
-        "currentSequence": 123,
-        "pair": "pair1",
-        "userOrders": "fromList",
-      },
-      Object {
         "currentSequence": 456,
         "pair": "pair1",
         "userOrder": "from single order",
+      },
+      Object {
+        "currentSequence": 123,
+        "pair": "pair1",
+        "userOrders": "fromList",
       },
     ],
     "pair2": Array [
@@ -266,14 +266,14 @@ Object {
   "orderHistory": Object {
     "pair1": Array [
       Object {
-        "currentSequence": 123,
-        "pair": "pair1",
-        "userOrders": "fromList",
-      },
-      Object {
         "currentSequence": 456,
         "pair": "pair1",
         "userOrder": "from single order",
+      },
+      Object {
+        "currentSequence": 123,
+        "pair": "pair1",
+        "userOrders": "fromList",
       },
     ],
     "pair2": Array [
@@ -540,12 +540,12 @@ Object {
   "orderHistory": Object {
     "pair1": Array [
       Object {
-        "currentSequence": 123,
+        "currentSequence": 456,
         "pair": "pair1",
         "userOrders": "fromList",
       },
       Object {
-        "currentSequence": 456,
+        "currentSequence": 123,
         "pair": "pair1",
         "userOrders": "fromList",
       },

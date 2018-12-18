@@ -18,96 +18,78 @@ interface IProps {
 	account: string;
 }
 
-const parsePairRow: (pair: string) => any = pair => {
-	return {
-		key: pair,
-		[CST.TH_PAIR]: pair,
-		[CST.TH_SIDE]: '',
-		[CST.TH_PX]: '',
-		[CST.TH_AMT]: '',
-		[CST.TH_BALANCE]: '',
-		[CST.TH_FILL]: '',
-		[CST.TH_MATCHING]: '',
-		[CST.TH_FEE]: '',
-		[CST.TH_EXPIRY]: '',
-		[CST.TH_STATUS]: '',
-		[CST.TH_ORDER_HASH]: '',
-		[CST.TH_ACTIONS]: null,
-		children: []
-	};
-};
+interface IState {
+	showHistory: boolean;
+}
 
-const parseRow: (uo: IUserOrder, isParent: boolean, account: string, isCancel: boolean) => any = (
-	uo,
-	isParent,
-	account,
-	isCancel
-) => {
-	function handleClick(e: any, orderHash: string, pair: string, acc: string) {
-		web3Util
-			.web3PersonalSign(acc, CST.TERMINATE_SIGN_MSG + orderHash)
-			.then(result => wsUtil.deleteOrder(pair, orderHash, result));
-		console.log(e);
+export default class OrderHistoryCard extends React.Component<IProps, IState> {
+	constructor(props: IProps) {
+		super(props);
+		this.state = {
+			showHistory: false
+		};
 	}
 
-	const row: { [key: string]: any } = {
-		key: uo.currentSequence,
-		[CST.TH_PAIR]: uo.pair,
-		[CST.TH_SIDE]: uo.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
-		[CST.TH_PX]: uo.price,
-		[CST.TH_AMT]: uo.amount,
-		[CST.TH_BALANCE]: uo.balance,
-		[CST.TH_FILL]: uo.fill,
-		[CST.TH_MATCHING]: uo.matching,
-		[CST.TH_FEE]: uo.fee + ' ' + uo.feeAsset,
-		[CST.TH_EXPIRY]: moment(uo.expiry).format('YYYY-MM-DD HH:mm'),
-		[CST.TH_STATUS]: uo.type + '|' + uo.status,
-		[CST.TH_ORDER_HASH]: uo.orderHash,
-		[CST.TH_ACTIONS]:
-			isParent && isCancel ? (
-				<Popconfirm
-					title={CST.TT_DELETE_ORDER}
-					icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-					onConfirm={e => handleClick(e, uo.orderHash, uo.pair, account)}
-				>
-					<a style={{ color: '#f5222d' }}>cancel</a>
-				</Popconfirm>
-			) : null
-	};
-	if (isParent) row.children = [];
-	return row;
-};
-
-export default class OrderHistoryCard extends React.Component<IProps> {
 	public render() {
 		const { orderHistory, account } = this.props;
-		const dataSource = [];
+		const { showHistory } = this.state;
+		const dataSource: object[] = [];
+		const liveOrders: { [orderHash: string]: IUserOrder[] } = {};
+		const pastOrders: { [orderHash: string]: IUserOrder[] } = {};
 		for (const pair in orderHistory) {
-			const pairHistory = orderHistory[pair];
-			const pairRow = parsePairRow(pair);
-			let parentRow = [];
-			if (pairHistory.length) {
-				pairHistory.sort(
-					(a, b) =>
-						-a.initialSequence + b.initialSequence ||
-						-a.currentSequence + b.currentSequence
-				);
-				if (pairHistory[0].type === 'terminate')
-					parentRow = parseRow(pairHistory[0], true, account, false);
-				else parentRow = parseRow(pairHistory[0], true, account, true);
-				for (let i = 1; i < pairHistory.length; i++) {
-					const userOrder = pairHistory[i];
-					if (userOrder.orderHash !== parentRow[CST.TH_ORDER_HASH]) {
-						pairRow.children.push(parentRow);
-						if (userOrder.type === 'terminate')
-							parentRow = parseRow(userOrder, true, account, false);
-						else parentRow = parseRow(userOrder, true, account, true);
-					} else parentRow.children.push(parseRow(userOrder, false, account, false));
+			const pairOrders = orderHistory[pair];
+			pairOrders.forEach(order => {
+				const { orderHash, type } = order;
+				// an order can only have one terminate version
+				if (type === CST.DB_TERMINATE) pastOrders[orderHash] = [order];
+				// if this order already has a terminate version,
+				// put previous versions into past orders
+				else if (pastOrders[orderHash]) pastOrders[orderHash].push(order);
+				else {
+					if (!liveOrders[orderHash]) liveOrders[orderHash] = [];
+					liveOrders[orderHash].push(order);
 				}
-				pairRow.children.push(parentRow);
-				dataSource.push(pairRow);
-			}
+			});
 		}
+		if (showHistory)
+			for (const orderHash in pastOrders) {
+				const orders = pastOrders[orderHash];
+				const lastVersion = orders[0];
+				const firstVersion = orders[orders.length - 1];
+				dataSource.push({
+					key: orderHash,
+					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_HISTORY]: orders
+				});
+			}
+		else
+			for (const orderHash in liveOrders) {
+				const orders = liveOrders[orderHash];
+				const lastVersion = orders[0];
+				const firstVersion = orders[orders.length - 1];
+				dataSource.push({
+					key: orderHash,
+					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_ACTIONS]: (
+						<Popconfirm
+							title={CST.TT_DELETE_ORDER}
+							icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+							onConfirm={() =>
+								web3Util
+									.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash)
+									.then(result =>
+										wsUtil.deleteOrder(lastVersion.pair, orderHash, result)
+									)
+							}
+						>
+							<a style={{ color: '#f5222d' }}>{CST.TH_CANCEL}</a>
+						</Popconfirm>
+					),
+					[CST.TH_HISTORY]: orders
+				});
+			}
 		return (
 			<SCard
 				title={
@@ -115,24 +97,28 @@ export default class OrderHistoryCard extends React.Component<IProps> {
 				}
 				width="740px"
 				margin="0 10px 0 10px"
+				extra={
+					<button
+						onClick={() =>
+							this.setState({
+								showHistory: !showHistory
+							})
+						}
+					>
+						Switch to {showHistory ? CST.TH_LIVE : CST.TH_HISTORY}
+					</button>
+				}
 			>
 				<STableWrapper>
 					<Table dataSource={dataSource} pagination={false} style={{ width: '100%' }}>
-						{[
-							CST.TH_PAIR,
-							CST.TH_SIDE,
-							CST.TH_PX,
-							CST.TH_AMT,
-							CST.TH_BALANCE,
-							CST.TH_FILL,
-							CST.TH_MATCHING,
-							CST.TH_FEE,
-							CST.TH_EXPIRY,
-							CST.TH_STATUS,
-							CST.TH_ACTIONS
-						].map(c => (
-							<Column key={c} title={c} dataIndex={c} />
-						))}
+						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={140} />
+						<Column title={CST.TH_ORDER} dataIndex={CST.TH_ORDER} />
+						{showHistory ? null : <Column
+							key={CST.TH_ACTIONS}
+							title={''}
+							dataIndex={CST.TH_ACTIONS}
+							width={100}
+						/>}
 					</Table>
 				</STableWrapper>
 			</SCard>

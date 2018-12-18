@@ -76,24 +76,36 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 					if (!orderHistory[o.pair]) orderHistory[o.pair] = [];
 					orderHistory[o.pair].push(o);
 				});
+				for (const pair in orderHistory)
+					orderHistory[pair].sort(
+						(a, b) =>
+							-a.initialSequence + b.initialSequence ||
+							-a.currentSequence + b.currentSequence
+					);
 				return Object.assign({}, state, {
 					orderHistory: orderHistory
 				});
 			} else return state;
 		case CST.AC_ORDER:
 			const newOrder: IUserOrder = action.value;
-			if (state.orderHistory[newOrder.pair])
+			if (state.orderHistory[newOrder.pair]) {
+				const newOrderArray = [
+					...state.orderHistory[newOrder.pair].filter(
+						o => o.currentSequence !== newOrder.currentSequence
+					),
+					newOrder
+				];
+				newOrderArray.sort(
+					(a, b) =>
+						-a.initialSequence + b.initialSequence ||
+						-a.currentSequence + b.currentSequence
+				);
 				return Object.assign({}, state, {
 					orderHistory: Object.assign({}, state.orderHistory, {
-						[newOrder.pair]: [
-							...state.orderHistory[newOrder.pair].filter(
-								o => o.currentSequence !== newOrder.currentSequence
-							),
-							newOrder
-						]
+						[newOrder.pair]: newOrderArray
 					})
 				});
-			else
+			} else
 				return Object.assign({}, state, {
 					orderHistory: Object.assign({}, state.orderHistory, {
 						[newOrder.pair]: [newOrder]
