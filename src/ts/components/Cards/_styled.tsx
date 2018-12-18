@@ -1019,6 +1019,9 @@ injectGlobal([
 				border: none;
 				font-size: 12px;
 			}
+			.ant-card-body {
+				overflow: scroll;
+			}
 		}
 	`
 ] as any);

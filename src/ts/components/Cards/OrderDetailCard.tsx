@@ -18,7 +18,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 				<div className={'popup-bg ' + (visible ? 'popup-open-bg' : '')} />
 				<SCard
 					title={<SCardTitle>{CST.TH_ORDER.toUpperCase()}</SCardTitle>}
-					width="360px"
+					width="600px"
 					className={'popup-card ' + (visible ? 'popup-open' : '')}
 					noBodymargin
 					extra={<img className="cardpopup-close" src={close} onClick={handleClose} />}
