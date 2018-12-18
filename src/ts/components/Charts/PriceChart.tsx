@@ -74,6 +74,15 @@ function drawLines(
 		.y(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
+	const background = d3
+		.area<any>()
+		.x(d => {
+			return xScale(d.timestamp);
+		})
+		.y0(margin.top)
+		.y1(d => {
+			return ethYScale(isA ? d.navA : d.navB);
+		});
 	const area = d3
 		.area<any>()
 		.x(d => {
@@ -109,6 +118,14 @@ function drawLines(
 		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
+		.attr('class', 'background')
+		.attr('d', background)
+		.attr('fill', ColorStyles.TextBlackAlphaLLL);
+	svg.append('path')
+		.datum(source)
+		.attr('class', 'line' + name)
+		.attr('d', line)
+		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
 		.attr('class', 'area')
 		.attr('d', area)
@@ -139,8 +156,8 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	public shouldComponentUpdate(nextProps: IProps) {
 		const { prices, timeStep, name, isA } = nextProps;
 		if (
-			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices)
-			|| JSON.stringify(nextProps.timeStep) !== JSON.stringify(this.props.timeStep)
+			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices) ||
+			JSON.stringify(nextProps.timeStep) !== JSON.stringify(this.props.timeStep)
 		)
 			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
 
