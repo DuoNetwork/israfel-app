@@ -3,6 +3,7 @@ import * as CST from 'ts/common/constants';
 import {
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IToken,
 	IUserOrder,
 	IWsState
 } from 'ts/common/types';
@@ -15,13 +16,7 @@ export const initialState: IWsState = {
 	status: [],
 	acceptedPrices: {},
 	exchangePrices: {},
-	orderBookSnapshot: {
-		pair: 'pair',
-		version: 0,
-		bids: [],
-		asks: []
-	},
-	orderBookSubscription: '',
+	orderBookSnapshot: {},
 	orderHistory: {},
 	orderSubscription: '',
 	level: '',
@@ -35,6 +30,20 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 				connection: action.value
 			});
 		case CST.AC_INFO:
+			const newCodes = (action.tokens as IToken[]).map(token => token.code);
+			const oldCodes = state.tokens.map(token => token.code);
+			newCodes.sort();
+			oldCodes.sort();
+			if (JSON.stringify(newCodes) !== JSON.stringify(oldCodes)) {
+				oldCodes.forEach(code => {
+					if (!newCodes.includes(code))
+						wsUtil.unsubscribeOrderBook(code + '|' + CST.TH_WETH);
+				});
+				newCodes.forEach(code => {
+					if (!oldCodes.includes(code))
+						wsUtil.subscribeOrderBook(code + '|' + CST.TH_WETH);
+				});
+			}
 			return Object.assign({}, state, {
 				tokens: action.tokens,
 				status: action.status,
@@ -42,42 +51,24 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 				exchangePrices: action.exchangePrices
 			});
 		case CST.AC_OB_SNAPSHOT:
-			if (state.orderBookSubscription === action.value.pair)
-				return Object.assign({}, state, {
-					orderBookSnapshot: action.value
-				});
-			else return state;
+			return Object.assign({}, state, {
+				orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
+					[action.value.pair]: action.value
+				})
+			});
 		case CST.AC_OB_UPDATE:
-			if (state.orderBookSubscription === action.value.pair) {
+			if (state.orderBookSnapshot[action.value.pair]) {
 				const obUpdate: IOrderBookSnapshotUpdate = action.value;
 				const orderBook: IOrderBookSnapshot = JSON.parse(
-					JSON.stringify(state.orderBookSnapshot)
+					JSON.stringify(state.orderBookSnapshot[obUpdate.pair])
 				);
 				orderBookUtil.updateOrderBookSnapshot(orderBook, obUpdate);
 				return Object.assign({}, state, {
-					orderBookSnapshot: orderBook
+					orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
+						[obUpdate.pair]: orderBook
+					})
 				});
 			} else return state;
-		case CST.AC_OB_SUB:
-			if (action.pair)
-				return Object.assign({}, state, {
-					orderBookSubscription: action.pair
-				});
-			else {
-				const { orderBookSnapshot, orderBookSubscription, ...restOb } = state;
-				if (orderBookSubscription) wsUtil.unsubscribeOrderBook(orderBookSubscription);
-
-				return {
-					...restOb,
-					orderBookSnapshot: {
-						pair: 'pair',
-						version: 0,
-						bids: [],
-						asks: []
-					},
-					orderBookSubscription: ''
-				};
-			}
 		case CST.AC_ORDER_HISTORY:
 			if ((action.value as IUserOrder[]).length) {
 				const orderHistory: { [pair: string]: IUserOrder[] } = {};
@@ -115,7 +106,8 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 				});
 			else {
 				const { orderHistory, orderSubscription, ...restOrder } = state;
-				if (orderSubscription) wsUtil.unsubscribeOrderHistory(orderSubscription);
+				if (orderSubscription && orderSubscription !== CST.DUMMY_ADDR)
+					wsUtil.unsubscribeOrderHistory(orderSubscription);
 
 				return {
 					...restOrder,

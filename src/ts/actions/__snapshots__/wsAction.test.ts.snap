@@ -46,13 +46,6 @@ Object {
 }
 `;
 
-exports[`actions orderBookSubscriptionUpdate 1`] = `
-Object {
-  "pair": "pair",
-  "type": "orderBookSubscription",
-}
-`;
-
 exports[`actions orderBookUpdate 1`] = `
 Object {
   "type": "orderBookUpdate",
@@ -76,7 +69,7 @@ Object {
 exports[`actions orderSubscriptionUpdate 1`] = `
 Object {
   "account": "account",
-  "type": "orderBookSubscription",
+  "type": "orderSubscription",
 }
 `;
 
@@ -89,41 +82,20 @@ Object {
 }
 `;
 
-exports[`actions subscribeOrderBook 1`] = `
-Array [
-  Object {
-    "pair": "",
-    "type": "orderBookSubscription",
-  },
-  Object {
-    "pair": "pair",
-    "type": "orderBookSubscription",
-  },
-]
-`;
-
-exports[`actions subscribeOrderBook 2`] = `
-Array [
-  Array [
-    "pair",
-  ],
-]
-`;
-
-exports[`actions subscribeOrderBook 3`] = `
+exports[`actions subscribeOrder 1`] = `
 Array [
   Object {
     "account": "",
-    "type": "orderBookSubscription",
+    "type": "orderSubscription",
   },
   Object {
     "account": "account",
-    "type": "orderBookSubscription",
+    "type": "orderSubscription",
   },
 ]
 `;
 
-exports[`actions subscribeOrderBook 4`] = `
+exports[`actions subscribeOrder 2`] = `
 Array [
   Array [
     "account",
@@ -131,11 +103,11 @@ Array [
 ]
 `;
 
-exports[`actions subscribeOrderBook dummy account 1`] = `
+exports[`actions subscribeOrder dummy account 1`] = `
 Array [
   Object {
     "account": "",
-    "type": "orderBookSubscription",
+    "type": "orderSubscription",
   },
 ]
 `;

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as wsActions from 'ts/actions/wsActions';
-import * as CST from 'ts/common/constants';
 import { IState } from 'ts/common/types';
 import Dex from 'ts/components/Pages/Dex';
 
@@ -15,7 +14,7 @@ function mapStateToProps(state: IState) {
 		custodians: state.web3.custodians,
 		custodianTokenBalances: state.web3.custodianTokenBalances,
 		ethBalance: state.web3.ethBalance,
-		orderBook: state.ws.orderBookSnapshot,
+		orderBooks: state.ws.orderBookSnapshot,
 		orderHistory: state.ws.orderHistory,
 		connection: state.ws.connection,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0
@@ -24,9 +23,6 @@ function mapStateToProps(state: IState) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
-		subscribeOrderBook: (token: string) =>
-			dispatch(wsActions.subscribeOrderBook(token + '|' + CST.TH_WETH)),
-		unsubscribeOrderBook: () => dispatch(wsActions.orderBookSubscriptionUpdate('')),
 		subscribeOrder: (account: string) => dispatch(wsActions.subscribeOrder(account)),
 		unsubscribeOrder: () => dispatch(wsActions.orderSubscriptionUpdate(''))
 	};

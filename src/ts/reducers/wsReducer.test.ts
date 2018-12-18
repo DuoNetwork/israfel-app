@@ -19,23 +19,48 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('status', () => {
+	test('info', () => {
+		wsUtil.subscribeOrderBook = jest.fn();
+		wsUtil.unsubscribeOrderBook = jest.fn();
 		state = wsReducer(state, {
 			type: CST.AC_INFO,
-			tokens: ['token1'],
+			tokens: [
+				{
+					code: 'token1'
+				},
+				{
+					code: 'token2'
+				}
+			],
 			status: ['status1'],
 			acceptedPrices: { custodian: ['acceptedPrices'] },
 			exchangePrices: { source: ['exchangePrices'] }
 		});
 		expect(state).toMatchSnapshot();
+		expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
 	});
 
-	test('orderBookSubscription on', () => {
+	test('info overlapping tokens', () => {
+		wsUtil.subscribeOrderBook = jest.fn();
+		wsUtil.unsubscribeOrderBook = jest.fn();
 		state = wsReducer(state, {
-			type: CST.AC_OB_SUB,
-			pair: 'pair'
+			type: CST.AC_INFO,
+			tokens: [
+				{
+					code: 'token2'
+				},
+				{
+					code: 'token3'
+				}
+			],
+			status: ['status1'],
+			acceptedPrices: { custodian: ['acceptedPrices'] },
+			exchangePrices: { source: ['exchangePrices'] }
 		});
 		expect(state).toMatchSnapshot();
+		expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((wsUtil.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderBookSnapshot', () => {
@@ -51,7 +76,7 @@ describe('ws reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('orderBookSnapshot wrong pair', () => {
+	test('orderBookSnapshot different pair', () => {
 		state = wsReducer(state, {
 			type: CST.AC_OB_SNAPSHOT,
 			value: {
@@ -76,38 +101,16 @@ describe('ws reducer', () => {
 		expect((orderBookUtil.updateOrderBookSnapshot as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
-	test('orderBookUpdate wrong pair', () => {
+	test('orderBookUpdate pair without snapshot', () => {
 		orderBookUtil.updateOrderBookSnapshot = jest.fn();
 		state = wsReducer(state, {
 			type: CST.AC_OB_UPDATE,
 			value: {
-				pair: 'test'
+				pair: 'test1'
 			}
 		});
 		expect(state).toMatchSnapshot();
 		expect(orderBookUtil.updateOrderBookSnapshot as jest.Mock).not.toBeCalled();
-	});
-
-	test('orderBookSubscription off', () => {
-		wsUtil.unsubscribeOrderBook = jest.fn();
-		state = wsReducer(state, {
-			type: CST.AC_OB_SUB,
-			account: 'account',
-			pair: ''
-		});
-		expect(state).toMatchSnapshot();
-		expect((wsUtil.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-	});
-
-	test('orderBookSubscription off again', () => {
-		wsUtil.unsubscribeOrderBook = jest.fn();
-		state = wsReducer(state, {
-			type: CST.AC_OB_SUB,
-			account: 'account',
-			pair: ''
-		});
-		expect(state).toMatchSnapshot();
-		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
 	});
 
 	test('orderSubscription on', () => {
@@ -167,19 +170,41 @@ describe('ws reducer', () => {
 	});
 
 	test('orderSubscription off', () => {
+		wsUtil.unsubscribeOrderHistory = jest.fn();
 		state = wsReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''
+		});
+		expect(state).toMatchSnapshot();
+		expect((wsUtil.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
+	});
+
+	test('orderSubscription again', () => {
+		wsUtil.unsubscribeOrderHistory = jest.fn();
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_SUB,
+			account: ''
+		});
+		expect(state).toMatchSnapshot();
+		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
+	});
+
+	test('orderSubscription dummy', () => {
+		state = wsReducer(state, {
+			type: CST.AC_ORDER_SUB,
+			account: CST.DUMMY_ADDR
 		});
 		expect(state).toMatchSnapshot();
 	});
 
-	test('orderSubscription again', () => {
+	test('orderSubscription dummy off', () => {
+		wsUtil.unsubscribeOrderHistory = jest.fn();
 		state = wsReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''
 		});
 		expect(state).toMatchSnapshot();
+		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
 	});
 
 	test('message', () => {

@@ -56,17 +56,17 @@ export function orderBookUpdate(obUpdate: IOrderBookSnapshotUpdate) {
 
 export function orderSubscriptionUpdate(account: string) {
 	return {
-		type: CST.AC_OB_SUB,
+		type: CST.AC_ORDER_SUB,
 		account: account
 	};
 }
 
-export function orderBookSubscriptionUpdate(pair: string) {
-	return {
-		type: CST.AC_OB_SUB,
-		pair: pair
-	};
-}
+// export function orderBookSubscriptionUpdate(pair: string) {
+// 	return {
+// 		type: CST.AC_OB_SUB,
+// 		pair: pair
+// 	};
+// }
 
 export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
 	return {
@@ -75,13 +75,13 @@ export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
 	};
 }
 
-export function subscribeOrderBook(pair: string): VoidThunkAction {
-	return dispatch => {
-		dispatch(orderBookSubscriptionUpdate(''));
-		dispatch(orderBookSubscriptionUpdate(pair));
-		wsUtil.subscribeOrderBook(pair);
-	};
-}
+// export function subscribeOrderBook(pair: string): VoidThunkAction {
+// 	return dispatch => {
+// 		// dispatch(orderBookSubscriptionUpdate(''));
+// 		// dispatch(orderBookSubscriptionUpdate(pair));
+// 		wsUtil.subscribeOrderBook(pair);
+// 	};
+// }
 
 export function subscribeOrder(account: string): VoidThunkAction {
 	return dispatch => {

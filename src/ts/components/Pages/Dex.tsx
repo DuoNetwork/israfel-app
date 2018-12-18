@@ -24,14 +24,12 @@ interface IProps {
 	ethPrice: number;
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
-	orderBook: IOrderBookSnapshot;
+	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
-	subscribeOrderBook: (pair: string) => any;
-	unsubscribeOrderBook: () => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
-	showHistory: boolean
+	showHistory: boolean;
 }
 
 interface IState {
@@ -61,7 +59,6 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
 		if (props.account !== state.account) {
-			props.unsubscribeOrder();
 			props.subscribeOrder(props.account);
 			return {
 				account: props.account
@@ -82,11 +79,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertBToken: bToken
 		});
 
-	public handleTrade = (token: string) => {
-		if (!token) this.props.unsubscribeOrderBook();
-		else this.props.subscribeOrderBook(token);
-		this.setState({ tradeToken: token });
-	};
+	public handleTrade = (token: string) => this.setState({ tradeToken: token });
 
 	public render() {
 		const {
@@ -97,17 +90,12 @@ export default class Dex extends React.Component<IProps, IState> {
 			custodianTokenBalances,
 			ethBalance,
 			connection,
-			orderBook,
+			orderBooks,
 			ethPrice,
 			orderHistory,
 			showHistory
 		} = this.props;
-		const {
-			convertCustodian,
-			tradeToken,
-			convertAToken,
-			convertBToken
-		} = this.state;
+		const { convertCustodian, tradeToken, convertAToken, convertBToken } = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		for (const custodian in custodians) {
@@ -178,7 +166,14 @@ export default class Dex extends React.Component<IProps, IState> {
 					tokenInfo={tradeTokenInfo}
 					tokenBalance={tradeTokenBalance}
 					ethBalance={ethBalance}
-					orderBook={orderBook}
+					orderBook={
+						orderBooks[tradeToken + '|' + CST.TH_WETH] || {
+							pair: 'pair',
+							version: 0,
+							bids: [],
+							asks: []
+						}
+					}
 					ethPrice={ethPrice}
 					handleClose={() => this.handleTrade('')}
 				/>

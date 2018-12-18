@@ -46,24 +46,24 @@ describe('actions', () => {
 		expect(wsActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
-	test('orderBookSubscriptionUpdate', () => {
-		expect(wsActions.orderBookSubscriptionUpdate('pair')).toMatchSnapshot();
-	});
+	// test('orderBookSubscriptionUpdate', () => {
+	// 	expect(wsActions.orderBookSubscriptionUpdate('pair')).toMatchSnapshot();
+	// });
 
-	test('subscribeOrderBook', () => {
-		const store: any = mockStore({});
-		wsUtil.subscribeOrderBook = jest.fn();
-		store.dispatch(wsActions.subscribeOrderBook('pair'));
-		return new Promise(resolve =>
-			setTimeout(() => {
-				expect(store.getActions()).toMatchSnapshot();
-				expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-				resolve();
-			}, 0)
-		);
-	});
+	// test('subscribeOrderBook', () => {
+	// 	const store: any = mockStore({});
+	// 	wsUtil.subscribeOrderBook = jest.fn();
+	// 	store.dispatch(wsActions.subscribeOrderBook('pair'));
+	// 	return new Promise(resolve =>
+	// 		setTimeout(() => {
+	// 			expect(store.getActions()).toMatchSnapshot();
+	// 			expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+	// 			resolve();
+	// 		}, 0)
+	// 	);
+	// });
 
-	test('subscribeOrderBook dummy account', () => {
+	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		wsUtil.subscribeOrderHistory = jest.fn();
 		store.dispatch(wsActions.subscribeOrder(CST.DUMMY_ADDR));
@@ -76,7 +76,7 @@ describe('actions', () => {
 		);
 	});
 
-	test('subscribeOrderBook', () => {
+	test('subscribeOrder', () => {
 		const store: any = mockStore({});
 		wsUtil.subscribeOrderHistory = jest.fn();
 		store.dispatch(wsActions.subscribeOrder('account'));

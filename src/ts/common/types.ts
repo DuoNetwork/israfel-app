@@ -37,8 +37,8 @@ export interface IWsState {
 	readonly status: relayerTypes.IStatus[];
 	readonly acceptedPrices: { [custodian: string]: relayerTypes.IAcceptedPrice[] };
 	readonly exchangePrices: { [source: string]: relayerTypes.IPrice[] };
-	readonly orderBookSnapshot: relayerTypes.IOrderBookSnapshot;
-	readonly orderBookSubscription: string;
+	readonly orderBookSnapshot: {[pair: string]: relayerTypes.IOrderBookSnapshot};
+	// readonly orderBookSubscription: string;
 	readonly orderHistory: { [pair: string]: relayerTypes.IUserOrder[] };
 	readonly orderSubscription: string;
 	readonly level: string;

@@ -7,13 +7,7 @@ Object {
   "exchangePrices": Object {},
   "level": "",
   "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
+  "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [],
@@ -28,18 +22,103 @@ Object {
   "exchangePrices": Object {},
   "level": "",
   "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
+  "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [],
   "tokens": Array [],
 }
+`;
+
+exports[`ws reducer info 1`] = `
+Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptedPrices",
+    ],
+  },
+  "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
+  "level": "",
+  "message": "",
+  "orderBookSnapshot": Object {},
+  "orderHistory": Object {},
+  "orderSubscription": "",
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    Object {
+      "code": "token1",
+    },
+    Object {
+      "code": "token2",
+    },
+  ],
+}
+`;
+
+exports[`ws reducer info 2`] = `
+Array [
+  Array [
+    "token1|WETH",
+  ],
+  Array [
+    "token2|WETH",
+  ],
+]
+`;
+
+exports[`ws reducer info overlapping tokens 1`] = `
+Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptedPrices",
+    ],
+  },
+  "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
+  "level": "",
+  "message": "",
+  "orderBookSnapshot": Object {},
+  "orderHistory": Object {},
+  "orderSubscription": "",
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
+  ],
+}
+`;
+
+exports[`ws reducer info overlapping tokens 2`] = `
+Array [
+  Array [
+    "token3|WETH",
+  ],
+]
+`;
+
+exports[`ws reducer info overlapping tokens 3`] = `
+Array [
+  Array [
+    "token1|WETH",
+  ],
+]
 `;
 
 exports[`ws reducer message 1`] = `
@@ -58,19 +137,32 @@ Object {
   "level": "level",
   "message": " message",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -91,12 +183,20 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {
     "pair1": Array [
       Object {
@@ -123,7 +223,12 @@ Object {
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -144,12 +249,20 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {
     "pair1": Array [
       Object {
@@ -183,7 +296,12 @@ Object {
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -204,28 +322,34 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
-    "pair": "pair",
-    "version": 123,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
   },
-  "orderBookSubscription": "pair",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
 
-exports[`ws reducer orderBookSnapshot wrong pair 1`] = `
+exports[`ws reducer orderBookSnapshot different pair 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -241,130 +365,32 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
-    "pair": "pair",
-    "version": 123,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "pair",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
-  ],
-}
-`;
-
-exports[`ws reducer orderBookSubscription off 1`] = `
-Object {
-  "acceptedPrices": Object {
-    "custodian": Array [
-      "acceptedPrices",
-    ],
-  },
-  "connection": true,
-  "exchangePrices": Object {
-    "source": Array [
-      "exchangePrices",
-    ],
-  },
-  "level": "",
-  "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "orderHistory": Object {},
-  "orderSubscription": "",
-  "status": Array [
-    "status1",
-  ],
-  "tokens": Array [
-    "token1",
-  ],
-}
-`;
-
-exports[`ws reducer orderBookSubscription off 2`] = `
-Array [
-  Array [
-    "pair",
-  ],
-]
-`;
-
-exports[`ws reducer orderBookSubscription off again 1`] = `
-Object {
-  "acceptedPrices": Object {
-    "custodian": Array [
-      "acceptedPrices",
-    ],
-  },
-  "connection": true,
-  "exchangePrices": Object {
-    "source": Array [
-      "exchangePrices",
-    ],
-  },
-  "level": "",
-  "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "orderHistory": Object {},
-  "orderSubscription": "",
-  "status": Array [
-    "status1",
-  ],
-  "tokens": Array [
-    "token1",
-  ],
-}
-`;
-
-exports[`ws reducer orderBookSubscription on 1`] = `
-Object {
-  "acceptedPrices": Object {
-    "custodian": Array [
-      "acceptedPrices",
-    ],
-  },
-  "connection": true,
-  "exchangePrices": Object {
-    "source": Array [
-      "exchangePrices",
-    ],
-  },
-  "level": "",
-  "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "pair",
-  "orderHistory": Object {},
-  "orderSubscription": "",
-  "status": Array [
-    "status1",
-  ],
-  "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -385,23 +411,32 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
-    "pair": "pair",
-    "version": 123,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "pair",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -426,7 +461,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer orderBookUpdate wrong pair 1`] = `
+exports[`ws reducer orderBookUpdate pair without snapshot 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -442,23 +477,32 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [
-      2,
-    ],
-    "bids": Array [
-      1,
-    ],
-    "pair": "pair",
-    "version": 123,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "pair",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -479,12 +523,20 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {
     "pair1": Array [
       Object {
@@ -511,7 +563,12 @@ Object {
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -532,19 +589,32 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {},
   "orderSubscription": "account",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -565,19 +635,124 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
+  ],
+}
+`;
+
+exports[`ws reducer orderSubscription dummy 1`] = `
+Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptedPrices",
+    ],
+  },
+  "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
+  "level": "",
+  "message": "",
+  "orderBookSnapshot": Object {
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
+  },
+  "orderHistory": Object {},
+  "orderSubscription": "0x0000000000000000000000000000000000000000",
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
+  ],
+}
+`;
+
+exports[`ws reducer orderSubscription dummy off 1`] = `
+Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptedPrices",
+    ],
+  },
+  "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
+  "level": "",
+  "message": "",
+  "orderBookSnapshot": Object {
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
+  },
+  "orderHistory": Object {},
+  "orderSubscription": "",
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
@@ -598,21 +773,42 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
+`;
+
+exports[`ws reducer orderSubscription off 2`] = `
+Array [
+  Array [
+    "account",
+  ],
+]
 `;
 
 exports[`ws reducer orderSubscription on 1`] = `
@@ -631,52 +827,32 @@ Object {
   "level": "",
   "message": "",
   "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
   },
-  "orderBookSubscription": "",
   "orderHistory": Object {},
   "orderSubscription": "account",
   "status": Array [
     "status1",
   ],
   "tokens": Array [
-    "token1",
-  ],
-}
-`;
-
-exports[`ws reducer status 1`] = `
-Object {
-  "acceptedPrices": Object {
-    "custodian": Array [
-      "acceptedPrices",
-    ],
-  },
-  "connection": true,
-  "exchangePrices": Object {
-    "source": Array [
-      "exchangePrices",
-    ],
-  },
-  "level": "",
-  "message": "",
-  "orderBookSnapshot": Object {
-    "asks": Array [],
-    "bids": Array [],
-    "pair": "pair",
-    "version": 0,
-  },
-  "orderBookSubscription": "",
-  "orderHistory": Object {},
-  "orderSubscription": "",
-  "status": Array [
-    "status1",
-  ],
-  "tokens": Array [
-    "token1",
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
   ],
 }
 `;
