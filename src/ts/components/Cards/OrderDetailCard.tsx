@@ -24,7 +24,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 					extra={<img className="cardpopup-close" src={close} onClick={handleClose} />}
 				>
 					{orders.map(order => (
-						<div>{JSON.stringify(order)}</div>
+						<div style={{ overflow: 'scroll' }}>{JSON.stringify(order)}</div>
 					))}
 				</SCard>
 			</div>
