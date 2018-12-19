@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-// import moment from 'moment';
 import * as React from 'react';
 import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
@@ -66,14 +65,6 @@ function drawLines(
 		.append('g')
 		.attr('class', 'chart-data' + name)
 		.attr('clip-path', `url(#${'clip' + name})`);
-	const line = d3
-		.line<any>()
-		.x(d => {
-			return xScale(d.timestamp);
-		})
-		.y(d => {
-			return ethYScale(isA ? d.navA : d.navB);
-		});
 	const background = d3
 		.area<any>()
 		.x(d => {
@@ -97,21 +88,6 @@ function drawLines(
 		.data(source)
 		.enter()
 		.append('g');
-	const segments = svg.append('g').attr('class', 'segments' + name);
-	segments
-		.selectAll('g')
-		.data(source)
-		.enter()
-		.append('g');
-	const segBar = segments.selectAll('g');
-	segBar
-		.append('circle')
-		.attr('class', 'segdot-eth' + name)
-		.attr('cx', (d: any) => xScale(d.timestamp))
-		.attr('cy', (d: any) => ethYScale(isA ? d.navA : d.navB))
-		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-		.attr('r', 1)
-		.style('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -120,8 +96,6 @@ function drawLines(
 		.attr('fill', ColorStyles.TextBlackAlphaLLL);
 	svg.append('path')
 		.datum(source)
-		.attr('class', 'line' + name)
-		.attr('d', line)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
 		.attr('class', 'area')
