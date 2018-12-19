@@ -114,7 +114,19 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				<STableWrapper>
 					<Table
 						dataSource={dataSource}
-						pagination={false}
+						pagination={{
+							showSizeChanger: true,
+							showQuickJumper: true,
+							showTotal: (total: number) =>
+								CST.TH_TOTAL +
+								' ' +
+								total +
+								' ' +
+								(showHistory ? CST.TH_PAST : CST.TH_LIVE) + ' ' + CST.TH_ORDERS,
+							pageSize: 10,
+							pageSizeOptions: ['10', '20', '50'],
+							size: 'small'
+						}}
 						style={{ width: '100%' }}
 						onRow={(record: { [key: string]: any }) => ({
 							onClick: () =>
