@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import moment from 'moment';
 import relayerUtil from '../../../../israfel-relayer/src/utils/util';
 import * as CST from './constants';
+import { IUserOrder } from './types';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
@@ -58,6 +59,69 @@ class Util {
 	public getMonthEndExpiry = relayerUtil.getMonthEndExpiry;
 
 	public getExpiryTimestamp = relayerUtil.getExpiryTimestamp;
+
+	public getOrderFullDescription(order: IUserOrder) {
+		const code1 = order.pair.split('|')[0];
+		let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
+			order.amount
+		} ${code1} of ${order.pair} at ${order.price}.`;
+		if (order.type === CST.DB_ADD) return baseDescription;
+
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
+			return baseDescription + ' Filly filled';
+
+		if (order.fill)
+			baseDescription += ` ${order.fill}(${this.formatPercent(
+				order.fill / order.amount
+			)}) filled.`;
+
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
+			return (
+				baseDescription +
+				(order.updatedAt || 0 < order.expiry ? ' Cancelled by user.' : ' Expired.')
+			);
+
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_BALANCE)
+			return baseDescription + ` Cancelled due to insufficient balance.`;
+
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
+			return baseDescription + ` Cancelled due to matching error.`;
+
+		if (order.type === CST.DB_UPDATE && order.matching)
+			return (
+				baseDescription +
+				` ${order.matching}(${util.formatPercent(order.matching / order.amount)}) matching.`
+			);
+
+		return baseDescription;
+	}
+
+	public getOrderDescription(order: IUserOrder) {
+		const code1 = order.pair.split('|')[0];
+		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
+			order.amount
+		} ${code1} of ${order.pair} at ${order.price}. Total ${order.fill} filled.`;
+	}
+
+	public getVersionDescription(order: IUserOrder) {
+		if (order.type === CST.DB_ADD) return 'Order submitted.';
+
+		if (order.type === CST.DB_UPDATE) {
+			let description = '';
+			if (order.fill) description = `Total ${order.fill} filled.`;
+			if (order.matching) description += ` ${order.matching} matching`;
+			return description;
+		}
+
+		if (order.type === CST.DB_TERMINATE)
+			if (order.status === CST.DB_CONFIRMED)
+				return order.updatedAt || 0 < order.expiry ? 'Cancelled by user.' : 'Expired';
+			else if (order.status === CST.DB_BALANCE)
+				return 'Cancelled due to insufficent balance.';
+			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to matching error.';
+			else if (order.status === CST.DB_FILL) return 'Fully filled';
+		return 'Invalid order';
+	}
 }
 
 const util = new Util();

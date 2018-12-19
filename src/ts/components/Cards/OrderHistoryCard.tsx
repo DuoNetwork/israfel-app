@@ -22,42 +22,6 @@ interface IState {
 	details: IUserOrder[];
 }
 
-const getOrderDescription = (order: IUserOrder) => {
-	const code1 = order.pair.split('|')[0];
-	let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
-		order.amount
-	} ${code1} of ${order.pair} at ${order.price}.`;
-	if (order.type === CST.DB_ADD) return baseDescription;
-
-	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
-		return baseDescription + ' Filly filled';
-
-	if (order.fill)
-		baseDescription += ` ${order.fill}(${util.formatPercent(
-			order.fill / order.amount
-		)}) filled.`;
-
-	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
-		return (
-			baseDescription +
-			(order.updatedAt || 0 < order.expiry ? ' Cancelled by user.' : ' Expired.')
-		);
-
-	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_BALANCE)
-		return baseDescription + ` Cancelled due to insufficient balance.`;
-
-	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
-		return baseDescription + ` Cancelled due to matching error.`;
-
-	if (order.type === CST.DB_UPDATE && order.matching)
-		return (
-			baseDescription +
-			` ${order.matching}(${util.formatPercent(order.matching / order.amount)}) matching.`
-		);
-
-	return baseDescription;
-};
-
 export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
@@ -95,7 +59,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				dataSource.push({
 					key: orderHash,
 					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: getOrderDescription(lastVersion),
+					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_HISTORY]: orders
 				});
 			}
@@ -106,7 +70,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				dataSource.push({
 					key: orderHash,
 					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: getOrderDescription(lastVersion),
+					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_ACTIONS]: (
 						<Popconfirm
 							title={CST.TT_DELETE_ORDER}

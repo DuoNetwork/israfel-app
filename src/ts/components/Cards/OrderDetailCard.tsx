@@ -3,39 +3,13 @@ import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IUserOrder } from 'ts/common/types';
-// import util from 'ts/common/util';
+import util from 'ts/common/util';
 import { SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {
 	orders: IUserOrder[];
 	handleClose: () => void;
 }
-
-const getOrderDescription = (order: IUserOrder) => {
-	const code1 = order.pair.split('|')[0];
-	return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${order.amount} ${code1} of ${
-		order.pair
-	} at ${order.price}. Total ${order.fill} filled.`;
-};
-
-const getVersionDescription = (order: IUserOrder) => {
-	if (order.type === CST.DB_ADD) return 'Order submitted.';
-
-	if (order.type === CST.DB_UPDATE) {
-		let description = '';
-		if (order.fill) description = `Total ${order.fill} filled.`;
-		if (order.matching) description += ` ${order.matching} matching`;
-		return description;
-	}
-
-	if (order.type === CST.DB_TERMINATE)
-		if (order.status === CST.DB_CONFIRMED)
-			return order.updatedAt || 0 < order.expiry ? 'Cancelled by user.' : 'Expired';
-		else if (order.status === CST.DB_BALANCE) return 'Cancelled due to insufficent balance.';
-		else if (order.status === CST.DB_MATCHING) return 'Cancelled due to matching error.';
-		else if (order.status === CST.DB_FILL) return 'Fully filled';
-	return 'Invalid order';
-};
 
 export default class OrderDetailCard extends React.Component<IProps> {
 	public render() {
@@ -60,7 +34,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
-								<li>{getOrderDescription(lastVersion)}</li>
+								<li>{util.getOrderDescription(lastVersion)}</li>
 								{orders.map(o => (
 									<li key={o.currentSequence}>
 										<span>
@@ -68,7 +42,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 												'YYYY-MM-DD HH:mm:ss'
 											)}
 										</span>
-										<span>{getVersionDescription(o)}</span>
+										<span>{util.getVersionDescription(o)}</span>
 									</li>
 								))}
 							</ul>
