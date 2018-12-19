@@ -10,6 +10,7 @@ import {
 	ITokenBalance,
 	IUserOrder
 } from 'ts/common/types';
+import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -119,6 +120,18 @@ export default class Dex extends React.Component<IProps, IState> {
 		const tradeTokenBalance = tradeTokenInfo
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
+		const tokenInterestOrLeverage =
+			tradeTokenInfo &&
+			acceptedPrices[tradeTokenInfo.custodian] &&
+			acceptedPrices[tradeTokenInfo.custodian].length
+				? util.getTokenInterestOrLeverage(
+						custodians[tradeTokenInfo.custodian],
+						acceptedPrices[tradeTokenInfo.custodian][
+							acceptedPrices[tradeTokenInfo.custodian].length - 1
+						],
+						tradeToken.startsWith('a') || tradeToken.startsWith('s')
+				)
+				: 0;
 		return (
 			<div>
 				<Spin spinning={!connection} tip="loading...">
@@ -205,6 +218,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						}
 						ethPrice={ethPrice}
 						notification={notification}
+						interestOrLeverage={tokenInterestOrLeverage}
 						handleClose={() => this.handleTrade('')}
 					/>
 				</Spin>

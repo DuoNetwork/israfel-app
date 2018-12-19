@@ -22,20 +22,20 @@ interface IProps {
 }
 
 interface IState {
-	timeStep: number;
+	timeOffset: number;
 }
 
 export default class CustodianCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			timeStep: 3600
+			timeOffset: 7 * 3600
 		};
 	}
 
 	private handleDayButtonClick(e: number) {
 		this.setState({
-			timeStep: e
+			timeOffset: e
 		});
 	}
 
@@ -52,7 +52,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			ethPrice,
 			custodian
 		} = this.props;
-		const { timeStep } = this.state;
+		const { timeOffset } = this.state;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
 		const maturity = util.formatMaturity(info.states.maturity);
@@ -63,21 +63,15 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			? acceptedPrices[acceptedPrices.length - 1]
 			: null;
 		const aLabel =
-			type === CST.BEETHOVEN
-				? d3.format('.2%')(
-						(info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1)
-				) + CST.TH_PA
-				: d3.format('.2f')(
-						lastAcceptedPrice
-							? (lastAcceptedPrice.navA - 2) / lastAcceptedPrice.navA
-							: 0
-				) + CST.TH_X_LEV;
+			d3.format(type === CST.BEETHOVEN ? '.2%' : '.2f')(
+				lastAcceptedPrice
+					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, true)
+					: 0
+			) + (type === CST.BEETHOVEN ? CST.TH_PA : CST.TH_X_LEV);
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
-					? ((type === CST.BEETHOVEN ? 1 : 2) * info.states.alpha +
-							lastAcceptedPrice.navB) /
-							lastAcceptedPrice.navB
+					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, false)
 					: 0
 			) + CST.TH_X_LEV;
 		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
@@ -158,7 +152,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}
-							timeStep={timeStep}
+							timeOffset={timeOffset}
 							name={aCode}
 							isA={true}
 						/>
@@ -172,12 +166,12 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{display: 'flex'}}>
-							<span className='px-topleft'>
+						<div style={{ display: 'flex' }}>
+							<span className="px-topleft">
 								{aBestBid ? util.formatPriceShort(aBestBid) : '-'}
 							</span>
 							/
-							<span className='px-buttomright'>
+							<span className="px-buttomright">
 								{aBestAsk ? util.formatPriceShort(aBestAsk) : '-'}
 							</span>
 						</div>
@@ -193,7 +187,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}
-							timeStep={timeStep}
+							timeOffset={timeOffset}
 							name={bCode}
 							isA={false}
 						/>
@@ -207,12 +201,12 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{display: 'flex'}}>
-							<span className='px-topleft'>
+						<div style={{ display: 'flex' }}>
+							<span className="px-topleft">
 								{bBestBid ? util.formatPriceShort(bBestBid) : '-'}
 							</span>
 							/
-							<span className='px-buttomright'>
+							<span className="px-buttomright">
 								{bBestAsk ? util.formatPriceShort(bBestAsk) : '-'}
 							</span>
 						</div>
@@ -227,7 +221,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					{[1, 3, 7].map(pct => (
 						<SButton
 							key={pct + ''}
-							className={timeStep === 3600 * pct ? '' : 'day-Button'}
+							className={timeOffset === 3600 * pct ? '' : 'day-Button'}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
 						>
 							{pct + 'D'}

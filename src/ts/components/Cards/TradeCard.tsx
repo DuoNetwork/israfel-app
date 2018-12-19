@@ -1,4 +1,5 @@
 import { Radio, Spin } from 'antd';
+import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import moment from 'moment';
@@ -29,6 +30,7 @@ interface IProps {
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
 	ethPrice: number;
+	interestOrLeverage: number;
 	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
 }
@@ -380,23 +382,31 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		let des: string = '';
 		switch (token) {
 			case 'aETH':
-				des = 'income token with coupon rate ' + n + '% p.a.';
+				des = 'income token with coupon rate of ' + d3.format('.2%')(n) + ' p.a.';
 				break;
 			case 'bETH':
-				des = 'leverage token with ' + n + 'x leverage.';
+				des = 'leverage token with ' + d3.format('.2f')(n) + 'x leverage.';
 				break;
 			case 'sETH':
-				des = 'short token with ' + n + 'x leverage.';
+				des = 'short token with ' + d3.format('.2f')(n) + 'x leverage.';
 				break;
 			default:
-				des = 'long token with ' + n + 'x leverage.';
+				des = 'long token with ' + d3.format('.2f')(n) + 'x leverage.';
 				break;
 		}
 		return des;
 	};
 
 	public render() {
-		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
+		const {
+			token,
+			tokenInfo,
+			handleClose,
+			tokenBalance,
+			ethBalance,
+			orderBook,
+			interestOrLeverage
+		} = this.props;
 		const {
 			isBid,
 			price,
@@ -449,30 +459,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					{/* <SCardList noMargin width="100%">
-						<div className="status-list-wrapper">
-							<ul>
-								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{CST.TH_BALANCE}
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{token}</span>
-									<span className="content">
-										{tokenBalance
-											? util.formatBalance(tokenBalance.balance)
-											: 0}
-									</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{CST.TH_WETH}</span>
-									<span className="content">
-										{util.formatBalance(ethBalance.weth)}
-									</span>
-								</li>
-							</ul>
-						</div>
-					</SCardList> */}
-					<div className="convert-popup-des">{`${token} is the ${this.cardDescription(token.split('-')[0], 1.0)}`}</div>
+					<div className="convert-popup-des">{`${token} is the ${this.cardDescription(
+						token.split('-')[0],
+						interestOrLeverage
+					)}`}</div>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
@@ -551,11 +541,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<SCardList noMargin width="100%">
 								<div className="status-list-wrapper">
 									<ul>
-										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
-											<span className="title">{token}</span>
-											<span className="title">{CST.TH_WETH}</span>
-										</li>
-										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
 											<span className="content">
 												{util.formatBalance(ethBalance.weth)}
 											</span>
@@ -564,6 +555,15 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatBalance(tokenBalance.balance)
 													: 0}
 											</span>
+										</li>
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
+											<span className="title">{token}</span>
+											<span className="title">{CST.TH_WETH}</span>
 										</li>
 									</ul>
 								</div>
@@ -664,7 +664,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											/>
 										</li>
 										<li className="input-line" style={{ padding: '0 15px' }}>
-											<span className="title" style={{width: 40}}>
+											<span className="title" style={{ width: 40 }}>
 												{CST.TH_EXPIRY}
 											</span>
 											<SDivFlexCenter horizontal width="46%" rowInv>
@@ -678,7 +678,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													<Radio value={2}>Month</Radio>
 												</RadioGroup>
 											</SDivFlexCenter>
-											<div className="convert-radio-des">{expiryDescription}</div>
+											<div className="convert-radio-des">
+												{expiryDescription}
+											</div>
 										</li>
 									</ul>
 								</div>

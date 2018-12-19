@@ -11,7 +11,7 @@ const height = 110 - margin.top - margin.bottom;
 function drawLines(
 	el: Element,
 	sourceData: IAcceptedPrice[],
-	timeStep: number,
+	timeOffset: number,
 	name: string,
 	isA: boolean
 ) {
@@ -24,7 +24,7 @@ function drawLines(
 		return;
 	}
 	const now = util.getUTCNowTimestamp();
-	const beginningTime = now / 1000 - 24 * timeStep;
+	const beginningTime = now / 1000 - 24 * timeOffset;
 	const source = sourceData.filter(a => a.timestamp / 1000 > beginningTime);
 	//Establish SVG Playground
 	d3.selectAll('.loading' + name).remove();
@@ -105,7 +105,7 @@ function drawLines(
 
 interface IProps {
 	prices: any[];
-	timeStep: number;
+	timeOffset: number;
 	name: string;
 	isA: boolean;
 }
@@ -118,17 +118,17 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, timeStep, name, isA } = this.props;
-		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
+		const { prices, timeOffset, name, isA } = this.props;
+		drawLines(this.chartRef.current as Element, prices, timeOffset, name, isA);
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, timeStep, name, isA } = nextProps;
+		const { prices, timeOffset, name, isA } = nextProps;
 		if (
 			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices) ||
-			JSON.stringify(nextProps.timeStep) !== JSON.stringify(this.props.timeStep)
+			JSON.stringify(nextProps.timeOffset) !== JSON.stringify(this.props.timeOffset)
 		)
-			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
+			drawLines(this.chartRef.current as Element, prices, timeOffset, name, isA);
 
 		return false;
 	}

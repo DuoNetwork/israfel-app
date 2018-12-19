@@ -40,7 +40,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     <div
       className="convert-popup-des"
     >
-      test is the long token with 1x leverage.
+      test is the long token with 1.00x leverage.
     </div>
     <styled.div
       horizontal={true}
@@ -231,14 +231,14 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <span
-                  className="title"
+                  className="content"
                 >
-                  test
+                  123.0
                 </span>
                 <span
-                  className="title"
+                  className="content"
                 >
-                  WETH
+                  123.0
                 </span>
               </li>
               <li
@@ -250,14 +250,14 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <span
-                  className="content"
+                  className="title"
                 >
-                  123.0
+                  test
                 </span>
                 <span
-                  className="content"
+                  className="title"
                 >
-                  123.0
+                  WETH
                 </span>
               </li>
             </ul>
