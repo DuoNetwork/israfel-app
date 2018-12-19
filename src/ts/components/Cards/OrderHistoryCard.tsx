@@ -2,12 +2,11 @@ import { Table } from 'antd';
 import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
-// import wsUtil from 'ts/common/wsUtil';
 import * as CST from 'ts/common/constants';
 import { IUserOrder } from 'ts/common/types';
+import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-// import util from '../../common/util';
 import { SCard, SCardTitle, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
@@ -22,6 +21,42 @@ interface IState {
 	showHistory: boolean;
 	details: IUserOrder[];
 }
+
+const getOrderDescription = (order: IUserOrder) => {
+	const code1 = order.pair.split('|')[0];
+	let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
+		order.amount
+	} ${code1} of ${order.pair} at ${order.price}.`;
+	if (order.type === CST.DB_ADD) return baseDescription;
+
+	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
+		return baseDescription + ' Filly filled';
+
+	if (order.fill)
+		baseDescription += ` ${order.fill}(${util.formatPercent(
+			order.fill / order.amount
+		)}) filled.`;
+
+	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
+		return (
+			baseDescription +
+			(order.updatedAt || 0 < order.expiry ? ' Cancelled by user.' : ' Expired.')
+		);
+
+	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_BALANCE)
+		return baseDescription + ` Cancelled due to insufficient balance.`;
+
+	if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
+		return baseDescription + ` Cancelled due to matching error.`;
+
+	if (order.type === CST.DB_UPDATE && order.matching)
+		return (
+			baseDescription +
+			` ${order.matching}(${util.formatPercent(order.matching / order.amount)}) matching.`
+		);
+
+	return baseDescription;
+};
 
 export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -57,11 +92,10 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 			for (const orderHash in pastOrders) {
 				const orders = pastOrders[orderHash];
 				const lastVersion = orders[0];
-				const firstVersion = orders[orders.length - 1];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: getOrderDescription(lastVersion),
 					[CST.TH_HISTORY]: orders
 				});
 			}
@@ -69,11 +103,10 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 			for (const orderHash in liveOrders) {
 				const orders = liveOrders[orderHash];
 				const lastVersion = orders[0];
-				const firstVersion = orders[orders.length - 1];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: getOrderDescription(lastVersion),
 					[CST.TH_ACTIONS]: (
 						<Popconfirm
 							title={CST.TT_DELETE_ORDER}
@@ -122,7 +155,9 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 								' ' +
 								total +
 								' ' +
-								(showHistory ? CST.TH_PAST : CST.TH_LIVE) + ' ' + CST.TH_ORDERS,
+								(showHistory ? CST.TH_PAST : CST.TH_LIVE) +
+								' ' +
+								CST.TH_ORDERS,
 							pageSize: 10,
 							pageSizeOptions: ['10', '20', '50'],
 							size: 'small'
@@ -130,10 +165,12 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 						style={{ width: '100%' }}
 						onRow={(record: { [key: string]: any }) => ({
 							onClick: () =>
-								this.setState({ details: record[CST.TH_HISTORY] as IUserOrder[] })
+								this.setState({
+									details: record[CST.TH_HISTORY] as IUserOrder[]
+								})
 						})}
 					>
-						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={140} />
+						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={120} />
 						<Column title={CST.TH_ORDER} dataIndex={CST.TH_ORDER} />
 						{showHistory ? null : (
 							<Column

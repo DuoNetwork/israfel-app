@@ -31,6 +31,10 @@ class Util {
 			.replace(/G/g, 'B');
 	}
 
+	public formatPercent(num: number) {
+		return d3.format('%')(num);
+	}
+
 	public formatNumber(num: number) {
 		if (Math.abs(num) < 1e-8) return '0.000';
 		if (Math.abs(num) < 1) return d3.format(',.4n')(num);

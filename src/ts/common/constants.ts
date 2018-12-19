@@ -94,6 +94,7 @@ export const TH_CONV_RATIO = 'Conversion Ratio';
 export const TH_AMOUNT = 'Amount';
 export const TH_CANCEL = 'Cancel';
 export const TH_TOTAL = 'Total';
+export const TH_DETAIL = 'Detail';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
