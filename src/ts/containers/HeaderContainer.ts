@@ -7,9 +7,15 @@ import { IState } from 'ts/common/types';
 import Header from 'ts/components/Header';
 
 function mapStateToProps(state: IState) {
+	const exchangePrices: { [source: string]: number } = {};
+	for (const source in state.ws.exchangePrices)
+		if (state.ws.exchangePrices[source].length)
+			exchangePrices[source] = state.ws.exchangePrices[source][0].close;
+
 	return {
 		locale: state.ui.locale,
-		network: state.web3.network
+		network: state.web3.network,
+		exchangePrices: exchangePrices
 	};
 }
 

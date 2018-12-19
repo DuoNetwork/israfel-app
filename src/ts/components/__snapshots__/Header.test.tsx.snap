@@ -27,6 +27,7 @@ exports[`Header Test User Login Test Snapshot 1`] = `
         </div>
       </Link>
     </div>
+    {}
     <styled.div
       horizontal={true}
     >

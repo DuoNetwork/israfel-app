@@ -8,12 +8,13 @@ import { SDivFlexCenter, SHeader } from './_styled';
 export interface IProps {
 	network: number;
 	locale: string;
+	exchangePrices: { [source: string]: number }
 	updateLocale: (locale: string) => any;
 }
 
 export default class Header extends React.Component<IProps> {
 	public render() {
-		const { network } = this.props;
+		const { network, exchangePrices } = this.props;
 		const locale = this.props.locale || CST.LOCALE_EN;
 		return (
 			<SHeader>
@@ -30,7 +31,7 @@ export default class Header extends React.Component<IProps> {
 						(!__KOVAN__ && network !== CST.NETWORK_ID_MAIN) ? (
 							<span className="error-msg">{CST.TT_NETWORK_CHECK[locale]}</span>
 						) : (
-							''
+							JSON.stringify(exchangePrices)
 						)
 					) : null}
 					<SDivFlexCenter horizontal>
