@@ -96,7 +96,8 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				width="360px"
 				margin={margin}
 				extra={
-					<button
+					<div
+						className="cus-addr-button"
 						onClick={() =>
 							window.open(
 								`https://${
@@ -107,7 +108,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						}
 					>
 						{custodian.substring(0, 6)}
-					</button>
+					</div>
 				}
 			>
 				<SDivFlexCenter horizontal>
@@ -171,19 +172,15 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<SCardList noMargin width="100%">
-							<div className="status-list-wrapper">
-								<ul>
-									<li>
-										<span className="title">
-											{(aBestBid ? util.formatPriceShort(aBestBid) : '-') +
-												'/' +
-												(aBestAsk ? util.formatPriceShort(aBestAsk) : '-')}
-										</span>
-									</li>
-								</ul>
-							</div>
-						</SCardList>
+						<div style={{display: 'flex'}}>
+							<span className='px-topleft'>
+								{aBestBid ? util.formatPriceShort(aBestBid) : '-'}
+							</span>
+							/
+							<span className='px-buttomright'>
+								{aBestAsk ? util.formatPriceShort(aBestAsk) : '-'}
+							</span>
+						</div>
 						<SButton onClick={() => handleTrade(aCode)}>
 							{tokenBalances[aCode] && tokenBalances[aCode].balance
 								? CST.TH_TRADE
@@ -210,19 +207,15 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<SCardList noMargin width="100%">
-							<div className="status-list-wrapper">
-								<ul>
-									<li>
-										<span className="title">
-											{(bBestBid ? util.formatPriceShort(bBestBid) : '-') +
-												'/' +
-												(bBestAsk ? util.formatPriceShort(bBestAsk) : '-')}
-										</span>
-									</li>
-								</ul>
-							</div>
-						</SCardList>
+						<div style={{display: 'flex'}}>
+							<span className='px-topleft'>
+								{bBestBid ? util.formatPriceShort(bBestBid) : '-'}
+							</span>
+							/
+							<span className='px-buttomright'>
+								{bBestAsk ? util.formatPriceShort(bBestAsk) : '-'}
+							</span>
+						</div>
 						<SButton onClick={() => handleTrade(bCode)}>
 							{tokenBalances[bCode] && tokenBalances[bCode].balance
 								? CST.TH_TRADE

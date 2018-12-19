@@ -284,7 +284,24 @@ svg {
 	opacity: 0.6;
 	pointer-events: none;
 }
-
+.cus-addr-button {
+	padding: 2px 10px;
+    border: 1px dashed rgba(255,255,255,.3);
+    font-size: 12px;
+    color: #fff;
+	cursor: pointer;
+	transition: all .2s;
+}
+.cus-addr-button:hover {
+	border: 1px solid rgba(255,255,255,.5);
+}
+.px-topleft {
+	font-size: 10px;
+}
+.px-buttomright {
+	font-size: 10px;
+	margin-top: 6px;
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);
