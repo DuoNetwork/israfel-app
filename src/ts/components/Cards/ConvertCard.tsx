@@ -400,7 +400,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<SCardList noMargin width="100%">
+					{/* <SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
@@ -438,15 +438,32 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								</li>
 							</ul>
 						</div>
-					</SCardList>
+					</SCardList> */}
+					<div className="convert-popup-des">{`Split ${
+						wethCreate ? CST.TH_WETH : CST.TH_ETH
+					} into tokens ${
+						info
+							? info.code.split('-')[0] === CST.BEETHOVEN.toUpperCase()
+								? 'with diversified payoffs'
+								: 'of short and long positions'
+							: ''
+					}, currently backed by ${util.formatBalance(info ? info.states.ethCollateral : 0)}ETH${
+						info
+							? info.code.split('-')[1] === 'M19'
+								? ', maturing on ' + util.formatMaturity(info.states.maturity) + '.'
+								: '.'
+							: ''
+					}`}</div>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
-								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{CST.TH_CUSTODIAN}
+								<li
+									className="block-title"
+									style={{ padding: '5px 15px', justifyContent: 'center' }}
+								>
+									{CST.TH_CONV_RATIO}
 								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{CST.TH_CONV_RATIO}</span>
+								<li style={{ padding: '5px 15px', justifyContent: 'center' }}>
 									<span className="content">{`1 ${
 										CST.TH_ETH
 									} = ${util.formatNumber(aTokenPerETH)} ${aToken.substring(
@@ -542,6 +559,40 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									</button>
 								))}
 							</SDivFlexCenter>
+							<SCardList noMargin width="100%">
+								<div className="status-list-wrapper">
+									<ul>
+										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+											<span className="title">
+												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
+											</span>
+											<span className="title">{aToken}</span>
+											<span className="title">{bToken}</span>
+										</li>
+										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+										<span className="content">
+												{util.formatBalance(
+													wethCreate ? ethBalance.weth : ethBalance.eth
+												)}
+											</span>
+											<span className="content">
+												{util.formatBalance(
+													tokenBalances && tokenBalances[aToken]
+														? tokenBalances[aToken].balance
+														: 0
+												)}
+											</span>
+											<span className="content">
+												{util.formatBalance(
+													tokenBalances && tokenBalances[bToken]
+														? tokenBalances[bToken].balance
+														: 0
+												)}
+											</span>
+										</li>
+									</ul>
+								</div>
+							</SCardList>
 							<SCardList noUlBorder noLiBorder>
 								<div className="status-list-wrapper">
 									<ul>

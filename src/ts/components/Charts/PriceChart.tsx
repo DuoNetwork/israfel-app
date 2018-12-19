@@ -93,7 +93,7 @@ function drawLines(
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('class', 'background')
 		.attr('d', background)
-		.attr('fill', ColorStyles.TextBlackAlphaLLL);
+		.attr('fill', 'rgba(0,0,0,.02)');
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')

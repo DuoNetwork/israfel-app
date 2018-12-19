@@ -229,7 +229,7 @@ svg {
 
 .popup-card {
 	position: absolute;
-	top: 50%;
+	top:100px;
 	left: 50%;
 	z-index: 11;
 }
@@ -283,10 +283,10 @@ svg {
 
 @keyframes openPopup {
 	from {
-		transform: translate(-50%, -50%) scale(0);
+		transform: translate(-50%, 0) scale(0);
 	}
 	to {
-		transform: translate(-50%, -50%) scale(1) ;
+		transform: translate(-50%, 0) scale(1) ;
 	}
 }
 
