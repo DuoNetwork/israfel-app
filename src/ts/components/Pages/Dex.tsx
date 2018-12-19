@@ -28,6 +28,7 @@ interface IProps {
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
+	notification: (level: string, message: string, txHash: string) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
 }
@@ -94,7 +95,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			connection,
 			orderBooks,
 			ethPrice,
-			orderHistory
+			orderHistory,
+			notification
 		} = this.props;
 		const {
 			convertCustodian,
@@ -182,6 +184,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						aToken={convertAToken}
 						bToken={convertBToken}
 						info={custodians[convertCustodian]}
+						notification={notification}
 						handleClose={() => this.handleConvert('', '', '')}
 					/>
 					<TradeCard
@@ -199,6 +202,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							}
 						}
 						ethPrice={ethPrice}
+						notification={notification}
 						handleClose={() => this.handleTrade('')}
 					/>
 				</Spin>
@@ -209,6 +213,7 @@ export default class Dex extends React.Component<IProps, IState> {
 					beethovenList={beethovenList}
 					mozartList={mozartList}
 					custodianTokenBalances={custodianTokenBalances}
+					notification={notification}
 					handleClose={() => this.setState({ showBalances: !showBalances })}
 				/>
 			</div>

@@ -93,10 +93,11 @@ export function subscribeOrder(account: string): VoidThunkAction {
 	};
 }
 
-export function messageUpdate(level: string, message: string) {
+export function messageUpdate(level: string, message: string, txHash: string) {
 	return {
 		type: CST.AC_MESSAGE,
 		level: level,
-		message: message
+		message: message,
+		transactionHash: txHash
 	};
 }

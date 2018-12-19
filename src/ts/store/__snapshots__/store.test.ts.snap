@@ -27,6 +27,7 @@ Object {
     "orderSubscription": "",
     "status": Array [],
     "tokens": Array [],
+    "transactionHash": "",
   },
 }
 `;

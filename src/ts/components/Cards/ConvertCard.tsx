@@ -1,4 +1,4 @@
-import { notification, Spin } from 'antd';
+import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
@@ -19,25 +19,6 @@ import {
 	SSlider
 } from './_styled';
 
-const openNotification = (description: string, tx: string) => {
-	const btn = (
-		<SButton
-			onClick={() =>
-				window.open(`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`, '_blank')
-			}
-		>
-			View Transaction on Etherscan
-		</SButton>
-	);
-	const args = {
-		message: 'Transaction Sent',
-		description: description + ' Transaction hash: ' + tx,
-		duration: 0,
-		btn
-	};
-	notification.open(args);
-};
-
 interface IProps {
 	account: string;
 	custodian: string;
@@ -46,6 +27,7 @@ interface IProps {
 	tokenBalances?: { [code: string]: ITokenBalance };
 	ethBalance: IEthBalance;
 	info?: ICustodianInfo;
+	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
 }
 
@@ -274,14 +256,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleWETHApprove = async () => {
 		this.setState({ loading: true });
-		const { account, custodian } = this.props;
+		const { account, custodian, notification } = this.props;
 		try {
 			await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
-				(hash: string) => openNotification('Pending WETH approval.', hash),
+				(hash: string) => notification('info', 'WETH approval transaction sent.', hash),
 				true
 			);
 			const interval = setInterval(() => {
@@ -326,7 +308,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			loading: true
 		});
-		const { account, custodian, handleClose, info } = this.props;
+		const { account, custodian, handleClose, info, notification } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
@@ -339,7 +321,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 		try {
 			const onTxHash = (hash: string) => {
-				openNotification(description, hash);
+				notification('info', description, hash);
 				handleClose();
 			};
 			if (isCreate)

@@ -1,4 +1,4 @@
-import { notification, Radio, Spin } from 'antd';
+import { Radio, Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import moment from 'moment';
@@ -21,37 +21,6 @@ import {
 
 const RadioGroup = Radio.Group;
 
-const openNotification = (type: string, tx: string) => {
-	let args = {};
-	if (type === 'error')
-		args = {
-			message: type.toUpperCase(),
-			description: tx,
-			duration: 0
-		};
-	else {
-		const btn = (
-			<SButton
-				onClick={() =>
-					window.open(
-						`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`,
-						'_blank'
-					)
-				}
-			>
-				View Transaction on Etherscan
-			</SButton>
-		);
-		args = {
-			message: 'Transaction Sent',
-			description: 'Transaction hash: ' + tx,
-			duration: 0,
-			btn
-		};
-	}
-	notification.open(args as any);
-};
-
 interface IProps {
 	account: string;
 	token: string;
@@ -60,6 +29,7 @@ interface IProps {
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
 	ethPrice: number;
+	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
 }
 
@@ -332,16 +302,17 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 	private handleApprove = async () => {
+		const {token, account, notification} = this.props;
 		this.setState({ approving: true });
 		try {
 			const { isBid } = this.state;
 			const tx = await web3Util.setUnlimitedTokenAllowance(
-				isBid ? CST.TH_WETH : this.props.token,
-				this.props.account
+				isBid ? CST.TH_WETH : token,
+				account
 			);
-			openNotification('result', tx);
+			notification('info', `${token} approval transaction sent`, tx);
 		} catch (error) {
-			openNotification('error', error);
+			notification('error', `Error in approving ${token}`, '');
 			this.setState({
 				approving: false
 			});
@@ -373,7 +344,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 
 	private handleSubmit = async () => {
-		const { account, token, tokenInfo, ethPrice } = this.props;
+		const { account, token, tokenInfo, ethPrice, notification } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		try {
 			this.setState({
@@ -398,7 +369,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		} catch (error) {
-			openNotification('error', error);
+			notification('error', 'Error in signing order', '');
 			this.setState({
 				submitting: false
 			});

@@ -33,6 +33,7 @@ exports[`actions messageUpdate 1`] = `
 Object {
   "level": "level",
   "message": "message",
+  "transactionHash": "txHash",
   "type": "message",
 }
 `;

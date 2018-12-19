@@ -90,6 +90,6 @@ describe('actions', () => {
 	});
 
 	test('messageUpdate', () => {
-		expect(wsActions.messageUpdate('level', 'message')).toMatchSnapshot();
+		expect(wsActions.messageUpdate('level', 'message', 'txHash')).toMatchSnapshot();
 	});
 });

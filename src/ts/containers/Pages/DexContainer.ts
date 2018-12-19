@@ -23,6 +23,8 @@ function mapStateToProps(state: IState) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
+		notification: (level: string, message: string, txHash: string) =>
+			dispatch(wsActions.messageUpdate(level, message, txHash)),
 		subscribeOrder: (account: string) => dispatch(wsActions.subscribeOrder(account)),
 		unsubscribeOrder: () => dispatch(wsActions.orderSubscriptionUpdate(''))
 	};

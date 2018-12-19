@@ -211,7 +211,8 @@ describe('ws reducer', () => {
 		state = wsReducer(state, {
 			type: CST.AC_MESSAGE,
 			level: 'level',
-			message: ' message'
+			message: ' message',
+			transactionHash: 'txHash'
 		});
 		expect(state).toMatchSnapshot();
 	});

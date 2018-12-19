@@ -62,6 +62,7 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					ethPrice={123}
+					notification={() => ({})}
 					handleClose={handleClose}
 				/>
 			);

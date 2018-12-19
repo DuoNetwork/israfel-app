@@ -32,15 +32,16 @@ wsUtil.onOrder(
 	userOrders => store.dispatch(wsActions.orderHistoryUpdate(userOrders)),
 	userOrder => {
 		store.dispatch(wsActions.orderUpdate(userOrder));
-		store.dispatch(wsActions.messageUpdate('info', JSON.stringify(userOrder)));
+		store.dispatch(wsActions.messageUpdate('info', JSON.stringify(userOrder), ''));
 	},
 	(method, orderHash, error) =>
-		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error))
+		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error, ''))
 );
 wsUtil.onOrderBook(
 	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
 	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
-	(method, pair, error) => store.dispatch(wsActions.messageUpdate('error', method + pair + error))
+	(method, pair, error) =>
+		store.dispatch(wsActions.messageUpdate('error', method + pair + error, ''))
 );
 
 wsUtil.onConnection(

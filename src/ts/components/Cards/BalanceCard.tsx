@@ -1,4 +1,3 @@
-import { notification } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
@@ -9,37 +8,6 @@ import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle, SInput } from './_styled';
 import { SButton } from './_styled';
 
-const openNotification = (type: string, tx: string) => {
-	let args = {};
-	if (type === 'error')
-		args = {
-			message: type.toUpperCase(),
-			description: tx,
-			duration: 0
-		};
-	else {
-		const btn = (
-			<SButton
-				onClick={() =>
-					window.open(
-						`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`,
-						'_blank'
-					)
-				}
-			>
-				View Transaction on Etherscan
-			</SButton>
-		);
-		args = {
-			message: 'Transaction Sent',
-			description: 'Transaction hash: ' + tx,
-			duration: 0,
-			btn
-		};
-	}
-	notification.open(args as any);
-};
-
 interface IProps {
 	visible: boolean;
 	account: string;
@@ -47,6 +15,7 @@ interface IProps {
 	beethovenList: string[];
 	mozartList: string[];
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
+	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
 }
 
@@ -79,7 +48,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (ethInput.match(CST.RX_NUM_P))
 			web3Util.wrapEther(Number(ethInput), this.props.account).then(txHash => {
 				this.setState({ ethInput: '' });
-				openNotification('info', txHash);
+				this.props.notification('info', 'Wrap transacton sent.' , txHash);
 			});
 		else this.setState({ ethInput: '' });
 	};
@@ -89,7 +58,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (wethInput.match(CST.RX_NUM_P))
 			web3Util.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
 				this.setState({ wethInput: '' });
-				openNotification('info', txHash);
+				this.props.notification('info', 'Unwrap transacton sent.' , txHash);
 			});
 		else this.setState({ wethInput: '' });
 	};
