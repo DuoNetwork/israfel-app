@@ -7,7 +7,7 @@ import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-import { SCard, SCardTitle, STableWrapper } from './_styled';
+import { SButton, SCard, SCardTitle, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
@@ -133,7 +133,8 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				width="740px"
 				margin="0 10px 0 10px"
 				extra={
-					<button
+					<SButton
+						style={{ height: 24 }}
 						onClick={() =>
 							this.setState({
 								showHistory: !showHistory
@@ -141,7 +142,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 						}
 					>
 						Switch to {showHistory ? CST.TH_LIVE : CST.TH_HISTORY}
-					</button>
+					</SButton>
 				}
 			>
 				<STableWrapper>
