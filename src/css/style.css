@@ -266,6 +266,10 @@ svg {
 	font-size: 12px;
 	color: rgba(64, 79, 84, .6);
 }
+.convert-radio-des {
+	font-size: 10px;
+	color: rgba(64, 79, 84, .6);
+}
 .cardpopup-close {
 	opacity: 0.8;
 	cursor: pointer;

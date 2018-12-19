@@ -103,7 +103,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
 const getExpiryDescription = (isMonth: boolean) =>
-	`Order Valid till ${moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm')}`;
+	`Valid till ${moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm')}`;
 
 const getLimit = (
 	price: string,
@@ -302,7 +302,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 	private handleApprove = async () => {
-		const {token, account, notification} = this.props;
+		const { token, account, notification } = this.props;
 		this.setState({ approving: true });
 		try {
 			const { isBid } = this.state;
@@ -376,6 +376,25 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		}
 	};
 
+	private cardDescription = (token: any, n: number) => {
+		let des: string = '';
+		switch (token) {
+			case 'aETH':
+				des = 'income token with coupon rate ' + n + '% p.a.';
+				break;
+			case 'bETH':
+				des = 'leverage token with ' + n + 'x leverage.';
+				break;
+			case 'sETH':
+				des = 'short token with ' + n + 'x leverage.';
+				break;
+			default:
+				des = 'long token with ' + n + 'x leverage.';
+				break;
+		}
+		return des;
+	};
+
 	public render() {
 		const { token, tokenInfo, handleClose, tokenBalance, ethBalance, orderBook } = this.props;
 		const {
@@ -430,7 +449,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<SCardList noMargin width="100%">
+					{/* <SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
 								<li className="block-title" style={{ padding: '5px 15px' }}>
@@ -452,19 +471,17 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								</li>
 							</ul>
 						</div>
-					</SCardList>
+					</SCardList> */}
+					<div className="convert-popup-des">{`${token} is the ${this.cardDescription(token.split('-')[0], 1.0)}`}</div>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li
-										style={{ justifyContent: 'center', cursor: 'pointer' }}
-										onClick={() => this.handleSideChange(true)}
-									>
-										{CST.TH_BID}
+									<li style={{ justifyContent: 'flex-end' }}>
+										{CST.TH_BID + ' ' + CST.TH_PX}
 									</li>
 									{bidsToRender.map((item, i) => (
-										<li key={i} style={{ padding: '5px 5px 5px 15px' }}>
+										<li key={i} style={{ padding: '5px 5px 5px 30px' }}>
 											<span className="content">
 												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
@@ -486,14 +503,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li
-										style={{ justifyContent: 'center', cursor: 'pointer' }}
-										onClick={() => this.handleSideChange(false)}
-									>
-										{CST.TH_ASK}
-									</li>
+									<li>{CST.TH_ASK + ' ' + CST.TH_PX}</li>
 									{asksToRender.map((item, i) => (
-										<li key={i} style={{ padding: '5px 15px 5px 5px' }}>
+										<li key={i} style={{ padding: '5px 30px 5px 5px' }}>
 											<span className="title">
 												{item.price && item.price > 0
 													? util.formatFixedNumber(item.price, precision)
@@ -536,6 +548,26 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									{CST.TH_SELL.toUpperCase()}
 								</button>
 							</SDivFlexCenter>
+							<SCardList noMargin width="100%">
+								<div className="status-list-wrapper">
+									<ul>
+										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+											<span className="title">{token}</span>
+											<span className="title">{CST.TH_WETH}</span>
+										</li>
+										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+											<span className="content">
+												{util.formatBalance(ethBalance.weth)}
+											</span>
+											<span className="content">
+												{tokenBalance
+													? util.formatBalance(tokenBalance.balance)
+													: 0}
+											</span>
+										</li>
+									</ul>
+								</div>
+							</SCardList>
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
@@ -632,10 +664,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											/>
 										</li>
 										<li className="input-line" style={{ padding: '0 15px' }}>
-											<span className="title" style={{ width: 200 }}>
+											<span className="title" style={{width: 40}}>
 												{CST.TH_EXPIRY}
 											</span>
-											<SDivFlexCenter horizontal width="60%" rowInv>
+											<SDivFlexCenter horizontal width="46%" rowInv>
 												<RadioGroup
 													onChange={e =>
 														this.handleExpiryChange(e.target.value)
@@ -646,6 +678,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													<Radio value={2}>Month</Radio>
 												</RadioGroup>
 											</SDivFlexCenter>
+											<div className="convert-radio-des">{expiryDescription}</div>
 										</li>
 									</ul>
 								</div>
@@ -653,7 +686,6 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SCardConversionForm>
 						<div className="convert-popup-des">{tradeDescription}</div>
 						<div className="convert-popup-des">{feeDescription}</div>
-						<div className="convert-popup-des">{expiryDescription}</div>
 						<SDivFlexCenter horizontal width="100%" padding="10px">
 							<SButton onClick={this.handleReset} width="49%">
 								{CST.TH_RESET}

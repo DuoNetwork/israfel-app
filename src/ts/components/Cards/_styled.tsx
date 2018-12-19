@@ -943,7 +943,7 @@ injectGlobal([
 			.ant-slider-mark {
 				font-size: 10px;
 			}
-			.ant-radio-wrapper:last-child {
+			.ant-radio-wrapper {
 				margin-right: 0 !important;
 			}
 			.ant-spin {

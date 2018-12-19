@@ -37,63 +37,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     }
     width="360px"
   >
-    <styled.div
-      noMargin={true}
-      width="100%"
+    <div
+      className="convert-popup-des"
     >
-      <div
-        className="status-list-wrapper"
-      >
-        <ul>
-          <li
-            className="block-title"
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            Balance
-          </li>
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              test
-            </span>
-            <span
-              className="content"
-            >
-              123.0
-            </span>
-          </li>
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              WETH
-            </span>
-            <span
-              className="content"
-            >
-              123.0
-            </span>
-          </li>
-        </ul>
-      </div>
-    </styled.div>
+      test is the long token with 1x leverage.
+    </div>
     <styled.div
       horizontal={true}
     >
@@ -103,21 +51,19 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         >
           <ul>
             <li
-              onClick={[Function]}
               style={
                 Object {
-                  "cursor": "pointer",
-                  "justifyContent": "center",
+                  "justifyContent": "flex-end",
                 }
               }
             >
-              Bid
+              Bid Price
             </li>
             <li
               key="0"
               style={
                 Object {
-                  "padding": "5px 5px 5px 15px",
+                  "padding": "5px 5px 5px 30px",
                 }
               }
             >
@@ -136,7 +82,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               key="1"
               style={
                 Object {
-                  "padding": "5px 5px 5px 15px",
+                  "padding": "5px 5px 5px 30px",
                 }
               }
             >
@@ -155,7 +101,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               key="2"
               style={
                 Object {
-                  "padding": "5px 5px 5px 15px",
+                  "padding": "5px 5px 5px 30px",
                 }
               }
             >
@@ -178,22 +124,14 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           className="status-list-wrapper"
         >
           <ul>
-            <li
-              onClick={[Function]}
-              style={
-                Object {
-                  "cursor": "pointer",
-                  "justifyContent": "center",
-                }
-              }
-            >
-              Ask
+            <li>
+              Ask Price
             </li>
             <li
               key="0"
               style={
                 Object {
-                  "padding": "5px 15px 5px 5px",
+                  "padding": "5px 30px 5px 5px",
                 }
               }
             >
@@ -212,7 +150,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               key="1"
               style={
                 Object {
-                  "padding": "5px 15px 5px 5px",
+                  "padding": "5px 30px 5px 5px",
                 }
               }
             >
@@ -231,7 +169,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               key="2"
               style={
                 Object {
-                  "padding": "5px 15px 5px 5px",
+                  "padding": "5px 30px 5px 5px",
                 }
               }
             >
@@ -275,6 +213,55 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           >
             SELL
           </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "justifyContent": "space-around",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                >
+                  test
+                </span>
+                <span
+                  className="title"
+                >
+                  WETH
+                </span>
+              </li>
+              <li
+                style={
+                  Object {
+                    "justifyContent": "space-around",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="content"
+                >
+                  123.0
+                </span>
+                <span
+                  className="content"
+                >
+                  123.0
+                </span>
+              </li>
+            </ul>
+          </div>
         </styled.div>
         <styled.div
           noLiBorder={true}
@@ -406,7 +393,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                   className="title"
                   style={
                     Object {
-                      "width": 200,
+                      "width": 40,
                     }
                   }
                 >
@@ -415,7 +402,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 <styled.div
                   horizontal={true}
                   rowInv={true}
-                  width="60%"
+                  width="46%"
                 >
                   <RadioGroup
                     buttonStyle="outline"
@@ -440,6 +427,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                     </Radio>
                   </RadioGroup>
                 </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-16 16:00
+                </div>
               </li>
             </ul>
           </div>
@@ -454,11 +446,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         className="convert-popup-des"
       >
         Pay 0.1 test fee
-      </div>
-      <div
-        className="convert-popup-des"
-      >
-        Order Valid till 1970-01-16 16:00
       </div>
       <styled.div
         horizontal={true}
