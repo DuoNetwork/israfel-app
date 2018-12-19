@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
-import { IEthBalance, ITokenBalance } from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
@@ -12,8 +12,10 @@ interface IProps {
 	visible: boolean;
 	account: string;
 	ethBalance: IEthBalance;
+	ethPrice: number;
 	beethovenList: string[];
 	mozartList: string[];
+	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
@@ -48,7 +50,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (ethInput.match(CST.RX_NUM_P))
 			web3Util.wrapEther(Number(ethInput), this.props.account).then(txHash => {
 				this.setState({ ethInput: '' });
-				this.props.notification('info', 'Wrap transacton sent.' , txHash);
+				this.props.notification('info', 'Wrap transacton sent.', txHash);
 			});
 		else this.setState({ ethInput: '' });
 	};
@@ -58,7 +60,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (wethInput.match(CST.RX_NUM_P))
 			web3Util.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
 				this.setState({ wethInput: '' });
-				this.props.notification('info', 'Unwrap transacton sent.' , txHash);
+				this.props.notification('info', 'Unwrap transacton sent.', txHash);
 			});
 		else this.setState({ wethInput: '' });
 	};
@@ -68,53 +70,58 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 			handleClose,
 			visible,
 			ethBalance,
+			ethPrice,
+			custodians,
 			custodianTokenBalances,
 			beethovenList,
 			mozartList
 		} = this.props;
 		const animated = visible ? 'animated' : '';
 
+		let totalNav = (ethBalance.eth + ethBalance.weth) * ethPrice;
 		const balanceLis: any[] = [];
 		beethovenList.forEach(c => {
 			const codes = Object.keys(custodianTokenBalances[c] || {});
 			codes.sort((a, b) => a.localeCompare(b));
-			codes.forEach(code =>
+			codes.forEach(code => {
+				const balance =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].balance
+						: 0;
 				balanceLis.push(
 					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
 						<span className="content">
-							{custodianTokenBalances[c] && custodianTokenBalances[c][code]
-								? util.formatBalance(custodianTokenBalances[c][code].balance)
-								: '-'}
+							{balance ? util.formatBalance(balance) : '-'}
 						</span>
 					</li>
-				)
-			);
+				);
+				if (code.startsWith('a')) totalNav += balance * custodians[c].states.navA;
+				else totalNav += balance * custodians[c].states.navB;
+			});
 		});
 		mozartList.forEach(c => {
 			const codes = Object.keys(custodianTokenBalances[c] || {});
 			codes.sort((a, b) => -a.localeCompare(b));
-			codes.forEach(code =>
+			codes.forEach(code => {
+				const balance =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].balance
+						: 0;
 				balanceLis.push(
 					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
-						<span className="content">
-							{custodianTokenBalances[c] && custodianTokenBalances[c][code]
-								? util.formatBalance(custodianTokenBalances[c][code].balance)
-								: '-'}
-						</span>
+						<span className="content">{balance ? balance : '-'}</span>
 					</li>
-				)
-			);
+				);
+				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
+				else totalNav += balance * custodians[c].states.navB;
+			});
 		});
 
 		return (
 			<SCard
-				title={
-					<SCardTitle>
-						{CST.TH_BALANCES.toUpperCase()}{' '}
-					</SCardTitle>
-				}
+				title={<SCardTitle>{CST.TH_BALANCES.toUpperCase()} </SCardTitle>}
 				className={'panel-wrap ' + animated}
 				style={{ right: visible ? 0 : -200 }}
 			>
@@ -135,7 +142,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				<SDivFlexCenter horizontal width="100%">
 					<SInput
 						right
-						placeholder='Amount'
+						placeholder="Amount"
 						width="60%"
 						style={{ height: '30px' }}
 						value={this.state.ethInput}
@@ -162,7 +169,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				<SDivFlexCenter horizontal width="100%">
 					<SInput
 						right
-						placeholder='Amount'
+						placeholder="Amount"
 						width="60%"
 						style={{ height: '30px' }}
 						value={this.state.wethInput}
@@ -179,6 +186,24 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						</div>
 					</SCardList>
 				</SDivFlexCenter>
+				<SDivFlexCenter horizontal style={{ marginTop: '5px' }}>
+					<SCardList noMargin>
+						<div className="status-list-wrapper">
+							<ul>
+								<li style={{ padding: '5px 5px' }}>
+									<span className="title">
+										{CST.TH_TOTAL + ' ' + CST.TH_NAV}
+									</span>
+								</li>
+								<li style={{ padding: '5px 5px' }}>
+									<span className="content">
+										{'$' + util.formatBalance(totalNav)}
+									</span>
+								</li>
+							</ul>
+						</div>
+					</SCardList>
+				</SDivFlexCenter>
 				<SButton
 					className="rightFixed"
 					onClick={handleClose}
@@ -187,7 +212,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						color: visible ? ColorStyles.MainColor : '#fff'
 					}}
 				>
-					{(visible ? ('∧  ' + CST.TH_HIDE) : ('∨  ' + CST.TH_SHOW)) + ' ' + CST.TH_BALANCES}
+					{(visible ? '∧  ' + CST.TH_HIDE : '∨  ' + CST.TH_SHOW) + ' ' + CST.TH_BALANCES}
 				</SButton>
 			</SCard>
 		);

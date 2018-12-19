@@ -979,7 +979,7 @@ injectGlobal([
 				top: 0;
 				z-index: 2;
 				margin-top: 80px;
-				height: 458px;
+				height: 528px;
 				width: 200px;
 				background: #ffffff;
 				border: 1px solid #dedede;

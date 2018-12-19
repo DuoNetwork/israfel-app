@@ -10,6 +10,7 @@ import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {
 	type: string;
+	custodian: string;
 	tokenBalances: { [code: string]: ITokenBalance };
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	info: ICustodianInfo;
@@ -48,7 +49,8 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			tokenBalances,
 			acceptedPrices,
 			orderBooks,
-			ethPrice
+			ethPrice,
+			custodian
 		} = this.props;
 		const { timeStep } = this.state;
 		const contractCode = info.code;
@@ -93,6 +95,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
 				width="360px"
 				margin={margin}
+				extra={
+					<button
+						onClick={() =>
+							window.open(
+								`https://${
+									__KOVAN__ ? 'kovan.' : ''
+								}etherscan.io/address/${custodian}`,
+								'_blank'
+							)
+						}
+					>
+						{custodian.substring(0, 6)}
+					</button>
+				}
 			>
 				<SDivFlexCenter horizontal>
 					<SCardList noMargin width="66%">
@@ -136,9 +152,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>
-					{aCode + ' ' + aLabel}
-				</SDivFlexCenter>
+				<SDivFlexCenter horizontal>{aCode + ' ' + aLabel}</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart
@@ -177,9 +191,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>
-					{bCode + ' ' + bLabel}
-				</SDivFlexCenter>
+				<SDivFlexCenter horizontal>{bCode + ' ' + bLabel}</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart

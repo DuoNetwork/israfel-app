@@ -139,6 +139,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								<CustodianCard
 									key={c}
 									type={CST.BEETHOVEN}
+									custodian={c}
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
@@ -163,6 +164,7 @@ export default class Dex extends React.Component<IProps, IState> {
 								<CustodianCard
 									key={c}
 									type={CST.MOZART}
+									custodian={c}
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
@@ -207,11 +209,13 @@ export default class Dex extends React.Component<IProps, IState> {
 					/>
 				</Spin>
 				<BalanceCard
+					ethPrice={ethPrice}
 					visible={showBalances}
 					account={account}
 					ethBalance={ethBalance}
 					beethovenList={beethovenList}
 					mozartList={mozartList}
+					custodians={custodians}
 					custodianTokenBalances={custodianTokenBalances}
 					notification={notification}
 					handleClose={() => this.setState({ showBalances: !showBalances })}

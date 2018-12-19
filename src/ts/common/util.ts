@@ -61,10 +61,10 @@ class Util {
 	public getExpiryTimestamp = relayerUtil.getExpiryTimestamp;
 
 	public getOrderFullDescription(order: IUserOrder) {
-		const code1 = order.pair.split('|')[0];
+		const [code1, code2] = order.pair.split('|');
 		let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
-		} ${code1} of ${order.pair} at ${order.price}.`;
+		} ${code1} of ${code1}-${code2} at ${order.price}.`;
 		if (order.type === CST.DB_ADD) return baseDescription;
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
@@ -97,10 +97,10 @@ class Util {
 	}
 
 	public getOrderDescription(order: IUserOrder) {
-		const code1 = order.pair.split('|')[0];
+		const [code1, code2] = order.pair.split('|');
 		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
-		} ${code1} of ${order.pair} at ${order.price}. Total ${order.fill} filled.`;
+		} ${code1} of ${code1}-${code2}} at ${order.price}. Total ${order.fill} filled.`;
 	}
 
 	public getVersionDescription(order: IUserOrder) {
