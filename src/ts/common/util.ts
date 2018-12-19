@@ -64,11 +64,11 @@ class Util {
 		const [code1, code2] = order.pair.split('|');
 		let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
-		} ${code1} of ${code1}-${code2} at ${order.price}.`;
+		} ${code1} at ${order.price} ${code2} per ${code1}.`;
 		if (order.type === CST.DB_ADD) return baseDescription;
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
-			return baseDescription + ' Filly filled';
+			return baseDescription + ' Fully filled';
 
 		if (order.fill)
 			baseDescription += ` ${order.fill}(${this.formatPercent(
@@ -100,7 +100,7 @@ class Util {
 		const [code1, code2] = order.pair.split('|');
 		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
-		} ${code1} of ${code1}-${code2}} at ${order.price}. Total ${order.fill} filled.`;
+		} ${code1} at ${order.price} ${code2} per ${code1}. Total ${order.fill} filled.`;
 	}
 
 	public getVersionDescription(order: IUserOrder) {

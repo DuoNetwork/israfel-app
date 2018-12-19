@@ -381,6 +381,30 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					tokenBalances[bToken].balance / info.states.alpha
 			)
 			: 0;
+
+		const [contractCode, contractTenor] = info ? info.code.split('-') : ['', ''];
+		const isBeethoven = contractCode === CST.BEETHOVEN.toUpperCase();
+		const contractDescription = `This contract allows you to convert between ${
+			wethCreate ? CST.TH_WETH : CST.TH_ETH
+		} and tokens ${
+			isBeethoven ? 'with diversified payoffs.' : 'of contrary directions in ETH/USD price.'
+		}.`;
+
+		const tokenDescription = aToken.startsWith('a')
+			? ` ${aToken} provides a fixed stream of income and ${bToken} provides leveraged return.`
+			: ` ${aToken} represents short positions and ${bToken} represents leveraged long positions.`;
+		const expiryDescription = ` Fully collateralized by ETH, this contract ${
+			contractTenor === 'PPT'
+				? 'never expires'
+				: 'expires in ' +
+				(info
+						? Math.floor(
+								(info.states.maturity - util.getUTCNowTimestamp()) / 86400000
+						).toFixed(0)
+						: 0) +
+				' days'
+		}.`;
+
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className={'popup-bg ' + (!!custodian ? 'popup-open-bg' : '')} />
@@ -400,60 +424,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					{/* <SCardList noMargin width="100%">
-						<div className="status-list-wrapper">
-							<ul>
-								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{CST.TH_BALANCE}
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">
-										{wethCreate ? CST.TH_WETH : CST.TH_ETH}
-									</span>
-									<span className="content">
-										{util.formatBalance(
-											wethCreate ? ethBalance.weth : ethBalance.eth
-										)}
-									</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{aToken}</span>
-									<span className="content">
-										{util.formatBalance(
-											tokenBalances && tokenBalances[aToken]
-												? tokenBalances[aToken].balance
-												: 0
-										)}
-									</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{bToken}</span>
-									<span className="content">
-										{util.formatBalance(
-											tokenBalances && tokenBalances[bToken]
-												? tokenBalances[bToken].balance
-												: 0
-										)}
-									</span>
-								</li>
-							</ul>
-						</div>
-					</SCardList> */}
-					<div className="convert-popup-des">{`Split ${
-						wethCreate ? CST.TH_WETH : CST.TH_ETH
-					} into tokens ${
-						info
-							? info.code.split('-')[0] === CST.BEETHOVEN.toUpperCase()
-								? 'with diversified payoffs'
-								: 'of short and long positions'
-							: ''
-					}, currently backed by ${util.formatBalance(info ? info.states.ethCollateral : 0)}ETH${
-						info
-							? info.code.split('-')[1] === 'M19'
-								? ', maturing on ' + util.formatMaturity(info.states.maturity) + '.'
-								: '.'
-							: ''
-					}`}</div>
+					<div className="convert-popup-des">{contractDescription}</div>
+					<div className="convert-popup-des">{tokenDescription}</div>
+					<div className="convert-popup-des">{expiryDescription}</div>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
@@ -562,15 +535,25 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							<SCardList noMargin width="100%">
 								<div className="status-list-wrapper">
 									<ul>
-										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
 											<span className="title">
 												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
 											</span>
 											<span className="title">{aToken}</span>
 											<span className="title">{bToken}</span>
 										</li>
-										<li style={{ padding: '5px 15px', justifyContent: 'space-around' }}>
-										<span className="content">
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
+											<span className="content">
 												{util.formatBalance(
 													wethCreate ? ethBalance.weth : ethBalance.eth
 												)}
