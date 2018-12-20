@@ -557,12 +557,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											}}
 										>
 											<span className="content">
+												{util.formatBalance(ethBalance.weth)}
+											</span>
+											<span className="content">
 												{tokenBalance
 													? util.formatBalance(tokenBalance.balance)
 													: 0}
-											</span>
-											<span className="content">
-												{util.formatBalance(ethBalance.weth)}
 											</span>
 										</li>
 									</ul>

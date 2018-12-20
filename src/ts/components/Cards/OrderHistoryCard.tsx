@@ -128,15 +128,18 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							size: 'small'
 						}}
 						style={{ width: '100%' }}
-						onRow={(record: { [key: string]: any }) => ({
-							onClick: () =>
-								this.setState({
-									details: record[CST.TH_HISTORY] as IUserOrder[]
-								})
-						})}
 					>
 						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={120} />
-						<Column title={CST.TH_ORDER} dataIndex={CST.TH_ORDER} />
+						<Column
+							title={CST.TH_ORDER}
+							dataIndex={CST.TH_ORDER}
+							onCell={(record: { [key: string]: any }) => ({
+								onClick: () =>
+									this.setState({
+										details: record[CST.TH_HISTORY] as IUserOrder[]
+									})
+							})}
+						/>
 						{showHistory ? null : (
 							<Column
 								key={CST.TH_ACTIONS}
