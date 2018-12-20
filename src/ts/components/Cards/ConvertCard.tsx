@@ -726,6 +726,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									limit === 0 ||
 									Number(isCreate && wethCreate ? wethAmount : amount) === 0
 								}
+								style={{opacity: (limit === 0 ||
+									Number(isCreate && wethCreate ? wethAmount : amount) === 0) ? 0.3 : 1}}
 								width="49%"
 								onClick={this.handleSubmit}
 							>

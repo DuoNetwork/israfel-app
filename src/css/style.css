@@ -259,7 +259,7 @@ svg {
 }
 
 .list-expand-button:hover {
-	background: rgba(42, 181, 202, .2)
+	background: rgba(92,164,222,.2)
 }
 .convert-popup-des {
 	padding: 5px 15px;
@@ -297,12 +297,10 @@ svg {
 }
 .px-topleft {
 	font-size: 12px;
-	margin-right: 2px;
 }
 .px-buttomright {
 	font-size: 12px;
 	margin-top: 6px;
-	margin-left: 2px;
 }
 .range-picker {
 	font-size: 10px !important;

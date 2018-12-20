@@ -461,6 +461,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         <styled.button
           disable={true}
           onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
           width="49%"
         >
           Submit

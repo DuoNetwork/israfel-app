@@ -1,7 +1,9 @@
+import { Icon } from 'antd';
 import * as d3 from 'd3';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
+import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice, ICustodianInfo, IOrderBookSnapshot, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
@@ -106,12 +108,14 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				}
 			>
 				<SDivFlexCenter horizontal>
-					<SCardList noMargin width="66%">
+					<SCardList noLiBorder noUlBorder noMargin width="66%">
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
 									<span className="title">{CST.TH_ETH}</span>
-									<span className="title">{'<-->'}</span>
+									<span className="title">
+										<Icon type="swap" />
+									</span>
 									<span className="content">
 										{isBeethoven ? 'Income/Leverage' : 'Short/Long'}
 									</span>
@@ -150,14 +154,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>
-					{aCode +
-						' ' +
-						aLabel +
-						' NAV $' +
-						(info ? util.formatPriceShort(info.states.navA) : 0)}
+				<SDivFlexCenter horizontal padding='10px 10px 0 5px' style={{color: ColorStyles.TextBlackAlpha, fontSize: 12}}>
+					<span>{aCode + ': ' + aLabel}</span>
+					<span>{'NAV: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal height="130px" padding="10px 0">
+				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}
@@ -191,14 +192,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>
-					{bCode +
-						' ' +
-						bLabel +
-						' NAV $' +
-						(info ? util.formatPriceShort(info.states.navB) : 0)}
+				<SDivFlexCenter horizontal padding='0 10px 0 5px' style={{color: ColorStyles.TextBlackAlpha, fontSize: 12}}>
+					<span>{bCode + ': ' + bLabel}</span>
+					<span>{'NAV: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal height="130px" padding="10px 0">
+				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart
 							prices={acceptedPrices}

@@ -694,6 +694,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</SButton>
 							<SButton
 								disable={Number(price) === 0 || Number(amount) === 0}
+								style={{opacity: (Number(price) === 0 || Number(amount) === 0) ? 0.3 : 1}}
 								onClick={this.handleSubmit}
 								width="49%"
 							>
