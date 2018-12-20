@@ -231,14 +231,14 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <span
-                  className="content"
+                  className="title"
                 >
-                  123.0
+                  WETH
                 </span>
                 <span
-                  className="content"
+                  className="title"
                 >
-                  123.0
+                  test
                 </span>
               </li>
               <li
@@ -250,14 +250,14 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <span
-                  className="title"
+                  className="content"
                 >
-                  test
+                  123.0
                 </span>
                 <span
-                  className="title"
+                  className="content"
                 >
-                  WETH
+                  123.0
                 </span>
               </li>
             </ul>

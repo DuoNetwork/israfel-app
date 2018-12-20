@@ -547,14 +547,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												justifyContent: 'space-around'
 											}}
 										>
-											<span className="content">
-												{util.formatBalance(ethBalance.weth)}
-											</span>
-											<span className="content">
-												{tokenBalance
-													? util.formatBalance(tokenBalance.balance)
-													: 0}
-											</span>
+											<span className="title">{CST.TH_WETH}</span>
+											<span className="title">{token}</span>
 										</li>
 										<li
 											style={{
@@ -562,8 +556,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												justifyContent: 'space-around'
 											}}
 										>
-											<span className="title">{token}</span>
-											<span className="title">{CST.TH_WETH}</span>
+											<span className="content">
+												{tokenBalance
+													? util.formatBalance(tokenBalance.balance)
+													: 0}
+											</span>
+											<span className="content">
+												{util.formatBalance(ethBalance.weth)}
+											</span>
 										</li>
 									</ul>
 								</div>

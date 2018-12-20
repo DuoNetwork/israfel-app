@@ -264,7 +264,7 @@ svg {
 .convert-popup-des {
 	padding: 5px 15px;
 	font-size: 12px;
-	color: rgba(64, 79, 84, .6);
+	color: rgba(64, 79, 84, .8);
 }
 .convert-radio-des {
 	font-size: 10px;
@@ -296,11 +296,13 @@ svg {
 	border: 1px solid rgba(255,255,255,.5);
 }
 .px-topleft {
-	font-size: 10px;
+	font-size: 12px;
+	margin-right: 2px;
 }
 .px-buttomright {
-	font-size: 10px;
+	font-size: 12px;
 	margin-top: 6px;
+	margin-left: 2px;
 }
 @keyframes openPopup {
 	from {
