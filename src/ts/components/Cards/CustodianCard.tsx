@@ -217,11 +217,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal width="66%" padding="0">
+				<SDivFlexCenter horizontal width="30%" padding="0">
 					{[1, 3, 7].map(pct => (
 						<SButton
 							key={pct + ''}
-							className={timeOffset === 3600 * pct ? '' : 'day-Button'}
+							className={'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
 						>
 							{pct + 'D'}

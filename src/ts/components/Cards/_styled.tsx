@@ -1012,7 +1012,6 @@ injectGlobal([
 			}
 			.day-Button {
 				border: none;
-				font-size: 12px;
 			}
 		}
 	`

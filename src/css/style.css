@@ -304,6 +304,11 @@ svg {
 	margin-top: 6px;
 	margin-left: 2px;
 }
+.range-picker {
+	font-size: 10px !important;
+	height: 20px !important;
+	width: 36px !important;
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);
