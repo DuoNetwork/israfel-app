@@ -129,7 +129,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 						}}
 						style={{ width: '100%' }}
 					>
-						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={120} />
+						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={180} />
 						<Column
 							title={CST.TH_ORDER}
 							dataIndex={CST.TH_ORDER}
