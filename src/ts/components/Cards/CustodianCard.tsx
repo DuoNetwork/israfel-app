@@ -55,19 +55,19 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const { timeOffset } = this.state;
 		const contractCode = info.code;
 		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
-		const maturity = util.formatMaturity(info.states.maturity);
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
+		const isBeethoven = type === CST.BEETHOVEN;
 		const lastAcceptedPrice = acceptedPrices.length
 			? acceptedPrices[acceptedPrices.length - 1]
 			: null;
 		const aLabel =
-			d3.format(type === CST.BEETHOVEN ? '.2%' : '.2f')(
+			d3.format(isBeethoven ? '.2%' : '.2f')(
 				lastAcceptedPrice
 					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, true)
 					: 0
-			) + (type === CST.BEETHOVEN ? CST.TH_PA : CST.TH_X_LEV);
+			) + (isBeethoven ? CST.TH_PA : CST.TH_X_LEV);
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
@@ -110,8 +110,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
-									<span className="title">{CST.TH_MATURITY}</span>
-									<span className="content">{maturity}</span>
+									<span className="title">{CST.TH_ETH}</span>
+									<span className="title">{'<-->'}</span>
+									<span className="content">
+										{isBeethoven ? 'Income/Leverage' : 'Short/Long'}
+									</span>
 								</li>
 								<li>
 									<span className="title">{CST.TH_COLLATERAL}</span>
@@ -147,7 +150,13 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>{aCode + ' ' + aLabel}</SDivFlexCenter>
+				<SDivFlexCenter horizontal>
+					{aCode +
+						' ' +
+						aLabel +
+						' NAV $' +
+						(info ? util.formatPriceShort(info.states.navA) : 0)}
+				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart
@@ -168,11 +177,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex' }}>
 							<span className="px-topleft">
-								{aBestBid ? util.formatPriceShort(aBestBid) : '-'}
+								{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}
 							</span>
 							/
 							<span className="px-buttomright">
-								{aBestAsk ? util.formatPriceShort(aBestAsk) : '-'}
+								{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(aCode)}>
@@ -182,7 +191,13 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal>{bCode + ' ' + bLabel}</SDivFlexCenter>
+				<SDivFlexCenter horizontal>
+					{bCode +
+						' ' +
+						bLabel +
+						' NAV $' +
+						(info ? util.formatPriceShort(info.states.navB) : 0)}
+				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="130px" padding="10px 0">
 					<div style={{ width: '66%' }}>
 						<PriceChart
@@ -203,11 +218,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex' }}>
 							<span className="px-topleft">
-								{bBestBid ? util.formatPriceShort(bBestBid) : '-'}
+								{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}
 							</span>
 							/
 							<span className="px-buttomright">
-								{bBestAsk ? util.formatPriceShort(bBestAsk) : '-'}
+								{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(bCode)}>
@@ -221,7 +236,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					{[1, 3, 7].map(pct => (
 						<SButton
 							key={pct + ''}
-							className={'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')}
+							className={
+								'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')
+							}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
 						>
 							{pct + 'D'}

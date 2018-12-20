@@ -382,28 +382,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			)
 			: 0;
 
-		const [contractCode, contractTenor] = info ? info.code.split('-') : ['', ''];
+		const contractCode = info ? info.code.split('-')[0] : '';
 		const isBeethoven = contractCode === CST.BEETHOVEN.toUpperCase();
-		const contractDescription = `This contract allows you to convert between ${
-			wethCreate ? CST.TH_WETH : CST.TH_ETH
-		} and tokens ${
-			isBeethoven ? 'with diversified payoffs.' : 'of contrary directions in ETH/USD price.'
-		}.`;
-
-		const tokenDescription = aToken.startsWith('a')
-			? ` ${aToken} provides a fixed stream of income and ${bToken} provides leveraged return.`
-			: ` ${aToken} represents short positions and ${bToken} represents leveraged long positions.`;
-		const expiryDescription = ` Fully collateralized by ETH, this contract ${
-			contractTenor === 'PPT'
-				? 'never expires'
-				: 'expires in ' +
-				(info
-						? Math.floor(
-								(info.states.maturity - util.getUTCNowTimestamp()) / 86400000
-						).toFixed(0)
-						: 0) +
-				' days'
-		}.`;
 
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -424,9 +404,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<div className="convert-popup-des">{contractDescription}</div>
-					<div className="convert-popup-des">{tokenDescription}</div>
-					<div className="convert-popup-des">{expiryDescription}</div>
+					<div className="convert-popup-des">
+						{util.getContractDescription(isBeethoven)}
+					</div>
+					<div className="convert-popup-des">
+						{util.getTokenDescription(aToken, bToken)}
+					</div>
+					<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>

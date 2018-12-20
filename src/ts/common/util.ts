@@ -139,6 +139,40 @@ class Util {
 			lastAcceptedPrice.navB
 		);
 	}
+
+	public getContractShortDescription(isBeethoven: boolean, info?: ICustodianInfo) {
+		return `Fully backed by ${this.formatBalance(
+			info ? info.states.ethCollateral : 0
+		)} ETH, this contract convert between ETH and tokens ${
+			isBeethoven ? 'with diversified payoffs.' : 'of contrary directions in ETH/USD price.'
+		}`;
+	}
+
+	public getContractDescription(isBeethoven: boolean) {
+		return `This contract allows you to convert between ETH and tokens ${
+			isBeethoven ? 'with diversified payoffs.' : 'of contrary directions in ETH/USD price.'
+		}`;
+	}
+
+	public getTokenDescription(aToken: string, bToken: string) {
+		return aToken.startsWith('a')
+			? ` ${aToken} provides a fixed stream of income and ${bToken} provides leveraged return.`
+			: ` ${aToken} represents short positions and ${bToken} represents leveraged long positions.`;
+	}
+
+	public getMaturityDescription(info?: ICustodianInfo) {
+		return `Fully collateralized by ETH, this contract ${
+			info && info.code.endsWith('PPT')
+				? 'never expires'
+				: 'expires in ' +
+				(info
+						? Math.floor(
+								(info.states.maturity - util.getUTCNowTimestamp()) / 86400000
+						).toFixed(0)
+						: 0) +
+				' days'
+		}.`;
+	}
 }
 
 const util = new Util();
