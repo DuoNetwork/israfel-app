@@ -73,7 +73,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 123.0
               </span>
               <span
-                className="title"
+                className="title bid-span"
               >
                 123.000000
               </span>
@@ -92,7 +92,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 -
               </span>
               <span
-                className="title"
+                className="title bid-span"
               >
                 -
               </span>
@@ -111,7 +111,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 -
               </span>
               <span
-                className="title"
+                className="title bid-span"
               >
                 -
               </span>
@@ -136,7 +136,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               }
             >
               <span
-                className="title"
+                className="title ask-span"
               >
                 123.000000
               </span>
@@ -155,7 +155,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               }
             >
               <span
-                className="title"
+                className="title ask-span"
               >
                 -
               </span>
@@ -174,7 +174,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               }
             >
               <span
-                className="title"
+                className="title ask-span"
               >
                 -
               </span>

@@ -480,7 +480,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													)
 													: '-'}
 											</span>
-											<span className="title">
+											<span className="title bid-span">
 												{item.price && item.price > 0
 													? util.formatFixedNumber(item.price, precision)
 													: '-'}
@@ -496,7 +496,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									<li>{CST.TH_ASK + ' ' + CST.TH_PX}</li>
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 30px 5px 5px' }}>
-											<span className="title">
+											<span className="title ask-span">
 												{item.price && item.price > 0
 													? util.formatFixedNumber(item.price, precision)
 													: '-'}

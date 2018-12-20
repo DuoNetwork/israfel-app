@@ -302,12 +302,18 @@ svg {
 }
 .px-topleft {
 	font-size: 12px;
-	color: #F55E5E
+	color: #9AC370;
 }
 .px-buttomright {
 	font-size: 12px;
 	margin-top: 10px;
-	color: #9AC370;
+	color: #F55E5E;
+}
+.bid-span {
+	color: #9AC370 !important;
+}
+.ask-span {
+	color: #F55E5E !important;
 }
 .range-picker {
 	font-size: 10px !important;
