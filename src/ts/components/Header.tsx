@@ -31,8 +31,8 @@ export default class Header extends React.Component<IProps> {
 						</Link>
 						<div className="nav-bal-wrapper">
 							{network ? (
-								(__KOVAN__ && network !== CST.NETWORK_ID_KOVAN) ||
-								(!__KOVAN__ && network !== CST.NETWORK_ID_MAIN) ? (
+								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
+								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
 									<span className="error-msg">
 										{CST.TT_NETWORK_CHECK[locale]}
 									</span>
@@ -49,14 +49,6 @@ export default class Header extends React.Component<IProps> {
 							) : null}
 						</div>
 					</div>
-					{/* {network ? (
-						(__KOVAN__ && network !== CST.NETWORK_ID_KOVAN) ||
-						(!__KOVAN__ && network !== CST.NETWORK_ID_MAIN) ? (
-							<span className="error-msg">{CST.TT_NETWORK_CHECK[locale]}</span>
-						) : (
-							JSON.stringify(exchangePrices)
-						)
-					) : null} */}
 					<SDivFlexCenter horizontal>
 						<div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div>
 						<div className="nav-button-wrapper">

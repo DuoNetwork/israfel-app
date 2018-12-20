@@ -58,12 +58,12 @@ class WsUtil {
 	}
 
 	public close() {
-		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
+		this.ws = new WebSocket(`wss://relayer.${__ENV__}.israfel.info:8080`);
 		this.ws.onclose = () => this.reconnect();
 	}
 
 	public connectToRelayer() {
-		this.ws = new WebSocket(`wss://relayer.${__KOVAN__ ? 'dev' : 'live'}.israfel.info:8080`);
+		this.ws = new WebSocket(`wss://relayer.${__ENV__}.israfel.info:8080`);
 		this.ws.onopen = () => {
 			this.reconnectionNumber = 0;
 			this.handleConnected();

@@ -27,8 +27,7 @@ module.exports = {
 		new webpack.SourceMapDevToolPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development'),
-			__DEV__: true,
-			__KOVAN__: true
+			__ENV__: JSON.stringify('dev'),
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({

@@ -19,8 +19,7 @@
 	"jest": {
 		"testEnvironment": "node",
 		"globals": {
-			"__DEV__": false,
-			"__KOVAN__": true,
+			"__ENV__": "dev",
 			"window": {},
 			"navigator": {
 				"language": "EN"

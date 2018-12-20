@@ -97,7 +97,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						onClick={() =>
 							window.open(
 								`https://${
-									__KOVAN__ ? 'kovan.' : ''
+									__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
 								}etherscan.io/address/${custodian}`,
 								'_blank'
 							)

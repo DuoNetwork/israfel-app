@@ -13,5 +13,4 @@ declare module '*.json' {
 	export default content;
 }
 
-declare const __DEV__: boolean;
-declare const __KOVAN__: boolean;
+declare const __ENV__: string;

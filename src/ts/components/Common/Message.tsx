@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import React from 'react';
+import { DB_LIVE } from 'ts/common/constants';
 import { SButton } from '../Cards/_styled';
 
 interface IProps {
@@ -23,7 +24,7 @@ export default class Message extends React.Component<IProps> {
 					onClick={() =>
 						window.open(
 							`https://${
-								__KOVAN__ ? 'kovan.' : ''
+								__ENV__ === DB_LIVE ? '' : 'kovan.'
 							}etherscan.io/tx/${transactionHash}`,
 							'_blank'
 						)

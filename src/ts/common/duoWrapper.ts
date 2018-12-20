@@ -6,8 +6,8 @@ import infura from '../../../../israfel-relayer/src/keys/infura.json';
 import * as CST from './constants';
 
 const provider =
-	(__KOVAN__ ? CST.PROVIDER_INFURA_KOVAN : CST.PROVIDER_INFURA_MAIN) + '/' + infura.token;
-export const duoWeb3Wrapper = new Web3Wrapper(window, '', provider, !__KOVAN__);
+	(__ENV__ === CST.DB_LIVE ? CST.PROVIDER_INFURA_MAIN : CST.PROVIDER_INFURA_KOVAN) + '/' + infura.token;
+export const duoWeb3Wrapper = new Web3Wrapper(window, '', provider, __ENV__ === CST.DB_LIVE);
 export const dualClassWrappers: { [custodian: string]: DualClassWrapper } = {};
 export const getDualClassWrapper = (custodian: string) => {
 	if (!dualClassWrappers[custodian])
