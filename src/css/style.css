@@ -233,7 +233,12 @@ svg {
 	left: 50%;
 	z-index: 11;
 }
-
+.popup-card-oh {
+	position: absolute;
+	top:40px;
+	left: 50%;
+	z-index: 11;
+}
 .popup-open {
 	animation-name: openPopup;
 	animation-duration:0.2s;

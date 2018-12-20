@@ -26,14 +26,15 @@ export default class OrderDetailCard extends React.Component<IProps> {
 							{CST.TH_ORDER.toUpperCase() + ' ' + CST.TH_DETAIL.toUpperCase()}
 						</SCardTitle>
 					}
+					style={{overflow: 'visible !important'}}
 					width="600px"
-					className={'popup-card ' + (visible ? 'popup-open' : '')}
+					className={'popup-card-oh ' + (visible ? 'popup-open' : '')}
 					noBodymargin
 					extra={<img className="cardpopup-close" src={close} onClick={handleClose} />}
 				>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
-							<ul>
+							<ul style={{padding: '0 10px', maxHeight: 256, overflowY: 'scroll'}}>
 								<li>{util.getOrderDescription(lastVersion)}</li>
 								{orders.map(o => (
 									<li key={o.currentSequence}>

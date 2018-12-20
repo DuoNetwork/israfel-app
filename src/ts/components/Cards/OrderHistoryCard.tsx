@@ -95,7 +95,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 					<SCardTitle>{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}</SCardTitle>
 				}
 				width="740px"
-				margin="0 10px 0 10px"
+				margin="0 10px 50px 10px"
 				extra={
 					<SButton
 						style={{ height: 24 }}
