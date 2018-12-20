@@ -26,9 +26,21 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           />
         </div>
       </Link>
-      <div
-        className="nav-bal-wrapper"
-      />
+      <div>
+        <div
+          className="nav-bal-wrapper"
+        >
+          <span
+            style={
+              Object {
+                "marginRight": 18,
+              }
+            }
+          >
+            ETH/USD
+          </span>
+        </div>
+      </div>
     </div>
     <styled.div
       horizontal={true}

@@ -302,10 +302,12 @@ svg {
 }
 .px-topleft {
 	font-size: 12px;
+	color: #F55E5E
 }
 .px-buttomright {
 	font-size: 12px;
-	margin-top: 6px;
+	margin-top: 10px;
+	color: #9AC370;
 }
 .range-picker {
 	font-size: 10px !important;

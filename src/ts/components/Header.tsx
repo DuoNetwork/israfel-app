@@ -29,7 +29,7 @@ export default class Header extends React.Component<IProps> {
 								<img src={duoIcon} />
 							</div>
 						</Link>
-						<div className="nav-bal-wrapper">
+						<div >
 							{network ? (
 								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
 								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
@@ -37,14 +37,17 @@ export default class Header extends React.Component<IProps> {
 										{CST.TT_NETWORK_CHECK[locale]}
 									</span>
 								) : (
-									exPx.map(ex => (
-										<div className="nav-bal-item">
-											<div key={ex.exchange}>{ex.exchange}</div>
-											<div key={ex.price} className="nav-bal-value">
-												{util.formatPriceShort(ex.price)}
+									<div className="nav-bal-wrapper">
+										<span style={{marginRight: 18}}>ETH/USD</span>
+										{exPx.map(ex => (
+											<div className="nav-bal-item">
+												<div key={ex.exchange}>{ex.exchange}</div>
+												<div key={ex.price} className="nav-bal-value">
+													{util.formatPriceShort(ex.price)}
+												</div>
 											</div>
-										</div>
-									))
+										))}
+									</div>
 								)
 							) : null}
 						</div>

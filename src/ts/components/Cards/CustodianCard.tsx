@@ -154,9 +154,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal padding='10px 10px 0 5px' style={{color: ColorStyles.TextBlackAlpha, fontSize: 12}}>
-					<span>{aCode + ': ' + aLabel}</span>
-					<span>{'NAV: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
+				<SDivFlexCenter
+					horizontal
+					padding="10px 10px 0 5px"
+					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
+				>
+					<div style={{ width: '66%', display: 'flex', justifyContent: 'space-between' }}>
+						<span>{aCode + ': '}</span>
+						<span>{aLabel}</span>
+					</div>
+					<span>{'Nav: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '66%' }}>
@@ -176,11 +183,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{ display: 'flex' }}>
+						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
 								{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}
 							</span>
-							/
 							<span className="px-buttomright">
 								{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}
 							</span>
@@ -192,9 +198,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						</SButton>
 					</div>
 				</SDivFlexCenter>
-				<SDivFlexCenter horizontal padding='0 10px 0 5px' style={{color: ColorStyles.TextBlackAlpha, fontSize: 12}}>
-					<span>{bCode + ': ' + bLabel}</span>
-					<span>{'NAV: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
+				<SDivFlexCenter
+					horizontal
+					padding="0 10px 0 5px"
+					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
+				>
+					<div style={{ width: '66%', display: 'flex', justifyContent: 'space-between' }}>
+						<span>{bCode + ': '}</span>
+						<span>{bLabel}</span>
+					</div>
+					<span>{'Nav: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '66%' }}>
@@ -214,11 +227,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{ display: 'flex' }}>
+						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
 								{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}
 							</span>
-							/
 							<span className="px-buttomright">
 								{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}
 							</span>
