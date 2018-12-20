@@ -111,7 +111,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				balanceLis.push(
 					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
-						<span className="content">{balance ? balance : '-'}</span>
+						<span className="content">{balance ? util.formatBalance(balance) : '-'}</span>
 					</li>
 				);
 				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
@@ -195,7 +195,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 										{CST.TH_TOTAL + ' ' + CST.TH_NAV}
 									</span>
 								</li>
-								<li style={{ padding: '5px 5px' }}>
+								<li style={{ padding: '5px 5px', flexDirection: 'row-reverse' }}>
 									<span className="content">
 										{'$' + util.formatBalance(totalNav)}
 									</span>
