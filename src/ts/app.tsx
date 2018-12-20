@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import * as web3Actions from './actions/web3Actions';
 import * as wsActions from './actions/wsActions';
+import util from './common/util';
 import web3Util from './common/web3Util';
 import wsUtil from './common/wsUtil';
 import Israfel from './containers/IsrafelContainer';
@@ -32,15 +33,18 @@ wsUtil.onOrder(
 	userOrders => store.dispatch(wsActions.orderHistoryUpdate(userOrders)),
 	userOrder => {
 		store.dispatch(wsActions.orderUpdate(userOrder));
-		store.dispatch(wsActions.messageUpdate('info', JSON.stringify(userOrder)));
+		store.dispatch(
+			wsActions.messageUpdate('info', util.getOrderFullDescription(userOrder), '')
+		);
 	},
 	(method, orderHash, error) =>
-		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error))
+		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error, ''))
 );
 wsUtil.onOrderBook(
 	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
 	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
-	(method, pair, error) => store.dispatch(wsActions.messageUpdate('error', method + pair + error))
+	(method, pair, error) =>
+		store.dispatch(wsActions.messageUpdate('error', method + pair + error, ''))
 );
 
 wsUtil.onConnection(

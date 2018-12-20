@@ -6,12 +6,12 @@ import util from '../../common/util';
 
 const margin = { top: 0, right: 5, bottom: 0, left: 0 };
 const width = 222 - margin.left - margin.right;
-const height = 110 - margin.top - margin.bottom;
+const height = 70 - margin.top - margin.bottom;
 
 function drawLines(
 	el: Element,
 	sourceData: IAcceptedPrice[],
-	timeStep: number,
+	timeOffset: number,
 	name: string,
 	isA: boolean
 ) {
@@ -24,7 +24,7 @@ function drawLines(
 		return;
 	}
 	const now = util.getUTCNowTimestamp();
-	const beginningTime = now / 1000 - 24 * timeStep;
+	const beginningTime = now / 1000 - 24 * timeOffset;
 	const source = sourceData.filter(a => a.timestamp / 1000 > beginningTime);
 	//Establish SVG Playground
 	d3.selectAll('.loading' + name).remove();
@@ -52,15 +52,29 @@ function drawLines(
 		.append('g')
 		.attr('class', 'graph-area' + name)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	chart
+	const defs = chart
 		.append('defs')
-		.append('clipPath')
+	defs.append('clipPath')
 		.attr('id', 'clip' + name)
 		.append('rect')
 		.attr('x', 1)
 		.attr('y', 0)
 		.attr('width', width - 1)
 		.attr('height', height);
+	const grad = defs.append('linearGradient')
+		.attr('id', 'gradfill')
+		.attr('x1', '0%')
+		.attr('y1', '0%')
+		.attr('x2', '0%')
+		.attr('y2', '100%');
+	grad.append('stop')
+		.attr('offset', '0%')
+		.style('stop-color', 'rgb(128,198,255)')
+		.style('stop-opacity', '1');
+	grad.append('stop')
+		.attr('offset', '100%')
+		.style('stop-color', 'rgb(245,247,248)')
+		.style('stop-opacity', '1');
 	const chartdata = chart
 		.append('g')
 		.attr('class', 'chart-data' + name)
@@ -83,6 +97,15 @@ function drawLines(
 		.y1(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
+	const line = d3
+		.line<any>()
+		.x(d => {
+			return xScale(d.timestamp);
+		})
+		.y(d => {
+			return ethYScale(isA ? d.navA : d.navB);
+		});
+
 	const ohlc = chartdata.append('g').attr('class', 'ohlc' + name);
 	ohlc.selectAll('g')
 		.data(source)
@@ -93,19 +116,30 @@ function drawLines(
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('class', 'background')
 		.attr('d', background)
-		.attr('fill', ColorStyles.TextBlackAlphaLLL);
+		.attr('fill', 'rgba(245,247,248,1)');
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
 		.attr('class', 'area')
 		.attr('d', area)
-		.attr('fill', isA ? ColorStyles.BeethovenTokenAColor : ColorStyles.BeethovenTokenBCollar);
+		.attr('fill', 'url(#gradfill)');
+	svg.append('path')
+		.datum(source)
+		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+		.attr('class', 'line')
+		.attr('d', line)
+		.attr('fill', 'none')
+		.attr('stroke-linejoin', 'round')
+		.attr('stroke-linecap', 'round')
+		.attr('stroke', ColorStyles.MainColor)
+		.attr('stroke-width', 1.5);
+
 }
 
 interface IProps {
 	prices: any[];
-	timeStep: number;
+	timeOffset: number;
 	name: string;
 	isA: boolean;
 }
@@ -118,17 +152,17 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, timeStep, name, isA } = this.props;
-		drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
+		const { prices, timeOffset, name, isA } = this.props;
+		drawLines(this.chartRef.current as Element, prices, timeOffset, name, isA);
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, timeStep, name, isA } = nextProps;
+		const { prices, timeOffset, name, isA } = nextProps;
 		if (
 			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices) ||
-			JSON.stringify(nextProps.timeStep) !== JSON.stringify(this.props.timeStep)
+			JSON.stringify(nextProps.timeOffset) !== JSON.stringify(this.props.timeOffset)
 		)
-			drawLines(this.chartRef.current as Element, prices, timeStep, name, isA);
+			drawLines(this.chartRef.current as Element, prices, timeOffset, name, isA);
 
 		return false;
 	}

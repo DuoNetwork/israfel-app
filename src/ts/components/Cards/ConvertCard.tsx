@@ -1,4 +1,4 @@
-import { notification, Spin } from 'antd';
+import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
@@ -19,25 +19,6 @@ import {
 	SSlider
 } from './_styled';
 
-const openNotification = (description: string, tx: string) => {
-	const btn = (
-		<SButton
-			onClick={() =>
-				window.open(`https://${__KOVAN__ ? 'kovan.' : ''}etherscan.io/tx/${tx}`, '_blank')
-			}
-		>
-			View Transaction on Etherscan
-		</SButton>
-	);
-	const args = {
-		message: 'Transaction Sent',
-		description: description + ' Transaction hash: ' + tx,
-		duration: 0,
-		btn
-	};
-	notification.open(args);
-};
-
 interface IProps {
 	account: string;
 	custodian: string;
@@ -46,6 +27,7 @@ interface IProps {
 	tokenBalances?: { [code: string]: ITokenBalance };
 	ethBalance: IEthBalance;
 	info?: ICustodianInfo;
+	notification: (level: string, message: string, txHash: string) => any;
 	handleClose: () => void;
 }
 
@@ -274,14 +256,14 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleWETHApprove = async () => {
 		this.setState({ loading: true });
-		const { account, custodian } = this.props;
+		const { account, custodian, notification } = this.props;
 		try {
 			await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
-				(hash: string) => openNotification('Pending WETH approval.', hash),
+				(hash: string) => notification('info', 'WETH approval transaction sent.', hash),
 				true
 			);
 			const interval = setInterval(() => {
@@ -326,7 +308,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			loading: true
 		});
-		const { account, custodian, handleClose, info } = this.props;
+		const { account, custodian, handleClose, info, notification } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
@@ -339,7 +321,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 		try {
 			const onTxHash = (hash: string) => {
-				openNotification(description, hash);
+				notification('info', description, hash);
 				handleClose();
 			};
 			if (isCreate)
@@ -399,6 +381,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					tokenBalances[bToken].balance / info.states.alpha
 			)
 			: 0;
+
+		const contractCode = info ? info.code.split('-')[0] : '';
+		const isBeethoven = contractCode === CST.BEETHOVEN.toUpperCase();
+
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
 				<div className={'popup-bg ' + (!!custodian ? 'popup-open-bg' : '')} />
@@ -418,53 +404,41 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<SCardList noMargin width="100%">
-						<div className="status-list-wrapper">
-							<ul>
-								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{CST.TH_BALANCE}
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">
-										{wethCreate ? CST.TH_WETH : CST.TH_ETH}
-									</span>
-									<span className="content">
-										{util.formatBalance(
-											wethCreate ? ethBalance.weth : ethBalance.eth
-										)}
-									</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{aToken}</span>
-									<span className="content">
-										{util.formatBalance(
-											tokenBalances && tokenBalances[aToken]
-												? tokenBalances[aToken].balance
-												: 0
-										)}
-									</span>
-								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{bToken}</span>
-									<span className="content">
-										{util.formatBalance(
-											tokenBalances && tokenBalances[bToken]
-												? tokenBalances[bToken].balance
-												: 0
-										)}
-									</span>
-								</li>
-							</ul>
+					<div
+						className="cus-link"
+						onClick={() =>
+							window.open(
+								`https://kovan.duo.network/${
+									info ? info.code.split('-')[0].toLowerCase() : ''
+								}/${
+									info
+										? info.code.split('-')[1]
+											? info.code.split('-')[1].toLowerCase()
+											: 'perpetual'
+										: ''
+								}`,
+								'_blank'
+							)
+						}
+					>
+						<div className="convert-popup-des">
+							{util.getContractDescription(isBeethoven)}
 						</div>
-					</SCardList>
+						<div className="convert-popup-des">
+							{util.getTokenDescription(aToken, bToken)}
+						</div>
+						<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
+					</div>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
-								<li className="block-title" style={{ padding: '5px 15px' }}>
-									{CST.TH_CUSTODIAN}
+								<li
+									className="block-title"
+									style={{ padding: '5px 15px', justifyContent: 'center' }}
+								>
+									{CST.TH_CONV_RATIO}
 								</li>
-								<li style={{ padding: '5px 15px' }}>
-									<span className="title">{CST.TH_CONV_RATIO}</span>
+								<li style={{ padding: '5px 15px', justifyContent: 'center' }}>
 									<span className="content">{`1 ${
 										CST.TH_ETH
 									} = ${util.formatNumber(aTokenPerETH)} ${aToken.substring(
@@ -560,6 +534,50 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									</button>
 								))}
 							</SDivFlexCenter>
+							<SCardList noMargin width="100%">
+								<div className="status-list-wrapper">
+									<ul>
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
+											<span className="title">
+												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
+											</span>
+											<span className="title">{aToken}</span>
+											<span className="title">{bToken}</span>
+										</li>
+										<li
+											style={{
+												padding: '5px 15px',
+												justifyContent: 'space-around'
+											}}
+										>
+											<span className="content">
+												{util.formatBalance(
+													wethCreate ? ethBalance.weth : ethBalance.eth
+												)}
+											</span>
+											<span className="content">
+												{util.formatBalance(
+													tokenBalances && tokenBalances[aToken]
+														? tokenBalances[aToken].balance
+														: 0
+												)}
+											</span>
+											<span className="content">
+												{util.formatBalance(
+													tokenBalances && tokenBalances[bToken]
+														? tokenBalances[bToken].balance
+														: 0
+												)}
+											</span>
+										</li>
+									</ul>
+								</div>
+							</SCardList>
 							<SCardList noUlBorder noLiBorder>
 								<div className="status-list-wrapper">
 									<ul>
@@ -726,6 +744,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									limit === 0 ||
 									Number(isCreate && wethCreate ? wethAmount : amount) === 0
 								}
+								style={{
+									opacity:
+										limit === 0 ||
+										Number(isCreate && wethCreate ? wethAmount : amount) === 0
+											? 0.3
+											: 1
+								}}
 								width="49%"
 								onClick={this.handleSubmit}
 							>

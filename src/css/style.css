@@ -49,7 +49,7 @@ body {
 }
 
 .nav-bal-wrapper {
-	margin-left: 50px;
+	margin-left: 60px;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -60,18 +60,18 @@ body {
 
 .nav-bal-item {
 	height: 60%;
-	margin-right: 30px;
+	margin-right: 24px;
 }
 
 .nav-bal-item>div {
 	height: 50%;
-	font-size: 10px;
+	font-size: 11px;
 	line-height: 18px;
 	color: rgba(255, 255, 255, 0.7);
 }
 
 .nav-bal-item>.nav-bal-value {
-	font-size: 13px;
+	font-size: 14px;
 	color: rgba(255, 255, 255, 1);
 }
 
@@ -229,7 +229,7 @@ svg {
 
 .popup-card {
 	position: absolute;
-	top: 50%;
+	top:100px;
 	left: 50%;
 	z-index: 11;
 }
@@ -259,11 +259,15 @@ svg {
 }
 
 .list-expand-button:hover {
-	background: rgba(42, 181, 202, .2)
+	background: rgba(92,164,222,.2)
 }
 .convert-popup-des {
 	padding: 5px 15px;
 	font-size: 12px;
+	color: rgba(64, 79, 84, .8);
+}
+.convert-radio-des {
+	font-size: 10px;
 	color: rgba(64, 79, 84, .6);
 }
 .cardpopup-close {
@@ -280,13 +284,41 @@ svg {
 	opacity: 0.6;
 	pointer-events: none;
 }
-
+.cus-addr-button {
+	padding: 2px 10px;
+    border: 1px dashed rgba(255,255,255,.3);
+    font-size: 12px;
+    color: #fff;
+	cursor: pointer;
+	transition: all .2s;
+}
+.cus-addr-button:hover {
+	border: 1px solid rgba(255,255,255,.5);
+}
+.px-topleft {
+	font-size: 12px;
+}
+.px-buttomright {
+	font-size: 12px;
+	margin-top: 6px;
+}
+.range-picker {
+	font-size: 10px !important;
+	height: 20px !important;
+	width: 36px !important;
+}
+.cus-link {
+	cursor: pointer;
+}
+.cus-link:hover {
+	background: #38a4e30e
+}
 @keyframes openPopup {
 	from {
-		transform: translate(-50%, -50%) scale(0);
+		transform: translate(-50%, 0) scale(0);
 	}
 	to {
-		transform: translate(-50%, -50%) scale(1) ;
+		transform: translate(-50%, 0) scale(1) ;
 	}
 }
 

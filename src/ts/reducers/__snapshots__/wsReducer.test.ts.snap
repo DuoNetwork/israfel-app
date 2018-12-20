@@ -12,6 +12,7 @@ Object {
   "orderSubscription": "",
   "status": Array [],
   "tokens": Array [],
+  "transactionHash": "",
 }
 `;
 
@@ -27,6 +28,7 @@ Object {
   "orderSubscription": "",
   "status": Array [],
   "tokens": Array [],
+  "transactionHash": "",
 }
 `;
 
@@ -59,6 +61,7 @@ Object {
       "code": "token2",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -102,6 +105,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -164,6 +168,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "txHash",
 }
 `;
 
@@ -230,6 +235,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -303,6 +309,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -346,6 +353,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -392,6 +400,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -438,6 +447,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -504,6 +514,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -570,6 +581,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -616,6 +628,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -662,6 +675,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -708,6 +722,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -754,6 +769,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -800,6 +816,7 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;
 
@@ -854,5 +871,6 @@ Object {
       "code": "token3",
     },
   ],
+  "transactionHash": "",
 }
 `;

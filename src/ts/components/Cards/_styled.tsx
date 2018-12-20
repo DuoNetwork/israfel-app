@@ -943,7 +943,7 @@ injectGlobal([
 			.ant-slider-mark {
 				font-size: 10px;
 			}
-			.ant-radio-wrapper:last-child {
+			.ant-radio-wrapper {
 				margin-right: 0 !important;
 			}
 			.ant-spin {
@@ -974,38 +974,33 @@ injectGlobal([
 			}
 
 			.panel-wrap {
+				overflow: visible !important;
 				position: fixed;
 				top: 0;
-				right: -600px;
-				bottom: 0;
 				z-index: 2;
 				margin-top: 80px;
-				height: 790px;
-				overflow: auto;
-				width: 195px;
+				height: 528px;
+				width: 200px;
 				background: #ffffff;
 				border: 1px solid #dedede;
 				-webkit-box-shadow: -4px 0 11px 0 rgba(0,0,0,0.14);
 				box-shadow: -4px 0 11px 0 rgba(0,0,0,0.14);
 				border-radius: 8px 0 0 8px;
-				-webkit-transition: right .3s;
-				-o-transition: right .3s;
-				transition: right .3s;
-			}
-
-				// 打开时候的动画
-			.panel-wrap.animated {
-				right: 0;
-				-webkit-transition: right .5s;
-				-o-transition: right .5s;
-				transition: right .5s;
+				-webkit-transition: all .3s;
+				-o-transition: all .3s;
+				transition: all .3s;
+				.ant-card-body {
+					position: relative;
+					display: block
+				}
 			}
 			.rightFixed {
-				position: fixed;
-				width: 300px;
-				height: 31px;
-				right: -90px;
-				top: 450px;
+				position: absolute;
+				width: 180px;
+				height: 30px;
+				right: 25px;
+				top: 5px;
+				transform-origin: top left;
 				-webkit-transform: rotate(90deg);
 				-ms-transform: rotate(90deg);
 				transform: rotate(90deg);
@@ -1017,7 +1012,6 @@ injectGlobal([
 			}
 			.day-Button {
 				border: none;
-				font-size: 12px;
 			}
 		}
 	`

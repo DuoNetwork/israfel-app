@@ -2,13 +2,12 @@ import { Table } from 'antd';
 import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
-// import wsUtil from 'ts/common/wsUtil';
 import * as CST from 'ts/common/constants';
 import { IUserOrder } from 'ts/common/types';
+import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-// import util from '../../common/util';
-import { SCard, SCardTitle, STableWrapper } from './_styled';
+import { SButton, SCard, SCardTitle, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
@@ -57,11 +56,10 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 			for (const orderHash in pastOrders) {
 				const orders = pastOrders[orderHash];
 				const lastVersion = orders[0];
-				const firstVersion = orders[orders.length - 1];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_HISTORY]: orders
 				});
 			}
@@ -69,11 +67,10 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 			for (const orderHash in liveOrders) {
 				const orders = liveOrders[orderHash];
 				const lastVersion = orders[0];
-				const firstVersion = orders[orders.length - 1];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(firstVersion.createdAt).format('YYYY-MM-DD HH:mm'),
-					[CST.TH_ORDER]: JSON.stringify(lastVersion),
+					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_ACTIONS]: (
 						<Popconfirm
 							title={CST.TT_DELETE_ORDER}
@@ -100,7 +97,8 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				width="740px"
 				margin="0 10px 0 10px"
 				extra={
-					<button
+					<SButton
+						style={{ height: 24 }}
 						onClick={() =>
 							this.setState({
 								showHistory: !showHistory
@@ -108,21 +106,40 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 						}
 					>
 						Switch to {showHistory ? CST.TH_LIVE : CST.TH_HISTORY}
-					</button>
+					</SButton>
 				}
 			>
 				<STableWrapper>
 					<Table
 						dataSource={dataSource}
-						pagination={false}
+						pagination={{
+							showSizeChanger: true,
+							showQuickJumper: true,
+							showTotal: (total: number) =>
+								CST.TH_TOTAL +
+								' ' +
+								total +
+								' ' +
+								(showHistory ? CST.TH_PAST : CST.TH_LIVE) +
+								' ' +
+								CST.TH_ORDERS,
+							pageSize: 10,
+							pageSizeOptions: ['10', '20', '50'],
+							size: 'small'
+						}}
 						style={{ width: '100%' }}
-						onRow={(record: { [key: string]: any }) => ({
-							onClick: () =>
-								this.setState({ details: record[CST.TH_HISTORY] as IUserOrder[] })
-						})}
 					>
-						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={140} />
-						<Column title={CST.TH_ORDER} dataIndex={CST.TH_ORDER} />
+						<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={180} />
+						<Column
+							title={CST.TH_ORDER}
+							dataIndex={CST.TH_ORDER}
+							onCell={(record: { [key: string]: any }) => ({
+								onClick: () =>
+									this.setState({
+										details: record[CST.TH_HISTORY] as IUserOrder[]
+									})
+							})}
+						/>
 						{showHistory ? null : (
 							<Column
 								key={CST.TH_ACTIONS}
