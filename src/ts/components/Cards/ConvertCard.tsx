@@ -404,13 +404,31 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<div className="convert-popup-des">
-						{util.getContractDescription(isBeethoven)}
+					<div
+						className="cus-link"
+						onClick={() =>
+							window.open(
+								`https://kovan.duo.network/${
+									info ? info.code.split('-')[0].toLowerCase() : ''
+								}/${
+									info
+										? info.code.split('-')[1]
+											? info.code.split('-')[1].toLowerCase()
+											: 'perpetual'
+										: ''
+								}`,
+								'_blank'
+							)
+						}
+					>
+						<div className="convert-popup-des">
+							{util.getContractDescription(isBeethoven)}
+						</div>
+						<div className="convert-popup-des">
+							{util.getTokenDescription(aToken, bToken)}
+						</div>
+						<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					</div>
-					<div className="convert-popup-des">
-						{util.getTokenDescription(aToken, bToken)}
-					</div>
-					<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
 							<ul>
@@ -726,8 +744,13 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									limit === 0 ||
 									Number(isCreate && wethCreate ? wethAmount : amount) === 0
 								}
-								style={{opacity: (limit === 0 ||
-									Number(isCreate && wethCreate ? wethAmount : amount) === 0) ? 0.3 : 1}}
+								style={{
+									opacity:
+										limit === 0 ||
+										Number(isCreate && wethCreate ? wethAmount : amount) === 0
+											? 0.3
+											: 1
+								}}
 								width="49%"
 								onClick={this.handleSubmit}
 							>

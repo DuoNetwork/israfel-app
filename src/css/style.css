@@ -307,6 +307,12 @@ svg {
 	height: 20px !important;
 	width: 36px !important;
 }
+.cus-link {
+	cursor: pointer;
+}
+.cus-link:hover {
+	background: #38a4e30e
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);
