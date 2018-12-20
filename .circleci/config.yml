@@ -75,8 +75,9 @@ workflows:
             - test:
                 requires:
                     - build-israfel-relayer
-                    - build-duo-contract-wrapper
-                    - build-duo-admin
+                        requires:
+                            - build-duo-contract-wrapper
+                            - build-duo-admin
                 filters:
                     branches:
                         only: master
