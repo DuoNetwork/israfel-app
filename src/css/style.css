@@ -320,6 +320,15 @@ svg {
 .cus-link:hover {
 	background: #38a4e30e
 }
+.order-cancel {
+	color: #F55E5E;
+	padding: 2px 5px;
+	transition: all .1s;
+}
+.order-cancel:hover {
+	color: #F55E5E;
+	box-shadow: 0 0 0 1px rgba(245, 94, 94, 0.8);
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);

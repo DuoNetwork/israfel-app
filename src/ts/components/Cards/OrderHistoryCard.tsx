@@ -83,7 +83,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 									)
 							}
 						>
-							<a style={{ color: '#f5222d' }}>{CST.TH_CANCEL}</a>
+							<a className='order-cancel'>{CST.TH_CANCEL}</a>
 						</Popconfirm>
 					),
 					[CST.TH_HISTORY]: orders
