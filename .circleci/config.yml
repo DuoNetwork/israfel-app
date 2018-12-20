@@ -36,7 +36,7 @@ jobs:
         docker: 
             - image: circleci/node:8.11.1
         steps:
-            - run: git clone https://github.com/FinBook/israfel-relayer.git /home/circleci/israfel-relayer
+            - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
                 key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
