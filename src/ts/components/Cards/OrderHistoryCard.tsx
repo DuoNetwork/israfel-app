@@ -92,21 +92,23 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 		return (
 			<SCard
 				title={
-					<div className="ordercard-header">
+					<div
+						className="ordercard-header"
+						onClick={() =>
+							this.setState({
+								showHistory: !showHistory
+							})
+						}
+					>
 						<SCardTitle>
 							{showHistory
 								? (CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()
 								: (CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
 						</SCardTitle>
-						<div
-							className="switch-button"
-							onClick={() =>
-								this.setState({
-									showHistory: !showHistory
-								})
-							}
-						>
-							<Icon type="retweet" />
+						<div className="switch-button">
+							{!showHistory
+								? (CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()
+								: (CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
 						</div>
 					</div>
 				}

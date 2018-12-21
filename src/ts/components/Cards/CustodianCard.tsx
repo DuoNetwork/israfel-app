@@ -180,9 +180,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<span
 						className="cuscardnavtag"
 						style={{
-							background: !isBeethoven ? color(
+							background: color(
 								(info.states.limitUpper - info.states.navB) / info.states.limitUpper
-							) : ColorStyles.MainColorShadow
+							)
 						}}
 					>
 						{'NAV: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}
