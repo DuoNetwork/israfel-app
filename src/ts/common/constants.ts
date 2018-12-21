@@ -4,7 +4,9 @@ export {
 	BEETHOVEN,
 	MOZART,
 	TENOR_M19,
-	TENOR_PPT
+	TENOR_PPT,
+	CTD_TRADING,
+	CTD_PRERESET
 } from '../../../../duo-admin/src/common/constants';
 
 export const AC_ACCOUNT = 'account';
