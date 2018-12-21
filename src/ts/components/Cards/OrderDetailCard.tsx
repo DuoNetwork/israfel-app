@@ -27,7 +27,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 						</SCardTitle>
 					}
 					style={{overflow: 'visible !important'}}
-					width="600px"
+					width="480px"
 					className={'popup-card-oh ' + (visible ? 'popup-open' : '')}
 					noBodymargin
 					extra={<img className="cardpopup-close" src={close} onClick={handleClose} />}

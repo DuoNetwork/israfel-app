@@ -48,11 +48,6 @@ exports[`Header Test User Login Test Snapshot 1`] = `
       <div
         className="nav-button-wrapper"
       >
-        ORDERS
-      </div>
-      <div
-        className="nav-button-wrapper"
-      >
         <Link
           replace={false}
           to="/status"

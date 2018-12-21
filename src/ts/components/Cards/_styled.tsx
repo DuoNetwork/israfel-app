@@ -1017,6 +1017,9 @@ injectGlobal([
 			.ant-tooltip-placement-right .ant-tooltip-arrow, .ant-tooltip-placement-rightTop .ant-tooltip-arrow, .ant-tooltip-placement-rightBottom .ant-tooltip-arrow {
 				border-right-color: transparent !important
 			}
+			.ant-tooltip-placement-left .ant-tooltip-arrow, .ant-tooltip-placement-leftTop .ant-tooltip-arrow, .ant-tooltip-placement-leftBottom .ant-tooltip-arrow {
+				border-left-color: transparent !important
+			}
 		}
 	`
 ] as any);

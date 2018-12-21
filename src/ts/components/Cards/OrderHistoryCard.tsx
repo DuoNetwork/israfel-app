@@ -7,7 +7,7 @@ import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-import { SCard, SCardTitle, STableWrapper } from './_styled';
+import { SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
@@ -100,15 +100,14 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							})
 						}
 					>
-						<SCardTitle>
-							{showHistory
-								? (CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()
-								: (CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
-						</SCardTitle>
-						<div className="switch-button">
-							{!showHistory
-								? (CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()
-								: (CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
+						<div
+							className="switch-button"
+							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5 }}
+						>
+							{(CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
+						</div>
+						<div className="switch-button" style={{ opacity: showHistory ? 1 : 0.5 }}>
+							{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}
 						</div>
 					</div>
 				}
