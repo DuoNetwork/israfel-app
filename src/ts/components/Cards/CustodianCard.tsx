@@ -1,7 +1,7 @@
 import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
-import successIcon from 'images/icons/status/success.svg';
-import warningIcon from 'images/icons/status/warning.svg';
+// import successIcon from 'images/icons/status/success.svg';
+// import warningIcon from 'images/icons/status/warning.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
@@ -105,27 +105,14 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const tooltioText =
 			info.states.state === 'Trading'
 				? 'Trading State'
-				: info.states.state === 'Inception'
-				? 'Inception state, please wait until the system is started.'
+				: info.states.state === 'Prereset'
+				? 'Prereset State'
 				: 'Reset State';
 		return (
 			<SCard
 				title={
-					<div className="cuscardheadertitle">
-						<SCardTitle>{type + ' ' + tenor}</SCardTitle>
-						<Tooltip title={tooltioText} placement="right">
-							<img
-								className="status-icon"
-								src={info.states.state === 'Trading' ? successIcon : warningIcon}
-							/>
-						</Tooltip>
-					</div>
-				}
-				width="360px"
-				margin={margin}
-				extra={
-					<div
-						className="cus-addr-button"
+					<SCardTitle
+						style={{ cursor: 'Pointer' }}
 						onClick={() =>
 							window.open(
 								`https://${
@@ -135,7 +122,29 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							)
 						}
 					>
-						{custodian.substring(0, 6)}
+						{type + ' ' + tenor}
+					</SCardTitle>
+				}
+				width="360px"
+				margin={margin}
+				extra={
+					<div className="cus-addr-button">
+						<Tooltip title={tooltioText} placement="left">
+							<div className="status-ligh-wrapper">
+								<div
+									className="status-light status1"
+									style={{ opacity: info.states.state === 'Prereset' ? 1 : 0.4 }}
+								/>
+								<div
+									className="status-light status2"
+									style={{ opacity: info.states.state === 'Reset' ? 1 : 0.4 }}
+								/>
+								<div
+									className="status-light status3"
+									style={{ opacity: info.states.state === 'Trading' ? 1 : 0.4 }}
+								/>
+							</div>
+						</Tooltip>
 					</div>
 				}
 			>
