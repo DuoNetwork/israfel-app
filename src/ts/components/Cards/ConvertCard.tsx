@@ -78,7 +78,6 @@ const getDescription = (
 	amount: number,
 	info?: ICustodianInfo
 ) => {
-	console.log(amount);
 	const ethCode = wethCreate && isCreate ? CST.TH_WETH : CST.TH_ETH;
 	if (!amount || !info)
 		return isCreate

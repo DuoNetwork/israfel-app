@@ -19,7 +19,6 @@ export default class Header extends React.Component<IProps> {
 		const locale = this.props.locale || CST.LOCALE_EN;
 		const exPx = [];
 		for (const key in exchangePrices) exPx.push({ exchange: key, price: exchangePrices[key] });
-		console.log(exPx);
 		return (
 			<SHeader>
 				<SDivFlexCenter horizontal width={'1200px'} height={'60px'}>
@@ -29,7 +28,7 @@ export default class Header extends React.Component<IProps> {
 								<img src={duoIcon} />
 							</div>
 						</Link>
-						<div >
+						<div>
 							{network ? (
 								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
 								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
@@ -38,11 +37,11 @@ export default class Header extends React.Component<IProps> {
 									</span>
 								) : (
 									<div className="nav-bal-wrapper">
-										<span style={{marginRight: 18}}>ETH/USD</span>
+										<span style={{ marginRight: 18 }}>ETH/USD</span>
 										{exPx.map(ex => (
-											<div className="nav-bal-item">
-												<div key={ex.exchange}>{ex.exchange}</div>
-												<div key={ex.price} className="nav-bal-value">
+											<div key={ex.exchange} className="nav-bal-item">
+												<div>{ex.exchange.toUpperCase()}</div>
+												<div className="nav-bal-value">
 													{util.formatPriceShort(ex.price)}
 												</div>
 											</div>

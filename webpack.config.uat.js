@@ -19,7 +19,7 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
-			__ENV__: JSON.stringify('dev'),
+			__ENV__: JSON.stringify('uat'),
 		}),
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 		new MiniCssExtractPlugin({
