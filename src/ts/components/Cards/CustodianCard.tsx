@@ -259,7 +259,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<span
 						className="cuscardnavtag"
 					>
-						<span className='navspan'>NAV</span> {'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}
+						<span className='navspan' style={{background: 'rgba(224, 136, 77, 0.8)'}}>NAV</span> {'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}
 					</span>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
