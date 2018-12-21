@@ -21,7 +21,7 @@ class Util {
 	}
 
 	public formatPriceShort(num: number) {
-		return d3.format('.4f')(num);
+		return d3.format('.4n')(num);
 	}
 
 	public formatBalance(num: number) {

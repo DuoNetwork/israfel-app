@@ -87,18 +87,16 @@ const getDescription = (
 	const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
 
 	const ethNum = isCreate ? amount : amount / aTokenPerETH;
-	const aTokenAmt = util.formatBalance(isCreate ? amount * aTokenPerETH : amount);
-	const bTokenAmt = util.formatBalance(
-		isCreate ? amount * bTokenPerETH : amount / info.states.alpha
-	);
-	const feeAmt = util.formatBalance(
-		ethNum * (isCreate ? info.states.createCommRate : info.states.redeemCommRate)
-	);
-	const ethAmt = util.formatBalance(ethNum);
+	const feeNum = ethNum * (isCreate ? info.states.createCommRate : info.states.redeemCommRate);
+	const ethAfterFeeNum = ethNum - feeNum;
+	const aTokenAmt = util.formatBalance(ethAfterFeeNum * aTokenPerETH);
+	const bTokenAmt = util.formatBalance(ethAfterFeeNum * bTokenPerETH);
+	const feeAmt = util.formatBalance(feeNum);
+	const ethAmt = util.formatBalance(ethAfterFeeNum);
 
 	return isCreate
-		? `${ethAmt} ${ethCode} --> ${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken} with ${feeAmt} ${ethCode} fee`
-		: `${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken} --> ${ethAmt} ${ethCode} with ${feeAmt} ${ethCode} fee`;
+		? `${ethAmt}(after fee ${feeAmt}) ${ethCode} --> ${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken}`
+		: `${aTokenAmt} ${aToken} + ${bTokenAmt} ${bToken} --> ${ethAmt}(after fee ${feeAmt}) ${ethCode}`;
 };
 
 export default class ConvertCard extends React.Component<IProps, IState> {
