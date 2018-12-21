@@ -38,8 +38,8 @@ jobs:
         steps:
             - add_ssh_keys:
                 fingerprints:
-                    - "30:39:eb:7e:1a:82:61:a0:11:22:e1:c6:35:15:a3:d7"
-            - run: git clone git@github.com:lipeiru0329/React_Native.git /home/circleci/israfel-relayer
+                    - "7a:0d:dd:1b:85:8a:34:d9:3e:99:b1:49:db:fb:e4:6e"
+            - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
                 key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
