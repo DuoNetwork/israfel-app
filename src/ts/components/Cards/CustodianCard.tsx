@@ -213,7 +213,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 					<div className="cuscardnavtag">
 						<span className="navspan">NAV</span>
-						<span>{'$' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
+						<span>
+							<b>{'$' + (info ? util.formatPriceShort(info.states.navA) : 0)}</b>
+						</span>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
@@ -236,10 +238,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
-								{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}
+								<b>{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}</b>
 							</span>
 							<span className="px-buttomright">
-								{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}
+								<b>{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}</b>
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(aCode)} disable={!isTrading}>
@@ -265,7 +267,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<span className="navspan" style={{ background: 'rgba(224, 136, 77, 0.8)' }}>
 							NAV
 						</span>{' '}
-						<span>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
+						<span>
+							<b>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</b>
+						</span>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
@@ -288,10 +292,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
-								{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}
+								<b>{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}</b>
 							</span>
 							<span className="px-buttomright">
-								{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}
+								<b>{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}</b>
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(bCode)} disable={!isTrading}>
