@@ -1020,6 +1020,18 @@ injectGlobal([
 			.ant-tooltip-placement-left .ant-tooltip-arrow, .ant-tooltip-placement-leftTop .ant-tooltip-arrow, .ant-tooltip-placement-leftBottom .ant-tooltip-arrow {
 				border-left-color: transparent !important
 			}
+			.ant-notification-notice-with-icon .ant-notification-notice-message {
+				font-size: 16px;
+				margin-left: 32px;
+				margin-bottom: 8px;
+			}
+			.ant-notification-notice-icon {
+				margin-left: 0px;
+			}
+			.ant-notification-notice-with-icon .ant-notification-notice-description {
+				width: 300px;
+				margin-left: 0px;
+			}
 		}
 	`
 ] as any);
