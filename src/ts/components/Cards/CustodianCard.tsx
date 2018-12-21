@@ -205,14 +205,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span><span className='aspan'>{(isBeethoven ? 'Income' : 'Short')}</span>{aCode}</span>
+						<span>
+							<span className="aspan">{isBeethoven ? 'Income' : 'Short'}</span>
+							{aCode}
+						</span>
 						<span>{aLabel}</span>
 					</div>
-					<span
-						className="cuscardnavtag"
-					>
-						<span className='navspan'>NAV</span> {'$' + (info ? util.formatPriceShort(info.states.navA) : 0)}
-					</span>
+					<div className="cuscardnavtag">
+						<span className="navspan">NAV</span>
+						<span>{'$' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
+					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '66%' }}>
@@ -253,14 +255,18 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span><span className='bspan'>{(isBeethoven ? 'Leverage' : 'Long')}</span>{bCode}</span>
+						<span>
+							<span className="bspan">{isBeethoven ? 'Leverage' : 'Long'}</span>
+							{bCode}
+						</span>
 						<span>{bLabel}</span>
 					</div>
-					<span
-						className="cuscardnavtag"
-					>
-						<span className='navspan' style={{background: 'rgba(224, 136, 77, 0.8)'}}>NAV</span> {'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}
-					</span>
+					<div className="cuscardnavtag">
+						<span className="navspan" style={{ background: 'rgba(224, 136, 77, 0.8)' }}>
+							NAV
+						</span>{' '}
+						<span>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
+					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '66%' }}>
