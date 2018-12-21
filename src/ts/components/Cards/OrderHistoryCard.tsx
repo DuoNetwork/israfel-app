@@ -100,11 +100,14 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							})
 						}
 					>
-						<div className="switch-button" style={{borderLeft: 'none', opacity: showHistory ? 1 : 0.5}}>
-							{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}
-						</div>
-						<div className="switch-button" style={{opacity: !showHistory ? 1 : 0.5}}>
+						<div
+							className="switch-button"
+							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5 }}
+						>
 							{(CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
+						</div>
+						<div className="switch-button" style={{ opacity: showHistory ? 1 : 0.5 }}>
+							{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}
 						</div>
 					</div>
 				}
