@@ -358,7 +358,6 @@ svg {
 .cuscardnavtag {
 	padding: 2px 5px;
 	width: 96px;
-    text-align: center;
 }
 .ordercard-header {
 	display: flex;
@@ -382,6 +381,26 @@ svg {
 .status-icon {
 	height: 14px;
 	margin-left: 8px
+}
+.navspan {
+	background: rgba(92,164,222,.8);
+	color: #fff;
+	padding: 2px 4px;
+	border-radius: 2px;
+}
+.aspan {
+	background: rgba(92,164,222,.8);
+	color: #fff;
+	padding: 2px 4px;
+	border-radius: 2px;
+	margin-right: 4px;
+}
+.bspan {
+	background: rgba(224, 136, 77, 0.8);
+	color: #fff;
+	padding: 2px 4px;
+	border-radius: 2px;
+	margin-right: 4px;
 }
 @keyframes openPopup {
 	from {
