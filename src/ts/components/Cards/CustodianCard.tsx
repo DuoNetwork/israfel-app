@@ -132,16 +132,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<Tooltip title={tooltioText} placement="left">
 							<div className="status-ligh-wrapper">
 								<div
-									className="status-light status1"
-									style={{ opacity: info.states.state === 'Prereset' ? 1 : 0.4 }}
+									className="status-light status3"
+									style={{ opacity: info.states.state === 'Trading' ? 1 : 0.4 }}
 								/>
 								<div
 									className="status-light status2"
 									style={{ opacity: info.states.state === 'Reset' ? 1 : 0.4 }}
 								/>
 								<div
-									className="status-light status3"
-									style={{ opacity: info.states.state === 'Trading' ? 1 : 0.4 }}
+									className="status-light status1"
+									style={{ opacity: info.states.state === 'Prereset' ? 1 : 0.4 }}
 								/>
 							</div>
 						</Tooltip>
