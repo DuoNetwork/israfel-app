@@ -900,7 +900,7 @@ injectGlobal([
 				max-width: 400px;
 				border-radius: 2px;
 				border: solid 1px ${ColorStyles.MainColor};
-				font-size: 11px;
+				font-size: 12px;
 				font-family: 'Roboto', 'Microsoft YaHei';
 				background: ${ColorStyles.CardBackgroundSolid};
 				box-shadow: none;
