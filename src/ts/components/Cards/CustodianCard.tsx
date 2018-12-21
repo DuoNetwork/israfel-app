@@ -1,7 +1,5 @@
 import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
-// import successIcon from 'images/icons/status/success.svg';
-// import warningIcon from 'images/icons/status/warning.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
@@ -88,7 +86,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			bOrderBook && bOrderBook.bids.length ? bOrderBook.bids[0].price * ethPrice : 0;
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
-		const color = d3
+		const navColor = d3
 			.scaleThreshold()
 			.domain([-0.05, 0.01, 0.05, 0.1, 0.15, 0.3, 0.4, 0.5, 1])
 			.range([
@@ -101,13 +99,15 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				'#e6e1e9',
 				'#e4e7f0',
 				'#e2edf7'
-			] as any);
-		const tooltioText =
-			info.states.state === 'Trading'
-				? 'Trading State'
-				: info.states.state === 'Prereset'
-				? 'Prereset State'
-				: 'Reset State';
+			] as any)(
+				Math.min(
+					(info.states.limitUpper - info.states.navB) /
+						info.states.limitUpper,
+					(info.states.navB - info.states.limitLower) /
+						info.states.limitLower
+				)
+			);
+		const isTrading = info.states.state === CST.CTD_TRADING;
 		return (
 			<SCard
 				title={
@@ -129,7 +129,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				margin={margin}
 				extra={
 					<div className="cus-addr-button">
-						<Tooltip title={tooltioText} placement="left">
+						<Tooltip
+							title={`Custodian is in ${info.states.state} state`}
+							placement="left"
+						>
 							<div className="status-ligh-wrapper">
 								<div
 									className="status-light status3"
@@ -185,6 +188,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							onClick={() =>
 								handleConvert(contractAddress.custodian.address, aCode, bCode)
 							}
+							disable={!isTrading}
 						>
 							{tokenBalances[aCode] &&
 							tokenBalances[bCode] &&
@@ -207,9 +211,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<span
 						className="cuscardnavtag"
 						style={{
-							background: color(
-								(info.states.limitUpper - info.states.navB) / info.states.limitUpper
-							)
+							background: navColor
 						}}
 					>
 						{'NAV: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}
@@ -241,7 +243,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 								{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}
 							</span>
 						</div>
-						<SButton onClick={() => handleTrade(aCode)}>
+						<SButton onClick={() => handleTrade(aCode)} disable={!isTrading}>
 							{tokenBalances[aCode] && tokenBalances[aCode].balance
 								? CST.TH_TRADE
 								: CST.TH_GET}
@@ -260,9 +262,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<span
 						className="cuscardnavtag"
 						style={{
-							background: color(
-								(info.states.limitUpper - info.states.navB) / info.states.limitUpper
-							)
+							background: navColor
 						}}
 					>
 						{'NAV: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}
@@ -294,7 +294,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 								{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}
 							</span>
 						</div>
-						<SButton onClick={() => handleTrade(bCode)}>
+						<SButton onClick={() => handleTrade(bCode)} disable={!isTrading}>
 							{tokenBalances[bCode] && tokenBalances[bCode].balance
 								? CST.TH_TRADE
 								: CST.TH_GET}

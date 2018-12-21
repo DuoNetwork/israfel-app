@@ -87,6 +87,9 @@ class Util {
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
 			return baseDescription + ` Cancelled due to matching error.`;
 
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_RESET)
+			return baseDescription + ` Cancelled due to custodian reset.`;
+
 		if (order.type === CST.DB_UPDATE && order.matching)
 			return (
 				baseDescription +
@@ -100,7 +103,9 @@ class Util {
 		const [code1, code2] = order.pair.split('|');
 		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
-		} ${code1} at ${order.price} ${code2} per ${code1}. Total ${order.fill} filled.`;
+		} ${code1} at ${order.price} ${code2} per ${code1}. Total ${util.formatBalance(
+			order.fill
+		)} filled.`;
 	}
 
 	public getVersionDescription(order: IUserOrder) {
@@ -108,8 +113,8 @@ class Util {
 
 		if (order.type === CST.DB_UPDATE) {
 			let description = '';
-			if (order.fill) description = `Total ${order.fill} filled.`;
-			if (order.matching) description += ` ${order.matching} matching`;
+			if (order.fill) description = `Total ${this.formatBalance(order.fill)} filled.`;
+			if (order.matching) description += ` ${this.formatBalance(order.matching)} matching`;
 			return description;
 		}
 
@@ -119,6 +124,7 @@ class Util {
 			else if (order.status === CST.DB_BALANCE)
 				return 'Cancelled due to insufficent balance.';
 			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to matching error.';
+			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset.';
 			else if (order.status === CST.DB_FILL) return 'Fully filled';
 		return 'Invalid order';
 	}
