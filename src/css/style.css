@@ -362,6 +362,14 @@ svg {
     border-left: 1px solid rgba(255,255,255,.3);
     padding-left: 5px;
 }
+.cuscardheadertitle {
+	display: flex;
+	align-items: center;
+}
+.status-icon {
+	height: 14px;
+	margin-left: 8px
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);

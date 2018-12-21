@@ -1014,6 +1014,9 @@ injectGlobal([
 			.day-Button {
 				border: none;
 			}
+			.ant-tooltip-placement-right .ant-tooltip-arrow, .ant-tooltip-placement-rightTop .ant-tooltip-arrow, .ant-tooltip-placement-rightBottom .ant-tooltip-arrow {
+				border-right-color: transparent !important
+			}
 		}
 	`
 ] as any);

@@ -1,5 +1,7 @@
-import { Icon } from 'antd';
+import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
+import successIcon from 'images/icons/status/success.svg';
+import warningIcon from 'images/icons/status/warning.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
@@ -100,9 +102,25 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				'#e4e7f0',
 				'#e2edf7'
 			] as any);
+		const tooltioText =
+			info.states.state === 'Trading'
+				? 'Trading State'
+				: info.states.state === 'Inception'
+				? 'Inception state, please wait until the system is started.'
+				: 'Reset State';
 		return (
 			<SCard
-				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
+				title={
+					<div className="cuscardheadertitle">
+						<SCardTitle>{type + ' ' + tenor}</SCardTitle>
+						<Tooltip title={tooltioText} placement="right">
+							<img
+								className="status-icon"
+								src={info.states.state === 'Trading' ? successIcon : warningIcon}
+							/>
+						</Tooltip>
+					</div>
+				}
 				width="360px"
 				margin={margin}
 				extra={
