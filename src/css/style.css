@@ -356,8 +356,10 @@ svg {
 	padding: 2px 0;
 }
 .cuscardnavtag {
-	padding: 2px 5px;
 	width: 96px;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .ordercard-header {
 	display: flex;
