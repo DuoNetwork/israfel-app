@@ -52,7 +52,7 @@ export default class Header extends React.Component<IProps> {
 						</div>
 					</div>
 					<SDivFlexCenter horizontal>
-						<div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div>
+						{/* <div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div> */}
 						<div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
 						</div>
