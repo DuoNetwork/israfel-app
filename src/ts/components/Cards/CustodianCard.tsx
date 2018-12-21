@@ -69,13 +69,13 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				lastAcceptedPrice
 					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, true)
 					: 0
-			) + (isBeethoven ? CST.TH_PA : CST.TH_X_LEV);
+			) + (isBeethoven ? CST.TH_PA : 'x');
 		const bLabel =
 			d3.format('.2f')(
 				lastAcceptedPrice
 					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, false)
 					: 0
-			) + CST.TH_X_LEV;
+			) + 'x';
 		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
 		const bOrderBook = orderBooks[bCode + '|' + CST.TH_WETH];
 		const aBestBid =
@@ -86,6 +86,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			bOrderBook && bOrderBook.bids.length ? bOrderBook.bids[0].price * ethPrice : 0;
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
+		const color = d3
+			.scaleThreshold()
+			.domain([-0.05, 0.01, 0.05, 0.1, 0.15, 0.3, 0.4, 0.5, 1])
+			.range([
+				'#ff9d9d',
+				'#fea0a1',
+				'#fba7a9',
+				'#f7b4b7',
+				'#efcace',
+				'#ebd5dc',
+				'#e6e1e9',
+				'#e4e7f0',
+				'#e2edf7'
+			] as any);
 		return (
 			<SCard
 				title={<SCardTitle>{type + ' ' + tenor}</SCardTitle>}
@@ -159,11 +173,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					padding="10px 10px 0 5px"
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
-					<div style={{ width: '66%', display: 'flex', justifyContent: 'space-between' }}>
-						<span>{aCode + ': '}</span>
+					<div className="cuscardtokenwrapper">
+						<span>{(isBeethoven ? 'Income: ' : 'Short: ') + aCode}</span>
 						<span>{aLabel}</span>
 					</div>
-					<span>{'Nav: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}</span>
+					<span
+						className="cuscardnavtag"
+						style={{
+							background: !isBeethoven ? color(
+								(info.states.limitUpper - info.states.navB) / info.states.limitUpper
+							) : ColorStyles.MainColorShadow
+						}}
+					>
+						{'NAV: $' + (info ? util.formatPriceShort(info.states.navA) : 0)}
+					</span>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '66%' }}>
@@ -203,11 +226,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					padding="0 10px 0 5px"
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
-					<div style={{ width: '66%', display: 'flex', justifyContent: 'space-between' }}>
-						<span>{bCode + ': '}</span>
+					<div className="cuscardtokenwrapper">
+						<span>{(isBeethoven ? 'Leverage: ' : 'Long: ') + bCode}</span>
 						<span>{bLabel}</span>
 					</div>
-					<span>{'Nav: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}</span>
+					<span
+						className="cuscardnavtag"
+						style={{
+							background: color(
+								(info.states.limitUpper - info.states.navB) / info.states.limitUpper
+							)
+						}}
+					>
+						{'NAV: $' + (info ? util.formatPriceShort(info.states.navB) : 0)}
+					</span>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '66%' }}>

@@ -335,6 +335,27 @@ svg {
 	color: #F55E5E;
 	box-shadow: 0 0 0 1px rgba(245, 94, 94, 0.8);
 }
+.cuscardtokenwrapper {
+	width: 66%;
+	display: flex;
+	justify-content: space-between;
+}
+.cuscardtokenwrapper > span {
+	padding: 2px 0;
+}
+.cuscardnavtag {
+	padding: 2px 5px;
+	font-weight: 500;
+}
+.ordercard-header {
+	display: flex;
+	align-items: center;
+}
+.ordercard-header > .switch-button {
+	cursor: pointer;
+	color: #fff;
+	margin-left: 10px;
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);

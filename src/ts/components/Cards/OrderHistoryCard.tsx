@@ -7,7 +7,7 @@ import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-import { SButton, SCard, SCardTitle, STableWrapper } from './_styled';
+import { SCard, SCardTitle, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
@@ -83,7 +83,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 									)
 							}
 						>
-							<a className='order-cancel'>{CST.TH_CANCEL}</a>
+							<a className="order-cancel">{CST.TH_CANCEL}</a>
 						</Popconfirm>
 					),
 					[CST.TH_HISTORY]: orders
@@ -92,22 +92,26 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 		return (
 			<SCard
 				title={
-					<SCardTitle>{(CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()}</SCardTitle>
+					<div className="ordercard-header">
+						<SCardTitle>
+							{showHistory
+								? (CST.TH_ORDER + ' ' + CST.TH_HISTORY).toUpperCase()
+								: (CST.TH_LIVE + ' ' + CST.TH_ORDER).toUpperCase()}
+						</SCardTitle>
+						<div
+							className="switch-button"
+							onClick={() =>
+								this.setState({
+									showHistory: !showHistory
+								})
+							}
+						>
+							<Icon type="retweet" />
+						</div>
+					</div>
 				}
 				width="740px"
 				margin="0 10px 50px 10px"
-				extra={
-					<SButton
-						style={{ height: 24 }}
-						onClick={() =>
-							this.setState({
-								showHistory: !showHistory
-							})
-						}
-					>
-						Switch to {showHistory ? CST.TH_LIVE : CST.TH_HISTORY}
-					</SButton>
-				}
 			>
 				<STableWrapper>
 					<Table
