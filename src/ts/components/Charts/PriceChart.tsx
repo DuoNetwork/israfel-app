@@ -4,7 +4,7 @@ import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import util from '../../common/util';
 
-const margin = { top: 0, right: 5, bottom: 0, left: 0 };
+const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 const width = 222 - margin.left - margin.right;
 const height = 70 - margin.top - margin.bottom;
 
