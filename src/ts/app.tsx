@@ -34,17 +34,36 @@ wsUtil.onOrder(
 	userOrder => {
 		store.dispatch(wsActions.orderUpdate(userOrder));
 		store.dispatch(
-			wsActions.messageUpdate('info', util.getOrderFullDescription(userOrder), '')
+			wsActions.notificationUpdate({
+				level: 'info',
+				title: util.getOrderTitle(userOrder),
+				message: util.getOrderFullDescription(userOrder),
+				transactionHash: ''
+			})
 		);
 	},
 	(method, orderHash, error) =>
-		store.dispatch(wsActions.messageUpdate('error', method + orderHash + error, ''))
+		store.dispatch(
+			wsActions.notificationUpdate({
+				level: 'error',
+				title: method + orderHash,
+				message: error,
+				transactionHash: ''
+			})
+		)
 );
 wsUtil.onOrderBook(
 	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
 	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
 	(method, pair, error) =>
-		store.dispatch(wsActions.messageUpdate('error', method + pair + error, ''))
+		store.dispatch(
+			wsActions.notificationUpdate({
+				level: 'error',
+				title: method + pair,
+				message: error,
+				transactionHash: ''
+			})
+		)
 );
 
 wsUtil.onConnection(

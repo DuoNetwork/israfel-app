@@ -1,6 +1,7 @@
 import * as CST from 'ts/common/constants';
 import {
 	IAcceptedPrice,
+	INotification,
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
 	IPrice,
@@ -93,11 +94,9 @@ export function subscribeOrder(account: string): VoidThunkAction {
 	};
 }
 
-export function messageUpdate(level: string, message: string, txHash: string) {
+export function notificationUpdate(notification: INotification) {
 	return {
-		type: CST.AC_MESSAGE,
-		level: level,
-		message: message,
-		transactionHash: txHash
+		type: CST.AC_NOTIFICATION,
+		value: notification
 	};
 }

@@ -20,14 +20,17 @@ Object {
     "acceptedPrices": Object {},
     "connection": false,
     "exchangePrices": Object {},
-    "level": "",
-    "message": "",
+    "notification": Object {
+      "level": "",
+      "message": "",
+      "title": "",
+      "transactionHash": "",
+    },
     "orderBookSnapshot": Object {},
     "orderHistory": Object {},
     "orderSubscription": "",
     "status": Array [],
     "tokens": Array [],
-    "transactionHash": "",
   },
 }
 `;

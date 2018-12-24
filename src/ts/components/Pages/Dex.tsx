@@ -5,6 +5,7 @@ import {
 	IAcceptedPrice,
 	ICustodianInfo,
 	IEthBalance,
+	INotification,
 	IOrderBookSnapshot,
 	IToken,
 	ITokenBalance,
@@ -29,7 +30,7 @@ interface IProps {
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
-	notification: (level: string, message: string, txHash: string) => any;
+	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
 }
@@ -97,7 +98,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			orderBooks,
 			ethPrice,
 			orderHistory,
-			notification
+			notify
 		} = this.props;
 		const {
 			convertCustodian,
@@ -199,7 +200,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						aToken={convertAToken}
 						bToken={convertBToken}
 						info={custodians[convertCustodian]}
-						notification={notification}
+						notify={notify}
 						handleClose={() => this.handleConvert('', '', '')}
 					/>
 					<TradeCard
@@ -217,7 +218,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							}
 						}
 						ethPrice={ethPrice}
-						notification={notification}
+						notify={notify}
 						interestOrLeverage={tokenInterestOrLeverage}
 						handleClose={() => this.handleTrade('')}
 					/>
@@ -231,7 +232,7 @@ export default class Dex extends React.Component<IProps, IState> {
 					mozartList={mozartList}
 					custodians={custodians}
 					custodianTokenBalances={custodianTokenBalances}
-					notification={notification}
+					notify={notify}
 					handleClose={() => this.setState({ showBalances: !showBalances })}
 				/>
 			</div>

@@ -32,7 +32,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        TRADE test/WETH
+        Trade test/WETH
       </styled.div>
     }
     width="360px"
@@ -40,7 +40,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     <div
       className="convert-popup-des"
     >
-      test is the long token with 1.00x leverage.
+      <Component
+        n={1}
+        token="test"
+      />
     </div>
     <styled.div
       horizontal={true}
@@ -500,7 +503,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           }
           width="49%"
         >
-          Submit
+          Buy
         </styled.button>
       </styled.div>
     </Spin>

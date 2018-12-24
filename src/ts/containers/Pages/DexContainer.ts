@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as wsActions from 'ts/actions/wsActions';
-import { IState } from 'ts/common/types';
+import { INotification, IState } from 'ts/common/types';
 import Dex from 'ts/components/Pages/Dex';
 
 function mapStateToProps(state: IState) {
@@ -23,8 +23,8 @@ function mapStateToProps(state: IState) {
 
 function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction>) {
 	return {
-		notification: (level: string, message: string, txHash: string) =>
-			dispatch(wsActions.messageUpdate(level, message, txHash)),
+		notify: (notification: INotification) =>
+			dispatch(wsActions.notificationUpdate(notification)),
 		subscribeOrder: (account: string) => dispatch(wsActions.subscribeOrder(account)),
 		unsubscribeOrder: () => dispatch(wsActions.orderSubscriptionUpdate(''))
 	};

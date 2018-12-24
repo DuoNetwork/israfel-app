@@ -20,7 +20,7 @@ class Util {
 		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 
-	public formatTime(isMonth: boolean) {
+	public formatExpiry(isMonth: boolean) {
 		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
 	}
 
@@ -67,6 +67,22 @@ class Util {
 	public getMonthEndExpiry = relayerUtil.getMonthEndExpiry;
 
 	public getExpiryTimestamp = relayerUtil.getExpiryTimestamp;
+
+	public getOrderTitle(order: IUserOrder) {
+		if (order.type === CST.DB_ADD) return 'Order Placed';
+		else if (order.type === CST.DB_TERMINATE)
+			if (order.status === CST.DB_FILL) return 'Order Fully Filled';
+			else if (
+				order.status === CST.DB_CONFIRMED &&
+				(order.updatedAt || order.createdAt) >= order.expiry
+			)
+				return 'Order Expired';
+			else return 'Order Cancelled';
+		else if (order.status === CST.DB_MATCHING)
+			return 'Order Filled';
+		else // if (order.status === CST.DB_PFILL)
+			return 'Order Partially Filled';
+	}
 
 	public getOrderFullDescription(order: IUserOrder) {
 		const [code1, code2] = order.pair.split('|');

@@ -5,14 +5,17 @@ Object {
   "acceptedPrices": Object {},
   "connection": true,
   "exchangePrices": Object {},
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [],
   "tokens": Array [],
-  "transactionHash": "",
 }
 `;
 
@@ -21,14 +24,17 @@ Object {
   "acceptedPrices": Object {},
   "connection": false,
   "exchangePrices": Object {},
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
   "status": Array [],
   "tokens": Array [],
-  "transactionHash": "",
 }
 `;
 
@@ -45,8 +51,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
@@ -61,7 +71,6 @@ Object {
       "code": "token2",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -89,8 +98,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {},
   "orderHistory": Object {},
   "orderSubscription": "",
@@ -105,7 +118,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -125,7 +137,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer message 1`] = `
+exports[`ws reducer notification 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -138,8 +150,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "level",
-  "message": " message",
+  "notification": Object {
+    "level": "level",
+    "message": " message",
+    "title": "title",
+    "transactionHash": "txHash",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -168,7 +184,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "txHash",
 }
 `;
 
@@ -185,8 +200,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -235,7 +254,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -252,8 +270,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -309,7 +331,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -326,8 +347,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -353,7 +378,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -370,8 +394,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -400,7 +428,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -417,8 +444,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -447,7 +478,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -484,8 +514,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -514,7 +548,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -531,8 +564,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -581,7 +618,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -598,8 +634,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -628,7 +668,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -645,8 +684,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -675,7 +718,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -692,8 +734,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -722,7 +768,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -739,8 +784,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -769,7 +818,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -786,8 +834,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -816,7 +868,6 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;
 
@@ -841,8 +892,12 @@ Object {
       "exchangePrices",
     ],
   },
-  "level": "",
-  "message": "",
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
   "orderBookSnapshot": Object {
     "pair": Object {
       "asks": Array [
@@ -871,6 +926,5 @@ Object {
       "code": "token3",
     },
   ],
-  "transactionHash": "",
 }
 `;

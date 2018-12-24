@@ -7,7 +7,7 @@ import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import wsUtil from 'ts/common/wsUtil';
-import { SCard, STableWrapper } from './_styled';
+import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
 const Column = Table.Column;
@@ -115,18 +115,18 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 					>
 						<div
 							className="switch-button"
-							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5 }}
+							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5, marginLeft: 0, paddingLeft: 0 }}
 						>
-							{('OPEN ' + CST.TH_ORDERS).toUpperCase()}
+							{('Open ' + CST.TH_ORDERS)}
 						</div>
 						<div className="switch-button" style={{ opacity: showHistory ? 1 : 0.5 }}>
-							{('PAST ' + CST.TH_ORDERS).toUpperCase()}
+							{('Past ' + CST.TH_ORDERS)}
 						</div>
 					</div>
 				}
 				width="740px"
 				margin="0 10px 50px 10px"
-				extra={<button onClick={this.handleExport}>Export to CSV</button>}
+				extra={<SButton className='export-button' onClick={this.handleExport}>Export to CSV</SButton>}
 			>
 				<STableWrapper>
 					<Table
