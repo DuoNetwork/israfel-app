@@ -43,6 +43,13 @@ jobs:
                     - "c4:57:14:a4:83:f3:ca:f3:60:97:4f:04:10:e9:65:59"
                     - "16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48"
                     - "e6:90:fa:e5:7d:4e:7e:d7:2f:ed:d0:5b:3a:b6:77:cb"
+                    - "3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2"
+                    - "aa:42:83:37:be:c6:3c:db:68:f6:25:90:3b:24:b5:a5"
+            - run:
+                name: upload files to github
+                command: |
+                    echo '192.30.253.113 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/' >> ~/.ssh/known_hosts
+                    ssh git@192.30.253.113 sudo scp -r FinBook/israfel-relayer/* git@192.30.253.113:~/circleupload
             - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
