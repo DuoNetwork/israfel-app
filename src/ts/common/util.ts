@@ -21,7 +21,11 @@ class Util {
 	}
 
 	public formatPriceShort(num: number) {
-		return d3.format('.4n')(num);
+		if (num < 1) return d3.format('.3f')(num);
+		return d3
+			.format('.4s')(num)
+			.toUpperCase()
+			.replace(/G/g, 'B');
 	}
 
 	public formatBalance(num: number) {
@@ -70,7 +74,7 @@ class Util {
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
 			return baseDescription + ' Fully filled';
 
-		if (order.fill)
+		if (order.fill || order.matching)
 			baseDescription += ` ${order.fill}(${this.formatPercent(
 				order.fill / order.amount
 			)}) filled.`;
