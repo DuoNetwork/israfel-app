@@ -6,7 +6,7 @@ exports[`StatusCard Test Test Snapshot Test Snapshot 1`] = `
   margin="20px 0 0 0"
   title={
     <styled.div>
-      STATUS
+      Status
     </styled.div>
   }
   width="100%"

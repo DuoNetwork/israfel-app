@@ -25,7 +25,7 @@ export default class StatusCard extends React.Component<IProps> {
 		dataSource.sort((a, b) => a.key.localeCompare(b.key));
 		return (
 			<SCard
-				title={<SCardTitle>{CST.TH_STATUS.toUpperCase()}</SCardTitle>}
+				title={<SCardTitle>{CST.TH_STATUS}</SCardTitle>}
 				width="100%"
 				margin="20px 0 0 0"
 				inlinetype="table"

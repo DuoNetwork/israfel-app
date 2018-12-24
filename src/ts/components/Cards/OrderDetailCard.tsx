@@ -23,7 +23,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 				<SCard
 					title={
 						<SCardTitle>
-							{CST.TH_ORDER.toUpperCase() + ' ' + CST.TH_DETAIL.toUpperCase()}
+							{CST.TH_ORDER + ' ' + CST.TH_DETAIL}
 						</SCardTitle>
 					}
 					style={{ overflow: 'visible !important' }}
