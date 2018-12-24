@@ -457,6 +457,16 @@ export const SCardList = styled.div`
 			.content {
 				color: ${ColorStyles.TextBlack};
 			}
+			.tabletitle {
+				width: 40%;
+				text-align: right;
+				color: ${ColorStyles.TextBlackAlpha};
+			}
+			.tablecontent {
+				width: 40%;
+				text-align: right;
+				color: ${ColorStyles.TextBlack};
+			}
 			.des {
 				color: ${ColorStyles.TextBlackAlphaL};
 				font-size: 12px;
