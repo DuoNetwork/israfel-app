@@ -26,7 +26,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 							{CST.TH_ORDER.toUpperCase() + ' ' + CST.TH_DETAIL.toUpperCase()}
 						</SCardTitle>
 					}
-					style={{overflow: 'visible !important'}}
+					style={{ overflow: 'visible !important' }}
 					width="480px"
 					className={'popup-card-oh ' + (visible ? 'popup-open' : '')}
 					noBodymargin
@@ -34,10 +34,21 @@ export default class OrderDetailCard extends React.Component<IProps> {
 				>
 					<SCardList noMargin width="100%">
 						<div className="status-list-wrapper">
-							<ul style={{padding: '0 10px', maxHeight: 256, overflowY: 'scroll'}}>
+							<ul style={{ padding: '0 10px', maxHeight: 256, overflowY: 'scroll' }}>
 								<li>{util.getOrderDescription(lastVersion)}</li>
 								{orders.map(o => (
-									<li key={o.currentSequence}>
+									<li
+										key={o.currentSequence}
+										onClick={() => {
+											if (o.transactionHash)
+												window.open(
+													`https://${
+														__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+													}etherscan.io/tx/${o.transactionHash}`,
+													'_blank'
+												);
+										}}
+									>
 										<span>
 											{moment(o.updatedAt || o.createdAt).format(
 												'YYYY-MM-DD HH:mm:ss'
