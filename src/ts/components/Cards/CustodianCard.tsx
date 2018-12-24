@@ -222,19 +222,19 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div
 						style={{
 							width: '44%',
-							padding: '0 0 0 10px',
+							padding: '5px 0 0 10px',
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
-							<span className="px-topleft">
-								<b>{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '$1.234'}</b>
-							</span>
-							<span className="px-buttomright">
-								<b>{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '$1.234'}</b>
-							</span>
+						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+							<div className="px-left">
+								<b>{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}</b>
+							</div>
+							<div className="px-right">
+								<b>{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}</b>
+							</div>
 						</div>
 						<SButton onClick={() => handleTrade(aCode)} disable={!isTrading}>
 							{tokenBalances[aCode] && tokenBalances[aCode].balance
@@ -276,19 +276,19 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div
 						style={{
 							width: '44%',
-							padding: '0 0 0 10px',
+							padding: '5px 0 0 10px',
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between'
 						}}
 					>
-						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
-							<span className="px-topleft">
-								<b>{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '$1.234'}</b>
-							</span>
-							<span className="px-buttomright">
-								<b>{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '$1.234'}</b>
-							</span>
+						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+							<div className="px-left">
+								<b>{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}</b>
+							</div>
+							<div className="px-right">
+								<b>{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}</b>
+							</div>
 						</div>
 						<SButton onClick={() => handleTrade(bCode)} disable={!isTrading}>
 							{tokenBalances[bCode] && tokenBalances[bCode].balance

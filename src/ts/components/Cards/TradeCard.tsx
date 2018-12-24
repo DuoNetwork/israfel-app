@@ -481,9 +481,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													: '-'}
 											</span>
 											<span className="title bid-span">
-												{item.price && item.price > 0
-													? util.formatFixedNumber(item.price, precision)
-													: '-'}
+												<b>
+													{item.price && item.price > 0
+														? util.formatFixedNumber(
+																item.price,
+																precision
+														)
+														: '-'}
+												</b>
 											</span>
 										</li>
 									))}
@@ -497,9 +502,14 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 30px 5px 5px' }}>
 											<span className="title ask-span">
-												{item.price && item.price > 0
-													? util.formatFixedNumber(item.price, precision)
-													: '-'}
+												<b>
+													{item.price && item.price > 0
+														? util.formatFixedNumber(
+																item.price,
+																precision
+														)
+														: '-'}
+												</b>
 											</span>
 											<span className="content">
 												{item.balance && item.balance > 0
@@ -694,7 +704,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</SButton>
 							<SButton
 								disable={Number(price) === 0 || Number(amount) === 0}
-								style={{opacity: (Number(price) === 0 || Number(amount) === 0) ? 0.3 : 1}}
+								style={{
+									opacity: Number(price) === 0 || Number(amount) === 0 ? 0.3 : 1
+								}}
 								onClick={this.handleSubmit}
 								width="49%"
 							>

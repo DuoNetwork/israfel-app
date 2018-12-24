@@ -1,7 +1,7 @@
 @import '~antd/dist/antd.css';
 
 body {
-	font-family: 'Roboto', 'Microsoft YaHei';
+	font-family: 'Roboto', 'Microsoft YaHei' !important;
 	background: #F5F5F5;
 }
 
@@ -308,14 +308,23 @@ svg {
 .status3 {
 	background-color: #97FF2D
 }
-.px-topleft {
-	font-size: 12px;
-	color: #9AC370;
+.px-left {
+	font-size: 14px;
+	text-align: center;
+	width: 50%;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	background: #81BF69;
+	color:#fff;
 }
-.px-buttomright {
-	font-size: 12px;
-	margin-top: 10px;
-	color: #F55E5E;
+.px-right {
+	font-size: 14px;
+	text-align: center;
+	width: 50%;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	background: rgba(245, 94, 94);
+	color:#fff;
 }
 .bid-span {
 	color: #9AC370 !important;
