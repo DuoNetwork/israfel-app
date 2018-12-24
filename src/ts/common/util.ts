@@ -20,6 +20,10 @@ class Util {
 		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 
+	public formatTime(isMonth: boolean) {
+		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
+	}
+
 	public formatPriceShort(num: number) {
 		if (num < 1) return d3.format('.3f')(num);
 		return d3
@@ -221,7 +225,7 @@ class Util {
 				row.push(
 					moment.utc(order.updatedAt || order.createdAt).format('YYYY-MM-DD HH:mm:ss')
 				); // CST.TH_TIME_UTC,
-				row.push(order.side); // CST.TH_SIDE,
+				row.push(order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL); // CST.TH_SIDE,
 				row.push(order.price); // CST.TH_PRICE,
 				row.push(order.amount); // CST.TH_AMOUNT,
 				row.push(order.fill + order.matching); // CST.TH_FILL,

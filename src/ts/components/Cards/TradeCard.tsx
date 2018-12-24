@@ -2,7 +2,6 @@ import { Radio, Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
-import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
@@ -105,7 +104,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
 const getExpiryDescription = (isMonth: boolean) =>
-	`Valid till ${moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm')}`;
+	`Valid till ${util.formatTime(isMonth)}`;
 
 const getLimit = (
 	price: string,

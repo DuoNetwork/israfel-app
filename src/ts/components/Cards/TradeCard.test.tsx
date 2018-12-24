@@ -52,6 +52,7 @@ describe('TradeCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			util.formatTime = jest.fn(() => "1970-01-16 16:00");
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapper = shallow(
 				<TradeCard

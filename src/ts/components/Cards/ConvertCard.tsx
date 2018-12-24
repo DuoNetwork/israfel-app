@@ -388,7 +388,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				<SCard
 					title={
 						<SCardTitle>
-							{CST.TH_CONVERT + (info ? ' ' + info.code.split('-')[0] : '')}
+							{CST.TH_CONVERT + ' ' + (isBeethoven ? CST.BEETHOVEN : CST.MOZART)}
 						</SCardTitle>
 					}
 					width="360px"
