@@ -503,7 +503,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           }
           width="49%"
         >
-          Submit
+          Buy
         </styled.button>
       </styled.div>
     </Spin>

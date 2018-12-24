@@ -751,7 +751,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								width="49%"
 								onClick={this.handleSubmit}
 							>
-								{CST.TH_SUBMIT}
+								{isCreate ? CST.TH_CREATE : CST.TH_REDEEM}
 							</SButton>
 						</SDivFlexCenter>
 					</Spin>

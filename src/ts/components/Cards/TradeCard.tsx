@@ -736,7 +736,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								onClick={this.handleSubmit}
 								width="49%"
 							>
-								{CST.TH_SUBMIT}
+								{isBid ? CST.TH_BUY : CST.TH_SELL}
 							</SButton>
 						</SDivFlexCenter>
 					</Spin>
