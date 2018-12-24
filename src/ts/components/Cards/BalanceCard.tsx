@@ -133,7 +133,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 
 		return (
 			<SCard
-				title={<SCardTitle>{CST.TH_BALANCES.toUpperCase()} </SCardTitle>}
+				title={<SCardTitle>{CST.TH_BALANCES} </SCardTitle>}
 				className={'panel-wrap ' + animated}
 				style={{ right: visible ? 0 : -200 }}
 			>
