@@ -450,6 +450,10 @@ svg {
 	left: 10%;
 	font-weight: 600;
 }
+.cus-des > div {
+	font-size: 12px;
+	color: rgba(64, 79, 84, .8);
+}
 @keyframes openPopup {
 	from {
 		transform: translate(-50%, 0) scale(0);

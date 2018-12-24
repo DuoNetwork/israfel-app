@@ -87,7 +87,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
 		const isTrading = info.states.state === CST.CTD_TRADING;
-		const isNearReset = info.states.navB - info.states.limitLower < 0.1 || info.states.limitUpper - info.states.navB < 0.1;
+		const isNearReset =
+			info.states.navB - info.states.limitLower < 0.1 ||
+			info.states.limitUpper - info.states.navB < 0.1;
 		return (
 			<SCard
 				title={
@@ -115,7 +117,14 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						>
 							<div className="status-ligh-wrapper">
 								<div
-									className={"status-light " +  (isNearReset ? 'status1' : info.states.state === 'Trading' ? 'status3' : 'status2')}
+									className={
+										'status-light ' +
+										(isNearReset
+											? 'status1'
+											: info.states.state === 'Trading'
+											? 'status3'
+											: 'status2')
+									}
 								/>
 							</div>
 						</Tooltip>
@@ -127,20 +136,37 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
-									<span className="title">{CST.TH_ETH}</span>
-									<span className="title">
+									<span className="title" style={{display: 'flex', alignItems: 'center'}}>{CST.TH_ETH}</span>
+									<span className="title" style={{display: 'flex', alignItems: 'center', transform: 'scaleX(1.5)'}}>
 										<Icon type="swap" />
 									</span>
 									<span className="content">
-										{isBeethoven ? 'Income/Leverage' : 'Short/Long'}
+										{isBeethoven ? (
+											<div className="cus-des">
+												<div>Income Token</div>
+												<div>Leverage Token</div>
+											</div>
+										) : (
+											<div className="cus-des">
+												<div>Short Token</div>
+												<div>Long Token</div>
+											</div>
+										)}
 									</span>
 								</li>
-								<li>
-									<span className="title">{CST.TH_COLLATERAL}</span>
-									<span className="content">
-										{util.formatBalance(info.states.ethCollateral) +
-											' ' +
-											CST.TH_ETH}
+								<li style={{ justifyContent: 'start' }}>
+									<span className="title" style={{ fontSize: 10 }}>
+										Fully backed by
+									</span>
+									<span
+										className="content"
+										style={{ fontSize: 10, marginLeft: 4 }}
+									>
+										<b>
+											{util.formatBalance(info.states.ethCollateral) +
+												' ' +
+												CST.TH_ETH}
+										</b>
 									</span>
 								</li>
 							</ul>
@@ -176,7 +202,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span style={{display: 'flex', alignItems: 'center'}}>
+						<span style={{ display: 'flex', alignItems: 'center' }}>
 							{aCode}
 							<span className="aspan">{isBeethoven ? 'INCOME' : 'SHORT'}</span>
 						</span>
@@ -228,16 +254,14 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span style={{display: 'flex', alignItems: 'center'}}>
+						<span style={{ display: 'flex', alignItems: 'center' }}>
 							{bCode}
 							<span className="aspan">{isBeethoven ? 'LEVERAGE' : 'LONG'}</span>
 						</span>
 						<span>{bLabel}</span>
 					</div>
 					<div className="cuscardnavtag">
-						<span className="navspan">
-							NAV
-						</span>
+						<span className="navspan">NAV</span>
 						<span>
 							<b>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</b>
 						</span>
@@ -284,7 +308,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 								'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')
 							}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
-							style={{border: 'none'}}
+							style={{ border: 'none' }}
 						>
 							{pct === 1 ? '24H' : pct + 'D'}
 						</SButton>
