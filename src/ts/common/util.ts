@@ -221,7 +221,7 @@ class Util {
 				row.push(
 					moment.utc(order.updatedAt || order.createdAt).format('YYYY-MM-DD HH:mm:ss')
 				); // CST.TH_TIME_UTC,
-				row.push(order.side); // CST.TH_SIDE,
+				row.push(order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL); // CST.TH_SIDE,
 				row.push(order.price); // CST.TH_PRICE,
 				row.push(order.amount); // CST.TH_AMOUNT,
 				row.push(order.fill + order.matching); // CST.TH_FILL,
