@@ -1,5 +1,4 @@
 import moment from 'moment';
-import * as CST from './constants';
 import util from './util';
 
 test('formatNumber', () => {
@@ -35,9 +34,4 @@ test('getUTCNowTimestamp days', () => {
 
 test('getUTCNowTimestamp Long Ago', () => {
 	expect(util.convertUpdateTime(moment().valueOf() - 260000000000000000)).toBe('Long Time Ago');
-});
-
-test('formatMaturity', () => {
-	expect(util.formatMaturity(0)).toEqual(CST.TH_PERPETUAL);
-	expect(util.formatMaturity(1234567890)).toMatchSnapshot();
 });
