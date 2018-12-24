@@ -72,7 +72,7 @@ jobs:
                 command: npm install
             - run:
                 name: test
-                command: npm test -- -w 1
+                command: npm test -- -w 1 --detectOpenHandles
 workflows:
     version: 2
     build_and_test:
