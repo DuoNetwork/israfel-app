@@ -1,13 +1,13 @@
 export const ColorStyles = {
 	//Theme Colors
-	MainColor: 'rgba(92,164,222,1)',
-	MainColorAlpha: 'rgba(92,164,222,.8)',
-	MainColorShadow: 'rgba(92,164,222,.2)',
+	MainColor: 'rgba(46,128,237,1)',
+	MainColorAlpha: 'rgba(46,128,237,.8)',
+	MainColorShadow: 'rgba(46,128,237,.2)',
 	MainErrorColor: 'rgba(256,56,79,1)',
 	MainErrorColorAplha: 'rgba(256,56,79,.8)',
 	MainErrorColorShadow: 'rgba(256,56,79,.2)',
 	//Background Colors
-	HeaderBackground: 'rgba(73,132,180,1)',
+	HeaderBackground: 'rgba(42,107,193,1)',
 	CardBackground: 'rgba(255,255,255,1)',
 	CardBackgroundSolid: 'rgba(255,255,255,1)',
 	CardBackgroundDarkSolid: 'rgba(25,26,28,1)',
