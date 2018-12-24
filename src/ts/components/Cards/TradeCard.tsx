@@ -35,6 +35,8 @@ interface IProps {
 	ethBalance: IEthBalance;
 	orderBook: IOrderBookSnapshot;
 	ethPrice: number;
+	navInEth: number;
+	navUpdatedAt: number;
 	interestOrLeverage: number;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;

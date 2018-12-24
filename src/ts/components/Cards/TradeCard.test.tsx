@@ -63,6 +63,8 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					ethPrice={123}
+					navInEth={1}
+					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
