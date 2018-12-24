@@ -49,10 +49,6 @@ jobs:
                 name: Fix host authenticity for 192.30.253.113
                 command: |
                     ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run:
-                name: ssh
-                command: |
-                    ssh git@192.30.253.113
             - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
