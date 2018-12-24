@@ -44,6 +44,30 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         n={1}
         token="test"
       />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
     </div>
     <styled.div
       horizontal={true}
@@ -53,15 +77,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           className="status-list-wrapper"
         >
           <ul>
-            <li
-              style={
-                Object {
-                  "justifyContent": "flex-end",
-                }
-              }
-            >
-              Bid Price
-            </li>
             <li
               key="0"
               style={
@@ -133,9 +148,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           className="status-list-wrapper"
         >
           <ul>
-            <li>
-              Ask Price
-            </li>
             <li
               key="0"
               style={
@@ -258,12 +270,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 <div
                   className="tabletitle"
                 >
-                  WETH
+                  test
                 </div>
                 <div
                   className="tabletitle"
                 >
-                  test
+                  WETH
                 </div>
               </li>
               <li
@@ -274,7 +286,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 }
               >
                 <div
-                  className="tablecontent"
+                  className="tabletitle"
                   style={
                     Object {
                       "textAlign": "left",
@@ -282,7 +294,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                     }
                   }
                 >
-                  Available
+                  Balance
                 </div>
                 <div
                   className="tablecontent"

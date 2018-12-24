@@ -17,21 +17,17 @@ test('formatBalance', () => {
 });
 
 test('getUTCNowTimestamp just now', () => {
-	expect(util.convertUpdateTime(moment().valueOf() - 1000)).toBe('Just Now');
+	expect(util.convertUpdateTime(moment().valueOf() - 1000)).toBe('just now');
 });
 
 test('getUTCNowTimestamp miniutes', () => {
-	expect(util.convertUpdateTime(moment().valueOf() - 3000000)).toBe('50 Minutes Ago');
+	expect(util.convertUpdateTime(moment().valueOf() - 3000000)).toBe('50 min ago');
 });
 
 test('getUTCNowTimestamp Hours', () => {
-	expect(util.convertUpdateTime(moment().valueOf() - 82800000)).toBe('23 Hours Ago');
-});
-
-test('getUTCNowTimestamp days', () => {
-	expect(util.convertUpdateTime(moment().valueOf() - 86400000)).toBe('1 Days Ago');
+	expect(util.convertUpdateTime(moment().valueOf() - 82800000)).toBe('23 hrs ago');
 });
 
 test('getUTCNowTimestamp Long Ago', () => {
-	expect(util.convertUpdateTime(moment().valueOf() - 260000000000000000)).toBe('Long Time Ago');
+	expect(util.convertUpdateTime(moment().valueOf() - 260000000000000000)).toBe('long time ago');
 });

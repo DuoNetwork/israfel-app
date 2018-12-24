@@ -22,7 +22,7 @@ exports[`StatusCard Test Test Snapshot Test Snapshot 1`] = `
             "Info": 123,
             "Pair": "test",
             "Process": "test",
-            "Updated": "Long Time Ago",
+            "Updated": "long time ago",
             "key": "testtesttest",
           },
         ]

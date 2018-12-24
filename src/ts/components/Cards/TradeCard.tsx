@@ -4,6 +4,7 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { ColorStyles } from 'ts/common/styles';
 import {
 	IEthBalance,
 	INotification,
@@ -458,7 +459,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			tokenBalance,
 			ethBalance,
 			orderBook,
-			interestOrLeverage
+			interestOrLeverage,
+			navInEth,
+			navUpdatedAt
 		} = this.props;
 		const {
 			isBid,
@@ -512,14 +515,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				>
 					<div className="convert-popup-des">
 						<this.cardDescription token={token.split('-')[0]} n={interestOrLeverage} />
+						<div className='trade-nav'>
+							<span className="navspan">NAV</span>
+							<span className='trade-nav-px'>{`${util.formatFixedNumber(navInEth, precision)} ETH`}</span>
+							<span style={{fontSize: 10, color: ColorStyles.TextBlackAlphaL}}>{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}</span>
+						</div>
 					</div>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li style={{ justifyContent: 'flex-end' }}>
-										{CST.TH_BID + ' ' + CST.TH_PX}
-									</li>
 									{bidsToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 5px 5px 30px' }}>
 											<span className="content">
@@ -548,7 +553,6 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<SCardList>
 							<div className="status-list-wrapper">
 								<ul>
-									<li>{CST.TH_ASK + ' ' + CST.TH_PX}</li>
 									{asksToRender.map((item, i) => (
 										<li key={i} style={{ padding: '5px 30px 5px 5px' }}>
 											<span className="title ask-span">
@@ -612,8 +616,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											>
 												Token
 											</div>
-											<div className="tabletitle">{CST.TH_WETH}</div>
 											<div className="tabletitle">{token}</div>
+											<div className="tabletitle">{CST.TH_WETH}</div>
 										</li>
 										<li
 											style={{
@@ -621,18 +625,18 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											}}
 										>
 											<div
-												className="tablecontent"
+												className="tabletitle"
 												style={{ textAlign: 'left', width: '20%' }}
 											>
-												Available
-											</div>
-											<div className="tablecontent">
-												{util.formatBalance(ethBalance.weth)}
+												Balance
 											</div>
 											<div className="tablecontent">
 												{tokenBalance
 													? util.formatBalance(tokenBalance.balance)
 													: 0}
+											</div>
+											<div className="tablecontent">
+												{util.formatBalance(ethBalance.weth)}
 											</div>
 										</li>
 									</ul>

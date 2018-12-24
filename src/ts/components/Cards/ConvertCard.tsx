@@ -354,6 +354,33 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			});
 		}
 	};
+	private TokenDescription = (props: { aToken: string; bToken: string }) => {
+		return props.aToken.startsWith('a') ? (
+			<span>
+				{` ${props.aToken} provides a fixed stream of `}
+				<span className="aspan" style={{ fontSize: 12 }}>
+					INCOME
+				</span>
+				{` and ${props.bToken} provides `}
+				<span className="aspan" style={{ fontSize: 12 }}>
+					LEVERAGE
+				</span>
+				{` return.`}
+			</span>
+		) : (
+			<span>
+				{` ${props.aToken} represents `}
+				<span className="aspan" style={{ fontSize: 12 }}>
+					SHORT
+				</span>
+				{` positions and ${props.bToken} represents margin `}
+				<span className="aspan" style={{ fontSize: 12 }}>
+					LONG
+				</span>
+				{` positions.`}
+			</span>
+		);
+	};
 
 	public render() {
 		const {
@@ -430,10 +457,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						}
 					>
 						<div className="convert-popup-des">
-							{util.getContractDescription(isBeethoven)}
-						</div>
-						<div className="convert-popup-des">
-							{util.getTokenDescription(aToken, bToken)}
+							Fully backed by ETH, this contract converts between ETH and tokens with
+							diversified payoffs.
+							<this.TokenDescription aToken={aToken} bToken={bToken} />
 						</div>
 						<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					</div>
@@ -548,40 +574,52 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 										<li
 											style={{
 												padding: '5px 15px',
-												justifyContent: 'space-around'
+												justifyContent: 'space-between'
 											}}
 										>
-											<span className="title">
+											<div
+												className="tabletitle"
+												style={{ textAlign: 'left', width: '20%' }}
+											>
+												Token
+											</div>
+											<div className="tabletitle2">{aToken}</div>
+											<div className="tabletitle2">{bToken}</div>
+											<div className="tabletitle2" style={{width: '20%'}}>
 												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
-											</span>
-											<span className="title">{aToken}</span>
-											<span className="title">{bToken}</span>
+											</div>
 										</li>
 										<li
 											style={{
 												padding: '5px 15px',
-												justifyContent: 'space-around'
+												justifyContent: 'space-between'
 											}}
 										>
-											<span className="content">
-												{util.formatBalance(
-													wethCreate ? ethBalance.weth : ethBalance.eth
-												)}
-											</span>
-											<span className="content">
+											<div
+												className="tabletitle"
+												style={{ textAlign: 'left', width: '20%' }}
+											>
+												Balance
+											</div>
+											<div className="tablecontent2">
 												{util.formatBalance(
 													tokenBalances && tokenBalances[aToken]
 														? tokenBalances[aToken].balance
 														: 0
 												)}
-											</span>
-											<span className="content">
+											</div>
+											<div className="tablecontent2">
 												{util.formatBalance(
 													tokenBalances && tokenBalances[bToken]
 														? tokenBalances[bToken].balance
 														: 0
 												)}
-											</span>
+											</div>
+											<div className="tablecontent2" style={{width: '20%'}}>
+												{util.formatBalance(
+													wethCreate ? ethBalance.weth : ethBalance.eth
+												)}
+											</div>
 										</li>
 									</ul>
 								</div>

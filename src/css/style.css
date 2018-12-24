@@ -268,7 +268,7 @@ svg {
 }
 .convert-popup-des {
 	padding: 5px 15px;
-	font-size: 12px;
+	font-size: 14px;
 	color: rgba(64, 79, 84, .8);
 }
 .convert-radio-des {
@@ -436,6 +436,19 @@ svg {
 	padding: 2px 4px;
 	border-radius: 2px;
 	margin-right: 4px;
+}
+.trade-nav {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 5px;
+	height: 14px;
+	position: relative;
+	align-items: center;
+}
+.trade-nav-px {
+	position: absolute;
+	left: 10%;
+	font-weight: 600;
 }
 @keyframes openPopup {
 	from {
