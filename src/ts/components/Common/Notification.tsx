@@ -5,18 +5,19 @@ import { SButton } from '../Cards/_styled';
 
 interface IProps {
 	level: string;
+	title: string;
 	message: string;
 	transactionHash: string;
 }
 
-export default class Message extends React.Component<IProps> {
+export default class Notification extends React.Component<IProps> {
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { level, message, transactionHash } = nextProps;
+		const { level, title, message, transactionHash } = nextProps;
 
 		if (!message) return false;
 
 		((notification as any)[level] || notification.open)({
-			message: level.toUpperCase(),
+			message: title || level.toUpperCase(),
 			description: message,
 			duration: 0,
 			btn: transactionHash ? (

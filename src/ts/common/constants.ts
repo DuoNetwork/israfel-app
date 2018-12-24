@@ -24,7 +24,7 @@ export const AC_OB_SNAPSHOT = 'orderBookSnapshot';
 export const AC_ETH_BALANCE = 'ethBalance';
 export const AC_TOKEN_BALANCE = 'tokenBalance';
 export const AC_CUSTODIAN = 'custodian';
-export const AC_MESSAGE = 'message';
+export const AC_NOTIFICATION = 'notification';
 
 export const RX_NUM = /^-?[0-9]+(\.[0-9]+)?$/;
 export const RX_NUM_P = /^[0-9]+(\.[0-9]+)?$/;

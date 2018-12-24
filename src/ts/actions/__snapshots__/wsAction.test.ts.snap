@@ -29,12 +29,15 @@ Object {
 }
 `;
 
-exports[`actions messageUpdate 1`] = `
+exports[`actions notificationUpdate 1`] = `
 Object {
-  "level": "level",
-  "message": "message",
-  "transactionHash": "txHash",
-  "type": "message",
+  "type": "notification",
+  "value": Object {
+    "level": "level",
+    "message": "message",
+    "title": "title",
+    "transactionHash": "txHash",
+  },
 }
 `;
 

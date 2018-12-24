@@ -19,9 +19,12 @@ export const initialState: IWsState = {
 	orderBookSnapshot: {},
 	orderHistory: {},
 	orderSubscription: '',
-	level: '',
-	message: '',
-	transactionHash: ''
+	notification: {
+		level: '',
+		title: '',
+		message: '',
+		transactionHash: ''
+	}
 };
 
 export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
@@ -128,11 +131,9 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 					orderSubscription: ''
 				};
 			}
-		case CST.AC_MESSAGE:
+		case CST.AC_NOTIFICATION:
 			return Object.assign({}, state, {
-				level: action.level,
-				message: action.message,
-				transactionHash: action.transactionHash
+				notification: action.value
 			});
 		default:
 			return state;

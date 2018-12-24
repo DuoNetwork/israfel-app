@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
-import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
@@ -17,7 +17,7 @@ interface IProps {
 	mozartList: string[];
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
-	notification: (level: string, message: string, txHash: string) => any;
+	notify: (notification: INotification) => any;
 	handleClose: () => void;
 }
 
@@ -50,7 +50,12 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (ethInput.match(CST.RX_NUM_P))
 			web3Util.wrapEther(Number(ethInput), this.props.account).then(txHash => {
 				this.setState({ ethInput: '' });
-				this.props.notification('info', 'Wrap transacton sent.', txHash);
+				this.props.notify({
+					level: 'info',
+					title: 'WETH',
+					message: 'Wrap transacton sent.',
+					transactionHash: txHash
+				});
 			});
 		else this.setState({ ethInput: '' });
 	};
@@ -60,7 +65,12 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		if (wethInput.match(CST.RX_NUM_P))
 			web3Util.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
 				this.setState({ wethInput: '' });
-				this.props.notification('info', 'Unwrap transacton sent.', txHash);
+				this.props.notify({
+					level: 'info',
+					title: 'WETH',
+					message: 'Unwrap transacton sent.',
+					transactionHash: txHash
+				});
 			});
 		else this.setState({ wethInput: '' });
 	};
@@ -111,7 +121,9 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				balanceLis.push(
 					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
-						<span className="content">{balance ? util.formatBalance(balance) : '-'}</span>
+						<span className="content">
+							{balance ? util.formatBalance(balance) : '-'}
+						</span>
 					</li>
 				);
 				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
@@ -191,9 +203,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li style={{ padding: '5px 5px' }}>
-									<span className="title">
-										{CST.TH_TOTAL + ' ' + CST.TH_NAV}
-									</span>
+									<span className="title">{CST.TH_TOTAL + ' ' + CST.TH_NAV}</span>
 								</li>
 								<li style={{ padding: '5px 5px', flexDirection: 'row-reverse' }}>
 									<span className="content">

@@ -5,7 +5,7 @@ import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper, getDualClassWrapper } from 'ts/common/duoWrapper';
-import { ICustodianInfo, IEthBalance, ITokenBalance } from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
@@ -27,7 +27,7 @@ interface IProps {
 	tokenBalances?: { [code: string]: ITokenBalance };
 	ethBalance: IEthBalance;
 	info?: ICustodianInfo;
-	notification: (level: string, message: string, txHash: string) => any;
+	notify: (notification: INotification) => any;
 	handleClose: () => void;
 }
 
@@ -253,14 +253,20 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleWETHApprove = async () => {
 		this.setState({ loading: true });
-		const { account, custodian, notification } = this.props;
+		const { account, custodian, notify } = this.props;
 		try {
 			await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
-				(hash: string) => notification('info', 'WETH approval transaction sent.', hash),
+				(hash: string) =>
+					notify({
+						level: 'info',
+						title: CST.TH_WETH,
+						message: 'Approval transaction sent.',
+						transactionHash: hash
+					}),
 				true
 			);
 			const interval = setInterval(() => {
@@ -305,7 +311,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			loading: true
 		});
-		const { account, custodian, handleClose, info, notification } = this.props;
+		const { account, custodian, handleClose, info, notify } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
@@ -318,7 +324,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 		try {
 			const onTxHash = (hash: string) => {
-				notification('info', description, hash);
+				notify({
+					level: 'info',
+					title: `${isCreate ? 'Creation' : 'Redemption'}`,
+					message: description,
+					transactionHash: hash
+				});
 				handleClose();
 			};
 			if (isCreate)

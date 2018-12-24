@@ -4,7 +4,13 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IEthBalance, IOrderBookSnapshot, IToken, ITokenBalance } from 'ts/common/types';
+import {
+	IEthBalance,
+	INotification,
+	IOrderBookSnapshot,
+	IToken,
+	ITokenBalance
+} from 'ts/common/types';
 import util from 'ts/common/util';
 import wsUtil from 'ts/common/wsUtil';
 import web3Util from '../../common/web3Util';
@@ -30,7 +36,7 @@ interface IProps {
 	orderBook: IOrderBookSnapshot;
 	ethPrice: number;
 	interestOrLeverage: number;
-	notification: (level: string, message: string, txHash: string) => any;
+	notify: (notification: INotification) => any;
 	handleClose: () => void;
 }
 
@@ -103,8 +109,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
-const getExpiryDescription = (isMonth: boolean) =>
-	`Valid till ${util.formatTime(isMonth)}`;
+const getExpiryDescription = (isMonth: boolean) => `Valid till ${util.formatExpiry(isMonth)}`;
 
 const getLimit = (
 	price: string,
@@ -303,7 +308,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 	};
 	private handleApprove = async () => {
-		const { token, account, notification } = this.props;
+		const { token, account, notify } = this.props;
 		this.setState({ approving: true });
 		try {
 			const { isBid } = this.state;
@@ -311,9 +316,19 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				isBid ? CST.TH_WETH : token,
 				account
 			);
-			notification('info', `${token} approval transaction sent`, tx);
+			notify({
+				level: 'info',
+				title: `${token}`,
+				message: 'Approval transaction sent',
+				transactionHash: tx
+			});
 		} catch (error) {
-			notification('error', `Error in approving ${token}`, '');
+			notify({
+				level: 'error',
+				title: `${token}`,
+				message: '`Error in sending approval transaction',
+				transactionHash: ''
+			});
 			this.setState({
 				approving: false
 			});
@@ -345,7 +360,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 
 	private handleSubmit = async () => {
-		const { account, token, tokenInfo, ethPrice, notification } = this.props;
+		const { account, token, tokenInfo, ethPrice, notify } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		try {
 			this.setState({
@@ -370,20 +385,28 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		} catch (error) {
-			notification('error', 'Error in signing order', '');
+			notify({
+				level: 'error',
+				title: `${token}-${CST.TH_WETH}`,
+				message: 'Error in signing order',
+				transactionHash: ''
+			});
 			this.setState({
 				submitting: false
 			});
 		}
 	};
 
-	private cardDescription = (props: {token: any, n: number}) => {
+	private cardDescription = (props: { token: any; n: number }) => {
 		let des: JSX.Element;
 		switch (props.token) {
 			case 'aETH':
 				des = (
 					<span>
-						Price-stable<span className="aspan" style={{fontSize: 12}}>INCOME</span>
+						Price-stable
+						<span className="aspan" style={{ fontSize: 12 }}>
+							INCOME
+						</span>
 						{`token with coupon rate of ${d3.format('.2%')(props.n)} p.a.`}
 					</span>
 				);
@@ -391,7 +414,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			case 'bETH':
 				des = (
 					<span>
-						ETH-backed<span className="aspan" style={{fontSize: 12}}>LEVERAGE</span>
+						ETH-backed
+						<span className="aspan" style={{ fontSize: 12 }}>
+							LEVERAGE
+						</span>
 						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
 					</span>
 				);
@@ -399,7 +425,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			case 'sETH':
 				des = (
 					<span>
-						ETH-backed<span className="aspan" style={{fontSize: 12}}>SHORT</span>
+						ETH-backed
+						<span className="aspan" style={{ fontSize: 12 }}>
+							SHORT
+						</span>
 						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
 					</span>
 				);
@@ -407,7 +436,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			default:
 				des = (
 					<span>
-						ETH-backed<span className="aspan" style={{fontSize: 12}}>LONG</span>
+						ETH-backed
+						<span className="aspan" style={{ fontSize: 12 }}>
+							LONG
+						</span>
 						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
 					</span>
 				);

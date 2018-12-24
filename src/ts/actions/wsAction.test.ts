@@ -46,23 +46,6 @@ describe('actions', () => {
 		expect(wsActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
-	// test('orderBookSubscriptionUpdate', () => {
-	// 	expect(wsActions.orderBookSubscriptionUpdate('pair')).toMatchSnapshot();
-	// });
-
-	// test('subscribeOrderBook', () => {
-	// 	const store: any = mockStore({});
-	// 	wsUtil.subscribeOrderBook = jest.fn();
-	// 	store.dispatch(wsActions.subscribeOrderBook('pair'));
-	// 	return new Promise(resolve =>
-	// 		setTimeout(() => {
-	// 			expect(store.getActions()).toMatchSnapshot();
-	// 			expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-	// 			resolve();
-	// 		}, 0)
-	// 	);
-	// });
-
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		wsUtil.subscribeOrderHistory = jest.fn();
@@ -89,7 +72,14 @@ describe('actions', () => {
 		);
 	});
 
-	test('messageUpdate', () => {
-		expect(wsActions.messageUpdate('level', 'message', 'txHash')).toMatchSnapshot();
+	test('notificationUpdate', () => {
+		expect(
+			wsActions.notificationUpdate({
+				level: 'level',
+				title: 'title',
+				message: 'message',
+				transactionHash: 'txHash'
+			})
+		).toMatchSnapshot();
 	});
 });
