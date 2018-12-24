@@ -42,7 +42,7 @@ export default class Header extends React.Component<IProps> {
 											<div key={ex.exchange} className="nav-bal-item">
 												<div>{ex.exchange.toUpperCase()}</div>
 												<div className="nav-bal-value">
-													{util.formatPriceShort(ex.price)}
+													{util.formatNumber(ex.price)}
 												</div>
 											</div>
 										))}
