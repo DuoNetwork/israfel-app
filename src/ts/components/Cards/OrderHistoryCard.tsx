@@ -104,10 +104,10 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							className="switch-button"
 							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5 }}
 						>
-							{('OPEN ' + CST.TH_ORDER).toUpperCase()}
+							{('OPEN ' + CST.TH_ORDERS).toUpperCase()}
 						</div>
 						<div className="switch-button" style={{ opacity: showHistory ? 1 : 0.5 }}>
-							{('PAST ' + CST.TH_ORDER).toUpperCase()}
+							{('PAST ' + CST.TH_ORDERS).toUpperCase()}
 						</div>
 					</div>
 				}
