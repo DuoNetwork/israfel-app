@@ -237,40 +237,60 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <li
                 style={
                   Object {
-                    "justifyContent": "space-around",
                     "padding": "5px 15px",
                   }
                 }
               >
-                <span
-                  className="title"
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
                 >
                   WETH
-                </span>
-                <span
-                  className="title"
+                </div>
+                <div
+                  className="tabletitle"
                 >
                   test
-                </span>
+                </div>
               </li>
               <li
                 style={
                   Object {
-                    "justifyContent": "space-around",
                     "padding": "5px 15px",
                   }
                 }
               >
-                <span
-                  className="content"
+                <div
+                  className="tablecontent"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Available
+                </div>
+                <div
+                  className="tablecontent"
                 >
                   123.0
-                </span>
-                <span
-                  className="content"
+                </div>
+                <div
+                  className="tablecontent"
                 >
                   123.0
-                </span>
+                </div>
               </li>
             </ul>
           </div>

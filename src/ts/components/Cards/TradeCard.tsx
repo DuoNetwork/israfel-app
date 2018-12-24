@@ -554,26 +554,26 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li
 											style={{
 												padding: '5px 15px',
-												justifyContent: 'space-around'
 											}}
 										>
-											<span className="title">{CST.TH_WETH}</span>
-											<span className="title">{token}</span>
+											<div className="tabletitle" style={{textAlign: 'left', width: '20%'}}>Token</div>
+											<div className="tabletitle">{CST.TH_WETH}</div>
+											<div className="tabletitle">{token}</div>
 										</li>
 										<li
 											style={{
 												padding: '5px 15px',
-												justifyContent: 'space-around'
 											}}
 										>
-											<span className="content">
+											<div className="tablecontent" style={{textAlign: 'left', width: '20%'}}>Available</div>
+											<div className="tablecontent">
 												{util.formatBalance(ethBalance.weth)}
-											</span>
-											<span className="content">
+											</div>
+											<div className="tablecontent">
 												{tokenBalance
 													? util.formatBalance(tokenBalance.balance)
 													: 0}
-											</span>
+											</div>
 										</li>
 									</ul>
 								</div>

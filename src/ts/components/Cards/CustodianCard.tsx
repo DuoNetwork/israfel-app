@@ -258,7 +258,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div className="cuscardnavtag">
 						<span className="navspan">
 							NAV
-						</span>{' '}
+						</span>
 						<span>
 							<b>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</b>
 						</span>
