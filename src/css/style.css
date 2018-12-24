@@ -289,9 +289,6 @@ svg {
 	opacity: 0.6;
 	pointer-events: none;
 }
-.cus-addr-button {
-	padding: 2px 10px;
-}
 .status-ligh-wrapper {
 	display: flex;
 	width:44px;
