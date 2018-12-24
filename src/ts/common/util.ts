@@ -20,6 +20,10 @@ class Util {
 		return precision ? roundedNumber.toFixed(decimal) : num + '';
 	}
 
+	public formatTime(isMonth: boolean) {
+		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
+	}
+
 	public formatPriceShort(num: number) {
 		if (num < 1) return d3.format('.3f')(num);
 		return d3
