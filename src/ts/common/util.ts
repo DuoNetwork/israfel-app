@@ -116,18 +116,17 @@ class Util {
 		if (order.type === CST.DB_UPDATE) {
 			let description = '';
 			if (order.fill || order.matching)
-				description = `Total ${this.formatBalance(order.fill + order.matching)} filled.`;
+				description = `Total ${this.formatBalance(order.fill + order.matching)} filled`;
 			if (order.matching) description += 'Pending settlement';
 			return description;
 		}
 
 		if (order.type === CST.DB_TERMINATE)
 			if (order.status === CST.DB_CONFIRMED)
-				return order.updatedAt || 0 < order.expiry ? 'Cancelled by user.' : 'Expired';
-			else if (order.status === CST.DB_BALANCE)
-				return 'Cancelled due to insufficent balance.';
-			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error.';
-			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset.';
+				return order.updatedAt || 0 < order.expiry ? 'Cancelled by user' : 'Expired';
+			else if (order.status === CST.DB_BALANCE) return 'Cancelled due to insufficent balance';
+			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error';
+			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset';
 			else if (order.status === CST.DB_FILL) return 'Fully filled';
 		return 'Invalid order';
 	}
@@ -181,6 +180,90 @@ class Util {
 						: 0) +
 				' days'
 		}.`;
+	}
+
+	public convertOrdersToCSV(orders: { [pair: string]: IUserOrder[] }): string {
+		const headers = [
+			CST.TH_PAIR,
+			CST.TH_ORDER_HASH,
+			CST.TH_VERSION,
+			CST.TH_TIME_UTC,
+			CST.TH_SIDE,
+			CST.TH_PRICE,
+			CST.TH_AMOUNT,
+			CST.TH_FILL,
+			CST.TH_FEE,
+			CST.TH_EXPIRY_UTC,
+			CST.TH_STATUS,
+			CST.TH_TX_HASH
+		];
+		let output = '';
+		headers.forEach(
+			(header, index) =>
+				(output += this.wrapCSVString(header) + (index < headers.length - 1 ? ',' : '\n'))
+		);
+		const ordersByHash: { [orderHash: string]: IUserOrder[] } = {};
+		for (const pair in orders)
+			orders[pair].forEach(order => {
+				if (!ordersByHash[order.orderHash]) ordersByHash[order.orderHash] = [];
+				ordersByHash[order.orderHash].push(order);
+			});
+
+		const rows: any[][] = [];
+		for (const orderHash in ordersByHash) {
+			ordersByHash[orderHash].sort((a, b) => a.currentSequence - b.currentSequence);
+			ordersByHash[orderHash].forEach((order, index) => {
+				const row: any[] = [];
+				row.push(order.createdAt);
+				row.push(order.pair.replace('|', '-')); // CST.TH_PAIR,
+				row.push(order.orderHash); // CST.TH_ID,
+				row.push(index + 1); // CST.TH_VERSION,
+				row.push(
+					moment.utc(order.updatedAt || order.createdAt).format('YYYY-MM-DD HH:mm:ss')
+				); // CST.TH_TIME_UTC,
+				row.push(order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL); // CST.TH_SIDE,
+				row.push(order.price); // CST.TH_PRICE,
+				row.push(order.amount); // CST.TH_AMOUNT,
+				row.push(order.fill + order.matching); // CST.TH_FILL,
+				row.push(order.fee + ' ' + order.feeAsset); // CST.TH_FEE,
+				row.push(moment.utc(order.expiry).format('YYYY-MM-DD HH:mm:ss')); // CST.TH_EXPIRY,
+				// CST.TH_STATUS,
+				if (order.type === CST.DB_TERMINATE)
+					if (order.status === CST.DB_BALANCE)
+						row.push('Cancelled due to insufficent balance');
+					else if (order.status === CST.DB_MATCHING)
+						row.push('Cancelled due to settlement error');
+					else if (order.status === CST.DB_RESET)
+						row.push('Cancelled due to custodian reset');
+					else if (order.status === CST.DB_FILL) row.push('Fully filled');
+					//if (order.status === CST.DB_CONFIRMED)
+					else
+						row.push(
+							order.updatedAt || order.createdAt < order.expiry
+								? 'Cancelled by user'
+								: 'Expired'
+						);
+				else if (order.status === CST.DB_MATCHING) row.push('Pending settlement');
+				else row.push('Open');
+				row.push(order.transactionHash || ''); // CST.TH_TX_HASH
+				rows.push(row);
+			});
+		}
+
+		rows.sort((a, b) => a[1].localeCompare(b[1]) || -a[0] + b[0] || -a[3] + b[3]);
+		rows.forEach(row =>
+			row.forEach((item, index) => {
+				if (index)
+					output +=
+						this.wrapCSVString(item + '') + (index !== row.length - 1 ? ',' : '\n');
+			})
+		);
+
+		return output;
+	}
+
+	private wrapCSVString(input: string): string {
+		return ('' + input).indexOf(',') >= 0 ? '"' + input + '"' : input;
 	}
 }
 
