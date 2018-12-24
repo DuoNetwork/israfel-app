@@ -38,7 +38,10 @@ jobs:
         steps:
             - add_ssh_keys:
                 fingerprints:
+                    - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
                     - "7a:0d:dd:1b:85:8a:34:d9:3e:99:b1:49:db:fb:e4:6e"
+                    - "c4:57:14:a4:83:f3:ca:f3:60:97:4f:04:10:e9:65:59"
+                    - "16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48"
             - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
