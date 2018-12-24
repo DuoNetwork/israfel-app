@@ -46,15 +46,13 @@ jobs:
                     - "3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2"
                     - "aa:42:83:37:be:c6:3c:db:68:f6:25:90:3b:24:b5:a5"
             - run:
-                name: upload files to github
+                name: Fix host authenticity for 192.30.253.113
                 command: |
-                    echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDm9owcrLXPnLTOPNk8SqFUvMThxIDwUcu+zm34a64d5QSWGN97wt6B/oeH6GMLhYXp5u9A8WcyQKHrEPmmD59fKM77tzM18Tc2X43Vh/YhdsZhvftxDfOiSCESL/ELs6OJhoUi0qARY2TwTD8t5KE3B1zTQn+x3wUCvn56Gw24fOallfSH8xcqHNWLjHJg5YteC/DTdkhUmLmJMK+c9KD1403OWzc72s2Awor08u5Y7RbmwS0UXxcf6E+wylUgdUI4R8Q6dT8PIdUjHkIhtvwTqA1UDnCDb3dvA5MqiFQd3XgEdezboyI3RqptTDbfkirySbe8gCXabrUArYw3HGWexEnQ+ToyzvHI/B2/IdXsxOh1NLhAKoQXWbGySAsXNv5ZnOLWQiTUyKDUW2uqU7HJ7BKM5pVbLRqePQDuSfoeaULBoiI8K7gSlc3HKGPyjxq5kI6cTRQ6V9zi3PWKZW75SzuQeXRHQzGKTe6YUuIRClk26ty/NzlosN20roEcyLwDPTBFvRan7AEAia3fP4A9U9nBfxxWKFULswSJQhhqUF+mPqC6oEN8RK9kme6M5zuZTaIdWBnAoHrKmK4lWA5lG+FpxjOI/wvl4SpEGzr/kZIibUdvmxYsz5qYqyOJmOE4NduIurTZrl+9wUjovA2yPcfcdi/daQHMwxxA0iM1aQ== lipeiru0329@gmail.com' >> ~/.ssh/known_hosts
-                    ssh git@192.30.253.113 sudo scp -r FinBook/israfel-relayer/* git@192.30.253.113:~/circleupload
+                    ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run:
-                name: upload files to github
+                name: ssh
                 command: |
-                    echo 'github.com,13.229.188.59 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/' >> ~/.ssh/known_hosts
-                    ssh git@github.com sudo scp -r FinBook/israfel-relayer/* git@github.com:~/circleupload
+                    ssh git@192.30.253.113
             - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
