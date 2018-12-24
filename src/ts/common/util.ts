@@ -75,9 +75,13 @@ class Util {
 			return baseDescription + ' Fully filled';
 
 		if (order.fill || order.matching)
-			baseDescription += ` ${order.fill}(${this.formatPercent(
+			baseDescription += ` ${order.fill +
+				(order.type === CST.DB_TERMINATE ? 0 : order.matching)}(${this.formatPercent(
 				order.fill / order.amount
 			)}) filled.`;
+
+		if (order.matching && order.type !== CST.DB_TERMINATE)
+			baseDescription += 'Pending settlement';
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
 			return (
@@ -89,16 +93,10 @@ class Util {
 			return baseDescription + ` Cancelled due to insufficient balance.`;
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
-			return baseDescription + ` Cancelled due to matching error.`;
+			return baseDescription + ` Cancelled due to settlement error.`;
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_RESET)
 			return baseDescription + ` Cancelled due to custodian reset.`;
-
-		if (order.type === CST.DB_UPDATE && order.matching)
-			return (
-				baseDescription +
-				` ${order.matching}(${util.formatPercent(order.matching / order.amount)}) matching.`
-			);
 
 		return baseDescription;
 	}
@@ -108,17 +106,18 @@ class Util {
 		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
 		} ${code1} at ${order.price} ${code2} per ${code1}. Total ${util.formatBalance(
-			order.fill
+			order.fill + (order.type === CST.DB_TERMINATE ? 0 : order.matching)
 		)} filled.`;
 	}
 
 	public getVersionDescription(order: IUserOrder) {
-		if (order.type === CST.DB_ADD) return 'Order submitted.';
+		if (order.type === CST.DB_ADD) return 'Order placed.';
 
 		if (order.type === CST.DB_UPDATE) {
 			let description = '';
-			if (order.fill) description = `Total ${this.formatBalance(order.fill)} filled.`;
-			if (order.matching) description += ` ${this.formatBalance(order.matching)} matching`;
+			if (order.fill || order.matching)
+				description = `Total ${this.formatBalance(order.fill + order.matching)} filled.`;
+			if (order.matching) description += 'Pending settlement';
 			return description;
 		}
 
@@ -127,7 +126,7 @@ class Util {
 				return order.updatedAt || 0 < order.expiry ? 'Cancelled by user.' : 'Expired';
 			else if (order.status === CST.DB_BALANCE)
 				return 'Cancelled due to insufficent balance.';
-			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to matching error.';
+			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error.';
 			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset.';
 			else if (order.status === CST.DB_FILL) return 'Fully filled';
 		return 'Invalid order';
