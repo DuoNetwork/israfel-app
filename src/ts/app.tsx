@@ -37,7 +37,7 @@ wsUtil.onOrder(
 			wsActions.notificationUpdate({
 				level: 'info',
 				title: util.getOrderTitle(userOrder),
-				message: util.getOrderFullDescription(userOrder),
+				message: util.getOrderDescription(userOrder),
 				transactionHash: ''
 			})
 		);
