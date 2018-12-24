@@ -1043,6 +1043,16 @@ injectGlobal([
 				width: 300px;
 				margin-left: 0px;
 			}
+			.export-button {
+				background: transparent !important;
+				color: #fff !important;
+				border: 1px solid rgba(255, 255, 255, .5) !important;
+			}
+			.export-button:hover {
+				background: transparent !important;
+				color: #fff !important;
+				box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.5) !important;
+			}
 		}
 	`
 ] as any);

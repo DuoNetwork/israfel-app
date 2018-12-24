@@ -378,20 +378,40 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		}
 	};
 
-	private cardDescription = (token: any, n: number) => {
-		let des: string = '';
-		switch (token) {
+	private cardDescription = (props: {token: any, n: number}) => {
+		let des: JSX.Element;
+		switch (props.token) {
 			case 'aETH':
-				des = 'income token with coupon rate of ' + d3.format('.2%')(n) + ' p.a.';
+				des = (
+					<span>
+						Price-stable<span className="aspan" style={{fontSize: 12}}>INCOME</span>
+						{`token with coupon rate of ${d3.format('.2%')(props.n)} p.a.`}
+					</span>
+				);
 				break;
 			case 'bETH':
-				des = 'leverage token with ' + d3.format('.2f')(n) + 'x leverage.';
+				des = (
+					<span>
+						ETH-backed<span className="aspan" style={{fontSize: 12}}>LEVERAGE</span>
+						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
+					</span>
+				);
 				break;
 			case 'sETH':
-				des = 'short token with ' + d3.format('.2f')(n) + 'x leverage.';
+				des = (
+					<span>
+						ETH-backed<span className="aspan" style={{fontSize: 12}}>SHORT</span>
+						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
+					</span>
+				);
 				break;
 			default:
-				des = 'long token with ' + d3.format('.2f')(n) + 'x leverage.';
+				des = (
+					<span>
+						ETH-backed<span className="aspan" style={{fontSize: 12}}>LONG</span>
+						{`token with ${d3.format('.2f')(props.n)}x leverage.`}
+					</span>
+				);
 				break;
 		}
 		return des;
@@ -445,9 +465,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				<div className={'popup-bg ' + (!!token ? 'popup-open-bg' : '')} />
 				<SCard
 					title={
-						<SCardTitle>
-							{CST.TH_TRADE.toUpperCase() + ' ' + token + '/' + CST.TH_WETH}
-						</SCardTitle>
+						<SCardTitle>{CST.TH_TRADE + ' ' + token + '/' + CST.TH_WETH}</SCardTitle>
 					}
 					width="360px"
 					className={'popup-card ' + (!!token ? 'popup-open' : '')}
@@ -459,10 +477,9 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<div className="convert-popup-des">{`${token} is the ${this.cardDescription(
-						token.split('-')[0],
-						interestOrLeverage
-					)}`}</div>
+					<div className="convert-popup-des">
+						<this.cardDescription token={token.split('-')[0]} n={interestOrLeverage} />
+					</div>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
@@ -553,19 +570,29 @@ export default class TradeCard extends React.Component<IProps, IState> {
 									<ul>
 										<li
 											style={{
-												padding: '5px 15px',
+												padding: '5px 15px'
 											}}
 										>
-											<div className="tabletitle" style={{textAlign: 'left', width: '20%'}}>Token</div>
+											<div
+												className="tabletitle"
+												style={{ textAlign: 'left', width: '20%' }}
+											>
+												Token
+											</div>
 											<div className="tabletitle">{CST.TH_WETH}</div>
 											<div className="tabletitle">{token}</div>
 										</li>
 										<li
 											style={{
-												padding: '5px 15px',
+												padding: '5px 15px'
 											}}
 										>
-											<div className="tablecontent" style={{textAlign: 'left', width: '20%'}}>Available</div>
+											<div
+												className="tablecontent"
+												style={{ textAlign: 'left', width: '20%' }}
+											>
+												Available
+											</div>
 											<div className="tablecontent">
 												{util.formatBalance(ethBalance.weth)}
 											</div>

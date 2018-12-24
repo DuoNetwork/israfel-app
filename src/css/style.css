@@ -316,6 +316,19 @@ svg {
 	border-bottom-left-radius: 2px;
 	background: #81BF69;
 	color:#fff;
+	overflow: hidden;
+	position: relative;
+}
+.px-left::after {
+	content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    background: #f55e5d;
+    left: 100%;
+    top: 0;
+    transform: rotate(20deg);
+    transform-origin: left center;
 }
 .px-right {
 	font-size: 14px;
@@ -325,6 +338,18 @@ svg {
 	border-bottom-right-radius: 2px;
 	background: rgba(245, 94, 94);
 	color:#fff;
+	overflow: hidden;
+	position: relative;
+}
+.px-right::before {
+	content: '';
+    width: 6px;
+    height: 100%;
+    background: #82be68;
+    position: absolute;
+    right: 100%;
+    transform-origin: right center;
+    transform: rotate(20deg);
 }
 .bid-span {
 	color: #9AC370 !important;
@@ -402,7 +427,8 @@ svg {
 	padding: 0px 4px;
 	border-radius: 2px;
 	margin-left: 4px;
-	font-size: 10px
+	font-size: 10px;
+	margin-right: 4px;
 }
 .bspan {
 	background: rgba(224, 136, 77, 0.8);
