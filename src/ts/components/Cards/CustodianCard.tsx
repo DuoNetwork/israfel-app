@@ -108,6 +108,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		// 		)
 		// 	);
 		const isTrading = info.states.state === CST.CTD_TRADING;
+		const isNearReset = info.states.navB - info.states.limitLower < 0.1 || info.states.limitUpper - info.states.navB < 0.1;
 		return (
 			<SCard
 				title={
@@ -135,16 +136,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						>
 							<div className="status-ligh-wrapper">
 								<div
-									className="status-light status3"
-									style={{ opacity: info.states.state === 'Trading' ? 1 : 0.4 }}
-								/>
-								<div
-									className="status-light status2"
-									style={{ opacity: info.states.state === 'Reset' ? 1 : 0.4 }}
-								/>
-								<div
-									className="status-light status1"
-									style={{ opacity: info.states.state === 'Prereset' ? 1 : 0.4 }}
+									className={"status-light " +  (isNearReset ? 'status1' : info.states.state === 'Trading' ? 'status3' : 'status2')}
 								/>
 							</div>
 						</Tooltip>
@@ -314,7 +306,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
 						>
-							{pct + 'D'}
+							{pct === 1 ? '24H' : pct + 'D'}
 						</SButton>
 					))}
 				</SDivFlexCenter>
