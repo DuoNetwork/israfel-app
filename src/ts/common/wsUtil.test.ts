@@ -222,7 +222,7 @@ test('unsubscribeOrderHistory', () => {
 	expect(send.mock.calls).toMatchSnapshot();
 });
 
-test('addOrder bid', async () => {
+test('addOrder bid', async (done) => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
 	web3Util.getTokenAddressFromCode = jest.fn((code: string) => code + 'address');
@@ -255,9 +255,10 @@ test('addOrder bid', async () => {
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();
+	done();
 });
 
-test('addOrder ask', async () => {
+test('addOrder ask', async (done) => {
 	const send = jest.fn();
 	wsUtil.ws = { send } as any;
 	web3Util.getTokenAddressFromCode = jest.fn((code: string) => code + 'address');
@@ -290,6 +291,7 @@ test('addOrder ask', async () => {
 	expect(send.mock.calls).toMatchSnapshot();
 	expect((orderUtil.getAmountAfterFee as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Util.createRawOrder as jest.Mock).mock.calls).toMatchSnapshot();
+	done();
 });
 
 test('deleteOrder', () => {
