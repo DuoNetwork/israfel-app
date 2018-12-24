@@ -13,6 +13,7 @@ export interface ICardProps {
 
 export const SCard = styled(Card)`
 	overflow: hidden !important;
+	font-family: 'Roboto', 'Microsoft YaHei' !important;
 	max-width: 1200px;
 	width: ${(props: ICardProps) => props.width} !important;
 	margin: ${(props: ICardProps) => props.margin} !important;

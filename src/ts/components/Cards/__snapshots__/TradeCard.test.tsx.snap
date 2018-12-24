@@ -75,7 +75,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title bid-span"
               >
-                123.000000
+                <b>
+                  123.000000
+                </b>
               </span>
             </li>
             <li
@@ -94,7 +96,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title bid-span"
               >
-                -
+                <b>
+                  -
+                </b>
               </span>
             </li>
             <li
@@ -113,7 +117,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title bid-span"
               >
-                -
+                <b>
+                  -
+                </b>
               </span>
             </li>
           </ul>
@@ -138,7 +144,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title ask-span"
               >
-                123.000000
+                <b>
+                  123.000000
+                </b>
               </span>
               <span
                 className="content"
@@ -157,7 +165,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title ask-span"
               >
-                -
+                <b>
+                  -
+                </b>
               </span>
               <span
                 className="content"
@@ -176,7 +186,9 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title ask-span"
               >
-                -
+                <b>
+                  -
+                </b>
               </span>
               <span
                 className="content"
