@@ -31,6 +31,19 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 		};
 	}
 
+	public handleExport = () => {
+		const csvData =
+			'data:text/csv;charset=utf-8,' + util.convertOrdersToCSV(this.props.orderHistory);
+		const link = document.createElement('a');
+		link.href = encodeURI(csvData);
+		link.download = 'transactions_' + moment().format('YYYY-MM-DD_HH-mm-ss') + '.csv';
+		// $FlowFixMe
+		document.body.appendChild(link);
+		link.click();
+		// $FlowFixMe
+		document.body.removeChild(link);
+	};
+
 	public render() {
 		const { orderHistory, account } = this.props;
 		const { showHistory, details } = this.state;
@@ -113,6 +126,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				}
 				width="740px"
 				margin="0 10px 50px 10px"
+				extra={<button onClick={this.handleExport}>Export to CSV</button>}
 			>
 				<STableWrapper>
 					<Table

@@ -99,6 +99,11 @@ export const TH_CANCEL = 'Cancel';
 export const TH_TOTAL = 'Total';
 export const TH_DETAIL = 'Detail';
 export const TH_NAV = 'Net Asset Value';
+export const TH_PRICE = 'Price';
+export const TH_TX_HASH = 'Transaction Hash';
+export const TH_VERSION = 'Version';
+export const TH_TIME_UTC = 'Time(UTC)';
+export const TH_EXPIRY_UTC = 'Expiry(UTC)';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
