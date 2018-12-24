@@ -36,6 +36,10 @@ jobs:
         docker: 
             - image: circleci/node:8.11.1
         steps:
+            - run:
+                name: Fix host authenticity for 192.30.253.113
+                command: |
+                    ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - add_ssh_keys:
                 fingerprints:
                     - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
@@ -45,17 +49,7 @@ jobs:
                     - "e6:90:fa:e5:7d:4e:7e:d7:2f:ed:d0:5b:3a:b6:77:cb"
                     - "3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2"
                     - "aa:42:83:37:be:c6:3c:db:68:f6:25:90:3b:24:b5:a5"
-            - run:
-                name: upload files to github
-                command: |
-                    echo '192.30.253.113 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/' >> ~/.ssh/known_hosts
-                    ssh git@192.30.253.113 sudo scp -r FinBook/israfel-relayer/* git@192.30.253.113:~/circleupload
-            - run:
-                name: upload files to github
-                command: |
-                    echo 'github.com,13.229.188.59 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/' >> ~/.ssh/known_hosts
-                    ssh git@github.com sudo scp -r FinBook/israfel-relayer/* git@github.com:~/circleupload
-            - run: git clone git@github.com:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
+            - run: git clone https://github.com/FinBook/israfel-relayer.git /home/circleci/israfel-relayer
             - run: cd /home/circleci/israfel-relayer
             - restore_cache:
                 key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
