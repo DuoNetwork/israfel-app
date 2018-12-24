@@ -45,7 +45,8 @@ jobs:
                     - "e6:90:fa:e5:7d:4e:7e:d7:2f:ed:d0:5b:3a:b6:77:cb"
                     - "3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2"
                     - "aa:42:83:37:be:c6:3c:db:68:f6:25:90:3b:24:b5:a5"
-            - run: ssh-keygen -R 192.30.253.113
+            - run: rm /home/.ssh/id_rsa
+            - run: rm /home/.ssh/id_rsa.pub
             - run:
                 name: upload files to github
                 command: |
