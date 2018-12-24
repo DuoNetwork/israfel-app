@@ -48,6 +48,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 													'_blank'
 												);
 										}}
+										style={{cursor: o.transactionHash ? 'pointer' : 'default'}}
 									>
 										<span>
 											{moment(o.updatedAt || o.createdAt).format(

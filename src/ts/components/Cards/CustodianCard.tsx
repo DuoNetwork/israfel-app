@@ -284,6 +284,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 								'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')
 							}
 							onClick={() => this.handleDayButtonClick(3600 * pct)}
+							style={{border: 'none'}}
 						>
 							{pct === 1 ? '24H' : pct + 'D'}
 						</SButton>
