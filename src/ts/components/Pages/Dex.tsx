@@ -133,6 +133,12 @@ export default class Dex extends React.Component<IProps, IState> {
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
 				)
 				: 0;
+		let tokenNavInEth = 0;
+		if (tradeTokenInfo && custodians[tradeTokenInfo.custodian])
+			if (tradeToken.startsWith('a') || tradeToken.startsWith('s'))
+				tokenNavInEth = custodians[tradeTokenInfo.custodian].states.navA / ethPrice;
+			else tokenNavInEth = custodians[tradeTokenInfo.custodian].states.navB / ethPrice;
+
 		return (
 			<div>
 				<Spin spinning={!connection} tip="loading...">
@@ -218,6 +224,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							}
 						}
 						ethPrice={ethPrice}
+						navInEth={tokenNavInEth}
 						notify={notify}
 						interestOrLeverage={tokenInterestOrLeverage}
 						handleClose={() => this.handleTrade('')}

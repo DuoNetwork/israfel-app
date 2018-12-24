@@ -86,27 +86,6 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			bOrderBook && bOrderBook.bids.length ? bOrderBook.bids[0].price * ethPrice : 0;
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
-		// const navColor = d3
-		// 	.scaleThreshold()
-		// 	.domain([-0.05, 0.01, 0.05, 0.1, 0.15, 0.3, 0.4, 0.5, 1])
-		// 	.range([
-		// 		'#ff9d9d',
-		// 		'#fea0a1',
-		// 		'#fba7a9',
-		// 		'#f7b4b7',
-		// 		'#efcace',
-		// 		'#ebd5dc',
-		// 		'#e6e1e9',
-		// 		'#e4e7f0',
-		// 		'#e2edf7'
-		// 	] as any)(
-		// 		Math.min(
-		// 			(info.states.limitUpper - info.states.navB) /
-		// 				info.states.limitUpper,
-		// 			(info.states.navB - info.states.limitLower) /
-		// 				info.states.limitLower
-		// 		)
-		// 	);
 		const isTrading = info.states.state === CST.CTD_TRADING;
 		const isNearReset = info.states.navB - info.states.limitLower < 0.1 || info.states.limitUpper - info.states.navB < 0.1;
 		return (
