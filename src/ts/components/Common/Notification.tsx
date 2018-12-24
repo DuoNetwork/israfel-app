@@ -19,7 +19,7 @@ export default class Notification extends React.Component<IProps> {
 		((notification as any)[level] || notification.open)({
 			message: title || level.toUpperCase(),
 			description: message,
-			duration: 0,
+			duration: level === 'error' ? 0 : 5,
 			btn: transactionHash ? (
 				<SButton
 					onClick={() =>
