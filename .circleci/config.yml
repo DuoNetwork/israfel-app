@@ -30,7 +30,8 @@ jobs:
                 command: npm install
             - save_cache:
                 key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-                path: /home/circleci/duo-admin
+                paths:
+                    - /home/circleci/duo-admin
     build-israfel-relayer:
         working_directory: /home/circleci/israfel-relayer
         docker: 
