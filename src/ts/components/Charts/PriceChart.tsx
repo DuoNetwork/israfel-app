@@ -5,7 +5,7 @@ import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import util from '../../common/util';
 
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-const width = 222 - margin.left - margin.right;
+const width = 190 - margin.left - margin.right;
 const height = 70 - margin.top - margin.bottom;
 
 function drawLines(
@@ -123,7 +123,7 @@ function drawLines(
 		.attr('fill', 'none')
 		.attr('class', 'area')
 		.attr('d', area)
-		.attr('fill', 'url(#gradfill)');
+		.attr('fill', ColorStyles.MainColorShadow);
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')

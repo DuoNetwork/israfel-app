@@ -144,7 +144,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				}
 			>
 				<SDivFlexCenter horizontal>
-					<SCardList noLiBorder noUlBorder noMargin width="66%">
+					<SCardList noLiBorder noUlBorder noMargin width="56%">
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
@@ -169,11 +169,11 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<div
 						style={{
-							width: '34%',
+							width: '44%',
 							display: 'flex',
 							justifyContent: 'center',
 							alignItems: 'center',
-							padding: '0px 10px'
+							padding: '0 0 0 10px'
 						}}
 					>
 						<SButton
@@ -193,13 +193,13 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				</SDivFlexCenter>
 				<SDivFlexCenter
 					horizontal
-					padding="10px 10px 0 5px"
+					padding="10px 5px 0 5px"
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span>
-							<span className="aspan">{isBeethoven ? 'Income' : 'Short'}</span>
+						<span style={{display: 'flex', alignItems: 'center'}}>
 							{aCode}
+							<span className="aspan">{isBeethoven ? 'INCOME' : 'SHORT'}</span>
 						</span>
 						<span>{aLabel}</span>
 					</div>
@@ -211,7 +211,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
-					<div style={{ width: '66%' }}>
+					<div style={{ width: '56%' }}>
 						<PriceChart
 							prices={acceptedPrices}
 							timeOffset={timeOffset}
@@ -221,8 +221,8 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 					<div
 						style={{
-							width: '34%',
-							padding: '0px 10px',
+							width: '44%',
+							padding: '0 0 0 10px',
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between'
@@ -230,10 +230,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
-								<b>{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '-'}</b>
+								<b>{aBestBid ? '$' + util.formatPriceShort(aBestBid) : '$1.234'}</b>
 							</span>
 							<span className="px-buttomright">
-								<b>{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '-'}</b>
+								<b>{aBestAsk ? '$' + util.formatPriceShort(aBestAsk) : '$1.234'}</b>
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(aCode)} disable={!isTrading}>
@@ -245,18 +245,18 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				</SDivFlexCenter>
 				<SDivFlexCenter
 					horizontal
-					padding="0 10px 0 5px"
+					padding="0 5px 0 5px"
 					style={{ color: ColorStyles.TextBlackAlpha, fontSize: 12 }}
 				>
 					<div className="cuscardtokenwrapper">
-						<span>
-							<span className="bspan">{isBeethoven ? 'Leverage' : 'Long'}</span>
+						<span style={{display: 'flex', alignItems: 'center'}}>
 							{bCode}
+							<span className="aspan">{isBeethoven ? 'LEVERAGE' : 'LONG'}</span>
 						</span>
 						<span>{bLabel}</span>
 					</div>
 					<div className="cuscardnavtag">
-						<span className="navspan" style={{ background: 'rgba(224, 136, 77, 0.8)' }}>
+						<span className="navspan">
 							NAV
 						</span>{' '}
 						<span>
@@ -265,7 +265,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
-					<div style={{ width: '66%' }}>
+					<div style={{ width: '56%' }}>
 						<PriceChart
 							prices={acceptedPrices}
 							timeOffset={timeOffset}
@@ -275,8 +275,8 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					</div>
 					<div
 						style={{
-							width: '34%',
-							padding: '0px 10px',
+							width: '44%',
+							padding: '0 0 0 10px',
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between'
@@ -284,10 +284,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					>
 						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<span className="px-topleft">
-								<b>{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '-'}</b>
+								<b>{bBestBid ? '$' + util.formatPriceShort(bBestBid) : '$1.234'}</b>
 							</span>
 							<span className="px-buttomright">
-								<b>{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '-'}</b>
+								<b>{bBestAsk ? '$' + util.formatPriceShort(bBestAsk) : '$1.234'}</b>
 							</span>
 						</div>
 						<SButton onClick={() => handleTrade(bCode)} disable={!isTrading}>
