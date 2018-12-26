@@ -3,11 +3,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import * as relayerActions from './actions/relayerActions';
 import * as web3Actions from './actions/web3Actions';
-import * as wsActions from './actions/wsActions';
+import relayerClient from './common/relayerClient';
 import util from './common/util';
 import web3Util from './common/web3Util';
-import wsUtil from './common/wsUtil';
 import Israfel from './containers/IsrafelContainer';
 import store from './store/store';
 
@@ -25,16 +25,16 @@ web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
 store.dispatch(web3Actions.refresh());
 setInterval(() => store.dispatch(web3Actions.refresh()), 10000);
 
-wsUtil.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
-	store.dispatch(wsActions.infoUpdate(tokens, status, acceptedPrices, exchangePrices));
+relayerClient.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
+	store.dispatch(relayerActions.infoUpdate(tokens, status, acceptedPrices, exchangePrices));
 	store.dispatch(web3Actions.refresh());
 });
-wsUtil.onOrder(
-	userOrders => store.dispatch(wsActions.orderHistoryUpdate(userOrders)),
+relayerClient.onOrder(
+	userOrders => store.dispatch(relayerActions.orderHistoryUpdate(userOrders)),
 	userOrder => {
-		store.dispatch(wsActions.orderUpdate(userOrder));
+		store.dispatch(relayerActions.orderUpdate(userOrder));
 		store.dispatch(
-			wsActions.notificationUpdate({
+			relayerActions.notificationUpdate({
 				level: 'info',
 				title: util.getOrderTitle(userOrder),
 				message: util.getOrderDescription(userOrder),
@@ -44,7 +44,7 @@ wsUtil.onOrder(
 	},
 	(method, orderHash, error) =>
 		store.dispatch(
-			wsActions.notificationUpdate({
+			relayerActions.notificationUpdate({
 				level: 'error',
 				title: method + orderHash,
 				message: error,
@@ -52,12 +52,12 @@ wsUtil.onOrder(
 			})
 		)
 );
-wsUtil.onOrderBook(
-	orderBookSnapshot => store.dispatch(wsActions.orderBookSnapshotUpdate(orderBookSnapshot)),
-	orderBookUpdate => store.dispatch(wsActions.orderBookUpdate(orderBookUpdate)),
+relayerClient.onOrderBook(
+	orderBookSnapshot => store.dispatch(relayerActions.orderBookSnapshotUpdate(orderBookSnapshot)),
+	orderBookUpdate => store.dispatch(relayerActions.orderBookUpdate(orderBookUpdate)),
 	(method, pair, error) =>
 		store.dispatch(
-			wsActions.notificationUpdate({
+			relayerActions.notificationUpdate({
 				level: 'error',
 				title: method + pair,
 				message: error,
@@ -66,12 +66,12 @@ wsUtil.onOrderBook(
 		)
 );
 
-wsUtil.onConnection(
-	() => store.dispatch(wsActions.connectionUpdate(true)),
-	() => store.dispatch(wsActions.connectionUpdate(false))
+relayerClient.onConnection(
+	() => store.dispatch(relayerActions.connectionUpdate(true)),
+	() => store.dispatch(relayerActions.connectionUpdate(false))
 );
 
-wsUtil.connectToRelayer();
+relayerClient.connectToRelayer();
 if ((window as any).ethereum) (window as any).ethereum.enable();
 ReactDOM.render(
 	<Provider store={store}>

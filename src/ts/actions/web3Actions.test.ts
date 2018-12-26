@@ -82,7 +82,7 @@ describe('actions', () => {
 			web3: {
 				account: CST.DUMMY_ADDR
 			},
-			ws: {
+			relayer: {
 				tokens: [
 					{
 						custodian: 'custodian',
@@ -116,7 +116,7 @@ describe('actions', () => {
 			web3: {
 				account: '0xAccount'
 			},
-			ws: {
+			relayer: {
 				tokens: [
 					{
 						custodian: 'custodian',
@@ -150,7 +150,7 @@ describe('actions', () => {
 			web3: {
 				account: '0xAccount'
 			},
-			ws: {
+			relayer: {
 				tokens: [
 					{
 						custodian: 'custodian',

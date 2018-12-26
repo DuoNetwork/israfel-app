@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as CST from 'ts/common/constants';
-import wsUtil from 'ts/common/wsUtil';
-import * as wsActions from './wsActions';
+import relayerClient from 'ts/common/relayerClient';
+import * as wsActions from './relayerActions';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -48,12 +48,12 @@ describe('actions', () => {
 
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
-		wsUtil.subscribeOrderHistory = jest.fn();
+		relayerClient.subscribeOrderHistory = jest.fn();
 		store.dispatch(wsActions.subscribeOrder(CST.DUMMY_ADDR));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
-				expect(wsUtil.subscribeOrderHistory as jest.Mock).not.toBeCalled();
+				expect(relayerClient.subscribeOrderHistory as jest.Mock).not.toBeCalled();
 				resolve();
 			}, 0)
 		);
@@ -61,12 +61,14 @@ describe('actions', () => {
 
 	test('subscribeOrder', () => {
 		const store: any = mockStore({});
-		wsUtil.subscribeOrderHistory = jest.fn();
+		relayerClient.subscribeOrderHistory = jest.fn();
 		store.dispatch(wsActions.subscribeOrder('account'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
-				expect((wsUtil.subscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
+				expect(
+					(relayerClient.subscribeOrderHistory as jest.Mock).mock.calls
+				).toMatchSnapshot();
 				resolve();
 			}, 0)
 		);

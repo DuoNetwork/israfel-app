@@ -56,7 +56,7 @@ export function custodianUpdate(custodian: string, code: string, states: IDualCl
 export function getCustodianBalances(): VoidThunkAction {
 	return (dispatch, getState) => {
 		const account = getState().web3.account;
-		const tokens = getState().ws.tokens;
+		const tokens = getState().relayer.tokens;
 		const processedCustodian: { [custodian: string]: boolean } = {};
 		if (account !== CST.DUMMY_ADDR)
 			Promise.all([

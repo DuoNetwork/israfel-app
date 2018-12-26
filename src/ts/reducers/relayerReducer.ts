@@ -1,16 +1,16 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
 import {
 	IOrderBookSnapshot,
 	IOrderBookSnapshotUpdate,
+	IRelayerState,
 	IToken,
-	IUserOrder,
-	IWsState
+	IUserOrder
 } from 'ts/common/types';
-import wsUtil from 'ts/common/wsUtil';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 
-export const initialState: IWsState = {
+export const initialState: IRelayerState = {
 	connection: false,
 	tokens: [],
 	status: [],
@@ -27,7 +27,10 @@ export const initialState: IWsState = {
 	}
 };
 
-export function wsReducer(state: IWsState = initialState, action: AnyAction): IWsState {
+export function relayerReducer(
+	state: IRelayerState = initialState,
+	action: AnyAction
+): IRelayerState {
 	switch (action.type) {
 		case CST.AC_CONNECTION:
 			return Object.assign({}, state, {
@@ -41,11 +44,11 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 			if (JSON.stringify(newCodes) !== JSON.stringify(oldCodes)) {
 				oldCodes.forEach(code => {
 					if (!newCodes.includes(code))
-						wsUtil.unsubscribeOrderBook(code + '|' + CST.TH_WETH);
+						relayerClient.unsubscribeOrderBook(code + '|' + CST.TH_WETH);
 				});
 				newCodes.forEach(code => {
 					if (!oldCodes.includes(code))
-						wsUtil.subscribeOrderBook(code + '|' + CST.TH_WETH);
+						relayerClient.subscribeOrderBook(code + '|' + CST.TH_WETH);
 				});
 			}
 			return Object.assign({}, state, {
@@ -123,7 +126,7 @@ export function wsReducer(state: IWsState = initialState, action: AnyAction): IW
 			else {
 				const { orderHistory, orderSubscription, ...restOrder } = state;
 				if (orderSubscription && orderSubscription !== CST.DUMMY_ADDR)
-					wsUtil.unsubscribeOrderHistory(orderSubscription);
+					relayerClient.unsubscribeOrderHistory(orderSubscription);
 
 				return {
 					...restOrder,

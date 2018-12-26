@@ -1,18 +1,18 @@
 import * as CST from 'ts/common/constants';
-import wsUtil from 'ts/common/wsUtil';
+import relayerClient from 'ts/common/relayerClient';
 import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
-import { initialState, wsReducer } from './wsReducer';
+import { initialState, relayerReducer } from './relayerReducer';
 
-describe('ws reducer', () => {
+describe('relayer reducer', () => {
 	let state = initialState;
 
 	test('default', () => {
-		state = wsReducer(state, { type: 'any' });
+		state = relayerReducer(state, { type: 'any' });
 		expect(state).toMatchSnapshot();
 	});
 
 	test('connection', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_CONNECTION,
 			value: true
 		});
@@ -20,9 +20,9 @@ describe('ws reducer', () => {
 	});
 
 	test('info', () => {
-		wsUtil.subscribeOrderBook = jest.fn();
-		wsUtil.unsubscribeOrderBook = jest.fn();
-		state = wsReducer(state, {
+		relayerClient.subscribeOrderBook = jest.fn();
+		relayerClient.unsubscribeOrderBook = jest.fn();
+		state = relayerReducer(state, {
 			type: CST.AC_INFO,
 			tokens: [
 				{
@@ -37,14 +37,14 @@ describe('ws reducer', () => {
 			exchangePrices: { source: ['exchangePrices'] }
 		});
 		expect(state).toMatchSnapshot();
-		expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-		expect(wsUtil.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
+		expect((relayerClient.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect(relayerClient.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
 	});
 
 	test('info overlapping tokens', () => {
-		wsUtil.subscribeOrderBook = jest.fn();
-		wsUtil.unsubscribeOrderBook = jest.fn();
-		state = wsReducer(state, {
+		relayerClient.subscribeOrderBook = jest.fn();
+		relayerClient.unsubscribeOrderBook = jest.fn();
+		state = relayerReducer(state, {
 			type: CST.AC_INFO,
 			tokens: [
 				{
@@ -59,12 +59,12 @@ describe('ws reducer', () => {
 			exchangePrices: { source: ['exchangePrices'] }
 		});
 		expect(state).toMatchSnapshot();
-		expect((wsUtil.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
-		expect((wsUtil.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderBookSnapshot', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_OB_SNAPSHOT,
 			value: {
 				pair: 'pair',
@@ -77,7 +77,7 @@ describe('ws reducer', () => {
 	});
 
 	test('orderBookSnapshot different pair', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_OB_SNAPSHOT,
 			value: {
 				pair: 'test'
@@ -91,7 +91,7 @@ describe('ws reducer', () => {
 			pair: 'pair',
 			version: 1234567890
 		}));
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_OB_UPDATE,
 			value: {
 				pair: 'pair'
@@ -103,7 +103,7 @@ describe('ws reducer', () => {
 
 	test('orderBookUpdate pair without snapshot', () => {
 		orderBookUtil.updateOrderBookSnapshot = jest.fn();
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_OB_UPDATE,
 			value: {
 				pair: 'test1'
@@ -114,7 +114,7 @@ describe('ws reducer', () => {
 	});
 
 	test('orderSubscription on', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: 'account'
 		});
@@ -122,7 +122,7 @@ describe('ws reducer', () => {
 	});
 
 	test('orderHistory empty', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_HISTORY,
 			value: []
 		});
@@ -130,7 +130,7 @@ describe('ws reducer', () => {
 	});
 
 	test('orderHistory', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_HISTORY,
 			value: [
 				{
@@ -154,7 +154,7 @@ describe('ws reducer', () => {
 	});
 
 	test('order', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER,
 			value: { userOrder: 'from single order', pair: 'pair1', currentSequence: 456 }
 		});
@@ -162,7 +162,7 @@ describe('ws reducer', () => {
 	});
 
 	test('order new pair', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER,
 			value: { userOrder: 'from single order', pair: 'pair3', currentSequence: 999 }
 		});
@@ -170,27 +170,27 @@ describe('ws reducer', () => {
 	});
 
 	test('orderSubscription off', () => {
-		wsUtil.unsubscribeOrderHistory = jest.fn();
-		state = wsReducer(state, {
+		relayerClient.unsubscribeOrderHistory = jest.fn();
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''
 		});
 		expect(state).toMatchSnapshot();
-		expect((wsUtil.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.unsubscribeOrderHistory as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderSubscription again', () => {
-		wsUtil.unsubscribeOrderHistory = jest.fn();
-		state = wsReducer(state, {
+		relayerClient.unsubscribeOrderHistory = jest.fn();
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''
 		});
 		expect(state).toMatchSnapshot();
-		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
+		expect(relayerClient.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
 	});
 
 	test('orderSubscription dummy', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: CST.DUMMY_ADDR
 		});
@@ -198,17 +198,17 @@ describe('ws reducer', () => {
 	});
 
 	test('orderSubscription dummy off', () => {
-		wsUtil.unsubscribeOrderHistory = jest.fn();
-		state = wsReducer(state, {
+		relayerClient.unsubscribeOrderHistory = jest.fn();
+		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
 			account: ''
 		});
 		expect(state).toMatchSnapshot();
-		expect(wsUtil.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
+		expect(relayerClient.unsubscribeOrderHistory as jest.Mock).not.toBeCalled();
 	});
 
 	test('notification', () => {
-		state = wsReducer(state, {
+		state = relayerReducer(state, {
 			type: CST.AC_NOTIFICATION,
 			value: {
 				level: 'level',

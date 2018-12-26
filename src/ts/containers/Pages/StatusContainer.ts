@@ -4,7 +4,7 @@ import Status from 'ts/components/Pages/Status';
 
 function mapStateToProps(state: IState) {
 	return {
-		status: state.ws.status
+		status: state.relayer.status
 	};
 }
 

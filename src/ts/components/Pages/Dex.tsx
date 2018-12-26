@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import {
 	IAcceptedPrice,
 	ICustodianInfo,
@@ -11,7 +12,6 @@ import {
 	ITokenBalance,
 	IUserOrder
 } from 'ts/common/types';
-import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -122,14 +122,12 @@ export default class Dex extends React.Component<IProps, IState> {
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
 		const tokenInterestOrLeverage =
-			tradeTokenInfo &&
-			acceptedPrices[tradeTokenInfo.custodian] &&
-			acceptedPrices[tradeTokenInfo.custodian].length
-				? util.getTokenInterestOrLeverage(
-						custodians[tradeTokenInfo.custodian],
-						acceptedPrices[tradeTokenInfo.custodian][
-							acceptedPrices[tradeTokenInfo.custodian].length - 1
-						],
+			tradeTokenInfo && custodians[tradeTokenInfo.custodian]
+				? getTokenInterestOrLeverage(
+						custodians[tradeTokenInfo.custodian].states,
+						custodians[tradeTokenInfo.custodian].code.startsWith(
+							CST.BEETHOVEN.toUpperCase()
+						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
 				)
 				: 0;

@@ -8,9 +8,9 @@ import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
 export interface IState {
+	readonly relayer: IRelayerState;
 	readonly ui: IUIState;
 	readonly web3: IWeb3State;
-	readonly ws: IWsState;
 }
 
 export interface IUIState {
@@ -31,7 +31,7 @@ export interface IWeb3State {
 	};
 }
 
-export interface IWsState {
+export interface IRelayerState {
 	readonly connection: boolean;
 	readonly tokens: relayerTypes.IToken[];
 	readonly status: relayerTypes.IStatus[];

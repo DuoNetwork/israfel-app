@@ -8,9 +8,9 @@ import Header from 'ts/components/Header';
 
 function mapStateToProps(state: IState) {
 	const exchangePrices: { [source: string]: number } = {};
-	for (const source in state.ws.exchangePrices)
-		if (state.ws.exchangePrices[source].length)
-			exchangePrices[source] = state.ws.exchangePrices[source][0].close;
+	for (const source in state.relayer.exchangePrices)
+		if (state.relayer.exchangePrices[source].length)
+			exchangePrices[source] = state.relayer.exchangePrices[source][0].close;
 
 	return {
 		locale: state.ui.locale,

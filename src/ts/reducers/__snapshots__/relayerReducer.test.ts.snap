@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ws reducer connection 1`] = `
+exports[`relayer reducer connection 1`] = `
 Object {
   "acceptedPrices": Object {},
   "connection": true,
@@ -19,7 +19,7 @@ Object {
 }
 `;
 
-exports[`ws reducer default 1`] = `
+exports[`relayer reducer default 1`] = `
 Object {
   "acceptedPrices": Object {},
   "connection": false,
@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`ws reducer info 1`] = `
+exports[`relayer reducer info 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -74,7 +74,7 @@ Object {
 }
 `;
 
-exports[`ws reducer info 2`] = `
+exports[`relayer reducer info 2`] = `
 Array [
   Array [
     "token1|WETH",
@@ -85,7 +85,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer info overlapping tokens 1`] = `
+exports[`relayer reducer info overlapping tokens 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -121,7 +121,7 @@ Object {
 }
 `;
 
-exports[`ws reducer info overlapping tokens 2`] = `
+exports[`relayer reducer info overlapping tokens 2`] = `
 Array [
   Array [
     "token3|WETH",
@@ -129,7 +129,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer info overlapping tokens 3`] = `
+exports[`relayer reducer info overlapping tokens 3`] = `
 Array [
   Array [
     "token1|WETH",
@@ -137,7 +137,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer notification 1`] = `
+exports[`relayer reducer notification 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -187,7 +187,7 @@ Object {
 }
 `;
 
-exports[`ws reducer order 1`] = `
+exports[`relayer reducer order 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -257,7 +257,7 @@ Object {
 }
 `;
 
-exports[`ws reducer order new pair 1`] = `
+exports[`relayer reducer order new pair 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -334,7 +334,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderBookSnapshot 1`] = `
+exports[`relayer reducer orderBookSnapshot 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -381,57 +381,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderBookSnapshot different pair 1`] = `
-Object {
-  "acceptedPrices": Object {
-    "custodian": Array [
-      "acceptedPrices",
-    ],
-  },
-  "connection": true,
-  "exchangePrices": Object {
-    "source": Array [
-      "exchangePrices",
-    ],
-  },
-  "notification": Object {
-    "level": "",
-    "message": "",
-    "title": "",
-    "transactionHash": "",
-  },
-  "orderBookSnapshot": Object {
-    "pair": Object {
-      "asks": Array [
-        2,
-      ],
-      "bids": Array [
-        1,
-      ],
-      "pair": "pair",
-      "version": 123,
-    },
-    "test": Object {
-      "pair": "test",
-    },
-  },
-  "orderHistory": Object {},
-  "orderSubscription": "",
-  "status": Array [
-    "status1",
-  ],
-  "tokens": Array [
-    Object {
-      "code": "token2",
-    },
-    Object {
-      "code": "token3",
-    },
-  ],
-}
-`;
-
-exports[`ws reducer orderBookUpdate 1`] = `
+exports[`relayer reducer orderBookSnapshot different pair 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -481,7 +431,57 @@ Object {
 }
 `;
 
-exports[`ws reducer orderBookUpdate 2`] = `
+exports[`relayer reducer orderBookUpdate 1`] = `
+Object {
+  "acceptedPrices": Object {
+    "custodian": Array [
+      "acceptedPrices",
+    ],
+  },
+  "connection": true,
+  "exchangePrices": Object {
+    "source": Array [
+      "exchangePrices",
+    ],
+  },
+  "notification": Object {
+    "level": "",
+    "message": "",
+    "title": "",
+    "transactionHash": "",
+  },
+  "orderBookSnapshot": Object {
+    "pair": Object {
+      "asks": Array [
+        2,
+      ],
+      "bids": Array [
+        1,
+      ],
+      "pair": "pair",
+      "version": 123,
+    },
+    "test": Object {
+      "pair": "test",
+    },
+  },
+  "orderHistory": Object {},
+  "orderSubscription": "",
+  "status": Array [
+    "status1",
+  ],
+  "tokens": Array [
+    Object {
+      "code": "token2",
+    },
+    Object {
+      "code": "token3",
+    },
+  ],
+}
+`;
+
+exports[`relayer reducer orderBookUpdate 2`] = `
 Array [
   Array [
     Object {
@@ -501,7 +501,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer orderBookUpdate pair without snapshot 1`] = `
+exports[`relayer reducer orderBookUpdate pair without snapshot 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -551,7 +551,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderHistory 1`] = `
+exports[`relayer reducer orderHistory 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -621,7 +621,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderHistory empty 1`] = `
+exports[`relayer reducer orderHistory empty 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -671,7 +671,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderSubscription again 1`] = `
+exports[`relayer reducer orderSubscription again 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -721,7 +721,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderSubscription dummy 1`] = `
+exports[`relayer reducer orderSubscription dummy 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -771,7 +771,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderSubscription dummy off 1`] = `
+exports[`relayer reducer orderSubscription dummy off 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -821,7 +821,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderSubscription off 1`] = `
+exports[`relayer reducer orderSubscription off 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [
@@ -871,7 +871,7 @@ Object {
 }
 `;
 
-exports[`ws reducer orderSubscription off 2`] = `
+exports[`relayer reducer orderSubscription off 2`] = `
 Array [
   Array [
     "account",
@@ -879,7 +879,7 @@ Array [
 ]
 `;
 
-exports[`ws reducer orderSubscription on 1`] = `
+exports[`relayer reducer orderSubscription on 1`] = `
 Object {
   "acceptedPrices": Object {
     "custodian": Array [

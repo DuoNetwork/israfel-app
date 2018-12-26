@@ -4,6 +4,7 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
 import { ColorStyles } from 'ts/common/styles';
 import {
 	IEthBalance,
@@ -13,7 +14,6 @@ import {
 	ITokenBalance
 } from 'ts/common/types';
 import util from 'ts/common/util';
-import wsUtil from 'ts/common/wsUtil';
 import web3Util from '../../common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
@@ -369,7 +369,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			this.setState({
 				submitting: true
 			});
-			await wsUtil.addOrder(
+			await relayerClient.addOrder(
 				account,
 				token + '|' + CST.TH_WETH,
 				Number(price),

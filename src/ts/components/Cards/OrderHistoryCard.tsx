@@ -3,10 +3,10 @@ import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
 import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
-import wsUtil from 'ts/common/wsUtil';
 import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
@@ -92,7 +92,11 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 								web3Util
 									.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash)
 									.then(result =>
-										wsUtil.deleteOrder(lastVersion.pair, orderHash, result)
+										relayerClient.deleteOrder(
+											lastVersion.pair,
+											orderHash,
+											result
+										)
 									)
 							}
 						>
@@ -115,18 +119,27 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 					>
 						<div
 							className="switch-button"
-							style={{ borderLeft: 'none', opacity: !showHistory ? 1 : 0.5, marginLeft: 0, paddingLeft: 0 }}
+							style={{
+								borderLeft: 'none',
+								opacity: !showHistory ? 1 : 0.5,
+								marginLeft: 0,
+								paddingLeft: 0
+							}}
 						>
-							{('Open ' + CST.TH_ORDERS)}
+							{'Open ' + CST.TH_ORDERS}
 						</div>
 						<div className="switch-button" style={{ opacity: showHistory ? 1 : 0.5 }}>
-							{('Past ' + CST.TH_ORDERS)}
+							{'Past ' + CST.TH_ORDERS}
 						</div>
 					</div>
 				}
 				width="740px"
 				margin="0 10px 50px 10px"
-				extra={<SButton className='export-button' onClick={this.handleExport}>Export to CSV</SButton>}
+				extra={
+					<SButton className="export-button" onClick={this.handleExport}>
+						Export to CSV
+					</SButton>
+				}
 			>
 				<STableWrapper>
 					<Table

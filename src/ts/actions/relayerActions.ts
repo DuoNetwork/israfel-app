@@ -1,4 +1,5 @@
 import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
 import {
 	IAcceptedPrice,
 	INotification,
@@ -10,7 +11,6 @@ import {
 	IUserOrder,
 	VoidThunkAction
 } from 'ts/common/types';
-import wsUtil from 'ts/common/wsUtil';
 
 export function connectionUpdate(connected: boolean) {
 	return {
@@ -89,7 +89,7 @@ export function subscribeOrder(account: string): VoidThunkAction {
 		dispatch(orderSubscriptionUpdate(''));
 		if (account && account !== CST.DUMMY_ADDR) {
 			dispatch(orderSubscriptionUpdate(account));
-			wsUtil.subscribeOrderHistory(account);
+			relayerClient.subscribeOrderHistory(account);
 		}
 	};
 }

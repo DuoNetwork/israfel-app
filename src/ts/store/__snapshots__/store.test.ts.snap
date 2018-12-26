@@ -2,21 +2,7 @@
 
 exports[`store actions 1`] = `
 Object {
-  "ui": Object {
-    "locale": "EN",
-  },
-  "web3": Object {
-    "account": "0x0000000000000000000000000000000000000000",
-    "custodianTokenBalances": Object {},
-    "custodians": Object {},
-    "ethBalance": Object {
-      "allowance": 0,
-      "eth": 0,
-      "weth": 0,
-    },
-    "network": 0,
-  },
-  "ws": Object {
+  "relayer": Object {
     "acceptedPrices": Object {},
     "connection": false,
     "exchangePrices": Object {},
@@ -31,6 +17,20 @@ Object {
     "orderSubscription": "",
     "status": Array [],
     "tokens": Array [],
+  },
+  "ui": Object {
+    "locale": "EN",
+  },
+  "web3": Object {
+    "account": "0x0000000000000000000000000000000000000000",
+    "custodianTokenBalances": Object {},
+    "custodians": Object {},
+    "ethBalance": Object {
+      "allowance": 0,
+      "eth": 0,
+      "weth": 0,
+    },
+    "network": 0,
   },
 }
 `;

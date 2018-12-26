@@ -5,7 +5,7 @@ import Israfel from 'ts/components/Israfel';
 
 function mapStateToProps(state: IState) {
 	return {
-		tokens: state.ws.tokens
+		tokens: state.relayer.tokens
 	};
 }
 
