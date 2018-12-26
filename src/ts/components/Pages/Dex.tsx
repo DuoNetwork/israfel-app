@@ -174,7 +174,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							);
 						})}
 						{Array.from(Array(Math.max(0, 2 - beethovenList.length)).keys()).map(a => (
-							<DummyCustodianCard key={a} margin="0 10px" />
+							<DummyCustodianCard key={a} type={CST.BEETHOVEN} margin="0 10px" />
 						))}
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal marginBottom="20px">
@@ -202,7 +202,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							);
 						})}
 						{Array.from(Array(Math.max(0, 2 - mozartList.length)).keys()).map(a => (
-							<DummyCustodianCard key={a} margin="0 10px" />
+							<DummyCustodianCard key={a} type={CST.MOZART} margin="0 10px" />
 						))}
 					</SDivFlexCenter>{' '}
 					<OrderHistoryCard orderHistory={orderHistory} account={account} />
