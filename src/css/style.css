@@ -220,11 +220,11 @@ svg {
 
 .pop-up-convert {
 	background: rgba(255, 255, 255, 0.8);
-    position: fixed;
-    top: 460px;
-    width: 100%;
-    height: 170px;
-    z-index: 10;
+	position: fixed;
+	top: 4650px;
+	width: 100%;
+	height: 100px;
+	z-index: 10;
 }
 
 .popup-card {

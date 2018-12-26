@@ -414,7 +414,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
@@ -585,7 +585,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											</div>
 											<div className="tabletitle2">{aToken}</div>
 											<div className="tabletitle2">{bToken}</div>
-											<div className="tabletitle2" style={{width: '20%'}}>
+											<div className="tabletitle2" style={{ width: '20%' }}>
 												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
 											</div>
 										</li>
@@ -615,7 +615,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 														: 0
 												)}
 											</div>
-											<div className="tablecontent2" style={{width: '20%'}}>
+											<div className="tablecontent2" style={{ width: '20%' }}>
 												{util.formatBalance(
 													wethCreate ? ethBalance.weth : ethBalance.eth
 												)}
@@ -748,15 +748,15 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											<div
 												className="pop-up-convert"
 												style={{
-													top: infoExpand ? '568px' : '440px'
+													top: infoExpand ? '620px' : '500px'
 												}}
 											>
 												<li
 													style={{
 														position: 'fixed',
-														top: infoExpand ? '588px' : '460px',
+														top: infoExpand ? '628px' : '500px',
 														width: '100%',
-														padding: '0 100px'
+														padding: '0 100px',
 													}}
 												>
 													<SButton onClick={this.handleWETHApprove}>
