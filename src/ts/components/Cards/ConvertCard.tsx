@@ -4,7 +4,7 @@ import help from 'images/icons/help.svg';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { duoWeb3Wrapper, getDualClassWrapper } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper, getDualClassWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import web3Util from 'ts/common/web3Util';
@@ -64,12 +64,6 @@ const marks = {
 	}
 };
 
-const getBTokenPerETH = (info?: ICustodianInfo) =>
-	info ? (info.states.resetPrice * info.states.beta) / (1 + info.states.alpha) : 0;
-
-const getATokenPerETH = (bTokenPerETH: number, info?: ICustodianInfo) =>
-	info ? bTokenPerETH * info.states.alpha : 0;
-
 const getDescription = (
 	wethCreate: boolean,
 	isCreate: boolean,
@@ -83,14 +77,13 @@ const getDescription = (
 		return isCreate
 			? `Create ${aToken} and ${bToken} with ${ethCode}`
 			: `Redeem ETH from ${aToken} and ${bToken}`;
-	const bTokenPerETH = getBTokenPerETH(info);
-	const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
+	const [aTokenPerEth, bTokenPerEth] = info ? getTokensPerEth(info.states) : [0, 0];
 
-	const ethNum = isCreate ? amount : amount / aTokenPerETH;
+	const ethNum = isCreate ? amount : amount / aTokenPerEth;
 	const feeNum = ethNum * (isCreate ? info.states.createCommRate : info.states.redeemCommRate);
 	const ethAfterFeeNum = ethNum - feeNum;
-	const aTokenAmt = util.formatBalance(ethAfterFeeNum * aTokenPerETH);
-	const bTokenAmt = util.formatBalance(ethAfterFeeNum * bTokenPerETH);
+	const aTokenAmt = util.formatBalance(ethAfterFeeNum * aTokenPerEth);
+	const bTokenAmt = util.formatBalance(ethAfterFeeNum * bTokenPerEth);
 	const feeAmt = util.formatBalance(feeNum);
 	const ethAmt = util.formatBalance(ethAfterFeeNum);
 
@@ -359,11 +352,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			<span>
 				{` ${props.aToken} provides a fixed stream of `}
 				<span className="aspan" style={{ fontSize: 12 }}>
-					INCOME
+					{CST.TH_INCOME.toUpperCase()}
 				</span>
 				{` and ${props.bToken} provides `}
 				<span className="aspan" style={{ fontSize: 12 }}>
-					LEVERAGE
+					{CST.TH_LEVERAGE.toUpperCase()}
 				</span>
 				{` return.`}
 			</span>
@@ -371,11 +364,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			<span>
 				{` ${props.aToken} represents `}
 				<span className="aspan" style={{ fontSize: 12 }}>
-					SHORT
+					{CST.TH_SHORT.toUpperCase()}
 				</span>
 				{` positions and ${props.bToken} represents margin `}
 				<span className="aspan" style={{ fontSize: 12 }}>
-					LONG
+					{CST.TH_LONG.toUpperCase()}
 				</span>
 				{` positions.`}
 			</span>
@@ -404,8 +397,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			sliderValue,
 			sliderWETH
 		} = this.state;
-		const bTokenPerETH = getBTokenPerETH(info);
-		const aTokenPerETH = getATokenPerETH(bTokenPerETH, info);
+		const [aTokenPerEth, bTokenPerEth] = info ? getTokensPerEth(info.states) : [0, 0];
 		const limit = isCreate
 			? wethCreate
 				? ethBalance.weth
@@ -475,10 +467,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								<li style={{ padding: '5px 15px', justifyContent: 'center' }}>
 									<span className="content">{`1 ${
 										CST.TH_ETH
-									} = ${util.formatNumber(aTokenPerETH)} ${aToken.substring(
+									} = ${util.formatNumber(aTokenPerEth)} ${aToken.substring(
 										0,
 										1
-									)} + ${util.formatNumber(bTokenPerETH)} ${bToken.substring(
+									)} + ${util.formatNumber(bTokenPerEth)} ${bToken.substring(
 										0,
 										1
 									)}`}</span>
@@ -581,7 +573,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												className="tabletitle"
 												style={{ textAlign: 'left', width: '20%' }}
 											>
-												Token
+												{CST.TH_TOKEN}
 											</div>
 											<div className="tabletitle2">{aToken}</div>
 											<div className="tabletitle2">{bToken}</div>
@@ -599,7 +591,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												className="tabletitle"
 												style={{ textAlign: 'left', width: '20%' }}
 											>
-												Balance
+												{CST.TH_BALANCE}
 											</div>
 											<div className="tablecontent2">
 												{util.formatBalance(
@@ -756,7 +748,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 														position: 'fixed',
 														top: infoExpand ? '658px' : '530px',
 														width: '100%',
-														padding: '0 100px',
+														padding: '0 100px'
 													}}
 												>
 													<SButton onClick={this.handleWETHApprove}>

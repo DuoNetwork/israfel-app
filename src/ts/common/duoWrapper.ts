@@ -23,3 +23,5 @@ export const getDualClassWrapper = (custodian: string) => {
 		dualClassWrappers[custodian] = new DualClassWrapper(duoWeb3Wrapper, custodian);
 	return dualClassWrappers[custodian];
 };
+
+export const getTokensPerEth = DualClassWrapper.getTokensPerEth;

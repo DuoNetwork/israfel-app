@@ -104,6 +104,11 @@ export const TH_TX_HASH = 'Transaction Hash';
 export const TH_VERSION = 'Version';
 export const TH_TIME_UTC = 'Time(UTC)';
 export const TH_EXPIRY_UTC = 'Expiry(UTC)';
+export const TH_INCOME = 'Income';
+export const TH_LEVERAGE = 'Leverage';
+export const TH_SHORT = 'Short';
+export const TH_LONG = 'Long';
+export const TH_TOKEN = 'Token';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
