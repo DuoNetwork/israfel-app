@@ -73,6 +73,11 @@ jobs:
             - run:
                 name: test
                 command: npm test -- -w 1 --forceExit
+            - run:
+                name: coverage
+                command: npm test -- --coverage
+            - store_test_results:
+                path: /coverage/lcov-report/index.html
 workflows:
     version: 2
     build_and_test:
