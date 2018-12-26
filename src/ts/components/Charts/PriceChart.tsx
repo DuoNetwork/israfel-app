@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import * as React from 'react';
-import { ColorStyles } from 'ts/common/styles';
+//import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import util from '../../common/util';
 
@@ -15,12 +15,12 @@ function drawLines(
 	name: string,
 	isA: boolean
 ) {
-	if (sourceData.length === 0) {
-		d3.selectAll('.loading' + name).remove();
+	if (!sourceData.length) {
+		d3.selectAll('.loading').remove();
 		d3.select(el)
 			.append('div')
 			.attr('class', 'loading')
-			.html('<span style="color: black">loading...</span>');
+			.html('<span>Loading...</span>');
 		return;
 	}
 	const now = util.getUTCNowTimestamp();
@@ -52,7 +52,8 @@ function drawLines(
 		.append('g')
 		.attr('class', 'graph-area' + name)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	const defs = chart.append('defs');
+	const defs = chart
+		.append('defs')
 	defs.append('clipPath')
 		.attr('id', 'clip' + name)
 		.append('rect')
@@ -60,8 +61,7 @@ function drawLines(
 		.attr('y', 0)
 		.attr('width', width - 1)
 		.attr('height', height);
-	const grad = defs
-		.append('linearGradient')
+	const grad = defs.append('linearGradient')
 		.attr('id', 'gradfill')
 		.attr('x1', '0%')
 		.attr('y1', '0%')
@@ -79,21 +79,13 @@ function drawLines(
 		.append('g')
 		.attr('class', 'chart-data' + name)
 		.attr('clip-path', `url(#${'clip' + name})`);
-	const background = d3
-		.area<any>()
-		.x(d => {
-			return xScale(d.timestamp);
-		})
-		.y0(0)
-		.y1(d => {
-			return ethYScale(isA ? d.navA : d.navB);
-		});
+	const startValue = isA ? source[0].navA : source[0].navB;
 	const area = d3
 		.area<any>()
 		.x(d => {
 			return xScale(d.timestamp);
 		})
-		.y0(height)
+		.y0(ethYScale(startValue))
 		.y1(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
@@ -105,7 +97,6 @@ function drawLines(
 		.y(d => {
 			return ethYScale(isA ? d.navA : d.navB);
 		});
-
 	const ohlc = chartdata.append('g').attr('class', 'ohlc' + name);
 	ohlc.selectAll('g')
 		.data(source)
@@ -114,16 +105,10 @@ function drawLines(
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-		.attr('class', 'background')
-		.attr('d', background)
-		.attr('fill', 'rgba(245,247,248,1)');
-	svg.append('path')
-		.datum(source)
-		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('fill', 'none')
 		.attr('class', 'area')
 		.attr('d', area)
-		.attr('fill', ColorStyles.MainColorShadow);
+		.attr('fill', 'rgb(100,100,100)');
 	svg.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
@@ -132,8 +117,22 @@ function drawLines(
 		.attr('fill', 'none')
 		.attr('stroke-linejoin', 'round')
 		.attr('stroke-linecap', 'round')
-		.attr('stroke', ColorStyles.MainColor)
+		.attr('stroke', 'rgb(0,0,0)')
 		.attr('stroke-width', 1.5);
+	svg.append('rect')
+		.attr('x', -1)
+		.attr('y', 0)
+		.attr('width', width + 2)
+		.attr('height', ethYScale(startValue))
+		.style('fill', 'rgb(97, 206, 94)')
+		.style('mix-blend-mode', 'screen');
+	svg.append('rect')
+		.attr('x', -1)
+		.attr('y', ethYScale(startValue))
+		.attr('width', width + 2)
+		.attr('height', height - ethYScale(startValue))
+		.style('fill', 'rgb(245, 83, 83)')
+		.style('mix-blend-mode', 'screen');
 }
 
 interface IProps {
