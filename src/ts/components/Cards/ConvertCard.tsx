@@ -414,7 +414,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
