@@ -754,7 +754,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												<li
 													style={{
 														position: 'fixed',
-														top: infoExpand ? '628px' : '500px',
+														top: infoExpand ? '658px' : '530px',
 														width: '100%',
 														padding: '0 100px',
 													}}
