@@ -352,7 +352,7 @@ svg {
     transform: rotate(20deg);
 }
 .bid-span {
-	color: #9AC370 !important;
+	color: rgb(97, 206, 94) !important;
 }
 .ask-span {
 	color: #F55E5E !important;
