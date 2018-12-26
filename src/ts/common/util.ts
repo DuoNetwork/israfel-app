@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import moment from 'moment';
 import relayerUtil from '../../../../israfel-relayer/src/utils/util';
 import * as CST from './constants';
-import { IAcceptedPrice, ICustodianInfo, IUserOrder } from './types';
+import { ICustodianInfo, IUserOrder } from './types';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
@@ -148,23 +148,6 @@ class Util {
 			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset';
 			else if (order.status === CST.DB_FILL) return 'Fully filled';
 		return 'Invalid order';
-	}
-
-	public getTokenInterestOrLeverage(
-		info: ICustodianInfo,
-		lastAcceptedPrice: IAcceptedPrice,
-		isA: boolean
-	) {
-		const contractCode = info.code.split('-')[0];
-		const isBeethoven = contractCode === CST.BEETHOVEN.toUpperCase();
-		if (isA && isBeethoven)
-			return (info.states.periodCoupon * 365 * 24 * 3600000) / (info.states.period || 1);
-		if (isA && !isBeethoven) return (lastAcceptedPrice.navA - 2) / lastAcceptedPrice.navA;
-
-		return (
-			((isBeethoven ? 1 : 2) * info.states.alpha + lastAcceptedPrice.navB) /
-			lastAcceptedPrice.navB
-		);
 	}
 
 	public getMaturityDescription(info?: ICustodianInfo) {

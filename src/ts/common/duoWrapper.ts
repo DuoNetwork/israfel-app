@@ -25,3 +25,4 @@ export const getDualClassWrapper = (custodian: string) => {
 };
 
 export const getTokensPerEth = DualClassWrapper.getTokensPerEth;
+export const getTokenInterestOrLeverage = DualClassWrapper.getTokenInterestOrLeverage;

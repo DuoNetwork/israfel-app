@@ -2,7 +2,7 @@ import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper, getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import { ColorStyles } from 'ts/common/styles';
 import { IAcceptedPrice, ICustodianInfo, IOrderBookSnapshot, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
@@ -61,21 +61,12 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
 		const isBeethoven = type === CST.BEETHOVEN;
-		const lastAcceptedPrice = acceptedPrices.length
-			? acceptedPrices[acceptedPrices.length - 1]
-			: null;
 		const aLabel =
 			d3.format(isBeethoven ? '.2%' : '.2f')(
-				lastAcceptedPrice
-					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, true)
-					: 0
+				getTokenInterestOrLeverage(info.states, isBeethoven, true)
 			) + (isBeethoven ? CST.TH_PA : 'x');
 		const bLabel =
-			d3.format('.2f')(
-				lastAcceptedPrice
-					? util.getTokenInterestOrLeverage(info, lastAcceptedPrice, false)
-					: 0
-			) + 'x';
+			d3.format('.2f')(getTokenInterestOrLeverage(info.states, isBeethoven, false)) + 'x';
 		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
 		const bOrderBook = orderBooks[bCode + '|' + CST.TH_WETH];
 		const aBestBid =
@@ -136,8 +127,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<div className="status-list-wrapper">
 							<ul>
 								<li>
-									<span className="title" style={{display: 'flex', alignItems: 'center'}}>{CST.TH_ETH}</span>
-									<span className="title" style={{display: 'flex', alignItems: 'center', transform: 'scaleX(1.5)'}}>
+									<span
+										className="title"
+										style={{ display: 'flex', alignItems: 'center' }}
+									>
+										{CST.TH_ETH}
+									</span>
+									<span
+										className="title"
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											transform: 'scaleX(1.5)'
+										}}
+									>
 										<Icon type="swap" />
 									</span>
 									<span className="content">
