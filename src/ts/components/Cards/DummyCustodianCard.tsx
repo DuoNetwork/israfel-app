@@ -7,30 +7,21 @@ import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {
+	type: string;
 	margin: string;
 }
 
-interface IState {
-	timeOffset: number;
-}
-
-export default class CustodianCard extends React.Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-		this.state = {
-			timeOffset: 7 * 3600
-		};
-	}
-
+export default class CustodianCard extends React.Component<IProps> {
 	public render() {
-		const { margin } = this.props;
-		const { timeOffset } = this.state;
-		const isBeethoven = false;
+		const { margin, type } = this.props;
+		const isBeethoven = type === CST.BEETHOVEN;
 		const aLabel = '-';
 		const bLabel = '-';
 		return (
 			<SCard
-				title={<SCardTitle style={{ cursor: 'Pointer' }}>loading...</SCardTitle>}
+				title={
+					<SCardTitle style={{ cursor: 'Pointer' }}>{type + ' Loading...'}</SCardTitle>
+				}
 				width="360px"
 				margin={margin}
 			>
@@ -77,9 +68,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 										className="content"
 										style={{ fontSize: 10, marginLeft: 4 }}
 									>
-										<b>
-											{'0' + CST.TH_ETH}
-										</b>
+										<b>{'0' + CST.TH_ETH}</b>
 									</span>
 								</li>
 							</ul>
@@ -117,7 +106,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '56%' }}>
-						<PriceChart prices={[]} timeOffset={timeOffset} name={'-'} isA={true} />
+						<PriceChart prices={[]} timeOffset={7 * 3600} name={'-'} isA={true} />
 					</div>
 					<div
 						style={{
@@ -159,7 +148,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '56%' }}>
-						<PriceChart prices={[]} timeOffset={timeOffset} name={'-'} isA={false} />
+						<PriceChart prices={[]} timeOffset={7 * 3600} name={'-'} isA={false} />
 					</div>
 					<div
 						style={{
@@ -185,9 +174,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					{[1, 3, 7].map(pct => (
 						<SButton
 							key={pct + ''}
-							className={
-								'range-picker ' + (timeOffset === 3600 * pct ? '' : 'day-Button')
-							}
+							className={'range-picker ' + (pct === 7 ? '' : 'day-Button')}
 							style={{ border: 'none' }}
 						>
 							{pct === 1 ? '24H' : pct + 'D'}
