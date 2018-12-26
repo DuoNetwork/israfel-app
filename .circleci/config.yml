@@ -78,7 +78,7 @@ jobs:
                 command: npm test -- --coverage
             - save_cache:
                 key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-                path: 
+                paths:
                     - /home/circleci/israfel-app/coverage/lcov-report/
     deploy:
         docker:
