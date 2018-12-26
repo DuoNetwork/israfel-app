@@ -15,12 +15,12 @@ function drawLines(
 	name: string,
 	isA: boolean
 ) {
-	if (!sourceData.length) {
-		d3.selectAll('.loading').remove();
+	if (sourceData.length === 0) {
+		d3.selectAll('.loading' + name).remove();
 		d3.select(el)
 			.append('div')
 			.attr('class', 'loading')
-			.html('<span>Loading...</span>');
+			.html('<span style="color: black">loading...</span>');
 		return;
 	}
 	const now = util.getUTCNowTimestamp();
@@ -52,8 +52,7 @@ function drawLines(
 		.append('g')
 		.attr('class', 'graph-area' + name)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	const defs = chart
-		.append('defs')
+	const defs = chart.append('defs');
 	defs.append('clipPath')
 		.attr('id', 'clip' + name)
 		.append('rect')
@@ -61,7 +60,8 @@ function drawLines(
 		.attr('y', 0)
 		.attr('width', width - 1)
 		.attr('height', height);
-	const grad = defs.append('linearGradient')
+	const grad = defs
+		.append('linearGradient')
 		.attr('id', 'gradfill')
 		.attr('x1', '0%')
 		.attr('y1', '0%')
@@ -134,7 +134,6 @@ function drawLines(
 		.attr('stroke-linecap', 'round')
 		.attr('stroke', ColorStyles.MainColor)
 		.attr('stroke-width', 1.5);
-
 }
 
 interface IProps {
