@@ -78,11 +78,12 @@ jobs:
                 command: npm test -- --coverage
             - save_cache:
                 key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-                path: /home/circleci/israfel-app/coverage/lcov-report/
+                path: 
+                    - /home/circleci/israfel-app/coverage/lcov-report/
     deploy:
         docker:
             - image: circleci/python:2.7-jessie
-        working_directory: ~/circleci-docs
+        working_directory: /home/circleci/test
         steps:
             - run:
                 name: Install awscli
