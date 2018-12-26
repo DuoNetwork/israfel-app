@@ -120,16 +120,16 @@ function drawLines(
 		.attr('stroke', 'rgb(0,0,0)')
 		.attr('stroke-width', 1.5);
 	svg.append('rect')
-		.attr('x', 0)
+		.attr('x', -1)
 		.attr('y', 0)
-		.attr('width', width)
+		.attr('width', width + 2)
 		.attr('height', ethYScale(startValue))
 		.style('fill', 'rgb(97, 206, 94)')
 		.style('mix-blend-mode', 'screen');
 	svg.append('rect')
-		.attr('x', 0)
+		.attr('x', -1)
 		.attr('y', ethYScale(startValue))
-		.attr('width', width)
+		.attr('width', width + 2)
 		.attr('height', height - ethYScale(startValue))
 		.style('fill', 'rgb(245, 83, 83)')
 		.style('mix-blend-mode', 'screen');
