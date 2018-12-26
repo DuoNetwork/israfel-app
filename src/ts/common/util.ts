@@ -77,10 +77,9 @@ class Util {
 			)
 				return 'Order Expired';
 			else return 'Order Cancelled';
-		else if (order.status === CST.DB_MATCHING)
-			return 'Order Filled';
-		else // if (order.status === CST.DB_PFILL)
-			return 'Order Partially Filled';
+		else if (order.status === CST.DB_MATCHING) return 'Order Filled';
+		// if (order.status === CST.DB_PFILL)
+		else return 'Order Partially Filled';
 	}
 
 	public getOrderFullDescription(order: IUserOrder) {
@@ -103,10 +102,10 @@ class Util {
 			baseDescription += 'Pending settlement';
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
-			return (
-				baseDescription +
-				(order.updatedAt || 0 < order.expiry ? ' Cancelled by user.' : ' Expired.')
-			);
+			return baseDescription + ' Cancelled by user.';
+
+		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_TERMINATE)
+			return baseDescription + ' Expired.';
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_BALANCE)
 			return baseDescription + ` Cancelled due to insufficient balance.`;
@@ -141,8 +140,8 @@ class Util {
 		}
 
 		if (order.type === CST.DB_TERMINATE)
-			if (order.status === CST.DB_CONFIRMED)
-				return order.updatedAt || 0 < order.expiry ? 'Cancelled by user' : 'Expired';
+			if (order.status === CST.DB_CONFIRMED) return 'Cancelled by user';
+			else if (order.status === CST.DB_TERMINATE) return 'Expired';
 			else if (order.status === CST.DB_BALANCE) return 'Cancelled due to insufficent balance';
 			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error';
 			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset';
@@ -218,13 +217,8 @@ class Util {
 					else if (order.status === CST.DB_RESET)
 						row.push('Cancelled due to custodian reset');
 					else if (order.status === CST.DB_FILL) row.push('Fully filled');
-					//if (order.status === CST.DB_CONFIRMED)
-					else
-						row.push(
-							order.updatedAt || order.createdAt < order.expiry
-								? 'Cancelled by user'
-								: 'Expired'
-						);
+					else if (order.status === CST.DB_CONFIRMED) row.push('Cancelled by user');
+					else row.push('Expired');
 				else if (order.status === CST.DB_MATCHING) row.push('Pending settlement');
 				else row.push('Open');
 				row.push(order.transactionHash || ''); // CST.TH_TX_HASH

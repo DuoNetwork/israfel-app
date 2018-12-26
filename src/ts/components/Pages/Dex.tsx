@@ -150,67 +150,65 @@ export default class Dex extends React.Component<IProps, IState> {
 						marginBottom="20px"
 						style={{ paddingTop: '20px' }}
 					>
-						{beethovenList.length > 0 ? (
-							beethovenList.map(c => {
-								const tbs = custodianTokenBalances[c] || {};
-								const obs: { [pair: string]: IOrderBookSnapshot } = {};
-								for (const code in tbs) {
-									const pair = code + '|' + CST.TH_WETH;
-									obs[pair] = orderBooks[pair];
-								}
-								return (
-									<CustodianCard
-										key={c}
-										type={CST.BEETHOVEN}
-										custodian={c}
-										handleConvert={this.handleConvert}
-										handleTrade={this.handleTrade}
-										info={custodians[c]}
-										margin="0 10px"
-										acceptedPrices={acceptedPrices[c]}
-										tokenBalances={tbs}
-										orderBooks={obs}
-										ethPrice={ethPrice}
-									/>
-								);
+						{beethovenList.length
+							? beethovenList.map(c => {
+									const tbs = custodianTokenBalances[c] || {};
+									const obs: { [pair: string]: IOrderBookSnapshot } = {};
+									for (const code in tbs) {
+										const pair = code + '|' + CST.TH_WETH;
+										obs[pair] = orderBooks[pair];
+									}
+									return (
+										<CustodianCard
+											key={c}
+											type={CST.BEETHOVEN}
+											custodian={c}
+											handleConvert={this.handleConvert}
+											handleTrade={this.handleTrade}
+											info={custodians[c]}
+											margin="0 10px"
+											acceptedPrices={acceptedPrices[c]}
+											tokenBalances={tbs}
+											orderBooks={obs}
+											ethPrice={ethPrice}
+										/>
+									);
 							})
-						) : (
-							<DummyCustodianCard
-								margin="0 10px"
-							/>
-						)}
-					</SDivFlexCenter >
+							: [
+									<DummyCustodianCard key={0} margin="0 10px" />,
+									<DummyCustodianCard key={1} margin="0 10px" />
+							]}
+					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal marginBottom="20px">
-						{mozartList.length ? (
-							mozartList.map(c => {
-								const tbs = custodianTokenBalances[c] || {};
-								const obs: { [pair: string]: IOrderBookSnapshot } = {};
-								for (const code in tbs) {
-									const pair = code + '|' + CST.TH_WETH;
-									obs[pair] = orderBooks[pair];
-								}
-								return (
-									<CustodianCard
-										key={c}
-										type={CST.MOZART}
-										custodian={c}
-										handleConvert={this.handleConvert}
-										handleTrade={this.handleTrade}
-										info={custodians[c]}
-										margin="0 10px"
-										acceptedPrices={acceptedPrices[c]}
-										tokenBalances={tbs}
-										orderBooks={obs}
-										ethPrice={ethPrice}
-									/>
-								);
+						{mozartList.length
+							? mozartList.map(c => {
+									const tbs = custodianTokenBalances[c] || {};
+									const obs: { [pair: string]: IOrderBookSnapshot } = {};
+									for (const code in tbs) {
+										const pair = code + '|' + CST.TH_WETH;
+										obs[pair] = orderBooks[pair];
+									}
+									return (
+										<CustodianCard
+											key={c}
+											type={CST.MOZART}
+											custodian={c}
+											handleConvert={this.handleConvert}
+											handleTrade={this.handleTrade}
+											info={custodians[c]}
+											margin="0 10px"
+											acceptedPrices={acceptedPrices[c]}
+											tokenBalances={tbs}
+											orderBooks={obs}
+											ethPrice={ethPrice}
+										/>
+									);
 							})
-						) : (
-							<DummyCustodianCard
-								margin="0 10px"
-							/>
-						)
-					}
+							: [
+									<DummyCustodianCard key={0} margin="0 10px" />,
+									<DummyCustodianCard key={1} margin="0 10px" />
+							]}
+						}
 					</SDivFlexCenter>{' '}
 					<OrderHistoryCard orderHistory={orderHistory} account={account} />
 					<ConvertCard
