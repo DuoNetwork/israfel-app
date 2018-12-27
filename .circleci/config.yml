@@ -16,115 +16,29 @@ jobs:
                 key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
                     - /home/circleci/duo-contract-wrapper
-    build-duo-admin:
-        working_directory: /home/circleci/duo-admin
-        docker: 
-            - image: circleci/node:8.11.1
-        steps:
-            - run: git clone https://github.com/FinBook/duo-admin.git /home/circleci/duo-admin
-            - run: cd /home/circleci/duo-admin
-            - restore_cache:
-                key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                name: Install npm wee
-                command: npm install
-            - save_cache:
-                key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - /home/circleci/duo-admin
-    build-israfel-relayer:
-        working_directory: /home/circleci/israfel-relayer
-        docker: 
+    push-repo:
+        working_directory: /home/circleci/
+        docker:
             - image: circleci/node:8.11.1
         steps:
             - add_ssh_keys:
                 fingerprints:            
                     - "3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2"
-            - run:
-                name: Fix host authenticity for 192.30.253.113
-                command: |
-                    ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run: git clone git@192.30.253.113:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
-            - run: cd /home/circleci/israfel-relayer
-            - restore_cache:
-                key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                name: Install npm wee
-                command: npm install
-            - save_cache:
-                key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - /home/circleci/israfel-relayer
-    test:
-        working_directory: /home/circleci/israfel-app
-        docker:
-            - image: circleci/node:8.11.1
-        steps:
-            - checkout
-            - restore_cache:
-                key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
+                    - "48:4b:53:58:5a:d6:34:40:e1:43:32:03:9f:85:96:bc"
             - restore_cache:
                 key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                name: Install npm
-                command: npm install
-            - run:
-                name: test
-                command: npm test -- -w 1 --forceExit
-            - run:
-                name: coverage
-                command: npm test -- --coverage
-            - save_cache:
-                key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - /home/circleci/israfel-app
-    deploy:
-        docker:
-            - image: circleci/python:2.7-jessie
-        working_directory: /home/circleci/test
-        steps:
-            - run:
-                name: Install awscli
-                command: sudo pip install awscli
-            - restore_cache:
-                key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-            - run: aws s3 sync /home/circleci/israfel-app/coverage/lcov-report s3://israfel-coverage
+            - run: git init
+            - run: git remote add origin https://github.com/lipeiru0329/testCircleCI.git
+            - run: git fetch
+            - run: git pull
+            - run: git add *
+            - run: git commit -m 'update'
+            - run: git push --force origin master
 workflows:
     version: 2
     build_test_deploy:
         jobs:
             - build-duo-contract-wrapper
-            - build-duo-admin
-            - build-israfel-relayer
-            - test:
+            - push-repo:
                 requires:
-                    - build-israfel-relayer
                     - build-duo-contract-wrapper
-                    - build-duo-admin
-                filters:
-                    branches:
-                        only: master
-    schedule_deploy:
-        triggers:
-            - schedule:
-                cron: "0 0 * * *"
-                filters:
-                    branches:
-                        only: master
-        jobs:
-            - build-duo-contract-wrapper
-            - build-duo-admin
-            - build-israfel-relayer
-            - test:
-                requires:
-                    - build-israfel-relayer
-                    - build-duo-contract-wrapper
-                    - build-duo-admin
-                filters:
-                    branches:
-                        only: master
-            - deploy:
-                requires:
-                    - test
