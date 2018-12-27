@@ -26,7 +26,7 @@ jobs:
                 command: sudo pip install awscli
             - restore_cache:
                 key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - run: aws s3 sync /home/circleci/test/src s3://israfel-coverage
+            - run: aws s3 sync /home/circleci/duo-contract-wrapper/src s3://israfel-coverage
 workflows:
     version: 2
     build_and_test:
