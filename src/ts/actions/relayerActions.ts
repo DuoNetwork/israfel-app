@@ -4,7 +4,6 @@ import {
 	IAcceptedPrice,
 	INotification,
 	IOrderBookSnapshot,
-	IOrderBookSnapshotUpdate,
 	IPrice,
 	IStatus,
 	IToken,
@@ -48,10 +47,10 @@ export function orderHistoryUpdate(orderHistory: IUserOrder[]) {
 	};
 }
 
-export function orderBookUpdate(obUpdate: IOrderBookSnapshotUpdate) {
+export function orderBookUpdate(orderBook: IOrderBookSnapshot) {
 	return {
-		type: CST.AC_OB_UPDATE,
-		value: obUpdate
+		type: CST.AC_ORDER_BOOK,
+		value: orderBook
 	};
 }
 
@@ -68,13 +67,6 @@ export function orderSubscriptionUpdate(account: string) {
 // 		pair: pair
 // 	};
 // }
-
-export function orderBookSnapshotUpdate(orderBook: IOrderBookSnapshot) {
-	return {
-		type: CST.AC_OB_SNAPSHOT,
-		value: orderBook
-	};
-}
 
 // export function subscribeOrderBook(pair: string): VoidThunkAction {
 // 	return dispatch => {

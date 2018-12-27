@@ -41,18 +41,9 @@ Object {
 }
 `;
 
-exports[`actions orderBookSnapshotUpdate 1`] = `
-Object {
-  "type": "orderBookSnapshot",
-  "value": Object {
-    "test": "test",
-  },
-}
-`;
-
 exports[`actions orderBookUpdate 1`] = `
 Object {
-  "type": "orderBookUpdate",
+  "type": "orderBook",
   "value": Object {
     "test": "test",
   },

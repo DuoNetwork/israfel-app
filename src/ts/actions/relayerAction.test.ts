@@ -38,10 +38,6 @@ describe('actions', () => {
 		expect(wsActions.orderSubscriptionUpdate('account')).toMatchSnapshot();
 	});
 
-	test('orderBookSnapshotUpdate', () => {
-		expect(wsActions.orderBookSnapshotUpdate({ test: 'test' } as any)).toMatchSnapshot();
-	});
-
 	test('orderBookUpdate', () => {
 		expect(wsActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});

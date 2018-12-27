@@ -1,6 +1,5 @@
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
 import { initialState, relayerReducer } from './relayerReducer';
 
 describe('relayer reducer', () => {
@@ -63,9 +62,9 @@ describe('relayer reducer', () => {
 		expect((relayerClient.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
-	test('orderBookSnapshot', () => {
+	test('orderBook', () => {
 		state = relayerReducer(state, {
-			type: CST.AC_OB_SNAPSHOT,
+			type: CST.AC_ORDER_BOOK,
 			value: {
 				pair: 'pair',
 				version: 123,
@@ -74,43 +73,6 @@ describe('relayer reducer', () => {
 			}
 		});
 		expect(state).toMatchSnapshot();
-	});
-
-	test('orderBookSnapshot different pair', () => {
-		state = relayerReducer(state, {
-			type: CST.AC_OB_SNAPSHOT,
-			value: {
-				pair: 'test'
-			}
-		});
-		expect(state).toMatchSnapshot();
-	});
-
-	test('orderBookUpdate', () => {
-		orderBookUtil.updateOrderBookSnapshot = jest.fn(() => ({
-			pair: 'pair',
-			version: 1234567890
-		}));
-		state = relayerReducer(state, {
-			type: CST.AC_OB_UPDATE,
-			value: {
-				pair: 'pair'
-			}
-		});
-		expect(state).toMatchSnapshot();
-		expect((orderBookUtil.updateOrderBookSnapshot as jest.Mock).mock.calls).toMatchSnapshot();
-	});
-
-	test('orderBookUpdate pair without snapshot', () => {
-		orderBookUtil.updateOrderBookSnapshot = jest.fn();
-		state = relayerReducer(state, {
-			type: CST.AC_OB_UPDATE,
-			value: {
-				pair: 'test1'
-			}
-		});
-		expect(state).toMatchSnapshot();
-		expect(orderBookUtil.updateOrderBookSnapshot as jest.Mock).not.toBeCalled();
 	});
 
 	test('orderSubscription on', () => {

@@ -53,8 +53,7 @@ relayerClient.onOrder(
 		)
 );
 relayerClient.onOrderBook(
-	orderBookSnapshot => store.dispatch(relayerActions.orderBookSnapshotUpdate(orderBookSnapshot)),
-	orderBookUpdate => store.dispatch(relayerActions.orderBookUpdate(orderBookUpdate)),
+	orderBookSnapshot => store.dispatch(relayerActions.orderBookUpdate(orderBookSnapshot)),
 	(method, pair, error) =>
 		store.dispatch(
 			relayerActions.notificationUpdate({

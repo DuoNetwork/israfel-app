@@ -1,14 +1,7 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import {
-	IOrderBookSnapshot,
-	IOrderBookSnapshotUpdate,
-	IRelayerState,
-	IToken,
-	IUserOrder
-} from 'ts/common/types';
-import orderBookUtil from '../../../../israfel-relayer/src/utils/orderBookUtil';
+import { IRelayerState, IToken, IUserOrder } from 'ts/common/types';
 
 export const initialState: IRelayerState = {
 	connection: false,
@@ -57,25 +50,12 @@ export function relayerReducer(
 				acceptedPrices: action.acceptedPrices,
 				exchangePrices: action.exchangePrices
 			});
-		case CST.AC_OB_SNAPSHOT:
+		case CST.AC_ORDER_BOOK:
 			return Object.assign({}, state, {
 				orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
-					[action.value.pair]: action.value
+					[action.value.pair]: Object.assign({}, action.value)
 				})
 			});
-		case CST.AC_OB_UPDATE:
-			if (state.orderBookSnapshot[action.value.pair]) {
-				const obUpdate: IOrderBookSnapshotUpdate = action.value;
-				const orderBook: IOrderBookSnapshot = JSON.parse(
-					JSON.stringify(state.orderBookSnapshot[obUpdate.pair])
-				);
-				orderBookUtil.updateOrderBookSnapshot(orderBook, obUpdate);
-				return Object.assign({}, state, {
-					orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
-						[obUpdate.pair]: orderBook
-					})
-				});
-			} else return state;
 		case CST.AC_ORDER_HISTORY:
 			if ((action.value as IUserOrder[]).length) {
 				const orderHistory: { [pair: string]: IUserOrder[] } = {};
