@@ -106,6 +106,26 @@ workflows:
                 filters:
                     branches:
                         only: master
+    schedule:
+        triggers:
+            - schedule:
+                corn: "0 */12 * * *"
+                filters:
+                    branches:
+                        only:
+                            - master
+        jobs:
+            - build-duo-contract-wrapper
+            - build-duo-admin
+            - build-israfel-relayer
+            - test:
+                requires:
+                    - build-israfel-relayer
+                    - build-duo-contract-wrapper
+                    - build-duo-admin
+                filters:
+                    branches:
+                        only: master
             - deploy:
                 requires:
                     - test
