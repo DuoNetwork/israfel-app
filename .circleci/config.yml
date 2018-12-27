@@ -106,14 +106,13 @@ workflows:
                 filters:
                     branches:
                         only: master
-    schedule:
+    schedule_deploy:
         triggers:
             - schedule:
                 corn: "0 */12 * * *"
                 filters:
                     branches:
-                        only:
-                            - master
+                        only: master
         jobs:
             - build-duo-contract-wrapper
             - build-duo-admin
