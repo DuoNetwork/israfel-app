@@ -9,7 +9,6 @@ function mapStateToProps(state: IState) {
 	const krakenPrices = state.relayer.exchangePrices['kraken'];
 	return {
 		account: state.web3.account,
-		tokens: state.relayer.tokens,
 		acceptedPrices: state.relayer.acceptedPrices,
 		custodians: state.web3.custodians,
 		custodianTokenBalances: state.web3.custodianTokenBalances,

@@ -8,10 +8,10 @@ import {
 	IEthBalance,
 	INotification,
 	IOrderBookSnapshot,
-	IToken,
 	ITokenBalance,
 	IUserOrder
 } from 'ts/common/types';
+import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -23,7 +23,6 @@ import TradeCard from '../Cards/TradeCard';
 interface IProps {
 	account: string;
 	ethBalance: IEthBalance;
-	tokens: IToken[];
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
 	custodians: { [custodian: string]: ICustodianInfo };
@@ -90,7 +89,6 @@ export default class Dex extends React.Component<IProps, IState> {
 	public render() {
 		const {
 			account,
-			tokens,
 			acceptedPrices,
 			custodians,
 			custodianTokenBalances,
@@ -118,7 +116,7 @@ export default class Dex extends React.Component<IProps, IState> {
 		}
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
-		const tradeTokenInfo = tokens.find(t => t.code === tradeToken);
+		const tradeTokenInfo = web3Util.getTokenByCode(tradeToken);
 		const tradeTokenBalance = tradeTokenInfo
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
