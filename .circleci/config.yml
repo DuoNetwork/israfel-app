@@ -109,7 +109,7 @@ workflows:
     schedule_deploy:
         triggers:
             - schedule:
-                corn: "0 */12 * * *"
+                cron: "0 0 * * *"
                 filters:
                     branches:
                         only: master
