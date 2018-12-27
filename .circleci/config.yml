@@ -33,5 +33,5 @@ workflows:
         jobs:
             - build-duo-contract-wrapper
             - deploy:
-                require:
+                requires:
                     - build-duo-contract-wrapper
