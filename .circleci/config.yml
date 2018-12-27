@@ -27,6 +27,10 @@ jobs:
                     - "48:4b:53:58:5a:d6:34:40:e1:43:32:03:9f:85:96:bc"
             - restore_cache:
                 key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - run:
+                name: Fix host authenticity for 192.30.253.113
+                command: |
+                    ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run: git init
             - run: git remote add origin git@192.30.253.113:lipeiru0329/testCircleCI.git
             - run: git fetch
