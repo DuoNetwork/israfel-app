@@ -1,5 +1,21 @@
 version: 2
 jobs:
+    build-duo-contract-wrapper:
+        working_directory: /home/circleci/duo-contract-wrapper
+        docker: 
+            - image: circleci/node:8.11.1
+        steps:
+            - run: git clone https://github.com/FinBook/duo-contract-wrapper.git /home/circleci/duo-contract-wrapper
+            - run: cd /home/circleci/duo-contract-wrapper
+            - restore_cache:
+                key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - run:
+                name: Install npm wee
+                command: npm install
+            - save_cache:
+                key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+                paths:
+                    - /home/circleci/duo-contract-wrapper
     deploy:
         docker:
             - image: circleci/python:2.7-jessie
@@ -9,10 +25,13 @@ jobs:
                 name: Install awscli
                 command: sudo pip install awscli
             - restore_cache:
-                key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-            - run: aws s3 sync ./lcov-report s3://israfel-coverage
+                key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - run: aws s3 sync ./src s3://israfel-coverage
 workflows:
     version: 2
     build_and_test:
         jobs:
-            - deploy
+            - build-duo-contract-wrapper
+            - deploy:
+                require:
+                    - build-duo-contract-wrapper
