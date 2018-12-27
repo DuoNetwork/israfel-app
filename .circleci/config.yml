@@ -28,7 +28,7 @@ jobs:
             - restore_cache:
                 key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
             - run: git init
-            - run: git remote set-url git@github.com:lipeiru0329/testCircleCI.git
+            - run: git remote set-url origin git@github.com:lipeiru0329/testCircleCI.git
             - run: git fetch
             - run: git pull
             - run: git add *
