@@ -7,9 +7,7 @@ jobs:
         steps:
             - add_ssh_keys:
                   fingerprints:
-                      - '3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2'
                       - '48:4b:53:58:5a:d6:34:40:e1:43:32:03:9f:85:96:bc'
-                      - '39:a3:74:f5:d3:fa:ca:46:14:bf:bd:8f:26:06:c6:b0'
             - run:
                   name: Fix host authenticity for 192.30.253.113
                   command: |
@@ -19,12 +17,16 @@ jobs:
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: cp -a ./testCircleCI/index.html ./Hello_World
+            - add_ssh_keys:
+                  fingerprints:
+                      - '39:a3:74:f5:d3:fa:ca:46:14:bf:bd:8f:26:06:c6:b0'
             - run:
                   name: push
                   command: cd /home/circleci/duo-network-kovan-relayer/Hello_World
                       && git config --global user.email "lipeiru0329@gmail.com"
                       && git config --global user.name "lipeiru0329"
-                      && git add * && git commit -m 'update'
+                      && git add *
+                      && git commit -m 'update'
                       && git push -u origin master
 workflows:
     version: 2
