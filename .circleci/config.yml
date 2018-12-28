@@ -18,8 +18,8 @@ jobs:
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: ls
-            - run: cp -a index.html ../Hello_World
-            - run: cd ../Hello_World/
+            - run: cp -a ./testCircleCI/index.html ./Hello_World
+            - run: cd ./Hello_World/
             - run: git add *
             - run: git commit -m 'update'
             - run: git push -u origin master
