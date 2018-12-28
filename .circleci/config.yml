@@ -17,7 +17,7 @@ jobs:
             - run: mkdir duo-network-kovan-relayer/234
             - run: cd /home/circleci/duo-network-kovan-relayer
             - run: git clone git@192.30.253.113:lipeiru0329/testCircleCI.git /home/circleci/duo-network-kovan-relayer/testCircleCI
-            - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git
+            - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git /home/circleci/duo-network-kovan-relayer/Hello_World
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: ls
