@@ -94,7 +94,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 									.then(result =>
 										relayerClient.deleteOrder(
 											lastVersion.pair,
-											orderHash,
+											[orderHash],
 											result
 										)
 									)

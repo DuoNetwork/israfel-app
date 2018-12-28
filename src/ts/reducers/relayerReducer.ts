@@ -26,9 +26,12 @@ export function relayerReducer(
 ): IRelayerState {
 	switch (action.type) {
 		case CST.AC_CONNECTION:
-			return Object.assign({}, state, {
-				connection: action.value
-			});
+			if (action.value)
+				return Object.assign({}, state, {
+					connection: action.value
+				});
+			else
+				return initialState;
 		case CST.AC_INFO:
 			const newCodes = (action.tokens as IToken[]).map(token => token.code);
 			const oldCodes = state.tokens.map(token => token.code);
