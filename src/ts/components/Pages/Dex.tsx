@@ -36,6 +36,7 @@ interface IProps {
 }
 
 interface IState {
+	connection: boolean;
 	account: string;
 	convertCustodian: string;
 	convertAToken: string;
@@ -48,6 +49,7 @@ export default class Dex extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			connection: props.connection,
 			account: props.account,
 			convertCustodian: '',
 			convertAToken: '',
@@ -63,9 +65,11 @@ export default class Dex extends React.Component<IProps, IState> {
 	}
 
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
-		if (props.account !== state.account) {
-			props.subscribeOrder(props.account);
+		if (props.connection !== state.connection || props.account !== state.account) {
+			if (props.connection) props.subscribeOrder(props.account);
+			else props.unsubscribeOrder();
 			return {
+				connection: props.connection,
 				account: props.account
 			};
 		}
