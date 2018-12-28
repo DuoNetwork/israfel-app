@@ -19,7 +19,7 @@ jobs:
             - run: git clone git@192.30.253.113:lipeiru0329/testCircleCI.git
             - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git
             - run: ls
-            - run: cd testCircleCI
+            - run: cd ./testCircleCI
             - run: ls
             - run: cd testCircleCI
             - run: cp -a index.html ../Hello_World
