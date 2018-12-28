@@ -20,7 +20,7 @@ jobs:
             - run: cp -a ./testCircleCI/index.html ./Hello_World
             - run: 
                 name: push
-                command: cd /home/circleci/duo-network-kovan-relayer/Hello_World && git add * && git commit -m 'update' && git push -u origin master
+                command: cd /home/circleci/duo-network-kovan-relayer/Hello_World && git config --global user.email "lipeiru0329@gmail.com" && git config --global user.name "lipeiru0329" && git add * && git commit -m 'update' && git push -u origin master
 workflows:
     version: 2
     build_test_deploy:
