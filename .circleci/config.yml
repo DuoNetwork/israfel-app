@@ -17,9 +17,9 @@ jobs:
             - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git /home/circleci/duo-network-kovan-relayer/Hello_World
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
-            - run: ls
             - run: cp -a ./testCircleCI/index.html ./Hello_World
-            - run: cd ./Hello_World/
+            - run: cd /home/circleci/duo-network-kovan-relayer/Hello_World
+            - run: ls
             - run: git add *
             - run: git commit -m 'update'
             - run: git push -u origin master
