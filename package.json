@@ -9,14 +9,15 @@
 		"test": "jest",
 		"tslint": "tslint -c tslint.json -p tsconfig.json src/**/*.ts{,x} --fix",
 		"start": "webpack-dev-server --config webpack.config.local.js",
-		"prebuild": "rimraf dist",
-		"analyze": "webpack-bundle-analyzer dist/kovan/stats.json",
-		"rebuildDev": "webpack --config webpack.config.dev.js --json > webpack.json",
-		"rebuild": "webpack --config webpack.config.uat.js --json > webpack.json",
-		"rebuildLive": "webpack --config webpack.config.prod.js --json > webpack.json",
-		"buildDev": "npm run clean && npm run rebuildDev && npm run analyze",
-		"build": "npm run clean && npm run rebuild && npm run analyze",
-		"buildLive": "npm run clean && npm run rebuildLive && npm run analyze"
+		"analyze": "npm run clean && npm run analyze:build && npm run analyze:no:build",
+		"analyze:build": "webpack --config webpack.config.uat.js --json > webpack.json",
+		"analyze:no:build": "webpack-bundle-analyzer dist/kovan/stats.json",
+		"rebuildDev": "webpack --config webpack.config.dev.js",
+		"rebuild": "webpack --config webpack.config.uat.js",
+		"rebuildLive": "webpack --config webpack.config.prod.js",
+		"buildDev": "npm run clean && npm run rebuildDev",
+		"build": "npm run clean && npm run rebuild",
+		"buildLive": "npm run clean && npm run rebuildLive"
 	},
 	"jest": {
 		"testEnvironment": "node",
