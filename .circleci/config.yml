@@ -1,36 +1,32 @@
 version: 2
 jobs:
-    push-repo:
-        working_directory: /home/circleci
-        docker:
-            - image: circleci/node:8.11.1
-        steps:
-            - add_ssh_keys:
-                  fingerprints:
-                      - '3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2'
-            - run:
-                  name: Fix host authenticity for 192.30.253.113
-                  command: |
-                      ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run: git clone git@192.30.253.113:FinBook/israfel-app.git /home/circleci/israfel-app
-            - run: git clone git@192.30.253.113:FinBook/duo-network-kovan-relayer.git /home/circleci/duo-network-kovan-relayer
-            - run:
-                  name: build
-                  command: cd /home/circleci/israfel-app
-                      && npm run build
-            - run: cp -a ./duo-network-kovan-relayer/web.config ./israfel-app/dist/kovan
-            - run: rm -r ./duo-network-kovan-relayer/*
-            - run: cp -a ./israfel-app/dist/kovan ./duo-network-kovan-relayer/
-            - run:
-                  name: push
-                  command: cd /home/circleci/duo-network-kovan-relayer
-                      && git config --global user.email "lipeiru0329@gmail.com"
-                      && git config --global user.name "lipeiru0329"
-                      && git add *
-                      && git commit -m 'update'
-                      && git push -u origin master
+  push-repo:
+    working_directory: /home/circleci
+    docker:
+    - image: circleci/node:8.11.1
+    steps:
+    - add_ssh_keys:
+        fingerprints:
+        - 3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2
+    - run:
+        name: Fix host authenticity for 192.30.253.113
+        command: |
+          ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
+    - run: git clone git@192.30.253.113:FinBook/duo-network-kovan-relayer.git /home/circleci/duo-network-kovan-relayer
+    - run: git clone git@192.30.253.113:FinBook/israfel-app.git /home/circleci/israfel-app
+    - run:
+        name: build
+        command: cd /home/circleci/israfel-app && npm install && npm run build
+    - run: cp -a ./duo-network-kovan-relayer/web.config ./israfel-app/dist/kovan
+    - run: rm -r ./duo-network-kovan-relayer/*
+    - run: cp -a ./israfel-app/dist/kovan ./duo-network-kovan-relayer/
+    - run:
+        name: push
+        command: cd /home/circleci/duo-network-kovan-relayer && git config --global
+          user.email "lipeiru0329@gmail.com" && git config --global user.name "lipeiru0329"
+          && git add * && git commit -m 'update' && git push -u origin master
 workflows:
-    version: 2
-    build_test_deploy:
-        jobs:
-            - push-repo
+  version: 2
+  build_test_deploy:
+    jobs:
+    - push-repo
