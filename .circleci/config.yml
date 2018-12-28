@@ -120,7 +120,6 @@ workflows:
     version: 2
     build_test_deploy:
         jobs:
-            - push-repo
             - build-duo-contract-wrapper
             - build-duo-admin
             - build-israfel-relayer
@@ -130,6 +129,14 @@ workflows:
                       - build-duo-contract-wrapper
                       - build-duo-admin
                   filters:
+                      branches:
+                          only: master
+            - push-repo:
+                requires:
+                      - build-israfel-relayer
+                      - build-duo-contract-wrapper
+                      - build-duo-admin
+                filters:
                       branches:
                           only: master
     schedule_deploy:
