@@ -87,7 +87,8 @@ class Util {
 		let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
 		} ${code1} at ${order.price} ${code2} per ${code1}.`;
-		if (order.type === CST.DB_ADD) return baseDescription;
+		if (order.type === CST.DB_ADD)
+			return baseDescription + ` Valid till ${this.formatMaturity(order.expiry)}`;
 
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
 			return baseDescription + ' Fully filled';

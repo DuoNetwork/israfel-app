@@ -47,7 +47,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	public render() {
 		const { orderHistory, account } = this.props;
 		const { showHistory, details } = this.state;
-		const dataSource: object[] = [];
+		const dataSource: any[] = [];
 		const liveOrders: { [orderHash: string]: IUserOrder[] } = {};
 		const pastOrders: { [orderHash: string]: IUserOrder[] } = {};
 		for (const pair in orderHistory) {
@@ -106,6 +106,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 					[CST.TH_HISTORY]: orders
 				});
 			}
+		dataSource.sort((a, b) => -a[CST.TH_TIME].localeCompare(b[CST.TH_TIME]));
 		return (
 			<SCard
 				title={
