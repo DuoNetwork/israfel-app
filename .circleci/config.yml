@@ -18,11 +18,9 @@ jobs:
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: cp -a ./testCircleCI/index.html ./Hello_World
-            - run: cd /home/circleci/duo-network-kovan-relayer/Hello_World
-            - run: ls
-            - run: git add *
-            - run: git commit -m 'update'
-            - run: git push -u origin master
+            - run: 
+                name: push
+                command: cd /home/circleci/duo-network-kovan-relayer/Hello_World && git add * && git commit -m 'update' && git push -u origin master
 workflows:
     version: 2
     build_test_deploy:
