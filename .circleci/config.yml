@@ -1,7 +1,7 @@
 version: 2
 jobs:
     push-repo:
-        working_directory: /home/circleci/
+        working_directory: /home/circleci/duo-network-kovan-relayer
         docker:
             - image: circleci/node:8.11.1
         steps:
@@ -13,15 +13,11 @@ jobs:
                 name: Fix host authenticity for 192.30.253.113
                 command: |
                     ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run: mkdir duo-network-kovan-relayer
-            - run: mkdir duo-network-kovan-relayer/234
-            - run: cd /home/circleci/duo-network-kovan-relayer
             - run: git clone git@192.30.253.113:lipeiru0329/testCircleCI.git /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git /home/circleci/duo-network-kovan-relayer/Hello_World
             - run: ls
             - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: ls
-            - run: cd testCircleCI
             - run: cp -a index.html ../Hello_World
             - run: cd ../Hello_World/
             - run: git add *
