@@ -104,6 +104,12 @@ jobs:
                 command: |
                     ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run: git clone git@192.30.253.113:FinBook/duo-network-kovan-relayer.git /home/circleci/duo-network-kovan-relayer
+            - restore_cache:
+                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
+            - restore_cache:
+                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - restore_cache:
+                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
             - run: git clone git@192.30.253.113:FinBook/israfel-app.git /home/circleci/israfel-app
             - run:
                 name: build
