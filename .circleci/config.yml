@@ -14,15 +14,10 @@ jobs:
                       ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run: git clone git@192.30.253.113:lipeiru0329/testCircleCI.git /home/circleci/duo-network-kovan-relayer/testCircleCI
             - run: git clone git@192.30.253.113:lipeiru0329/Hello_World.git /home/circleci/duo-network-kovan-relayer/Hello_World
-            - run: ls
-            - run: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
-            - run: cp -a ./testCircleCI/index.html ./Hello_World
-            - add_ssh_keys:
-                  fingerprints:
-                      - '39:a3:74:f5:d3:fa:ca:46:14:bf:bd:8f:26:06:c6:b0'
+            - run: cp -a ./Hello_World/README.md ./testCircleCI
             - run:
                   name: push
-                  command: cd /home/circleci/duo-network-kovan-relayer/Hello_World
+                  command: cd /home/circleci/duo-network-kovan-relayer/testCircleCI
                       && git config --global user.email "lipeiru0329@gmail.com"
                       && git config --global user.name "lipeiru0329"
                       && git add *
