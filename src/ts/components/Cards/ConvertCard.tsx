@@ -248,20 +248,19 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({ loading: true });
 		const { account, custodian, notify } = this.props;
 		try {
-			await duoWeb3Wrapper.erc20Approve(
+			const txHash = await duoWeb3Wrapper.erc20Approve(
 				web3Util.contractAddresses.etherToken,
 				account,
 				custodian,
 				0,
-				(hash: string) =>
-					notify({
-						level: 'info',
-						title: CST.TH_WETH,
-						message: 'Approval transaction sent.',
-						transactionHash: hash
-					}),
 				true
 			);
+			notify({
+				level: 'info',
+				title: CST.TH_WETH,
+				message: 'Approval transaction sent.',
+				transactionHash: txHash
+			})
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -316,31 +315,28 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		}
 
 		try {
-			const onTxHash = (hash: string) => {
-				notify({
-					level: 'info',
-					title: `${isCreate ? 'Creation' : 'Redemption'}`,
-					message: description,
-					transactionHash: hash
-				});
-				handleClose();
-			};
+			let txHash = '';
 			if (isCreate)
 				if (wethCreate)
-					await cw.createWithWETH(
+					txHash = await cw.createWithWETH(
 						account,
 						Number(wethAmount),
-						web3Util.contractAddresses.etherToken,
-						onTxHash
+						web3Util.contractAddresses.etherToken
 					);
-				else await cw.create(account, Number(amount), onTxHash);
+				else txHash = await cw.create(account, Number(amount));
 			else
-				await cw.redeem(
+				txHash = await cw.redeem(
 					account,
 					Number(amount),
-					Number(amount) / info.states.alpha,
-					onTxHash
+					Number(amount) / info.states.alpha
 				);
+			notify({
+				level: 'info',
+				title: `${isCreate ? 'Creation' : 'Redemption'}`,
+				message: description,
+				transactionHash: txHash
+			});
+			handleClose();
 		} catch (error) {
 			this.setState({
 				loading: false
