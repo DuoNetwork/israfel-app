@@ -93,7 +93,7 @@ describe('actions', () => {
 		});
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
-		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
+		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
 		dualClassWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),
 			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
@@ -104,7 +104,7 @@ describe('actions', () => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect(web3Util.getEthBalance as jest.Mock).not.toBeCalled();
 				expect(web3Util.getTokenBalance as jest.Mock).not.toBeCalled();
-				expect(web3Util.getProxyTokenAllowance as jest.Mock).not.toBeCalled();
+				expect(web3Util.getTokenAllowance as jest.Mock).not.toBeCalled();
 				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
@@ -127,7 +127,7 @@ describe('actions', () => {
 		});
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
-		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
+		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
 		dualClassWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),
 			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
@@ -138,7 +138,7 @@ describe('actions', () => {
 				expect(store.getActions()).toMatchSnapshot();
 				expect((web3Util.getEthBalance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect((web3Util.getTokenBalance as jest.Mock).mock.calls).toMatchSnapshot();
-				expect((web3Util.getProxyTokenAllowance as jest.Mock).mock.calls).toMatchSnapshot();
+				expect((web3Util.getTokenAllowance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
@@ -162,7 +162,7 @@ describe('actions', () => {
 		web3Util.getCurrentNetwork = jest.fn(() => Promise.resolve(123));
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
-		web3Util.getProxyTokenAllowance = jest.fn(() => Promise.resolve(333));
+		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
 		web3Util.getCurrentAddress = jest.fn(() => Promise.resolve('0x0'));
 		dualClassWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),

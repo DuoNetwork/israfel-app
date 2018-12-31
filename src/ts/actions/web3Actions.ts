@@ -62,7 +62,7 @@ export function getCustodianBalances(): VoidThunkAction {
 			Promise.all([
 				web3Util.getEthBalance(account),
 				web3Util.getTokenBalance(CST.TOKEN_WETH, account),
-				web3Util.getProxyTokenAllowance(CST.TOKEN_WETH, account)
+				web3Util.getTokenAllowance(CST.TOKEN_WETH, account)
 			]).then(result =>
 				dispatch(
 					ethBalanceUpdate({
@@ -85,7 +85,7 @@ export function getCustodianBalances(): VoidThunkAction {
 			if (account !== CST.DUMMY_ADDR)
 				Promise.all([
 					web3Util.getTokenBalance(token.code, account),
-					web3Util.getProxyTokenAllowance(token.code, account)
+					web3Util.getTokenAllowance(token.code, account)
 				]).then(result =>
 					dispatch(
 						tokenBalanceUpdate(token.code, token.custodian, {
