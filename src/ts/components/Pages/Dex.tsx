@@ -168,7 +168,7 @@ export default class Dex extends React.Component<IProps, IState> {
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
 									margin="0 10px"
-									acceptedPrices={acceptedPrices[c]}
+									acceptedPrices={acceptedPrices[c] || []}
 									tokenBalances={tbs}
 									orderBooks={obs}
 									ethPrice={ethPrice}
@@ -196,7 +196,7 @@ export default class Dex extends React.Component<IProps, IState> {
 									handleTrade={this.handleTrade}
 									info={custodians[c]}
 									margin="0 10px"
-									acceptedPrices={acceptedPrices[c]}
+									acceptedPrices={acceptedPrices[c] || []}
 									tokenBalances={tbs}
 									orderBooks={obs}
 									ethPrice={ethPrice}
