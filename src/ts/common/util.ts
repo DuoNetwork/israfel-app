@@ -13,12 +13,6 @@ class Util {
 		else return 'long time ago';
 	}
 
-	public formatFixedNumber(num: number, precision: number) {
-		const decimal = precision && precision < 1 ? (precision + '').length - 2 : 0;
-		const roundedNumber = Math.round(Number(num) / precision) * precision;
-		return precision ? roundedNumber.toFixed(decimal) : num + '';
-	}
-
 	public formatExpiry(isMonth: boolean) {
 		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
 	}
@@ -56,6 +50,8 @@ class Util {
 	public formatMaturity(maturity: number) {
 		return maturity ? moment(maturity).format('YYYY-MM-DD HH:mm') : CST.TH_PERPETUAL;
 	}
+
+	public formatFixedNumber = relayerUtil.formatFixedNumber;
 
 	public getUTCNowTimestamp = relayerUtil.getUTCNowTimestamp;
 
