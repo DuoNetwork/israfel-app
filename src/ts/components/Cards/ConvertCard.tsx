@@ -260,7 +260,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				title: CST.TH_WETH,
 				message: 'Approval transaction sent.',
 				transactionHash: txHash
-			})
+			});
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
 					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
@@ -315,26 +315,17 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		}
 
 		try {
-			let txHash = '';
-			if (isCreate)
-				if (wethCreate)
-					txHash = await cw.createWithWETH(
-						account,
-						Number(wethAmount),
-						web3Util.contractAddresses.etherToken
-					);
-				else txHash = await cw.create(account, Number(amount));
-			else
-				txHash = await cw.redeem(
-					account,
-					Number(amount),
-					Number(amount) / info.states.alpha
-				);
 			notify({
 				level: 'info',
 				title: `${isCreate ? 'Creation' : 'Redemption'}`,
 				message: description,
-				transactionHash: txHash
+				transactionHash: isCreate
+					? await cw.create(
+							account,
+							wethCreate ? Number(wethAmount) : Number(amount),
+							wethCreate ? web3Util.contractAddresses.etherToken : ''
+					)
+					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
 		} catch (error) {
