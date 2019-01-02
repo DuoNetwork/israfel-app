@@ -168,6 +168,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription: getFeeDescription(props.token, '', '', props.tokenInfo),
 			expiryDescription: getExpiryDescription(false)
 		};
+		document.addEventListener('keydown', this.escFunction.bind(this), false);
+	}
+
+	private escFunction(event: any) {
+		if (event.keyCode === 27)
+		this.props.handleClose();
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {

@@ -108,7 +108,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
 			sliderValue: 0,
 			sliderWETH: 0
-		};
+		}
+		document.addEventListener('keydown', this.escFunction.bind(this), false);
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
@@ -324,7 +325,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
 							wethCreate ? web3Util.contractAddresses.etherToken : ''
-					)
+					  )
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
@@ -334,6 +335,18 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			});
 		}
 	};
+
+	private escFunction(event: any) {
+		console.log("123456");
+		if (this.props) {
+			const { handleClose } = this.props;
+			if (event.keyCode === 27) {
+				console.log("1234567890");
+				handleClose();
+			}
+		}
+	}
+
 	private TokenDescription = (props: { aToken: string; bToken: string }) => {
 		return props.aToken.startsWith('a') ? (
 			<span>
@@ -393,7 +406,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
