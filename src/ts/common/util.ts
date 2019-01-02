@@ -26,7 +26,7 @@ class Util {
 	}
 
 	public formatBalance(num: number) {
-		if (Math.abs(num) < 1e-8) return '0.000';
+		if (Math.abs(num) < 1e-4) return '0.000';
 		return d3
 			.format(Math.abs(num) > 1 ? ',.4s' : ',.4n')(num)
 			.toUpperCase()
@@ -38,7 +38,7 @@ class Util {
 	}
 
 	public formatNumber(num: number) {
-		if (Math.abs(num) < 1e-8) return '0.000';
+		if (Math.abs(num) < 1e-4) return '0.000';
 		if (Math.abs(num) < 1) return d3.format(',.4n')(num);
 		if (Math.abs(num) < 100000) return d3.format(',.2f')(num);
 		return d3
