@@ -54,7 +54,8 @@ describe('ConvertCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
-			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
+			util.formatMaturity = jest.fn(() => "1970-01-01 08:00:00");
+			util.formatExpiry = jest.fn(() => "1970-01-01 19:00:00");
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapper = shallow(
 				<ConvertCard
