@@ -2,81 +2,85 @@
  * @jest-environment jsdom
  */
 
-// import { shallow } from 'enzyme';
-// import * as React from 'react';
-// import util from 'ts/common/util';
-// import BalanceCard from './BalanceCard';
-//
+import { shallow } from 'enzyme';
+import * as React from 'react';
+import util from 'ts/common/util';
+import BalanceCard from './BalanceCard';
+
 describe('BalanceCard Test', () => {
-	// describe('Test Snapshot', () => {
-	// 	const visible: boolean;
-	// 	ethPrice: number;
-	// 	beethovenList: string[];
-	// 	mozartList: string[];
-	// 	custodians: { [custodian: string]: ICustodianInfo };
-	// 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
-	// 	const custodian = '0x13016f27945f3f7b39a5daae068d698e34e55491';
-	// 	const aToken = 'WETH-ETH';
-	// 	const bToken = 'WETH-ETH';
-	// 	const info = {
-	// 		code: 'test',
-	// 		states: {
-	// 			resetState: 'test',
-	// 			alpha: 123,
-	// 			beta: 123,
-	// 			periodCoupon: 123,
-	// 			limitPeriodic: 123,
-	// 			limitUpper: 123,
-	// 			limitLower: 123,
-	// 			iterationGasThreshold: 123,
-	// 			state: 'test',
-	// 			minBalance: 123,
-	// 			totalSupplyA: 123,
-	// 			totalSupplyB: 123,
-	// 			ethCollateral: 123,
-	// 			navA: 123,
-	// 			navB: 123,
-	// 			lastPrice: 123,
-	// 			lastPriceTime: 123,
-	// 			resetPrice: 123,
-	// 			resetPriceTime: 123,
-	// 			createCommRate: 123,
-	// 			redeemCommRate: 123,
-	// 			period: 123,
-	// 			maturity: 123,
-	// 			preResetWaitingBlocks: 123,
-	// 			priceFetchCoolDown: 123,
-	// 			nextResetAddrIndex: 123,
-	// 			totalUsers: 123,
-	// 			feeBalance: 123,
-	// 			lastOperationTime: 123,
-	// 			operationCoolDown: 123
-	// 		}
-	// 	};
-	// 	const ethBalance = {
-	// 		eth: 123,
-	// 		weth: 123,
-	// 		allowance: 123
-	// 	};
-	// 	const handleClose = jest.fn();
-	// 	it('Test Snapshot', () => {
-	// 		util.formatMaturity = jest.fn(() => "1970-01-01 08:00:00");
-	// 		util.formatExpiry = jest.fn(() => "1970-01-01 19:00:00");
-	// 		util.getUTCNowTimestamp = jest.fn(() => 1234567890);
-	// 		const wrapper = shallow(
-	// 			<BalanceCard
-	// 				custodian={custodian}
-	// 				aToken={aToken}
-	// 				bToken={bToken}
-	// 				info={info}
-	// 				account={'account'}
-	// 				ethBalance={ethBalance}
-	// 				notify={() => ({})}
-	// 				handleClose={handleClose}
-	// 			/>
-	// 		);
-	// 		expect(wrapper).toMatchSnapshot();
-			expect(true);
-		// });
-	// });
+	describe('Test Snapshot', () => {
+		const visible = true;
+		const ethPrice = 123;
+		const beethovenList = ['123', 'test'];
+		const mozartList = ['test', '123'];
+		const custodians = {
+			'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': {
+				code: 'MOZART-PPT',
+				states: {
+					alpha: 0.5,
+					beta: 1,
+					createCommRate: 0.01,
+					ethCollateral: 12.358884504282397,
+					feeBalance: 0.15089954869517602,
+					iterationGasThreshold: 65000,
+					lastOperationTime: 0,
+					lastPrice: 139.65558504384992,
+					lastPriceTime: 1546412400000,
+					limitLower: 0.25,
+					limitPeriodic: 0,
+					limitUpper: 1.75,
+					maturity: 0,
+					minBalance: 0.01,
+					navA: 0.8643764401469363,
+					navB: 1.2712471197061275,
+					nextResetAddrIndex: 0,
+					operationCoolDown: 86400000,
+					period: 3600000,
+					periodCoupon: 0,
+					preResetWaitingBlocks: 10,
+					priceFetchCoolDown: 3000000,
+					redeemCommRate: 0.01,
+					resetPrice: 122.97700574468506,
+					resetPriceTime: 1545530400000,
+					resetState: 'UpwardReset',
+					state: 'Trading',
+					totalSupplyA: 506.61953689367846,
+					totalSupplyB: 1013.2390737873569,
+					totalUsers: 13
+				}
+			}
+		};
+		const custodianTokenBalances = {
+			'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': {
+				LETH: { balance: 0, allowance: 0 },
+				sETH: { balance: 0, allowance: 1.157920892373162e59 }
+			}
+		};
+		const ethBalance = {
+			allowance: 1.157920892373,
+			eth: 0.5076699707487066,
+			weth: 0.984992
+		};
+		const handleClose = jest.fn();
+		it('Test Snapshot', () => {
+			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
+			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
+			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const wrapper = shallow(
+				<BalanceCard
+					visible={visible}
+					account={'account'}
+					ethPrice={ethPrice}
+					beethovenList={beethovenList}
+					ethBalance={ethBalance}
+					mozartList={mozartList}
+					custodians={custodians}
+					custodianTokenBalances={custodianTokenBalances}
+					notify={() => ({})}
+					handleClose={handleClose}
+				/>
+			);
+			expect(wrapper).toMatchSnapshot();
+		});
+	});
 });

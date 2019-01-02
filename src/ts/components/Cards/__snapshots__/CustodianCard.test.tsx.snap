@@ -1,0 +1,434 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
+<Styled(Card)
+  extra={
+    <div
+      className="cus-addr-button"
+    >
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="left"
+        prefixCls="ant-tooltip"
+        title="Custodian is in Trading state"
+        transitionName="zoom-big-fast"
+      >
+        <div
+          className="status-ligh-wrapper"
+        >
+          <div
+            className="status-light status3"
+          />
+        </div>
+      </Tooltip>
+    </div>
+  }
+  margin="test"
+  title={
+    <styled.div
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "Pointer",
+        }
+      }
+    >
+      Beethoven Perpetual
+    </styled.div>
+  }
+  width="360px"
+>
+  <styled.div
+    horizontal={true}
+  >
+    <styled.div
+      noLiBorder={true}
+      noMargin={true}
+      noUlBorder={true}
+      width="56%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li>
+            <span
+              className="title"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                }
+              }
+            >
+              ETH
+            </span>
+            <span
+              className="title"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "transform": "scaleX(1.5)",
+                }
+              }
+            >
+              <Icon
+                type="swap"
+              />
+            </span>
+            <span
+              className="content"
+            >
+              <div
+                className="cus-des"
+              >
+                <div>
+                  Income Token
+                </div>
+                <div>
+                  Leverage Token
+                </div>
+              </div>
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "justifyContent": "start",
+              }
+            }
+          >
+            <span
+              className="title"
+              style={
+                Object {
+                  "fontSize": 10,
+                }
+              }
+            >
+              Fully backed by
+            </span>
+            <span
+              className="content"
+              style={
+                Object {
+                  "fontSize": 10,
+                  "marginLeft": 4,
+                }
+              }
+            >
+              <b>
+                35.27 ETH
+              </b>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "center",
+          "padding": "0 0 0 10px",
+          "width": "44%",
+        }
+      }
+    >
+      <styled.button
+        disable={false}
+        onClick={[Function]}
+      >
+        Get Both
+      </styled.button>
+    </div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    padding="10px 5px 0 5px"
+    style={
+      Object {
+        "color": "rgba(64,79,84,.8)",
+        "fontSize": 12,
+      }
+    }
+  >
+    <div
+      className="cuscardtokenwrapper"
+    >
+      <span
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+          }
+        }
+      >
+        aETH
+        <span
+          className="aspan"
+        >
+          INCOME
+        </span>
+      </span>
+      <span>
+        5.26% p.a.
+      </span>
+    </div>
+    <div
+      className="cuscardnavtag"
+    >
+      <span
+        className="navspan"
+      >
+        NAV
+      </span>
+      <span>
+        <b>
+          $1.001
+        </b>
+      </span>
+    </div>
+  </styled.div>
+  <styled.div
+    height="90px"
+    horizontal={true}
+    padding="5px 0 15px 0"
+  >
+    <div
+      style={
+        Object {
+          "width": "56%",
+        }
+      }
+    >
+      <TimeSeriesChart
+        isA={true}
+        name="aETH"
+        prices={
+          Array [
+            Object {
+              "blockNumber": 9835631,
+              "contractAddress": "0x00be45Fe5903AB1b33a9d3969b05b29552a6d18b",
+              "navA": 0.9554321303002988,
+              "navB": 1.0891357393994023,
+              "price": 128.45782891277358,
+              "timestamp": 1545782400000,
+              "transactionHash": "0x54c64c781b92e1d44d5229245e86b9aae602f126339e16d72f50162100e7b5e5",
+            },
+          ]
+        }
+        timeOffset={25200}
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": "5px 0 0 10px",
+          "width": "44%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <div
+          className="px-left"
+        >
+          <b>
+            -
+          </b>
+        </div>
+        <div
+          className="px-right"
+        >
+          <b>
+            -
+          </b>
+        </div>
+      </div>
+      <styled.button
+        disable={false}
+        onClick={[Function]}
+      >
+        Get
+      </styled.button>
+    </div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    padding="0 5px 0 5px"
+    style={
+      Object {
+        "color": "rgba(64,79,84,.8)",
+        "fontSize": 12,
+      }
+    }
+  >
+    <div
+      className="cuscardtokenwrapper"
+    >
+      <span
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+          }
+        }
+      >
+        bETH
+        <span
+          className="aspan"
+        >
+          LEVERAGE
+        </span>
+      </span>
+      <span>
+        1.84x
+      </span>
+    </div>
+    <div
+      className="cuscardnavtag"
+    >
+      <span
+        className="navspan"
+      >
+        NAV
+      </span>
+      <span>
+        <b>
+          $1.186
+        </b>
+      </span>
+    </div>
+  </styled.div>
+  <styled.div
+    height="80px"
+    horizontal={true}
+    padding="5px 0 5px 0"
+  >
+    <div
+      style={
+        Object {
+          "width": "56%",
+        }
+      }
+    >
+      <TimeSeriesChart
+        isA={false}
+        name="bETH"
+        prices={
+          Array [
+            Object {
+              "blockNumber": 9835631,
+              "contractAddress": "0x00be45Fe5903AB1b33a9d3969b05b29552a6d18b",
+              "navA": 0.9554321303002988,
+              "navB": 1.0891357393994023,
+              "price": 128.45782891277358,
+              "timestamp": 1545782400000,
+              "transactionHash": "0x54c64c781b92e1d44d5229245e86b9aae602f126339e16d72f50162100e7b5e5",
+            },
+          ]
+        }
+        timeOffset={25200}
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-between",
+          "padding": "5px 0 0 10px",
+          "width": "44%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <div
+          className="px-left"
+        >
+          <b>
+            -
+          </b>
+        </div>
+        <div
+          className="px-right"
+        >
+          <b>
+            -
+          </b>
+        </div>
+      </div>
+      <styled.button
+        disable={false}
+        onClick={[Function]}
+      >
+        Get
+      </styled.button>
+    </div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    padding="0"
+    width="30%"
+  >
+    <styled.button
+      className="range-picker day-Button"
+      key="1"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+        }
+      }
+    >
+      24H
+    </styled.button>
+    <styled.button
+      className="range-picker day-Button"
+      key="3"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+        }
+      }
+    >
+      3D
+    </styled.button>
+    <styled.button
+      className="range-picker "
+      key="7"
+      onClick={[Function]}
+      style={
+        Object {
+          "border": "none",
+        }
+      }
+    >
+      7D
+    </styled.button>
+  </styled.div>
+</Styled(Card)>
+`;

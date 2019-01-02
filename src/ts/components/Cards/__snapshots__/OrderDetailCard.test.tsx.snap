@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderDetailCard Test Test Snapshot Test Snapshot 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card-oh popup-open"
+    extra={
+      <img
+        className="cardpopup-close"
+        onClick={[MockFunction]}
+        src={null}
+      />
+    }
+    noBodymargin={true}
+    style={
+      Object {
+        "overflow": "visible !important",
+      }
+    }
+    title={
+      <styled.div>
+        Order Detail
+      </styled.div>
+    }
+    width="480px"
+  >
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul
+          style={
+            Object {
+              "maxHeight": 256,
+              "overflowY": "scroll",
+              "padding": "0 10px",
+            }
+          }
+        >
+          <li>
+            Sell 123 test at 123 undefined per test. Total 246.0 filled.
+          </li>
+          <li
+            key="123"
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
+          >
+            <span>
+              1970-01-01 07:30:00
+            </span>
+            <span>
+              Invalid order
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </Styled(Card)>
+</div>
+`;

@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
+<Styled(Card)
+  className="panel-wrap animated"
+  style={
+    Object {
+      "right": 0,
+    }
+  }
+  title={
+    <styled.div>
+      Balances
+       
+    </styled.div>
+  }
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              ETH
+            </span>
+            <span
+              className="content"
+            >
+              0.5077
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Wrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              WETH
+            </span>
+            <span
+              className="content"
+            >
+              0.9850
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Unwrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul />
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              Total Net Asset Value
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "flexDirection": "row-reverse",
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              $183.6
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.button
+    className="rightFixed"
+    onClick={[MockFunction]}
+    style={
+      Object {
+        "background": "#fff",
+        "color": "rgba(0,144,206,1)",
+      }
+    }
+  >
+    ∧  Hide Balances
+  </styled.button>
+</Styled(Card)>
+`;
