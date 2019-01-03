@@ -14,7 +14,13 @@ describe('StatusCard Test', () => {
 			pair: "test",
 			tool: "test",
 			count: 123,
-		}];
+		}, {
+				hostname: "test1",
+				updatedAt: 123,
+				pair: "test1",
+				tool: "test1",
+				count: 123,
+			}];
 		it('Test Snapshot', () => {
 			const wrapper = shallow(<StatusCard status={status} />);
 			expect(wrapper).toMatchSnapshot();

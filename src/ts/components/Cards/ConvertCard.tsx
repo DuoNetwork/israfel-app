@@ -108,7 +108,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			description: `Create ${props.aToken} and ${props.bToken} with ETH`,
 			sliderValue: 0,
 			sliderWETH: 0
-		}
+		};
 		document.addEventListener('keydown', this.escFunction.bind(this), false);
 	}
 
@@ -155,6 +155,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	private handleAmountBlurChange = (value: string, limit: number) => {
 		const { info, aToken, bToken } = this.props;
 		const { isCreate } = this.state;
+		console.log(limit);
+		console.log(value.match(CST.RX_NUM_P));
 		if (value.match(CST.RX_NUM_P) && limit) {
 			const amountNum = Math.min(Number(value), limit);
 			this.setState({
@@ -337,13 +339,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	};
 
 	private escFunction(event: any) {
-		console.log("123456");
 		if (this.props) {
 			const { handleClose } = this.props;
-			if (event.keyCode === 27) {
-				console.log("1234567890");
-				handleClose();
-			}
+			if (event.keyCode === 27) handleClose();
 		}
 	}
 

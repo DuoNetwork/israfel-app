@@ -18,6 +18,14 @@ exports[`StatusCard Test Test Snapshot Test Snapshot 1`] = `
       dataSource={
         Array [
           Object {
+            "Hostname": "test1",
+            "Info": 123,
+            "Pair": "test1",
+            "Process": "test1",
+            "Updated": "long time ago",
+            "key": "test1test1test1",
+          },
+          Object {
             "Hostname": "test",
             "Info": 123,
             "Pair": "test",

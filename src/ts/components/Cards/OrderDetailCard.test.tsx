@@ -29,14 +29,25 @@ describe('OrderDetailCard Test', () => {
 				updatedAt: 123,
 				initialSequence: 123,
 				currentSequence: 123,
+				transactionHash: "Hash",
 				fee: 123,
 				feeAsset: 'test'
 			}
 		];
 		const handleClose = jest.fn(() => ({}));
 		it('Test Snapshot', () => {
+			window.open = jest.fn();
 			util.formatTimeSecond = jest.fn(() => "1970-01-01 00:00:00");
 			const wrapper = shallow(<OrderDetailCard orders={orders} handleClose={handleClose} />);
+			expect(wrapper).toMatchSnapshot();
+			wrapper.find('li').at(1).simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			expect(window.open).toBeCalled();
+		});
+		it('Test Snapshot', () => {
+			window.open = jest.fn();
+			util.formatTimeSecond = jest.fn(() => "1970-01-01 00:00:00");
+			const wrapper = shallow(<OrderDetailCard orders={[]} handleClose={handleClose} />);
 			expect(wrapper).toMatchSnapshot();
 		});
 	});

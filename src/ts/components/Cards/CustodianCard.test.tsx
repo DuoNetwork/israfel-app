@@ -3,14 +3,16 @@
  */
 
 import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
+import { SButton, SCardTitle } from './_styled';
 import CustodianCard from './CustodianCard';
 
 describe('CustodianCard Test', () => {
 	describe('Test Snapshot', () => {
 		const type = 'Beethoven';
-		const custodian = "0x66ad9d0b933da88bbee196b2a9c0badc901c4a3a";
+		const custodian = '0x66ad9d0b933da88bbee196b2a9c0badc901c4a3a';
 		const tokenBalances = {
 			'LETH-M19|WETH': {
 				balance: 123,
@@ -95,6 +97,49 @@ describe('CustodianCard Test', () => {
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(1)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(2)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(3)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+		});
+
+		it('clicking "continue" button fires the callback', () => {
+			const wrapper = mount(
+				<CustodianCard
+					margin={margin}
+					acceptedPrices={acceptedPrice}
+					handleConvert={handleConvert}
+					handleTrade={handleTrade}
+					ethPrice={ethPrice}
+					orderBooks={orderBooks}
+					info={info}
+					type={type}
+					tokenBalances={tokenBalances}
+					custodian={custodian}
+				/>
+			);
+			window.open = jest.fn();
+			wrapper
+				.find(SCardTitle)
+				.at(0)
+				.simulate('click');
+			expect(window.open).toBeCalled();
 		});
 	});
 });
