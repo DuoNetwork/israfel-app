@@ -3,8 +3,8 @@
  */
 
 import { shallow } from 'enzyme';
-import moment from 'moment';
 import * as React from 'react';
+import util from 'ts/common/util';
 import OrderDetailCard from './OrderDetailCard';
 
 describe('OrderDetailCard Test', () => {
@@ -35,7 +35,7 @@ describe('OrderDetailCard Test', () => {
 		];
 		const handleClose = jest.fn(() => ({}));
 		it('Test Snapshot', () => {
-			moment().format = jest.fn(() => "1970-01-01 07:30");
+			util.formatTimeSecond = jest.fn(() => "1970-01-01 00:00:00");
 			const wrapper = shallow(<OrderDetailCard orders={orders} handleClose={handleClose} />);
 			expect(wrapper).toMatchSnapshot();
 		});

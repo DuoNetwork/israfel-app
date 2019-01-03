@@ -122,7 +122,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
               },
             ],
             "Order": "Sell 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement",
-            "Time": "1970-01-01 07:30",
+            "Time": "1970-01-01 00:00:00",
             "key": "test",
           },
           Object {
@@ -176,7 +176,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
               },
             ],
             "Order": "Buy 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement",
-            "Time": "1970-01-01 07:30",
+            "Time": "1970-01-01 00:00:00",
             "key": "tesst123",
           },
         ]

@@ -1,5 +1,4 @@
 import close from 'images/icons/close.svg';
-import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { IUserOrder } from 'ts/common/types';
@@ -51,9 +50,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 										style={{cursor: o.transactionHash ? 'pointer' : 'default'}}
 									>
 										<span>
-											{moment(o.updatedAt || o.createdAt).format(
-												'YYYY-MM-DD HH:mm:ss'
-											)}
+											{util.formatTimeSecond(o.updatedAt || o.createdAt)}
 										</span>
 										<span>{util.getVersionDescription(o)}</span>
 									</li>

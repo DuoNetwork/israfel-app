@@ -71,7 +71,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				const lastVersion = orders[0];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_TIME]: util.formatTime(lastVersion.createdAt),
 					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_HISTORY]: orders
 				});
@@ -82,7 +82,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 				const lastVersion = orders[0];
 				dataSource.push({
 					key: orderHash,
-					[CST.TH_TIME]: moment(lastVersion.createdAt).format('YYYY-MM-DD HH:mm'),
+					[CST.TH_TIME]: util.formatTime(lastVersion.createdAt),
 					[CST.TH_ORDER]: util.getOrderFullDescription(lastVersion),
 					[CST.TH_ACTIONS]: (
 						<Popconfirm

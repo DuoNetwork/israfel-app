@@ -62,7 +62,7 @@ exports[`OrderDetailCard Test Test Snapshot Test Snapshot 1`] = `
             }
           >
             <span>
-              1970-01-01 07:30:00
+              1970-01-01 00:00:00
             </span>
             <span>
               Invalid order

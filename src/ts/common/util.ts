@@ -17,6 +17,14 @@ class Util {
 		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
 	}
 
+	public formatTime(time: any) {
+		return moment(time).format('YYYY-MM-DD HH:mm');
+	}
+
+	public formatTimeSecond(time: number) {
+		return moment(time).format('YYYY-MM-DD HH:mm:ss');
+	}
+
 	public formatPriceShort(num: number) {
 		if (num < 1) return d3.format('.3f')(num);
 		return d3

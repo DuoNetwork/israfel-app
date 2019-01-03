@@ -3,8 +3,8 @@
  */
 
 import { shallow } from 'enzyme';
-import moment from 'moment';
 import * as React from 'react';
+import util from 'ts/common/util';
 import OrderHistoryCard from './OrderHistoryCard';
 
 describe('OrderHistoryCard Test', () => {
@@ -81,11 +81,11 @@ describe('OrderHistoryCard Test', () => {
 		};
 
 		it('Test Snapshot', () => {
-			moment().format = jest.fn(() => "1970-01-01 07:30");
+			util.formatTime = jest.fn(() => '1970-01-01 00:00:00');
 			const wrapper = shallow(
 				<OrderHistoryCard orderHistory={orderHistory} account={'test'} />
 			);
 			expect(wrapper).toMatchSnapshot();
-			});
+		});
 	});
 });
