@@ -3,6 +3,7 @@
  */
 
 import { shallow } from 'enzyme';
+import moment from 'moment';
 import * as React from 'react';
 import OrderHistoryCard from './OrderHistoryCard';
 
@@ -80,6 +81,7 @@ describe('OrderHistoryCard Test', () => {
 		};
 
 		it('Test Snapshot', () => {
+			moment().format = jest.fn(() => "1970-01-01 07:30");
 			const wrapper = shallow(
 				<OrderHistoryCard orderHistory={orderHistory} account={'test'} />
 			);
