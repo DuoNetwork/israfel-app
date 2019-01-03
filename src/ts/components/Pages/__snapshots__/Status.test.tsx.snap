@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status Test User Login Test Snapshot 1`] = `
+<StatusCard
+  status={
+    Array [
+      Object {
+        "count": 123,
+        "hostname": "test",
+        "pair": "test",
+        "tool": "test",
+        "updatedAt": 123,
+      },
+    ]
+  }
+/>
+`;

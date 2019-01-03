@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
+<Styled(Card)
+  extra={
+    <styled.button
+      className="export-button"
+      onClick={[Function]}
+    >
+      Export to CSV
+    </styled.button>
+  }
+  margin="0 10px 50px 10px"
+  title={
+    <div
+      className="ordercard-header"
+      onClick={[Function]}
+    >
+      <div
+        className="switch-button"
+        style={
+          Object {
+            "borderLeft": "none",
+            "marginLeft": 0,
+            "opacity": 1,
+            "paddingLeft": 0,
+          }
+        }
+      >
+        Open Orders
+      </div>
+      <div
+        className="switch-button"
+        style={
+          Object {
+            "opacity": 0.5,
+          }
+        }
+      >
+        Past Orders
+      </div>
+    </div>
+  }
+  width="740px"
+>
+  <styled.div>
+    <Table
+      bordered={false}
+      className=""
+      dataSource={
+        Array [
+          Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                className="order-cancel"
+              >
+                Cancel
+              </a>
+            </Popconfirm>,
+            "History": Array [
+              Object {
+                "account": "test",
+                "amount": 123,
+                "balance": 123,
+                "createdAt": 123,
+                "currentSequence": 123,
+                "expiry": 123,
+                "fee": 123,
+                "feeAsset": "test",
+                "fill": 123,
+                "initialSequence": 123,
+                "matching": 123,
+                "orderHash": "test",
+                "pair": "test",
+                "price": 123,
+                "processed": true,
+                "side": "ask",
+                "status": "test",
+                "type": "test",
+                "updatedAt": 123,
+                "updatedBy": "test",
+              },
+              Object {
+                "account": "test",
+                "amount": 123,
+                "balance": 123,
+                "createdAt": 123,
+                "currentSequence": 1234,
+                "expiry": 123,
+                "fee": 123,
+                "feeAsset": "test",
+                "fill": 123,
+                "initialSequence": 1234,
+                "matching": 111,
+                "orderHash": "test",
+                "pair": "test",
+                "price": 123,
+                "processed": true,
+                "side": "test",
+                "status": "test",
+                "type": "test",
+                "updatedAt": 123,
+                "updatedBy": "test",
+              },
+            ],
+            "Order": "Sell 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement",
+            "Time": "1970-01-01 07:30",
+            "key": "test",
+          },
+          Object {
+            "Actions": <Popconfirm
+              icon={
+                <Icon
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                  type="question-circle-o"
+                />
+              }
+              okType="primary"
+              onConfirm={[Function]}
+              placement="top"
+              prefixCls="ant-popover"
+              title="Are you sure to delete this order?"
+              transitionName="zoom-big"
+              trigger="click"
+            >
+              <a
+                className="order-cancel"
+              >
+                Cancel
+              </a>
+            </Popconfirm>,
+            "History": Array [
+              Object {
+                "account": "test",
+                "amount": 123,
+                "balance": 123,
+                "createdAt": 123,
+                "currentSequence": 1233,
+                "expiry": 123,
+                "fee": 123,
+                "feeAsset": "test",
+                "fill": 123,
+                "initialSequence": 1234456,
+                "matching": 123,
+                "orderHash": "tesst123",
+                "pair": "test",
+                "price": 123,
+                "processed": true,
+                "side": "bid",
+                "status": "test",
+                "type": "test",
+                "updatedAt": 123,
+                "updatedBy": "test",
+              },
+            ],
+            "Order": "Buy 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement",
+            "Time": "1970-01-01 07:30",
+            "key": "tesst123",
+          },
+        ]
+      }
+      indentSize={20}
+      loading={false}
+      locale={Object {}}
+      pagination={
+        Object {
+          "pageSize": 10,
+          "pageSizeOptions": Array [
+            "10",
+            "20",
+            "50",
+          ],
+          "showQuickJumper": true,
+          "showSizeChanger": true,
+          "showTotal": [Function],
+          "size": "small",
+        }
+      }
+      prefixCls="ant-table"
+      rowKey="key"
+      showHeader={true}
+      size="default"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+      useFixedHeader={false}
+    >
+      <Column
+        dataIndex="Time"
+        title="Time"
+        width={180}
+      />
+      <Column
+        dataIndex="Order"
+        onCell={[Function]}
+        title="Order"
+      />
+      <Column
+        dataIndex="Actions"
+        key="Actions"
+        title=""
+        width={100}
+      />
+    </Table>
+  </styled.div>
+  <OrderDetailCard
+    handleClose={[Function]}
+    orders={Array []}
+  />
+</Styled(Card)>
+`;
