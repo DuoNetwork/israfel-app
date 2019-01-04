@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getOrderFullDescription 1`] = `"Sell 123 test at 123 undefined per test. Valid till 1970-01-01 12:00:00"`;
+
+exports[`getOrderFullDescription 2`] = `"Sell 123 test at 123 undefined per test. Fully filled"`;
+
+exports[`getOrderFullDescription 3`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled by user."`;
+
+exports[`getOrderFullDescription 4`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Expired."`;
+
+exports[`getOrderFullDescription 5`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to insufficient balance."`;
+
+exports[`getOrderFullDescription 6`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to settlement error."`;
+
+exports[`getOrderFullDescription 7`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to custodian reset."`;
+
+exports[`getVersionDescription 1`] = `"Order placed."`;
+
+exports[`getVersionDescription 2`] = `"Fully filled"`;
+
+exports[`getVersionDescription 3`] = `"Cancelled by user"`;
+
+exports[`getVersionDescription 4`] = `"Expired"`;
+
+exports[`getVersionDescription 5`] = `"Cancelled due to insufficent balance"`;
+
+exports[`getVersionDescription 6`] = `"Cancelled due to settlement error"`;
+
+exports[`getVersionDescription 7`] = `"Cancelled due to custodian reset"`;
+
+exports[`getVersionDescription 8`] = `"Total 246.0 filledPending settlement"`;
