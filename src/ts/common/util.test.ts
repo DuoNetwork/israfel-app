@@ -180,10 +180,6 @@ test('getOrderTitle', () => {
 	).toBe('Order Filled');
 });
 
-test('formatTimeSecond', () => {
-	expect(util.formatTimeSecond(1234567890)).toBe('1970-01-15 14:26:07');
-});
-
 test('getOrderFullDescription', () => {
 	util.formatMaturity = jest.fn(() => '1970-01-01 12:00:00');
 	expect(
