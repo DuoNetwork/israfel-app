@@ -155,8 +155,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	private handleAmountBlurChange = (value: string, limit: number) => {
 		const { info, aToken, bToken } = this.props;
 		const { isCreate } = this.state;
-		console.log(limit);
-		console.log(value.match(CST.RX_NUM_P));
 		if (value.match(CST.RX_NUM_P) && limit) {
 			const amountNum = Math.min(Number(value), limit);
 			this.setState({
@@ -327,7 +325,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
 							wethCreate ? web3Util.contractAddresses.etherToken : ''
-					  )
+					)
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
@@ -404,7 +402,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
