@@ -5,6 +5,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
+import { SButton, SInput } from './_styled';
 import BalanceCard from './BalanceCard';
 
 describe('BalanceCard Test', () => {
@@ -81,6 +82,23 @@ describe('BalanceCard Test', () => {
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SInput)
+				.at(0)
+				.simulate('change', { target: { value: '123456' } });
+			wrapper
+				.find(SInput)
+				.at(1)
+				.simulate('change', { target: { value: '123456' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(1)
+				.simulate('click');
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
 		});
 	});
 });
