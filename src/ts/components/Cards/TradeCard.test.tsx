@@ -1,15 +1,17 @@
 /**
  * @jest-environment jsdom
  */
-
+import { Radio } from 'antd';
 import { shallow } from 'enzyme';
+// import { mount } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
+import { SInput, SSlider, SButton } from './_styled';
 import TradeCard from './TradeCard';
+const RadioGroup = Radio.Group;
 
 describe('TradeCard Test', () => {
 	describe('Test Snapshot', () => {
-		const token = 'test';
 		const tokenInfo = {
 			address: '0x8a3beca74e0e737460bde45a09594a8d7d8c9886',
 			code: 'bETH',
@@ -52,12 +54,12 @@ describe('TradeCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
-			util.formatExpiry = jest.fn(() => "1970-01-01 19:00:00");
+			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapper = shallow(
 				<TradeCard
 					account={'account'}
-					token={token}
+					token={'aETH'}
 					tokenInfo={tokenInfo}
 					tokenBalance={tokenBalance}
 					ethBalance={ethBalance}
@@ -70,6 +72,124 @@ describe('TradeCard Test', () => {
 					handleClose={handleClose}
 				/>
 			);
+			expect(wrapper).toMatchSnapshot();
+			const wrapper1 = shallow(
+				<TradeCard
+					account={'account'}
+					token={'bToken'}
+					tokenInfo={tokenInfo}
+					tokenBalance={tokenBalance}
+					ethBalance={ethBalance}
+					orderBook={orderBook}
+					ethPrice={123}
+					navInEth={1}
+					navUpdatedAt={1234567890}
+					notify={() => ({})}
+					interestOrLeverage={1}
+					handleClose={handleClose}
+				/>
+			);
+			expect(wrapper1).toMatchSnapshot();
+			const wrapper2 = shallow(
+				<TradeCard
+					account={'account'}
+					token={'sToken'}
+					tokenInfo={tokenInfo}
+					tokenBalance={tokenBalance}
+					ethBalance={ethBalance}
+					orderBook={orderBook}
+					ethPrice={123}
+					navInEth={1}
+					navUpdatedAt={1234567890}
+					notify={() => ({})}
+					interestOrLeverage={1}
+					handleClose={handleClose}
+				/>
+			);
+			expect(wrapper2).toMatchSnapshot();
+			const wrapper3 = shallow(
+				<TradeCard
+					account={'account'}
+					token={'dETH'}
+					tokenInfo={tokenInfo}
+					tokenBalance={tokenBalance}
+					ethBalance={ethBalance}
+					orderBook={orderBook}
+					ethPrice={123}
+					navInEth={1}
+					navUpdatedAt={1234567890}
+					notify={() => ({})}
+					interestOrLeverage={1}
+					handleClose={handleClose}
+				/>
+			);
+			expect(wrapper3).toMatchSnapshot();
+			wrapper
+				.find(SInput)
+				.at(1)
+				.simulate('change', { target: { value: '123456' } });
+			wrapper
+				.find(SInput)
+				.at(1)
+				.simulate('blur', { target: { value: '123456' } });
+			wrapper
+				.find(SInput)
+				.at(0)
+				.simulate('change', { target: { value: '123456' } });
+			wrapper
+				.find(SInput)
+				.at(0)
+				.simulate('blur', { target: { value: '123456' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper.simulate('keypress', { keyCode: 27 });
+			expect(wrapper).toMatchSnapshot();
+			wrapper.setState({ approving: false });
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+		});
+
+		it('Test Snapshot', () => {
+			Math.max = jest.fn(() => 1);
+			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
+			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const wrapper = shallow(
+				<TradeCard
+					account={'account'}
+					token={'aETH'}
+					tokenBalance={tokenBalance}
+					ethBalance={ethBalance}
+					orderBook={orderBook}
+					ethPrice={123}
+					navInEth={1}
+					navUpdatedAt={1234567890}
+					notify={() => ({})}
+					interestOrLeverage={1}
+					handleClose={handleClose}
+				/>
+			);
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SSlider)
+				.at(0)
+				.simulate('change', { target: { value: '123456' } });
+			wrapper
+				.find(RadioGroup)
+				.at(0)
+				.simulate('change', { target: { value: '123456' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find('button')
+				.at(0)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+
+			wrapper
+				.find('button')
+				.at(1)
+				.simulate('click');
 			expect(wrapper).toMatchSnapshot();
 		});
 	});

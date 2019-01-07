@@ -32,7 +32,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        Trade test/WETH
+        Trade aETH/WETH
       </styled.div>
     }
     width="360px"
@@ -42,7 +42,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     >
       <Component
         n={1}
-        token="test"
+        token="aETH"
       />
       <div
         className="trade-nav"
@@ -270,7 +270,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 <div
                   className="tabletitle"
                 >
-                  test
+                  aETH
                 </div>
                 <div
                   className="tabletitle"
@@ -487,12 +487,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       <div
         className="convert-popup-des"
       >
-        Buy test with WETH
+        Buy aETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 test fee
+        Pay 0.1 aETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -516,6 +516,5228 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           width="49%"
         >
           Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade bToken/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="bToken"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  bToken
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy bToken with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 bToken fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade sToken/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="sToken"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  sToken
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy sToken with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 sToken fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade dETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="dETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  dETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy dETH with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 dETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value="123456.000000"
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  approx. 15.19M USD
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={false}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={false}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy 123456.0 aETH with 15.24B WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value="123456.000000"
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  approx. 15.19M USD
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={false}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={false}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy 123456.0 aETH with 15.24B WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1.000000 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123.000000
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123.0
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  123.0
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.000005}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  step={0.1}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy aETH with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0.1 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value={1}
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy aETH with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  estimated USD price
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={true}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value="NaN"
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value="123456"
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy aETH with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value="123"
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  approx. 15,129.0 USD
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={false}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value="123456"
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Buy aETH with WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Buy
+        </styled.button>
+      </styled.div>
+    </Spin>
+  </Styled(Card)>
+</div>
+`;
+
+exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    className="popup-bg popup-open-bg"
+  />
+  <Styled(Card)
+    className="popup-card popup-open"
+    extra={
+      <styled.div
+        horizontal={true}
+        width="40px"
+      >
+        <img
+          className="cardpopup-close"
+          src={null}
+        />
+        <img
+          className="cardpopup-close"
+          onClick={[MockFunction]}
+          src={null}
+        />
+      </styled.div>
+    }
+    noBodymargin={true}
+    title={
+      <styled.div>
+        Trade aETH/WETH
+      </styled.div>
+    }
+    width="360px"
+  >
+    <div
+      className="convert-popup-des"
+    >
+      <Component
+        n={1}
+        token="aETH"
+      />
+      <div
+        className="trade-nav"
+      >
+        <span
+          className="navspan"
+        >
+          NAV
+        </span>
+        <span
+          className="trade-nav-px"
+        >
+          1 ETH
+        </span>
+        <span
+          style={
+            Object {
+              "color": "rgba(64,79,84,.6)",
+              "fontSize": 10,
+            }
+          }
+        >
+          Last updated: just now
+        </span>
+      </div>
+    </div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                123
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 5px 5px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+              >
+                -
+              </span>
+              <span
+                className="title bid-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+        >
+          <ul>
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  123
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                123
+              </span>
+            </li>
+            <li
+              key="1"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+            <li
+              key="2"
+              style={
+                Object {
+                  "padding": "5px 30px 5px 5px",
+                }
+              }
+            >
+              <span
+                className="title ask-span"
+              >
+                <b>
+                  -
+                </b>
+              </span>
+              <span
+                className="content"
+              >
+                -
+              </span>
+            </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <Spin
+      prefixCls="ant-spin"
+      size="default"
+      spinning={false}
+      tip="Pending Order Signature"
+      wrapperClassName=""
+    >
+      <styled.div>
+        <styled.div
+          horizontal={true}
+          padding="10px;"
+          width="100%"
+        >
+          <button
+            className="conv-button non-select"
+            onClick={[Function]}
+          >
+            BUY
+          </button>
+          <button
+            className="conv-button selected"
+            onClick={[Function]}
+          >
+            SELL
+          </button>
+        </styled.div>
+        <styled.div
+          noMargin={true}
+          width="100%"
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Token
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  aETH
+                </div>
+                <div
+                  className="tabletitle"
+                >
+                  WETH
+                </div>
+              </li>
+              <li
+                style={
+                  Object {
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <div
+                  className="tabletitle"
+                  style={
+                    Object {
+                      "textAlign": "left",
+                      "width": "20%",
+                    }
+                  }
+                >
+                  Balance
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+                <div
+                  className="tablecontent"
+                >
+                  0.1K
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+        <styled.div
+          noLiBorder={true}
+          noUlBorder={true}
+        >
+          <div
+            className="status-list-wrapper"
+          >
+            <ul>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Price
+                </span>
+                <styled.input
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value="123"
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "flexDirection": "row-reverse",
+                    "padding": "5px 15px",
+                  }
+                }
+              >
+                <span
+                  className="des"
+                >
+                  approx. 15,129.0 USD
+                </span>
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "marginBottom": 0,
+                    "padding": "0 10px",
+                  }
+                }
+              >
+                <span
+                  className="input-des"
+                >
+                  Amount
+                </span>
+                <styled.input
+                  disabled={false}
+                  min={0}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  right={true}
+                  type="number"
+                  value=""
+                  width="100%"
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0px 15px",
+                  }
+                }
+              >
+                <Styled(Slider)
+                  disabled={true}
+                  marks={
+                    Object {
+                      "0": Object {
+                        "label": <strong>
+                          0%
+                        </strong>,
+                      },
+                      "100": Object {
+                        "label": <strong>
+                          100%
+                        </strong>,
+                      },
+                      "25": Object {
+                        "label": <strong>
+                          25%
+                        </strong>,
+                      },
+                      "50": Object {
+                        "label": <strong>
+                          50%
+                        </strong>,
+                      },
+                      "75": Object {
+                        "label": <strong>
+                          75%
+                        </strong>,
+                      },
+                    }
+                  }
+                  onChange={[Function]}
+                  step={1}
+                  value={0}
+                />
+              </li>
+              <li
+                className="input-line"
+                style={
+                  Object {
+                    "padding": "0 15px",
+                  }
+                }
+              >
+                <span
+                  className="title"
+                  style={
+                    Object {
+                      "width": 40,
+                    }
+                  }
+                >
+                  Expiry
+                </span>
+                <styled.div
+                  horizontal={true}
+                  rowInv={true}
+                  width="46%"
+                >
+                  <RadioGroup
+                    buttonStyle="outline"
+                    disabled={false}
+                    onChange={[Function]}
+                    prefixCls="ant-radio"
+                    value="123456"
+                  >
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={1}
+                    >
+                      Day
+                    </Radio>
+                    <Radio
+                      prefixCls="ant-radio"
+                      type="radio"
+                      value={2}
+                    >
+                      Month
+                    </Radio>
+                  </RadioGroup>
+                </styled.div>
+                <div
+                  className="convert-radio-des"
+                >
+                  Valid till 1970-01-01 19:00:00
+                </div>
+              </li>
+            </ul>
+          </div>
+        </styled.div>
+      </styled.div>
+      <div
+        className="convert-popup-des"
+      >
+        Sell aETH for WETH
+      </div>
+      <div
+        className="convert-popup-des"
+      >
+        Pay 0 aETH fee
+      </div>
+      <styled.div
+        horizontal={true}
+        padding="10px"
+        width="100%"
+      >
+        <styled.button
+          onClick={[Function]}
+          width="49%"
+        >
+          Reset
+        </styled.button>
+        <styled.button
+          disable={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0.3,
+            }
+          }
+          width="49%"
+        >
+          Sell
         </styled.button>
       </styled.div>
     </Spin>
