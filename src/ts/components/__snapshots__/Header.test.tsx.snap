@@ -39,6 +39,19 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           >
             ETH/USD
           </span>
+          <div
+            className="nav-bal-item"
+            key="0x00"
+          >
+            <div>
+              0X00
+            </div>
+            <div
+              className="nav-bal-value"
+            >
+              123.00
+            </div>
+          </div>
         </div>
       </div>
     </div>
