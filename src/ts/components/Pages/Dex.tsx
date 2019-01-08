@@ -30,7 +30,7 @@ interface IProps {
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
-	etherToken: string;
+	wethAddress: string;
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
@@ -39,6 +39,15 @@ interface IProps {
 	getTokenByCode: (code: string) => IToken | undefined;
 	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
 	web3PersonalSign: (account: string, message: string) => Promise<string>;
+	addOrder: (
+		account: string,
+		pair: string,
+		price: number,
+		amount: number,
+		isBid: boolean,
+		expiry: number
+	) => Promise<string>;
+	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
 }
 
 interface IState {
@@ -110,7 +119,11 @@ export default class Dex extends React.Component<IProps, IState> {
 			notify,
 			wrapEther,
 			unwrapEther,
-			getTokenByCode
+			getTokenByCode,
+			wethAddress,
+			setUnlimitedTokenAllowance,
+			addOrder,
+			deleteOrder
 		} = this.props;
 		const {
 			convertCustodian,
@@ -141,7 +154,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				  )
+				)
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -220,6 +233,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						orderHistory={orderHistory}
 						account={account}
 						web3PersonalSign={this.props.web3PersonalSign}
+						deleteOrder={deleteOrder}
 					/>
 					<ConvertCard
 						account={account}
@@ -231,13 +245,13 @@ export default class Dex extends React.Component<IProps, IState> {
 						info={custodians[convertCustodian]}
 						notify={notify}
 						handleClose={() => this.handleConvert('', '', '')}
-						etherToken={this.props.etherToken}
+						wethAddress={wethAddress}
 					/>
 					<TradeCard
 						account={account}
 						token={tradeToken}
 						tokenInfo={tradeTokenInfo}
-						setUnlimitedTokenAllowance={this.props.setUnlimitedTokenAllowance}
+						setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 						tokenBalance={tradeTokenBalance}
 						ethBalance={ethBalance}
 						orderBook={
@@ -254,6 +268,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						notify={notify}
 						interestOrLeverage={tokenInterestOrLeverage}
 						handleClose={() => this.handleTrade('')}
+						addOrder={addOrder}
 					/>
 				</Spin>
 				<BalanceCard

@@ -85,11 +85,13 @@ describe('OrderHistoryCard Test', () => {
 			util.convertOrdersToCSV = jest.fn();
 			util.getOrderFullDescription = jest.fn();
 			const web3PersonalSign = jest.fn();
+			const deleteOrder = jest.fn();
 			const wrapper = shallow(
 				<OrderHistoryCard
 					web3PersonalSign={web3PersonalSign}
 					orderHistory={orderHistory}
 					account={'test'}
+					deleteOrder={deleteOrder}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

@@ -29,7 +29,7 @@ interface IProps {
 	info?: ICustodianInfo;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
-	etherToken: string;
+	wethAddress: string;
 }
 
 interface IState {
@@ -110,7 +110,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			sliderValue: 0,
 			sliderWETH: 0
 		};
-		document.addEventListener('keydown', this.escFunction.bind(this), false);
+		document.addEventListener('keydown', this.handleKeyBoardEsc);
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
@@ -135,7 +135,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		return null;
 	}
 
-	private handleSideChange = () =>
+	private handleSideChange = () => {
+		const { aToken, bToken } = this.props;
 		this.setState({
 			isCreate: !this.state.isCreate,
 			wethCreate: false,
@@ -144,9 +145,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			sliderWETH: 0,
 			wethAmount: '',
 			description: this.state.isCreate
-				? `Redeem ETH from ${this.props.aToken} and ${this.props.bToken}`
-				: `Create ${this.props.aToken} and ${this.props.bToken} with ETH`
+				? `Redeem ETH from ${aToken} and ${bToken}`
+				: `Create ${aToken} and ${bToken} with ETH`
 		});
+	};
 
 	private handleInfoExpandChange = () =>
 		this.setState({
@@ -220,38 +222,36 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 	}
 
 	private handleWethCreateChange = () => {
-		if (!this.state.wethCreate) {
-			const { account, custodian } = this.props;
-			duoWeb3Wrapper
-				.getErc20Allowance(this.props.etherToken, account, custodian)
-				.then(allownace => {
-					this.setState({
-						allowance: allownace,
-						loading: false
-					});
+		const { account, custodian, wethAddress, aToken, bToken } = this.props;
+		const wethCreate = this.state.wethCreate;
+		if (!wethCreate)
+			duoWeb3Wrapper.getErc20Allowance(wethAddress, account, custodian).then(allownace => {
+				this.setState({
+					allowance: allownace,
+					loading: false
 				});
-		}
+			});
 
 		this.setState({
-			wethCreate: !this.state.wethCreate,
+			wethCreate: !wethCreate,
 			amount: '',
 			sliderValue: 0,
 			wethAmount: '',
 			sliderWETH: 0,
 			allowance: 0,
-			loading: !this.state.wethCreate,
-			description: `Create ${this.props.aToken} and ${this.props.bToken} with ${
-				this.state.wethCreate ? CST.TH_ETH : CST.TH_WETH
+			loading: !wethCreate,
+			description: `Create ${aToken} and ${bToken} with ${
+				wethCreate ? CST.TH_ETH : CST.TH_WETH
 			}`
 		});
 	};
 
 	private handleWETHApprove = async () => {
 		this.setState({ loading: true });
-		const { account, custodian, notify } = this.props;
+		const { account, custodian, notify, wethAddress } = this.props;
 		try {
 			const txHash = await duoWeb3Wrapper.erc20Approve(
-				this.props.etherToken,
+				wethAddress,
 				account,
 				custodian,
 				0,
@@ -265,7 +265,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			});
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
-					.getErc20Allowance(this.props.etherToken, account, custodian)
+					.getErc20Allowance(wethAddress, account, custodian)
 					.then(allownace => {
 						if (allownace) {
 							this.setState({
@@ -305,7 +305,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		this.setState({
 			loading: true
 		});
-		const { account, custodian, handleClose, info, notify } = this.props;
+		const { account, custodian, handleClose, info, notify, wethAddress } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
 		const cw = getDualClassWrapper(custodian);
 		if (!info || !cw) {
@@ -325,8 +325,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					? await cw.create(
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
-							wethCreate ? this.props.etherToken : ''
-					  )
+							wethCreate ? wethAddress : ''
+					)
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
@@ -337,11 +337,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		}
 	};
 
-	private escFunction(event: any) {
-		if (this.props) {
-			const { handleClose } = this.props;
-			if (event.keyCode === 27) handleClose();
-		}
+	private handleKeyBoardEsc = (event: KeyboardEvent) => {
+		if (event.keyCode === 27 && this.props.custodian) this.props.handleClose();
 	}
 
 	private TokenDescription = (props: { aToken: string; bToken: string }) => {
@@ -403,7 +400,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			  )
+			)
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';

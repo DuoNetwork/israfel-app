@@ -123,6 +123,7 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
      
     <OrderHistoryCard
       account="test"
+      deleteOrder={[MockFunction]}
       orderHistory={Object {}}
       web3PersonalSign={[MockFunction]}
     />
@@ -138,12 +139,13 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
           "weth": 0.984992,
         }
       }
-      etherToken="test"
       handleClose={[Function]}
       notify={[MockFunction]}
+      wethAddress="wethAddress"
     />
     <TradeCard
       account="test"
+      addOrder={[MockFunction]}
       ethBalance={
         Object {
           "allowance": 1.157920892373162,

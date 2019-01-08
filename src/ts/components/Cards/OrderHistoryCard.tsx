@@ -3,7 +3,6 @@ import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import relayerClient from 'ts/common/relayerClient';
 import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SButton, SCard, STableWrapper } from './_styled';
@@ -15,6 +14,7 @@ interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	account: string;
 	web3PersonalSign: (account: string, message: string) => Promise<string>;
+	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
 }
 
 interface IState {
@@ -45,7 +45,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		const { orderHistory, account } = this.props;
+		const { orderHistory, account, web3PersonalSign, deleteOrder } = this.props;
 		const { showHistory, details } = this.state;
 		const dataSource: any[] = [];
 		const liveOrders: { [orderHash: string]: IUserOrder[] } = {};
@@ -89,15 +89,9 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							title={CST.TT_DELETE_ORDER}
 							icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
 							onConfirm={() =>
-								this.props
-									.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash)
-									.then(result =>
-										relayerClient.deleteOrder(
-											lastVersion.pair,
-											[orderHash],
-											result
-										)
-									)
+								web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash).then(
+									result => deleteOrder(lastVersion.pair, [orderHash], result)
+								)
 							}
 						>
 							<a className="order-cancel">{CST.TH_CANCEL}</a>

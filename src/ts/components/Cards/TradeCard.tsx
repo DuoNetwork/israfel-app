@@ -4,7 +4,6 @@ import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import relayerClient from 'ts/common/relayerClient';
 import { ColorStyles } from 'ts/common/styles';
 import {
 	IEthBalance,
@@ -40,7 +39,15 @@ interface IProps {
 	interestOrLeverage: number;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
-	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
+	setUnlimitedTokenAllowance: (code: string, account: string) => any;
+	addOrder: (
+		account: string,
+		pair: string,
+		price: number,
+		amount: number,
+		isBid: boolean,
+		expiry: number
+	) => Promise<string>;
 }
 
 interface IState {
@@ -108,7 +115,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		  )
+		)
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -168,11 +175,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription: getFeeDescription(props.token, '', '', props.tokenInfo),
 			expiryDescription: getExpiryDescription(false)
 		};
-		document.addEventListener('keydown', this.escFunction.bind(this), false);
+		document.addEventListener('keydown', this.handleKeyBoardEsc);
 	}
 
-	private escFunction(event: any) {
-		if (event.keyCode === 27) this.props.handleClose();
+	private handleKeyBoardEsc = (event: KeyboardEvent) => {
+		if (event.keyCode === 27 && this.props.token) this.props.handleClose();
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
@@ -368,13 +375,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		});
 
 	private handleSubmit = async () => {
-		const { account, token, tokenInfo, ethPrice, notify } = this.props;
+		const { account, token, tokenInfo, ethPrice, notify, addOrder } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		try {
 			this.setState({
 				submitting: true
 			});
-			await relayerClient.addOrder(
+			await addOrder(
 				account,
 				token + '|' + CST.TH_WETH,
 				Number(price),
@@ -522,13 +529,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<this.cardDescription token={token.split('-')[0]} n={interestOrLeverage} />
 						<div className="trade-nav">
 							<span className="navspan">NAV</span>
-							<span className="trade-nav-px">{`${util.formatFixedNumber(
-								navInEth,
-								precision
-							)} ETH`}</span>
-							<span
-								style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}
-							>{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}</span>
+							<span className="trade-nav-px">
+								{`${util.formatFixedNumber(navInEth, precision)} ETH`}
+							</span>
+							<span style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}>
+								{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}
+							</span>
 						</div>
 					</div>
 					<SDivFlexCenter horizontal>
@@ -542,7 +548,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -551,7 +557,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -571,7 +577,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -580,7 +586,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 										</li>
@@ -670,18 +676,17 @@ export default class TradeCard extends React.Component<IProps, IState> {
 												right
 												width="100%"
 												value={
-													this.state.price !== ''
-														? this.state.price
-														: this.props.orderBook.asks &&
-														  this.props.orderBook.asks.length
+													price ||
+													(this.props.orderBook.asks &&
+													this.props.orderBook.asks.length
 														? util.formatFixedNumber(
 																this.props.orderBook.asks[0].price
 																	? this.props.orderBook.asks[0]
 																			.price
 																	: 0,
 																precision
-														  )
-														: ''
+														)
+														: '')
 												}
 												type="number"
 												min={0}
