@@ -427,3 +427,42 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
   </styled.button>
 </Styled(Card)>
 `;
+
+exports[`BalanceCard Test Test Snapshot Test Snapshot 3`] = `
+Array [
+  Array [
+    123456,
+    "account",
+  ],
+]
+`;
+
+exports[`BalanceCard Test Test Snapshot Test Snapshot 4`] = `
+Array [
+  Array [
+    123456,
+    "account",
+  ],
+]
+`;
+
+exports[`BalanceCard Test Test Snapshot Test Snapshot 5`] = `
+Array [
+  Array [
+    Object {
+      "level": "info",
+      "message": "Please check your MetaMask!",
+      "title": "WETH",
+      "transactionHash": "",
+    },
+  ],
+  Array [
+    Object {
+      "level": "info",
+      "message": "Please check your MetaMask!",
+      "title": "ETH",
+      "transactionHash": "",
+    },
+  ],
+]
+`;
