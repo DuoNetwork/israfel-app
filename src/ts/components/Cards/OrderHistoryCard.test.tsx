@@ -86,12 +86,14 @@ describe('OrderHistoryCard Test', () => {
 			util.getOrderFullDescription = jest.fn();
 			const web3PersonalSign = jest.fn();
 			const deleteOrder = jest.fn();
+			const notify = jest.fn();
 			const wrapper = shallow(
 				<OrderHistoryCard
 					web3PersonalSign={web3PersonalSign}
 					orderHistory={orderHistory}
 					account={'test'}
 					deleteOrder={deleteOrder}
+					notify={notify}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

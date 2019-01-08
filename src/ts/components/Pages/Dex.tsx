@@ -234,6 +234,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						account={account}
 						web3PersonalSign={this.props.web3PersonalSign}
 						deleteOrder={deleteOrder}
+						notify={notify}
 					/>
 					<ConvertCard
 						account={account}

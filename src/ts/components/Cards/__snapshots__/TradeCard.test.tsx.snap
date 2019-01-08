@@ -211,7 +211,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -721,7 +721,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -1231,7 +1231,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -1741,7 +1741,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -2251,7 +2251,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -2761,7 +2761,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -3271,7 +3271,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -3781,7 +3781,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -4289,7 +4289,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -4797,7 +4797,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -5305,7 +5305,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
       prefixCls="ant-spin"
       size="default"
       spinning={false}
-      tip="Pending Order Signature"
+      tip="Pending Order Signature. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>

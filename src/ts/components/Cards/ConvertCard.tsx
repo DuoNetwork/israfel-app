@@ -339,7 +339,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 
 	private handleKeyBoardEsc = (event: KeyboardEvent) => {
 		if (event.keyCode === 27 && this.props.custodian) this.props.handleClose();
-	}
+	};
 
 	private TokenDescription = (props: { aToken: string; bToken: string }) => {
 		return props.aToken.startsWith('a') ? (
@@ -530,7 +530,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<Spin
 						spinning={loading}
-						tip={wethCreate && !allowance ? 'Approving' : 'Submitting...'}
+						tip={
+							(wethCreate && !allowance ? 'Approving' : 'Submitting') +
+							'. Please check your MetaMask!'
+						}
 					>
 						<SCardConversionForm>
 							<SDivFlexCenter

@@ -180,7 +180,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 	private handleKeyBoardEsc = (event: KeyboardEvent) => {
 		if (event.keyCode === 27 && this.props.token) this.props.handleClose();
-	}
+	};
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token)
@@ -597,7 +597,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					</SDivFlexCenter>
 					<Spin
 						spinning={approving || submitting}
-						tip={approving ? 'Pending Approval' : 'Pending Order Signature'}
+						tip={
+							(approving ? 'Pending Approval' : 'Pending Order Signature') +
+							'. Please check your MetaMask!'
+						}
 					>
 						<SCardConversionForm>
 							<SDivFlexCenter horizontal width="100%" padding="10px;">

@@ -3,7 +3,7 @@ import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IUserOrder } from 'ts/common/types';
+import { INotification, IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
@@ -15,6 +15,7 @@ interface IProps {
 	account: string;
 	web3PersonalSign: (account: string, message: string) => Promise<string>;
 	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
+	notify: (notification: INotification) => any;
 }
 
 interface IState {
@@ -45,7 +46,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		const { orderHistory, account, web3PersonalSign, deleteOrder } = this.props;
+		const { orderHistory, account, web3PersonalSign, deleteOrder, notify } = this.props;
 		const { showHistory, details } = this.state;
 		const dataSource: any[] = [];
 		const liveOrders: { [orderHash: string]: IUserOrder[] } = {};
@@ -88,11 +89,18 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 						<Popconfirm
 							title={CST.TT_DELETE_ORDER}
 							icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-							onConfirm={() =>
+							onConfirm={() => {
+								notify({
+									level: 'info',
+									title: CST.TH_ORDERS,
+									message:
+										'Pending signature for deleting orders. Please check your MetaMask!',
+									transactionHash: ''
+								});
 								web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash).then(
 									result => deleteOrder(lastVersion.pair, [orderHash], result)
-								)
-							}
+								);
+							}}
 						>
 							<a className="order-cancel">{CST.TH_CANCEL}</a>
 						</Popconfirm>

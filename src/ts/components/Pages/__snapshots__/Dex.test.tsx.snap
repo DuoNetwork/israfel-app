@@ -124,6 +124,7 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
+      notify={[MockFunction]}
       orderHistory={Object {}}
       web3PersonalSign={[MockFunction]}
     />
