@@ -3,7 +3,6 @@ import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
-import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle, SInput } from './_styled';
 import { SButton } from './_styled';
@@ -19,6 +18,8 @@ interface IProps {
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
+	wrapEther: (amount: number, address: string) => Promise<string>
+	unwrapEther: (amount: number, address: string) => Promise<string>
 }
 
 interface IState {
@@ -55,7 +56,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				message: 'Please check your MetaMask!',
 				transactionHash: ''
 			});
-			web3Util.wrapEther(Number(ethInput), this.props.account).then(txHash => {
+			this.props.wrapEther(Number(ethInput), this.props.account).then(txHash => {
 				this.setState({ ethInput: '' });
 				this.props.notify({
 					level: 'info',
@@ -76,7 +77,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				message: 'Please check your MetaMask!',
 				transactionHash: ''
 			});
-			web3Util.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
+			this.props.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
 				this.setState({ wethInput: '' });
 				this.props.notify({
 					level: 'info',

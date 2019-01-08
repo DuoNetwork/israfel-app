@@ -239,7 +239,9 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       ]
     }
     notify={[MockFunction]}
+    unwrapEther={[MockFunction]}
     visible={true}
+    wrapEther={[MockFunction]}
   />
 </div>
 `;

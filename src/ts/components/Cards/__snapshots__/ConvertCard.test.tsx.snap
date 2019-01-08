@@ -37,10 +37,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -48,6 +45,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div
@@ -585,10 +592,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -596,6 +600,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div
@@ -1133,10 +1147,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -1144,6 +1155,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div
@@ -1681,10 +1702,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -1692,6 +1710,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div
@@ -2229,10 +2257,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -2240,6 +2265,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div
@@ -2777,10 +2812,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
     }
     width="360px"
   >
-    <div
-      className="cus-link"
-      onClick={[Function]}
-    >
+    <div>
       <div
         className="convert-popup-des"
       >
@@ -2788,6 +2820,16 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
+        />
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "width": "12px",
+            }
+          }
         />
       </div>
       <div

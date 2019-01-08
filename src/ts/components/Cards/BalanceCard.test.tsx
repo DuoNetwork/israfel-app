@@ -5,7 +5,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
-import web3Util from 'ts/common/web3Util';
 import { SButton, SInput } from './_styled';
 import BalanceCard from './BalanceCard';
 
@@ -76,8 +75,8 @@ describe('BalanceCard Test', () => {
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
-			web3Util.wrapEther = jest.fn(() => Promise.resolve('txHash'));
-			web3Util.unwrapEther = jest.fn(() => Promise.resolve('txHash'));
+			const wrapEther = jest.fn(() => Promise.resolve('txHash'));
+			const unwrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const notify = jest.fn();
 			const wrapper = shallow(
 				<BalanceCard
@@ -91,6 +90,8 @@ describe('BalanceCard Test', () => {
 					custodianTokenBalances={custodianTokenBalances}
 					notify={notify}
 					handleClose={handleClose}
+					wrapEther={wrapEther}
+					unwrapEther={unwrapEther}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
@@ -111,8 +112,8 @@ describe('BalanceCard Test', () => {
 				.find(SButton)
 				.at(0)
 				.simulate('click');
-			expect((web3Util.wrapEther as jest.Mock).mock.calls).toMatchSnapshot();
-			expect((web3Util.unwrapEther as jest.Mock).mock.calls).toMatchSnapshot();
+			expect(wrapEther.mock.calls).toMatchSnapshot();
+			expect(unwrapEther.mock.calls).toMatchSnapshot();
 			expect(notify.mock.calls).toMatchSnapshot();
 		});
 	});

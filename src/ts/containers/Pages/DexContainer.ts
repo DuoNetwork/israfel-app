@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as relayerActions from 'ts/actions/relayerActions';
 import { INotification, IState } from 'ts/common/types';
+import web3Util from 'ts/common/web3Util';
 import Dex from 'ts/components/Pages/Dex';
 
 function mapStateToProps(state: IState) {
@@ -25,7 +26,10 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 		notify: (notification: INotification) =>
 			dispatch(relayerActions.notificationUpdate(notification)),
 		subscribeOrder: (account: string) => dispatch(relayerActions.subscribeOrder(account)),
-		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate(''))
+		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate('')),
+		wrapEther: (amount: number, address: string) => web3Util.wrapEther(amount, address),
+		unwrapEther: (amount: number, address: string) => web3Util.unwrapEther(amount, address),
+		getTokenByCode: (code: string) => web3Util.getTokenByCode(code)
 	};
 }
 

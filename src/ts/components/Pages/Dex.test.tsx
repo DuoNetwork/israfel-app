@@ -94,6 +94,9 @@ describe('Dex Test', () => {
 			const notify = jest.fn(() => ({}));
 			const subscribeOrder = jest.fn();
 			const unsubscribeOrder = jest.fn();
+			const wrapEther = jest.fn();
+			const unwrapEther = jest.fn();
+			const getTokenByCode = jest.fn();
 			const wrapper = shallow(
 				<Dex
 					orderHistory={orderHistory}
@@ -108,6 +111,9 @@ describe('Dex Test', () => {
 					acceptedPrices={acceptedPrices}
 					ethBalance={ethBalance}
 					account={account}
+					wrapEther={wrapEther}
+					unwrapEther={unwrapEther}
+					getTokenByCode={getTokenByCode}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

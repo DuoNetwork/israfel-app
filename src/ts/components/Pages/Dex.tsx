@@ -8,10 +8,10 @@ import {
 	IEthBalance,
 	INotification,
 	IOrderBookSnapshot,
+	IToken,
 	ITokenBalance,
-	IUserOrder
+	IUserOrder,
 } from 'ts/common/types';
-import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -33,6 +33,9 @@ interface IProps {
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
+	wrapEther: (amount: number, address: string) => Promise<string>
+	unwrapEther: (amount: number, address: string) => Promise<string>,
+	getTokenByCode: (code: string) => IToken | undefined
 }
 
 interface IState {
@@ -101,7 +104,10 @@ export default class Dex extends React.Component<IProps, IState> {
 			orderBooks,
 			ethPrice,
 			orderHistory,
-			notify
+			notify,
+			wrapEther,
+			unwrapEther,
+			getTokenByCode
 		} = this.props;
 		const {
 			convertCustodian,
@@ -120,7 +126,7 @@ export default class Dex extends React.Component<IProps, IState> {
 		}
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
-		const tradeTokenInfo = web3Util.getTokenByCode(tradeToken);
+		const tradeTokenInfo = getTokenByCode(tradeToken);
 		const tradeTokenBalance = tradeTokenInfo
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
@@ -252,6 +258,8 @@ export default class Dex extends React.Component<IProps, IState> {
 					custodianTokenBalances={custodianTokenBalances}
 					notify={notify}
 					handleClose={() => this.setState({ showBalances: !showBalances })}
+					wrapEther={wrapEther}
+					unwrapEther={unwrapEther}
 				/>
 			</div>
 		);
