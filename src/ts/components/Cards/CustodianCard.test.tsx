@@ -3,10 +3,9 @@
  */
 
 import { shallow } from 'enzyme';
-import { mount } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
-import { SButton, SCardTitle } from './_styled';
+import { SButton } from './_styled';
 import CustodianCard from './CustodianCard';
 
 describe('CustodianCard Test', () => {
@@ -120,27 +119,27 @@ describe('CustodianCard Test', () => {
 			expect(wrapper).toMatchSnapshot();
 		});
 
-		it('clicking "continue" button fires the callback', () => {
-			const wrapper = mount(
-				<CustodianCard
-					margin={margin}
-					acceptedPrices={acceptedPrice}
-					handleConvert={handleConvert}
-					handleTrade={handleTrade}
-					ethPrice={ethPrice}
-					orderBooks={orderBooks}
-					info={info}
-					type={type}
-					tokenBalances={tokenBalances}
-					custodian={custodian}
-				/>
-			);
-			window.open = jest.fn();
-			wrapper
-				.find(SCardTitle)
-				.at(0)
-				.simulate('click');
-			expect(window.open).toBeCalled();
-		});
+		// it('clicking "continue" button fires the callback', () => {
+		// 	const wrapper = mount(
+		// 		<CustodianCard
+		// 			margin={margin}
+		// 			acceptedPrices={acceptedPrice}
+		// 			handleConvert={handleConvert}
+		// 			handleTrade={handleTrade}
+		// 			ethPrice={ethPrice}
+		// 			orderBooks={orderBooks}
+		// 			info={info}
+		// 			type={type}
+		// 			tokenBalances={tokenBalances}
+		// 			custodian={custodian}
+		// 		/>
+		// 	);
+		// 	window.open = jest.fn();
+		// 	wrapper
+		// 		.find(SCardTitle)
+		// 		.at(0)
+		// 		.simulate('click');
+		// 	expect(window.open).toBeCalled();
+		// });
 	});
 });

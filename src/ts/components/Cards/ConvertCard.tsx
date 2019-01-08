@@ -413,6 +413,25 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					title={
 						<SCardTitle>
 							{CST.TH_CONVERT + ' ' + (isBeethoven ? CST.BEETHOVEN : CST.MOZART)}
+							<img
+								className="cus-link"
+								src={link}
+								style={{ width: '12px', marginLeft: '10px' }}
+								onClick={() =>
+									window.open(
+										`https://kovan.duo.network/${
+											info ? info.code.split('-')[0].toLowerCase() : ''
+										}/${
+											info
+												? info.code.split('-')[1]
+													? info.code.split('-')[1].toLowerCase()
+													: 'perpetual'
+												: ''
+										}`,
+										'_blank'
+									)
+								}
+							/>
 						</SCardTitle>
 					}
 					width="360px"
@@ -430,25 +449,6 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							Fully backed by ETH, this contract converts between ETH and tokens with
 							diversified payoffs.
 							<this.TokenDescription aToken={aToken} bToken={bToken} />
-							<img
-								className="cus-link"
-								src={link}
-								style={{ width: '12px' }}
-								onClick={() =>
-									window.open(
-										`https://kovan.duo.network/${
-											info ? info.code.split('-')[0].toLowerCase() : ''
-										}/${
-											info
-												? info.code.split('-')[1]
-													? info.code.split('-')[1].toLowerCase()
-													: 'perpetual'
-												: ''
-										}`,
-										'_blank'
-									)
-								}
-							/>
 						</div>
 						<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					</div>
@@ -523,7 +523,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 									onClick={() => this.handleInfoExpandChange()}
 									className="list-expand-button"
 								>
-									{infoExpand ? '∧' : '···'}
+									{infoExpand ? 'Show Less' : 'Show More'}
 								</li>
 							</ul>
 						</div>

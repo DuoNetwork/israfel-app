@@ -1,5 +1,6 @@
 import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
+import link from 'images/icons/link.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper, getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
@@ -84,18 +85,21 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		return (
 			<SCard
 				title={
-					<SCardTitle
-						style={{ cursor: 'Pointer' }}
-						onClick={() =>
-							window.open(
-								`https://${
-									__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-								}etherscan.io/address/${custodian}`,
-								'_blank'
-							)
-						}
-					>
+					<SCardTitle>
 						{type + ' ' + tenor}
+						<img
+							className="cus-link"
+							src={link}
+							style={{ width: '12px', marginLeft: '10px' }}
+							onClick={() =>
+								window.open(
+									`https://${
+										__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+									}etherscan.io/address/${custodian}`,
+									'_blank'
+								)
+							}
+						/>
 					</SCardTitle>
 				}
 				width="360px"

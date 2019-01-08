@@ -28,6 +28,14 @@ function mapStateToProps(state: IState) {
 			web3Util.setUnlimitedTokenAllowance(code, account, spender),
 		web3PersonalSign: (account: string, message: string) =>
 			web3Util.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + message),
+		addOrder: (
+			account: string,
+			pair: string,
+			price: number,
+			amount: number,
+			isBid: boolean,
+			expiry: number
+		) => relayerClient.addOrder(account, pair, price, amount, isBid, expiry),
 		deleteOrder: (pair: string, orderHashes: string[], signature: string) =>
 			relayerClient.deleteOrder(pair, orderHashes, signature)
 	};

@@ -115,12 +115,6 @@ describe('ConvertCard Test', () => {
 			wrapper.setState({ wethCreate: false });
 			expect(wrapper).toMatchSnapshot();
 			wrapper
-				.find('.cus-link')
-				.at(0)
-				.simulate('click');
-			expect(wrapper).toMatchSnapshot();
-			expect(window.open).toBeCalled();
-			wrapper
 				.find(SSlider)
 				.at(0)
 				.simulate('change', { target: { value: '12', limit: '123' } });

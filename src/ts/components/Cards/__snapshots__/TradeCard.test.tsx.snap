@@ -335,7 +335,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -360,7 +360,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                   Amount
                 </span>
                 <styled.input
-                  disabled={true}
+                  disabled={false}
                   min={0}
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -845,7 +845,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -870,7 +870,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                   Amount
                 </span>
                 <styled.input
-                  disabled={true}
+                  disabled={false}
                   min={0}
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -1355,7 +1355,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -1380,7 +1380,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                   Amount
                 </span>
                 <styled.input
-                  disabled={true}
+                  disabled={false}
                   min={0}
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -1865,7 +1865,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -1890,7 +1890,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                   Amount
                 </span>
                 <styled.input
-                  disabled={true}
+                  disabled={false}
                   min={0}
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -2375,7 +2375,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -2885,7 +2885,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -3387,6 +3387,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                   right={true}
                   step={0.000005}
                   type="number"
+                  value=""
                   width="100%"
                 />
               </li>
@@ -3395,7 +3396,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -3896,6 +3897,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
+                  value=""
                   width="100%"
                 />
               </li>
@@ -3904,7 +3906,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -4404,6 +4406,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
+                  value=""
                   width="100%"
                 />
               </li>
@@ -4412,7 +4415,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -4920,7 +4923,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >
@@ -5428,7 +5431,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                 style={
                   Object {
                     "flexDirection": "row-reverse",
-                    "padding": "5 === \\"\\"px 15px",
+                    "padding": "5px 15px",
                   }
                 }
               >

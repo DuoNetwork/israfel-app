@@ -180,6 +180,22 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
             >
               Total Net Asset Value
             </span>
+            <span
+              className="content"
+            >
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
           </li>
           <li
             style={
@@ -393,6 +409,22 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
               className="title"
             >
               Total Net Asset Value
+            </span>
+            <span
+              className="content"
+            >
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
             </span>
           </li>
           <li

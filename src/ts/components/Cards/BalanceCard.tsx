@@ -94,6 +94,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 
 	public render() {
 		const {
+			account,
 			handleClose,
 			visible,
 			ethBalance,
@@ -103,7 +104,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 			beethovenList,
 			mozartList
 		} = this.props;
-		const {ethInput, wethInput} = this.state;
+		const { ethInput, wethInput } = this.state;
 		const animated = visible ? 'animated' : '';
 
 		let totalNav = (ethBalance.eth + ethBalance.weth) * ethPrice;
@@ -153,11 +154,28 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 					custodianTokenBalances[c] && custodianTokenBalances[c][code]
 						? custodianTokenBalances[c][code].balance
 						: 0;
+				const address =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].address
+						: '';
 				balanceLis.push(
 					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
 						<span className="content">
 							{balance ? util.formatBalance(balance) : '-'}
+							<img
+								className="cus-link"
+								src={link}
+								style={{ width: '12px', height: '12px', marginLeft: '10px' }}
+								onClick={() =>
+									window.open(
+										`https://${
+											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+										}etherscan.io/token/${address}`,
+										'__blank'
+									)
+								}
+							/>
 						</span>
 					</li>
 				);
@@ -239,6 +257,25 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 							<ul>
 								<li style={{ padding: '5px 5px' }}>
 									<span className="title">{CST.TH_TOTAL + ' ' + CST.TH_NAV}</span>
+									<span className="content">
+										<img
+											className="cus-link"
+											src={link}
+											style={{
+												width: '12px',
+												height: '12px',
+												marginLeft: '10px'
+											}}
+											onClick={() =>
+												window.open(
+													`https://${
+														__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+													}etherscan.io/address/${account}`,
+													'__blank'
+												)
+											}
+										/>
+									</span>
 								</li>
 								<li style={{ padding: '5px 5px', flexDirection: 'row-reverse' }}>
 									<span className="content">

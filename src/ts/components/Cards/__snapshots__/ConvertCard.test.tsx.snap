@@ -33,6 +33,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -45,16 +56,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -199,7 +200,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ···
+            Show More
           </li>
         </ul>
       </div>
@@ -588,6 +589,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -600,16 +612,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -754,7 +756,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ···
+            Show More
           </li>
         </ul>
       </div>
@@ -1143,6 +1145,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -1155,16 +1168,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -1309,7 +1312,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ···
+            Show More
           </li>
         </ul>
       </div>
@@ -1698,6 +1701,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -1710,16 +1724,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -1864,7 +1868,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ···
+            Show More
           </li>
         </ul>
       </div>
@@ -2253,6 +2257,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -2265,16 +2280,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -2419,7 +2424,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>
@@ -2808,6 +2813,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -2820,16 +2836,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -2974,7 +2980,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>
@@ -3363,6 +3369,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 7`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -3375,16 +3392,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 7`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -3529,7 +3536,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 7`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>
@@ -3918,6 +3925,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -3930,16 +3948,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -4084,7 +4092,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>
@@ -4353,7 +4361,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   right={true}
-                  value=""
+                  value="123456"
                   width="100%"
                 />
               </li>
@@ -4473,6 +4481,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -4486,21 +4505,11 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
           aToken="WETH-ETH"
           bToken="WETH-ETH"
         />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
-        />
       </div>
       <div
         className="convert-popup-des"
       >
-        This contract expires in -15 days.
+        This contract expires in 0 days.
       </div>
     </div>
     <styled.div
@@ -4533,7 +4542,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
             <span
               className="content"
             >
-              1 ETH = 15,006.99 W + 122.01 W
+              1 ETH = 0.000 W + 0.000 W
             </span>
           </li>
         </ul>
@@ -4584,7 +4593,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
             <span
               className="content"
             >
-              123.0 ETH
+              0.000 ETH
             </span>
           </li>
           <li
@@ -4602,7 +4611,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
             <span
               className="content"
             >
-              123.0 WETH-ETH
+              0.000 WETH-ETH
             </span>
           </li>
           <li
@@ -4618,7 +4627,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
             <span
               className="content"
             >
-              123.0 WETH-ETH
+              0.000 WETH-ETH
             </span>
           </li>
         </ul>
@@ -4639,7 +4648,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>
@@ -4647,7 +4656,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
     <Spin
       prefixCls="ant-spin"
       size="default"
-      spinning={false}
+      spinning={true}
       tip="Submitting. Please check your MetaMask!"
       wrapperClassName=""
     >
@@ -5028,6 +5037,17 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
     title={
       <styled.div>
         Convert Mozart
+        <img
+          className="cus-link"
+          onClick={[Function]}
+          src={null}
+          style={
+            Object {
+              "marginLeft": "10px",
+              "width": "12px",
+            }
+          }
+        />
       </styled.div>
     }
     width="360px"
@@ -5040,16 +5060,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
         <Component
           aToken="WETH-ETH"
           bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
         />
       </div>
       <div
@@ -5194,562 +5204,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
             className="list-expand-button"
             onClick={[Function]}
           >
-            ∧
-          </li>
-        </ul>
-      </div>
-    </styled.div>
-    <Spin
-      prefixCls="ant-spin"
-      size="default"
-      spinning={true}
-      tip="Submitting. Please check your MetaMask!"
-      wrapperClassName=""
-    >
-      <styled.div>
-        <styled.div
-          horizontal={true}
-          padding="10px"
-          style={
-            Object {
-              "opacity": 1,
-              "pointerEvents": "auto",
-            }
-          }
-          width="100%"
-        >
-          <button
-            className="conv-button non-select"
-            key="Create"
-            onClick={[Function]}
-          >
-            CREATE
-          </button>
-          <button
-            className="conv-button selected"
-            key="Redeem"
-            onClick={[Function]}
-          >
-            REDEEM
-          </button>
-        </styled.div>
-        <styled.div
-          noMargin={true}
-          width="100%"
-        >
-          <div
-            className="status-list-wrapper"
-          >
-            <ul>
-              <li
-                style={
-                  Object {
-                    "justifyContent": "space-between",
-                    "padding": "5px 15px",
-                  }
-                }
-              >
-                <div
-                  className="tabletitle"
-                  style={
-                    Object {
-                      "textAlign": "left",
-                      "width": "20%",
-                    }
-                  }
-                >
-                  Token
-                </div>
-                <div
-                  className="tabletitle2"
-                >
-                  WETH-ETH
-                </div>
-                <div
-                  className="tabletitle2"
-                >
-                  WETH-ETH
-                </div>
-                <div
-                  className="tabletitle2"
-                  style={
-                    Object {
-                      "width": "20%",
-                    }
-                  }
-                >
-                  ETH
-                </div>
-              </li>
-              <li
-                style={
-                  Object {
-                    "justifyContent": "space-between",
-                    "padding": "5px 15px",
-                  }
-                }
-              >
-                <div
-                  className="tabletitle"
-                  style={
-                    Object {
-                      "textAlign": "left",
-                      "width": "20%",
-                    }
-                  }
-                >
-                  Balance
-                </div>
-                <div
-                  className="tablecontent2"
-                >
-                  0.000
-                </div>
-                <div
-                  className="tablecontent2"
-                >
-                  0.000
-                </div>
-                <div
-                  className="tablecontent2"
-                  style={
-                    Object {
-                      "width": "20%",
-                    }
-                  }
-                >
-                  100.0
-                </div>
-              </li>
-            </ul>
-          </div>
-        </styled.div>
-        <styled.div
-          noLiBorder={true}
-          noUlBorder={true}
-        >
-          <div
-            className="status-list-wrapper"
-          >
-            <ul>
-              <li
-                className="input-line"
-                style={
-                  Object {
-                    "marginBottom": 0,
-                    "opacity": 1,
-                    "padding": "0 10px",
-                    "pointerEvents": "auto",
-                  }
-                }
-              >
-                <span
-                  className="input-des"
-                >
-                  WETH-ETH Amount
-                </span>
-                <styled.input
-                  disabled={true}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  right={true}
-                  value=""
-                  width="100%"
-                />
-              </li>
-              <li
-                className="input-line"
-                style={
-                  Object {
-                    "opacity": 1,
-                    "padding": "0 15px",
-                    "pointerEvents": "auto",
-                  }
-                }
-              >
-                <Styled(Slider)
-                  disabled={true}
-                  marks={
-                    Object {
-                      "0": Object {
-                        "label": <strong>
-                          0%
-                        </strong>,
-                      },
-                      "100": Object {
-                        "label": <strong>
-                          100%
-                        </strong>,
-                      },
-                      "25": Object {
-                        "label": <strong>
-                          25%
-                        </strong>,
-                      },
-                      "50": Object {
-                        "label": <strong>
-                          50%
-                        </strong>,
-                      },
-                      "75": Object {
-                        "label": <strong>
-                          75%
-                        </strong>,
-                      },
-                    }
-                  }
-                  onChange={[Function]}
-                  step={1}
-                  value={0}
-                />
-              </li>
-              <li
-                className="waring-expand-button"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "padding": "0 10px 0 15px",
-                    "pointerEvents": "none",
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "opacity": 0,
-                    }
-                  }
-                >
-                  <img
-                    src={null}
-                    style={
-                      Object {
-                        "marginRight": 2,
-                      }
-                    }
-                  />
-                  Click to create with WETH
-                </span>
-              </li>
-            </ul>
-          </div>
-        </styled.div>
-        <styled.div
-          noLiBorder={true}
-          noUlBorder={true}
-        >
-          <div
-            className="status-list-wrapper"
-          >
-            <ul
-              style={
-                Object {
-                  "height": "0px",
-                  "margin": "0",
-                }
-              }
-            >
-              <li
-                className="input-line"
-                style={
-                  Object {
-                    "marginBottom": 0,
-                    "padding": "0 10px",
-                  }
-                }
-              >
-                <styled.input
-                  disabled={true}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  right={true}
-                  value="123456"
-                  width="100%"
-                />
-              </li>
-              <li
-                className="input-line"
-                style={
-                  Object {
-                    "padding": "0 15px",
-                  }
-                }
-              >
-                <Styled(Slider)
-                  disabled={true}
-                  marks={
-                    Object {
-                      "0": Object {
-                        "label": <strong>
-                          0%
-                        </strong>,
-                      },
-                      "100": Object {
-                        "label": <strong>
-                          100%
-                        </strong>,
-                      },
-                      "25": Object {
-                        "label": <strong>
-                          25%
-                        </strong>,
-                      },
-                      "50": Object {
-                        "label": <strong>
-                          50%
-                        </strong>,
-                      },
-                      "75": Object {
-                        "label": <strong>
-                          75%
-                        </strong>,
-                      },
-                    }
-                  }
-                  onChange={[Function]}
-                  step={1}
-                  value={0}
-                />
-              </li>
-            </ul>
-          </div>
-        </styled.div>
-      </styled.div>
-      <div
-        className="convert-popup-des"
-      >
-        Redeem ETH from WETH-ETH and WETH-ETH
-      </div>
-      <styled.div
-        horizontal={true}
-        padding="10px"
-        width="100%"
-      >
-        <styled.button
-          disable={true}
-          onClick={[Function]}
-          width="49%"
-        >
-          Reset
-        </styled.button>
-        <styled.button
-          disable={true}
-          onClick={[Function]}
-          style={
-            Object {
-              "opacity": 0.3,
-            }
-          }
-          width="49%"
-        >
-          Redeem
-        </styled.button>
-      </styled.div>
-    </Spin>
-  </Styled(Card)>
-</div>
-`;
-
-exports[`ConvertCard Test Test Snapshot Test Snapshot 11`] = `
-<div
-  style={
-    Object {
-      "display": "block",
-    }
-  }
->
-  <div
-    className="popup-bg popup-open-bg"
-  />
-  <Styled(Card)
-    className="popup-card popup-open"
-    extra={
-      <styled.div
-        horizontal={true}
-        width="40px"
-      >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
-        <img
-          className="cardpopup-close"
-          onClick={[MockFunction]}
-          src={null}
-        />
-      </styled.div>
-    }
-    noBodymargin={true}
-    title={
-      <styled.div>
-        Convert Mozart
-      </styled.div>
-    }
-    width="360px"
-  >
-    <div>
-      <div
-        className="convert-popup-des"
-      >
-        Fully backed by ETH, this contract converts between ETH and tokens with diversified payoffs.
-        <Component
-          aToken="WETH-ETH"
-          bToken="WETH-ETH"
-        />
-        <img
-          className="cus-link"
-          onClick={[Function]}
-          src={null}
-          style={
-            Object {
-              "width": "12px",
-            }
-          }
-        />
-      </div>
-      <div
-        className="convert-popup-des"
-      >
-        This contract expires in 0 days.
-      </div>
-    </div>
-    <styled.div
-      noMargin={true}
-      width="100%"
-    >
-      <div
-        className="status-list-wrapper"
-      >
-        <ul>
-          <li
-            className="block-title"
-            style={
-              Object {
-                "justifyContent": "center",
-                "padding": "5px 15px",
-              }
-            }
-          >
-            Conversion Ratio
-          </li>
-          <li
-            style={
-              Object {
-                "justifyContent": "center",
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="content"
-            >
-              1 ETH = 0.000 W + 0.000 W
-            </span>
-          </li>
-        </ul>
-      </div>
-    </styled.div>
-    <styled.div>
-      <div
-        className="status-list-wrapper"
-      >
-        <ul
-          style={
-            Object {
-              "height": "128px",
-              "margin": "-1px 0",
-            }
-          }
-        >
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              Maturity
-            </span>
-            <span
-              className="content"
-            >
-              1970-01-01 08:00:00
-            </span>
-          </li>
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              Collateral
-            </span>
-            <span
-              className="content"
-            >
-              0.000 ETH
-            </span>
-          </li>
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              Total Supply
-            </span>
-            <span
-              className="content"
-            >
-              0.000 WETH-ETH
-            </span>
-          </li>
-          <li
-            style={
-              Object {
-                "padding": "5px 15px",
-              }
-            }
-          >
-            <span
-              className="title"
-            />
-            <span
-              className="content"
-            >
-              0.000 WETH-ETH
-            </span>
-          </li>
-        </ul>
-      </div>
-    </styled.div>
-    <styled.div>
-      <div
-        className="status-list-wrapper"
-      >
-        <ul
-          style={
-            Object {
-              "margin": "0",
-            }
-          }
-        >
-          <li
-            className="list-expand-button"
-            onClick={[Function]}
-          >
-            ∧
+            Show Less
           </li>
         </ul>
       </div>

@@ -115,7 +115,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -160,17 +160,27 @@ const getLimit = (
 export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
+		const price = props.tokenInfo && props.orderBook.asks &&
+			props.orderBook.asks.length
+				? util.formatFixedNumber(
+						props.orderBook.asks[0].price
+							? props.orderBook.asks[0]
+									.price
+							: 0,
+						props.tokenInfo.precisions[CST.TH_WETH]
+				)
+				: ''
 		this.state = {
 			account: props.account,
 			token: props.token,
 			isBid: true,
-			price: '',
+			price: price,
 			amount: '',
 			expiry: 1,
 			approving: false,
 			submitting: false,
 			sliderValue: 0,
-			priceDescription: getPriceDescription('', props.ethPrice),
+			priceDescription: getPriceDescription(price, props.ethPrice),
 			tradeDescription: getTradeDescription(props.token, true, '', '', props.tokenInfo),
 			feeDescription: getFeeDescription(props.token, '', '', props.tokenInfo),
 			expiryDescription: getExpiryDescription(false)
@@ -183,18 +193,28 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	};
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
-		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token)
+		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token) {
+			const price = nextProps.tokenInfo && nextProps.orderBook.asks &&
+			nextProps.orderBook.asks.length
+				? util.formatFixedNumber(
+						nextProps.orderBook.asks[0].price
+							? nextProps.orderBook.asks[0]
+									.price
+							: 0,
+						nextProps.tokenInfo.precisions[CST.TH_WETH]
+				)
+				: ''
 			return {
 				account: nextProps.account,
 				token: nextProps.token,
 				isBid: true,
-				price: '',
+				price: price,
 				amount: '',
 				expiry: 1,
 				approving: false,
 				submitting: false,
 				sliderValue: 0,
-				priceDescription: getPriceDescription('', nextProps.ethPrice),
+				priceDescription: getPriceDescription(price, nextProps.ethPrice),
 				tradeDescription: getTradeDescription(
 					nextProps.token,
 					true,
@@ -205,6 +225,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				feeDescription: getFeeDescription(nextProps.token, '', '', nextProps.tokenInfo),
 				expiryDescription: getExpiryDescription(false)
 			};
+		}
 
 		// check for allowance
 		if (
@@ -548,7 +569,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -557,7 +578,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -577,7 +598,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -586,7 +607,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
@@ -678,19 +699,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<SInput
 												right
 												width="100%"
-												value={
-													price ||
-													(this.props.orderBook.asks &&
-													this.props.orderBook.asks.length
-														? util.formatFixedNumber(
-																this.props.orderBook.asks[0].price
-																	? this.props.orderBook.asks[0]
-																			.price
-																	: 0,
-																precision
-														)
-														: '')
-												}
+												value={price}
 												type="number"
 												min={0}
 												step={
@@ -709,7 +718,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li
 											className={'input-line'}
 											style={{
-												padding: '5 === ""px 15px',
+												padding: '5px 15px',
 												flexDirection: 'row-reverse'
 											}}
 										>

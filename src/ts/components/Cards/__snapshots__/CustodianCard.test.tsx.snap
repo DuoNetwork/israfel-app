@@ -28,15 +28,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
   }
   margin="test"
   title={
-    <styled.div
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "Pointer",
-        }
-      }
-    >
+    <styled.div>
       Beethoven Perpetual
+      <img
+        className="cus-link"
+        onClick={[Function]}
+        src={null}
+        style={
+          Object {
+            "marginLeft": "10px",
+            "width": "12px",
+          }
+        }
+      />
     </styled.div>
   }
   width="360px"
@@ -461,15 +465,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
   }
   margin="test"
   title={
-    <styled.div
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "Pointer",
-        }
-      }
-    >
+    <styled.div>
       Beethoven Perpetual
+      <img
+        className="cus-link"
+        onClick={[Function]}
+        src={null}
+        style={
+          Object {
+            "marginLeft": "10px",
+            "width": "12px",
+          }
+        }
+      />
     </styled.div>
   }
   width="360px"
@@ -894,15 +902,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
   }
   margin="test"
   title={
-    <styled.div
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "Pointer",
-        }
-      }
-    >
+    <styled.div>
       Beethoven Perpetual
+      <img
+        className="cus-link"
+        onClick={[Function]}
+        src={null}
+        style={
+          Object {
+            "marginLeft": "10px",
+            "width": "12px",
+          }
+        }
+      />
     </styled.div>
   }
   width="360px"
@@ -1327,15 +1339,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
   }
   margin="test"
   title={
-    <styled.div
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "Pointer",
-        }
-      }
-    >
+    <styled.div>
       Beethoven Perpetual
+      <img
+        className="cus-link"
+        onClick={[Function]}
+        src={null}
+        style={
+          Object {
+            "marginLeft": "10px",
+            "width": "12px",
+          }
+        }
+      />
     </styled.div>
   }
   width="360px"
@@ -1760,15 +1776,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
   }
   margin="test"
   title={
-    <styled.div
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "Pointer",
-        }
-      }
-    >
+    <styled.div>
       Beethoven Perpetual
+      <img
+        className="cus-link"
+        onClick={[Function]}
+        src={null}
+        style={
+          Object {
+            "marginLeft": "10px",
+            "width": "12px",
+          }
+        }
+      />
     </styled.div>
   }
   width="360px"
