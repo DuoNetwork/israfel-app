@@ -90,7 +90,8 @@ export function getCustodianBalances(): VoidThunkAction {
 					dispatch(
 						tokenBalanceUpdate(token.code, token.custodian, {
 							balance: result[0],
-							allowance: result[1]
+							allowance: result[1],
+							address: token.address
 						})
 					)
 				);

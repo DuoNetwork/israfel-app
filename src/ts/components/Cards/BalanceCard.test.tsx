@@ -5,6 +5,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
+import web3Util from 'ts/common/web3Util';
 import { SButton, SInput } from './_styled';
 import BalanceCard from './BalanceCard';
 
@@ -53,8 +54,16 @@ describe('BalanceCard Test', () => {
 		};
 		const custodianTokenBalances = {
 			'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': {
-				LETH: { balance: 0, allowance: 0 },
-				sETH: { balance: 0, allowance: 1.157920892373162e59 }
+				LETH: {
+					balance: 0,
+					allowance: 0,
+					address: '0x59E6B3d43F762310626d2905148939973db2BBd3'
+				},
+				sETH: {
+					balance: 0,
+					allowance: 1.157920892373162e59,
+					address: '0x8a3beca74e0e737460bde45a09594a8d7d8c9886'
+				}
 			}
 		};
 		const ethBalance = {
@@ -67,6 +76,9 @@ describe('BalanceCard Test', () => {
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			web3Util.wrapEther = jest.fn(() => Promise.resolve('txHash'));
+			web3Util.unwrapEther = jest.fn(() => Promise.resolve('txHash'));
+			const notify = jest.fn();
 			const wrapper = shallow(
 				<BalanceCard
 					visible={visible}
@@ -77,7 +89,7 @@ describe('BalanceCard Test', () => {
 					mozartList={mozartList}
 					custodians={custodians}
 					custodianTokenBalances={custodianTokenBalances}
-					notify={() => ({})}
+					notify={notify}
 					handleClose={handleClose}
 				/>
 			);
@@ -99,6 +111,9 @@ describe('BalanceCard Test', () => {
 				.find(SButton)
 				.at(0)
 				.simulate('click');
+			expect((web3Util.wrapEther as jest.Mock).mock.calls).toMatchSnapshot();
+			expect((web3Util.unwrapEther as jest.Mock).mock.calls).toMatchSnapshot();
+			expect(notify.mock.calls).toMatchSnapshot();
 		});
 	});
 });

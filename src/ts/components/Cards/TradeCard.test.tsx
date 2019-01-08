@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 // import { mount } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
-import { SInput, SSlider, SButton } from './_styled';
+import { SButton, SInput, SSlider } from './_styled';
 import TradeCard from './TradeCard';
 const RadioGroup = Radio.Group;
 
@@ -27,7 +27,8 @@ describe('TradeCard Test', () => {
 		};
 		const tokenBalance = {
 			balance: 123,
-			allowance: 123
+			allowance: 123,
+			address: '0x59E6B3d43F762310626d2905148939973db2BBd3'
 		};
 		const ethBalance = {
 			eth: 123,

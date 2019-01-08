@@ -16,7 +16,8 @@ describe('CustodianCard Test', () => {
 		const tokenBalances = {
 			'LETH-M19|WETH': {
 				balance: 123,
-				allowance: 123
+				allowance: 123,
+				address: '0x59E6B3d43F762310626d2905148939973db2BBd3'
 			}
 		};
 		const orderBooks = {

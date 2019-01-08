@@ -111,8 +111,23 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 					custodianTokenBalances[c] && custodianTokenBalances[c][code]
 						? custodianTokenBalances[c][code].balance
 						: 0;
+				const address =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].address
+						: '';
 				balanceLis.push(
-					<li key={code} style={{ padding: '5px 5px' }}>
+					<li
+						key={code}
+						style={{ padding: '5px 5px', cursor: 'pointer' }}
+						onClick={() =>
+							window.open(
+								`https://${
+									__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+								}etherscan.io/token/${address}`,
+								'__blank'
+							)
+						}
+					>
 						<span className="title">{code}</span>
 						<span className="content">
 							{balance ? util.formatBalance(balance) : '-'}

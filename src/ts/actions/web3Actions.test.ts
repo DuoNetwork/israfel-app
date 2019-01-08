@@ -66,7 +66,8 @@ describe('actions', () => {
 		expect(
 			web3Actions.tokenBalanceUpdate('code', 'custodian', {
 				balance: 123,
-				allowance: 456
+				allowance: 456,
+				address: '0xAddress'
 			})
 		).toMatchSnapshot();
 	});
@@ -86,7 +87,8 @@ describe('actions', () => {
 				tokens: [
 					{
 						custodian: 'custodian',
-						code: 'code'
+						code: 'code',
+						address: '0xAddress'
 					}
 				]
 			}

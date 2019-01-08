@@ -16,16 +16,18 @@ describe('Dex Test', () => {
 				weth: 0.984992
 			};
 			const acceptedPrices = {
-				'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': [{
-					blockNumber: 9835631,
-					contractAddress: '0x00be45Fe5903AB1b33a9d3969b05b29552a6d18b',
-					navA: 0.9554321303002988,
-					navB: 1.0891357393994023,
-					price: 128.45782891277358,
-					timestamp: 1545782400000,
-					transactionHash:
-						'0x54c64c781b92e1d44d5229245e86b9aae602f126339e16d72f50162100e7b5e5'
-				}]
+				'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': [
+					{
+						blockNumber: 9835631,
+						contractAddress: '0x00be45Fe5903AB1b33a9d3969b05b29552a6d18b',
+						navA: 0.9554321303002988,
+						navB: 1.0891357393994023,
+						price: 128.45782891277358,
+						timestamp: 1545782400000,
+						transactionHash:
+							'0x54c64c781b92e1d44d5229245e86b9aae602f126339e16d72f50162100e7b5e5'
+					}
+				]
 			};
 			const ethPrice = 123;
 			const custodians = {
@@ -67,8 +69,16 @@ describe('Dex Test', () => {
 			};
 			const custodianTokenBalances = {
 				'0x00be45fe5903ab1b33a9d3969b05b29552a6d18b': {
-					LETH: { balance: 0, allowance: 0 },
-					sETH: { balance: 0, allowance: 1.157920892373162e59 }
+					LETH: {
+						balance: 0,
+						allowance: 0,
+						address: '0x59E6B3d43F762310626d2905148939973db2BBd3'
+					},
+					sETH: {
+						balance: 0,
+						allowance: 1.157920892373162e59,
+						address: '0x8a3beca74e0e737460bde45a09594a8d7d8c9886'
+					}
 				}
 			};
 			const orderBooks = {
@@ -101,6 +111,6 @@ describe('Dex Test', () => {
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
-			});
+		});
 	});
 });

@@ -54,6 +54,7 @@ Array [
   },
   Object {
     "balance": Object {
+      "address": undefined,
       "allowance": 333,
       "balance": 222,
     },
@@ -151,6 +152,7 @@ Array [
   },
   Object {
     "balance": Object {
+      "address": undefined,
       "allowance": 333,
       "balance": 222,
     },
@@ -164,6 +166,7 @@ Array [
 exports[`actions tokenBalanceUpdate 1`] = `
 Object {
   "balance": Object {
+    "address": "0xAddress",
     "allowance": 456,
     "balance": 123,
   },

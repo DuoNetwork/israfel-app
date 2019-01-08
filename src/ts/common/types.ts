@@ -60,6 +60,7 @@ export interface IEthBalance {
 export interface ITokenBalance {
 	balance: number;
 	allowance: number;
+	address: string;
 }
 
 export interface ICustodianInfo {
