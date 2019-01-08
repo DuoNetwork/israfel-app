@@ -55,7 +55,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -87,15 +87,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -159,15 +155,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -298,14 +290,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -339,7 +327,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123.000000"
                   width="100%"
                 />
               </li>
@@ -578,7 +565,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -610,15 +597,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -682,15 +665,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -821,14 +800,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -862,7 +837,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123.000000"
                   width="100%"
                 />
               </li>
@@ -1101,7 +1075,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -1133,15 +1107,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -1205,15 +1175,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -1344,14 +1310,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -1385,7 +1347,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123.000000"
                   width="100%"
                 />
               </li>
@@ -1624,7 +1585,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -1656,15 +1617,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -1728,15 +1685,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -1867,14 +1820,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -1908,7 +1857,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123.000000"
                   width="100%"
                 />
               </li>
@@ -2147,7 +2095,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -2179,15 +2127,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -2251,15 +2195,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -2390,14 +2330,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -2431,7 +2367,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123456.000000"
                   width="100%"
                 />
               </li>
@@ -2447,7 +2382,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 <span
                   className="des"
                 >
-                  approx. 15.19M USD
+                  estimated USD price
                 </span>
               </li>
               <li
@@ -2485,7 +2420,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 }
               >
                 <Styled(Slider)
-                  disabled={false}
+                  disabled={true}
                   marks={
                     Object {
                       "0": Object {
@@ -2579,12 +2514,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
       <div
         className="convert-popup-des"
       >
-        Buy 123456.0 aETH with 15.24B WETH
+        Buy aETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay NaN aETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -2670,7 +2605,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -2702,15 +2637,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -2774,15 +2705,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -2913,14 +2840,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -2954,7 +2877,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123456.000000"
                   width="100%"
                 />
               </li>
@@ -2970,7 +2892,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 <span
                   className="des"
                 >
-                  approx. 15.19M USD
+                  estimated USD price
                 </span>
               </li>
               <li
@@ -3008,7 +2930,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 }
               >
                 <Styled(Slider)
-                  disabled={false}
+                  disabled={true}
                   marks={
                     Object {
                       "0": Object {
@@ -3102,12 +3024,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
       <div
         className="convert-popup-des"
       >
-        Buy 123456.0 aETH with 15.24B WETH
+        Buy aETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay NaN aETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -3193,7 +3115,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
         <span
           className="trade-nav-px"
         >
-          1.000000 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -3225,15 +3147,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
             >
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -3297,15 +3215,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123.000000
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123.0
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -3436,14 +3350,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  123.0
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -3477,7 +3387,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                   right={true}
                   step={0.000005}
                   type="number"
-                  value="123.000000"
                   width="100%"
                 />
               </li>
@@ -3716,7 +3625,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
         <span
           className="trade-nav-px"
         >
-          1 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -3748,15 +3657,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
             >
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -3820,15 +3725,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -3959,14 +3860,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -3999,7 +3896,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
-                  value="123"
                   width="100%"
                 />
               </li>
@@ -4237,7 +4133,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
         <span
           className="trade-nav-px"
         >
-          1 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -4269,15 +4165,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
             >
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -4341,15 +4233,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -4480,14 +4368,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -4520,7 +4404,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
-                  value="123"
                   width="100%"
                 />
               </li>
@@ -4758,7 +4641,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
         <span
           className="trade-nav-px"
         >
-          1 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -4790,15 +4673,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
             >
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -4862,15 +4741,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -5001,14 +4876,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -5041,7 +4912,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
-                  value="123"
                   width="100%"
                 />
               </li>
@@ -5057,7 +4927,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                 <span
                   className="des"
                 >
-                  approx. 15,129.0 USD
+                  estimated USD price
                 </span>
               </li>
               <li
@@ -5279,7 +5149,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
         <span
           className="trade-nav-px"
         >
-          1 ETH
+          undefined ETH
         </span>
         <span
           style={
@@ -5311,15 +5181,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
             >
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
               <span
                 className="title bid-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
             </li>
             <li
@@ -5383,15 +5249,11 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
               <span
                 className="title ask-span"
               >
-                <b>
-                  123
-                </b>
+                <b />
               </span>
               <span
                 className="content"
-              >
-                123
-              </span>
+              />
             </li>
             <li
               key="1"
@@ -5522,14 +5384,10 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                 </div>
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
                 <div
                   className="tablecontent"
-                >
-                  0.1K
-                </div>
+                />
               </li>
             </ul>
           </div>
@@ -5562,7 +5420,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                   onChange={[Function]}
                   right={true}
                   type="number"
-                  value="123"
                   width="100%"
                 />
               </li>
@@ -5578,7 +5435,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                 <span
                   className="des"
                 >
-                  approx. 15,129.0 USD
+                  estimated USD price
                 </span>
               </li>
               <li

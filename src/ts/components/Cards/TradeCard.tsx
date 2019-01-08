@@ -14,7 +14,6 @@ import {
 	ITokenBalance
 } from 'ts/common/types';
 import util from 'ts/common/util';
-import web3Util from '../../common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -41,6 +40,7 @@ interface IProps {
 	interestOrLeverage: number;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
+	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
 }
 
 interface IState {
@@ -320,7 +320,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		this.setState({ approving: true });
 		try {
 			const { isBid } = this.state;
-			const tx = await web3Util.setUnlimitedTokenAllowance(
+			const tx = await this.props.setUnlimitedTokenAllowance(
 				isBid ? CST.TH_WETH : token,
 				account
 			);

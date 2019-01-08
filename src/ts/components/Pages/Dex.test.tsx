@@ -97,6 +97,8 @@ describe('Dex Test', () => {
 			const wrapEther = jest.fn();
 			const unwrapEther = jest.fn();
 			const getTokenByCode = jest.fn();
+			const setUnlimitedTokenAllowance = jest.fn();
+			const web3PersonalSign = jest.fn();
 			const wrapper = shallow(
 				<Dex
 					orderHistory={orderHistory}
@@ -107,6 +109,7 @@ describe('Dex Test', () => {
 					custodianTokenBalances={custodianTokenBalances}
 					custodians={custodians}
 					orderBooks={orderBooks}
+					etherToken={'test'}
 					ethPrice={ethPrice}
 					acceptedPrices={acceptedPrices}
 					ethBalance={ethBalance}
@@ -114,6 +117,8 @@ describe('Dex Test', () => {
 					wrapEther={wrapEther}
 					unwrapEther={unwrapEther}
 					getTokenByCode={getTokenByCode}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					web3PersonalSign={web3PersonalSign}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

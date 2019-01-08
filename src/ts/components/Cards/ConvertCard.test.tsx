@@ -71,6 +71,7 @@ describe('ConvertCard Test', () => {
 					ethBalance={ethBalance}
 					notify={() => ({})}
 					handleClose={handleClose}
+					etherToken={'test'}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

@@ -55,8 +55,12 @@ describe('TradeCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			util.getExpiryTimestamp = jest.fn();
+			util.formatFixedNumber = jest.fn();
+			util.formatBalance = jest.fn();
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
 					account={'account'}
@@ -71,6 +75,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
@@ -88,6 +93,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 				/>
 			);
 			expect(wrapper1).toMatchSnapshot();
@@ -105,6 +111,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 				/>
 			);
 			expect(wrapper2).toMatchSnapshot();
@@ -122,6 +129,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 				/>
 			);
 			expect(wrapper3).toMatchSnapshot();
@@ -156,6 +164,7 @@ describe('TradeCard Test', () => {
 			Math.max = jest.fn(() => 1);
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
 					account={'account'}
@@ -169,6 +178,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
+					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

@@ -6,7 +6,6 @@ import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
 import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
-import web3Util from 'ts/common/web3Util';
 import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
@@ -15,6 +14,7 @@ const Column = Table.Column;
 interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	account: string;
+	web3PersonalSign: (account: string, message: string) => Promise<string>;
 }
 
 interface IState {
@@ -89,7 +89,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 							title={CST.TT_DELETE_ORDER}
 							icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
 							onConfirm={() =>
-								web3Util
+								this.props
 									.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash)
 									.then(result =>
 										relayerClient.deleteOrder(

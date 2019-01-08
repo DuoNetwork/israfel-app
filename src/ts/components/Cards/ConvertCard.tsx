@@ -8,7 +8,6 @@ import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper, getDualClassWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
-import web3Util from 'ts/common/web3Util';
 import { SDivFlexCenter } from '../_styled';
 import {
 	SButton,
@@ -30,6 +29,7 @@ interface IProps {
 	info?: ICustodianInfo;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
+	etherToken: string;
 }
 
 interface IState {
@@ -223,7 +223,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		if (!this.state.wethCreate) {
 			const { account, custodian } = this.props;
 			duoWeb3Wrapper
-				.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+				.getErc20Allowance(this.props.etherToken, account, custodian)
 				.then(allownace => {
 					this.setState({
 						allowance: allownace,
@@ -251,7 +251,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		const { account, custodian, notify } = this.props;
 		try {
 			const txHash = await duoWeb3Wrapper.erc20Approve(
-				web3Util.contractAddresses.etherToken,
+				this.props.etherToken,
 				account,
 				custodian,
 				0,
@@ -265,7 +265,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			});
 			const interval = setInterval(() => {
 				duoWeb3Wrapper
-					.getErc20Allowance(web3Util.contractAddresses.etherToken, account, custodian)
+					.getErc20Allowance(this.props.etherToken, account, custodian)
 					.then(allownace => {
 						if (allownace) {
 							this.setState({
@@ -325,7 +325,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					? await cw.create(
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
-							wethCreate ? web3Util.contractAddresses.etherToken : ''
+							wethCreate ? this.props.etherToken : ''
 					  )
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});

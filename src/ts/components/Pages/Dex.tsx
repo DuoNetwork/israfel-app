@@ -10,7 +10,7 @@ import {
 	IOrderBookSnapshot,
 	IToken,
 	ITokenBalance,
-	IUserOrder,
+	IUserOrder
 } from 'ts/common/types';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
@@ -30,12 +30,15 @@ interface IProps {
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
+	etherToken: string;
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
-	wrapEther: (amount: number, address: string) => Promise<string>
-	unwrapEther: (amount: number, address: string) => Promise<string>,
-	getTokenByCode: (code: string) => IToken | undefined
+	wrapEther: (amount: number, address: string) => Promise<string>;
+	unwrapEther: (amount: number, address: string) => Promise<string>;
+	getTokenByCode: (code: string) => IToken | undefined;
+	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
+	web3PersonalSign: (account: string, message: string) => Promise<string>;
 }
 
 interface IState {
@@ -138,7 +141,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				)
+				  )
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -213,7 +216,11 @@ export default class Dex extends React.Component<IProps, IState> {
 							<DummyCustodianCard key={a} type={CST.MOZART} margin="0 10px" />
 						))}
 					</SDivFlexCenter>{' '}
-					<OrderHistoryCard orderHistory={orderHistory} account={account} />
+					<OrderHistoryCard
+						orderHistory={orderHistory}
+						account={account}
+						web3PersonalSign={this.props.web3PersonalSign}
+					/>
 					<ConvertCard
 						account={account}
 						tokenBalances={custodianTokenBalances[convertCustodian]}
@@ -224,11 +231,13 @@ export default class Dex extends React.Component<IProps, IState> {
 						info={custodians[convertCustodian]}
 						notify={notify}
 						handleClose={() => this.handleConvert('', '', '')}
+						etherToken={this.props.etherToken}
 					/>
 					<TradeCard
 						account={account}
 						token={tradeToken}
 						tokenInfo={tradeTokenInfo}
+						setUnlimitedTokenAllowance={this.props.setUnlimitedTokenAllowance}
 						tokenBalance={tradeTokenBalance}
 						ethBalance={ethBalance}
 						orderBook={

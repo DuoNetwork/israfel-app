@@ -82,8 +82,15 @@ describe('OrderHistoryCard Test', () => {
 
 		it('Test Snapshot', () => {
 			util.formatTime = jest.fn(() => '1970-01-01 00:00:00');
+			util.convertOrdersToCSV = jest.fn();
+			util.getOrderFullDescription = jest.fn();
+			const web3PersonalSign = jest.fn();
 			const wrapper = shallow(
-				<OrderHistoryCard orderHistory={orderHistory} account={'test'} />
+				<OrderHistoryCard
+					web3PersonalSign={web3PersonalSign}
+					orderHistory={orderHistory}
+					account={'test'}
+				/>
 			);
 			expect(wrapper).toMatchSnapshot();
 		});
