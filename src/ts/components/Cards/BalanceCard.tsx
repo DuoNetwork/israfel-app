@@ -1,3 +1,4 @@
+import link from 'images/icons/link.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
@@ -120,21 +121,23 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						? custodianTokenBalances[c][code].address
 						: '';
 				balanceLis.push(
-					<li
-						key={code}
-						style={{ padding: '5px 5px', cursor: 'pointer' }}
-						onClick={() =>
-							window.open(
-								`https://${
-									__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-								}etherscan.io/token/${address}`,
-								'__blank'
-							)
-						}
-					>
+					<li key={code} style={{ padding: '5px 5px' }}>
 						<span className="title">{code}</span>
 						<span className="content">
 							{balance ? util.formatBalance(balance) : '-'}
+							<img
+								className="cus-link"
+								src={link}
+								style={{ width: '12px', height: '12px', marginLeft: '10px' }}
+								onClick={() =>
+									window.open(
+										`https://${
+											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+										}etherscan.io/token/${address}`,
+										'__blank'
+									)
+								}
+							/>
 						</span>
 					</li>
 				);
