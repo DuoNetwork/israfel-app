@@ -108,7 +108,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -172,8 +172,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	}
 
 	private escFunction(event: any) {
-		if (event.keyCode === 27)
-		this.props.handleClose();
+		if (event.keyCode === 27) this.props.handleClose();
 	}
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
@@ -294,7 +293,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { tokenInfo, orderBook, ethPrice, token } = this.props;
 		const { expiry } = this.state;
 		const precision = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : 0;
-		const orders = (isBid ? orderBook.bids : orderBook.asks).slice(0, 1);
+		const orders = (!isBid ? orderBook.bids : orderBook.asks).slice(0, 1);
 		const price =
 			orders && orders.length
 				? util.formatFixedNumber(orders[0].price ? orders[0].price : 0, precision)
@@ -521,10 +520,15 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				>
 					<div className="convert-popup-des">
 						<this.cardDescription token={token.split('-')[0]} n={interestOrLeverage} />
-						<div className='trade-nav'>
+						<div className="trade-nav">
 							<span className="navspan">NAV</span>
-							<span className='trade-nav-px'>{`${util.formatFixedNumber(navInEth, precision)} ETH`}</span>
-							<span style={{fontSize: 10, color: ColorStyles.TextBlackAlphaL}}>{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}</span>
+							<span className="trade-nav-px">{`${util.formatFixedNumber(
+								navInEth,
+								precision
+							)} ETH`}</span>
+							<span
+								style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}
+							>{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}</span>
 						</div>
 					</div>
 					<SDivFlexCenter horizontal>
@@ -538,7 +542,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -547,7 +551,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -567,7 +571,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -576,7 +580,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
@@ -611,11 +615,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<SCardList noMargin width="100%">
 								<div className="status-list-wrapper">
 									<ul>
-										<li
-											style={{
-												padding: '5px 15px'
-											}}
-										>
+										<li style={{ padding: '5px 15px' }}>
 											<div
 												className="tabletitle"
 												style={{ textAlign: 'left', width: '20%' }}
@@ -625,11 +625,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<div className="tabletitle">{token}</div>
 											<div className="tabletitle">{CST.TH_WETH}</div>
 										</li>
-										<li
-											style={{
-												padding: '5px 15px'
-											}}
-										>
+										<li style={{ padding: '5px 15px' }}>
 											<div
 												className="tabletitle"
 												style={{ textAlign: 'left', width: '20%' }}
@@ -651,12 +647,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
-										<p
-											style={{
-												paddingTop: '100px',
-												textAlign: 'center'
-											}}
-										>
+										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
 											Not enough allowance, please approve first
 										</p>
 									</li>
@@ -678,7 +669,20 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<SInput
 												right
 												width="100%"
-												value={this.state.price}
+												value={
+													this.state.price !== ''
+														? this.state.price
+														: this.props.orderBook.asks &&
+														  this.props.orderBook.asks.length
+														? util.formatFixedNumber(
+																this.props.orderBook.asks[0].price
+																	? this.props.orderBook.asks[0]
+																			.price
+																	: 0,
+																precision
+														  )
+														: ''
+												}
 												type="number"
 												min={0}
 												step={
@@ -697,7 +701,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										<li
 											className={'input-line'}
 											style={{
-												padding: '5px 15px',
+												padding: '5 === ""px 15px',
 												flexDirection: 'row-reverse'
 											}}
 										>
