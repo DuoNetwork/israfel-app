@@ -60,6 +60,7 @@ describe('TradeCard Test', () => {
 			util.formatBalance = jest.fn();
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -76,6 +77,7 @@ describe('TradeCard Test', () => {
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					addOrder={addOrder}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
@@ -94,6 +96,7 @@ describe('TradeCard Test', () => {
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					addOrder={addOrder}
 				/>
 			);
 			expect(wrapper1).toMatchSnapshot();
@@ -112,6 +115,7 @@ describe('TradeCard Test', () => {
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					addOrder={addOrder}
 				/>
 			);
 			expect(wrapper2).toMatchSnapshot();
@@ -130,6 +134,7 @@ describe('TradeCard Test', () => {
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					addOrder={addOrder}
 				/>
 			);
 			expect(wrapper3).toMatchSnapshot();
@@ -164,6 +169,7 @@ describe('TradeCard Test', () => {
 			Math.max = jest.fn(() => 1);
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -179,6 +185,7 @@ describe('TradeCard Test', () => {
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
+					addOrder={addOrder}
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();

@@ -48,18 +48,19 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 		});
 
 	private handleWrap = () => {
+		const { notify, wrapEther, account } = this.props;
 		const { ethInput } = this.state;
 
 		if (ethInput.match(CST.RX_NUM_P)) {
-			this.props.notify({
+			notify({
 				level: 'info',
 				title: CST.TH_ETH,
 				message: 'Please check your MetaMask!',
 				transactionHash: ''
 			});
-			this.props.wrapEther(Number(ethInput), this.props.account).then(txHash => {
+			wrapEther(Number(ethInput), account).then(txHash => {
 				this.setState({ ethInput: '' });
-				this.props.notify({
+				notify({
 					level: 'info',
 					title: 'WETH',
 					message: 'Wrap transacton sent.',
@@ -70,17 +71,18 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 	};
 
 	private handleUnwrap = () => {
+		const { notify, unwrapEther, account } = this.props;
 		const { wethInput } = this.state;
 		if (wethInput.match(CST.RX_NUM_P)) {
-			this.props.notify({
+			notify({
 				level: 'info',
 				title: CST.TH_WETH,
 				message: 'Please check your MetaMask!',
 				transactionHash: ''
 			});
-			this.props.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
+			unwrapEther(Number(wethInput), account).then(txHash => {
 				this.setState({ wethInput: '' });
-				this.props.notify({
+				notify({
 					level: 'info',
 					title: 'WETH',
 					message: 'Unwrap transacton sent.',
@@ -101,6 +103,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 			beethovenList,
 			mozartList
 		} = this.props;
+		const {ethInput, wethInput} = this.state;
 		const animated = visible ? 'animated' : '';
 
 		let totalNav = (ethBalance.eth + ethBalance.weth) * ethPrice;
@@ -189,7 +192,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						placeholder="Amount"
 						width="60%"
 						style={{ height: '30px' }}
-						value={this.state.ethInput}
+						value={ethInput}
 						onChange={e => this.handleETHInputChange(e.target.value)}
 					/>
 					<SButton onClick={this.handleWrap} width="40%">
@@ -216,7 +219,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 						placeholder="Amount"
 						width="60%"
 						style={{ height: '30px' }}
-						value={this.state.wethInput}
+						value={wethInput}
 						onChange={e => this.handleWETHInputChange(e.target.value)}
 					/>
 					<SButton onClick={this.handleUnwrap} width="40%">
