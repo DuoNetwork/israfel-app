@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
+import link from 'images/icons/link.png';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -325,7 +326,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
 							wethCreate ? web3Util.contractAddresses.etherToken : ''
-					)
+					  )
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
@@ -402,7 +403,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
@@ -427,27 +428,30 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 						</SDivFlexCenter>
 					}
 				>
-					<div
-						className="cus-link"
-						onClick={() =>
-							window.open(
-								`https://kovan.duo.network/${
-									info ? info.code.split('-')[0].toLowerCase() : ''
-								}/${
-									info
-										? info.code.split('-')[1]
-											? info.code.split('-')[1].toLowerCase()
-											: 'perpetual'
-										: ''
-								}`,
-								'_blank'
-							)
-						}
-					>
+					<div>
 						<div className="convert-popup-des">
 							Fully backed by ETH, this contract converts between ETH and tokens with
 							diversified payoffs.
 							<this.TokenDescription aToken={aToken} bToken={bToken} />
+							<img
+								className="cus-link"
+								src={link}
+								style={{ width: '12px' }}
+								onClick={() =>
+									window.open(
+										`https://kovan.duo.network/${
+											info ? info.code.split('-')[0].toLowerCase() : ''
+										}/${
+											info
+												? info.code.split('-')[1]
+													? info.code.split('-')[1].toLowerCase()
+													: 'perpetual'
+												: ''
+										}`,
+										'_blank'
+									)
+								}
+							/>
 						</div>
 						<div className="convert-popup-des">{util.getMaturityDescription(info)}</div>
 					</div>
