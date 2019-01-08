@@ -4,6 +4,7 @@
 
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
 import util from 'ts/common/util';
 import { SButton, SInput, SSlider } from './_styled';
 import ConvertCard from './ConvertCard';
@@ -56,6 +57,7 @@ describe('ConvertCard Test', () => {
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
 			window.open = jest.fn();
+			duoWeb3Wrapper.getErc20Allowance = jest.fn();
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
@@ -73,6 +75,29 @@ describe('ConvertCard Test', () => {
 			);
 			expect(wrapper).toMatchSnapshot();
 			wrapper
+				.find(SInput)
+				.at(1)
+				.simulate('blur', { target: { value: '123456.123' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SInput)
+				.at(0)
+				.simulate('blur', { target: { value: '12.123' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SSlider)
+				.at(1)
+				.simulate('change', { target: { value: 12, limit: 123 } });
+			expect(wrapper).toMatchSnapshot();
+			// // wrapper.setState({ wethCreate: false });
+			// // wrapper.setState({ isCreate: true });
+			// wrapper
+			// 	.find('li')
+			// 	.at(11)
+			// 	.simulate('click');
+			// expect(wrapper).toMatchSnapshot();
+
+			wrapper
 				.find('li')
 				.at(6)
 				.simulate('click');
@@ -86,6 +111,7 @@ describe('ConvertCard Test', () => {
 				.find('li')
 				.at(11)
 				.simulate('click');
+			wrapper.setState({ wethCreate: false });
 			expect(wrapper).toMatchSnapshot();
 			wrapper
 				.find('.cus-link')
@@ -100,7 +126,7 @@ describe('ConvertCard Test', () => {
 			wrapper
 				.find(SSlider)
 				.at(1)
-				.simulate('change', { target: { value: '12', limit: '123' } });
+				.simulate('change', { target: { value: 12, limit: 123 } });
 			wrapper
 				.find(SInput)
 				.at(0)
@@ -113,22 +139,22 @@ describe('ConvertCard Test', () => {
 				.find(SInput)
 				.at(1)
 				.simulate('change', { target: { value: '123456' } });
-			wrapper
-				.find(SInput)
-				.at(1)
-				.simulate('blur', { target: { value: '123456.123' } });
+			// wrapper
+			// 	.find(SInput)
+			// 	.at(1)
+			// 	.simulate('blur', { target: { value: '123456.123' } });
+			expect(wrapper).toMatchSnapshot();
 			wrapper
 				.find(SButton)
 				.at(1)
 				.simulate('click');
+			wrapper.setProps({ info: false });
+			expect(wrapper).toMatchSnapshot();
 			wrapper
 				.find(SButton)
 				.at(0)
 				.simulate('click');
-			wrapper
-				.find(SButton)
-				.at(1)
-				.simulate('keydown', { keyCode: 27 });
+			wrapper.simulate('keydown', { keyCode: 27 });
 			expect(wrapper).toMatchSnapshot();
 		});
 	});
