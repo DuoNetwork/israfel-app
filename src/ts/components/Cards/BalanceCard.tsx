@@ -47,7 +47,14 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 
 	private handleWrap = () => {
 		const { ethInput } = this.state;
-		if (ethInput.match(CST.RX_NUM_P))
+
+		if (ethInput.match(CST.RX_NUM_P)) {
+			this.props.notify({
+				level: 'info',
+				title: CST.TH_ETH,
+				message: 'Please check your MetaMask!',
+				transactionHash: ''
+			});
 			web3Util.wrapEther(Number(ethInput), this.props.account).then(txHash => {
 				this.setState({ ethInput: '' });
 				this.props.notify({
@@ -57,12 +64,18 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 					transactionHash: txHash
 				});
 			});
-		else this.setState({ ethInput: '' });
+		} else this.setState({ ethInput: '' });
 	};
 
 	private handleUnwrap = () => {
 		const { wethInput } = this.state;
-		if (wethInput.match(CST.RX_NUM_P))
+		if (wethInput.match(CST.RX_NUM_P)) {
+			this.props.notify({
+				level: 'info',
+				title: CST.TH_WETH,
+				message: 'Please check your MetaMask!',
+				transactionHash: ''
+			});
 			web3Util.unwrapEther(Number(wethInput), this.props.account).then(txHash => {
 				this.setState({ wethInput: '' });
 				this.props.notify({
@@ -72,7 +85,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 					transactionHash: txHash
 				});
 			});
-		else this.setState({ wethInput: '' });
+		} else this.setState({ wethInput: '' });
 	};
 
 	public render() {
