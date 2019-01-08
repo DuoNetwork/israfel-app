@@ -129,7 +129,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 							<img
 								className="cus-link"
 								src={link}
-								style={{ width: '12px', height: '12px', marginLeft: '10px' }}
+								style={{ width: '14px', height: '14px', marginLeft: '10px' }}
 								onClick={() =>
 									window.open(
 										`https://${

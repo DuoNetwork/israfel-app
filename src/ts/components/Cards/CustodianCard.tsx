@@ -90,7 +90,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 						<img
 							className="cus-link"
 							src={link}
-							style={{ width: '12px', marginLeft: '10px' }}
+							style={{ width: '14px', marginLeft: '10px' }}
 							onClick={() =>
 								window.open(
 									`https://${

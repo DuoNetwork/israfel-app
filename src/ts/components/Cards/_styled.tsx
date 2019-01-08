@@ -35,7 +35,7 @@ export const SCard = styled(Card)`
 			.ant-card-extra {
 				height: 40px;
 				align-items: center;
-    			display: flex;
+				display: flex;
 			}
 		}
 	}
@@ -51,6 +51,8 @@ export const SCardTitle = styled.div`
 	letter-spacing: 1px;
 	font-size: 16px;
 	line-height: 20px;
+	display: flex;
+	align-items: center;
 `;
 
 export const SCardTitleSelector = styled(Select as any)`

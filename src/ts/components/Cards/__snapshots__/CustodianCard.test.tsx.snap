@@ -37,7 +37,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
         style={
           Object {
             "marginLeft": "10px",
-            "width": "12px",
+            "width": "14px",
           }
         }
       />
@@ -474,7 +474,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
         style={
           Object {
             "marginLeft": "10px",
-            "width": "12px",
+            "width": "14px",
           }
         }
       />
@@ -911,7 +911,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
         style={
           Object {
             "marginLeft": "10px",
-            "width": "12px",
+            "width": "14px",
           }
         }
       />
@@ -1348,7 +1348,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
         style={
           Object {
             "marginLeft": "10px",
-            "width": "12px",
+            "width": "14px",
           }
         }
       />
@@ -1785,7 +1785,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
         style={
           Object {
             "marginLeft": "10px",
-            "width": "12px",
+            "width": "14px",
           }
         }
       />

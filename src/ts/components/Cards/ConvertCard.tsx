@@ -326,7 +326,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
 							wethCreate ? wethAddress : ''
-					)
+					  )
 					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
 			});
 			handleClose();
@@ -400,7 +400,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.min(
 					tokenBalances[aToken].balance,
 					tokenBalances[bToken].balance / info.states.alpha
-			)
+			  )
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
@@ -416,7 +416,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 							<img
 								className="cus-link"
 								src={link}
-								style={{ width: '12px', marginLeft: '10px' }}
+								style={{ width: '14px', marginLeft: '10px' }}
 								onClick={() =>
 									window.open(
 										`https://kovan.duo.network/${

@@ -40,7 +40,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -596,7 +596,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -1152,7 +1152,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -1708,7 +1708,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -2264,7 +2264,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -2432,8 +2432,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
     <Spin
       prefixCls="ant-spin"
       size="default"
-      spinning={false}
-      tip="Submitting. Please check your MetaMask!"
+      spinning={true}
+      tip="Approving. Please check your MetaMask!"
       wrapperClassName=""
     >
       <styled.div>
@@ -2442,8 +2442,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
           padding="10px"
           style={
             Object {
-              "opacity": 1,
-              "pointerEvents": "auto",
+              "opacity": 0.3,
+              "pointerEvents": "none",
             }
           }
           width="100%"
@@ -2508,7 +2508,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                     }
                   }
                 >
-                  ETH
+                  WETH
                 </div>
               </li>
               <li
@@ -2548,7 +2548,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                     }
                   }
                 >
-                  100.0
+                  123.0
                 </div>
               </li>
             </ul>
@@ -2567,9 +2567,9 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                 style={
                   Object {
                     "marginBottom": 0,
-                    "opacity": 1,
+                    "opacity": 0.3,
                     "padding": "0 10px",
-                    "pointerEvents": "auto",
+                    "pointerEvents": "none",
                   }
                 }
               >
@@ -2583,7 +2583,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   right={true}
-                  value="12.123"
+                  value=""
                   width="100%"
                 />
               </li>
@@ -2591,9 +2591,9 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                 className="input-line"
                 style={
                   Object {
-                    "opacity": 1,
+                    "opacity": 0.3,
                     "padding": "0 15px",
-                    "pointerEvents": "auto",
+                    "pointerEvents": "none",
                   }
                 }
               >
@@ -2630,7 +2630,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                   }
                   onChange={[Function]}
                   step={1}
-                  value={12.245454545454544}
+                  value={0}
                 />
               </li>
               <li
@@ -2658,7 +2658,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                       }
                     }
                   />
-                  Click to create with WETH
+                  Click to create with ETH
                 </span>
               </li>
             </ul>
@@ -2674,7 +2674,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
             <ul
               style={
                 Object {
-                  "height": "0px",
+                  "height": "90px",
                   "margin": "0",
                 }
               }
@@ -2688,6 +2688,11 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
                   }
                 }
               >
+                <span
+                  className="input-des"
+                >
+                  WETH Amount
+                </span>
                 <styled.input
                   disabled={false}
                   onBlur={[Function]}
@@ -2763,11 +2768,11 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
           Reset
         </styled.button>
         <styled.button
-          disable={false}
+          disable={true}
           onClick={[Function]}
           style={
             Object {
-              "opacity": 1,
+              "opacity": 0.3,
             }
           }
           width="49%"
@@ -2820,7 +2825,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -2988,7 +2993,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 6`] = `
     <Spin
       prefixCls="ant-spin"
       size="default"
-      spinning={false}
+      spinning={true}
       tip="Submitting. Please check your MetaMask!"
       wrapperClassName=""
     >
@@ -3376,7 +3381,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 7`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -3544,7 +3549,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 7`] = `
     <Spin
       prefixCls="ant-spin"
       size="default"
-      spinning={false}
+      spinning={true}
       tip="Submitting. Please check your MetaMask!"
       wrapperClassName=""
     >
@@ -3932,7 +3937,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -4100,7 +4105,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
     <Spin
       prefixCls="ant-spin"
       size="default"
-      spinning={false}
+      spinning={true}
       tip="Submitting. Please check your MetaMask!"
       wrapperClassName=""
     >
@@ -4488,7 +4493,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -5044,7 +5049,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
           style={
             Object {
               "marginLeft": "10px",
-              "width": "12px",
+              "width": "14px",
             }
           }
         />
@@ -5473,7 +5478,7 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   right={true}
-                  value=""
+                  value="123456"
                   width="100%"
                 />
               </li>

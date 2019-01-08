@@ -56,8 +56,8 @@ describe('ConvertCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			duoWeb3Wrapper.getErc20Allowance = jest.fn(() => Promise.resolve('test'));
 			window.open = jest.fn();
-			duoWeb3Wrapper.getErc20Allowance = jest.fn();
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
@@ -90,13 +90,32 @@ describe('ConvertCard Test', () => {
 				.at(1)
 				.simulate('change', { target: { value: 12, limit: 123 } });
 			expect(wrapper).toMatchSnapshot();
-			// // wrapper.setState({ wethCreate: false });
-			// // wrapper.setState({ isCreate: true });
-			// wrapper
-			// 	.find('li')
-			// 	.at(11)
-			// 	.simulate('click');
-			// expect(wrapper).toMatchSnapshot();
+			wrapper.setState({ wethCreate: false });
+			wrapper.setState({ isCreate: true });
+			wrapper
+				.find('.waring-expand-button')
+				.at(0)
+				.simulate('click');
+			expect(duoWeb3Wrapper.getErc20Allowance).toBeCalled();
+
+			wrapper.setState({ wethCreate: true });
+			wrapper.setState({ isCreate: true });
+			wrapper.setState({ allowance: false });
+			wrapper.setState({ loading: false });
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
+			expect(duoWeb3Wrapper.getErc20Allowance).toBeCalled();
+
+			wrapper
+				.find(SButton)
+				.at(1)
+				.simulate('click');
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
 
 			wrapper
 				.find('li')
@@ -139,16 +158,8 @@ describe('ConvertCard Test', () => {
 			// 	.at(1)
 			// 	.simulate('blur', { target: { value: '123456.123' } });
 			expect(wrapper).toMatchSnapshot();
-			wrapper
-				.find(SButton)
-				.at(1)
-				.simulate('click');
 			wrapper.setProps({ info: false });
 			expect(wrapper).toMatchSnapshot();
-			wrapper
-				.find(SButton)
-				.at(0)
-				.simulate('click');
 			wrapper.simulate('keydown', { keyCode: 27 });
 			expect(wrapper).toMatchSnapshot();
 		});
