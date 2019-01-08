@@ -1,18 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`convertOrdersToCSV 1`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Open,test
+"
+`;
+
+exports[`convertOrdersToCSV 2`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Cancelled due to custodian reset,test
+"
+`;
+
+exports[`convertOrdersToCSV 3`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Cancelled due to insufficent balance,test
+"
+`;
+
+exports[`convertOrdersToCSV 4`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Cancelled due to settlement error,test
+"
+`;
+
+exports[`convertOrdersToCSV 5`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Fully filled,test
+"
+`;
+
+exports[`convertOrdersToCSV 6`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Expired,test
+"
+`;
+
+exports[`convertOrdersToCSV 7`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Expired,test
+"
+`;
+
+exports[`convertOrdersToCSV 8`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Open,test
+"
+`;
+
+exports[`convertOrdersToCSV 9`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,2,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Open,test
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Open,test
+"
+`;
+
+exports[`convertOrdersToCSV 10`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Pending settlement,test
+"
+`;
+
+exports[`convertOrdersToCSV 11`] = `
+"Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
+test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Cancelled by user,test
+"
+`;
+
 exports[`getOrderFullDescription 1`] = `"Sell 123 test at 123 undefined per test. Valid till 1970-01-01 12:00:00"`;
 
 exports[`getOrderFullDescription 2`] = `"Sell 123 test at 123 undefined per test. Fully filled"`;
 
-exports[`getOrderFullDescription 3`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled by user."`;
+exports[`getOrderFullDescription 3`] = `"Sell 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement"`;
 
-exports[`getOrderFullDescription 4`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Expired."`;
+exports[`getOrderFullDescription 4`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled."`;
 
-exports[`getOrderFullDescription 5`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to insufficient balance."`;
+exports[`getOrderFullDescription 5`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled by user."`;
 
-exports[`getOrderFullDescription 6`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to settlement error."`;
+exports[`getOrderFullDescription 6`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Expired."`;
 
-exports[`getOrderFullDescription 7`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to custodian reset."`;
+exports[`getOrderFullDescription 7`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to insufficient balance."`;
+
+exports[`getOrderFullDescription 8`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to settlement error."`;
+
+exports[`getOrderFullDescription 9`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to custodian reset."`;
 
 exports[`getVersionDescription 1`] = `"Order placed."`;
 

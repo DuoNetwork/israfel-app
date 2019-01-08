@@ -234,6 +234,56 @@ test('getOrderFullDescription', () => {
 	).toMatchSnapshot();
 	expect(
 		util.getOrderFullDescription({
+			type: 'default',
+			status: 'fill',
+			updatedBy: 'test',
+			processed: true,
+			transactionHash: 'test',
+			account: 'test',
+			pair: 'test',
+			orderHash: 'test',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 123,
+			fill: 123,
+			side: 'test',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'test'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getOrderFullDescription({
+			type: 'default',
+			status: 'fill',
+			updatedBy: 'test',
+			processed: true,
+			transactionHash: 'test',
+			account: 'test',
+			pair: 'test',
+			orderHash: 'test',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 0,
+			fill: 123,
+			side: 'test',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'test'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getOrderFullDescription({
 			type: 'terminate',
 			status: 'confirmed',
 			updatedBy: 'test',
@@ -578,3 +628,382 @@ test('getUTCNowTimestamp Hours', () => {
 test('getUTCNowTimestamp Long Ago', () => {
 	expect(util.convertUpdateTime(moment().valueOf() - 260000000000000000)).toBe('long time ago');
 });
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'update',
+					status: 'reset',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'reset',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'balance',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'matching',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'fill',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'confirm',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'default',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'matching',
+					status: 'default',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'matching',
+					status: 'default',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				},
+				{
+					type: 'matching',
+					status: 'default',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'default',
+					status: 'matching',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+test('convertOrdersToCSV', () => {
+	expect(
+		util.convertOrdersToCSV({
+			'WETH-ETH': [
+				{
+					type: 'terminate',
+					status: 'confirmed',
+					updatedBy: 'test',
+					processed: true,
+					transactionHash: 'test',
+					account: 'test',
+					pair: 'test',
+					orderHash: 'test',
+					price: 123,
+					amount: 123,
+					balance: 123,
+					matching: 123,
+					fill: 123,
+					side: 'test',
+					expiry: 1234567890,
+					createdAt: 123,
+					updatedAt: 123,
+					initialSequence: 123,
+					currentSequence: 123,
+					fee: 123,
+					feeAsset: 'test'
+				}
+			]
+		})
+	).toMatchSnapshot();
+});
+
+// test('wrapCSVString', () => {
+// 	expect(util.wrapCSVString('test')).toMatchSnapshot();
+// });
