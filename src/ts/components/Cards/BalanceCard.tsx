@@ -1,9 +1,9 @@
-import link from 'images/icons/link.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+import link from '../../../images/icons/linkBlack.png';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle, SInput } from './_styled';
 import { SButton } from './_styled';
