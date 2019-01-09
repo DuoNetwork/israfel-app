@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as relayerActions from 'ts/actions/relayerActions';
-import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
 import { INotification, IState } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
@@ -27,7 +26,7 @@ function mapStateToProps(state: IState) {
 		setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) =>
 			web3Util.setUnlimitedTokenAllowance(code, account, spender),
 		web3PersonalSign: (account: string, message: string) =>
-			web3Util.web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + message),
+			web3Util.web3PersonalSign(account, message),
 		addOrder: (
 			account: string,
 			pair: string,
