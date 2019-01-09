@@ -134,7 +134,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 									window.open(
 										`https://${
 											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-										}etherscan.io/token/${address}`,
+										}etherscan.io/token/${address}?a=${account}`,
 										'__blank'
 									)
 								}
@@ -171,7 +171,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 									window.open(
 										`https://${
 											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-										}etherscan.io/token/${address}`,
+										}etherscan.io/token/${address}?a=${account}`,
 										'__blank'
 									)
 								}
