@@ -2,10 +2,16 @@
  * @jest-environment jsdom
  */
 
-import { shallow } from 'enzyme';
+// import { shallow } from 'enzyme';
+import { Popconfirm } from 'antd';
+// import { Popconfirm } from 'antd';
+// import { Table } from 'antd';
+import { mount } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
+import { SButton, SCard } from './_styled';
 import OrderHistoryCard from './OrderHistoryCard';
+// const Column = Table.Column;
 
 describe('OrderHistoryCard Test', () => {
 	describe('Test Snapshot', () => {
@@ -13,8 +19,8 @@ describe('OrderHistoryCard Test', () => {
 			'WETH|ETH': [
 				{
 					account: 'test',
-					pair: 'test',
-					orderHash: 'test',
+					pair: 'WETH|ETH',
+					orderHash: 'WETH|ETH',
 					price: 123,
 					amount: 123,
 					balance: 123,
@@ -35,8 +41,8 @@ describe('OrderHistoryCard Test', () => {
 				},
 				{
 					account: 'test',
-					pair: 'test',
-					orderHash: 'tesst123',
+					pair: 'WETH|ETH',
+					orderHash: 'WETH|ETH123',
 					price: 123,
 					amount: 123,
 					balance: 123,
@@ -57,8 +63,8 @@ describe('OrderHistoryCard Test', () => {
 				},
 				{
 					account: 'test',
-					pair: 'test',
-					orderHash: 'test',
+					pair: 'WETH|ETH',
+					orderHash: 'WETH|ETH',
 					price: 123,
 					matching: 111,
 					amount: 123,
@@ -72,7 +78,7 @@ describe('OrderHistoryCard Test', () => {
 					currentSequence: 1234,
 					fee: 123,
 					feeAsset: 'test',
-					type: 'test',
+					type: 'terminate',
 					status: 'test',
 					updatedBy: 'test',
 					processed: true
@@ -84,10 +90,11 @@ describe('OrderHistoryCard Test', () => {
 			util.formatTime = jest.fn(() => '1970-01-01 00:00:00');
 			util.convertOrdersToCSV = jest.fn();
 			util.getOrderFullDescription = jest.fn();
+			util.convertOrdersToCSV = jest.fn();
 			const web3PersonalSign = jest.fn();
 			const deleteOrder = jest.fn();
 			const notify = jest.fn();
-			const wrapper = shallow(
+			const wrapper = mount(
 				<OrderHistoryCard
 					web3PersonalSign={web3PersonalSign}
 					orderHistory={orderHistory}
@@ -97,6 +104,35 @@ describe('OrderHistoryCard Test', () => {
 				/>
 			);
 			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SButton)
+				.at(0)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			const wrapper1 = mount(
+				<OrderHistoryCard
+					web3PersonalSign={web3PersonalSign}
+					orderHistory={orderHistory}
+					account={'test'}
+					deleteOrder={deleteOrder}
+					notify={notify}
+				/>
+			);
+			wrapper1.setState({ showHistory: true });
+			expect(wrapper1).toMatchSnapshot();
+			wrapper1.find('.ordercard-header').simulate('click');
+			wrapper1
+				.find(SCard)
+				.at(0)
+				.find('div')
+				.at(0)
+				.simulate('click');
+			expect(wrapper).toMatchSnapshot();
+			wrapper1
+				.find(Popconfirm)
+				.at(0)
+				.prop('onConfirm');
+			expect(wrapper1).toMatchSnapshot();
 		});
 	});
 });
