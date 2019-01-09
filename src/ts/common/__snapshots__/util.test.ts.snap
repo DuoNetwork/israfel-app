@@ -99,4 +99,4 @@ exports[`getVersionDescription 6`] = `"Cancelled due to settlement error"`;
 
 exports[`getVersionDescription 7`] = `"Cancelled due to custodian reset"`;
 
-exports[`getVersionDescription 8`] = `"Total 246.0 filledPending settlement"`;
+exports[`getVersionDescription 8`] = `"Total 246.0 filled, pending settlement"`;

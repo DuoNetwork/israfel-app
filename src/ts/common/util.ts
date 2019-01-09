@@ -137,10 +137,8 @@ class Util {
 		if (order.type === CST.DB_ADD) return 'Order placed.';
 
 		if (order.type === CST.DB_UPDATE) {
-			let description = '';
-			if (order.fill || order.matching)
-				description = `Total ${this.formatBalance(order.fill + order.matching)} filled`;
-			if (order.matching) description += 'Pending settlement';
+			let description = `Total ${this.formatBalance(order.fill + order.matching)} filled`;
+			if (order.matching) description += ', pending settlement';
 			return description;
 		}
 
