@@ -56,11 +56,14 @@ describe('ConvertCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
-			duoWeb3Wrapper.getErc20Allowance = jest.fn(() => Promise.resolve('test'));
+			duoWeb3Wrapper.getErc20Allowance = jest.fn(() => Promise.resolve('123'));
+			duoWeb3Wrapper.erc20Approve = jest.fn(() => Promise.resolve('test'));
 			window.open = jest.fn();
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			global.setInterval = jest.fn(() => Promise.resolve('test'));
+			const notify = jest.fn();
 			const wrapper = shallow(
 				<ConvertCard
 					custodian={custodian}
@@ -69,7 +72,7 @@ describe('ConvertCard Test', () => {
 					info={info}
 					account={'account'}
 					ethBalance={ethBalance}
-					notify={() => ({})}
+					notify={notify}
 					handleClose={handleClose}
 					wethAddress={'wethAddress'}
 				/>
@@ -79,6 +82,11 @@ describe('ConvertCard Test', () => {
 				.find(SInput)
 				.at(1)
 				.simulate('blur', { target: { value: '123456.123' } });
+			expect(wrapper).toMatchSnapshot();
+			wrapper
+				.find(SInput)
+				.at(1)
+				.simulate('blur', { target: { value: '-123456.123' } });
 			expect(wrapper).toMatchSnapshot();
 			wrapper
 				.find(SInput)
@@ -97,7 +105,6 @@ describe('ConvertCard Test', () => {
 				.at(0)
 				.simulate('click');
 			expect(duoWeb3Wrapper.getErc20Allowance).toBeCalled();
-
 			wrapper.setState({ wethCreate: true });
 			wrapper.setState({ isCreate: true });
 			wrapper.setState({ allowance: false });
@@ -106,7 +113,11 @@ describe('ConvertCard Test', () => {
 				.find(SButton)
 				.at(0)
 				.simulate('click');
+			expect(duoWeb3Wrapper.erc20Approve).toBeCalled();
 			expect(duoWeb3Wrapper.getErc20Allowance).toBeCalled();
+			expect((global.setInterval as jest.Mock).mock.calls).toMatchSnapshot();
+			expect(duoWeb3Wrapper.getErc20Allowance).toBeCalled();
+			expect(wrapper.state('allowance')).toMatchSnapshot();
 
 			wrapper
 				.find(SButton)
@@ -160,7 +171,48 @@ describe('ConvertCard Test', () => {
 			expect(wrapper).toMatchSnapshot();
 			wrapper.setProps({ info: false });
 			expect(wrapper).toMatchSnapshot();
-			wrapper.simulate('keydown', { keyCode: 27 });
+			wrapper.simulate('keydown', { event: { keyCode: 27 } });
+			expect(wrapper).toMatchSnapshot();
+		});
+
+		it('Submit', () => {
+			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
+			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
+			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			window.alert = jest.fn();
+			window.open = jest.fn();
+			const notify = jest.fn();
+			const wrapper = shallow(
+				<ConvertCard
+					custodian={''}
+					aToken={aToken}
+					bToken={bToken}
+					info={info}
+					account={'account'}
+					ethBalance={ethBalance}
+					notify={notify}
+					handleClose={handleClose}
+					wethAddress={'wethAddress'}
+				/>
+			);
+			// const getDualClassWrapper = jest.fn(() => true);
+			wrapper.setProps({ info: false });
+			wrapper.setState({ isCreate: true });
+
+			wrapper
+				.find(SButton)
+				.at(1)
+				.simulate('click');
+			expect(window.alert).toBeCalled();
+
+			wrapper.setState({ isCreate: false });
+
+			wrapper
+				.find(SButton)
+				.at(1)
+				.simulate('click');
+			// wrapper.find('.cus-link').simulate('click');
+			// expect(window.open).toBeCalled();
 			expect(wrapper).toMatchSnapshot();
 		});
 	});
