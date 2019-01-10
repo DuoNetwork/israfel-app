@@ -1,5 +1,969 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
+<Styled(Card)
+  className="panel-wrap animated"
+  style={
+    Object {
+      "right": 0,
+    }
+  }
+  title={
+    <styled.div>
+      Balances
+       
+    </styled.div>
+  }
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              ETH
+            </span>
+            <span
+              className="content"
+            >
+              0.5077
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Wrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              WETH
+            </span>
+            <span
+              className="content"
+            >
+              0.9850
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Unwrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              Total Net Asset Value
+            </span>
+            <span
+              className="content"
+            >
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "flexDirection": "row-reverse",
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              $183.6
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.button
+    className="rightFixed"
+    onClick={[MockFunction]}
+    style={
+      Object {
+        "background": "#fff",
+        "color": "rgba(0,144,206,1)",
+      }
+    }
+  >
+    ∧  Hide Balances
+  </styled.button>
+</Styled(Card)>
+`;
+
+exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
+<Styled(Card)
+  className="panel-wrap animated"
+  style={
+    Object {
+      "right": 0,
+    }
+  }
+  title={
+    <styled.div>
+      Balances
+       
+    </styled.div>
+  }
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              ETH
+            </span>
+            <span
+              className="content"
+            >
+              0.5077
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value="-123456"
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Wrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              WETH
+            </span>
+            <span
+              className="content"
+            >
+              0.9850
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value="-123456"
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Unwrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              Total Net Asset Value
+            </span>
+            <span
+              className="content"
+            >
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "flexDirection": "row-reverse",
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              $183.6
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.button
+    className="rightFixed"
+    onClick={[MockFunction]}
+    style={
+      Object {
+        "background": "#fff",
+        "color": "rgba(0,144,206,1)",
+      }
+    }
+  >
+    ∧  Hide Balances
+  </styled.button>
+</Styled(Card)>
+`;
+
+exports[`BalanceCard Test Test Snapshot Test Negative Input 3`] = `Array []`;
+
+exports[`BalanceCard Test Test Snapshot Test Negative Input 4`] = `Array []`;
+
+exports[`BalanceCard Test Test Snapshot Test Negative Input 5`] = `Array []`;
+
 exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
 <Styled(Card)
   className="panel-wrap animated"
@@ -149,7 +1113,256 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
       <div
         className="status-list-wrapper"
       >
-        <ul />
+        <ul>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+        </ul>
       </div>
     </styled.div>
   </styled.div>
@@ -379,7 +1592,256 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
       <div
         className="status-list-wrapper"
       >
-        <ul />
+        <ul>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+        </ul>
       </div>
     </styled.div>
   </styled.div>
@@ -497,4 +1959,483 @@ Array [
     },
   ],
 ]
+`;
+
+exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
+<Styled(Card)
+  className="panel-wrap animated"
+  style={
+    Object {
+      "right": 0,
+    }
+  }
+  title={
+    <styled.div>
+      Balances
+       
+    </styled.div>
+  }
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              ETH
+            </span>
+            <span
+              className="content"
+            >
+              0.5077
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Wrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              WETH
+            </span>
+            <span
+              className="content"
+            >
+              0.9850
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    width="100%"
+  >
+    <styled.input
+      onChange={[Function]}
+      placeholder="Amount"
+      right={true}
+      style={
+        Object {
+          "height": "30px",
+        }
+      }
+      value=""
+      width="60%"
+    />
+    <styled.button
+      onClick={[Function]}
+      width="40%"
+    >
+      Unwrap
+    </styled.button>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "14px",
+                    "marginLeft": "10px",
+                    "width": "14px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="sETH"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              sETH
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            key="abc"
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              abc
+            </span>
+            <span
+              className="content"
+            >
+              -
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            style={
+              Object {
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="title"
+            >
+              Total Net Asset Value
+            </span>
+            <span
+              className="content"
+            >
+              <img
+                className="cus-link"
+                onClick={[Function]}
+                src={null}
+                style={
+                  Object {
+                    "height": "12px",
+                    "marginLeft": "10px",
+                    "width": "12px",
+                  }
+                }
+              />
+            </span>
+          </li>
+          <li
+            style={
+              Object {
+                "flexDirection": "row-reverse",
+                "padding": "5px 5px",
+              }
+            }
+          >
+            <span
+              className="content"
+            >
+              $183.6
+            </span>
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+  </styled.div>
+  <styled.button
+    className="rightFixed"
+    onClick={[MockFunction]}
+    style={
+      Object {
+        "background": "#fff",
+        "color": "rgba(0,144,206,1)",
+      }
+    }
+  >
+    ∧  Hide Balances
+  </styled.button>
+</Styled(Card)>
 `;
