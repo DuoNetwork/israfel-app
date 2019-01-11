@@ -8,6 +8,7 @@ import {
 	IStatus,
 	IToken,
 	IUserOrder,
+	IWsTradeResponse,
 	VoidThunkAction
 } from 'ts/common/types';
 
@@ -54,10 +55,21 @@ export function orderBookUpdate(orderBook: IOrderBookSnapshot) {
 	};
 }
 
+export function tradeUpdate(orderBook: IWsTradeResponse) {
+	return { type: CST.AC_TRADE, value: orderBook };
+}
+
 export function orderSubscriptionUpdate(account: string) {
 	return {
 		type: CST.AC_ORDER_SUB,
 		account: account
+	};
+}
+
+export function tradeSubscriptionUpdate(pair: string) {
+	return {
+		type: CST.AC_TRADE_SUB,
+		pair: pair
 	};
 }
 
@@ -82,6 +94,16 @@ export function subscribeOrder(account: string): VoidThunkAction {
 		if (account && account !== CST.DUMMY_ADDR) {
 			dispatch(orderSubscriptionUpdate(account));
 			relayerClient.subscribeOrderHistory(account);
+		}
+	};
+}
+
+export function subscribeTrade(pair: string): VoidThunkAction {
+	return dispatch => {
+		dispatch(tradeSubscriptionUpdate(''));
+		if (pair && pair !== CST.DUMMY_PAIR) {
+			dispatch(tradeSubscriptionUpdate(pair));
+			relayerClient.subscribeTrade(pair);
 		}
 	};
 }

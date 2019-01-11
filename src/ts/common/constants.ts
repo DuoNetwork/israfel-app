@@ -15,6 +15,8 @@ export const AC_NETWORK = 'network';
 export const AC_INFO = 'info';
 export const AC_LOCALE = 'locale';
 export const AC_ORDER = 'order';
+export const AC_TRADE = 'trade';
+export const AC_TRADE_SUB = 'tradeSubscription';
 export const AC_ORDER_HISTORY = 'orderHistory';
 export const AC_ORDER_SUB = 'orderSubscription';
 export const AC_CONNECTION = 'connection';
@@ -24,6 +26,8 @@ export const AC_ETH_BALANCE = 'ethBalance';
 export const AC_TOKEN_BALANCE = 'tokenBalance';
 export const AC_CUSTODIAN = 'custodian';
 export const AC_NOTIFICATION = 'notification';
+
+export const DUMMY_PAIR = '|WETH';
 
 export const RX_NUM = /^-?[0-9]+(\.[0-9]+)?$/;
 export const RX_NUM_P = /^[0-9]+(\.[0-9]+)?$/;

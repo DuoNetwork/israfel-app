@@ -45,7 +45,9 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 		notify: (notification: INotification) =>
 			dispatch(relayerActions.notificationUpdate(notification)),
 		subscribeOrder: (account: string) => dispatch(relayerActions.subscribeOrder(account)),
-		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate(''))
+		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate('')),
+		subscribeTrade: (pair: string) => dispatch(relayerActions.subscribeTrade(pair)),
+		unsubscribeTrade: () => dispatch(relayerActions.tradeSubscriptionUpdate(''))
 	};
 }
 

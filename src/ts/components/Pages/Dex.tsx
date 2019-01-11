@@ -31,6 +31,8 @@ interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
 	wethAddress: string;
+	subscribeTrade: (pair: string) => any;
+	unsubscribeTrade: () => any;
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
@@ -123,7 +125,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			wethAddress,
 			setUnlimitedTokenAllowance,
 			addOrder,
-			deleteOrder
+			deleteOrder,
+			subscribeTrade
 		} = this.props;
 		const {
 			convertCustodian,
@@ -154,7 +157,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				)
+				  )
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -255,6 +258,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 						tokenBalance={tradeTokenBalance}
 						ethBalance={ethBalance}
+						subscribeTrade={subscribeTrade}
 						orderBook={
 							orderBooks[tradeToken + '|' + CST.TH_WETH] || {
 								pair: 'pair',

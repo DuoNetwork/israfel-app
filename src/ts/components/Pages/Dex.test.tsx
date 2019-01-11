@@ -248,6 +248,8 @@ describe('Dex Test', () => {
 			const addOrder = jest.fn();
 			const deleteOrder = jest.fn();
 			const componentWillUnmount = jest.fn();
+			const subscribeTrade = jest.fn();
+			const unsubscribeTrade = jest.fn();
 			const wrapper = shallow(
 				<Dex
 					orderHistory={orderHistory}
@@ -264,6 +266,8 @@ describe('Dex Test', () => {
 					ethBalance={ethBalance}
 					account={account}
 					wrapEther={wrapEther}
+					unsubscribeTrade={unsubscribeTrade}
+					subscribeTrade={subscribeTrade}
 					unwrapEther={unwrapEther}
 					getTokenByCode={getTokenByCode}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}

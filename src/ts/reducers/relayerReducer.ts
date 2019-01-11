@@ -11,6 +11,7 @@ export const initialState: IRelayerState = {
 	exchangePrices: {},
 	orderBookSnapshot: {},
 	orderHistory: {},
+	trade: {},
 	orderSubscription: '',
 	notification: {
 		level: '',
@@ -30,8 +31,7 @@ export function relayerReducer(
 				return Object.assign({}, state, {
 					connection: action.value
 				});
-			else
-				return initialState;
+			else return initialState;
 		case CST.AC_INFO:
 			const newCodes = (action.tokens as IToken[]).map(token => token.code);
 			const oldCodes = state.tokens.map(token => token.code);
@@ -39,12 +39,18 @@ export function relayerReducer(
 			oldCodes.sort();
 			if (JSON.stringify(newCodes) !== JSON.stringify(oldCodes)) {
 				oldCodes.forEach(code => {
-					if (!newCodes.includes(code))
-						relayerClient.unsubscribeOrderBook(code + '|' + CST.TH_WETH);
+					if (!newCodes.includes(code)) {
+						const pair = code + '|' + CST.TH_WETH;
+						relayerClient.unsubscribeOrderBook(pair);
+						relayerClient.unsubscribeTrade(pair);
+					}
 				});
 				newCodes.forEach(code => {
-					if (!oldCodes.includes(code))
-						relayerClient.subscribeOrderBook(code + '|' + CST.TH_WETH);
+					if (!oldCodes.includes(code)) {
+						const pair = code + '|' + CST.TH_WETH;
+						relayerClient.subscribeOrderBook(pair);
+						relayerClient.subscribeTrade(pair);
+					}
 				});
 			}
 			return Object.assign({}, state, {
@@ -57,6 +63,12 @@ export function relayerReducer(
 			return Object.assign({}, state, {
 				orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
 					[action.value.pair]: Object.assign({}, action.value)
+				})
+			});
+		case CST.AC_TRADE:
+			return Object.assign({}, state, {
+				trade: Object.assign({}, state.trade, {
+					[action.value.pair]: Object.assign({}, action.value.trades)
 				})
 			});
 		case CST.AC_ORDER_HISTORY:
@@ -101,6 +113,10 @@ export function relayerReducer(
 						[newOrder.pair]: [newOrder]
 					})
 				});
+		case CST.AC_TRADE_SUB:
+			return Object.assign({}, state, {
+				trade: action.value
+			});
 		case CST.AC_ORDER_SUB:
 			if (action.account)
 				return Object.assign({}, state, {

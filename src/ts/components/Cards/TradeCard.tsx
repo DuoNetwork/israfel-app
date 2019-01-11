@@ -39,6 +39,7 @@ interface IProps {
 	interestOrLeverage: number;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
+	subscribeTrade: (pair: string) => Promise<string>;
 	setUnlimitedTokenAllowance: (code: string, account: string) => any;
 	addOrder: (
 		account: string,
@@ -160,16 +161,13 @@ const getLimit = (
 export default class TradeCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
-		const price = props.tokenInfo && props.orderBook.asks &&
-			props.orderBook.asks.length
+		const price =
+			props.tokenInfo && props.orderBook.asks && props.orderBook.asks.length
 				? util.formatFixedNumber(
-						props.orderBook.asks[0].price
-							? props.orderBook.asks[0]
-									.price
-							: 0,
+						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
-				)
-				: ''
+				  )
+				: '';
 		this.state = {
 			account: props.account,
 			token: props.token,
@@ -194,16 +192,16 @@ export default class TradeCard extends React.Component<IProps, IState> {
 
 	public static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
 		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token) {
-			const price = nextProps.tokenInfo && nextProps.orderBook.asks &&
-			nextProps.orderBook.asks.length
-				? util.formatFixedNumber(
-						nextProps.orderBook.asks[0].price
-							? nextProps.orderBook.asks[0]
-									.price
-							: 0,
-						nextProps.tokenInfo.precisions[CST.TH_WETH]
-				)
-				: ''
+			const price =
+				nextProps.tokenInfo && nextProps.orderBook.asks && nextProps.orderBook.asks.length
+					? util.formatFixedNumber(
+							nextProps.orderBook.asks[0].price
+								? nextProps.orderBook.asks[0].price
+								: 0,
+							nextProps.tokenInfo.precisions[CST.TH_WETH]
+					  )
+					: '';
+
 			return {
 				account: nextProps.account,
 				token: nextProps.token,
@@ -233,9 +231,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			((prevState.isBid && nextProps.ethBalance.allowance) ||
 				(!prevState.isBid && nextProps.tokenBalance && nextProps.tokenBalance.allowance))
 		)
-			return {
-				approving: false
-			};
+			return { approving: false };
 
 		return null;
 	}
@@ -339,9 +335,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 	};
 
 	private handlePriceInputChange = (value: string) => {
-		this.setState({
-			price: value
-		});
+		this.setState({ price: value });
 	};
 	private handleApprove = async () => {
 		const { token, account, notify } = this.props;
@@ -365,9 +359,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				message: '`Error in sending approval transaction',
 				transactionHash: ''
 			});
-			this.setState({
-				approving: false
-			});
+			this.setState({ approving: false });
 		}
 	};
 
@@ -399,9 +391,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { account, token, tokenInfo, ethPrice, notify, addOrder } = this.props;
 		const { isBid, price, amount, expiry } = this.state;
 		try {
-			this.setState({
-				submitting: true
-			});
+			this.setState({ submitting: true });
 			await addOrder(
 				account,
 				token + '|' + CST.TH_WETH,
@@ -427,9 +417,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				message: 'Error in signing order',
 				transactionHash: ''
 			});
-			this.setState({
-				submitting: false
-			});
+			this.setState({ submitting: false });
 		}
 	};
 
@@ -553,7 +541,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<span className="trade-nav-px">
 								{`${util.formatFixedNumber(navInEth, precision)} ETH`}
 							</span>
-							<span style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}>
+							<span
+								style={{
+									fontSize: 10,
+									color: ColorStyles.TextBlackAlphaL
+								}}
+							>
 								{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}
 							</span>
 						</div>
@@ -563,7 +556,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<div className="status-list-wrapper">
 								<ul>
 									{bidsToRender.map((item, i) => (
-										<li key={i} style={{ padding: '5px 5px 5px 30px' }}>
+										<li
+											key={i}
+											style={{
+												padding: '5px 5px 5px 30px'
+											}}
+										>
 											<span className="content">
 												{item.balance && item.balance > 0
 													? util.formatFixedNumber(
@@ -591,7 +589,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<div className="status-list-wrapper">
 								<ul>
 									{asksToRender.map((item, i) => (
-										<li key={i} style={{ padding: '5px 30px 5px 5px' }}>
+										<li
+											key={i}
+											style={{
+												padding: '5px 30px 5px 5px'
+											}}
+										>
 											<span className="title ask-span">
 												<b>
 													{item.price && item.price > 0
@@ -677,7 +680,12 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
-										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
+										<p
+											style={{
+												paddingTop: '100px',
+												textAlign: 'center'
+											}}
+										>
 											Not enough allowance, please approve first
 										</p>
 									</li>
