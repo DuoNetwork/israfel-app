@@ -222,6 +222,33 @@ describe('Dex Test', () => {
 					}
 				}
 			};
+			const trade = {
+				'LETH-M19|WETH': [
+					{
+						feeAsset: 'aETH',
+						maker: {
+							amount: 1,
+							fee: 0.05321100917431192,
+							orderHash:
+								'0x01268325a20092864f641f26739fa651605bb323065ee335f81ea5c8ff08eb46',
+							price: 0.007545
+						},
+						pair: 'aETH|WETH',
+						taker: {
+							address: '0x66ad9d0b933da88bbee196b2a9c0badc901c4a3a',
+							amount: 11.6,
+							fee: 0.09999999999999999,
+							orderHash:
+								'0x26743ef8da563f1889f452983d339a0bcc3ccc5d821ab86e5cf62d9aeff7a9d0',
+							price: 0.007545,
+							side: 'bid'
+						},
+						timestamp: 1547113406963,
+						transactionHash:
+							'0x6b3713eaa66f56873cdcc9d7db0f6ba76cd2be1268b35d9b04d1ae57d558e577'
+					}
+				]
+			};
 			const orderBooks = {
 				'LETH-M19|WETH': {
 					asks: [],
@@ -265,6 +292,7 @@ describe('Dex Test', () => {
 					acceptedPrices={acceptedPrices}
 					ethBalance={ethBalance}
 					account={account}
+					trade={trade}
 					wrapEther={wrapEther}
 					unsubscribeTrade={unsubscribeTrade}
 					subscribeTrade={subscribeTrade}

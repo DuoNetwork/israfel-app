@@ -10,6 +10,7 @@ import {
 	IOrderBookSnapshot,
 	IToken,
 	ITokenBalance,
+	ITrade,
 	IUserOrder
 } from 'ts/common/types';
 import { SDivFlexCenter } from '../_styled';
@@ -19,12 +20,14 @@ import CustodianCard from '../Cards/CustodianCard';
 import DummyCustodianCard from '../Cards/DummyCustodianCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import TradeCard from '../Cards/TradeCard';
+import TradeMsgCard from '../Cards/TradeMsgCard';
 
 interface IProps {
 	account: string;
 	ethBalance: IEthBalance;
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
+	trade: { [pair: string]: ITrade[] };
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
@@ -60,6 +63,7 @@ interface IState {
 	convertBToken: string;
 	tradeToken: string;
 	showBalances: boolean;
+	showTradeData: boolean;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
@@ -72,7 +76,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertAToken: '',
 			convertBToken: '',
 			tradeToken: '',
-			showBalances: true
+			showBalances: true,
+			showTradeData: true
 		};
 	}
 
@@ -116,6 +121,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			ethBalance,
 			connection,
 			orderBooks,
+			trade,
 			ethPrice,
 			orderHistory,
 			notify,
@@ -133,7 +139,8 @@ export default class Dex extends React.Component<IProps, IState> {
 			tradeToken,
 			convertAToken,
 			convertBToken,
-			showBalances
+			showBalances,
+			showTradeData
 		} = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
@@ -276,6 +283,12 @@ export default class Dex extends React.Component<IProps, IState> {
 						addOrder={addOrder}
 					/>
 				</Spin>
+				<TradeMsgCard
+					visible={showTradeData}
+					trade={trade}
+					notify={notify}
+					handleClose={() => this.setState({ showTradeData: !showTradeData })}
+				/>
 				<BalanceCard
 					ethPrice={ethPrice}
 					visible={showBalances}

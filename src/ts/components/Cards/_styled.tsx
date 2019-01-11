@@ -1034,6 +1034,26 @@ injectGlobal([
 				color: ${ColorStyles.MainColor};
 				box-shadow: 0 0 4px 1px ${ColorStyles.MainColorShadow};
 			}
+			.leftFixed {
+				position: absolute;
+				width: 180px;
+				height: 30px;
+				top: 185px;
+				left: 205px;
+				-webkit-transform-origin: top left;
+				-ms-transform-origin: top left;
+				transform-origin: top left;
+				-webkit-transform: rotate(-90deg);
+				-ms-transform: rotate(-90deg);
+				-webkit-transform: rotate(-90deg);
+				-ms-transform: rotate(-90deg);
+				transform: rotate(-90deg);
+			}
+			.leftFixed: hover {
+				background: ${ColorStyles.TextWhite};
+				color: ${ColorStyles.MainColor};
+				box-shadow: 0 0 4px 1px ${ColorStyles.MainColorShadow};
+			}
 			.day-Button {
 				border: none;
 				color: ${ColorStyles.MainColorShadow};

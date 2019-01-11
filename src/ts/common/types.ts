@@ -35,7 +35,7 @@ export interface IRelayerState {
 	readonly connection: boolean;
 	readonly tokens: relayerTypes.IToken[];
 	readonly status: relayerTypes.IStatus[];
-	readonly trade: { [pair: string]: relayerTypes.IToken[] };
+	readonly trade: { [pair: string]: relayerTypes.ITrade[] };
 	readonly acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	readonly exchangePrices: { [source: string]: relayerTypes.IPrice[] };
 	readonly orderBookSnapshot: { [pair: string]: relayerTypes.IOrderBookSnapshot };

@@ -17,6 +17,7 @@ function mapStateToProps(state: IState) {
 		ethBalance: state.web3.ethBalance,
 		orderBooks: state.relayer.orderBookSnapshot,
 		orderHistory: state.relayer.orderHistory,
+		trade: state.relayer.trade,
 		connection: state.relayer.connection,
 		wethAddress: web3Util.contractAddresses.etherToken,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0,
