@@ -7,8 +7,8 @@ import {
 	IPrice,
 	IStatus,
 	IToken,
+	ITrade,
 	IUserOrder,
-	IWsTradeResponse,
 	VoidThunkAction
 } from 'ts/common/types';
 
@@ -55,8 +55,12 @@ export function orderBookUpdate(orderBook: IOrderBookSnapshot) {
 	};
 }
 
-export function tradeUpdate(orderBook: IWsTradeResponse) {
-	return { type: CST.AC_TRADE, value: orderBook };
+export function tradeUpdate(pair: string, trades: ITrade[]) {
+	return {
+		type: CST.AC_TRADE,
+		pair: pair,
+		trades: trades
+	};
 }
 
 export function orderSubscriptionUpdate(account: string) {
@@ -98,15 +102,15 @@ export function subscribeOrder(account: string): VoidThunkAction {
 	};
 }
 
-export function subscribeTrade(pair: string): VoidThunkAction {
-	return dispatch => {
-		dispatch(tradeSubscriptionUpdate(''));
-		if (pair && pair !== CST.DUMMY_PAIR) {
-			dispatch(tradeSubscriptionUpdate(pair));
-			relayerClient.subscribeTrade(pair);
-		}
-	};
-}
+// export function subscribeTrade(pair: string): VoidThunkAction {
+// 	return dispatch => {
+// 		dispatch(tradeSubscriptionUpdate(''));
+// 		if (pair && pair !== CST.DUMMY_PAIR) {
+// 			dispatch(tradeSubscriptionUpdate(pair));
+// 			relayerClient.subscribeTrade(pair);
+// 		}
+// 	};
+// }
 
 export function notificationUpdate(notification: INotification) {
 	return {

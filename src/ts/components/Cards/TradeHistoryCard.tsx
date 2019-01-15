@@ -9,7 +9,7 @@ import { SButton } from './_styled';
 
 interface IProps {
 	visible: boolean;
-	trade: { [pair: string]: ITrade[] };
+	trades: { [pair: string]: ITrade[] };
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
 }
@@ -18,10 +18,10 @@ interface IState {
 	expandIndex: number;
 }
 
-export default class TradeMsgCard extends React.Component<IProps, IState> {
+export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
-		this.state = { expandIndex: -1 };
+		this.state = { expandIndex: 0 };
 	}
 
 	private handleShow(i: number) {
@@ -29,25 +29,26 @@ export default class TradeMsgCard extends React.Component<IProps, IState> {
 			expandIndex: i === this.state.expandIndex ? -1 : i
 		});
 	}
+
 	public render() {
-		const { handleClose, trade, visible } = this.props;
+		const { handleClose, trades, visible } = this.props;
 		const { expandIndex } = this.state;
 
 		const animated = visible ? 'animated' : '';
 
-		const tradeList: any[] = [];
-		const tradeKeylist: any[] = [];
+		const tradeList: ITrade[][] = [];
+		const tradeKeylist: string[] = [];
 
-		for (const key in trade) {
-			const subTradeList: any[] = [];
-			for (const subKey in trade[key]) subTradeList.push(trade[key][subKey]);
+		for (const key in trades) {
+			const subTradeList: ITrade[] = [];
+			for (const subKey in trades[key]) subTradeList.push(trades[key][subKey]);
 			tradeKeylist.push(key);
 			tradeList.push(subTradeList);
 		}
-		const showTradeList: any[] = [];
-		tradeList.forEach((c: any, i) => {
-			const showSubTradeList: any[] = [];
-			c.forEach((d: any, j: number) => {
+		const showTradeList: object[] = [];
+		tradeList.forEach((c, i) => {
+			const showSubTradeList: object[] = [];
+			c.forEach((d, j) => {
 				showSubTradeList.push(
 					<li key={j} style={{ padding: '5px 5px' }}>
 						<span className="title">{`Px:${util.formatPriceShort(
@@ -87,7 +88,7 @@ export default class TradeMsgCard extends React.Component<IProps, IState> {
 
 		return (
 			<SCard
-				title={<SCardTitle>{CST.TH_TRADE}</SCardTitle>}
+				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
 				className={'panel-wrap ' + animated}
 				style={{ left: visible ? '0px' : '-200px' }}
 			>

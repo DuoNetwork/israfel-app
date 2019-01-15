@@ -61,7 +61,6 @@ describe('TradeCard Test', () => {
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
-			const subscribeTrade = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -73,7 +72,6 @@ describe('TradeCard Test', () => {
 					orderBook={orderBook}
 					ethPrice={123}
 					navInEth={1}
-					subscribeTrade={subscribeTrade}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					interestOrLeverage={1}
@@ -92,7 +90,6 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					ethPrice={123}
-					subscribeTrade={subscribeTrade}
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
@@ -112,7 +109,6 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					ethPrice={123}
-					subscribeTrade={subscribeTrade}
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
@@ -132,7 +128,6 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					ethPrice={123}
-					subscribeTrade={subscribeTrade}
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
@@ -183,7 +178,6 @@ describe('TradeCard Test', () => {
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
-			const subscribeTrade = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -196,7 +190,6 @@ describe('TradeCard Test', () => {
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
-					subscribeTrade={subscribeTrade}
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
@@ -238,7 +231,6 @@ describe('TradeCard Test', () => {
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
-			const subscribeTrade = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -253,7 +245,6 @@ describe('TradeCard Test', () => {
 					orderBook={orderBook}
 					ethPrice={123}
 					navInEth={1}
-					subscribeTrade={subscribeTrade}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					interestOrLeverage={1}
@@ -274,7 +265,6 @@ describe('TradeCard Test', () => {
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
-			const subscribeTrade = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
 				<TradeCard
@@ -287,7 +277,6 @@ describe('TradeCard Test', () => {
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
-					subscribeTrade={subscribeTrade}
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}

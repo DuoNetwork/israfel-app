@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import { IRelayerState, IToken, IUserOrder } from 'ts/common/types';
+import { IRelayerState, IToken, ITrade, IUserOrder } from 'ts/common/types';
 
 export const initialState: IRelayerState = {
 	connection: false,
@@ -9,9 +9,9 @@ export const initialState: IRelayerState = {
 	status: [],
 	acceptedPrices: {},
 	exchangePrices: {},
-	orderBookSnapshot: {},
+	orderBookSnapshots: {},
 	orderHistory: {},
-	trade: {},
+	trades: {},
 	orderSubscription: '',
 	notification: {
 		level: '',
@@ -61,14 +61,17 @@ export function relayerReducer(
 			});
 		case CST.AC_ORDER_BOOK:
 			return Object.assign({}, state, {
-				orderBookSnapshot: Object.assign({}, state.orderBookSnapshot, {
+				orderBookSnapshots: Object.assign({}, state.orderBookSnapshots, {
 					[action.value.pair]: Object.assign({}, action.value)
 				})
 			});
 		case CST.AC_TRADE:
+			const pairTrades: ITrade[] = action.trades;
+			const newPairTrades = [...(state.trades[action.pair] || []), ...pairTrades];
+			newPairTrades.sort((a, b) => -a.timestamp - b.timestamp);
 			return Object.assign({}, state, {
-				trade: Object.assign({}, state.trade, {
-					[action.value.pair]: Object.assign({}, action.value.trades)
+				trades: Object.assign({}, state.trades, {
+					[action.pair]: newPairTrades.slice(0, 6)
 				})
 			});
 		case CST.AC_ORDER_HISTORY:

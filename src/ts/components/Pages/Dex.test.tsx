@@ -222,7 +222,7 @@ describe('Dex Test', () => {
 					}
 				}
 			};
-			const trade = {
+			const trades = {
 				'LETH-M19|WETH': [
 					{
 						feeAsset: 'aETH',
@@ -275,8 +275,6 @@ describe('Dex Test', () => {
 			const addOrder = jest.fn();
 			const deleteOrder = jest.fn();
 			const componentWillUnmount = jest.fn();
-			const subscribeTrade = jest.fn();
-			const unsubscribeTrade = jest.fn();
 			const wrapper = shallow(
 				<Dex
 					orderHistory={orderHistory}
@@ -292,10 +290,8 @@ describe('Dex Test', () => {
 					acceptedPrices={acceptedPrices}
 					ethBalance={ethBalance}
 					account={account}
-					trade={trade}
+					trades={trades}
 					wrapEther={wrapEther}
-					unsubscribeTrade={unsubscribeTrade}
-					subscribeTrade={subscribeTrade}
 					unwrapEther={unwrapEther}
 					getTokenByCode={getTokenByCode}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}

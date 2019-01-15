@@ -99,5 +99,10 @@ module.exports = {
 	resolve: {
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
-	}
+	},
+	node: {
+        fs: 'empty',
+        child_process: 'empty',
+        net: 'empty'
+    }
 };

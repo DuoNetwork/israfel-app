@@ -319,7 +319,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
         }
       }
       setUnlimitedTokenAllowance={[MockFunction]}
-      subscribeTrade={[MockFunction]}
       token=""
       tokenInfo={
         Object {
@@ -330,10 +329,10 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       }
     />
   </Spin>
-  <TradeMsgCard
+  <TradeHistoryCard
     handleClose={[Function]}
     notify={[MockFunction]}
-    trade={
+    trades={
       Object {
         "LETH-M19|WETH": Array [
           Object {
@@ -907,7 +906,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
         }
       }
       setUnlimitedTokenAllowance={[MockFunction]}
-      subscribeTrade={[MockFunction]}
       token=""
       tokenInfo={
         Object {
@@ -918,10 +916,10 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       }
     />
   </Spin>
-  <TradeMsgCard
+  <TradeHistoryCard
     handleClose={[Function]}
     notify={[MockFunction]}
-    trade={
+    trades={
       Object {
         "LETH-M19|WETH": Array [
           Object {
@@ -1495,7 +1493,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
         }
       }
       setUnlimitedTokenAllowance={[MockFunction]}
-      subscribeTrade={[MockFunction]}
       token=""
       tokenInfo={
         Object {
@@ -1506,10 +1503,10 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       }
     />
   </Spin>
-  <TradeMsgCard
+  <TradeHistoryCard
     handleClose={[Function]}
     notify={[MockFunction]}
-    trade={
+    trades={
       Object {
         "LETH-M19|WETH": Array [
           Object {
@@ -2083,7 +2080,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
         }
       }
       setUnlimitedTokenAllowance={[MockFunction]}
-      subscribeTrade={[MockFunction]}
       token="a"
       tokenInfo={
         Object {
@@ -2094,10 +2090,10 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       }
     />
   </Spin>
-  <TradeMsgCard
+  <TradeHistoryCard
     handleClose={[Function]}
     notify={[MockFunction]}
-    trade={
+    trades={
       Object {
         "LETH-M19|WETH": Array [
           Object {
@@ -2671,7 +2667,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
         }
       }
       setUnlimitedTokenAllowance={[MockFunction]}
-      subscribeTrade={[MockFunction]}
       token="s"
       tokenInfo={
         Object {
@@ -2682,10 +2677,10 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       }
     />
   </Spin>
-  <TradeMsgCard
+  <TradeHistoryCard
     handleClose={[Function]}
     notify={[MockFunction]}
-    trade={
+    trades={
       Object {
         "LETH-M19|WETH": Array [
           Object {

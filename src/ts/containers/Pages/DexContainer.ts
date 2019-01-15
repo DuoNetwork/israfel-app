@@ -15,9 +15,9 @@ function mapStateToProps(state: IState) {
 		custodians: state.web3.custodians,
 		custodianTokenBalances: state.web3.custodianTokenBalances,
 		ethBalance: state.web3.ethBalance,
-		orderBooks: state.relayer.orderBookSnapshot,
+		orderBooks: state.relayer.orderBookSnapshots,
 		orderHistory: state.relayer.orderHistory,
-		trade: state.relayer.trade,
+		trades: state.relayer.trades,
 		connection: state.relayer.connection,
 		wethAddress: web3Util.contractAddresses.etherToken,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0,
@@ -46,9 +46,7 @@ function mapDispatchToProps(dispatch: ThunkDispatch<IState, undefined, AnyAction
 		notify: (notification: INotification) =>
 			dispatch(relayerActions.notificationUpdate(notification)),
 		subscribeOrder: (account: string) => dispatch(relayerActions.subscribeOrder(account)),
-		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate('')),
-		subscribeTrade: (pair: string) => dispatch(relayerActions.subscribeTrade(pair)),
-		unsubscribeTrade: () => dispatch(relayerActions.tradeSubscriptionUpdate(''))
+		unsubscribeOrder: () => dispatch(relayerActions.orderSubscriptionUpdate(''))
 	};
 }
 

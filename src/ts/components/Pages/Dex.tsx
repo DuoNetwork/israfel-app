@@ -20,22 +20,20 @@ import CustodianCard from '../Cards/CustodianCard';
 import DummyCustodianCard from '../Cards/DummyCustodianCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import TradeCard from '../Cards/TradeCard';
-import TradeMsgCard from '../Cards/TradeMsgCard';
+import TradeHistoryCard from '../Cards/TradeHistoryCard';
 
 interface IProps {
 	account: string;
 	ethBalance: IEthBalance;
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
-	trade: { [pair: string]: ITrade[] };
+	trades: { [pair: string]: ITrade[] };
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
 	wethAddress: string;
-	subscribeTrade: (pair: string) => any;
-	unsubscribeTrade: () => any;
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
@@ -121,7 +119,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			ethBalance,
 			connection,
 			orderBooks,
-			trade,
+			trades,
 			ethPrice,
 			orderHistory,
 			notify,
@@ -131,8 +129,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			wethAddress,
 			setUnlimitedTokenAllowance,
 			addOrder,
-			deleteOrder,
-			subscribeTrade
+			deleteOrder
 		} = this.props;
 		const {
 			convertCustodian,
@@ -164,7 +161,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				  )
+				)
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -265,7 +262,6 @@ export default class Dex extends React.Component<IProps, IState> {
 						setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 						tokenBalance={tradeTokenBalance}
 						ethBalance={ethBalance}
-						subscribeTrade={subscribeTrade}
 						orderBook={
 							orderBooks[tradeToken + '|' + CST.TH_WETH] || {
 								pair: 'pair',
@@ -283,9 +279,9 @@ export default class Dex extends React.Component<IProps, IState> {
 						addOrder={addOrder}
 					/>
 				</Spin>
-				<TradeMsgCard
+				<TradeHistoryCard
 					visible={showTradeData}
-					trade={trade}
+					trades={trades}
 					notify={notify}
 					handleClose={() => this.setState({ showTradeData: !showTradeData })}
 				/>
