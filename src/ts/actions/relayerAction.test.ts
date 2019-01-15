@@ -42,6 +42,18 @@ describe('actions', () => {
 		expect(wsActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
+	test('tradeUpdate', () => {
+		expect(wsActions.tradeUpdate('test', [])).toMatchSnapshot();
+	});
+
+	test('tradeSubscriptionUpdate', () => {
+		expect(
+			wsActions.tradeSubscriptionUpdate({
+				test: 'test'
+			} as any)
+		).toMatchSnapshot();
+	});
+
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		relayerClient.subscribeOrderHistory = jest.fn();

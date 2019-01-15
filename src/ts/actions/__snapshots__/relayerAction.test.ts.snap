@@ -106,3 +106,20 @@ Array [
   },
 ]
 `;
+
+exports[`actions tradeSubscriptionUpdate 1`] = `
+Object {
+  "pair": Object {
+    "test": "test",
+  },
+  "type": "tradeSubscription",
+}
+`;
+
+exports[`actions tradeUpdate 1`] = `
+Object {
+  "pair": "test",
+  "trades": Array [],
+  "type": "trade",
+}
+`;

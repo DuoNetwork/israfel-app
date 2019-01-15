@@ -115,6 +115,74 @@ describe('relayer reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
+	test('trade', () => {
+		state = relayerReducer(state, {
+			type: CST.AC_TRADE,
+			value: {
+				pair: 'pair',
+				trades: [
+					{
+						pair: 'test',
+						transactionHash: 'test',
+						taker: {
+							orderHash: 'test',
+							address: 'test',
+							side: 'test',
+							price: 123,
+							amount: 123,
+							fee: 123
+						},
+						maker: {
+							orderHash: 'test',
+							price: 123,
+							amount: 123,
+							fee: 123
+						},
+						feeAsset: 'test',
+						timestamp: 123
+					},
+					{
+						pair: 'test',
+						transactionHash: 'test',
+						taker: {
+							orderHash: 'test',
+							address: 'test',
+							side: 'test',
+							price: 123,
+							amount: 123,
+							fee: 123
+						},
+						maker: {
+							orderHash: 'test',
+							price: 123,
+							amount: 123,
+							fee: 123
+						},
+						feeAsset: 'test',
+						timestamp: 12
+					}
+				]
+			}
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('order new pair', () => {
+		state = relayerReducer(state, {
+			type: CST.AC_TRADE_SUB,
+			value: {}
+		});
+		expect(state).toMatchSnapshot();
+	});
+
+	test('order new pair', () => {
+		state = relayerReducer(state, {
+			type: CST.AC_ORDER,
+			value: { userOrder: 'from single order', pair: 'pair3', currentSequence: 999 }
+		});
+		expect(state).toMatchSnapshot();
+	});
+
 	test('order', () => {
 		state = relayerReducer(state, {
 			type: CST.AC_ORDER,
