@@ -12,7 +12,6 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="left"
-        prefixCls="ant-tooltip"
         title="Custodian is in Trading state"
         transitionName="zoom-big-fast"
       >
@@ -449,7 +448,6 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="left"
-        prefixCls="ant-tooltip"
         title="Custodian is in Trading state"
         transitionName="zoom-big-fast"
       >
@@ -886,7 +884,6 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="left"
-        prefixCls="ant-tooltip"
         title="Custodian is in Trading state"
         transitionName="zoom-big-fast"
       >
@@ -1323,7 +1320,6 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="left"
-        prefixCls="ant-tooltip"
         title="Custodian is in Trading state"
         transitionName="zoom-big-fast"
       >
@@ -1760,7 +1756,6 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="left"
-        prefixCls="ant-tooltip"
         title="Custodian is in Trading state"
         transitionName="zoom-big-fast"
       >

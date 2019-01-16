@@ -3,7 +3,6 @@
 exports[`Dex Test User Login Test Snapshot 1`] = `
 <div>
   <Spin
-    prefixCls="ant-spin"
     size="default"
     spinning={false}
     tip="loading..."
@@ -590,7 +589,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
 exports[`Dex Test User Login Test Snapshot 2`] = `
 <div>
   <Spin
-    prefixCls="ant-spin"
     size="default"
     spinning={true}
     tip="loading..."
@@ -1177,7 +1175,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
 exports[`Dex Test User Login Test Snapshot 3`] = `
 <div>
   <Spin
-    prefixCls="ant-spin"
     size="default"
     spinning={false}
     tip="loading..."
@@ -1764,7 +1761,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
 exports[`Dex Test User Login Test Snapshot 4`] = `
 <div>
   <Spin
-    prefixCls="ant-spin"
     size="default"
     spinning={false}
     tip="loading..."
@@ -2351,7 +2347,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
 exports[`Dex Test User Login Test Snapshot 5`] = `
 <div>
   <Spin
-    prefixCls="ant-spin"
     size="default"
     spinning={false}
     tip="loading..."

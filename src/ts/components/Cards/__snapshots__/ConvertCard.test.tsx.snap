@@ -206,7 +206,6 @@ exports[`ConvertCard Test Test Snapshot Submit 1`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -762,7 +761,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -1318,7 +1316,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -1874,7 +1871,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -2430,7 +2426,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -2986,7 +2981,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Submitting. Please check your MetaMask!"
@@ -3546,7 +3540,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Approving. Please check your MetaMask!"
@@ -4107,7 +4100,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Submitting. Please check your MetaMask!"
@@ -4663,7 +4655,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Submitting. Please check your MetaMask!"
@@ -5219,7 +5210,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 11`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Submitting. Please check your MetaMask!"
@@ -5775,7 +5765,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 12`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Submitting. Please check your MetaMask!"
@@ -6331,7 +6320,6 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 13`] = `
       </div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={true}
       tip="Submitting. Please check your MetaMask!"

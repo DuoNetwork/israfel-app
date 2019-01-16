@@ -208,7 +208,6 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -470,18 +469,15 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -746,7 +742,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -980,18 +975,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -1256,7 +1248,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -1490,18 +1481,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -1766,7 +1754,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -2000,18 +1987,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -2276,7 +2260,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -2510,18 +2493,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -2786,7 +2766,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -3021,18 +3000,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -3297,7 +3273,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -3532,18 +3507,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -3808,7 +3780,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -4043,18 +4014,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -4319,7 +4287,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -4552,18 +4519,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -4828,7 +4792,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -5061,18 +5024,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value="123456"
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -5337,7 +5297,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -5569,18 +5528,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value="123456"
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -5845,7 +5801,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -6077,18 +6032,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value="123456"
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -6353,7 +6305,6 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -6584,18 +6535,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -6860,7 +6808,6 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -7122,18 +7069,15 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
@@ -7398,7 +7342,6 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
       </styled.div>
     </styled.div>
     <Spin
-      prefixCls="ant-spin"
       size="default"
       spinning={false}
       tip="Pending Order Signature. Please check your MetaMask!"
@@ -7660,18 +7603,15 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
                     buttonStyle="outline"
                     disabled={false}
                     onChange={[Function]}
-                    prefixCls="ant-radio"
                     value={1}
                   >
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={1}
                     >
                       Day
                     </Radio>
                     <Radio
-                      prefixCls="ant-radio"
                       type="radio"
                       value={2}
                     >
