@@ -137,7 +137,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 					</div>
 				}
 				width="740px"
-				margin="0 10px 50px 10px"
+				margin="0 10px 20px 10px"
 				extra={
 					<SButton className="export-button" onClick={this.handleExport}>
 						Export to CSV

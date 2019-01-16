@@ -88,7 +88,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         Export to CSV
       </styled.button>
     }
-    margin="0 10px 50px 10px"
+    margin="0 10px 20px 10px"
     title={
       <div
         className="ordercard-header"
@@ -122,7 +122,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa ijSkfU"
+      className="sc-bdVaJa iYUJRW"
       extra={
         <styled.button
           className="export-button"
@@ -131,7 +131,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           Export to CSV
         </styled.button>
       }
-      margin="0 10px 50px 10px"
+      margin="0 10px 20px 10px"
       title={
         <div
           className="ordercard-header"
@@ -165,8 +165,8 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa ijSkfU ant-card-bordered"
-        margin="0 10px 50px 10px"
+        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        margin="0 10px 20px 10px"
         width="740px"
       >
         <div
@@ -10235,7 +10235,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
         Export to CSV
       </styled.button>
     }
-    margin="0 10px 50px 10px"
+    margin="0 10px 20px 10px"
     title={
       <div
         className="ordercard-header"
@@ -10269,7 +10269,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa ijSkfU"
+      className="sc-bdVaJa iYUJRW"
       extra={
         <styled.button
           className="export-button"
@@ -10278,7 +10278,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
           Export to CSV
         </styled.button>
       }
-      margin="0 10px 50px 10px"
+      margin="0 10px 20px 10px"
       title={
         <div
           className="ordercard-header"
@@ -10312,8 +10312,8 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa ijSkfU ant-card-bordered"
-        margin="0 10px 50px 10px"
+        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        margin="0 10px 20px 10px"
         width="740px"
       >
         <div
@@ -20382,7 +20382,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
         Export to CSV
       </styled.button>
     }
-    margin="0 10px 50px 10px"
+    margin="0 10px 20px 10px"
     title={
       <div
         className="ordercard-header"
@@ -20416,7 +20416,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa ijSkfU"
+      className="sc-bdVaJa iYUJRW"
       extra={
         <styled.button
           className="export-button"
@@ -20425,7 +20425,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
           Export to CSV
         </styled.button>
       }
-      margin="0 10px 50px 10px"
+      margin="0 10px 20px 10px"
       title={
         <div
           className="ordercard-header"
@@ -20459,8 +20459,8 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa ijSkfU ant-card-bordered"
-        margin="0 10px 50px 10px"
+        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        margin="0 10px 20px 10px"
         width="740px"
       >
         <div
@@ -24921,7 +24921,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
         Export to CSV
       </styled.button>
     }
-    margin="0 10px 50px 10px"
+    margin="0 10px 20px 10px"
     title={
       <div
         className="ordercard-header"
@@ -24955,7 +24955,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa ijSkfU"
+      className="sc-bdVaJa iYUJRW"
       extra={
         <styled.button
           className="export-button"
@@ -24964,7 +24964,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
           Export to CSV
         </styled.button>
       }
-      margin="0 10px 50px 10px"
+      margin="0 10px 20px 10px"
       title={
         <div
           className="ordercard-header"
@@ -24998,8 +24998,8 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa ijSkfU ant-card-bordered"
-        margin="0 10px 50px 10px"
+        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        margin="0 10px 20px 10px"
         width="740px"
       >
         <div
@@ -35068,7 +35068,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
         Export to CSV
       </styled.button>
     }
-    margin="0 10px 50px 10px"
+    margin="0 10px 20px 10px"
     title={
       <div
         className="ordercard-header"
@@ -35102,7 +35102,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa ijSkfU"
+      className="sc-bdVaJa iYUJRW"
       extra={
         <styled.button
           className="export-button"
@@ -35111,7 +35111,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
           Export to CSV
         </styled.button>
       }
-      margin="0 10px 50px 10px"
+      margin="0 10px 20px 10px"
       title={
         <div
           className="ordercard-header"
@@ -35145,8 +35145,8 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa ijSkfU ant-card-bordered"
-        margin="0 10px 50px 10px"
+        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        margin="0 10px 20px 10px"
         width="740px"
       >
         <div

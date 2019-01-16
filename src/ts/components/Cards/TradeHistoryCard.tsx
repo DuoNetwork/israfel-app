@@ -6,10 +6,8 @@ import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {
-	visible: boolean;
 	trades: { [pair: string]: ITrade[] };
 	notify: (notification: INotification) => any;
-	handleClose: () => void;
 }
 
 interface IState {
@@ -32,8 +30,6 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		const { trades } = this.props;
 		const { expandIndex } = this.state;
 
-		// const animated = visible ? 'animated' : '';
-
 		const tradeList: ITrade[][] = [];
 		const tradeKeylist: string[] = [];
 
@@ -47,7 +43,6 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		tradeList.forEach((c, i) => {
 			const showSubTradeList: object[] = [];
 			c.forEach((d, j) => {
-				console.log(d);
 				showSubTradeList.push(
 					<li key={j} style={{ padding: '5px 5px' }}>
 						<span className="title">{`Px:${util.formatPriceShort(
@@ -91,7 +86,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
 				width="740px"
-				margin="0 10px 20px 10px !important"
+				margin="0 10px 20px 10px"
 			>
 				<SDivFlexCenter horizontal style={{ marginTop: '5px' }}>
 					<SCardList noMargin>

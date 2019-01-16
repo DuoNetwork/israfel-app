@@ -61,7 +61,6 @@ interface IState {
 	convertBToken: string;
 	tradeToken: string;
 	showBalances: boolean;
-	showTradeData: boolean;
 }
 
 export default class Dex extends React.Component<IProps, IState> {
@@ -74,8 +73,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertAToken: '',
 			convertBToken: '',
 			tradeToken: '',
-			showBalances: true,
-			showTradeData: true
+			showBalances: true
 		};
 	}
 
@@ -136,8 +134,7 @@ export default class Dex extends React.Component<IProps, IState> {
 			tradeToken,
 			convertAToken,
 			convertBToken,
-			showBalances,
-			showTradeData
+			showBalances
 		} = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
@@ -281,12 +278,7 @@ export default class Dex extends React.Component<IProps, IState> {
 						handleClose={() => this.handleTrade('')}
 						addOrder={addOrder}
 					/>
-					<TradeHistoryCard
-						visible={showTradeData}
-						trades={trades}
-						notify={notify}
-						handleClose={() => this.setState({ showTradeData: !showTradeData })}
-					/>
+					<TradeHistoryCard trades={trades} notify={notify} />
 				</Spin>
 
 				<BalanceCard

@@ -328,7 +328,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       }
     />
     <TradeHistoryCard
-      handleClose={[Function]}
       notify={[MockFunction]}
       trades={
         Object {
@@ -356,7 +355,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
           ],
         }
       }
-      visible={true}
     />
   </Spin>
   <BalanceCard
@@ -914,7 +912,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       }
     />
     <TradeHistoryCard
-      handleClose={[Function]}
       notify={[MockFunction]}
       trades={
         Object {
@@ -942,7 +939,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
           ],
         }
       }
-      visible={true}
     />
   </Spin>
   <BalanceCard
@@ -1500,7 +1496,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       }
     />
     <TradeHistoryCard
-      handleClose={[Function]}
       notify={[MockFunction]}
       trades={
         Object {
@@ -1528,7 +1523,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
           ],
         }
       }
-      visible={true}
     />
   </Spin>
   <BalanceCard
@@ -2086,7 +2080,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       }
     />
     <TradeHistoryCard
-      handleClose={[Function]}
       notify={[MockFunction]}
       trades={
         Object {
@@ -2114,7 +2107,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
           ],
         }
       }
-      visible={true}
     />
   </Spin>
   <BalanceCard
@@ -2672,7 +2664,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       }
     />
     <TradeHistoryCard
-      handleClose={[Function]}
       notify={[MockFunction]}
       trades={
         Object {
@@ -2700,7 +2691,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
           ],
         }
       }
-      visible={true}
     />
   </Spin>
   <BalanceCard
