@@ -8,11 +8,12 @@ interface IProps {
 	title: string;
 	message: string;
 	transactionHash: string;
+	clear: () => any;
 }
 
 export default class Notification extends React.Component<IProps> {
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { level, title, message, transactionHash } = nextProps;
+		const { level, title, message, transactionHash, clear } = nextProps;
 
 		if (!message) return false;
 
@@ -37,6 +38,7 @@ export default class Notification extends React.Component<IProps> {
 				undefined
 			)
 		});
+		clear();
 
 		return false;
 	}

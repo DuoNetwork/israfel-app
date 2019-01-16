@@ -174,7 +174,10 @@ export default class Dex extends React.Component<IProps, IState> {
 		}
 		return (
 			<div>
-				<Spin spinning={!connection} tip="loading...">
+				<Spin
+					spinning={!connection || !beethovenList.length || !mozartList.length}
+					tip="loading..."
+				>
 					<SDivFlexCenter
 						center
 						horizontal
