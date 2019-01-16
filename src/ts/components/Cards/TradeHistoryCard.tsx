@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { ColorStyles } from 'ts/common/styles';
 import { INotification, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle } from './_styled';
-import { SButton } from './_styled';
 
 interface IProps {
 	visible: boolean;
@@ -31,10 +29,10 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	}
 
 	public render() {
-		const { handleClose, trades, visible } = this.props;
+		const { trades } = this.props;
 		const { expandIndex } = this.state;
 
-		const animated = visible ? 'animated' : '';
+		// const animated = visible ? 'animated' : '';
 
 		const tradeList: ITrade[][] = [];
 		const tradeKeylist: string[] = [];
@@ -49,6 +47,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		tradeList.forEach((c, i) => {
 			const showSubTradeList: object[] = [];
 			c.forEach((d, j) => {
+				console.log(d);
 				showSubTradeList.push(
 					<li key={j} style={{ padding: '5px 5px' }}>
 						<span className="title">{`Px:${util.formatPriceShort(
@@ -57,6 +56,8 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						<span className="content">{`Amt:${util.formatNumber(
 							d.taker.amount
 						)}`}</span>
+						<span className="content">{`Time:${util.formatTime(d.timestamp)}`}</span>
+						<span className="content">{`Side:${d.taker.side}`}</span>
 					</li>
 				);
 			});
@@ -89,8 +90,8 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
-				className={'panel-wrap ' + animated}
-				style={{ left: visible ? '0px' : '-200px' }}
+				width="740px"
+				margin="0 10px 20px 10px !important"
 			>
 				<SDivFlexCenter horizontal style={{ marginTop: '5px' }}>
 					<SCardList noMargin>
@@ -99,20 +100,6 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						</div>
 					</SCardList>
 				</SDivFlexCenter>
-				<SButton
-					className="leftFixed"
-					onClick={handleClose}
-					style={{
-						background: visible ? '#fff' : ColorStyles.MainColor,
-						color: visible ? ColorStyles.MainColor : '#fff'
-					}}
-				>
-					{`${
-						visible
-							? CST.TH_HIDE + ' ' + CST.TH_TRADE + ' ∧'
-							: CST.TH_SHOW + ' ' + CST.TH_TRADE + '  ∨'
-					}`}
-				</SButton>
 			</SCard>
 		);
 	}

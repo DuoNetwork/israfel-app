@@ -161,7 +161,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				)
+				  )
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -281,13 +281,14 @@ export default class Dex extends React.Component<IProps, IState> {
 						handleClose={() => this.handleTrade('')}
 						addOrder={addOrder}
 					/>
+					<TradeHistoryCard
+						visible={showTradeData}
+						trades={trades}
+						notify={notify}
+						handleClose={() => this.setState({ showTradeData: !showTradeData })}
+					/>
 				</Spin>
-				<TradeHistoryCard
-					visible={showTradeData}
-					trades={trades}
-					notify={notify}
-					handleClose={() => this.setState({ showTradeData: !showTradeData })}
-				/>
+
 				<BalanceCard
 					ethPrice={ethPrice}
 					visible={showBalances}
