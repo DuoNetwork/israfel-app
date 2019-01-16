@@ -2,18 +2,18 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import * as wsActions from './relayerActions';
+import * as relayerActions from './relayerActions';
 
 const mockStore = configureMockStore([thunk]);
 
 describe('actions', () => {
 	test('connectionUpdate', () => {
-		expect(wsActions.connectionUpdate(true)).toMatchSnapshot();
+		expect(relayerActions.connectionUpdate(true)).toMatchSnapshot();
 	});
 
 	test('infoUpdate', () => {
 		expect(
-			wsActions.infoUpdate(
+			relayerActions.infoUpdate(
 				['token1'] as any,
 				['status1'] as any,
 				{
@@ -27,37 +27,29 @@ describe('actions', () => {
 	});
 
 	test('orderUpdate', () => {
-		expect(wsActions.orderUpdate({ test: 'test' } as any)).toMatchSnapshot();
+		expect(relayerActions.orderUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
 	test('orderHistoryUpdate', () => {
-		expect(wsActions.orderHistoryUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
+		expect(relayerActions.orderHistoryUpdate([{ test: 'test' }] as any)).toMatchSnapshot();
 	});
 
 	test('orderSubscriptionUpdate', () => {
-		expect(wsActions.orderSubscriptionUpdate('account')).toMatchSnapshot();
+		expect(relayerActions.orderSubscriptionUpdate('account')).toMatchSnapshot();
 	});
 
 	test('orderBookUpdate', () => {
-		expect(wsActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
+		expect(relayerActions.orderBookUpdate({ test: 'test' } as any)).toMatchSnapshot();
 	});
 
 	test('tradeUpdate', () => {
-		expect(wsActions.tradeUpdate('test', [])).toMatchSnapshot();
-	});
-
-	test('tradeSubscriptionUpdate', () => {
-		expect(
-			wsActions.tradeSubscriptionUpdate({
-				test: 'test'
-			} as any)
-		).toMatchSnapshot();
+		expect(relayerActions.tradeUpdate('test', ['test' as any])).toMatchSnapshot();
 	});
 
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		relayerClient.subscribeOrderHistory = jest.fn();
-		store.dispatch(wsActions.subscribeOrder(CST.DUMMY_ADDR));
+		store.dispatch(relayerActions.subscribeOrder(CST.DUMMY_ADDR));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -70,7 +62,7 @@ describe('actions', () => {
 	test('subscribeOrder', () => {
 		const store: any = mockStore({});
 		relayerClient.subscribeOrderHistory = jest.fn();
-		store.dispatch(wsActions.subscribeOrder('account'));
+		store.dispatch(relayerActions.subscribeOrder('account'));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();
@@ -84,7 +76,7 @@ describe('actions', () => {
 
 	test('notificationUpdate', () => {
 		expect(
-			wsActions.notificationUpdate({
+			relayerActions.notificationUpdate({
 				level: 'level',
 				title: 'title',
 				message: 'message',

@@ -70,12 +70,12 @@ export function orderSubscriptionUpdate(account: string) {
 	};
 }
 
-export function tradeSubscriptionUpdate(pair: string) {
-	return {
-		type: CST.AC_TRADE_SUB,
-		pair: pair
-	};
-}
+// export function tradeSubscriptionUpdate(pair: string) {
+// 	return {
+// 		type: CST.AC_TRADE_SUB,
+// 		pair: pair
+// 	};
+// }
 
 // export function orderBookSubscriptionUpdate(pair: string) {
 // 	return {

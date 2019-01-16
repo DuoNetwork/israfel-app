@@ -21,6 +21,8 @@ describe('relayer reducer', () => {
 	test('info', () => {
 		relayerClient.subscribeOrderBook = jest.fn();
 		relayerClient.unsubscribeOrderBook = jest.fn();
+		relayerClient.subscribeTrade = jest.fn();
+		relayerClient.unsubscribeTrade = jest.fn();
 		state = relayerReducer(state, {
 			type: CST.AC_INFO,
 			tokens: [
@@ -37,10 +39,40 @@ describe('relayer reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 		expect((relayerClient.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.subscribeTrade as jest.Mock).mock.calls).toMatchSnapshot();
 		expect(relayerClient.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
+		expect(relayerClient.unsubscribeTrade as jest.Mock).not.toBeCalled();
+	});
+
+	test('info same tokens', () => {
+		relayerClient.subscribeOrderBook = jest.fn();
+		relayerClient.unsubscribeOrderBook = jest.fn();
+		relayerClient.subscribeTrade = jest.fn();
+		relayerClient.unsubscribeTrade = jest.fn();
+		state = relayerReducer(state, {
+			type: CST.AC_INFO,
+			tokens: [
+				{
+					code: 'token1'
+				},
+				{
+					code: 'token2'
+				}
+			],
+			status: ['status1'],
+			acceptedPrices: { custodian: ['acceptedPrices'] },
+			exchangePrices: { source: ['exchangePrices'] }
+		});
+		expect(state).toMatchSnapshot();
+		expect(relayerClient.subscribeOrderBook as jest.Mock).not.toBeCalled();
+		expect(relayerClient.subscribeTrade as jest.Mock).not.toBeCalled();
+		expect(relayerClient.unsubscribeOrderBook as jest.Mock).not.toBeCalled();
+		expect(relayerClient.unsubscribeTrade as jest.Mock).not.toBeCalled();
 	});
 
 	test('info overlapping tokens', () => {
+		relayerClient.subscribeOrderBook = jest.fn();
+		relayerClient.unsubscribeOrderBook = jest.fn();
 		relayerClient.subscribeOrderBook = jest.fn();
 		relayerClient.unsubscribeOrderBook = jest.fn();
 		state = relayerReducer(state, {
@@ -59,7 +91,9 @@ describe('relayer reducer', () => {
 		});
 		expect(state).toMatchSnapshot();
 		expect((relayerClient.subscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.subscribeTrade as jest.Mock).mock.calls).toMatchSnapshot();
 		expect((relayerClient.unsubscribeOrderBook as jest.Mock).mock.calls).toMatchSnapshot();
+		expect((relayerClient.unsubscribeTrade as jest.Mock).mock.calls).toMatchSnapshot();
 	});
 
 	test('orderBook', () => {
@@ -115,62 +149,31 @@ describe('relayer reducer', () => {
 		expect(state).toMatchSnapshot();
 	});
 
-	test('trade', () => {
+	test('trade empty state', () => {
 		state = relayerReducer(state, {
 			type: CST.AC_TRADE,
-			value: {
-				pair: 'pair',
-				trades: [
-					{
-						pair: 'test',
-						transactionHash: 'test',
-						taker: {
-							orderHash: 'test',
-							address: 'test',
-							side: 'test',
-							price: 123,
-							amount: 123,
-							fee: 123
-						},
-						maker: {
-							orderHash: 'test',
-							price: 123,
-							amount: 123,
-							fee: 123
-						},
-						feeAsset: 'test',
-						timestamp: 123
-					},
-					{
-						pair: 'test',
-						transactionHash: 'test',
-						taker: {
-							orderHash: 'test',
-							address: 'test',
-							side: 'test',
-							price: 123,
-							amount: 123,
-							fee: 123
-						},
-						maker: {
-							orderHash: 'test',
-							price: 123,
-							amount: 123,
-							fee: 123
-						},
-						feeAsset: 'test',
-						timestamp: 12
-					}
-				]
-			}
+			pair: 'pair',
+			trades: [
+				{
+					timestamp: 123
+				},
+				{
+					timestamp: 456
+				}
+			]
 		});
 		expect(state).toMatchSnapshot();
 	});
 
-	test('order new pair', () => {
+	test('trade non empty state', () => {
 		state = relayerReducer(state, {
-			type: CST.AC_TRADE_SUB,
-			value: {}
+			type: CST.AC_TRADE,
+			pair: 'pair',
+			trades: [
+				{
+					timestamp: 789
+				}
+			]
 		});
 		expect(state).toMatchSnapshot();
 	});
@@ -248,5 +251,13 @@ describe('relayer reducer', () => {
 			}
 		});
 		expect(state).toMatchSnapshot();
+	});
+
+	test('connection false', () => {
+		state = relayerReducer(state, {
+			type: CST.AC_CONNECTION,
+			value: false
+		});
+		expect(state).toBe(initialState);
 	});
 });

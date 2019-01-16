@@ -68,7 +68,7 @@ export function relayerReducer(
 		case CST.AC_TRADE:
 			const pairTrades: ITrade[] = action.trades;
 			const newPairTrades = [...(state.trades[action.pair] || []), ...pairTrades];
-			newPairTrades.sort((a, b) => -a.timestamp - b.timestamp);
+			newPairTrades.sort((a, b) => -a.timestamp + b.timestamp);
 			return Object.assign({}, state, {
 				trades: Object.assign({}, state.trades, {
 					[action.pair]: newPairTrades.slice(0, 6)
@@ -116,10 +116,6 @@ export function relayerReducer(
 						[newOrder.pair]: [newOrder]
 					})
 				});
-		case CST.AC_TRADE_SUB:
-			return Object.assign({}, state, {
-				trade: action.value
-			});
 		case CST.AC_ORDER_SUB:
 			if (action.account)
 				return Object.assign({}, state, {
