@@ -42,7 +42,7 @@ class Util {
 	}
 
 	public formatPercent(num: number) {
-		return d3.format('%')(num);
+		return d3.format('.0%')(num);
 	}
 
 	public formatNumber(num: number) {
@@ -75,13 +75,11 @@ class Util {
 		if (order.type === CST.DB_ADD) return 'Order Placed';
 		else if (order.type === CST.DB_TERMINATE)
 			if (order.status === CST.DB_FILL) return 'Order Fully Filled';
-			else if (
-				order.status === CST.DB_CONFIRMED &&
-				(order.updatedAt || order.createdAt) >= order.expiry
-			)
+			else if (order.status === CST.DB_TERMINATE)
 				return 'Order Expired';
+			// order.status === CST.DB_CONFIRMED
 			else return 'Order Cancelled';
-		else if (order.status === CST.DB_MATCHING) return 'Order Filled';
+		else if (order.status === CST.DB_MATCHING) return 'Order is Being Filled';
 		// if (order.status === CST.DB_PFILL)
 		else return 'Order Partially Filled';
 	}
@@ -97,11 +95,12 @@ class Util {
 		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
 			return baseDescription + ' Fully filled';
 
-		if (order.fill || order.matching)
-			baseDescription += ` ${order.fill +
-				(order.type === CST.DB_TERMINATE ? 0 : order.matching)}(${this.formatPercent(
-				order.fill / order.amount
+		if (order.fill || order.matching) {
+			const totalFill = order.fill + (order.type === CST.DB_TERMINATE ? 0 : order.matching);
+			baseDescription += ` ${totalFill}(${this.formatPercent(
+				totalFill / order.amount
 			)}) filled.`;
+		}
 
 		if (order.matching && order.type !== CST.DB_TERMINATE)
 			baseDescription += 'Pending settlement';
@@ -143,12 +142,13 @@ class Util {
 		}
 
 		if (order.type === CST.DB_TERMINATE)
-			if (order.status === CST.DB_CONFIRMED) return 'Cancelled by user';
-			else if (order.status === CST.DB_TERMINATE) return 'Expired';
+			if (order.status === CST.DB_TERMINATE) return 'Expired';
 			else if (order.status === CST.DB_BALANCE) return 'Cancelled due to insufficent balance';
 			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error';
 			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset';
 			else if (order.status === CST.DB_FILL) return 'Fully filled';
+			// (order.status === CST.DB_CONFIRMED)
+			else return 'Cancelled by user';
 		return 'Invalid order';
 	}
 
@@ -241,7 +241,7 @@ class Util {
 		return output;
 	}
 
-	private wrapCSVString(input: string): string {
+	public wrapCSVString(input: string): string {
 		return ('' + input).indexOf(',') >= 0 ? '"' + input + '"' : input;
 	}
 }

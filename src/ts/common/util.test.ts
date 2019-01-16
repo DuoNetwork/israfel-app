@@ -81,7 +81,7 @@ test('getOrderTitle', () => {
 	expect(
 		util.getOrderTitle({
 			type: 'terminate',
-			status: 'confirmed',
+			status: 'terminate',
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
@@ -106,7 +106,7 @@ test('getOrderTitle', () => {
 	expect(
 		util.getOrderTitle({
 			type: 'terminate',
-			status: 'pending',
+			status: 'confirmed',
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
@@ -130,8 +130,8 @@ test('getOrderTitle', () => {
 	).toBe('Order Cancelled');
 	expect(
 		util.getOrderTitle({
-			type: 'matching',
-			status: 'confirmed',
+			type: 'update',
+			status: 'pFill',
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
@@ -155,7 +155,7 @@ test('getOrderTitle', () => {
 	).toBe('Order Partially Filled');
 	expect(
 		util.getOrderTitle({
-			type: 'matching',
+			type: 'update',
 			status: 'matching',
 			updatedBy: 'test',
 			processed: true,
@@ -177,7 +177,7 @@ test('getOrderTitle', () => {
 			fee: 123,
 			feeAsset: 'test'
 		})
-	).toBe('Order Filled');
+	).toBe('Order is Being Filled');
 });
 
 test('getOrderFullDescription', () => {
@@ -185,26 +185,101 @@ test('getOrderFullDescription', () => {
 	expect(
 		util.getOrderFullDescription({
 			type: 'add',
-			status: 'test',
-			updatedBy: 'test',
+			status: 'confirmed',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getOrderFullDescription({
+			type: 'add',
+			status: 'confirmed',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 0,
+			fill: 0,
+			side: 'bid',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getOrderFullDescription({
+			type: 'update',
+			status: 'matching',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 23,
+			matching: 100,
+			fill: 0,
+			side: 'bid',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getOrderFullDescription({
+			type: 'update',
+			status: 'pfill',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: 'transactionHash',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 23,
+			matching: 0,
+			fill: 100,
+			side: 'bid',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -213,73 +288,23 @@ test('getOrderFullDescription', () => {
 			status: 'fill',
 			updatedBy: 'test',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
-			price: 123,
-			amount: 123,
-			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
-			expiry: 1234567890,
-			createdAt: 123,
-			updatedAt: 123,
-			initialSequence: 123,
-			currentSequence: 123,
-			fee: 123,
-			feeAsset: 'test'
-		})
-	).toMatchSnapshot();
-	expect(
-		util.getOrderFullDescription({
-			type: 'default',
-			status: 'fill',
-			updatedBy: 'test',
-			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
-			price: 123,
-			amount: 123,
-			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
-			expiry: 1234567890,
-			createdAt: 123,
-			updatedAt: 123,
-			initialSequence: 123,
-			currentSequence: 123,
-			fee: 123,
-			feeAsset: 'test'
-		})
-	).toMatchSnapshot();
-	expect(
-		util.getOrderFullDescription({
-			type: 'default',
-			status: 'fill',
-			updatedBy: 'test',
-			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: 'transactionHash',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
 			matching: 0,
 			fill: 123,
-			side: 'test',
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -289,22 +314,22 @@ test('getOrderFullDescription', () => {
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -314,22 +339,22 @@ test('getOrderFullDescription', () => {
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -339,22 +364,22 @@ test('getOrderFullDescription', () => {
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -364,22 +389,22 @@ test('getOrderFullDescription', () => {
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
 			matching: 123,
-			fill: 123,
-			side: 'test',
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
@@ -389,15 +414,43 @@ test('getOrderFullDescription', () => {
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 0,
+			fill: 0,
+			side: 'test',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+});
+
+test('getOrderDescription', () => {
+	expect(
+		util.getOrderDescription({
+			type: 'terminate',
+			status: 'reset',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
 			matching: 123,
 			fill: 123,
-			side: 'test',
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
@@ -414,131 +467,181 @@ test('getVersionDescription', () => {
 	expect(
 		util.getVersionDescription({
 			type: 'add',
-			status: 'test',
-			updatedBy: 'test',
+			status: 'confirmed',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'terminate',
 			status: 'fill',
-			updatedBy: 'test',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: 'transactionHash',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
+			matching: 0,
 			fill: 123,
-			side: 'test',
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'terminate',
 			status: 'confirmed',
-			updatedBy: 'test',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: 'transactionHash',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			matching: 0,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'terminate',
 			status: 'terminate',
-			updatedBy: 'test',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
 			matching: 123,
 			fill: 123,
-			side: 'test',
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'terminate',
 			status: 'balance',
-			updatedBy: 'test',
+			updatedBy: 'updatedBy',
 			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
 			price: 123,
 			amount: 123,
 			balance: 123,
 			matching: 123,
 			fill: 123,
-			side: 'test',
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'terminate',
+			status: 'matching',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 123,
+			fill: 123,
+			side: 'bid',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getVersionDescription({
+			type: 'terminate',
+			status: 'reset',
+			updatedBy: 'updatedBy',
+			processed: true,
+			transactionHash: '',
+			account: 'account',
+			pair: 'code1|code2',
+			orderHash: 'orderHash',
+			price: 123,
+			amount: 123,
+			balance: 123,
+			matching: 123,
+			fill: 123,
+			side: 'bid',
+			expiry: 1234567890,
+			createdAt: 123,
+			updatedAt: 123,
+			initialSequence: 123,
+			currentSequence: 123,
+			fee: 123,
+			feeAsset: 'code1'
+		})
+	).toMatchSnapshot();
+	expect(
+		util.getVersionDescription({
+			type: 'update',
 			status: 'matching',
 			updatedBy: 'test',
 			processed: true,
@@ -548,48 +651,23 @@ test('getVersionDescription', () => {
 			orderHash: 'test',
 			price: 123,
 			amount: 123,
-			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			balance: 23,
+			matching: 100,
+			fill: 0,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
-		})
-	).toMatchSnapshot();
-	expect(
-		util.getVersionDescription({
-			type: 'terminate',
-			status: 'reset',
-			updatedBy: 'test',
-			processed: true,
-			transactionHash: 'test',
-			account: 'test',
-			pair: 'test',
-			orderHash: 'test',
-			price: 123,
-			amount: 123,
-			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
-			expiry: 1234567890,
-			createdAt: 123,
-			updatedAt: 123,
-			initialSequence: 123,
-			currentSequence: 123,
-			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
 	).toMatchSnapshot();
 	expect(
 		util.getVersionDescription({
 			type: 'update',
-			status: 'reset',
+			status: 'pfill',
 			updatedBy: 'test',
 			processed: true,
 			transactionHash: 'test',
@@ -598,18 +676,26 @@ test('getVersionDescription', () => {
 			orderHash: 'test',
 			price: 123,
 			amount: 123,
-			balance: 123,
-			matching: 123,
-			fill: 123,
-			side: 'test',
+			balance: 23,
+			matching: 0,
+			fill: 100,
+			side: 'bid',
 			expiry: 1234567890,
 			createdAt: 123,
 			updatedAt: 123,
 			initialSequence: 123,
 			currentSequence: 123,
 			fee: 123,
-			feeAsset: 'test'
+			feeAsset: 'code1'
 		})
+	).toMatchSnapshot();
+});
+
+test('getMaturityDescription', () => {
+	expect(
+		util.getMaturityDescription({
+			code: 'XXX-PPT'
+		} as any)
 	).toMatchSnapshot();
 });
 
@@ -702,7 +788,6 @@ test('convertOrdersToCSV', () => {
 					status: 'balance',
 					updatedBy: 'test',
 					processed: true,
-					transactionHash: 'test',
 					account: 'test',
 					pair: 'test',
 					orderHash: 'test',
@@ -711,10 +796,9 @@ test('convertOrdersToCSV', () => {
 					balance: 123,
 					matching: 123,
 					fill: 123,
-					side: 'test',
+					side: 'bid',
 					expiry: 1234567890,
 					createdAt: 123,
-					updatedAt: 123,
 					initialSequence: 123,
 					currentSequence: 123,
 					fee: 123,
@@ -1004,6 +1088,6 @@ test('convertOrdersToCSV', () => {
 	).toMatchSnapshot();
 });
 
-// test('wrapCSVString', () => {
-// 	expect(util.wrapCSVString('test')).toMatchSnapshot();
-// });
+test('wrapCSVString', () => {
+	expect(util.wrapCSVString('te,st')).toMatchSnapshot();
+});

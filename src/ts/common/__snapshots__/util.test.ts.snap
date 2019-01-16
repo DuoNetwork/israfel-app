@@ -14,7 +14,7 @@ test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Ca
 
 exports[`convertOrdersToCSV 3`] = `
 "Pair,Order Hash,Version,Time(UTC),Side,Price,Amount,Fill,Fee,Expiry(UTC),Status,Transaction Hash
-test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Cancelled due to insufficent balance,test
+test,test,1,1970-01-01 00:00:00,Buy,123,123,246,123 test,1970-01-15 06:56:07,Cancelled due to insufficent balance,
 "
 `;
 
@@ -67,23 +67,29 @@ test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Ca
 "
 `;
 
-exports[`getOrderFullDescription 1`] = `"Sell 123 test at 123 undefined per test. Valid till 1970-01-01 12:00:00"`;
+exports[`getMaturityDescription 1`] = `"This contract never expires."`;
 
-exports[`getOrderFullDescription 2`] = `"Sell 123 test at 123 undefined per test. Fully filled"`;
+exports[`getOrderDescription 1`] = `"Buy 123 code1 at 123 code2 per code1. Total 123.0 filled."`;
 
-exports[`getOrderFullDescription 3`] = `"Sell 123 test at 123 undefined per test. 246(100.000000%) filled.Pending settlement"`;
+exports[`getOrderFullDescription 1`] = `"Buy 123 code1 at 123 code2 per code1. Valid till 1970-01-01 12:00:00"`;
 
-exports[`getOrderFullDescription 4`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled."`;
+exports[`getOrderFullDescription 2`] = `"Buy 123 code1 at 123 code2 per code1. Valid till 1970-01-01 12:00:00"`;
 
-exports[`getOrderFullDescription 5`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled by user."`;
+exports[`getOrderFullDescription 3`] = `"Buy 123 code1 at 123 code2 per code1. 100(81%) filled.Pending settlement"`;
 
-exports[`getOrderFullDescription 6`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Expired."`;
+exports[`getOrderFullDescription 4`] = `"Buy 123 code1 at 123 code2 per code1. 100(81%) filled."`;
 
-exports[`getOrderFullDescription 7`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to insufficient balance."`;
+exports[`getOrderFullDescription 5`] = `"Buy 123 code1 at 123 code2 per code1. Fully filled"`;
 
-exports[`getOrderFullDescription 8`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to settlement error."`;
+exports[`getOrderFullDescription 6`] = `"Buy 123 code1 at 123 code2 per code1. Cancelled by user."`;
 
-exports[`getOrderFullDescription 9`] = `"Sell 123 test at 123 undefined per test. 123(100.000000%) filled. Cancelled due to custodian reset."`;
+exports[`getOrderFullDescription 7`] = `"Buy 123 code1 at 123 code2 per code1. Expired."`;
+
+exports[`getOrderFullDescription 8`] = `"Buy 123 code1 at 123 code2 per code1. Cancelled due to insufficient balance."`;
+
+exports[`getOrderFullDescription 9`] = `"Buy 123 code1 at 123 code2 per code1. 0(0%) filled. Cancelled due to settlement error."`;
+
+exports[`getOrderFullDescription 10`] = `"Sell 123 code1 at 123 code2 per code1. Cancelled due to custodian reset."`;
 
 exports[`getVersionDescription 1`] = `"Order placed."`;
 
@@ -99,4 +105,8 @@ exports[`getVersionDescription 6`] = `"Cancelled due to settlement error"`;
 
 exports[`getVersionDescription 7`] = `"Cancelled due to custodian reset"`;
 
-exports[`getVersionDescription 8`] = `"Total 246.0 filled, pending settlement"`;
+exports[`getVersionDescription 8`] = `"Total 100.0 filled, pending settlement"`;
+
+exports[`getVersionDescription 9`] = `"Total 100.0 filled"`;
+
+exports[`wrapCSVString 1`] = `"\\"te,st\\""`;
