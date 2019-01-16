@@ -68,6 +68,21 @@ exports[`Header Test User Login Test Snapshot 1`] = `
           STATUS
         </Link>
       </div>
+      <div
+        className="nav-button-wrapper"
+      >
+        <div
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "transparent",
+              "cursor": "pointer",
+            }
+          }
+        >
+          SUPPORT
+        </div>
+      </div>
     </styled.div>
   </styled.div>
 </Styled(Adapter)>

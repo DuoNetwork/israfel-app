@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import * as CST from 'ts/common/constants';
 import util from 'ts/common/util';
 import { SDivFlexCenter, SHeader } from './_styled';
-//import LocaleSelect from './Common/LocaleSelect';
 
 export interface IProps {
 	network: number;
@@ -55,6 +54,14 @@ export default class Header extends React.Component<IProps> {
 						{/* <div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div> */}
 						<div className="nav-button-wrapper">
 							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
+						</div>
+						<div className="nav-button-wrapper">
+							<div
+								style={{ background: 'transparent', cursor: 'pointer' }}
+								onClick={() => window.open('https://intercom.help/duonetwork')}
+							>
+								{CST.TH_SUPPORT.toUpperCase()}
+							</div>
 						</div>
 						{/* <LocaleSelect locale={locale} onSelect={updateLocale} /> */}
 					</SDivFlexCenter>
