@@ -151,7 +151,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
       >
         <ul>
           <li
-            key="abc"
+            key="code"
             style={
               Object {
                 "padding": "5px 5px",
@@ -161,12 +161,12 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
             <span
               className="title"
             >
-              abc
+              code
             </span>
             <span
               className="content"
             >
-              -
+              123.0
               <img
                 className="cus-link"
                 onClick={[Function]}
@@ -176,223 +176,6 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
                     "height": "14px",
                     "marginLeft": "10px",
                     "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
                   }
                 }
               />
@@ -457,7 +240,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
             <span
               className="content"
             >
-              $183.6
+              $123.5K
             </span>
           </li>
         </ul>
@@ -630,7 +413,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
       >
         <ul>
           <li
-            key="abc"
+            key="code"
             style={
               Object {
                 "padding": "5px 5px",
@@ -640,12 +423,12 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
             <span
               className="title"
             >
-              abc
+              code
             </span>
             <span
               className="content"
             >
-              -
+              123.0
               <img
                 className="cus-link"
                 onClick={[Function]}
@@ -655,223 +438,6 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
                     "height": "14px",
                     "marginLeft": "10px",
                     "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
                   }
                 }
               />
@@ -936,7 +502,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
             <span
               className="content"
             >
-              $183.6
+              $123.5K
             </span>
           </li>
         </ul>
@@ -1115,7 +681,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
       >
         <ul>
           <li
-            key="abc"
+            key="code"
             style={
               Object {
                 "padding": "5px 5px",
@@ -1125,12 +691,12 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
             <span
               className="title"
             >
-              abc
+              code
             </span>
             <span
               className="content"
             >
-              -
+              123.0
               <img
                 className="cus-link"
                 onClick={[Function]}
@@ -1140,223 +706,6 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
                     "height": "14px",
                     "marginLeft": "10px",
                     "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
                   }
                 }
               />
@@ -1421,7 +770,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
             <span
               className="content"
             >
-              $183.6
+              $123.5K
             </span>
           </li>
         </ul>
@@ -1594,7 +943,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
       >
         <ul>
           <li
-            key="abc"
+            key="code"
             style={
               Object {
                 "padding": "5px 5px",
@@ -1604,12 +953,12 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
             <span
               className="title"
             >
-              abc
+              code
             </span>
             <span
               className="content"
             >
-              -
+              123.0
               <img
                 className="cus-link"
                 onClick={[Function]}
@@ -1619,223 +968,6 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
                     "height": "14px",
                     "marginLeft": "10px",
                     "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
                   }
                 }
               />
@@ -1900,7 +1032,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
             <span
               className="content"
             >
-              $183.6
+              $123.5K
             </span>
           </li>
         </ul>
@@ -2112,7 +1244,7 @@ exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
       >
         <ul>
           <li
-            key="abc"
+            key="code"
             style={
               Object {
                 "padding": "5px 5px",
@@ -2122,12 +1254,12 @@ exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
             <span
               className="title"
             >
-              abc
+              code
             </span>
             <span
               className="content"
             >
-              -
+              123.0
               <img
                 className="cus-link"
                 onClick={[Function]}
@@ -2137,223 +1269,6 @@ exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
                     "height": "14px",
                     "marginLeft": "10px",
                     "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "14px",
-                    "marginLeft": "10px",
-                    "width": "14px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="sETH"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              sETH
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
-                  }
-                }
-              />
-            </span>
-          </li>
-          <li
-            key="abc"
-            style={
-              Object {
-                "padding": "5px 5px",
-              }
-            }
-          >
-            <span
-              className="title"
-            >
-              abc
-            </span>
-            <span
-              className="content"
-            >
-              -
-              <img
-                className="cus-link"
-                onClick={[Function]}
-                src={null}
-                style={
-                  Object {
-                    "height": "12px",
-                    "marginLeft": "10px",
-                    "width": "12px",
                   }
                 }
               />
@@ -2418,7 +1333,7 @@ exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
             <span
               className="content"
             >
-              $183.6
+              $123.5K
             </span>
           </li>
         </ul>

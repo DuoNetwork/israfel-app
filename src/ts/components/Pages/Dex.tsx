@@ -158,7 +158,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				  )
+				)
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -169,6 +169,52 @@ export default class Dex extends React.Component<IProps, IState> {
 
 			tokenNavUpdatedAt = custodians[tradeTokenInfo.custodian].states.lastPriceTime;
 		}
+
+		const tokenBalances: Array<{ code: string; balance: number; address: string }> = [];
+		let totalNav = 0;
+
+		beethovenList.forEach(c => {
+			const codes = Object.keys(custodianTokenBalances[c] || {});
+			codes.sort((a, b) => a.localeCompare(b));
+			codes.forEach(code => {
+				const balance =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].balance
+						: 0;
+				const address =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].address
+						: '';
+				tokenBalances.push({
+					code: code,
+					balance: balance,
+					address: address
+				});
+				if (code.startsWith('a')) totalNav += balance * custodians[c].states.navA;
+				else totalNav += balance * custodians[c].states.navB;
+			});
+		});
+		mozartList.forEach(c => {
+			const codes = Object.keys(custodianTokenBalances[c] || {});
+			codes.sort((a, b) => -a.localeCompare(b));
+			codes.forEach(code => {
+				const balance =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].balance
+						: 0;
+				const address =
+					custodianTokenBalances[c] && custodianTokenBalances[c][code]
+						? custodianTokenBalances[c][code].address
+						: '';
+				tokenBalances.push({
+					code: code,
+					balance: balance,
+					address: address
+				});
+				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
+				else totalNav += balance * custodians[c].states.navB;
+			});
+		});
 		return (
 			<div>
 				<Spin
@@ -278,18 +324,18 @@ export default class Dex extends React.Component<IProps, IState> {
 						handleClose={() => this.handleTrade('')}
 						addOrder={addOrder}
 					/>
-					<TradeHistoryCard trades={trades} notify={notify} />
+					<TradeHistoryCard
+						tokenBalances={tokenBalances}
+						trades={trades}
+					/>
 				</Spin>
 
 				<BalanceCard
-					ethPrice={ethPrice}
 					visible={showBalances}
 					account={account}
 					ethBalance={ethBalance}
-					beethovenList={beethovenList}
-					mozartList={mozartList}
-					custodians={custodians}
-					custodianTokenBalances={custodianTokenBalances}
+					tokenBalances={tokenBalances}
+					totalNav={totalNav}
 					notify={notify}
 					handleClose={() => this.setState({ showBalances: !showBalances })}
 					wrapEther={wrapEther}

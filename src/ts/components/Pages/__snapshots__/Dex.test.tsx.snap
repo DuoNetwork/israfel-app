@@ -328,7 +328,30 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       }
     />
     <TradeHistoryCard
-      notify={[MockFunction]}
+      tokenBalances={
+        Array [
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+        ]
+      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -359,208 +382,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
   </Spin>
   <BalanceCard
     account="test"
-    beethovenList={
-      Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-      ]
-    }
-    custodianTokenBalances={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18bc": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18be": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-      }
-    }
-    custodians={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-      }
-    }
     ethBalance={
       Object {
         "allowance": 1.157920892373162,
@@ -568,15 +389,33 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
         "weth": 0.984992,
       }
     }
-    ethPrice={123}
     handleClose={[Function]}
-    mozartList={
+    notify={[MockFunction]}
+    tokenBalances={
       Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e",
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
       ]
     }
-    notify={[MockFunction]}
+    totalNav={0}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -912,7 +751,30 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       }
     />
     <TradeHistoryCard
-      notify={[MockFunction]}
+      tokenBalances={
+        Array [
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+        ]
+      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -943,208 +805,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
   </Spin>
   <BalanceCard
     account="test"
-    beethovenList={
-      Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-      ]
-    }
-    custodianTokenBalances={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18bc": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18be": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-      }
-    }
-    custodians={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-      }
-    }
     ethBalance={
       Object {
         "allowance": 1.157920892373162,
@@ -1152,15 +812,33 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
         "weth": 0.984992,
       }
     }
-    ethPrice={123}
     handleClose={[Function]}
-    mozartList={
+    notify={[MockFunction]}
+    tokenBalances={
       Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e",
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
       ]
     }
-    notify={[MockFunction]}
+    totalNav={0}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -1496,7 +1174,30 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       }
     />
     <TradeHistoryCard
-      notify={[MockFunction]}
+      tokenBalances={
+        Array [
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+        ]
+      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -1527,208 +1228,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
   </Spin>
   <BalanceCard
     account="test"
-    beethovenList={
-      Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-      ]
-    }
-    custodianTokenBalances={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18bc": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18be": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-      }
-    }
-    custodians={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-      }
-    }
     ethBalance={
       Object {
         "allowance": 1.157920892373162,
@@ -1736,15 +1235,33 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
         "weth": 0.984992,
       }
     }
-    ethPrice={123}
     handleClose={[Function]}
-    mozartList={
+    notify={[MockFunction]}
+    tokenBalances={
       Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e",
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
       ]
     }
-    notify={[MockFunction]}
+    totalNav={0}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -2080,7 +1597,30 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       }
     />
     <TradeHistoryCard
-      notify={[MockFunction]}
+      tokenBalances={
+        Array [
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+        ]
+      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -2111,208 +1651,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
   </Spin>
   <BalanceCard
     account="test"
-    beethovenList={
-      Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-      ]
-    }
-    custodianTokenBalances={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18bc": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18be": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-      }
-    }
-    custodians={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-      }
-    }
     ethBalance={
       Object {
         "allowance": 1.157920892373162,
@@ -2320,15 +1658,33 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
         "weth": 0.984992,
       }
     }
-    ethPrice={123}
     handleClose={[Function]}
-    mozartList={
+    notify={[MockFunction]}
+    tokenBalances={
       Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e",
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
       ]
     }
-    notify={[MockFunction]}
+    totalNav={0}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -2664,7 +2020,30 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       }
     />
     <TradeHistoryCard
-      notify={[MockFunction]}
+      tokenBalances={
+        Array [
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+            "balance": 0,
+            "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
+          },
+        ]
+      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -2695,208 +2074,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
   </Spin>
   <BalanceCard
     account="test"
-    beethovenList={
-      Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-      ]
-    }
-    custodianTokenBalances={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18bc": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18be": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "LETH": Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "allowance": 0,
-            "balance": 0,
-          },
-          "sETH": Object {
-            "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
-            "allowance": 1.157920892373162e+59,
-            "balance": 0,
-          },
-        },
-      }
-    }
-    custodians={
-      Object {
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18c": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d": Object {
-          "code": "BEETHOVEN-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e": Object {
-          "code": "MOZART-PPT",
-          "states": Object {
-            "alpha": 0.5,
-            "beta": 1,
-            "createCommRate": 0.01,
-            "ethCollateral": 12.358884504282397,
-            "feeBalance": 0.15089954869517602,
-            "iterationGasThreshold": 65000,
-            "lastOperationTime": 0,
-            "lastPrice": 145.11564352568783,
-            "lastPriceTime": 1546423200000,
-            "limitLower": 0.25,
-            "limitPeriodic": 0,
-            "limitUpper": 1.75,
-            "maturity": 0,
-            "minBalance": 0.01,
-            "navA": 0.8199774206003582,
-            "navB": 1.3600451587992837,
-            "nextResetAddrIndex": 0,
-            "operationCoolDown": 86400000,
-            "period": 3600000,
-            "periodCoupon": 0,
-            "preResetWaitingBlocks": 10,
-            "priceFetchCoolDown": 3000000,
-            "redeemCommRate": 0.01,
-            "resetPrice": 122.97700574468506,
-            "resetPriceTime": 1545530400000,
-            "resetState": "UpwardReset",
-            "state": "Trading",
-            "totalSupplyA": 506.61953689367846,
-            "totalSupplyB": 1013.2390737873569,
-            "totalUsers": 18,
-          },
-        },
-      }
-    }
     ethBalance={
       Object {
         "allowance": 1.157920892373162,
@@ -2904,15 +2081,33 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
         "weth": 0.984992,
       }
     }
-    ethPrice={123}
     handleClose={[Function]}
-    mozartList={
+    notify={[MockFunction]}
+    tokenBalances={
       Array [
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18b",
-        "0x00be45fe5903ab1b33a9d3969b05b29552a6d18e",
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
+          "balance": 0,
+          "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
+        },
       ]
     }
-    notify={[MockFunction]}
+    totalNav={0}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}

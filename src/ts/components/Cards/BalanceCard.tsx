@@ -1,9 +1,9 @@
+import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
-import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
+import { IEthBalance, INotification } from 'ts/common/types';
 import util from 'ts/common/util';
-import link from '../../../images/icons/linkBlack.png';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle, SInput } from './_styled';
 import { SButton } from './_styled';
@@ -12,11 +12,8 @@ interface IProps {
 	visible: boolean;
 	account: string;
 	ethBalance: IEthBalance;
-	ethPrice: number;
-	beethovenList: string[];
-	mozartList: string[];
-	custodians: { [custodian: string]: ICustodianInfo };
-	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
+	tokenBalances: Array<{ code: string; balance: number; address: string }>;
+	totalNav: number;
 	notify: (notification: INotification) => any;
 	handleClose: () => void;
 	wrapEther: (amount: number, address: string) => Promise<string>;
@@ -98,91 +95,11 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 			handleClose,
 			visible,
 			ethBalance,
-			ethPrice,
-			custodians,
-			custodianTokenBalances,
-			beethovenList,
-			mozartList
+			tokenBalances,
+			totalNav
 		} = this.props;
 		const { ethInput, wethInput } = this.state;
 		const animated = visible ? 'animated' : '';
-
-		let totalNav = (ethBalance.eth + ethBalance.weth) * ethPrice;
-		const balanceLis: any[] = [];
-		beethovenList.forEach(c => {
-			const codes = Object.keys(custodianTokenBalances[c] || {});
-			codes.sort((a, b) => a.localeCompare(b));
-			codes.forEach(code => {
-				const balance =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].balance
-						: 0;
-				const address =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].address
-						: '';
-				balanceLis.push(
-					<li key={code} style={{ padding: '5px 5px' }}>
-						<span className="title">{code}</span>
-						<span className="content">
-							{balance ? util.formatBalance(balance) : '-'}
-							<img
-								className="cus-link"
-								src={link}
-								style={{ width: '14px', height: '14px', marginLeft: '10px' }}
-								onClick={() =>
-									window.open(
-										`https://${
-											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-										}etherscan.io/token/${address}?a=${account}`,
-										'__blank'
-									)
-								}
-							/>
-						</span>
-					</li>
-				);
-				if (code.startsWith('a')) totalNav += balance * custodians[c].states.navA;
-				else totalNav += balance * custodians[c].states.navB;
-			});
-		});
-		mozartList.forEach(c => {
-			const codes = Object.keys(custodianTokenBalances[c] || {});
-			codes.sort((a, b) => -a.localeCompare(b));
-			codes.forEach(code => {
-				const balance =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].balance
-						: 0;
-				const address =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].address
-						: '';
-				balanceLis.push(
-					<li key={code} style={{ padding: '5px 5px' }}>
-						<span className="title">{code}</span>
-						<span className="content">
-							{balance ? util.formatBalance(balance) : '-'}
-							<img
-								className="cus-link"
-								src={link}
-								style={{ width: '12px', height: '12px', marginLeft: '10px' }}
-								onClick={() =>
-									window.open(
-										`https://${
-											__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-										}etherscan.io/token/${address}?a=${account}`,
-										'__blank'
-									)
-								}
-							/>
-						</span>
-					</li>
-				);
-				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
-				else totalNav += balance * custodians[c].states.navB;
-			});
-		});
 
 		return (
 			<SCard
@@ -247,7 +164,35 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 				<SDivFlexCenter horizontal style={{ marginTop: '5px' }}>
 					<SCardList noMargin>
 						<div className="status-list-wrapper">
-							<ul>{balanceLis}</ul>
+							<ul>
+								{tokenBalances.map(tb => (
+									<li key={tb.code} style={{ padding: '5px 5px' }}>
+										<span className="title">{tb.code}</span>
+										<span className="content">
+											{tb.balance ? util.formatBalance(tb.balance) : '-'}
+											<img
+												className="cus-link"
+												src={link}
+												style={{
+													width: '14px',
+													height: '14px',
+													marginLeft: '10px'
+												}}
+												onClick={() =>
+													window.open(
+														`https://${
+															__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+														}etherscan.io/token/${
+															tb.address
+														}?a=${account}`,
+														'__blank'
+													)
+												}
+											/>
+										</span>
+									</li>
+								))}
+							</ul>
 						</div>
 					</SCardList>
 				</SDivFlexCenter>

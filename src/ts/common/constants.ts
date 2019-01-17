@@ -115,6 +115,7 @@ export const TH_LONG = 'Long';
 export const TH_TOKEN = 'Token';
 export const TH_MARKET = 'Market';
 export const TH_TRADES = 'Trades';
+export const TH_LINK = 'Link';
 
 export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
