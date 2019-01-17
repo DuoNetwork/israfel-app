@@ -1,8 +1,8 @@
 export const ColorStyles = {
 	//Theme Colors
-	MainColor: 'rgba(0,144,206,1)',
-	MainColorAlpha: 'rgba(0,144,206,.8)',
-	MainColorShadow: 'rgba(0,144,206,.2)',
+	MainColor: 'rgba(0,114,206,1)',
+	MainColorAlpha: 'rgba(0,114,206,.8)',
+	MainColorShadow: 'rgba(0,114,206,.2)',
 	MainErrorColor: 'rgba(256,56,79,1)',
 	MainErrorColorAplha: 'rgba(256,56,79,.8)',
 	MainErrorColorShadow: 'rgba(256,56,79,.2)',
@@ -71,5 +71,5 @@ export const ColorStyles = {
 	BeethovenTokenAColor: 'rgba(105,188,255,0.8)',
 	BeethovenTokenBCollar: 'rgba(245,122,15,0.8)',
 	MozartTokenAColor: '',
-	MozartTokenBColor: '',
+	MozartTokenBColor: ''
 };

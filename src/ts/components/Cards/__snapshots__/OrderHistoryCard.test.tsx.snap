@@ -122,7 +122,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa iYUJRW"
+      className="sc-bdVaJa gkpNTN"
       extra={
         <styled.button
           className="export-button"
@@ -165,7 +165,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        className="ant-card sc-bdVaJa gkpNTN ant-card-bordered"
         margin="0 10px 20px 10px"
         width="740px"
       >
@@ -216,7 +216,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
                 onClick={[Function]}
               >
                 <button
-                  className="export-button sc-bxivhb biDMaf"
+                  className="export-button sc-bxivhb iuzcAA"
                   onClick={[Function]}
                 >
                   Export to CSV
@@ -10269,7 +10269,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa iYUJRW"
+      className="sc-bdVaJa gkpNTN"
       extra={
         <styled.button
           className="export-button"
@@ -10312,7 +10312,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        className="ant-card sc-bdVaJa gkpNTN ant-card-bordered"
         margin="0 10px 20px 10px"
         width="740px"
       >
@@ -10363,7 +10363,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
                 onClick={[Function]}
               >
                 <button
-                  className="export-button sc-bxivhb biDMaf"
+                  className="export-button sc-bxivhb iuzcAA"
                   onClick={[Function]}
                 >
                   Export to CSV
@@ -20416,7 +20416,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa iYUJRW"
+      className="sc-bdVaJa gkpNTN"
       extra={
         <styled.button
           className="export-button"
@@ -20459,7 +20459,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        className="ant-card sc-bdVaJa gkpNTN ant-card-bordered"
         margin="0 10px 20px 10px"
         width="740px"
       >
@@ -20510,7 +20510,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
                 onClick={[Function]}
               >
                 <button
-                  className="export-button sc-bxivhb biDMaf"
+                  className="export-button sc-bxivhb iuzcAA"
                   onClick={[Function]}
                 >
                   Export to CSV
@@ -24955,7 +24955,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa iYUJRW"
+      className="sc-bdVaJa gkpNTN"
       extra={
         <styled.button
           className="export-button"
@@ -24998,7 +24998,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        className="ant-card sc-bdVaJa gkpNTN ant-card-bordered"
         margin="0 10px 20px 10px"
         width="740px"
       >
@@ -25049,7 +25049,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
                 onClick={[Function]}
               >
                 <button
-                  className="export-button sc-bxivhb biDMaf"
+                  className="export-button sc-bxivhb iuzcAA"
                   onClick={[Function]}
                 >
                   Export to CSV
@@ -35102,7 +35102,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
     width="740px"
   >
     <Card
-      className="sc-bdVaJa iYUJRW"
+      className="sc-bdVaJa gkpNTN"
       extra={
         <styled.button
           className="export-button"
@@ -35145,7 +35145,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
       width="740px"
     >
       <div
-        className="ant-card sc-bdVaJa iYUJRW ant-card-bordered"
+        className="ant-card sc-bdVaJa gkpNTN ant-card-bordered"
         margin="0 10px 20px 10px"
         width="740px"
       >
@@ -35196,7 +35196,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
                 onClick={[Function]}
               >
                 <button
-                  className="export-button sc-bxivhb biDMaf"
+                  className="export-button sc-bxivhb iuzcAA"
                   onClick={[Function]}
                 >
                   Export to CSV

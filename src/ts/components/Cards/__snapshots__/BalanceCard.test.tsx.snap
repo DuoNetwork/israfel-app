@@ -470,7 +470,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 1`] = `
     style={
       Object {
         "background": "#fff",
-        "color": "rgba(0,144,206,1)",
+        "color": "rgba(0,114,206,1)",
       }
     }
   >
@@ -949,7 +949,7 @@ exports[`BalanceCard Test Test Snapshot Test Negative Input 2`] = `
     style={
       Object {
         "background": "#fff",
-        "color": "rgba(0,144,206,1)",
+        "color": "rgba(0,114,206,1)",
       }
     }
   >
@@ -1434,7 +1434,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 1`] = `
     style={
       Object {
         "background": "#fff",
-        "color": "rgba(0,144,206,1)",
+        "color": "rgba(0,114,206,1)",
       }
     }
   >
@@ -1913,7 +1913,7 @@ exports[`BalanceCard Test Test Snapshot Test Snapshot 2`] = `
     style={
       Object {
         "background": "#fff",
-        "color": "rgba(0,144,206,1)",
+        "color": "rgba(0,114,206,1)",
       }
     }
   >
@@ -2431,7 +2431,7 @@ exports[`BalanceCard Test Test Snapshot Test window.open 1`] = `
     style={
       Object {
         "background": "#fff",
-        "color": "rgba(0,144,206,1)",
+        "color": "rgba(0,114,206,1)",
       }
     }
   >
