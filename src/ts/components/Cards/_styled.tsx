@@ -1086,6 +1086,10 @@ injectGlobal([
 				color: #fff !important;
 				box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.5) !important;
 			}
+			.ant-select-selection-selected-value {
+				font-size: 12px;
+				color: white;
+			}
 		}
-	`
+`
 ] as any);

@@ -1,10 +1,33 @@
+import { Select } from 'antd';
+import { Table } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { INotification, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
-import { SCard, SCardList, SCardTitle } from './_styled';
+import { SCard, SCardList, SCardTitle, SCardTitleSelector } from './_styled';
 
+const Option = Select.Option;
+const columns = [
+	{
+		title: 'pair',
+		dataIndex: 'pair'
+	},
+	{
+		title: 'amount',
+		dataIndex: 'maker.amount'
+	},
+	{
+		title: 'price',
+		dataIndex: 'maker.price'
+	},
+	{
+		title: 'timestamp',
+		key: 'timestamp',
+		dataIndex: 'timestamp',
+		render: (time: any) => util.formatTime(time)
+	}
+];
 interface IProps {
 	trades: { [pair: string]: ITrade[] };
 	notify: (notification: INotification) => any;
@@ -22,7 +45,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 
 	private handleShow(i: number) {
 		this.setState({
-			expandIndex: i === this.state.expandIndex ? -1 : i
+			expandIndex: i
 		});
 	}
 
@@ -39,59 +62,31 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 			tradeKeylist.push(key);
 			tradeList.push(subTradeList);
 		}
-		const showTradeList: object[] = [];
-		tradeList.forEach((c, i) => {
-			const showSubTradeList: object[] = [];
-			c.forEach((d, j) => {
-				showSubTradeList.push(
-					<li key={j} style={{ padding: '5px 5px' }}>
-						<span className="title">{`Px:${util.formatPriceShort(
-							d.taker.price
-						)}`}</span>
-						<span className="content">{`Amt:${util.formatNumber(
-							d.taker.amount
-						)}`}</span>
-						<span className="content">{`Time:${util.formatTime(d.timestamp)}`}</span>
-						<span className="content">{`Side:${d.taker.side}`}</span>
-					</li>
-				);
-			});
-			showTradeList.push(
-				<li key={i} style={{ padding: '5px 5px', flexDirection: 'column' }}>
-					<div
-						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							cursor: 'pointer'
-						}}
-						onClick={() => this.handleShow(i)}
-					>
-						<span className="title">{tradeKeylist[i]}</span>
-						<span className="content">{i === expandIndex ? '-' : '+'}</span>
-					</div>
-					<ul
-						style={{
-							paddingLeft: 10,
-							maxHeight: i === expandIndex ? 200 : 0,
-							overflow: 'hidden'
-						}}
-					>
-						{showSubTradeList.length ? showSubTradeList : 'No Trades'}
-					</ul>
-				</li>
-			);
-		});
+		const defaultTradeKey = tradeKeylist[0];
 
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
 				width="740px"
 				margin="0 10px 20px 10px"
+				extra={
+					<SCardTitleSelector
+						value={defaultTradeKey}
+						style={{ width: 200 }}
+						onSelect={(e: any) => this.handleShow(e)}
+					>
+						{tradeKeylist.map((e, i) => (
+							<Option className="optionMarketTrades" value={i}>
+								{e}
+							</Option>
+						))}
+					</SCardTitleSelector>
+				}
 			>
 				<SDivFlexCenter horizontal style={{ marginTop: '5px' }}>
 					<SCardList noMargin>
 						<div className="status-list-wrapper">
-							<ul>{showTradeList.length ? showTradeList : '-'}</ul>
+							<Table columns={columns} dataSource={tradeList[expandIndex]} />
 						</div>
 					</SCardList>
 				</SDivFlexCenter>
