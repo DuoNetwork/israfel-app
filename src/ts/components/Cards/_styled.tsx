@@ -1090,6 +1090,9 @@ injectGlobal([
 				font-size: 12px;
 				color: white;
 			}
+			.ant-select-arrow-icon {
+				color: white;
+			}
 		}
-`
+	`
 ] as any);
