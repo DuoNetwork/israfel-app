@@ -62,8 +62,6 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 			tradeKeylist.push(key);
 			tradeList.push(subTradeList);
 		}
-		const defaultTradeKey = tradeKeylist[0];
-
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
@@ -71,7 +69,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 				margin="0 10px 20px 10px"
 				extra={
 					<SCardTitleSelector
-						value={defaultTradeKey}
+						value={tradeKeylist[expandIndex]}
 						style={{ width: 200 }}
 						onSelect={(e: any) => this.handleShow(e)}
 					>
