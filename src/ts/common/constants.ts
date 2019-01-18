@@ -44,6 +44,7 @@ export interface ILocaleText {
 	JP: string;
 	[key: string]: string;
 }
+export const TH_MARKET_TRADES = 'Market Trades';
 export const TH_SUPPORT = 'support';
 export const TH_ETH = 'ETH';
 export const TH_WETH = 'WETH';

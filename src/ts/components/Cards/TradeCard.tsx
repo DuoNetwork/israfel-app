@@ -1,10 +1,13 @@
 import { Radio, Spin } from 'antd';
+import { Table } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
+import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
+import { ITrade } from 'ts/common/types';
 import {
 	IEthBalance,
 	INotification,
@@ -25,6 +28,7 @@ import {
 } from './_styled';
 
 const RadioGroup = Radio.Group;
+const Column = Table.Column;
 
 interface IProps {
 	account: string;
@@ -48,6 +52,7 @@ interface IProps {
 		isBid: boolean,
 		expiry: number
 	) => Promise<string>;
+	trades: { [pair: string]: ITrade[] };
 }
 
 interface IState {
@@ -115,7 +120,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -165,7 +170,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				? util.formatFixedNumber(
 						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
-				)
+				  )
 				: '';
 		this.state = {
 			account: props.account,
@@ -198,7 +203,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								? nextProps.orderBook.asks[0].price
 								: 0,
 							nextProps.tokenInfo.precisions[CST.TH_WETH]
-					)
+					  )
 					: '';
 
 			return {
@@ -481,7 +486,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			orderBook,
 			interestOrLeverage,
 			navInEth,
-			navUpdatedAt
+			navUpdatedAt,
+			trades
 		} = this.props;
 		const {
 			isBid,
@@ -496,6 +502,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription,
 			expiryDescription
 		} = this.state;
+		const pairs = orderBook.pair;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
 			bidsToRender.push({
@@ -540,16 +547,84 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<span className="trade-nav-px">
 								{`${util.formatFixedNumber(navInEth, precision)} ETH`}
 							</span>
-							<span
-								style={{
-									fontSize: 10,
-									color: ColorStyles.TextBlackAlphaL
-								}}
-							>
+							<span style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}>
 								{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}
 							</span>
 						</div>
 					</div>
+					<SDivFlexCenter
+						horizontal
+						style={{
+							width: '26%',
+							margin: 'auto',
+							fontSize: 14,
+							fontWeight: 'bold'
+						}}
+					>
+						<span className="content">{CST.TH_MARKET_TRADES}</span>
+					</SDivFlexCenter>
+					<SDivFlexCenter horizontal>
+						<SCardList noMargin>
+							<div className="status-list-wrapper">
+								<Table
+									dataSource={
+										pairs && trades[pairs]
+											? trades[pairs]
+													.slice(
+														0,
+														trades[pairs].length > 3
+															? 3
+															: trades[pairs].length
+													)
+													.map(t => ({
+														key: t.transactionHash,
+														[CST.TH_TIME]: util.formatTime(t.timestamp),
+														[CST.TH_PX]: t.maker.price,
+														[CST.TH_AMOUNT]: util.formatBalance(
+															t.maker.amount
+														),
+														[CST.TH_SIDE]: t.taker.side,
+														[CST.TH_LINK]: `https://${
+															__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
+														}etherscan.io/tx/${t.transactionHash}`
+													}))
+											: []
+									}
+									showHeader={false}
+									pagination={false}
+									style={{
+										width: '100%',
+										padding: '0px 20px 0px 20px',
+										textAlign: 'center'
+									}}
+									rowClassName={record =>
+										record[CST.TH_SIDE] === CST.DB_BID
+											? 'titleTable bid-span'
+											: 'titleTable ask-span'
+									}
+								>
+									<Column dataIndex={CST.TH_PX} width={80} />
+									<Column dataIndex={CST.TH_AMOUNT} width={50} />
+									<Column dataIndex={CST.TH_TIME} width={180} />
+									<Column
+										dataIndex={CST.TH_LINK}
+										render={text => (
+											<img
+												className="cus-link"
+												src={link}
+												style={{
+													width: '14px',
+													height: '14px',
+													marginLeft: '10px'
+												}}
+												onClick={() => window.open(text, '__blank')}
+											/>
+										)}
+									/>
+								</Table>
+							</div>
+						</SCardList>
+					</SDivFlexCenter>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
@@ -566,7 +641,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -575,7 +650,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -600,7 +675,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -609,7 +684,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 										</li>

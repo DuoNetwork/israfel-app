@@ -71,6 +71,79 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -605,6 +678,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -1109,6 +1255,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -1617,6 +1836,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -2123,6 +2415,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -2627,6 +2992,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -3136,6 +3574,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -3641,6 +4152,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -4150,6 +4734,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -4653,6 +5310,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -5160,6 +5890,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -5662,6 +6465,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -6168,6 +7044,79 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
     </div>
     <styled.div
       horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
     >
       <styled.div>
         <div
@@ -6669,6 +7618,79 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >
@@ -7203,6 +8225,79 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
         </span>
       </div>
     </div>
+    <styled.div
+      horizontal={true}
+      style={
+        Object {
+          "fontSize": 14,
+          "fontWeight": "bold",
+          "margin": "auto",
+          "width": "26%",
+        }
+      }
+    >
+      <span
+        className="content"
+      >
+        Market Trades
+      </span>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div
+        noMargin={true}
+      >
+        <div
+          className="status-list-wrapper"
+        >
+          <Table
+            bordered={false}
+            className=""
+            dataSource={Array []}
+            indentSize={20}
+            loading={false}
+            locale={Object {}}
+            pagination={false}
+            rowClassName={[Function]}
+            rowKey="key"
+            showHeader={false}
+            size="default"
+            sortDirections={
+              Array [
+                "ascend",
+                "descend",
+              ]
+            }
+            style={
+              Object {
+                "padding": "0px 20px 0px 20px",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+            useFixedHeader={false}
+          >
+            <Column
+              dataIndex="Price"
+              width={80}
+            />
+            <Column
+              dataIndex="Amount"
+              width={50}
+            />
+            <Column
+              dataIndex="Time"
+              width={180}
+            />
+            <Column
+              dataIndex="Link"
+              render={[Function]}
+            />
+          </Table>
+        </div>
+      </styled.div>
+    </styled.div>
     <styled.div
       horizontal={true}
     >

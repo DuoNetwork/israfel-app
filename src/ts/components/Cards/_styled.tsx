@@ -1093,6 +1093,9 @@ injectGlobal([
 			.ant-select-arrow-icon {
 				color: white;
 			}
+			.titleTable {
+				text-align: center;
+			}
 		}
 	`
 ] as any);

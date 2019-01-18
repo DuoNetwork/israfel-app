@@ -72,6 +72,30 @@ describe('TradeCard Test', () => {
 					orderBook={orderBook}
 					ethPrice={123}
 					navInEth={1}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					interestOrLeverage={1}
@@ -93,6 +117,30 @@ describe('TradeCard Test', () => {
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					interestOrLeverage={1}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
@@ -108,6 +156,30 @@ describe('TradeCard Test', () => {
 					tokenBalance={tokenBalance}
 					ethBalance={ethBalance}
 					orderBook={orderBook}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					ethPrice={123}
 					navInEth={1}
 					navUpdatedAt={1234567890}
@@ -130,6 +202,30 @@ describe('TradeCard Test', () => {
 					ethPrice={123}
 					navInEth={1}
 					navUpdatedAt={1234567890}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					notify={() => ({})}
 					interestOrLeverage={1}
 					handleClose={handleClose}
@@ -191,6 +287,30 @@ describe('TradeCard Test', () => {
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					interestOrLeverage={1}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					handleClose={handleClose}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 					addOrder={addOrder}
@@ -242,6 +362,30 @@ describe('TradeCard Test', () => {
 						weth: 123,
 						allowance: 0
 					}}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					orderBook={orderBook}
 					ethPrice={123}
 					navInEth={1}
@@ -270,6 +414,30 @@ describe('TradeCard Test', () => {
 				<TradeCard
 					account={'account'}
 					token={'aETH'}
+					trades={{
+						test: [
+							{
+								pair: 'test',
+								transactionHash: 'test',
+								taker: {
+									orderHash: 'test',
+									address: 'test',
+									side: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								maker: {
+									orderHash: 'test',
+									price: 123,
+									amount: 123,
+									fee: 123
+								},
+								feeAsset: 'test',
+								timestamp: 123
+							}
+						]
+					}}
 					tokenBalance={tokenBalance}
 					ethBalance={{ eth: 123, weth: 123, allowance: 0 }}
 					orderBook={orderBook}

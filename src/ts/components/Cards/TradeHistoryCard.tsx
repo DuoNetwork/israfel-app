@@ -80,15 +80,15 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 												[CST.TH_LINK]: `https://${
 													__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
 												}etherscan.io/tx/${t.transactionHash}`
-										}))
+										  }))
 										: []
 								}
 								pagination={false}
 								style={{ width: '100%' }}
 								rowClassName={record =>
 									record[CST.TH_SIDE] === CST.DB_BID
-										? 'trade-table-buy'
-										: 'trade-table-sell'
+										? 'titleTable bid-span'
+										: 'titleTable ask-span'
 								}
 							>
 								<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} width={180} />
