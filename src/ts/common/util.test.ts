@@ -1091,3 +1091,16 @@ test('convertOrdersToCSV', () => {
 test('wrapCSVString', () => {
 	expect(util.wrapCSVString('te,st')).toMatchSnapshot();
 });
+
+test('getEtherScanTransactionLink', () => {
+	expect(util.getEtherScanTransactionLink('txHash')).toMatchSnapshot();
+});
+
+test('getEtherScanAddressLink', () => {
+	expect(util.getEtherScanAddressLink('address')).toMatchSnapshot();
+});
+
+test('getEtherScanTokenLink', () => {
+	expect(util.getEtherScanTokenLink('tokenAddr')).toMatchSnapshot();
+	expect(util.getEtherScanTokenLink('tokenAddr', 'account')).toMatchSnapshot();
+});

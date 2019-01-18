@@ -90,14 +90,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		const {
-			account,
-			handleClose,
-			visible,
-			ethBalance,
-			tokenBalances,
-			totalNav
-		} = this.props;
+		const { account, handleClose, visible, ethBalance, tokenBalances, totalNav } = this.props;
 		const { ethInput, wethInput } = this.state;
 		const animated = visible ? 'animated' : '';
 
@@ -180,11 +173,10 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 												}}
 												onClick={() =>
 													window.open(
-														`https://${
-															__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-														}etherscan.io/token/${
-															tb.address
-														}?a=${account}`,
+														util.getEtherScanTokenLink(
+															tb.address,
+															account
+														),
 														'__blank'
 													)
 												}
@@ -213,9 +205,7 @@ export default class BalanceCard extends React.Component<IProps, IState> {
 											}}
 											onClick={() =>
 												window.open(
-													`https://${
-														__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-													}etherscan.io/address/${account}`,
+													util.getEtherScanAddressLink(account),
 													'__blank'
 												)
 											}

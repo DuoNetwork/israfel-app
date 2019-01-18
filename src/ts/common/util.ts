@@ -18,7 +18,7 @@ class Util {
 	}
 
 	public formatTime(time: any) {
-		return moment(time).format('YYYY-MM-DD HH:mm');
+		return moment(time).format('MM-DD HH:mm:ss');
 	}
 
 	public formatTimeSecond(time: number) {
@@ -75,8 +75,7 @@ class Util {
 		if (order.type === CST.DB_ADD) return 'Order Placed';
 		else if (order.type === CST.DB_TERMINATE)
 			if (order.status === CST.DB_FILL) return 'Order Fully Filled';
-			else if (order.status === CST.DB_TERMINATE)
-				return 'Order Expired';
+			else if (order.status === CST.DB_TERMINATE) return 'Order Expired';
 			// order.status === CST.DB_CONFIRMED
 			else return 'Order Cancelled';
 		else if (order.status === CST.DB_MATCHING) return 'Order is Being Filled';
@@ -243,6 +242,22 @@ class Util {
 
 	public wrapCSVString(input: string): string {
 		return ('' + input).indexOf(',') >= 0 ? '"' + input + '"' : input;
+	}
+
+	private getEtherScanLink() {
+		return `https://${__ENV__ === CST.DB_LIVE ? '' : 'kovan.'}etherscan.io`;
+	}
+
+	public getEtherScanTransactionLink(txHash: string) {
+		return `${this.getEtherScanLink()}/tx/${txHash}`;
+	}
+
+	public getEtherScanTokenLink(tokenAddr: string, account: string = '') {
+		return `${this.getEtherScanLink()}/token/${tokenAddr}${account ? `?a=${account}` : ''}`;
+	}
+
+	public getEtherScanAddressLink(account: string) {
+		return `${this.getEtherScanLink()}/address/${account}`;
 	}
 }
 

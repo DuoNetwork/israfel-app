@@ -92,12 +92,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							src={link}
 							style={{ width: '14px', marginLeft: '10px' }}
 							onClick={() =>
-								window.open(
-									`https://${
-										__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-									}etherscan.io/address/${custodian}`,
-									'_blank'
-								)
+								window.open(util.getEtherScanAddressLink(custodian), '_blank')
 							}
 						/>
 					</SCardTitle>

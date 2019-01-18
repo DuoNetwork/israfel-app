@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 import React from 'react';
-import { DB_LIVE } from 'ts/common/constants';
+import util from 'ts/common/util';
 import { SButton } from '../Cards/_styled';
 
 interface IProps {
@@ -24,12 +24,7 @@ export default class Notification extends React.Component<IProps> {
 			btn: transactionHash ? (
 				<SButton
 					onClick={() =>
-						window.open(
-							`https://${
-								__ENV__ === DB_LIVE ? '' : 'kovan.'
-							}etherscan.io/tx/${transactionHash}`,
-							'_blank'
-						)
+						window.open(util.getEtherScanTransactionLink(transactionHash), '_blank')
 					}
 				>
 					View Transaction on Etherscan

@@ -67,6 +67,14 @@ test,test,1,1970-01-01 00:00:00,Sell,123,123,246,123 test,1970-01-15 06:56:07,Ca
 "
 `;
 
+exports[`getEtherScanAddressLink 1`] = `"https://kovan.etherscan.io/address/address"`;
+
+exports[`getEtherScanTokenLink 1`] = `"https://kovan.etherscan.io/token/tokenAddr"`;
+
+exports[`getEtherScanTokenLink 2`] = `"https://kovan.etherscan.io/token/tokenAddr?a=account"`;
+
+exports[`getEtherScanTransactionLink 1`] = `"https://kovan.etherscan.io/tx/txHash"`;
+
 exports[`getMaturityDescription 1`] = `"This contract never expires."`;
 
 exports[`getOrderDescription 1`] = `"Buy 123 code1 at 123 code2 per code1. Total 123.0 filled."`;

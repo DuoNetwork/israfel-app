@@ -20,11 +20,7 @@ export default class OrderDetailCard extends React.Component<IProps> {
 			<div style={{ display: visible ? 'block' : 'none' }}>
 				<div className={'popup-bg ' + (visible ? 'popup-open-bg' : '')} />
 				<SCard
-					title={
-						<SCardTitle>
-							{CST.TH_ORDER + ' ' + CST.TH_DETAIL}
-						</SCardTitle>
-					}
+					title={<SCardTitle>{CST.TH_ORDER + ' ' + CST.TH_DETAIL}</SCardTitle>}
 					style={{ overflow: 'visible !important' }}
 					width="480px"
 					className={'popup-card-oh ' + (visible ? 'popup-open' : '')}
@@ -41,13 +37,15 @@ export default class OrderDetailCard extends React.Component<IProps> {
 										onClick={() => {
 											if (o.transactionHash)
 												window.open(
-													`https://${
-														__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-													}etherscan.io/tx/${o.transactionHash}`,
+													util.getEtherScanTransactionLink(
+														o.transactionHash
+													),
 													'_blank'
 												);
 										}}
-										style={{cursor: o.transactionHash ? 'pointer' : 'default'}}
+										style={{
+											cursor: o.transactionHash ? 'pointer' : 'default'
+										}}
 									>
 										<span>
 											{util.formatTimeSecond(o.updatedAt || o.createdAt)}
