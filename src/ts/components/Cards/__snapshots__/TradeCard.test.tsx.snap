@@ -70,77 +70,26 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -276,6 +225,46 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -677,77 +666,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -883,6 +821,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -1256,77 +1234,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -1462,6 +1389,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -1835,77 +1802,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -2041,6 +1957,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -2414,77 +2370,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -2620,6 +2525,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -2993,77 +2938,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -3199,6 +3093,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -3573,77 +3507,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -3779,6 +3662,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -4153,77 +4076,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -4359,6 +4231,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -4733,77 +4645,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -4939,6 +4800,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -5311,77 +5212,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -5517,6 +5367,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -5889,77 +5779,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -6095,6 +5934,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -6466,77 +6345,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -6672,6 +6500,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -7043,77 +6911,26 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -7249,6 +7066,46 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -7619,77 +7476,26 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -7825,6 +7631,46 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>
@@ -8226,77 +8072,26 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
       </div>
     </div>
     <styled.div
-      horizontal={true}
-      style={
-        Object {
-          "fontSize": 14,
-          "fontWeight": "bold",
-          "margin": "auto",
-          "width": "26%",
-        }
-      }
+      noMargin={true}
+      width="100%"
     >
-      <span
-        className="content"
+      <div
+        className="status-list-wrapper"
       >
-        Market Trades
-      </span>
-    </styled.div>
-    <styled.div
-      horizontal={true}
-    >
-      <styled.div
-        noMargin={true}
-      >
-        <div
-          className="status-list-wrapper"
-        >
-          <Table
-            bordered={false}
-            className=""
-            dataSource={Array []}
-            indentSize={20}
-            loading={false}
-            locale={Object {}}
-            pagination={false}
-            rowClassName={[Function]}
-            rowKey="key"
-            showHeader={false}
-            size="default"
-            sortDirections={
-              Array [
-                "ascend",
-                "descend",
-              ]
-            }
+        <ul>
+          <li
+            className="block-title"
             style={
               Object {
-                "padding": "0px 20px 0px 20px",
-                "textAlign": "center",
-                "width": "100%",
+                "justifyContent": "center",
+                "padding": "5px 15px",
               }
             }
-            useFixedHeader={false}
           >
-            <Column
-              dataIndex="Price"
-              width={80}
-            />
-            <Column
-              dataIndex="Amount"
-              width={50}
-            />
-            <Column
-              dataIndex="Time"
-              width={180}
-            />
-            <Column
-              dataIndex="Link"
-              render={[Function]}
-            />
-          </Table>
-        </div>
-      </styled.div>
+            Order Book
+          </li>
+        </ul>
+      </div>
     </styled.div>
     <styled.div
       horizontal={true}
@@ -8432,6 +8227,46 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
                 -
               </span>
             </li>
+          </ul>
+        </div>
+      </styled.div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      width="100%"
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <ul>
+          <li
+            className="block-title"
+            style={
+              Object {
+                "justifyContent": "center",
+                "padding": "5px 15px",
+              }
+            }
+          >
+            Market Trades
+          </li>
+        </ul>
+      </div>
+    </styled.div>
+    <styled.div
+      horizontal={true}
+    >
+      <styled.div>
+        <div
+          className="status-list-wrapper"
+          style={
+            Object {
+              "border": "none",
+            }
+          }
+        >
+          <ul>
+            -
           </ul>
         </div>
       </styled.div>

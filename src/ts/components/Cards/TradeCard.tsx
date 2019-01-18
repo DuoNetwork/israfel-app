@@ -1,5 +1,4 @@
 import { Radio, Spin } from 'antd';
-import { Table } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
 import help from 'images/icons/help.svg';
@@ -28,7 +27,6 @@ import {
 } from './_styled';
 
 const RadioGroup = Radio.Group;
-const Column = Table.Column;
 
 interface IProps {
 	account: string;
@@ -435,7 +433,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<span className="aspan" style={{ fontSize: 12 }}>
 							INCOME
 						</span>
-						{`token with coupon rate of ${d3.format('.2%')(props.n)} p.a.`}
+						{`token with ${d3.format('.2%')(props.n)} p.a. coupon.`}
 					</span>
 				);
 				break;
@@ -552,79 +550,18 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</span>
 						</div>
 					</div>
-					<SDivFlexCenter
-						horizontal
-						style={{
-							width: '26%',
-							margin: 'auto',
-							fontSize: 14,
-							fontWeight: 'bold'
-						}}
-					>
-						<span className="content">{CST.TH_MARKET_TRADES}</span>
-					</SDivFlexCenter>
-					<SDivFlexCenter horizontal>
-						<SCardList noMargin>
-							<div className="status-list-wrapper">
-								<Table
-									dataSource={
-										pairs && trades[pairs]
-											? trades[pairs]
-													.slice(
-														0,
-														trades[pairs].length > 3
-															? 3
-															: trades[pairs].length
-													)
-													.map(t => ({
-														key: t.transactionHash,
-														[CST.TH_TIME]: util.formatTime(t.timestamp),
-														[CST.TH_PX]: t.maker.price,
-														[CST.TH_AMOUNT]: util.formatBalance(
-															t.maker.amount
-														),
-														[CST.TH_SIDE]: t.taker.side,
-														[CST.TH_LINK]: `https://${
-															__ENV__ === CST.DB_LIVE ? '' : 'kovan.'
-														}etherscan.io/tx/${t.transactionHash}`
-													}))
-											: []
-									}
-									showHeader={false}
-									pagination={false}
-									style={{
-										width: '100%',
-										padding: '0px 20px 0px 20px',
-										textAlign: 'center'
-									}}
-									rowClassName={record =>
-										record[CST.TH_SIDE] === CST.DB_BID
-											? 'titleTable bid-span'
-											: 'titleTable ask-span'
-									}
+					<SCardList noMargin width="100%">
+						<div className="status-list-wrapper">
+							<ul>
+								<li
+									className="block-title"
+									style={{ padding: '5px 15px', justifyContent: 'center' }}
 								>
-									<Column dataIndex={CST.TH_PX} width={80} />
-									<Column dataIndex={CST.TH_AMOUNT} width={50} />
-									<Column dataIndex={CST.TH_TIME} width={180} />
-									<Column
-										dataIndex={CST.TH_LINK}
-										render={text => (
-											<img
-												className="cus-link"
-												src={link}
-												style={{
-													width: '14px',
-													height: '14px',
-													marginLeft: '10px'
-												}}
-												onClick={() => window.open(text, '__blank')}
-											/>
-										)}
-									/>
-								</Table>
-							</div>
-						</SCardList>
-					</SDivFlexCenter>
+									{CST.TH_ORDERBOOK}
+								</li>
+							</ul>
+						</div>
+					</SCardList>
 					<SDivFlexCenter horizontal>
 						<SCardList>
 							<div className="status-list-wrapper">
@@ -693,6 +630,95 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							</div>
 						</SCardList>
 					</SDivFlexCenter>
+					<SCardList noMargin width="100%">
+						<div className="status-list-wrapper">
+							<ul>
+								<li
+									className="block-title"
+									style={{ padding: '5px 15px', justifyContent: 'center' }}
+								>
+									{CST.TH_MARKET_TRADES}
+								</li>
+							</ul>
+						</div>
+					</SCardList>
+					<SDivFlexCenter horizontal>
+						<SCardList>
+							<div className="status-list-wrapper" style={{ border: 'none' }}>
+								<ul>
+									{trades && trades[pairs]
+										? trades[pairs]
+												.slice(
+													0,
+													trades[pairs].length > 3
+														? 3
+														: trades[pairs].length
+												)
+												.map((item, i) => (
+													<li
+														key={i}
+														style={{
+															padding: '5px 5px 5px 30px',
+															border: 'none'
+														}}
+													>
+														<span className="content">
+															{item.timestamp && item.timestamp > 0
+																? util.formatTime(item.timestamp)
+																: '-'}
+														</span>
+														<span
+															className={
+																item.taker.side === 'bid'
+																	? 'title bid-span'
+																	: 'title ask-span'
+															}
+														>
+															<b>
+																{item.maker.price &&
+																item.maker.price > 0
+																	? util.formatFixedNumber(
+																			item.maker.price,
+																			precision
+																	  )
+																	: '-'}
+															</b>
+														</span>
+														<span className="title">
+															<b>
+																{item.maker.amount &&
+																item.maker.amount > 0
+																	? util.formatBalance(
+																			item.maker.amount
+																	  )
+																	: '-'}
+															</b>
+														</span>
+														<span className="title bid-span">
+															<img
+																className="cus-link"
+																src={link}
+																style={{
+																	width: '14px',
+																	height: '14px',
+																	marginLeft: '10px'
+																}}
+																onClick={() =>
+																	window.open(
+																		util.getEtherScanTransactionLink(
+																			item.transactionHash
+																		)
+																	)
+																}
+															/>
+														</span>
+													</li>
+												))
+										: '-'}
+								</ul>
+							</div>
+						</SCardList>
+					</SDivFlexCenter>
 					<Spin
 						spinning={approving || submitting}
 						tip={
@@ -754,12 +780,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							{approveRequired && !approving ? (
 								<div className="pop-up-new">
 									<li>
-										<p
-											style={{
-												paddingTop: '100px',
-												textAlign: 'center'
-											}}
-										>
+										<p style={{ paddingTop: '100px', textAlign: 'center' }}>
 											Not enough allowance, please approve first
 										</p>
 									</li>

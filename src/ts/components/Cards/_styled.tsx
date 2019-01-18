@@ -1096,6 +1096,12 @@ injectGlobal([
 			.titleTable {
 				text-align: center;
 			}
+			.column {
+				text-align: center;
+			}
+			.ant-table-thead > tr > th {
+				text-align: center;
+			}
 		}
 	`
 ] as any);

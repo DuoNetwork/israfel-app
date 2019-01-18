@@ -82,27 +82,54 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 													t.taker.side === CST.DB_BID
 														? CST.TH_BUY
 														: CST.TH_SELL,
-												[CST.TH_PX]: t.maker.price,
+												[CST.TH_PX]: {
+													price: t.maker.price,
+													side:
+														t.taker.side === CST.DB_BID
+															? 'bid-span'
+															: 'ask-span'
+												},
 												[CST.TH_AMOUNT]: util.formatBalance(t.maker.amount),
 												[CST.TH_LINK]: util.getEtherScanTransactionLink(
 													t.transactionHash
 												)
-										}))
+										  }))
 										: []
 								}
 								pagination={false}
 								style={{ width: '100%' }}
 								rowClassName={record =>
-									record[CST.TH_SIDE] === CST.TH_BUY
-										? 'titleTable bid-span'
-										: 'titleTable ask-span'
+									record[CST.TH_SIDE] === CST.TH_BUY ? 'titleTable' : 'titleTable'
 								}
 							>
-								<Column title={CST.TH_TIME} dataIndex={CST.TH_TIME} />
-								<Column title={CST.TH_SIDE} dataIndex={CST.TH_SIDE} />
-								<Column title={CST.TH_TYPE} dataIndex={CST.TH_TYPE} />
-								<Column title={CST.TH_PX} dataIndex={CST.TH_PX} />
-								<Column title={CST.TH_AMOUNT} dataIndex={CST.TH_AMOUNT} />
+								<Column
+									className="column"
+									title={CST.TH_TIME}
+									dataIndex={CST.TH_TIME}
+								/>
+								<Column
+									className="column"
+									title={CST.TH_SIDE}
+									dataIndex={CST.TH_SIDE}
+								/>
+								<Column
+									className="column"
+									title={CST.TH_TYPE}
+									dataIndex={CST.TH_TYPE}
+								/>
+								<Column
+									className="column"
+									render={text => (
+										<span className={text.side + ' column'}>{text.price}</span>
+									)}
+									title={CST.TH_PX}
+									dataIndex={CST.TH_PX as any}
+								/>
+								<Column
+									className="column"
+									title={CST.TH_AMOUNT}
+									dataIndex={CST.TH_AMOUNT}
+								/>
 								<Column
 									title={''}
 									dataIndex={CST.TH_LINK}

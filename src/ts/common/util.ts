@@ -156,12 +156,12 @@ class Util {
 			info && info.code.endsWith('PPT')
 				? 'never expires'
 				: 'expires in ' +
-				(info
+				  (info
 						? Math.floor(
 								(info.states.maturity - util.getUTCNowTimestamp()) / 86400000
-						).toFixed(0)
+						  ).toFixed(0)
 						: 0) +
-				' days'
+				  ' days'
 		}.`;
 	}
 
