@@ -98,7 +98,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 												[CST.TH_LINK]: util.getEtherScanTransactionLink(
 													t.transactionHash
 												)
-										}))
+										  }))
 										: []
 								}
 								pagination={false}
@@ -123,7 +123,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 									dataIndex={CST.TH_TYPE}
 								/>
 								<Column
-									className="columnAlignLeft"
+									className="antdColumnAlignRight"
 									render={(text, record: any) => (
 										<span
 											className={
@@ -139,7 +139,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 									dataIndex={CST.TH_PX as any}
 								/>
 								<Column
-									className="columnAlignLeft"
+									className="antdColumnAlignRight"
 									title={CST.TH_AMOUNT}
 									dataIndex={CST.TH_AMOUNT}
 								/>

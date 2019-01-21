@@ -808,7 +808,7 @@ export const SInput = styled.input`
 `;
 
 export const STableWrapper = styled.div`
-	thead > tr > th {
+	thead   {
 		background: ${ColorStyles.ListHighlight};
 		color: ${ColorStyles.TextBlackAlpha};
 		border-bottom: 0;
@@ -1104,7 +1104,7 @@ injectGlobal([
 				text-align: left;
 			}
 			.ant-table-thead > tr > th {
-				text-align: left;
+				text-align: none !important;
 				background: transparent;
 				border-bottom: none;
 			}
@@ -1112,7 +1112,10 @@ injectGlobal([
 				border-bottom: none;
 			}
 			.imgColumn {
-				text-align: end;
+				text-align: right !important
+			}
+			.antdColumnAlignRight {
+				text-align: right !important
 			}
 			
 		`

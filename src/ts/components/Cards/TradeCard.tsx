@@ -664,7 +664,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															padding: '3px 5px 3px 30px'
 														}}
 													>
-														<span className="content">
+														<span className="content" style={{width: '30%'}}>
 															{item.timestamp && item.timestamp > 0
 																? util.formatTime(item.timestamp)
 																: 'No Trades'}
@@ -675,6 +675,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	? 'title bid-span'
 																	: 'title ask-span'
 															}
+															style={{width: '30%', textAlign: 'right'}}
 														>
 															<b>
 																{item.maker.price &&
@@ -686,7 +687,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	: '-'}
 															</b>
 														</span>
-														<span className="content">
+														<span className="content antdColumnAlignRight"  style={{width: '25%'}}>
 															{item.maker.amount &&
 															item.maker.amount > 0
 																? util.formatFixedNumber(
@@ -697,7 +698,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														</span>
 														<span
 															className="title bid-span"
-															style={{ paddingRight: 26 }}
+															style={{ paddingRight: 26, width: '15%' }}
 														>
 															<img
 																className="cus-link"
@@ -705,7 +706,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																style={{
 																	width: '12px',
 																	height: '12px',
-																	marginLeft: '10px'
+																	marginLeft: '10px', 
 																}}
 																onClick={() =>
 																	window.open(
