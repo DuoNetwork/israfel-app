@@ -10,13 +10,13 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           "width": 200,
         }
       }
-      value="MOZART-PPT|WETH"
+      value="aETH|WETH"
     >
       <Option
         className="optionMarketTrades"
-        value="MOZART-PPT|WETH"
+        value="aETH|WETH"
       >
-        MOZART-PPT-WETH
+        aETH-WETH
       </Option>
     </Styled(Select)>
   }
@@ -49,12 +49,12 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
             Array [
               Object {
                 "Amount": "123",
-                "Link": "https://kovan.etherscan.io/tx/test",
+                "Link": "https://kovan.etherscan.io/tx/txHash",
                 "Price": "123",
                 "Side": "Sell",
-                "Time": "01-01 07:30:00",
+                "Time": "01-01 08:00:00",
                 "Type": "Limit",
-                "key": "test",
+                "key": "txHash",
               },
             ]
           }

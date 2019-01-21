@@ -63,7 +63,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						onSelect={this.handleSelect}
 					>
 						{pairs.map(p => (
-							<Option className="optionMarketTrades" value={p}>
+							<Option className="optionMarketTrades" key={p} value={p}>
 								{p.replace('|', '-')}
 							</Option>
 						))}
@@ -98,7 +98,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 												[CST.TH_LINK]: util.getEtherScanTransactionLink(
 													t.transactionHash
 												)
-										  }))
+										}))
 										: []
 								}
 								pagination={false}

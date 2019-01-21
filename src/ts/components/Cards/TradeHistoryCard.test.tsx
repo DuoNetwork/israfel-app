@@ -65,10 +65,10 @@ describe('TradeHistoryCard Test', () => {
 			const wrapper1 = shallow(
 				<TradeHistoryCard
 					trades={{
-						'MOZART-PPT|WETH': [
+						'aETH|WETH': [
 							{
 								pair: 'test',
-								transactionHash: 'test',
+								transactionHash: 'txHash',
 								taker: {
 									orderHash: 'test',
 									address: 'test',
@@ -87,16 +87,16 @@ describe('TradeHistoryCard Test', () => {
 						{
 							custodian: 'test',
 							address: 'test',
-							code: 'test',
+							code: 'aETH',
 							denomination: 123,
-							precisions: { test: 123 },
-							feeSchedules: { test: { asset: 'test', rate: 123, minimum: 123 } },
+							precisions: { WETH: 123 },
+							feeSchedules: { WETH: { rate: 123, minimum: 123 } },
 							maturity: 123
 						}
 					]}
 					tokenBalances={[
 						{
-							code: 'MOZART-PPT',
+							code: 'aETH',
 							balance: 123,
 							address: '0x00be45fe5903ab1b33a9d3969b05b29552a6d18b'
 						}
