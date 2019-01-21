@@ -305,9 +305,9 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       }
       ethPrice={123}
       handleClose={[Function]}
-      interestOrLeverage={1.3676348515084786}
-      navInEth={0.011057277713815315}
-      navUpdatedAt={1546423200000}
+      interestOrLeverage={0}
+      navInEth={0}
+      navUpdatedAt={0}
       notify={[MockFunction]}
       orderBook={
         Object {
@@ -319,13 +319,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       }
       setUnlimitedTokenAllowance={[MockFunction]}
       token=""
-      tokenInfo={
-        Object {
-          "address": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-          "code": "test",
-          "custodian": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-        }
-      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -375,6 +368,25 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
             "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
             "balance": 0,
             "code": "LETH",
+          },
+        ]
+      }
+      tokens={
+        Array [
+          Object {
+            "address": "0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9",
+            "code": "sETH-M19",
+            "custodian": "0x56e2727e56F9D6717e462418f822a8FE08Be4711",
+            "denomination": 0.1,
+            "feeSchedules": Object {
+              "WETH": Object {
+                "minimum": 0.1,
+                "rate": 0,
+              },
+            },
+            "precisions": Object {
+              "WETH": 0.000005,
+            },
           },
         ]
       }
@@ -754,9 +766,9 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       }
       ethPrice={123}
       handleClose={[Function]}
-      interestOrLeverage={1.3676348515084786}
-      navInEth={0.011057277713815315}
-      navUpdatedAt={1546423200000}
+      interestOrLeverage={0}
+      navInEth={0}
+      navUpdatedAt={0}
       notify={[MockFunction]}
       orderBook={
         Object {
@@ -768,13 +780,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       }
       setUnlimitedTokenAllowance={[MockFunction]}
       token=""
-      tokenInfo={
-        Object {
-          "address": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-          "code": "test",
-          "custodian": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-        }
-      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -824,6 +829,25 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
             "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
             "balance": 0,
             "code": "LETH",
+          },
+        ]
+      }
+      tokens={
+        Array [
+          Object {
+            "address": "0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9",
+            "code": "sETH-M19",
+            "custodian": "0x56e2727e56F9D6717e462418f822a8FE08Be4711",
+            "denomination": 0.1,
+            "feeSchedules": Object {
+              "WETH": Object {
+                "minimum": 0.1,
+                "rate": 0,
+              },
+            },
+            "precisions": Object {
+              "WETH": 0.000005,
+            },
           },
         ]
       }
@@ -1203,9 +1227,9 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       }
       ethPrice={123}
       handleClose={[Function]}
-      interestOrLeverage={1.3676348515084786}
-      navInEth={0.011057277713815315}
-      navUpdatedAt={1546423200000}
+      interestOrLeverage={0}
+      navInEth={0}
+      navUpdatedAt={0}
       notify={[MockFunction]}
       orderBook={
         Object {
@@ -1217,13 +1241,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       }
       setUnlimitedTokenAllowance={[MockFunction]}
       token=""
-      tokenInfo={
-        Object {
-          "address": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-          "code": "test",
-          "custodian": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-        }
-      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -1273,6 +1290,25 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
             "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
             "balance": 0,
             "code": "LETH",
+          },
+        ]
+      }
+      tokens={
+        Array [
+          Object {
+            "address": "0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9",
+            "code": "sETH-M19",
+            "custodian": "0x56e2727e56F9D6717e462418f822a8FE08Be4711",
+            "denomination": 0.1,
+            "feeSchedules": Object {
+              "WETH": Object {
+                "minimum": 0.1,
+                "rate": 0,
+              },
+            },
+            "precisions": Object {
+              "WETH": 0.000005,
+            },
           },
         ]
       }
@@ -1653,8 +1689,8 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       ethPrice={123}
       handleClose={[Function]}
       interestOrLeverage={0}
-      navInEth={0.006666483094311855}
-      navUpdatedAt={1546423200000}
+      navInEth={0}
+      navUpdatedAt={0}
       notify={[MockFunction]}
       orderBook={
         Object {
@@ -1666,13 +1702,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       }
       setUnlimitedTokenAllowance={[MockFunction]}
       token="a"
-      tokenInfo={
-        Object {
-          "address": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-          "code": "test",
-          "custodian": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-        }
-      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -1722,6 +1751,25 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
             "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
             "balance": 0,
             "code": "LETH",
+          },
+        ]
+      }
+      tokens={
+        Array [
+          Object {
+            "address": "0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9",
+            "code": "sETH-M19",
+            "custodian": "0x56e2727e56F9D6717e462418f822a8FE08Be4711",
+            "denomination": 0.1,
+            "feeSchedules": Object {
+              "WETH": Object {
+                "minimum": 0.1,
+                "rate": 0,
+              },
+            },
+            "precisions": Object {
+              "WETH": 0.000005,
+            },
           },
         ]
       }
@@ -2102,8 +2150,8 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       ethPrice={123}
       handleClose={[Function]}
       interestOrLeverage={0}
-      navInEth={0.006666483094311855}
-      navUpdatedAt={1546423200000}
+      navInEth={0}
+      navUpdatedAt={0}
       notify={[MockFunction]}
       orderBook={
         Object {
@@ -2115,13 +2163,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       }
       setUnlimitedTokenAllowance={[MockFunction]}
       token="s"
-      tokenInfo={
-        Object {
-          "address": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-          "code": "test",
-          "custodian": "0x00be45fe5903ab1b33a9d3969b05b29552a6d18d",
-        }
-      }
       trades={
         Object {
           "LETH-M19|WETH": Array [
@@ -2171,6 +2212,25 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
             "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
             "balance": 0,
             "code": "LETH",
+          },
+        ]
+      }
+      tokens={
+        Array [
+          Object {
+            "address": "0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9",
+            "code": "sETH-M19",
+            "custodian": "0x56e2727e56F9D6717e462418f822a8FE08Be4711",
+            "denomination": 0.1,
+            "feeSchedules": Object {
+              "WETH": Object {
+                "minimum": 0.1,
+                "rate": 0,
+              },
+            },
+            "precisions": Object {
+              "WETH": 0.000005,
+            },
           },
         ]
       }

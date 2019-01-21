@@ -258,9 +258,19 @@ describe('Dex Test', () => {
 				}
 			};
 			const token = {
-				custodian: '0x00be45fe5903ab1b33a9d3969b05b29552a6d18d',
-				address: '0x00be45fe5903ab1b33a9d3969b05b29552a6d18d',
-				code: 'test'
+				address: '0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9',
+				code: 'sETH-M19',
+				custodian: '0x56e2727e56F9D6717e462418f822a8FE08Be4711',
+				denomination: 0.1,
+				feeSchedules: {
+					WETH: {
+						minimum: 0.1,
+						rate: 0
+					}
+				},
+				precisions: {
+					WETH: 0.000005
+				}
 			};
 			const orderHistory = {};
 			const connection = true;
@@ -269,7 +279,6 @@ describe('Dex Test', () => {
 			const unsubscribeOrder = jest.fn();
 			const wrapEther = jest.fn();
 			const unwrapEther = jest.fn();
-			const getTokenByCode = jest.fn(() => token);
 			const setUnlimitedTokenAllowance = jest.fn();
 			const web3PersonalSign = jest.fn();
 			const addOrder = jest.fn();
@@ -277,6 +286,7 @@ describe('Dex Test', () => {
 			const componentWillUnmount = jest.fn();
 			const wrapper = shallow(
 				<Dex
+					tokens={[token as any]}
 					orderHistory={orderHistory}
 					connection={connection}
 					notify={notify}
@@ -293,7 +303,6 @@ describe('Dex Test', () => {
 					trades={trades}
 					wrapEther={wrapEther}
 					unwrapEther={unwrapEther}
-					getTokenByCode={getTokenByCode}
 					setUnlimitedTokenAllowance={setUnlimitedTokenAllowance}
 					web3PersonalSign={web3PersonalSign}
 					addOrder={addOrder}

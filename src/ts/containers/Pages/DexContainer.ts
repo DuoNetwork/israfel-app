@@ -10,6 +10,7 @@ import Dex from 'ts/components/Pages/Dex';
 function mapStateToProps(state: IState) {
 	const krakenPrices = state.relayer.exchangePrices['kraken'];
 	return {
+		tokens: state.relayer.tokens,
 		account: state.web3.account,
 		acceptedPrices: state.relayer.acceptedPrices,
 		custodians: state.web3.custodians,
@@ -23,7 +24,6 @@ function mapStateToProps(state: IState) {
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0,
 		wrapEther: (amount: number, address: string) => web3Util.wrapEther(amount, address),
 		unwrapEther: (amount: number, address: string) => web3Util.unwrapEther(amount, address),
-		getTokenByCode: (code: string) => web3Util.getTokenByCode(code),
 		setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) =>
 			web3Util.setUnlimitedTokenAllowance(code, account, spender),
 		web3PersonalSign: (account: string, message: string) =>

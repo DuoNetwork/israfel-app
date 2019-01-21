@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { ITrade } from 'ts/common/types';
+import { IToken, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle, SCardTitleSelector } from './_styled';
@@ -12,6 +12,7 @@ const Option = Select.Option;
 interface IProps {
 	tokenBalances: Array<{ code: string; balance: number; address: string }>;
 	trades: { [pair: string]: ITrade[] };
+	tokens: IToken[];
 }
 
 interface IState {
@@ -42,10 +43,14 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	};
 
 	public render() {
-		const { tokenBalances, trades } = this.props;
+		const { tokenBalances, trades, tokens } = this.props;
 		const { pair } = this.state;
 
 		const pairs = tokenBalances.map(tb => tb.code + '|' + CST.TH_WETH);
+		const code = pair.split('|')[0];
+		const token = code ? tokens.find(t => t.code === code) : undefined;
+		const precision = token ? token.precisions[CST.TH_WETH] : 0;
+		const denomination = token ? token.denomination : 0;
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
@@ -82,18 +87,18 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 													t.taker.side === CST.DB_BID
 														? CST.TH_BUY
 														: CST.TH_SELL,
-												[CST.TH_PX]: {
-													price: t.maker.price,
-													side:
-														t.taker.side === CST.DB_BID
-															? 'bid-span'
-															: 'ask-span'
-												},
-												[CST.TH_AMOUNT]: util.formatBalance(t.maker.amount),
+												[CST.TH_PX]: util.formatFixedNumber(
+													t.maker.price,
+													precision
+												),
+												[CST.TH_AMOUNT]: util.formatFixedNumber(
+													t.maker.amount,
+													denomination
+												),
 												[CST.TH_LINK]: util.getEtherScanTransactionLink(
 													t.transactionHash
 												)
-										  }))
+										}))
 										: []
 								}
 								pagination={false}
@@ -119,8 +124,16 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 								/>
 								<Column
 									className="columnAlignLeft"
-									render={text => (
-										<span className={text.side + ' column'}>{text.price}</span>
+									render={(text, record: any) => (
+										<span
+											className={
+												(record[CST.TH_SIDE] === CST.TH_BUY
+													? 'bid-span'
+													: 'ask-span') + ' column'
+											}
+										>
+											{text}
+										</span>
 									)}
 									title={CST.TH_PX}
 									dataIndex={CST.TH_PX as any}

@@ -23,6 +23,7 @@ import TradeCard from '../Cards/TradeCard';
 import TradeHistoryCard from '../Cards/TradeHistoryCard';
 
 interface IProps {
+	tokens: IToken[];
 	account: string;
 	ethBalance: IEthBalance;
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
@@ -39,7 +40,6 @@ interface IProps {
 	unsubscribeOrder: () => any;
 	wrapEther: (amount: number, address: string) => Promise<string>;
 	unwrapEther: (amount: number, address: string) => Promise<string>;
-	getTokenByCode: (code: string) => IToken | undefined;
 	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
 	web3PersonalSign: (account: string, message: string) => Promise<string>;
 	addOrder: (
@@ -110,6 +110,7 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public render() {
 		const {
+			tokens,
 			account,
 			acceptedPrices,
 			custodians,
@@ -123,7 +124,6 @@ export default class Dex extends React.Component<IProps, IState> {
 			notify,
 			wrapEther,
 			unwrapEther,
-			getTokenByCode,
 			wethAddress,
 			setUnlimitedTokenAllowance,
 			addOrder,
@@ -146,7 +146,7 @@ export default class Dex extends React.Component<IProps, IState> {
 		}
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
-		const tradeTokenInfo = getTokenByCode(tradeToken);
+		const tradeTokenInfo = tokens.find(t => t.code === tradeToken);
 		const tradeTokenBalance = tradeTokenInfo
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
 			: undefined;
@@ -158,7 +158,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				  )
+				)
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -325,7 +325,11 @@ export default class Dex extends React.Component<IProps, IState> {
 						handleClose={() => this.handleTrade('')}
 						addOrder={addOrder}
 					/>
-					<TradeHistoryCard tokenBalances={tokenBalances} trades={trades} />
+					<TradeHistoryCard
+						tokenBalances={tokenBalances}
+						trades={trades}
+						tokens={tokens}
+					/>
 				</Spin>
 
 				<BalanceCard
