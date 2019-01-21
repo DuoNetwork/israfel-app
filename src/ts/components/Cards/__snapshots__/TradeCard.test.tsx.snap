@@ -82,7 +82,7 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -96,9 +96,15 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -165,7 +171,13 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -260,10 +272,17 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -678,7 +697,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -692,9 +711,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -761,7 +786,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -856,10 +887,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -1246,7 +1284,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -1260,9 +1298,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -1329,7 +1373,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -1424,10 +1474,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -1814,7 +1871,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -1828,9 +1885,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -1897,7 +1960,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -1992,10 +2061,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -2382,7 +2458,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -2396,9 +2472,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -2465,7 +2547,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -2560,10 +2648,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -2950,7 +3045,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -2964,9 +3059,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -3033,7 +3134,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -3128,10 +3235,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -3519,7 +3633,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -3533,9 +3647,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -3602,7 +3722,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -3697,10 +3823,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -4088,7 +4221,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -4102,9 +4235,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -4171,7 +4310,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -4266,10 +4411,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -4657,7 +4809,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -4671,9 +4823,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -4740,7 +4898,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -4835,10 +4999,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -5224,7 +5395,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -5238,9 +5409,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -5307,7 +5484,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -5402,10 +5585,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -5791,7 +5981,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -5805,9 +5995,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -5874,7 +6070,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -5969,10 +6171,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -6357,7 +6566,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -6371,9 +6580,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -6440,7 +6655,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -6535,10 +6756,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -6923,7 +7151,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -6937,9 +7165,15 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -7006,7 +7240,13 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -7101,10 +7341,17 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -7488,7 +7735,7 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -7502,9 +7749,15 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -7571,7 +7824,13 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -7666,10 +7925,17 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>
@@ -8084,7 +8350,7 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
             style={
               Object {
                 "justifyContent": "center",
-                "padding": "5px 15px",
+                "padding": "5px 5px",
               }
             }
           >
@@ -8098,9 +8364,15 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
     >
       <styled.div>
         <div
-          className="status-list-wrapper"
+          className="status-list-wrapper noMargin"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -8167,7 +8439,13 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
         <div
           className="status-list-wrapper"
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             <li
               key="0"
               style={
@@ -8262,10 +8540,17 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
           style={
             Object {
               "border": "none",
+              "fontSize": 12,
             }
           }
         >
-          <ul>
+          <ul
+            style={
+              Object {
+                "margin": 0,
+              }
+            }
+          >
             -
           </ul>
         </div>

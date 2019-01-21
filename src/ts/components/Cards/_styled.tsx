@@ -408,7 +408,6 @@ export const SCardList = styled.div`
 	.status-list-wrapper > ul {
 		transition: all 0.3s;
 		list-style: none;
-		margin: 10px 0;
 		padding: 0;
 		border: ${(props: ICardListProps) => (props.noUlBorder ? 'none' : '1px solid')};
 		border-color: ${ColorStyles.BorderWhite1};
@@ -430,7 +429,6 @@ export const SCardList = styled.div`
 		.block-title {
 			font-weight: 600;
 			color: ${ColorStyles.TextBlackAlphaL};
-			margin-bottom: 5px;
 			.last-reset-title {
 				width: 100%;
 				display: flex;
@@ -1101,6 +1099,7 @@ injectGlobal([
 			}
 			.ant-table-thead > tr > th {
 				text-align: center;
+				background: transparent;
 			}
 		}
 	`

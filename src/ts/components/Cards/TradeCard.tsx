@@ -555,7 +555,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 							<ul>
 								<li
 									className="block-title"
-									style={{ padding: '5px 15px', justifyContent: 'center' }}
+									style={{ padding: '5px 5px', justifyContent: 'center' }}
 								>
 									{CST.TH_ORDERBOOK}
 								</li>
@@ -564,8 +564,8 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<SDivFlexCenter horizontal>
 						<SCardList>
-							<div className="status-list-wrapper">
-								<ul>
+							<div className="status-list-wrapper noMargin">
+								<ul style={{ margin: 0 }}>
 									{bidsToRender.map((item, i) => (
 										<li
 											key={i}
@@ -598,7 +598,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						</SCardList>
 						<SCardList>
 							<div className="status-list-wrapper">
-								<ul>
+								<ul style={{ margin: 0 }}>
 									{asksToRender.map((item, i) => (
 										<li
 											key={i}
@@ -644,8 +644,11 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					</SCardList>
 					<SDivFlexCenter horizontal>
 						<SCardList>
-							<div className="status-list-wrapper" style={{ border: 'none' }}>
-								<ul>
+							<div
+								className="status-list-wrapper"
+								style={{ border: 'none', fontSize: 12 }}
+							>
+								<ul style={{ margin: 0 }}>
 									{trades && trades[pairs]
 										? trades[pairs]
 												.slice(
@@ -658,14 +661,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													<li
 														key={i}
 														style={{
-															padding: '5px 5px 5px 30px',
-															border: 'none'
+															padding: '3px 5px 3px 30px'
 														}}
 													>
 														<span className="content">
 															{item.timestamp && item.timestamp > 0
 																? util.formatTime(item.timestamp)
-																: '-'}
+																: 'No Trades'}
 														</span>
 														<span
 															className={
@@ -684,23 +686,25 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	: '-'}
 															</b>
 														</span>
-														<span className="title">
-															<b>
-																{item.maker.amount &&
-																item.maker.amount > 0
-																	? util.formatBalance(
-																			item.maker.amount
-																	  )
-																	: '-'}
-															</b>
+														<span className="content">
+															{item.maker.amount &&
+															item.maker.amount > 0
+																? util.formatFixedNumber(
+																		item.maker.amount,
+																		denomination
+																  )
+																: '-'}
 														</span>
-														<span className="title bid-span">
+														<span
+															className="title bid-span"
+															style={{ paddingRight: 26 }}
+														>
 															<img
 																className="cus-link"
 																src={link}
 																style={{
-																	width: '14px',
-																	height: '14px',
+																	width: '12px',
+																	height: '12px',
 																	marginLeft: '10px'
 																}}
 																onClick={() =>
