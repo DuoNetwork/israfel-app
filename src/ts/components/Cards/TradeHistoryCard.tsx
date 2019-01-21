@@ -97,28 +97,28 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 										: []
 								}
 								pagination={false}
-								style={{ width: '100%' }}
+								style={{ width: '100%', border: 'none' }}
 								rowClassName={record =>
 									record[CST.TH_SIDE] === CST.TH_BUY ? 'titleTable' : 'titleTable'
 								}
 							>
 								<Column
-									className="column"
+									className="columnAlignLeft"
 									title={CST.TH_TIME}
 									dataIndex={CST.TH_TIME}
 								/>
 								<Column
-									className="column"
+									className="columnAlignLeft"
 									title={CST.TH_SIDE}
 									dataIndex={CST.TH_SIDE}
 								/>
 								<Column
-									className="column"
+									className="columnAlignLeft"
 									title={CST.TH_TYPE}
 									dataIndex={CST.TH_TYPE}
 								/>
 								<Column
-									className="column"
+									className="columnAlignLeft"
 									render={text => (
 										<span className={text.side + ' column'}>{text.price}</span>
 									)}
@@ -126,13 +126,14 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 									dataIndex={CST.TH_PX as any}
 								/>
 								<Column
-									className="column"
+									className="columnAlignLeft"
 									title={CST.TH_AMOUNT}
 									dataIndex={CST.TH_AMOUNT}
 								/>
 								<Column
 									title={''}
 									dataIndex={CST.TH_LINK}
+									className="imgColumn"
 									render={text => (
 										<img
 											className="cus-link"

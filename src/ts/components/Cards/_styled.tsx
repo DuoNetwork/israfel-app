@@ -984,7 +984,10 @@ injectGlobal([
 				background: ${ColorStyles.MainColorShadow};
 			}
 			.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
-				padding: 12px 5px;
+				pading: 10px 5px;
+			}
+			.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+				padding: 8px 16px;
 			}
 			.panel-layer {
 				position: fixed;
@@ -1097,10 +1100,20 @@ injectGlobal([
 			.column {
 				text-align: center;
 			}
-			.ant-table-thead > tr > th {
-				text-align: center;
-				background: transparent;
+			.columnAlignLeft {
+				text-align: left;
 			}
-		}
-	`
+			.ant-table-thead > tr > th {
+				text-align: left;
+				background: transparent;
+				border-bottom: none;
+			}
+			.ant-table-tbody > tr > td {
+				border-bottom: none;
+			}
+			.imgColumn {
+				text-align: end;
+			}
+			
+		`
 ] as any);
