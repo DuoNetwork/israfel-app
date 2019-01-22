@@ -62,31 +62,30 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		const pairs = tokenBalances.map(tb => tb.code + '|' + CST.TH_WETH);
 		if (checkedList.length === 0) checkedList = pairs;
 		const dataShow: any[] = [];
-		checkedList && checkedList.length > 0
-			? checkedList.map(i => {
-					const token = tokens.find(to => to.code === i.split('|')[0]);
-					trades[i].map(t =>
-						dataShow.push({
-							key: t.transactionHash,
-							[CST.TH_TIME]: util.formatTime(t.timestamp),
-							[CST.TH_PAIR]: t.pair,
-							[CST.TH_TYPE]:
-								t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
-							[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
-							[CST.TH_PX]: util.formatFixedNumber(
-								t.maker.price,
-								token ? token.precisions[CST.TH_WETH] : 0
-							),
-							[CST.TH_AMOUNT]: util.formatFixedNumber(
-								t.maker.amount,
-								token ? token.denomination : 0
-							),
-							[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
-						})
-					);
-			  })
-			: [];
-		dataShow.sort((a, b) => a[CST.TH_TIME] - b[CST.TH_TIME]);
+		if (checkedList && checkedList.length > 0)
+			checkedList.forEach(i => {
+				const token = tokens.find(to => to.code === i.split('|')[0]);
+				trades[i].forEach(t =>
+					dataShow.push({
+						key: t.transactionHash,
+						[CST.TH_TIME]: t.timestamp,
+						[CST.TH_PAIR]: t.pair,
+						[CST.TH_TYPE]:
+							t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
+						[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
+						[CST.TH_PX]: util.formatFixedNumber(
+							t.maker.price,
+							token ? token.precisions[CST.TH_WETH] : 0
+						),
+						[CST.TH_AMOUNT]: util.formatFixedNumber(
+							t.maker.amount,
+							token ? token.denomination : 0
+						),
+						[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
+					})
+				);
+			});
+		dataShow.sort((a, b) => -a[CST.TH_TIME] + b[CST.TH_TIME]);
 
 		return (
 			<SCard
@@ -114,6 +113,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 									title={CST.TH_TIME}
 									width={140}
 									dataIndex={CST.TH_TIME}
+									render={text => util.formatTime(text)}
 								/>
 								<Column
 									className="antdColumnAlignRight"

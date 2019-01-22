@@ -35,7 +35,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
                 "Pair": "test",
                 "Price": "123",
                 "Side": "Sell",
-                "Time": "01-01 00:00:00",
+                "Time": 123,
                 "Type": "Limit",
                 "key": "txHash",
               },
@@ -78,6 +78,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           <Column
             className="columnAlignLeft"
             dataIndex="Time"
+            render={[Function]}
             title="Time"
             width={140}
           />
@@ -181,7 +182,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
                 "Pair": "test",
                 "Price": "12",
                 "Side": "Buy",
-                "Time": "01-01 00:00:00",
+                "Time": 123,
                 "Type": "Market",
                 "key": "test",
               },
@@ -224,6 +225,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           <Column
             className="columnAlignLeft"
             dataIndex="Time"
+            render={[Function]}
             title="Time"
             width={140}
           />
@@ -327,7 +329,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
                 "Pair": "test",
                 "Price": "12",
                 "Side": "Buy",
-                "Time": "01-01 00:00:00",
+                "Time": 123,
                 "Type": "Market",
                 "key": "test",
               },
@@ -370,6 +372,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           <Column
             className="columnAlignLeft"
             dataIndex="Time"
+            render={[Function]}
             title="Time"
             width={140}
           />

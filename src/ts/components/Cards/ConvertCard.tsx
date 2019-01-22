@@ -397,10 +397,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				? ethBalance.weth
 				: Math.round(ethBalance.eth * 99) / 100
 			: tokenBalances && info
-			? Math.min(
-					tokenBalances[aToken].balance,
-					tokenBalances[bToken].balance / info.states.alpha
-			)
+			? Math.round(
+					Math.min(
+						tokenBalances[aToken].balance,
+						tokenBalances[bToken].balance / info.states.alpha
+					) * 99
+			) / 100
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
