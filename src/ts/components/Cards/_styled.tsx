@@ -808,7 +808,7 @@ export const SInput = styled.input`
 `;
 
 export const STableWrapper = styled.div`
-	thead   {
+	thead {
 		background: ${ColorStyles.ListHighlight};
 		color: ${ColorStyles.TextBlackAlpha};
 		border-bottom: 0;
@@ -1117,6 +1117,10 @@ injectGlobal([
 			.antdColumnAlignRight {
 				text-align: right !important
 			}
-			
+			.ant-checkbox-group-item {
+				display: inline-block;
+				margin-right: 8px;
+				padding: 3px 3px;
+			}
 		`
 ] as any);

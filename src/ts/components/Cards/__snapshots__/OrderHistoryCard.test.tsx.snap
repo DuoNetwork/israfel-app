@@ -231,7 +231,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         >
           <styled.div>
             <div
-              className="sc-jzJRlG gtwmFz"
+              className="sc-jzJRlG jtvnaG"
             >
               <Table
                 bordered={false}
@@ -10378,7 +10378,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 2`] = `
         >
           <styled.div>
             <div
-              className="sc-jzJRlG gtwmFz"
+              className="sc-jzJRlG jtvnaG"
             >
               <Table
                 bordered={false}
@@ -20525,7 +20525,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 3`] = `
         >
           <styled.div>
             <div
-              className="sc-jzJRlG gtwmFz"
+              className="sc-jzJRlG jtvnaG"
             >
               <Table
                 bordered={false}
@@ -25064,7 +25064,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 4`] = `
         >
           <styled.div>
             <div
-              className="sc-jzJRlG gtwmFz"
+              className="sc-jzJRlG jtvnaG"
             >
               <Table
                 bordered={false}
@@ -35211,7 +35211,7 @@ exports[`OrderHistoryCard Test Test Snapshot Test Snapshot 5`] = `
         >
           <styled.div>
             <div
-              className="sc-jzJRlG gtwmFz"
+              className="sc-jzJRlG jtvnaG"
             >
               <Table
                 bordered={false}

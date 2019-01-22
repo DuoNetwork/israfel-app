@@ -2,24 +2,6 @@
 
 exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
 <Styled(Card)
-  extra={
-    <Styled(Select)
-      onSelect={[Function]}
-      style={
-        Object {
-          "width": 200,
-        }
-      }
-      value="aETH|WETH"
-    >
-      <Option
-        className="optionMarketTrades"
-        value="aETH|WETH"
-      >
-        aETH-WETH
-      </Option>
-    </Styled(Select)>
-  }
   margin="0 10px 20px 10px"
   title={
     <styled.div>
@@ -50,6 +32,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
               Object {
                 "Amount": "123",
                 "Link": "https://kovan.etherscan.io/tx/txHash",
+                "Pair": "test",
                 "Price": "123",
                 "Side": "Sell",
                 "Time": "01-01 00:00:00",
@@ -61,7 +44,13 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           indentSize={20}
           loading={false}
           locale={Object {}}
-          pagination={false}
+          pagination={
+            Object {
+              "pageSize": 6,
+              "simple": true,
+              "size": "small",
+            }
+          }
           rowKey="key"
           showHeader={true}
           size="default"
@@ -74,36 +63,36 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           style={
             Object {
               "border": "none",
-              "width": "100%",
+              "width": 520,
             }
           }
           useFixedHeader={false}
         >
           <Column
             className="columnAlignLeft"
+            dataIndex="Pair"
+            render={[Function]}
+            title="Pair"
+            width={165}
+          />
+          <Column
+            className="columnAlignLeft"
             dataIndex="Time"
             title="Time"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Side"
-            title="Side"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Type"
-            title="Type"
+            width={140}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Price"
             render={[Function]}
             title="Price"
+            width={100}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Amount"
             title="Amount"
+            width={100}
           />
           <Column
             className="imgColumn"
@@ -113,6 +102,45 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           />
         </Table>
       </div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      style={
+        Object {
+          "width": 200,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
+      >
+        <Checkbox
+          checked={false}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Check all
+        </Checkbox>
+      </div>
+      <br />
+      <CheckboxGroup
+        onChange={[Function]}
+        options={
+          Array [
+            "aETH|WETH",
+          ]
+        }
+        style={
+          Object {
+            "padding": "10, 5",
+          }
+        }
+        value={Array []}
+      />
     </styled.div>
   </styled.div>
 </Styled(Card)>
@@ -120,24 +148,6 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
 
 exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] = `
 <Styled(Card)
-  extra={
-    <Styled(Select)
-      onSelect={[Function]}
-      style={
-        Object {
-          "width": 200,
-        }
-      }
-      value="MOZART-PPT|WETH"
-    >
-      <Option
-        className="optionMarketTrades"
-        value="MOZART-PPT|WETH"
-      >
-        MOZART-PPT-WETH
-      </Option>
-    </Styled(Select)>
-  }
   margin="0 10px 20px 10px"
   title={
     <styled.div>
@@ -168,6 +178,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
               Object {
                 "Amount": "120",
                 "Link": "https://kovan.etherscan.io/tx/test",
+                "Pair": "test",
                 "Price": "12",
                 "Side": "Buy",
                 "Time": "01-01 00:00:00",
@@ -179,7 +190,13 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           indentSize={20}
           loading={false}
           locale={Object {}}
-          pagination={false}
+          pagination={
+            Object {
+              "pageSize": 6,
+              "simple": true,
+              "size": "small",
+            }
+          }
           rowKey="key"
           showHeader={true}
           size="default"
@@ -192,36 +209,36 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           style={
             Object {
               "border": "none",
-              "width": "100%",
+              "width": 520,
             }
           }
           useFixedHeader={false}
         >
           <Column
             className="columnAlignLeft"
+            dataIndex="Pair"
+            render={[Function]}
+            title="Pair"
+            width={165}
+          />
+          <Column
+            className="columnAlignLeft"
             dataIndex="Time"
             title="Time"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Side"
-            title="Side"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Type"
-            title="Type"
+            width={140}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Price"
             render={[Function]}
             title="Price"
+            width={100}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Amount"
             title="Amount"
+            width={100}
           />
           <Column
             className="imgColumn"
@@ -231,6 +248,45 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           />
         </Table>
       </div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      style={
+        Object {
+          "width": 200,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
+      >
+        <Checkbox
+          checked={false}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Check all
+        </Checkbox>
+      </div>
+      <br />
+      <CheckboxGroup
+        onChange={[Function]}
+        options={
+          Array [
+            "MOZART-PPT|WETH",
+          ]
+        }
+        style={
+          Object {
+            "padding": "10, 5",
+          }
+        }
+        value={Array []}
+      />
     </styled.div>
   </styled.div>
 </Styled(Card)>
@@ -238,24 +294,6 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
 
 exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] = `
 <Styled(Card)
-  extra={
-    <Styled(Select)
-      onSelect={[Function]}
-      style={
-        Object {
-          "width": 200,
-        }
-      }
-      value="MOZART-PPT|WETH"
-    >
-      <Option
-        className="optionMarketTrades"
-        value="MOZART-PPT|WETH"
-      >
-        MOZART-PPT-WETH
-      </Option>
-    </Styled(Select)>
-  }
   margin="0 10px 20px 10px"
   title={
     <styled.div>
@@ -286,6 +324,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
               Object {
                 "Amount": "120",
                 "Link": "https://kovan.etherscan.io/tx/test",
+                "Pair": "test",
                 "Price": "12",
                 "Side": "Buy",
                 "Time": "01-01 00:00:00",
@@ -297,7 +336,13 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           indentSize={20}
           loading={false}
           locale={Object {}}
-          pagination={false}
+          pagination={
+            Object {
+              "pageSize": 6,
+              "simple": true,
+              "size": "small",
+            }
+          }
           rowKey="key"
           showHeader={true}
           size="default"
@@ -310,36 +355,36 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           style={
             Object {
               "border": "none",
-              "width": "100%",
+              "width": 520,
             }
           }
           useFixedHeader={false}
         >
           <Column
             className="columnAlignLeft"
+            dataIndex="Pair"
+            render={[Function]}
+            title="Pair"
+            width={165}
+          />
+          <Column
+            className="columnAlignLeft"
             dataIndex="Time"
             title="Time"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Side"
-            title="Side"
-          />
-          <Column
-            className="columnAlignLeft"
-            dataIndex="Type"
-            title="Type"
+            width={140}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Price"
             render={[Function]}
             title="Price"
+            width={100}
           />
           <Column
             className="antdColumnAlignRight"
             dataIndex="Amount"
             title="Amount"
+            width={100}
           />
           <Column
             className="imgColumn"
@@ -349,6 +394,45 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           />
         </Table>
       </div>
+    </styled.div>
+    <styled.div
+      noMargin={true}
+      style={
+        Object {
+          "width": 200,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
+      >
+        <Checkbox
+          checked={false}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Check all
+        </Checkbox>
+      </div>
+      <br />
+      <CheckboxGroup
+        onChange={[Function]}
+        options={
+          Array [
+            "MOZART-PPT|WETH",
+          ]
+        }
+        style={
+          Object {
+            "padding": "10, 5",
+          }
+        }
+        value={Array []}
+      />
     </styled.div>
   </styled.div>
 </Styled(Card)>
