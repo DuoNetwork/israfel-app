@@ -215,6 +215,7 @@ export default class Dex extends React.Component<IProps, IState> {
 				else totalNav += balance * custodians[c].states.navB;
 			});
 		});
+		totalNav += (ethBalance.eth + ethBalance.weth) * ethPrice;
 		return (
 			<div>
 				<Spin

@@ -453,7 +453,7 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
         },
       ]
     }
-    totalNav={0}
+    totalNav={183.5974224020909}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -914,7 +914,7 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
         },
       ]
     }
-    totalNav={0}
+    totalNav={183.5974224020909}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -1375,7 +1375,7 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
         },
       ]
     }
-    totalNav={0}
+    totalNav={183.5974224020909}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -1836,7 +1836,7 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
         },
       ]
     }
-    totalNav={0}
+    totalNav={183.5974224020909}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
@@ -2297,7 +2297,7 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
         },
       ]
     }
-    totalNav={0}
+    totalNav={183.5974224020909}
     unwrapEther={[MockFunction]}
     visible={true}
     wrapEther={[MockFunction]}
