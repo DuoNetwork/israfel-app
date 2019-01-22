@@ -500,7 +500,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 			feeDescription,
 			expiryDescription
 		} = this.state;
-		const pairs = orderBook.pair;
+		const pair = orderBook.pair;
 		const bidsToRender = orderBook.bids.slice(0, 3);
 		while (bidsToRender.length < 3)
 			bidsToRender.push({
@@ -649,13 +649,13 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								style={{ border: 'none', fontSize: 12 }}
 							>
 								<ul style={{ margin: 0 }}>
-									{trades && trades[pairs]
-										? trades[pairs]
+									{trades && trades[pair]
+										? trades[pair]
 												.slice(
 													0,
-													trades[pairs].length > 3
+													trades[pair].length > 3
 														? 3
-														: trades[pairs].length
+														: trades[pair].length
 												)
 												.map((item, i) => (
 													<li
@@ -664,7 +664,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															padding: '3px 5px 3px 30px'
 														}}
 													>
-														<span className="content" style={{width: '30%'}}>
+														<span
+															className="content"
+															style={{ width: '30%' }}
+														>
 															{item.timestamp && item.timestamp > 0
 																? util.formatTime(item.timestamp)
 																: 'No Trades'}
@@ -675,7 +678,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	? 'title bid-span'
 																	: 'title ask-span'
 															}
-															style={{width: '30%', textAlign: 'right'}}
+															style={{
+																width: '30%',
+																textAlign: 'right'
+															}}
 														>
 															<b>
 																{item.maker.price &&
@@ -687,7 +693,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	: '-'}
 															</b>
 														</span>
-														<span className="content antdColumnAlignRight"  style={{width: '25%'}}>
+														<span
+															className="content antdColumnAlignRight"
+															style={{ width: '25%' }}
+														>
 															{item.maker.amount &&
 															item.maker.amount > 0
 																? util.formatFixedNumber(
@@ -698,7 +707,10 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														</span>
 														<span
 															className="title bid-span"
-															style={{ paddingRight: 26, width: '15%' }}
+															style={{
+																paddingRight: 26,
+																width: '15%'
+															}}
 														>
 															<img
 																className="cus-link"
@@ -706,7 +718,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																style={{
 																	width: '12px',
 																	height: '12px',
-																	marginLeft: '10px', 
+																	marginLeft: '10px'
 																}}
 																onClick={() =>
 																	window.open(

@@ -5,7 +5,7 @@
 import { shallow } from 'enzyme';
 // import { mount } from 'enzyme';
 import * as React from 'react';
-// import util from 'ts/common/util';
+import util from 'ts/common/util';
 // import { SButton, SInput, SSlider } from './_styled';
 import TradeHistoryCard from './TradeHistoryCard';
 // const RadioGroup = Radio.Group;
@@ -55,6 +55,7 @@ describe('TradeHistoryCard Test', () => {
 		// };
 		// const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			util.formatTime = jest.fn(() => '01-01 00:00:00');
 			// util.getExpiryTimestamp = jest.fn();
 			// util.formatFixedNumber = jest.fn();
 			// util.formatBalance = jest.fn();

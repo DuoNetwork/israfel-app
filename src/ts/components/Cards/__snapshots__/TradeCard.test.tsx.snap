@@ -283,7 +283,66 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -647,7 +706,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        Trade aETH/WETH
+        Trade bETH/WETH
       </styled.div>
     }
     width="360px"
@@ -657,7 +716,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     >
       <Component
         n={1}
-        token="aETH"
+        token="bETH"
       />
       <div
         className="trade-nav"
@@ -898,7 +957,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -957,7 +1075,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                 <div
                   className="tabletitle"
                 >
-                  aETH
+                  bETH
                 </div>
                 <div
                   className="tabletitle"
@@ -1166,12 +1284,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
       <div
         className="convert-popup-des"
       >
-        Buy aETH with WETH
+        Buy bETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay 0.1 bETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -1485,7 +1603,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -2072,7 +2249,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -2659,7 +2895,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -2995,7 +3290,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        Trade aETH/WETH
+        Trade bETH/WETH
       </styled.div>
     }
     width="360px"
@@ -3005,7 +3300,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
     >
       <Component
         n={1}
-        token="aETH"
+        token="bETH"
       />
       <div
         className="trade-nav"
@@ -3246,7 +3541,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -3305,7 +3659,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                 <div
                   className="tabletitle"
                 >
-                  aETH
+                  bETH
                 </div>
                 <div
                   className="tabletitle"
@@ -3515,12 +3869,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
       <div
         className="convert-popup-des"
       >
-        Buy aETH with WETH
+        Buy bETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay 0.1 bETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -3583,7 +3937,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        Trade aETH/WETH
+        Trade bETH/WETH
       </styled.div>
     }
     width="360px"
@@ -3593,7 +3947,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
     >
       <Component
         n={1}
-        token="aETH"
+        token="bETH"
       />
       <div
         className="trade-nav"
@@ -3834,7 +4188,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -3893,7 +4306,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                 <div
                   className="tabletitle"
                 >
-                  aETH
+                  bETH
                 </div>
                 <div
                   className="tabletitle"
@@ -4103,12 +4516,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
       <div
         className="convert-popup-des"
       >
-        Buy aETH with WETH
+        Buy bETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay 0.1 bETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -4171,7 +4584,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
     noBodymargin={true}
     title={
       <styled.div>
-        Trade aETH/WETH
+        Trade bETH/WETH
       </styled.div>
     }
     width="360px"
@@ -4181,7 +4594,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
     >
       <Component
         n={1}
-        token="aETH"
+        token="bETH"
       />
       <div
         className="trade-nav"
@@ -4422,7 +4835,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -4481,7 +4953,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                 <div
                   className="tabletitle"
                 >
-                  aETH
+                  bETH
                 </div>
                 <div
                   className="tabletitle"
@@ -4691,12 +5163,12 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
       <div
         className="convert-popup-des"
       >
-        Buy aETH with WETH
+        Buy bETH with WETH
       </div>
       <div
         className="convert-popup-des"
       >
-        Pay 0.1 aETH fee
+        Pay 0.1 bETH fee
       </div>
       <styled.div
         horizontal={true}
@@ -5010,7 +5482,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -5596,7 +6127,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -6182,7 +6772,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -6767,7 +7416,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -7352,7 +8060,66 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -7936,7 +8703,66 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>
@@ -8551,7 +9377,66 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
               }
             }
           >
-            -
+            <li
+              key="0"
+              style={
+                Object {
+                  "padding": "3px 5px 3px 30px",
+                }
+              }
+            >
+              <span
+                className="content"
+                style={
+                  Object {
+                    "width": "30%",
+                  }
+                }
+              >
+                01-01 00:00:00
+              </span>
+              <span
+                className="title ask-span"
+                style={
+                  Object {
+                    "textAlign": "right",
+                    "width": "30%",
+                  }
+                }
+              >
+                <b />
+              </span>
+              <span
+                className="content antdColumnAlignRight"
+                style={
+                  Object {
+                    "width": "25%",
+                  }
+                }
+              />
+              <span
+                className="title bid-span"
+                style={
+                  Object {
+                    "paddingRight": 26,
+                    "width": "15%",
+                  }
+                }
+              >
+                <img
+                  className="cus-link"
+                  onClick={[Function]}
+                  src={null}
+                  style={
+                    Object {
+                      "height": "12px",
+                      "marginLeft": "10px",
+                      "width": "12px",
+                    }
+                  }
+                />
+              </span>
+            </li>
           </ul>
         </div>
       </styled.div>

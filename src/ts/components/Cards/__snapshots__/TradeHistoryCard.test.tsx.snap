@@ -52,7 +52,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
                 "Link": "https://kovan.etherscan.io/tx/txHash",
                 "Price": "123",
                 "Side": "Sell",
-                "Time": "01-01 08:00:00",
+                "Time": "01-01 00:00:00",
                 "Type": "Limit",
                 "key": "txHash",
               },

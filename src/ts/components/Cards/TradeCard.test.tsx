@@ -37,7 +37,7 @@ describe('TradeCard Test', () => {
 		};
 		const orderBook = {
 			version: 123,
-			pair: 'WETH_ETH',
+			pair: 'bETH|WETH',
 			bids: [
 				{
 					price: 123,
@@ -55,6 +55,7 @@ describe('TradeCard Test', () => {
 		};
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
+			util.formatTime = jest.fn(() => '01-01 00:00:00');
 			util.getExpiryTimestamp = jest.fn();
 			util.formatFixedNumber = jest.fn();
 			util.formatBalance = jest.fn();
@@ -65,7 +66,7 @@ describe('TradeCard Test', () => {
 			const wrapper = shallow(
 				<TradeCard
 					account={'account'}
-					token={'aETH'}
+					token={'bETH'}
 					tokenInfo={tokenInfo}
 					tokenBalance={tokenBalance}
 					ethBalance={ethBalance}
@@ -73,7 +74,7 @@ describe('TradeCard Test', () => {
 					ethPrice={123}
 					navInEth={1}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -118,7 +119,7 @@ describe('TradeCard Test', () => {
 					navUpdatedAt={1234567890}
 					notify={() => ({})}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -157,7 +158,7 @@ describe('TradeCard Test', () => {
 					ethBalance={ethBalance}
 					orderBook={orderBook}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -203,7 +204,7 @@ describe('TradeCard Test', () => {
 					navInEth={1}
 					navUpdatedAt={1234567890}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -271,6 +272,7 @@ describe('TradeCard Test', () => {
 
 		it('Test Snapshot', () => {
 			Math.max = jest.fn(() => 1);
+			util.formatTime = jest.fn(() => '01-01 00:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
 			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
@@ -288,7 +290,7 @@ describe('TradeCard Test', () => {
 					notify={() => ({})}
 					interestOrLeverage={1}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -363,7 +365,7 @@ describe('TradeCard Test', () => {
 						allowance: 0
 					}}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
@@ -415,7 +417,7 @@ describe('TradeCard Test', () => {
 					account={'account'}
 					token={'aETH'}
 					trades={{
-						test: [
+						'bETH|WETH': [
 							{
 								pair: 'test',
 								transactionHash: 'test',
