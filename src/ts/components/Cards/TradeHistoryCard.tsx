@@ -103,9 +103,6 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 								}
 								pagination={false}
 								style={{ width: '100%', border: 'none' }}
-								rowClassName={record =>
-									record[CST.TH_SIDE] === CST.TH_BUY ? 'titleTable' : 'titleTable'
-								}
 							>
 								<Column
 									className="columnAlignLeft"

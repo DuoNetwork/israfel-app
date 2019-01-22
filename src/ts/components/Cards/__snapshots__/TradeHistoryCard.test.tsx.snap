@@ -52,7 +52,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
                 "Link": "https://kovan.etherscan.io/tx/txHash",
                 "Price": "123",
                 "Side": "Sell",
-                "Time": "01-01 00:00:00",
+                "Time": "01-01 07:30:00",
                 "Type": "Limit",
                 "key": "txHash",
               },
@@ -62,7 +62,242 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           loading={false}
           locale={Object {}}
           pagination={false}
-          rowClassName={[Function]}
+          rowKey="key"
+          showHeader={true}
+          size="default"
+          sortDirections={
+            Array [
+              "ascend",
+              "descend",
+            ]
+          }
+          style={
+            Object {
+              "border": "none",
+              "width": "100%",
+            }
+          }
+          useFixedHeader={false}
+        >
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Time"
+            title="Time"
+          />
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Side"
+            title="Side"
+          />
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Type"
+            title="Type"
+          />
+          <Column
+            className="antdColumnAlignRight"
+            dataIndex="Price"
+            render={[Function]}
+            title="Price"
+          />
+          <Column
+            className="antdColumnAlignRight"
+            dataIndex="Amount"
+            title="Amount"
+          />
+          <Column
+            className="imgColumn"
+            dataIndex="Link"
+            render={[Function]}
+            title=""
+          />
+        </Table>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
+
+exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] = `
+<Styled(Card)
+  extra={
+    <Styled(Select)
+      onSelect={[Function]}
+      style={
+        Object {
+          "width": 200,
+        }
+      }
+      value="MOZART-PPT|WETH"
+    >
+      <Option
+        className="optionMarketTrades"
+        value="MOZART-PPT|WETH"
+      >
+        MOZART-PPT-WETH
+      </Option>
+    </Styled(Select)>
+  }
+  margin="0 10px 20px 10px"
+  title={
+    <styled.div>
+      Market Trades
+    </styled.div>
+  }
+  width="740px"
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <Table
+          bordered={false}
+          className=""
+          dataSource={
+            Array [
+              Object {
+                "Amount": "120",
+                "Link": "https://kovan.etherscan.io/tx/test",
+                "Price": "12",
+                "Side": "Buy",
+                "Time": "01-01 07:30:00",
+                "Type": "Market",
+                "key": "test",
+              },
+            ]
+          }
+          indentSize={20}
+          loading={false}
+          locale={Object {}}
+          pagination={false}
+          rowKey="key"
+          showHeader={true}
+          size="default"
+          sortDirections={
+            Array [
+              "ascend",
+              "descend",
+            ]
+          }
+          style={
+            Object {
+              "border": "none",
+              "width": "100%",
+            }
+          }
+          useFixedHeader={false}
+        >
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Time"
+            title="Time"
+          />
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Side"
+            title="Side"
+          />
+          <Column
+            className="columnAlignLeft"
+            dataIndex="Type"
+            title="Type"
+          />
+          <Column
+            className="antdColumnAlignRight"
+            dataIndex="Price"
+            render={[Function]}
+            title="Price"
+          />
+          <Column
+            className="antdColumnAlignRight"
+            dataIndex="Amount"
+            title="Amount"
+          />
+          <Column
+            className="imgColumn"
+            dataIndex="Link"
+            render={[Function]}
+            title=""
+          />
+        </Table>
+      </div>
+    </styled.div>
+  </styled.div>
+</Styled(Card)>
+`;
+
+exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] = `
+<Styled(Card)
+  extra={
+    <Styled(Select)
+      onSelect={[Function]}
+      style={
+        Object {
+          "width": 200,
+        }
+      }
+      value="MOZART-PPT|WETH"
+    >
+      <Option
+        className="optionMarketTrades"
+        value="MOZART-PPT|WETH"
+      >
+        MOZART-PPT-WETH
+      </Option>
+    </Styled(Select)>
+  }
+  margin="0 10px 20px 10px"
+  title={
+    <styled.div>
+      Market Trades
+    </styled.div>
+  }
+  width="740px"
+>
+  <styled.div
+    horizontal={true}
+    style={
+      Object {
+        "marginTop": "5px",
+      }
+    }
+  >
+    <styled.div
+      noMargin={true}
+    >
+      <div
+        className="status-list-wrapper"
+      >
+        <Table
+          bordered={false}
+          className=""
+          dataSource={
+            Array [
+              Object {
+                "Amount": "120",
+                "Link": "https://kovan.etherscan.io/tx/test",
+                "Price": "12",
+                "Side": "Buy",
+                "Time": "01-01 07:30:00",
+                "Type": "Market",
+                "key": "test",
+              },
+            ]
+          }
+          indentSize={20}
+          loading={false}
+          locale={Object {}}
+          pagination={false}
           rowKey="key"
           showHeader={true}
           size="default"
