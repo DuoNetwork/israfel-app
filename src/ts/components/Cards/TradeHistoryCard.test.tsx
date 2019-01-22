@@ -5,10 +5,13 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 // import { SButton, SInput, SSlider } from './_styled';
 import TradeHistoryCard from './TradeHistoryCard';
+import util from 'ts/common/util';
 
 describe('TradeHistoryCard Test', () => {
 	describe('Test Snapshot', () => {
 		it('Test Snapshot', () => {
+			util.formatTime = jest.fn(() => '01-01 00:00:00');
+
 			const wrapper1 = shallow(
 				<TradeHistoryCard
 					trades={{
@@ -54,6 +57,8 @@ describe('TradeHistoryCard Test', () => {
 		});
 
 		it('Test getDerivedStateFromProps', () => {
+			util.formatTime = jest.fn(() => '01-01 00:00:00');
+
 			const wrapper1 = shallow(
 				<TradeHistoryCard
 					trades={{
