@@ -7,7 +7,7 @@ import * as CST from 'ts/common/constants';
 import { IToken, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
-import { SCard, SCardList, SCardTitle } from './_styled';
+import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 const Column = Table.Column;
 const CheckboxGroup = Checkbox.Group;
 
@@ -19,74 +19,50 @@ interface IProps {
 
 interface IState {
 	checkedList: string[];
-	indeterminate: boolean;
-	checkAll: boolean;
 }
 
 export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			checkedList: [],
-			indeterminate: true,
-			checkAll: false
+			checkedList: []
 		};
 	}
 
-	// private handleSelect = (pair: string) => {
-	// 	this.setState({
-	// 		pair: pair
-	// 	});
-	// };
-
-	private onChange = (checkedList: any, pairs: any) => {
+	private handleChange = (checkedList: string[]) => {
 		this.setState({
-			checkedList,
-			indeterminate: !!checkedList.length && checkedList.length < pairs.length,
-			checkAll: checkedList.length === pairs.length
-		});
-	};
-
-	private onCheckAllChange = (e: any, pairs: any) => {
-		this.setState({
-			checkedList: e.target.checked ? pairs : [],
-			indeterminate: false,
-			checkAll: e.target.checked
+			checkedList: checkedList.length === this.props.tokens.length ? [] : checkedList
 		});
 	};
 
 	public render() {
-		// const { tokenBalances,
 		const { tokenBalances, trades, tokens } = this.props;
-		let { checkedList } = this.state;
-		const pairs = tokenBalances.map(tb => tb.code + '|' + CST.TH_WETH);
-		if (checkedList.length === 0) checkedList = pairs;
-		const dataShow: any[] = [];
-		if (checkedList && checkedList.length > 0)
-			checkedList.forEach(i => {
-				const token = tokens.find(to => to.code === i.split('|')[0]);
-				trades[i].forEach(t =>
-					dataShow.push({
-						key: t.transactionHash,
-						[CST.TH_TIME]: t.timestamp,
-						[CST.TH_PAIR]: t.pair,
-						[CST.TH_TYPE]:
-							t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
-						[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
-						[CST.TH_PX]: util.formatFixedNumber(
-							t.maker.price,
-							token ? token.precisions[CST.TH_WETH] : 0
-						),
-						[CST.TH_AMOUNT]: util.formatFixedNumber(
-							t.maker.amount,
-							token ? token.denomination : 0
-						),
-						[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
-					})
-				);
-			});
-		dataShow.sort((a, b) => -a[CST.TH_TIME] + b[CST.TH_TIME]);
-
+		const codes = tokenBalances.map(tb => tb.code);
+		const codeList = this.state.checkedList.length ? [...this.state.checkedList] : codes;
+		const dataSource: any[] = [];
+		codeList.forEach(code => {
+			const token = tokens.find(to => to.code === code);
+			const pair = code + '|' + CST.TH_WETH;
+			trades[pair].forEach(t =>
+				dataSource.push({
+					key: t.transactionHash,
+					[CST.TH_TIME]: t.timestamp,
+					[CST.TH_PAIR]: t.pair,
+					[CST.TH_TYPE]: t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
+					[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
+					[CST.TH_PX]: util.formatFixedNumber(
+						t.maker.price,
+						token ? token.precisions[CST.TH_WETH] : 0
+					),
+					[CST.TH_AMOUNT]: util.formatFixedNumber(
+						t.maker.amount,
+						token ? token.denomination : 0
+					),
+					[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
+				})
+			);
+		});
+		dataSource.sort((a, b) => -a[CST.TH_TIME] + b[CST.TH_TIME]);
 		return (
 			<SCard
 				title={<SCardTitle>{CST.TH_MARKET + ' ' + CST.TH_TRADES}</SCardTitle>}
@@ -97,7 +73,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 					<SCardList noMargin>
 						<div className="status-list-wrapper">
 							<Table
-								dataSource={dataShow}
+								dataSource={dataSource}
 								pagination={{ simple: true, pageSize: 6, size: 'small' }}
 								style={{ width: 520, border: 'none' }}
 							>
@@ -159,21 +135,18 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						</div>
 					</SCardList>
 					<SCardList noMargin style={{ width: 200 }}>
-						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
-							<Checkbox
-								indeterminate={this.state.indeterminate}
-								onChange={(e: any) => this.onCheckAllChange(e, pairs)}
-								checked={this.state.checkAll}
-							>
-								Check all
-							</Checkbox>
-						</div>
+						<SButton
+							onClick={() => this.handleChange([])}
+							disable={!this.state.checkedList.length}
+						>
+							Clear Filter
+						</SButton>
 						<br />
 						<CheckboxGroup
 							style={{ padding: '10, 5' }}
-							options={pairs}
+							options={codes}
 							value={this.state.checkedList}
-							onChange={(e: any) => this.onChange(e, pairs)}
+							onChange={e => this.handleChange(e.map(i => i.toString()))}
 						/>
 					</SCardList>
 				</SDivFlexCenter>

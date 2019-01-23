@@ -112,27 +112,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         }
       }
     >
-      <div
-        style={
-          Object {
-            "borderBottom": "1px solid #E9E9E9",
-          }
-        }
+      <styled.button
+        disable={true}
+        onClick={[Function]}
       >
-        <Checkbox
-          checked={false}
-          indeterminate={true}
-          onChange={[Function]}
-        >
-          Check all
-        </Checkbox>
-      </div>
+        Clear Filter
+      </styled.button>
       <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
           Array [
-            "aETH|WETH",
+            "aETH",
           ]
         }
         style={
@@ -259,27 +250,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
         }
       }
     >
-      <div
-        style={
-          Object {
-            "borderBottom": "1px solid #E9E9E9",
-          }
-        }
+      <styled.button
+        disable={true}
+        onClick={[Function]}
       >
-        <Checkbox
-          checked={false}
-          indeterminate={true}
-          onChange={[Function]}
-        >
-          Check all
-        </Checkbox>
-      </div>
+        Clear Filter
+      </styled.button>
       <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
           Array [
-            "MOZART-PPT|WETH",
+            "MOZART-PPT",
           ]
         }
         style={
@@ -406,27 +388,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
         }
       }
     >
-      <div
-        style={
-          Object {
-            "borderBottom": "1px solid #E9E9E9",
-          }
-        }
+      <styled.button
+        disable={true}
+        onClick={[Function]}
       >
-        <Checkbox
-          checked={false}
-          indeterminate={true}
-          onChange={[Function]}
-        >
-          Check all
-        </Checkbox>
-      </div>
+        Clear Filter
+      </styled.button>
       <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
           Array [
-            "MOZART-PPT|WETH",
+            "MOZART-PPT",
           ]
         }
         style={
