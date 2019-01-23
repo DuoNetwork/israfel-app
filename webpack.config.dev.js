@@ -232,7 +232,7 @@ module.exports = {
 				'../duo-contract-wrapper/node_modules/web3-eth-contract'
 			),
 			'web3-eth-personal': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-accounts'
+				'../duo-contract-wrapper/node_modules/web3-eth-personal'
 			),
 			'web3-eth': path.resolve('../duo-contract-wrapper/node_modules/web3-eth'),
 			'web3-provider-engine': path.resolve(

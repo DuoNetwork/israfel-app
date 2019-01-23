@@ -27,7 +27,20 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         <Table
           bordered={false}
           className=""
-          dataSource={Array []}
+          dataSource={
+            Array [
+              Object {
+                "Amount": "123",
+                "Link": "https://kovan.etherscan.io/tx/txHash",
+                "Pair": "test",
+                "Price": "123",
+                "Side": "Sell",
+                "Time": 123,
+                "Type": "Limit",
+                "key": "txHash",
+              },
+            ]
+          }
           indentSize={20}
           loading={false}
           locale={Object {}}
@@ -114,7 +127,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           style={
             Object {
               "marginTop": 10,
-              "paddingLeft": 4,
+              "paddingLeft": 3,
             }
           }
         >
@@ -134,7 +147,11 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
             "padding": "10 5 ",
           }
         }
-        value={Array []}
+        value={
+          Array [
+            "aETH",
+          ]
+        }
       />
     </styled.div>
   </styled.div>
@@ -268,7 +285,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           style={
             Object {
               "marginTop": 10,
-              "paddingLeft": 4,
+              "paddingLeft": 3,
             }
           }
         >
@@ -426,7 +443,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           style={
             Object {
               "marginTop": 10,
-              "paddingLeft": 4,
+              "paddingLeft": 3,
             }
           }
         >

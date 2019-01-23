@@ -16,12 +16,8 @@ exports[`ConvertCard Test Test Snapshot Submit 1`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -571,12 +567,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 1`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -1126,12 +1118,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 2`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -1681,12 +1669,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 3`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -2236,12 +2220,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 4`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -2791,12 +2771,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 5`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -3350,12 +3326,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 8`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -3910,12 +3882,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 9`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -4465,12 +4433,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 10`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -5020,12 +4984,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 11`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -5575,12 +5535,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 12`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -6130,12 +6086,8 @@ exports[`ConvertCard Test Test Snapshot Test Snapshot 13`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}

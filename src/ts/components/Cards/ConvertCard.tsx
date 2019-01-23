@@ -1,6 +1,5 @@
 import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
-import help from 'images/icons/help.svg';
 import link from 'images/icons/link.png';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
@@ -440,8 +439,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					className={'popup-card ' + (!!custodian ? 'popup-open' : '')}
 					noBodymargin
 					extra={
-						<SDivFlexCenter horizontal width="40px">
-							<img className="cardpopup-close" src={help} />
+						<SDivFlexCenter horizontal width="20px">
 							<img className="cardpopup-close" src={close} onClick={handleClose} />
 						</SDivFlexCenter>
 					}

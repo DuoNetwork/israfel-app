@@ -1,7 +1,6 @@
 import { Radio, Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
-import help from 'images/icons/help.svg';
 import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -118,7 +117,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		  )
+		)
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -168,7 +167,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				? util.formatFixedNumber(
 						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
-				  )
+				)
 				: '';
 		this.state = {
 			account: props.account,
@@ -201,7 +200,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								? nextProps.orderBook.asks[0].price
 								: 0,
 							nextProps.tokenInfo.precisions[CST.TH_WETH]
-					  )
+					)
 					: '';
 
 			return {
@@ -532,8 +531,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 					className={'popup-card ' + (!!token ? 'popup-open' : '')}
 					noBodymargin
 					extra={
-						<SDivFlexCenter horizontal width="40px">
-							<img className="cardpopup-close" src={help} />
+						<SDivFlexCenter horizontal width="20px">
 							<img className="cardpopup-close" src={close} onClick={handleClose} />
 						</SDivFlexCenter>
 					}
@@ -578,7 +576,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -587,7 +585,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -612,7 +610,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -621,7 +619,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 										</li>
@@ -689,7 +687,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																	? util.formatFixedNumber(
 																			item.maker.price,
 																			precision
-																	  )
+																	)
 																	: '-'}
 															</b>
 														</span>
@@ -702,7 +700,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																? util.formatFixedNumber(
 																		item.maker.amount,
 																		denomination
-																  )
+																)
 																: '-'}
 														</span>
 														<span

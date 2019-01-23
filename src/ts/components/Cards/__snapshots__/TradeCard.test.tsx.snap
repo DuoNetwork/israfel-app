@@ -16,12 +16,8 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -690,12 +686,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -1336,12 +1328,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -1982,12 +1970,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -2628,12 +2612,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -3274,12 +3254,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -3921,12 +3897,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -4568,12 +4540,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -5215,12 +5183,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -5860,12 +5824,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -6505,12 +6465,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -7149,12 +7105,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -7793,12 +7745,8 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -8436,12 +8384,8 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}
@@ -9110,12 +9054,8 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
     extra={
       <styled.div
         horizontal={true}
-        width="40px"
+        width="20px"
       >
-        <img
-          className="cardpopup-close"
-          src={null}
-        />
         <img
           className="cardpopup-close"
           onClick={[MockFunction]}

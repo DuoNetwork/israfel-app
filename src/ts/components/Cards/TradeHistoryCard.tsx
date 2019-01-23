@@ -19,53 +19,26 @@ interface IProps {
 
 interface IState {
 	checkedList: string[];
-	checkAll: boolean;
-	indeterminate: boolean;
 }
 
 export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			checkedList: [],
-			checkAll: true,
-			indeterminate: false
+			checkedList: []
 		};
-	}
-	public componentWillReceiveProps(nextProps: IProps) {
-		this.setState({
-			checkedList:
-				this.props.tokenBalances.map(tb => tb.code).length === 8
-					? this.state.checkedList
-					: nextProps.tokenBalances.map(tb => tb.code)
-		});
 	}
 
 	private handleChange = (checkedList: string[]) => {
 		this.setState({
-			checkedList: checkedList,
-			checkAll: checkedList.length === this.props.tokens.length ? true : false,
-			indeterminate:
-				checkedList.length === this.props.tokens.length || checkedList.length === 0
-					? false
-					: true
-		});
-	};
-
-	private onCheckAllChange = (e: any, pair: any) => {
-		this.setState({
-			checkedList: e.target.checked ? pair : [],
-			checkAll: e.target.checked,
-			indeterminate: false
+			checkedList: checkedList
 		});
 	};
 
 	public render() {
 		const { tokenBalances, trades, tokens } = this.props;
 		const codes = tokenBalances.map(tb => tb.code);
-		console.log(codes);
-		const codeList = this.state.checkedList;
-		// this.state.checkedList.length ? [...this.state.checkedList] : codes;
+		const codeList = this.state.checkedList.length ? [...this.state.checkedList] : codes.length ? [codes[0]] : [];
 		const dataSource: any[] = [];
 		codeList.forEach(code => {
 			const token = tokens.find(to => to.code === code);
@@ -164,10 +137,12 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 					<SCardList noMargin style={{ width: 200 }}>
 						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
 							<Checkbox
-								style={{ paddingLeft: 4, marginTop: 10 }}
-								indeterminate={this.state.indeterminate}
-								onChange={(e: any) => this.onCheckAllChange(e, codes)}
-								checked={this.state.checkAll}
+								style={{ paddingLeft: 3, marginTop: 10 }}
+								indeterminate={codeList.length !== codes.length}
+								onChange={() =>
+									this.handleChange(codeList.length !== codes.length ? codes : [])
+								}
+								checked={!!codeList.length}
 							>
 								All
 							</Checkbox>
@@ -175,7 +150,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						<CheckboxGroup
 							style={{ padding: '10 5 ', marginTop: 11 }}
 							options={codes}
-							value={this.state.checkedList}
+							value={codeList}
 							onChange={e => this.handleChange(e.map(i => i.toString()))}
 						/>
 					</SCardList>
