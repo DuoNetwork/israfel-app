@@ -63,9 +63,9 @@ exports[`Header Test User Login Test Snapshot 1`] = `
       >
         <Link
           replace={false}
-          to="/status"
+          to=""
         >
-          STATUS
+          TUTORIAL
         </Link>
       </div>
       <div
@@ -82,6 +82,16 @@ exports[`Header Test User Login Test Snapshot 1`] = `
         >
           SUPPORT
         </div>
+      </div>
+      <div
+        className="nav-button-wrapper"
+      >
+        <Link
+          replace={false}
+          to="/status"
+        >
+          STATUS
+        </Link>
       </div>
     </styled.div>
   </styled.div>

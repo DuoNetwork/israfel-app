@@ -51,9 +51,8 @@ export default class Header extends React.Component<IProps> {
 						</div>
 					</div>
 					<SDivFlexCenter horizontal>
-						{/* <div className="nav-button-wrapper">{CST.DB_ORDERS.toUpperCase()}</div> */}
 						<div className="nav-button-wrapper">
-							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
+							<Link to={''}>{CST.TH_TUTORIAL.toUpperCase()}</Link>
 						</div>
 						<div className="nav-button-wrapper">
 							<div
@@ -63,7 +62,9 @@ export default class Header extends React.Component<IProps> {
 								{CST.TH_SUPPORT.toUpperCase()}
 							</div>
 						</div>
-						{/* <LocaleSelect locale={locale} onSelect={updateLocale} /> */}
+						<div className="nav-button-wrapper">
+							<Link to={'/status'}>{CST.TH_STATUS.toUpperCase()}</Link>
+						</div>
 					</SDivFlexCenter>
 				</SDivFlexCenter>
 			</SHeader>

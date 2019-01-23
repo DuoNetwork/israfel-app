@@ -75,6 +75,7 @@ export const TH_MATCHING = 'Matching';
 export const TH_SIDE = 'Side';
 export const TH_FEE = 'Fee';
 export const TH_STATUS = 'Status';
+export const TH_TUTORIAL = 'Tutorial';
 export const TH_ACTIONS = 'Actions';
 export const TH_EXPIRY = 'Expiry';
 export const TH_ORDER_HASH = 'Order Hash';

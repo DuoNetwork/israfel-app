@@ -7,7 +7,7 @@ import * as CST from 'ts/common/constants';
 import { IToken, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
-import { SButton, SCard, SCardList, SCardTitle } from './_styled';
+import { SCard, SCardList, SCardTitle } from './_styled';
 const Column = Table.Column;
 const CheckboxGroup = Checkbox.Group;
 
@@ -19,26 +19,49 @@ interface IProps {
 
 interface IState {
 	checkedList: string[];
+	indeterminate: boolean;
+	checkAll: boolean;
 }
 
 export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			checkedList: []
+			checkedList: [],
+			indeterminate: true,
+			checkAll: true
 		};
+	}
+	public componentWillReceiveProps(nextProps: IProps) {
+		this.setState({
+			checkedList:
+				this.props.tokenBalances.map(tb => tb.code).length === 8
+					? this.state.checkedList
+					: nextProps.tokenBalances.map(tb => tb.code)
+		});
 	}
 
 	private handleChange = (checkedList: string[]) => {
 		this.setState({
-			checkedList: checkedList.length === this.props.tokens.length ? [] : checkedList
+			checkedList: checkedList,
+			checkAll: false
+		});
+	};
+
+	private onCheckAllChange = (e: any, pair: any) => {
+		this.setState({
+			checkedList: e.target.checked ? pair : [],
+			indeterminate: false,
+			checkAll: e.target.checked
 		});
 	};
 
 	public render() {
 		const { tokenBalances, trades, tokens } = this.props;
 		const codes = tokenBalances.map(tb => tb.code);
-		const codeList = this.state.checkedList.length ? [...this.state.checkedList] : codes;
+		console.log(codes);
+		const codeList = this.state.checkedList;
+		// this.state.checkedList.length ? [...this.state.checkedList] : codes;
 		const dataSource: any[] = [];
 		codeList.forEach(code => {
 			const token = tokens.find(to => to.code === code);
@@ -75,7 +98,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 							<Table
 								dataSource={dataSource}
 								pagination={{ simple: true, pageSize: 6, size: 'small' }}
-								style={{ width: 520, border: 'none' }}
+								style={{ width: 520, height: 250, border: 'none' }}
 							>
 								<Column
 									className="columnAlignLeft"
@@ -135,12 +158,16 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						</div>
 					</SCardList>
 					<SCardList noMargin style={{ width: 200 }}>
-						<SButton
-							onClick={() => this.handleChange([])}
-							disable={!this.state.checkedList.length}
-						>
-							Clear Filter
-						</SButton>
+						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
+							<Checkbox
+								indeterminate={this.state.indeterminate}
+								onChange={(e: any) => this.onCheckAllChange(e, codes)}
+								checked={this.state.checkAll}
+								// onChange={() => this.handleChange([])}
+							>
+								{this.state.checkAll ? 'Clear All' : 'Select All'}
+							</Checkbox>
+						</div>
 						<br />
 						<CheckboxGroup
 							style={{ padding: '10, 5' }}

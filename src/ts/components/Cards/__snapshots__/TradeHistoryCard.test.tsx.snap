@@ -27,20 +27,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         <Table
           bordered={false}
           className=""
-          dataSource={
-            Array [
-              Object {
-                "Amount": "123",
-                "Link": "https://kovan.etherscan.io/tx/txHash",
-                "Pair": "test",
-                "Price": "123",
-                "Side": "Sell",
-                "Time": 123,
-                "Type": "Limit",
-                "key": "txHash",
-              },
-            ]
-          }
+          dataSource={Array []}
           indentSize={20}
           loading={false}
           locale={Object {}}
@@ -63,6 +50,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
           style={
             Object {
               "border": "none",
+              "height": 250,
               "width": 520,
             }
           }
@@ -112,12 +100,21 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         }
       }
     >
-      <styled.button
-        disable={true}
-        onClick={[Function]}
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
       >
-        Clear Filter
-      </styled.button>
+        <Checkbox
+          checked={true}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Clear All
+        </Checkbox>
+      </div>
       <br />
       <CheckboxGroup
         onChange={[Function]}
@@ -201,6 +198,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
           style={
             Object {
               "border": "none",
+              "height": 250,
               "width": 520,
             }
           }
@@ -250,12 +248,21 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
         }
       }
     >
-      <styled.button
-        disable={true}
-        onClick={[Function]}
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
       >
-        Clear Filter
-      </styled.button>
+        <Checkbox
+          checked={true}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Clear All
+        </Checkbox>
+      </div>
       <br />
       <CheckboxGroup
         onChange={[Function]}
@@ -269,7 +276,11 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
             "padding": "10, 5",
           }
         }
-        value={Array []}
+        value={
+          Array [
+            "MOZART-PPT",
+          ]
+        }
       />
     </styled.div>
   </styled.div>
@@ -339,6 +350,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
           style={
             Object {
               "border": "none",
+              "height": 250,
               "width": 520,
             }
           }
@@ -388,12 +400,21 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
         }
       }
     >
-      <styled.button
-        disable={true}
-        onClick={[Function]}
+      <div
+        style={
+          Object {
+            "borderBottom": "1px solid #E9E9E9",
+          }
+        }
       >
-        Clear Filter
-      </styled.button>
+        <Checkbox
+          checked={true}
+          indeterminate={true}
+          onChange={[Function]}
+        >
+          Clear All
+        </Checkbox>
+      </div>
       <br />
       <CheckboxGroup
         onChange={[Function]}
@@ -407,7 +428,11 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
             "padding": "10, 5",
           }
         }
-        value={Array []}
+        value={
+          Array [
+            "MOZART-PPT",
+          ]
+        }
       />
     </styled.div>
   </styled.div>

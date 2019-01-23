@@ -20,8 +20,10 @@ body {
 }
 
 .icon-wrapper>img {
-	height: 60px;
-	width: 75.6px;
+	width: 80px;
+	height: 80px;
+	position: relative;
+	top: -10px;
 }
 
 .nav-button-wrapper {
@@ -275,7 +277,7 @@ svg {
 	background: rgba(92, 164, 222, .2)
 }
 
-.ant-table-thead > tr > th {
+.ant-table-thead>tr>th {
 	text-align: none;
 }
 
