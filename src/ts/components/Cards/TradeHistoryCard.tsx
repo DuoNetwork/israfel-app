@@ -38,7 +38,12 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	public render() {
 		const { tokenBalances, trades, tokens } = this.props;
 		const codes = tokenBalances.map(tb => tb.code);
-		const codeList = this.state.checkedList.length ? [...this.state.checkedList] : codes.length ? [codes[0]] : [];
+		const codeList = this.state.checkedList.length
+			? [...this.state.checkedList]
+			: codes.length
+			? [codes[0]]
+			: [];
+		// this.state.checkedList.length ? [...this.state.checkedList] : codes;
 		const dataSource: any[] = [];
 		codeList.forEach(code => {
 			const token = tokens.find(to => to.code === code);

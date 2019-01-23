@@ -66,8 +66,28 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			d3.format(isBeethoven ? '.2%' : '.2f')(
 				getTokenInterestOrLeverage(info.states, isBeethoven, true)
 			) + (isBeethoven ? CST.TH_PA : 'x');
+		const aDescription =
+			aCode +
+			' holders ' +
+			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)) > 0
+				? 'receiving payments at '
+				: ' is shorting ') +
+			d3.format(isBeethoven ? '.2%' : '.2f')(
+				Math.abs(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)))
+			) +
+			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)) > 0
+				? ' per annum.'
+				: ' leverage');
 		const bLabel =
 			d3.format('.2f')(getTokenInterestOrLeverage(info.states, isBeethoven, false)) + 'x';
+		const bDescription =
+			bCode +
+			' holders are' +
+			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, false)) > 0
+				? ' longing '
+				: ' shorting ') +
+			bLabel +
+			' leverage.';
 		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
 		const bOrderBook = orderBooks[bCode + '|' + CST.TH_WETH];
 		const aBestBid =
@@ -208,7 +228,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							{aCode}
 							<span className="aspan">{isBeethoven ? 'INCOME' : 'SHORT'}</span>
 						</span>
-						<span>{aLabel}</span>
+						<Tooltip title={aDescription} placement="top">
+							<span>{aLabel}</span>
+						</Tooltip>
 					</div>
 					<div className="cuscardnavtag">
 						<span className="navspan">NAV</span>
@@ -260,7 +282,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							{bCode}
 							<span className="aspan">{isBeethoven ? 'LEVERAGE' : 'LONG'}</span>
 						</span>
-						<span>{bLabel}</span>
+						<Tooltip title={bDescription} placement="top">
+							<span>{bLabel}</span>
+						</Tooltip>
 					</div>
 					<div className="cuscardnavtag">
 						<span className="navspan">NAV</span>

@@ -179,9 +179,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
           INCOME
         </span>
       </span>
-      <span>
-        5.26% p.a.
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="aETH holders receiving payments at 5.26% per annum."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          5.26% p.a.
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -299,9 +309,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
           LEVERAGE
         </span>
       </span>
-      <span>
-        1.84x
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="bETH holders are longing 1.84x leverage."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          1.84x
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -615,9 +635,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
           INCOME
         </span>
       </span>
-      <span>
-        5.26% p.a.
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="aETH holders receiving payments at 5.26% per annum."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          5.26% p.a.
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -735,9 +765,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
           LEVERAGE
         </span>
       </span>
-      <span>
-        1.84x
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="bETH holders are longing 1.84x leverage."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          1.84x
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -1051,9 +1091,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
           INCOME
         </span>
       </span>
-      <span>
-        5.26% p.a.
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="aETH holders receiving payments at 5.26% per annum."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          5.26% p.a.
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -1171,9 +1221,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
           LEVERAGE
         </span>
       </span>
-      <span>
-        1.84x
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="bETH holders are longing 1.84x leverage."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          1.84x
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -1487,9 +1547,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
           INCOME
         </span>
       </span>
-      <span>
-        5.26% p.a.
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="aETH holders receiving payments at 5.26% per annum."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          5.26% p.a.
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -1607,9 +1677,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
           LEVERAGE
         </span>
       </span>
-      <span>
-        1.84x
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="bETH holders are longing 1.84x leverage."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          1.84x
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -1923,9 +2003,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
           INCOME
         </span>
       </span>
-      <span>
-        5.26% p.a.
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="aETH holders receiving payments at 5.26% per annum."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          5.26% p.a.
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
@@ -2043,9 +2133,19 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
           LEVERAGE
         </span>
       </span>
-      <span>
-        1.84x
-      </span>
+      <Tooltip
+        arrowPointAtCenter={false}
+        autoAdjustOverflow={true}
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        placement="top"
+        title="bETH holders are longing 1.84x leverage."
+        transitionName="zoom-big-fast"
+      >
+        <span>
+          1.84x
+        </span>
+      </Tooltip>
     </div>
     <div
       className="cuscardnavtag"
