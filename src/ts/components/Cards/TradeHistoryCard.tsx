@@ -19,8 +19,8 @@ interface IProps {
 
 interface IState {
 	checkedList: string[];
-	indeterminate: boolean;
 	checkAll: boolean;
+	indeterminate: boolean;
 }
 
 export default class TradeHistoryCard extends React.Component<IProps, IState> {
@@ -28,8 +28,8 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 		super(props);
 		this.state = {
 			checkedList: [],
-			indeterminate: true,
-			checkAll: true
+			checkAll: true,
+			indeterminate: false
 		};
 	}
 	public componentWillReceiveProps(nextProps: IProps) {
@@ -44,15 +44,19 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 	private handleChange = (checkedList: string[]) => {
 		this.setState({
 			checkedList: checkedList,
-			checkAll: false
+			checkAll: checkedList.length === this.props.tokens.length ? true : false,
+			indeterminate:
+				checkedList.length === this.props.tokens.length || checkedList.length === 0
+					? false
+					: true
 		});
 	};
 
 	private onCheckAllChange = (e: any, pair: any) => {
 		this.setState({
 			checkedList: e.target.checked ? pair : [],
-			indeterminate: false,
-			checkAll: e.target.checked
+			checkAll: e.target.checked,
+			indeterminate: false
 		});
 	};
 
@@ -160,17 +164,16 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 					<SCardList noMargin style={{ width: 200 }}>
 						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
 							<Checkbox
+								style={{ paddingLeft: 4, marginTop: 10 }}
 								indeterminate={this.state.indeterminate}
 								onChange={(e: any) => this.onCheckAllChange(e, codes)}
 								checked={this.state.checkAll}
-								// onChange={() => this.handleChange([])}
 							>
-								{this.state.checkAll ? 'Clear All' : 'Select All'}
+								All
 							</Checkbox>
 						</div>
-						<br />
 						<CheckboxGroup
-							style={{ padding: '10, 5' }}
+							style={{ padding: '10 5 ', marginTop: 11 }}
 							options={codes}
 							value={this.state.checkedList}
 							onChange={e => this.handleChange(e.map(i => i.toString()))}

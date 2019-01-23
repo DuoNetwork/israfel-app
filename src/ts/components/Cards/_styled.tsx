@@ -1122,5 +1122,9 @@ injectGlobal([
 				margin-right: 8px;
 				padding: 3px 3px;
 			}
+			.ant-table-pagination.ant-pagination {
+				margin: 8px 0;
+				float: right;
+			}
 		`
 ] as any);

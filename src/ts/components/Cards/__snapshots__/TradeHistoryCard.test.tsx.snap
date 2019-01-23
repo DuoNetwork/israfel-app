@@ -109,13 +109,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       >
         <Checkbox
           checked={true}
-          indeterminate={true}
+          indeterminate={false}
           onChange={[Function]}
+          style={
+            Object {
+              "marginTop": 10,
+              "paddingLeft": 4,
+            }
+          }
         >
-          Clear All
+          All
         </Checkbox>
       </div>
-      <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
@@ -125,7 +130,8 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
         }
         style={
           Object {
-            "padding": "10, 5",
+            "marginTop": 11,
+            "padding": "10 5 ",
           }
         }
         value={Array []}
@@ -257,13 +263,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
       >
         <Checkbox
           checked={true}
-          indeterminate={true}
+          indeterminate={false}
           onChange={[Function]}
+          style={
+            Object {
+              "marginTop": 10,
+              "paddingLeft": 4,
+            }
+          }
         >
-          Clear All
+          All
         </Checkbox>
       </div>
-      <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
@@ -273,7 +284,8 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
         }
         style={
           Object {
-            "padding": "10, 5",
+            "marginTop": 11,
+            "padding": "10 5 ",
           }
         }
         value={
@@ -409,13 +421,18 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
       >
         <Checkbox
           checked={true}
-          indeterminate={true}
+          indeterminate={false}
           onChange={[Function]}
+          style={
+            Object {
+              "marginTop": 10,
+              "paddingLeft": 4,
+            }
+          }
         >
-          Clear All
+          All
         </Checkbox>
       </div>
-      <br />
       <CheckboxGroup
         onChange={[Function]}
         options={
@@ -425,7 +442,8 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
         }
         style={
           Object {
-            "padding": "10, 5",
+            "marginTop": 11,
+            "padding": "10 5 ",
           }
         }
         value={
