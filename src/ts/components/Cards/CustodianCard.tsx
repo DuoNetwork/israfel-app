@@ -69,15 +69,9 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const aDescription =
 			aCode +
 			' holders ' +
-			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)) > 0
-				? 'receiving payments at '
-				: ' is shorting ') +
-			d3.format(isBeethoven ? '.2%' : '.2f')(
-				Math.abs(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)))
-			) +
-			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, true)) > 0
-				? ' per annum.'
-				: ' leverage');
+			(aLabel.startsWith('-') ? ' is shorting ' : 'receiving payments at ') +
+			aLabel +
+			(aLabel.startsWith('-') ? ' leverage' : ' per annum.');
 		const bLabel =
 			d3.format('.2f')(getTokenInterestOrLeverage(info.states, isBeethoven, false)) + 'x';
 		const bDescription =

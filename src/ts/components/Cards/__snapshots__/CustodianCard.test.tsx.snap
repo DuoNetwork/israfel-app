@@ -185,7 +185,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 1`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="top"
-        title="aETH holders receiving payments at 5.26% per annum."
+        title="aETH holders receiving payments at 5.26% p.a. per annum."
         transitionName="zoom-big-fast"
       >
         <span>
@@ -641,7 +641,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 2`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="top"
-        title="aETH holders receiving payments at 5.26% per annum."
+        title="aETH holders receiving payments at 5.26% p.a. per annum."
         transitionName="zoom-big-fast"
       >
         <span>
@@ -1097,7 +1097,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 3`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="top"
-        title="aETH holders receiving payments at 5.26% per annum."
+        title="aETH holders receiving payments at 5.26% p.a. per annum."
         transitionName="zoom-big-fast"
       >
         <span>
@@ -1553,7 +1553,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 4`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="top"
-        title="aETH holders receiving payments at 5.26% per annum."
+        title="aETH holders receiving payments at 5.26% p.a. per annum."
         transitionName="zoom-big-fast"
       >
         <span>
@@ -2009,7 +2009,7 @@ exports[`CustodianCard Test Test Snapshot Test Snapshot 5`] = `
         mouseEnterDelay={0.1}
         mouseLeaveDelay={0.1}
         placement="top"
-        title="aETH holders receiving payments at 5.26% per annum."
+        title="aETH holders receiving payments at 5.26% p.a. per annum."
         transitionName="zoom-big-fast"
       >
         <span>
