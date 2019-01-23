@@ -62,16 +62,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
 		const isBeethoven = type === CST.BEETHOVEN;
-		const aLabel =
-			d3.format(isBeethoven ? '.2%' : '.2f')(
-				getTokenInterestOrLeverage(info.states, isBeethoven, true)
-			) + (isBeethoven ? CST.TH_PA : 'x');
+		const aNumber = d3.format(isBeethoven ? '.2%' : '.2f')(
+			getTokenInterestOrLeverage(info.states, isBeethoven, true)
+		);
+		const aLabel = aNumber + (isBeethoven ? CST.TH_PA : 'x');
 		const aDescription =
 			aCode +
 			' holders ' +
-			(aLabel.startsWith('-') ? ' is shorting ' : 'receiving payments at ') +
-			aLabel +
-			(aLabel.startsWith('-') ? ' leverage' : ' per annum.');
+			(aNumber.startsWith('-') ? ' is shorting ' : 'receiving payments at ') +
+			aNumber +
+			(aNumber.startsWith('-') ? ' leverage' : ' per annum.');
 		const bLabel =
 			d3.format('.2f')(getTokenInterestOrLeverage(info.states, isBeethoven, false)) + 'x';
 		const bDescription =
