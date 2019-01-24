@@ -57,7 +57,7 @@ export default class Header extends React.Component<IProps> {
 						<div className="nav-button-wrapper">
 							<div
 								style={{ background: 'transparent', cursor: 'pointer' }}
-								onClick={() => window.open('https://intercom.help/duonetwork')}
+								onClick={() => window.open('https://help.duo.network')}
 							>
 								{CST.TH_SUPPORT.toUpperCase()}
 							</div>
