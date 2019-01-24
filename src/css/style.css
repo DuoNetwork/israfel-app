@@ -20,10 +20,8 @@ body {
 }
 
 .icon-wrapper>img {
-	width: 80px;
-	height: 80px;
-	position: relative;
-	top: -10px;
+	height: 60px;
+	width: 75.6px;
 }
 
 .nav-button-wrapper {
