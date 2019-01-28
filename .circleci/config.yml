@@ -55,7 +55,7 @@ jobs:
                   key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
                   paths:
                       - /home/circleci/israfel-relayer
-    test-coverage:
+    test:
         working_directory: /home/circleci/israfel-app
         docker:
             - image: circleci/node:8.11.1
@@ -71,11 +71,8 @@ jobs:
                   name: Install npm
                   command: npm install
             - run:
-                  name: test
-                  command: npm test -- -w 1 --forceExit
-            - run:
                   name: coverage
-                  command: npm test -- --coverage
+                  command: npm test -- --coverage -w 1 --forceExit
             - run:
                   name: post coverage
                   command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
@@ -132,14 +129,11 @@ workflows:
             - build-duo-contract-wrapper
             - build-duo-admin
             - build-israfel-relayer
-            - test-coverage:
+            - test:
                   requires:
                       - build-israfel-relayer
                       - build-duo-contract-wrapper
                       - build-duo-admin
-                  filters:
-                      branches:
-                          only: master
     schedule_deploy:
         triggers:
             - schedule:
@@ -151,7 +145,7 @@ workflows:
             - build-duo-contract-wrapper
             - build-duo-admin
             - build-israfel-relayer
-            - test-coverage:
+            - test:
                   requires:
                       - build-israfel-relayer
                       - build-duo-contract-wrapper
@@ -161,4 +155,4 @@ workflows:
                           only: master
             - deploy:
                   requires:
-                      - test-coverage
+                      - test
