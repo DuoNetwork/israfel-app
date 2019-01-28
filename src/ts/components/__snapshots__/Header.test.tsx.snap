@@ -60,7 +60,19 @@ exports[`Header Test User Login Test Snapshot 1`] = `
     >
       <div
         className="nav-button-wrapper"
-      />
+      >
+        <div
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "transparent",
+              "cursor": "pointer",
+            }
+          }
+        >
+          TUTORIAL
+        </div>
+      </div>
       <div
         className="nav-button-wrapper"
       >

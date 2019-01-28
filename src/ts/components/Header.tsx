@@ -52,7 +52,16 @@ export default class Header extends React.Component<IProps> {
 					</div>
 					<SDivFlexCenter horizontal>
 						<div className="nav-button-wrapper">
-							{/* <Link to={''}>{CST.TH_TUTORIAL.toUpperCase()}</Link> */}
+							<div
+								style={{ background: 'transparent', cursor: 'pointer' }}
+								onClick={() =>
+									window.open(
+										'https://help.duo.network/dn/getting-started/1-duo-dex-tutorial'
+									)
+								}
+							>
+								{CST.TH_TUTORIAL.toUpperCase()}
+							</div>
 						</div>
 						<div className="nav-button-wrapper">
 							<div
