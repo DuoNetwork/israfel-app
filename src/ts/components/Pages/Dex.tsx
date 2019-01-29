@@ -23,6 +23,8 @@ import TradeCard from '../Cards/TradeCard';
 import TradeHistoryCard from '../Cards/TradeHistoryCard';
 
 interface IProps {
+	network: number;
+	locale: string;
 	tokens: IToken[];
 	account: string;
 	ethBalance: IEthBalance;
@@ -127,7 +129,9 @@ export default class Dex extends React.Component<IProps, IState> {
 			wethAddress,
 			setUnlimitedTokenAllowance,
 			addOrder,
-			deleteOrder
+			deleteOrder,
+			network,
+			locale
 		} = this.props;
 		const {
 			convertCustodian,
@@ -138,6 +142,9 @@ export default class Dex extends React.Component<IProps, IState> {
 		} = this.state;
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
+		const checkNetwork =
+			(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
+			(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
 			const code = info.code.toLowerCase();
@@ -158,7 +165,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							CST.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				)
+				  )
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -220,7 +227,18 @@ export default class Dex extends React.Component<IProps, IState> {
 			<div>
 				<Spin
 					spinning={!connection || !beethovenList.length || !mozartList.length}
-					tip="loading..."
+					tip={checkNetwork ? CST.TT_NETWORK_CHECK[locale] : 'loading... '}
+					style={
+						checkNetwork
+							? {
+									color: 'red',
+									fontWeight: 600
+									// checkNetwork
+									// 	? CST.TT_NETWORK_CHECK[locale]
+									// 	: 'loading... '
+							  }
+							: {}
+					}
 				>
 					<SDivFlexCenter
 						center

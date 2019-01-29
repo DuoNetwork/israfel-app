@@ -14,9 +14,7 @@ describe('Header Test', () => {
 				<Header
 					locale={CST.LOCALE_EN}
 					network={CST.NETWORK_ID_KOVAN}
-					exchangePrices={{
-						'0x00': 123
-					}}
+					exchangePrices={{ '0x00': 123 }}
 					updateLocale={() => ({})}
 				/>
 			);

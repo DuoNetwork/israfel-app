@@ -5,7 +5,8 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
   <Spin
     size="default"
     spinning={false}
-    tip="loading..."
+    style={Object {}}
+    tip="loading... "
     wrapperClassName=""
   >
     <styled.div
@@ -466,7 +467,8 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
   <Spin
     size="default"
     spinning={true}
-    tip="loading..."
+    style={Object {}}
+    tip="loading... "
     wrapperClassName=""
   >
     <styled.div
@@ -927,7 +929,8 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
   <Spin
     size="default"
     spinning={false}
-    tip="loading..."
+    style={Object {}}
+    tip="loading... "
     wrapperClassName=""
   >
     <styled.div
@@ -1388,7 +1391,8 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
   <Spin
     size="default"
     spinning={false}
-    tip="loading..."
+    style={Object {}}
+    tip="loading... "
     wrapperClassName=""
   >
     <styled.div
@@ -1849,7 +1853,8 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
   <Spin
     size="default"
     spinning={false}
-    tip="loading..."
+    style={Object {}}
+    tip="loading... "
     wrapperClassName=""
   >
     <styled.div

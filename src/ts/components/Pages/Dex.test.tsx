@@ -5,6 +5,7 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import Dex from './Dex';
+import * as CST from '../../common/constants';
 
 describe('Dex Test', () => {
 	describe('User Login', () => {
@@ -286,6 +287,8 @@ describe('Dex Test', () => {
 			const componentWillUnmount = jest.fn();
 			const wrapper = shallow(
 				<Dex
+					locale={CST.LOCALE_EN}
+					network={CST.NETWORK_ID_KOVAN}
 					tokens={[token as any]}
 					orderHistory={orderHistory}
 					connection={connection}

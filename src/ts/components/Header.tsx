@@ -15,7 +15,7 @@ export interface IProps {
 export default class Header extends React.Component<IProps> {
 	public render() {
 		const { network, exchangePrices } = this.props;
-		const locale = this.props.locale || CST.LOCALE_EN;
+		// const locale = this.props.locale || CST.LOCALE_EN;
 		const exPx = [];
 		for (const key in exchangePrices) exPx.push({ exchange: key, price: exchangePrices[key] });
 		return (
@@ -32,7 +32,7 @@ export default class Header extends React.Component<IProps> {
 								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
 								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
 									<span className="error-msg">
-										{CST.TT_NETWORK_CHECK[locale]}
+										{/* {CST.TT_NETWORK_CHECK[locale]} */}
 									</span>
 								) : (
 									<div className="nav-bal-wrapper">

@@ -10,6 +10,8 @@ import Dex from 'ts/components/Pages/Dex';
 function mapStateToProps(state: IState) {
 	const krakenPrices = state.relayer.exchangePrices['kraken'];
 	return {
+		locale: state.ui.locale,
+		network: state.web3.network,
 		tokens: state.relayer.tokens,
 		account: state.web3.account,
 		acceptedPrices: state.relayer.acceptedPrices,
