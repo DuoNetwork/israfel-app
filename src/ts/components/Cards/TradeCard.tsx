@@ -117,7 +117,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		  )
+		)
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -167,7 +167,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				? util.formatFixedNumber(
 						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
-				  )
+				)
 				: '';
 		this.state = {
 			account: props.account,
@@ -200,7 +200,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								? nextProps.orderBook.asks[0].price
 								: 0,
 							nextProps.tokenInfo.precisions[CST.TH_WETH]
-					  )
+					)
 					: '';
 
 			return {
@@ -576,7 +576,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -585,7 +585,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -610,7 +610,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														  )
+														)
 														: '-'}
 												</b>
 											</span>
@@ -619,7 +619,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													  )
+													)
 													: '-'}
 											</span>
 										</li>
@@ -685,7 +685,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 																? util.formatFixedNumber(
 																		item.maker.price,
 																		precision
-																  )
+																)
 																: '-'}
 														</b>
 													</span>
@@ -697,7 +697,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 															? util.formatFixedNumber(
 																	item.maker.amount,
 																	denomination
-															  )
+															)
 															: '-'}
 													</span>
 													<span

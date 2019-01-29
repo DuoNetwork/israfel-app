@@ -4,19 +4,12 @@ import DualClassWrapper from '../../../../duo-contract-wrapper/src/DualClassWrap
 import Web3Wrapper from '../../../../duo-contract-wrapper/src/Web3Wrapper';
 import * as CST from './constants';
 
-let infura = {
-	token: ''
-};
-try {
-	infura = require('../../../../israfel-relayer/src/keys/infura.json');
-} catch (error) {
-	console.log(error);
-}
-const provider =
-	(__ENV__ === CST.DB_LIVE ? CST.PROVIDER_INFURA_MAIN : CST.PROVIDER_INFURA_KOVAN) +
-	'/' +
-	infura.token;
-export const duoWeb3Wrapper = new Web3Wrapper(window, provider, '', __ENV__ === CST.DB_LIVE);
+export const duoWeb3Wrapper = new Web3Wrapper(
+	window,
+	__ENV__ === CST.DB_LIVE ? CST.PROVIDER_INFURA_MAIN : CST.PROVIDER_INFURA_KOVAN,
+	'',
+	__ENV__ === CST.DB_LIVE
+);
 export const dualClassWrappers: { [custodian: string]: DualClassWrapper } = {};
 export const getDualClassWrapper = (custodian: string) => {
 	if (!dualClassWrappers[custodian])
