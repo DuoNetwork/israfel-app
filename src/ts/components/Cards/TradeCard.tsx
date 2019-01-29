@@ -117,7 +117,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		? Math.max(
 				amountNum * feeSchedule.rate * (feeSchedule.asset ? priceNum : 1),
 				feeSchedule.minimum
-		)
+		  )
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
@@ -167,7 +167,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				? util.formatFixedNumber(
 						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
-				)
+				  )
 				: '';
 		this.state = {
 			account: props.account,
@@ -200,7 +200,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								? nextProps.orderBook.asks[0].price
 								: 0,
 							nextProps.tokenInfo.precisions[CST.TH_WETH]
-					)
+					  )
 					: '';
 
 			return {
@@ -576,7 +576,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 											<span className="title bid-span">
@@ -585,7 +585,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -610,7 +610,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														? util.formatFixedNumber(
 																item.price,
 																precision
-														)
+														  )
 														: '-'}
 												</b>
 											</span>
@@ -619,7 +619,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													? util.formatFixedNumber(
 															item.balance,
 															denomination
-													)
+													  )
 													: '-'}
 											</span>
 										</li>
@@ -647,89 +647,95 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								style={{ border: 'none', fontSize: 12 }}
 							>
 								<ul style={{ margin: 0 }}>
-									{trades && trades[pair] && trades[pair].length
-										? trades[pair]
-												.slice(
-													0,
-													trades[pair].length > 3
-														? 3
-														: trades[pair].length
-												)
-												.map((item, i) => (
-													<li
-														key={i}
+									{trades && trades[pair] && trades[pair].length ? (
+										trades[pair]
+											.slice(
+												0,
+												trades[pair].length > 3 ? 3 : trades[pair].length
+											)
+											.map((item, i) => (
+												<li
+													key={i}
+													style={{
+														padding: '3px 5px 3px 30px'
+													}}
+												>
+													<span
+														className="content"
+														style={{ width: '30%' }}
+													>
+														{item.timestamp && item.timestamp > 0
+															? util.formatTime(item.timestamp)
+															: 'No Trades'}
+													</span>
+													<span
+														className={
+															item.taker.side === 'bid'
+																? 'title bid-span'
+																: 'title ask-span'
+														}
 														style={{
-															padding: '3px 5px 3px 30px'
+															width: '30%',
+															textAlign: 'right'
 														}}
 													>
-														<span
-															className="content"
-															style={{ width: '30%' }}
-														>
-															{item.timestamp && item.timestamp > 0
-																? util.formatTime(item.timestamp)
-																: 'No Trades'}
-														</span>
-														<span
-															className={
-																item.taker.side === 'bid'
-																	? 'title bid-span'
-																	: 'title ask-span'
-															}
-															style={{
-																width: '30%',
-																textAlign: 'right'
-															}}
-														>
-															<b>
-																{item.maker.price &&
-																item.maker.price > 0
-																	? util.formatFixedNumber(
-																			item.maker.price,
-																			precision
-																	)
-																	: '-'}
-															</b>
-														</span>
-														<span
-															className="content antdColumnAlignRight"
-															style={{ width: '25%' }}
-														>
-															{item.maker.amount &&
-															item.maker.amount > 0
+														<b>
+															{item.maker.price &&
+															item.maker.price > 0
 																? util.formatFixedNumber(
-																		item.maker.amount,
-																		denomination
-																)
+																		item.maker.price,
+																		precision
+																  )
 																: '-'}
-														</span>
-														<span
-															className="title bid-span"
+														</b>
+													</span>
+													<span
+														className="content antdColumnAlignRight"
+														style={{ width: '25%' }}
+													>
+														{item.maker.amount && item.maker.amount > 0
+															? util.formatFixedNumber(
+																	item.maker.amount,
+																	denomination
+															  )
+															: '-'}
+													</span>
+													<span
+														className="title bid-span"
+														style={{
+															paddingRight: 26,
+															width: '15%'
+														}}
+													>
+														<img
+															className="cus-link"
+															src={link}
 															style={{
-																paddingRight: 26,
-																width: '15%'
+																width: '12px',
+																height: '12px',
+																marginLeft: '10px'
 															}}
-														>
-															<img
-																className="cus-link"
-																src={link}
-																style={{
-																	width: '12px',
-																	height: '12px',
-																	marginLeft: '10px'
-																}}
-																onClick={() =>
-																	window.open(
-																		util.getEtherScanTransactionLink(
-																			item.transactionHash
-																		)
+															onClick={() =>
+																window.open(
+																	util.getEtherScanTransactionLink(
+																		item.transactionHash
 																	)
-																}
-															/>
-														</span>
-													</li>
-												))
-										: <li>No Recent Trades</li>}
+																)
+															}
+														/>
+													</span>
+												</li>
+											))
+									) : (
+										<li
+											style={{
+												margin: 'auto',
+												width: 110
+											}}
+										>
+											No Recent Trades
+										</li>
+									)}
 								</ul>
 							</div>
 						</SCardList>

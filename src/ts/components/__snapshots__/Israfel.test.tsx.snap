@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Israfel Test Israfel Test Test Snapshot 1`] = `
+<Adapter>
+  <Connect(Notification) />
+  <Connect(Header) />
+  <Styled(Adapter)>
+    <Switch>
+      <Route
+        path="/status"
+        render={[Function]}
+      />
+      <Route
+        render={[Function]}
+      />
+    </Switch>
+  </Styled(Adapter)>
+</Adapter>
+`;
