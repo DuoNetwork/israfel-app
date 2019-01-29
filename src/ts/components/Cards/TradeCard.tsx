@@ -647,7 +647,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 								style={{ border: 'none', fontSize: 12 }}
 							>
 								<ul style={{ margin: 0 }}>
-									{trades && trades[pair]
+									{trades && trades[pair] && trades[pair].length
 										? trades[pair]
 												.slice(
 													0,
@@ -729,7 +729,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														</span>
 													</li>
 												))
-										: '-'}
+										: <li>No Recent Trades</li>}
 								</ul>
 							</div>
 						</SCardList>
