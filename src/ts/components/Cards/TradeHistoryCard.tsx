@@ -43,29 +43,30 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 			: codes.length
 			? [codes[0]]
 			: [];
-		// this.state.checkedList.length ? [...this.state.checkedList] : codes;
 		const dataSource: any[] = [];
 		codeList.forEach(code => {
 			const token = tokens.find(to => to.code === code);
 			const pair = code + '|' + CST.TH_WETH;
-			trades[pair].forEach(t =>
-				dataSource.push({
-					key: t.transactionHash,
-					[CST.TH_TIME]: t.timestamp,
-					[CST.TH_PAIR]: t.pair,
-					[CST.TH_TYPE]: t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
-					[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
-					[CST.TH_PX]: util.formatFixedNumber(
-						t.maker.price,
-						token ? token.precisions[CST.TH_WETH] : 0
-					),
-					[CST.TH_AMOUNT]: util.formatFixedNumber(
-						t.maker.amount,
-						token ? token.denomination : 0
-					),
-					[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
-				})
-			);
+			if (trades[pair])
+				trades[pair].forEach(t =>
+					dataSource.push({
+						key: t.transactionHash,
+						[CST.TH_TIME]: t.timestamp,
+						[CST.TH_PAIR]: t.pair,
+						[CST.TH_TYPE]:
+							t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
+						[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
+						[CST.TH_PX]: util.formatFixedNumber(
+							t.maker.price,
+							token ? token.precisions[CST.TH_WETH] : 0
+						),
+						[CST.TH_AMOUNT]: util.formatFixedNumber(
+							t.maker.amount,
+							token ? token.denomination : 0
+						),
+						[CST.TH_LINK]: util.getEtherScanTransactionLink(t.transactionHash)
+					})
+				);
 		});
 		dataSource.sort((a, b) => -a[CST.TH_TIME] + b[CST.TH_TIME]);
 		return (
