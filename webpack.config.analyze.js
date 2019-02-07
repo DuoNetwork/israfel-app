@@ -46,15 +46,20 @@ module.exports = {
 			maxInitialRequests: Infinity,
 			minSize: 0,
 			cacheGroups: {
-				relayer: {
-					test: /israfel-relayer[\\/]node_modules[\\/]/,
-					name: 'relayer',
-					priority: 10
+				finbook: {
+					test: /[\\/]node_modules[\\/]@finbook/,
+					name: 'finbook',
+					priority: 100
 				},
-				'duo-contract-wrapper': {
-					test: /duo-contract-wrapper[\\/]node_modules[\\/]/,
-					name: 'duo-contract-wrapper',
-					priority: 10
+				'idna-uts46-hx': {
+					test: /[\\/]node_modules[\\/]idna-uts46-hx/,
+					name: 'idna-uts46-hx',
+					priority: 100
+				},
+				'core-js': {
+					test: /[\\/]node_modules[\\/]core-js/,
+					name: 'core-js',
+					priority: 100
 				},
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
@@ -156,6 +161,11 @@ module.exports = {
 					name: 'bip39',
 					priority: 100
 				},
+				relayer: {
+					test: /israfel-relayer[\\/]node_modules[\\/]/,
+					name: 'relayer',
+					priority: 10
+				},
 				commons: {
 					test: /[\\/]node_modules[\\/]/,
 					name: 'vendors',
@@ -215,50 +225,38 @@ module.exports = {
 	resolve: {
 		alias: {
 			moment: path.resolve('./node_modules/moment'),
-
-			bip39: path.resolve('../duo-contract-wrapper/node_modules/bip39'),
-
+			bip39: path.resolve('../israfel-relayer/node_modules/bip39'),
 			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
 			'bignumber.js': path.resolve('../israfel-relayer/node_modules/bignumber.js'),
+			'core-js': path.resolve('../israfel-relayer/node_modules/core-js'),
 			immutable: path.resolve('./node_modules/immutable'),
 			elliptic: path.resolve('./node_modules/elliptic'),
-			'ethereumjs-wallet': path.resolve(
-				'../duo-contract-wrapper/node_modules/ethereumjs-wallet'
-			),
+			'ethereumjs-wallet': path.resolve('../israfel-relayer/node_modules/ethereumjs-wallet'),
 			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
-			lodash: path.resolve('./node_modules/lodash'),
+			lodash: path.resolve('../israfel-relayer/node_modules/lodash'),
 			underscore: path.resolve('../israfel-relayer/node_modules/underscore'),
-			'@0x/contract-artifacts': path.resolve(
-				'../israfel-relayer/node_modules/@0x/contract-artifacts'
-			),
-			'web3-eth-accounts': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-accounts'
-			),
-			'web3-eth-contract': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-contract'
-			),
-			'web3-eth-personal': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-personal'
-			),
-			'web3-eth': path.resolve('../duo-contract-wrapper/node_modules/web3-eth'),
+			'web3-eth-accounts': path.resolve('../israfel-relayer/node_modules/web3-eth-accounts'),
+			'web3-eth-contract': path.resolve('../israfel-relayer/node_modules/web3-eth-contract'),
+			'web3-eth-personal': path.resolve('../israfel-relayer/node_modules/web3-eth-personal'),
+			'web3-eth': path.resolve('../israfel-relayer/node_modules/web3-eth'),
 			'web3-provider-engine': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-provider-engine'
+				'../israfel-relayer/node_modules/web3-provider-engine'
 			),
-			'web3-utils': path.resolve('../duo-contract-wrapper/node_modules/web3-utils'),
-			'web3-core-method': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-method'
-			),
-			'web3-core-helpers': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-helpers'
-			),
-			'web3-providers-ws': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ws'
-			),
+			'web3-utils': path.resolve('../israfel-relayer/node_modules/web3-utils'),
+			'web3-core-method': path.resolve('../israfel-relayer/node_modules/web3-core-method'),
+			'web3-core-helpers': path.resolve('../israfel-relayer/node_modules/web3-core-helpers'),
+			'web3-providers-ws': path.resolve('../israfel-relayer/node_modules/web3-providers-ws'),
 			'web3-providers-ipc': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ipc'
+				'../israfel-relayer/node_modules/web3-providers-ipc'
 			),
 			'web3-providers-http': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-http'
+				'../israfel-relayer/node_modules/web3-providers-http'
+			),
+			'@finbook/duo-contract-wrapper': path.resolve(
+				'../israfel-relayer/node_modules/@finbook/duo-contract-wrapper'
+			),
+			'@finbook/duo-market-data': path.resolve(
+				'../israfel-relayer/node_modules/@finbook/duo-market-data'
 			)
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],

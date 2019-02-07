@@ -1,3 +1,4 @@
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { Icon } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
@@ -14,7 +15,7 @@ interface IProps {
 export default class CustodianCard extends React.Component<IProps> {
 	public render() {
 		const { margin, type } = this.props;
-		const isBeethoven = type === CST.BEETHOVEN;
+		const isBeethoven = type === WrapperConstants.BEETHOVEN;
 		const aLabel = '-';
 		const bLabel = '-';
 		return (

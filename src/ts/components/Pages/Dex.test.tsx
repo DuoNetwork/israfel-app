@@ -1,11 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-
+// fix for @ledgerhq/hw-transport-u2f 4.28.0
+import '@babel/polyfill';
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import * as CST from 'ts/common/constants';
 import Dex from './Dex';
-import * as CST from '../../common/constants';
 
 describe('Dex Test', () => {
 	describe('User Login', () => {

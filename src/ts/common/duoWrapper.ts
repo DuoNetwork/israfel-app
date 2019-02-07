@@ -1,7 +1,4 @@
-// fix for @ledgerhq/hw-transport-u2f 4.28.0
-import '@babel/polyfill';
-import DualClassWrapper from '../../../../duo-contract-wrapper/src/DualClassWrapper';
-import Web3Wrapper from '../../../../duo-contract-wrapper/src/Web3Wrapper';
+import {DualClassWrapper, Web3Wrapper} from '@finbook/duo-contract-wrapper';
 import * as CST from './constants';
 
 export const duoWeb3Wrapper = new Web3Wrapper(

@@ -1,10 +1,9 @@
+import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
 import {
-	IAcceptedPrice,
 	INotification,
 	IOrderBookSnapshot,
-	IPrice,
 	IStatus,
 	IToken,
 	ITrade,

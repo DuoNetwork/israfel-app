@@ -3,9 +3,9 @@
  */
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import util from 'ts/common/util';
 // import { SButton, SInput, SSlider } from './_styled';
 import TradeHistoryCard from './TradeHistoryCard';
-import util from 'ts/common/util';
 
 describe('TradeHistoryCard Test', () => {
 	describe('Test Snapshot', () => {

@@ -5,12 +5,6 @@
 		},
 		{
 			"path": "..\\israfel-relayer"
-		},
-		{
-			"path": "..\\duo-admin"
-		},
-		{
-			"path": "..\\duo-contract-wrapper"
 		}
 	],
 	"settings": {

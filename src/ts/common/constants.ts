@@ -1,13 +1,5 @@
 export * from '../../../../israfel-relayer/src/common/constants';
 import { DB_LIVE } from '../../../../israfel-relayer/src/common/constants';
-export {
-	BEETHOVEN,
-	MOZART,
-	TENOR_M19,
-	TENOR_PPT,
-	CTD_TRADING,
-	CTD_PRERESET
-} from '../../../../duo-admin/src/common/constants';
 
 export const AC_ACCOUNT = 'account';
 export const AC_NETWORK = 'network';

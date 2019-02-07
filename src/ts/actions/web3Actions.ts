@@ -1,6 +1,7 @@
+import { IDualClassStates } from '@finbook/duo-contract-wrapper';
 import * as CST from 'ts/common/constants';
 import { getDualClassWrapper } from 'ts/common/duoWrapper';
-import { IDualClassStates, IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
+import { IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 
 export function accountUpdate(account: string) {
