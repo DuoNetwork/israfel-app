@@ -17,12 +17,18 @@ jobs:
             - run:
                   name: Install npm wee
                   command: npm install
+            - save_cache:
+                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
+                  paths:
+                      - /home/circleci/israfel-relayer
     test:
         working_directory: /home/circleci/israfel-app
         docker:
             - image: circleci/node:8.11.1
         steps:
             - checkout
+            - restore_cache:
+                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                   name: Install npm
                   command: npm install
