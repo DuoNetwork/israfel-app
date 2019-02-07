@@ -1,4 +1,4 @@
-import RelayerClient from '../../../../israfel-relayer/src/client/RelayerClient';
+import RelayerClient from '../../../../israfel-common/src/RelayerClient';
 import web3Util from './web3Util';
 
 const relayerClient = new RelayerClient(web3Util, __ENV__);

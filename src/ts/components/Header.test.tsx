@@ -4,6 +4,7 @@
 
 import { shallow } from 'enzyme';
 import * as React from 'react';
+import { Constants } from '../../../../israfel-common/src';
 import * as CST from '../common/constants';
 import Header from './Header';
 
@@ -13,7 +14,7 @@ describe('Header Test', () => {
 			const wrapper = shallow(
 				<Header
 					locale={CST.LOCALE_EN}
-					network={CST.NETWORK_ID_KOVAN}
+					network={Constants.NETWORK_ID_KOVAN}
 					exchangePrices={{ '0x00': 123 }}
 					updateLocale={() => ({})}
 				/>

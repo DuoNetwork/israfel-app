@@ -3,6 +3,7 @@ import * as CST from 'ts/common/constants';
 import { getDualClassWrapper } from 'ts/common/duoWrapper';
 import { IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
+import { Constants } from '../../../../israfel-common/src';
 
 export function accountUpdate(account: string) {
 	return {
@@ -59,11 +60,11 @@ export function getCustodianBalances(): VoidThunkAction {
 		const account = getState().web3.account;
 		const tokens = getState().relayer.tokens;
 		const processedCustodian: { [custodian: string]: boolean } = {};
-		if (account !== CST.DUMMY_ADDR)
+		if (account !== Constants.DUMMY_ADDR)
 			Promise.all([
 				web3Util.getEthBalance(account),
-				web3Util.getTokenBalance(CST.TOKEN_WETH, account),
-				web3Util.getTokenAllowance(CST.TOKEN_WETH, account)
+				web3Util.getTokenBalance(Constants.TOKEN_WETH, account),
+				web3Util.getTokenAllowance(Constants.TOKEN_WETH, account)
 			]).then(result =>
 				dispatch(
 					ethBalanceUpdate({
@@ -83,7 +84,7 @@ export function getCustodianBalances(): VoidThunkAction {
 					);
 				processedCustodian[token.custodian] = true;
 			}
-			if (account !== CST.DUMMY_ADDR)
+			if (account !== Constants.DUMMY_ADDR)
 				Promise.all([
 					web3Util.getTokenBalance(token.code, account),
 					web3Util.getTokenAllowance(token.code, account)

@@ -6,6 +6,7 @@ import '@babel/polyfill';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
+import { Constants } from '../../../../../israfel-common/src';
 import Dex from './Dex';
 
 describe('Dex Test', () => {
@@ -289,7 +290,7 @@ describe('Dex Test', () => {
 			const wrapper = shallow(
 				<Dex
 					locale={CST.LOCALE_EN}
-					network={CST.NETWORK_ID_KOVAN}
+					network={Constants.NETWORK_ID_KOVAN}
 					tokens={[token as any]}
 					orderHistory={orderHistory}
 					connection={connection}

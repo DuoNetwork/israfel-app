@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IStatus } from 'ts/common/types';
+import { IStatus } from '../../../../../israfel-common/src';
 import StatusCard from '../Cards/StatusCard';
 
 interface IProps {

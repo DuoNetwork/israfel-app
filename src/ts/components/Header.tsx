@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as CST from 'ts/common/constants';
 import util from 'ts/common/util';
+import { Constants } from '../../../../israfel-common/src';
 import { SDivFlexCenter, SHeader } from './_styled';
 
 export interface IProps {
@@ -29,8 +30,10 @@ export default class Header extends React.Component<IProps> {
 						</Link>
 						<div>
 							{network ? (
-								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
-								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
+								(__ENV__ !== Constants.DB_LIVE &&
+									network !== Constants.NETWORK_ID_KOVAN) ||
+								(__ENV__ === Constants.DB_LIVE &&
+									network !== Constants.NETWORK_ID_MAIN) ? (
 									<span className="error-msg">
 										{/* {CST.TT_NETWORK_CHECK[locale]} */}
 									</span>

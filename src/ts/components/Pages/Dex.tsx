@@ -4,16 +4,14 @@ import { Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
+import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import {
-	ICustodianInfo,
-	IEthBalance,
-	INotification,
+	Constants,
 	IOrderBookSnapshot,
 	IToken,
-	ITokenBalance,
 	ITrade,
 	IUserOrder
-} from 'ts/common/types';
+} from '../../../../../israfel-common/src';
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -144,8 +142,8 @@ export default class Dex extends React.Component<IProps, IState> {
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		const checkNetwork =
-			(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
-			(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN);
+			(__ENV__ !== Constants.DB_LIVE && network !== Constants.NETWORK_ID_KOVAN) ||
+			(__ENV__ === Constants.DB_LIVE && network !== Constants.NETWORK_ID_MAIN);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
 			const code = info.code.toLowerCase();

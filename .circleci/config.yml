@@ -1,7 +1,7 @@
 version: 2
 jobs:
-    build-israfel-relayer:
-        working_directory: /home/circleci/israfel-relayer
+    build-israfel-common:
+        working_directory: /home/circleci/israfel-common
         docker:
             - image: circleci/node:8.11.1
         steps:
@@ -12,15 +12,15 @@ jobs:
                   name: Fix host authenticity for 192.30.253.113
                   command: |
                       ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run: git clone -b marketData git@192.30.253.113:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
-            - run: cd /home/circleci/israfel-relayer
+            - run: git clone git@192.30.253.113:FinBook/israfel-common.git /home/circleci/israfel-common
+            - run: cd /home/circleci/israfel-common
             - run:
                   name: Install npm wee
                   command: npm install
             - save_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
+                  key: dependency-common-{{ .Environment.CIRCLE_SHA1 }}
                   paths:
-                      - /home/circleci/israfel-relayer
+                      - /home/circleci/israfel-common
     test:
         working_directory: /home/circleci/israfel-app
         docker:
@@ -28,7 +28,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
+                  key: dependency-common-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                   name: Install npm
                   command: npm install
@@ -52,11 +52,7 @@ jobs:
                       ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run: git clone git@192.30.253.113:FinBook/duo-network-kovan-relayer.git /home/circleci/duo-network-kovan-relayer
             - restore_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
+                  key: dependency-common-{{ .Environment.CIRCLE_SHA1 }}
             - run: git clone git@192.30.253.113:FinBook/israfel-app.git /home/circleci/israfel-app
             - run:
                   name: build
@@ -73,10 +69,10 @@ workflows:
     version: 2
     build_test_deploy:
         jobs:
-            - build-israfel-relayer
+            - build-israfel-common
             - test:
                   requires:
-                      - build-israfel-relayer
+                      - build-israfel-common
     schedule_deploy:
         triggers:
             - schedule:
@@ -85,10 +81,10 @@ workflows:
                       branches:
                           only: master
         jobs:
-            - build-israfel-relayer
+            - build-israfel-common
             - test:
                   requires:
-                      - build-israfel-relayer
+                      - build-israfel-common
                   filters:
                       branches:
                           only: master

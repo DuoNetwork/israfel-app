@@ -1,9 +1,10 @@
 import { AnyAction } from 'redux';
+import { Constants } from '../../../../israfel-common/src';
 import * as CST from '../common/constants';
 import { IWeb3State } from '../common/types';
 
 export const initialState: IWeb3State = {
-	account: CST.DUMMY_ADDR,
+	account: Constants.DUMMY_ADDR,
 	network: 0,
 	ethBalance: {
 		eth: 0,

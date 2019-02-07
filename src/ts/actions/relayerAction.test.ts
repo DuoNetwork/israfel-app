@@ -2,8 +2,8 @@
 import '@babel/polyfill';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
+import { Constants } from '../../../../israfel-common/src';
 import * as relayerActions from './relayerActions';
 
 const mockStore = configureMockStore([thunk]);
@@ -51,7 +51,7 @@ describe('actions', () => {
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		relayerClient.subscribeOrderHistory = jest.fn();
-		store.dispatch(relayerActions.subscribeOrder(CST.DUMMY_ADDR));
+		store.dispatch(relayerActions.subscribeOrder(Constants.DUMMY_ADDR));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();

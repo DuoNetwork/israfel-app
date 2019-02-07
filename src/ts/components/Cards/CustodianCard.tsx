@@ -7,9 +7,10 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper, getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import { ColorStyles } from 'ts/common/styles';
-import { ICustodianInfo, IOrderBookSnapshot, ITokenBalance } from 'ts/common/types';
+import { ICustodianInfo, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
+import { IOrderBookSnapshot } from '../../../../../israfel-common/src';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 

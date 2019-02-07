@@ -3,8 +3,9 @@ import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { INotification, IUserOrder } from 'ts/common/types';
+import { INotification } from 'ts/common/types';
 import util from 'ts/common/util';
+import { Constants, IUserOrder } from '../../../../../israfel-common/src';
 import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 
@@ -56,7 +57,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 			pairOrders.forEach(order => {
 				const { orderHash, type } = order;
 				// an order can only have one terminate version
-				if (type === CST.DB_TERMINATE) pastOrders[orderHash] = [order];
+				if (type === Constants.DB_TERMINATE) pastOrders[orderHash] = [order];
 				// if this order already has a terminate version,
 				// put previous versions into past orders
 				else if (pastOrders[orderHash]) pastOrders[orderHash].push(order);
@@ -97,7 +98,7 @@ export default class OrderHistoryCard extends React.Component<IProps, IState> {
 										'Pending signature for deleting orders. Please check your MetaMask!',
 									transactionHash: ''
 								});
-								web3PersonalSign(account, CST.TERMINATE_SIGN_MSG + orderHash).then(
+								web3PersonalSign(account, Constants.TERMINATE_SIGN_MSG + orderHash).then(
 									result => deleteOrder(lastVersion.pair, [orderHash], result)
 								);
 							}}

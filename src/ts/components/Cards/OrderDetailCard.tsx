@@ -1,8 +1,8 @@
 import close from 'images/icons/close.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IUserOrder } from 'ts/common/types';
 import util from 'ts/common/util';
+import { IUserOrder } from '../../../../../israfel-common/src';
 import { SCard, SCardList, SCardTitle } from './_styled';
 
 interface IProps {

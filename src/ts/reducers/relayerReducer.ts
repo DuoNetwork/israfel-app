@@ -1,7 +1,8 @@
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import { IRelayerState, IToken, ITrade, IUserOrder } from 'ts/common/types';
+import { IRelayerState } from 'ts/common/types';
+import { Constants, IToken, ITrade, IUserOrder } from '../../../../israfel-common/src';
 
 export const initialState: IRelayerState = {
 	connection: false,
@@ -123,7 +124,7 @@ export function relayerReducer(
 				});
 			else {
 				const { orderHistory, orderSubscription, ...restOrder } = state;
-				if (orderSubscription && orderSubscription !== CST.DUMMY_ADDR)
+				if (orderSubscription && orderSubscription !== Constants.DUMMY_ADDR)
 					relayerClient.unsubscribeOrderHistory(orderSubscription);
 
 				return {

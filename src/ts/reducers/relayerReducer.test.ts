@@ -1,5 +1,6 @@
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
+import { Constants } from '../../../../israfel-common/src';
 import { initialState, relayerReducer } from './relayerReducer';
 
 describe('relayer reducer', () => {
@@ -225,7 +226,7 @@ describe('relayer reducer', () => {
 	test('orderSubscription dummy', () => {
 		state = relayerReducer(state, {
 			type: CST.AC_ORDER_SUB,
-			account: CST.DUMMY_ADDR
+			account: Constants.DUMMY_ADDR
 		});
 		expect(state).toMatchSnapshot();
 	});

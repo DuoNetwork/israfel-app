@@ -4,6 +4,9 @@
 			"path": "."
 		},
 		{
+			"path": "..\\israfel-common"
+		},
+		{
 			"path": "..\\israfel-relayer"
 		}
 	],
