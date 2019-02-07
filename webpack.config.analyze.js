@@ -61,6 +61,11 @@ module.exports = {
 					name: 'core-js',
 					priority: 100
 				},
+				cryptoJs: {
+					test: /[\\/]node_modules[\\/]crypto/,
+					name: 'cryptoJs',
+					priority: 100
+				},
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
 					name: 'd3',
@@ -70,6 +75,11 @@ module.exports = {
 					test: /[\\/]node_modules[\\/]ethers/,
 					name: 'ethers',
 					priority: 100
+				},
+				eth: {
+					test: /[\\/]node_modules[\\/]eth/,
+					name: 'eth',
+					priority: 80
 				},
 				'0x': {
 					test: /[\\/]node_modules[\\/]@0x/,
@@ -97,7 +107,7 @@ module.exports = {
 					priority: 100
 				},
 				bn: {
-					test: /[\\/]node_modules[\\/]bn/,
+					test: /[\\/]node_modules[\\/]bn|bignumber/,
 					name: 'bn',
 					priority: 100
 				},
@@ -117,7 +127,7 @@ module.exports = {
 					priority: 100
 				},
 				react: {
-					test: /[\\/]node_modules[\\/]react/,
+					test: /[\\/]node_modules[\\/]react|redux/,
 					name: 'react',
 					priority: 100
 				},
