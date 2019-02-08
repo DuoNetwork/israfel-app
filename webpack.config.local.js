@@ -99,35 +99,9 @@ module.exports = {
 	resolve: {
 		alias: {
 			moment: path.resolve('./node_modules/moment'),
-			bip39: path.resolve('../israfel-common/node_modules/bip39'),
-			'bn.js': path.resolve('../israfel-common/node_modules/bn.js'),
-			'bignumber.js': path.resolve('../israfel-common/node_modules/bignumber.js'),
-			'core-js': path.resolve('../israfel-common/node_modules/core-js'),
+			'bn.js': path.resolve('./node_modules/bn.js'),
 			immutable: path.resolve('./node_modules/immutable'),
-			elliptic: path.resolve('./node_modules/elliptic'),
-			'ethereumjs-wallet': path.resolve('../israfel-common/node_modules/ethereumjs-wallet'),
-			ethers: path.resolve('../israfel-common/node_modules/ethers'),
-			lodash: path.resolve('../israfel-common/node_modules/lodash'),
-			underscore: path.resolve('../israfel-common/node_modules/underscore'),
-			'web3-eth-accounts': path.resolve('../israfel-common/node_modules/web3-eth-accounts'),
-			'web3-eth-contract': path.resolve('../israfel-common/node_modules/web3-eth-contract'),
-			'web3-eth-personal': path.resolve('../israfel-common/node_modules/web3-eth-personal'),
-			'web3-eth': path.resolve('../israfel-common/node_modules/web3-eth'),
-			'web3-provider-engine': path.resolve(
-				'../israfel-common/node_modules/web3-provider-engine'
-			),
-			'web3-utils': path.resolve('../israfel-common/node_modules/web3-utils'),
-			'web3-core-method': path.resolve('../israfel-common/node_modules/web3-core-method'),
-			'web3-core-helpers': path.resolve('../israfel-common/node_modules/web3-core-helpers'),
-			'web3-providers-ws': path.resolve('../israfel-common/node_modules/web3-providers-ws'),
-			'web3-providers-ipc': path.resolve('../israfel-common/node_modules/web3-providers-ipc'),
-			'web3-providers-http': path.resolve(
-				'../israfel-common/node_modules/web3-providers-http'
-			),
-			'@finbook/duo-contract-wrapper': path.resolve(
-				'./node_modules/@finbook/duo-contract-wrapper'
-			),
-			'@finbook/duo-market-data': path.resolve('.//node_modules/@finbook/duo-market-data')
+			elliptic: path.resolve('./node_modules/elliptic')
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
