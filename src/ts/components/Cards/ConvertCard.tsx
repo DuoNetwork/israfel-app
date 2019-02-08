@@ -1,3 +1,4 @@
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import link from 'images/icons/link.png';
@@ -405,7 +406,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			: 0;
 
 		const contractCode = info ? info.code.split('-')[0] : '';
-		const isBeethoven = contractCode === CST.BEETHOVEN.toUpperCase();
+		const isBeethoven = contractCode === WrapperConstants.BEETHOVEN.toUpperCase();
 
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -413,7 +414,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 				<SCard
 					title={
 						<SCardTitle>
-							{CST.TH_CONVERT + ' ' + (isBeethoven ? CST.BEETHOVEN : CST.MOZART)}
+							{CST.TH_CONVERT +
+								' ' +
+								(isBeethoven
+									? WrapperConstants.BEETHOVEN
+									: WrapperConstants.MOZART)}
 							<img
 								className="cus-link"
 								src={link}

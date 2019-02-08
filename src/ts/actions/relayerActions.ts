@@ -1,16 +1,15 @@
-import * as CST from 'ts/common/constants';
-import relayerClient from 'ts/common/relayerClient';
+import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
 import {
-	IAcceptedPrice,
-	INotification,
+	Constants,
 	IOrderBookSnapshot,
-	IPrice,
 	IStatus,
 	IToken,
 	ITrade,
-	IUserOrder,
-	VoidThunkAction
-} from 'ts/common/types';
+	IUserOrder
+} from '@finbook/israfel-common';
+import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
+import { INotification, VoidThunkAction } from 'ts/common/types';
 
 export function connectionUpdate(connected: boolean) {
 	return {
@@ -95,7 +94,7 @@ export function orderSubscriptionUpdate(account: string) {
 export function subscribeOrder(account: string): VoidThunkAction {
 	return dispatch => {
 		dispatch(orderSubscriptionUpdate(''));
-		if (account && account !== CST.DUMMY_ADDR) {
+		if (account && account !== Constants.DUMMY_ADDR) {
 			dispatch(orderSubscriptionUpdate(account));
 			relayerClient.subscribeOrderHistory(account);
 		}

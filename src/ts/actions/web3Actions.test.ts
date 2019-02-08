@@ -1,8 +1,11 @@
+// fix for @ledgerhq/hw-transport-u2f 4.28.0
+import '@babel/polyfill';
+import { Constants } from '@finbook/israfel-common';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as CST from 'ts/common/constants';
 import { dualClassWrappers } from 'ts/common/duoWrapper';
 import web3Util from 'ts/common/web3Util';
+
 import * as web3Actions from './web3Actions';
 
 const mockStore = configureMockStore([thunk]);
@@ -81,7 +84,7 @@ describe('actions', () => {
 	test('getCustodianBalances dummy', () => {
 		const store: any = mockStore({
 			web3: {
-				account: CST.DUMMY_ADDR
+				account: Constants.DUMMY_ADDR
 			},
 			relayer: {
 				tokens: [

@@ -1,18 +1,12 @@
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
+import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
 import { Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
-import {
-	IAcceptedPrice,
-	ICustodianInfo,
-	IEthBalance,
-	INotification,
-	IOrderBookSnapshot,
-	IToken,
-	ITokenBalance,
-	ITrade,
-	IUserOrder
-} from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
+
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -143,13 +137,15 @@ export default class Dex extends React.Component<IProps, IState> {
 		const beethovenList: string[] = [];
 		const mozartList: string[] = [];
 		const checkNetwork =
-			(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
-			(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN);
+			(__ENV__ !== Constants.DB_LIVE && network !== Constants.NETWORK_ID_KOVAN) ||
+			(__ENV__ === Constants.DB_LIVE && network !== Constants.NETWORK_ID_MAIN);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
 			const code = info.code.toLowerCase();
-			if (code.startsWith(CST.BEETHOVEN.toLowerCase())) beethovenList.push(custodian);
-			else if (code.startsWith(CST.MOZART.toLowerCase())) mozartList.push(custodian);
+			if (code.startsWith(WrapperConstants.BEETHOVEN.toLowerCase()))
+				beethovenList.push(custodian);
+			else if (code.startsWith(WrapperConstants.MOZART.toLowerCase()))
+				mozartList.push(custodian);
 		}
 		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
 		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
@@ -162,10 +158,10 @@ export default class Dex extends React.Component<IProps, IState> {
 				? getTokenInterestOrLeverage(
 						custodians[tradeTokenInfo.custodian].states,
 						custodians[tradeTokenInfo.custodian].code.startsWith(
-							CST.BEETHOVEN.toUpperCase()
+							WrapperConstants.BEETHOVEN.toUpperCase()
 						),
 						tradeToken.startsWith('a') || tradeToken.startsWith('s')
-				  )
+				)
 				: 0;
 		let tokenNavInEth = 0;
 		let tokenNavUpdatedAt = 0;
@@ -233,10 +229,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							? {
 									color: 'red',
 									fontWeight: 600
-									// checkNetwork
-									// 	? CST.TT_NETWORK_CHECK[locale]
-									// 	: 'loading... '
-							  }
+							}
 							: {}
 					}
 				>
@@ -256,7 +249,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							return (
 								<CustodianCard
 									key={c}
-									type={CST.BEETHOVEN}
+									type={WrapperConstants.BEETHOVEN}
 									custodian={c}
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
@@ -270,7 +263,11 @@ export default class Dex extends React.Component<IProps, IState> {
 							);
 						})}
 						{Array.from(Array(Math.max(0, 2 - beethovenList.length)).keys()).map(a => (
-							<DummyCustodianCard key={a} type={CST.BEETHOVEN} margin="0 10px" />
+							<DummyCustodianCard
+								key={a}
+								type={WrapperConstants.BEETHOVEN}
+								margin="0 10px"
+							/>
 						))}
 					</SDivFlexCenter>
 					<SDivFlexCenter center horizontal marginBottom="20px">
@@ -284,7 +281,7 @@ export default class Dex extends React.Component<IProps, IState> {
 							return (
 								<CustodianCard
 									key={c}
-									type={CST.MOZART}
+									type={WrapperConstants.MOZART}
 									custodian={c}
 									handleConvert={this.handleConvert}
 									handleTrade={this.handleTrade}
@@ -298,7 +295,11 @@ export default class Dex extends React.Component<IProps, IState> {
 							);
 						})}
 						{Array.from(Array(Math.max(0, 2 - mozartList.length)).keys()).map(a => (
-							<DummyCustodianCard key={a} type={CST.MOZART} margin="0 10px" />
+							<DummyCustodianCard
+								key={a}
+								type={WrapperConstants.MOZART}
+								margin="0 10px"
+							/>
 						))}
 					</SDivFlexCenter>{' '}
 					<OrderHistoryCard

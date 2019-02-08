@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DualClassWrapper 1`] = `
+Object {
+  "custodian": Object {
+    "contract": "dualClassWrapper",
+  },
+}
+`;
+
+exports[`DualClassWrapper 2`] = `
+Array [
+  Array [
+    mockConstructor {},
+    "custodian",
+  ],
+]
+`;
+
+exports[`Web3Wrapper 1`] = `
+Array [
+  Array [
+    [Object],
+    "https://kovan.infura.io",
+    "",
+    false,
+  ],
+]
+`;

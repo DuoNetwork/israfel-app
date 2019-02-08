@@ -1,3 +1,6 @@
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
+import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { IOrderBookSnapshot } from '@finbook/israfel-common';
 import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
 import link from 'images/icons/link.png';
@@ -5,7 +8,7 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { duoWeb3Wrapper, getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import { ColorStyles } from 'ts/common/styles';
-import { IAcceptedPrice, ICustodianInfo, IOrderBookSnapshot, ITokenBalance } from 'ts/common/types';
+import { ICustodianInfo, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
 import { SDivFlexCenter } from '../_styled';
@@ -57,11 +60,13 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		} = this.props;
 		const { timeOffset } = this.state;
 		const contractCode = info.code;
-		const tenor = info.states.maturity ? contractCode.split('-')[1] : CST.TENOR_PPT;
+		const tenor = info.states.maturity
+			? contractCode.split('-')[1]
+			: WrapperConstants.TENOR_PPT;
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
-		const isBeethoven = type === CST.BEETHOVEN;
+		const isBeethoven = type === WrapperConstants.BEETHOVEN;
 		const aNumber = d3.format(isBeethoven ? '.2%' : '.2f')(
 			getTokenInterestOrLeverage(info.states, isBeethoven, true)
 		);
@@ -92,7 +97,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			bOrderBook && bOrderBook.bids.length ? bOrderBook.bids[0].price * ethPrice : 0;
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
-		const isTrading = info.states.state === CST.CTD_TRADING;
+		const isTrading = info.states.state === WrapperConstants.CTD_TRADING;
 		const isNearReset =
 			info.states.navB - info.states.limitLower < 0.1 ||
 			info.states.limitUpper - info.states.navB < 0.1;

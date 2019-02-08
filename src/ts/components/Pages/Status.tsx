@@ -1,5 +1,5 @@
+import { IStatus } from '@finbook/israfel-common';
 import * as React from 'react';
-import { IStatus } from 'ts/common/types';
 import StatusCard from '../Cards/StatusCard';
 
 interface IProps {

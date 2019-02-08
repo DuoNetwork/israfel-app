@@ -1,8 +1,8 @@
+import { Constants, IUserOrder, Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
 import moment from 'moment';
-import relayerUtil from '../../../../israfel-relayer/src/utils/util';
 import * as CST from './constants';
-import { ICustodianInfo, IUserOrder } from './types';
+import { ICustodianInfo } from './types';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
@@ -59,64 +59,65 @@ class Util {
 		return maturity ? moment(maturity).format('YYYY-MM-DD HH:mm') : CST.TH_PERPETUAL;
 	}
 
-	public formatFixedNumber = relayerUtil.formatFixedNumber;
+	public formatFixedNumber = CommonUtil.formatFixedNumber;
 
-	public getUTCNowTimestamp = relayerUtil.getUTCNowTimestamp;
+	public getUTCNowTimestamp = CommonUtil.getUTCNowTimestamp;
 
-	public round = relayerUtil.round;
+	public round = CommonUtil.round;
 
-	public getDayExpiry = relayerUtil.getDayExpiry;
+	public getDayExpiry = CommonUtil.getDayExpiry;
 
-	public getMonthEndExpiry = relayerUtil.getMonthEndExpiry;
+	public getMonthEndExpiry = CommonUtil.getMonthEndExpiry;
 
-	public getExpiryTimestamp = relayerUtil.getExpiryTimestamp;
+	public getExpiryTimestamp = CommonUtil.getExpiryTimestamp;
 
 	public getOrderTitle(order: IUserOrder) {
-		if (order.type === CST.DB_ADD) return 'Order Placed';
-		else if (order.type === CST.DB_TERMINATE)
-			if (order.status === CST.DB_FILL) return 'Order Fully Filled';
-			else if (order.status === CST.DB_TERMINATE) return 'Order Expired';
-			// order.status === CST.DB_CONFIRMED
+		if (order.type === Constants.DB_ADD) return 'Order Placed';
+		else if (order.type === Constants.DB_TERMINATE)
+			if (order.status === Constants.DB_FILL) return 'Order Fully Filled';
+			else if (order.status === Constants.DB_TERMINATE) return 'Order Expired';
+			// order.status === Constants.DB_CONFIRMED
 			else return 'Order Cancelled';
-		else if (order.status === CST.DB_MATCHING) return 'Order is Being Filled';
-		// if (order.status === CST.DB_PFILL)
+		else if (order.status === Constants.DB_MATCHING) return 'Order is Being Filled';
+		// if (order.status === Constants.DB_PFILL)
 		else return 'Order Partially Filled';
 	}
 
 	public getOrderFullDescription(order: IUserOrder) {
 		const [code1, code2] = order.pair.split('|');
-		let baseDescription = `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
+		let baseDescription = `${order.side === Constants.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
 		} ${code1} at ${order.price} ${code2} per ${code1}.`;
-		if (order.type === CST.DB_ADD)
+		if (order.type === Constants.DB_ADD)
 			return baseDescription + ` Valid till ${this.formatMaturity(order.expiry)}`;
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_FILL)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_FILL)
 			return baseDescription + ' Fully filled';
 
 		if (order.fill || order.matching) {
-			const totalFill = order.fill + (order.type === CST.DB_TERMINATE ? 0 : order.matching);
+			const totalFill =
+				order.fill + (order.type === Constants.DB_TERMINATE ? 0 : order.matching);
 			baseDescription += ` ${totalFill}(${this.formatPercent(
 				totalFill / order.amount
 			)}) filled.`;
 		}
 
-		if (order.matching && order.type !== CST.DB_TERMINATE)
+		if (order.matching && order.type !== Constants.DB_TERMINATE)
 			baseDescription += 'Pending settlement';
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_CONFIRMED)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_CONFIRMED)
 			return baseDescription + ' Cancelled by user.';
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_TERMINATE)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_TERMINATE)
 			return baseDescription + ' Expired.';
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_BALANCE)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_BALANCE)
 			return baseDescription + ` Cancelled due to insufficient balance.`;
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_MATCHING)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_MATCHING)
 			return baseDescription + ` Cancelled due to settlement error.`;
 
-		if (order.type === CST.DB_TERMINATE && order.status === CST.DB_RESET)
+		if (order.type === Constants.DB_TERMINATE && order.status === Constants.DB_RESET)
 			return baseDescription + ` Cancelled due to custodian reset.`;
 
 		return baseDescription;
@@ -124,29 +125,31 @@ class Util {
 
 	public getOrderDescription(order: IUserOrder) {
 		const [code1, code2] = order.pair.split('|');
-		return `${order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
+		return `${order.side === Constants.DB_BID ? CST.TH_BUY : CST.TH_SELL} ${
 			order.amount
 		} ${code1} at ${order.price} ${code2} per ${code1}. Total ${util.formatBalance(
-			order.fill + (order.type === CST.DB_TERMINATE ? 0 : order.matching)
+			order.fill + (order.type === Constants.DB_TERMINATE ? 0 : order.matching)
 		)} filled.`;
 	}
 
 	public getVersionDescription(order: IUserOrder) {
-		if (order.type === CST.DB_ADD) return 'Order placed.';
+		if (order.type === Constants.DB_ADD) return 'Order placed.';
 
-		if (order.type === CST.DB_UPDATE) {
+		if (order.type === Constants.DB_UPDATE) {
 			let description = `Total ${this.formatBalance(order.fill + order.matching)} filled`;
 			if (order.matching) description += ', pending settlement';
 			return description;
 		}
 
-		if (order.type === CST.DB_TERMINATE)
-			if (order.status === CST.DB_TERMINATE) return 'Expired';
-			else if (order.status === CST.DB_BALANCE) return 'Cancelled due to insufficent balance';
-			else if (order.status === CST.DB_MATCHING) return 'Cancelled due to settlement error';
-			else if (order.status === CST.DB_RESET) return 'Cancelled due to custodian reset';
-			else if (order.status === CST.DB_FILL) return 'Fully filled';
-			// (order.status === CST.DB_CONFIRMED)
+		if (order.type === Constants.DB_TERMINATE)
+			if (order.status === Constants.DB_TERMINATE) return 'Expired';
+			else if (order.status === Constants.DB_BALANCE)
+				return 'Cancelled due to insufficent balance';
+			else if (order.status === Constants.DB_MATCHING)
+				return 'Cancelled due to settlement error';
+			else if (order.status === Constants.DB_RESET) return 'Cancelled due to custodian reset';
+			else if (order.status === Constants.DB_FILL) return 'Fully filled';
+			// (order.status === Constants.DB_CONFIRMED)
 			else return 'Cancelled by user';
 		return 'Invalid order';
 	}
@@ -204,24 +207,24 @@ class Util {
 				row.push(
 					moment.utc(order.updatedAt || order.createdAt).format('YYYY-MM-DD HH:mm:ss')
 				); // CST.TH_TIME_UTC,
-				row.push(order.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL); // CST.TH_SIDE,
+				row.push(order.side === Constants.DB_BID ? CST.TH_BUY : CST.TH_SELL); // CST.TH_SIDE,
 				row.push(order.price); // CST.TH_PRICE,
 				row.push(order.amount); // CST.TH_AMOUNT,
 				row.push(order.fill + order.matching); // CST.TH_FILL,
 				row.push(order.fee + ' ' + order.feeAsset); // CST.TH_FEE,
 				row.push(moment.utc(order.expiry).format('YYYY-MM-DD HH:mm:ss')); // CST.TH_EXPIRY,
 				// CST.TH_STATUS,
-				if (order.type === CST.DB_TERMINATE)
-					if (order.status === CST.DB_BALANCE)
+				if (order.type === Constants.DB_TERMINATE)
+					if (order.status === Constants.DB_BALANCE)
 						row.push('Cancelled due to insufficent balance');
-					else if (order.status === CST.DB_MATCHING)
+					else if (order.status === Constants.DB_MATCHING)
 						row.push('Cancelled due to settlement error');
-					else if (order.status === CST.DB_RESET)
+					else if (order.status === Constants.DB_RESET)
 						row.push('Cancelled due to custodian reset');
-					else if (order.status === CST.DB_FILL) row.push('Fully filled');
-					else if (order.status === CST.DB_CONFIRMED) row.push('Cancelled by user');
+					else if (order.status === Constants.DB_FILL) row.push('Fully filled');
+					else if (order.status === Constants.DB_CONFIRMED) row.push('Cancelled by user');
 					else row.push('Expired');
-				else if (order.status === CST.DB_MATCHING) row.push('Pending settlement');
+				else if (order.status === Constants.DB_MATCHING) row.push('Pending settlement');
 				else row.push('Open');
 				row.push(order.transactionHash || ''); // CST.TH_TX_HASH
 				rows.push(row);
@@ -245,7 +248,7 @@ class Util {
 	}
 
 	private getEtherScanLink() {
-		return `https://${__ENV__ === CST.DB_LIVE ? '' : 'kovan.'}etherscan.io`;
+		return `https://${__ENV__ === Constants.DB_LIVE ? '' : 'kovan.'}etherscan.io`;
 	}
 
 	public getEtherScanTransactionLink(txHash: string) {

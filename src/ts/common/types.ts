@@ -1,9 +1,14 @@
+import { IDualClassStates } from '@finbook/duo-contract-wrapper';
+import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
+import {
+	IOrderBookSnapshot,
+	IStatus,
+	IToken,
+	ITrade,
+	IUserOrder
+} from '@finbook/israfel-common';
 import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-export { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
-import { IAcceptedPrice, IDualClassStates } from '../../../../duo-admin/src/common/types';
-export * from '../../../../israfel-relayer/src/common/types';
-import * as relayerTypes from '../../../../israfel-relayer/src/common/types';
 
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 
@@ -33,14 +38,13 @@ export interface IWeb3State {
 
 export interface IRelayerState {
 	readonly connection: boolean;
-	readonly tokens: relayerTypes.IToken[];
-	readonly status: relayerTypes.IStatus[];
-	readonly trades: { [pair: string]: relayerTypes.ITrade[] };
+	readonly tokens: IToken[];
+	readonly status: IStatus[];
+	readonly trades: { [pair: string]: ITrade[] };
 	readonly acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
-	readonly exchangePrices: { [source: string]: relayerTypes.IPrice[] };
-	readonly orderBookSnapshots: { [pair: string]: relayerTypes.IOrderBookSnapshot };
-	// readonly orderBookSubscription: string;
-	readonly orderHistory: { [pair: string]: relayerTypes.IUserOrder[] };
+	readonly exchangePrices: { [source: string]: IPrice[] };
+	readonly orderBookSnapshots: { [pair: string]: IOrderBookSnapshot };
+	readonly orderHistory: { [pair: string]: IUserOrder[] };
 	readonly orderSubscription: string;
 	readonly notification: INotification;
 }

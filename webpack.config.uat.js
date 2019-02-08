@@ -40,15 +40,25 @@ module.exports = {
 			maxInitialRequests: Infinity,
 			minSize: 0,
 			cacheGroups: {
-				relayer: {
-					test: /israfel-relayer[\\/]node_modules[\\/]/,
-					name: 'relayer',
-					priority: 10
+				finbook: {
+					test: /[\\/]node_modules[\\/]@finbook/,
+					name: 'finbook',
+					priority: 100
 				},
-				'duo-contract-wrapper': {
-					test: /duo-contract-wrapper[\\/]node_modules[\\/]/,
-					name: 'duo-contract-wrapper',
-					priority: 10
+				'idna-uts46-hx': {
+					test: /[\\/]node_modules[\\/]idna-uts46-hx/,
+					name: 'idna-uts46-hx',
+					priority: 100
+				},
+				'core-js': {
+					test: /[\\/]node_modules[\\/]core-js/,
+					name: 'core-js',
+					priority: 100
+				},
+				cryptoJs: {
+					test: /[\\/]node_modules[\\/]crypto/,
+					name: 'cryptoJs',
+					priority: 100
 				},
 				d3: {
 					test: /[\\/]node_modules[\\/]d3/,
@@ -59,6 +69,11 @@ module.exports = {
 					test: /[\\/]node_modules[\\/]ethers/,
 					name: 'ethers',
 					priority: 100
+				},
+				eth: {
+					test: /[\\/]node_modules[\\/]eth/,
+					name: 'eth',
+					priority: 80
 				},
 				'0x': {
 					test: /[\\/]node_modules[\\/]@0x/,
@@ -86,7 +101,7 @@ module.exports = {
 					priority: 100
 				},
 				bn: {
-					test: /[\\/]node_modules[\\/]bn/,
+					test: /[\\/]node_modules[\\/]bn|bignumber/,
 					name: 'bn',
 					priority: 100
 				},
@@ -106,7 +121,7 @@ module.exports = {
 					priority: 100
 				},
 				react: {
-					test: /[\\/]node_modules[\\/]react/,
+					test: /[\\/]node_modules[\\/]react|redux/,
 					name: 'react',
 					priority: 100
 				},
@@ -209,51 +224,9 @@ module.exports = {
 	resolve: {
 		alias: {
 			moment: path.resolve('./node_modules/moment'),
-
-			bip39: path.resolve('../duo-contract-wrapper/node_modules/bip39'),
-
-			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
-			'bignumber.js': path.resolve('../israfel-relayer/node_modules/bignumber.js'),
+			'bn.js': path.resolve('./node_modules/bn.js'),
 			immutable: path.resolve('./node_modules/immutable'),
-			elliptic: path.resolve('./node_modules/elliptic'),
-			'ethereumjs-wallet': path.resolve(
-				'../duo-contract-wrapper/node_modules/ethereumjs-wallet'
-			),
-			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
-			lodash: path.resolve('./node_modules/lodash'),
-			underscore: path.resolve('../israfel-relayer/node_modules/underscore'),
-			'@0x/contract-artifacts': path.resolve(
-				'../israfel-relayer/node_modules/@0x/contract-artifacts'
-			),
-			'web3-eth-accounts': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-accounts'
-			),
-			'web3-eth-contract': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-contract'
-			),
-			'web3-eth-personal': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-personal'
-			),
-			'web3-eth': path.resolve('../duo-contract-wrapper/node_modules/web3-eth'),
-			'web3-provider-engine': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-provider-engine'
-			),
-			'web3-utils': path.resolve('../duo-contract-wrapper/node_modules/web3-utils'),
-			'web3-core-method': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-method'
-			),
-			'web3-core-helpers': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-helpers'
-			),
-			'web3-providers-ws': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ws'
-			),
-			'web3-providers-ipc': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ipc'
-			),
-			'web3-providers-http': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-http'
-			)
+			elliptic: path.resolve('./node_modules/elliptic')
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']

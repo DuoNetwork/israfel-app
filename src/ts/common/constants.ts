@@ -1,13 +1,4 @@
-export * from '../../../../israfel-relayer/src/common/constants';
-import { DB_LIVE } from '../../../../israfel-relayer/src/common/constants';
-export {
-	BEETHOVEN,
-	MOZART,
-	TENOR_M19,
-	TENOR_PPT,
-	CTD_TRADING,
-	CTD_PRERESET
-} from '../../../../duo-admin/src/common/constants';
+import { Constants } from '@finbook/israfel-common';
 
 export const AC_ACCOUNT = 'account';
 export const AC_NETWORK = 'network';
@@ -127,18 +118,18 @@ export const TT_DELETE_ORDER = 'Are you sure to delete this order?';
 export const TT_NETWORK_CHECK: ILocaleText = {
 	[LOCALE_CN]:
 		'此页面只支持' +
-		(__ENV__ === DB_LIVE ? 'MainNet' : 'KOVAN') +
+		(__ENV__ === Constants.DB_LIVE ? 'MainNet' : 'KOVAN') +
 		'，请在MetaMask中选择正确的网络',
 	[LOCALE_EN]:
 		'This page is built for ' +
-		(__ENV__ === DB_LIVE ? 'MainNet' : 'KOVAN') +
+		(__ENV__ === Constants.DB_LIVE ? 'MainNet' : 'KOVAN') +
 		', please choose the correct network in MetaMask',
 	[LOCALE_JP]:
 		'このページは' +
-		(__ENV__ === DB_LIVE ? 'MainNet' : 'KOVAN') +
+		(__ENV__ === Constants.DB_LIVE ? 'MainNet' : 'KOVAN') +
 		'のために作られています。メタマスクに、正しいネットワークを選んでください',
 	[LOCALE_RU]:
 		'Данная страница предназначена для ' +
-		(__ENV__ === DB_LIVE ? 'MainNet' : 'KOVAN') +
+		(__ENV__ === Constants.DB_LIVE ? 'MainNet' : 'KOVAN') +
 		', выберите необходимую сеть в MetaMask'
 };

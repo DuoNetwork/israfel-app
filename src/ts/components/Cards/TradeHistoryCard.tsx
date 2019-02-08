@@ -1,11 +1,11 @@
-// import { Select } from 'antd';
+import { Constants, IToken, ITrade } from '@finbook/israfel-common';
 import { Checkbox } from 'antd';
 import { Table } from 'antd';
 import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { IToken, ITrade } from 'ts/common/types';
 import util from 'ts/common/util';
+
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle } from './_styled';
 const Column = Table.Column;
@@ -55,7 +55,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						[CST.TH_PAIR]: t.pair,
 						[CST.TH_TYPE]:
 							t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
-						[CST.TH_SIDE]: t.taker.side === CST.DB_BID ? CST.TH_BUY : CST.TH_SELL,
+						[CST.TH_SIDE]: t.taker.side === Constants.DB_BID ? CST.TH_BUY : CST.TH_SELL,
 						[CST.TH_PX]: util.formatFixedNumber(
 							t.maker.price,
 							token ? token.precisions[CST.TH_WETH] : 0

@@ -1,3 +1,4 @@
+import { Constants } from '@finbook/israfel-common';
 import duoIcon from 'images/DUO_icon.png';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -29,8 +30,10 @@ export default class Header extends React.Component<IProps> {
 						</Link>
 						<div>
 							{network ? (
-								(__ENV__ !== CST.DB_LIVE && network !== CST.NETWORK_ID_KOVAN) ||
-								(__ENV__ === CST.DB_LIVE && network !== CST.NETWORK_ID_MAIN) ? (
+								(__ENV__ !== Constants.DB_LIVE &&
+									network !== Constants.NETWORK_ID_KOVAN) ||
+								(__ENV__ === Constants.DB_LIVE &&
+									network !== Constants.NETWORK_ID_MAIN) ? (
 									<span className="error-msg">
 										{/* {CST.TT_NETWORK_CHECK[locale]} */}
 									</span>

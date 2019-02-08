@@ -1,72 +1,11 @@
 version: 2
 jobs:
-    build-duo-contract-wrapper:
-        working_directory: /home/circleci/duo-contract-wrapper
-        docker:
-            - image: circleci/node:8.11.1
-        steps:
-            - run: git clone https://github.com/FinBook/duo-contract-wrapper.git /home/circleci/duo-contract-wrapper
-            - run: cd /home/circleci/duo-contract-wrapper
-            - restore_cache:
-                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                  name: Install npm wee
-                  command: npm install
-            - save_cache:
-                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-                  paths:
-                      - /home/circleci/duo-contract-wrapper
-    build-duo-admin:
-        working_directory: /home/circleci/duo-admin
-        docker:
-            - image: circleci/node:8.11.1
-        steps:
-            - run: git clone https://github.com/FinBook/duo-admin.git /home/circleci/duo-admin
-            - run: cd /home/circleci/duo-admin
-            - restore_cache:
-                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                  name: Install npm wee
-                  command: npm install
-            - save_cache:
-                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
-                  paths:
-                      - /home/circleci/duo-admin
-    build-israfel-relayer:
-        working_directory: /home/circleci/israfel-relayer
-        docker:
-            - image: circleci/node:8.11.1
-        steps:
-            - add_ssh_keys:
-                  fingerprints:
-                      - '3d:80:45:8e:e6:d2:fd:fd:9b:94:73:80:b3:6c:3e:c2'
-            - run:
-                  name: Fix host authenticity for 192.30.253.113
-                  command: |
-                      ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
-            - run: git clone git@192.30.253.113:FinBook/israfel-relayer.git /home/circleci/israfel-relayer
-            - run: cd /home/circleci/israfel-relayer
-            - restore_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                  name: Install npm wee
-                  command: npm install
-            - save_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-                  paths:
-                      - /home/circleci/israfel-relayer
     test:
         working_directory: /home/circleci/israfel-app
         docker:
             - image: circleci/node:8.11.1
         steps:
             - checkout
-            - restore_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                   name: Install npm
                   command: npm install
@@ -76,21 +15,6 @@ jobs:
             - run:
                   name: post coverage
                   command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-            - save_cache:
-                  key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-                  paths:
-                      - /home/circleci/israfel-app
-    deploy:
-        docker:
-            - image: circleci/python:2.7-jessie
-        working_directory: /home/circleci/test
-        steps:
-            - run:
-                  name: Install awscli
-                  command: sudo pip install awscli
-            - restore_cache:
-                  key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-            - run: aws s3 sync /home/circleci/israfel-app/coverage/lcov-report s3://israfel-coverage
     push-repo:
         working_directory: /home/circleci
         docker:
@@ -104,12 +28,6 @@ jobs:
                   command: |
                       ssh-keyscan 192.30.253.113 >> ~/.ssh/known_hosts
             - run: git clone git@192.30.253.113:FinBook/duo-network-kovan-relayer.git /home/circleci/duo-network-kovan-relayer
-            - restore_cache:
-                  key: dependency-relayer-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
-            - restore_cache:
-                  key: dependency-assets-{{ .Environment.CIRCLE_SHA1 }}
             - run: git clone git@192.30.253.113:FinBook/israfel-app.git /home/circleci/israfel-app
             - run:
                   name: build
@@ -126,14 +44,7 @@ workflows:
     version: 2
     build_test_deploy:
         jobs:
-            - build-duo-contract-wrapper
-            - build-duo-admin
-            - build-israfel-relayer
-            - test:
-                  requires:
-                      - build-israfel-relayer
-                      - build-duo-contract-wrapper
-                      - build-duo-admin
+            - test
     schedule_deploy:
         triggers:
             - schedule:
@@ -142,17 +53,4 @@ workflows:
                       branches:
                           only: master
         jobs:
-            - build-duo-contract-wrapper
-            - build-duo-admin
-            - build-israfel-relayer
-            - test:
-                  requires:
-                      - build-israfel-relayer
-                      - build-duo-contract-wrapper
-                      - build-duo-admin
-                  filters:
-                      branches:
-                          only: master
-            - deploy:
-                  requires:
-                      - test
+            - test

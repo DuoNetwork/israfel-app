@@ -1,7 +1,7 @@
+import { IAcceptedPrice } from '@finbook/duo-market-data';
 import * as d3 from 'd3';
 import * as React from 'react';
 //import { ColorStyles } from 'ts/common/styles';
-import { IAcceptedPrice } from '../../../../../duo-admin/src/common/types';
 import util from '../../common/util';
 
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };

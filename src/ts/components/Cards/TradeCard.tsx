@@ -1,3 +1,4 @@
+import { IOrderBookSnapshot, IToken, ITrade } from '@finbook/israfel-common';
 import { Radio, Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
@@ -5,14 +6,7 @@ import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { ColorStyles } from 'ts/common/styles';
-import { ITrade } from 'ts/common/types';
-import {
-	IEthBalance,
-	INotification,
-	IOrderBookSnapshot,
-	IToken,
-	ITokenBalance
-} from 'ts/common/types';
+import { IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
 import {

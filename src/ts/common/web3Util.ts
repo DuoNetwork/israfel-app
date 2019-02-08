@@ -1,7 +1,10 @@
-// fix for @ledgerhq/hw-transport-u2f 4.28.0
-import '@babel/polyfill';
-import Web3Util from '../../../../israfel-relayer/src/utils/Web3Util';
-import { DB_LIVE } from './constants';
+import { Constants, Web3Util } from '@finbook/israfel-common';
 
-const web3Util = new Web3Util(window, __ENV__ === DB_LIVE, '', false);
+const live = __ENV__ === Constants.DB_LIVE;
+const web3Util = new Web3Util(
+	window,
+	live ? Constants.PROVIDER_INFURA_MAIN : Constants.PROVIDER_INFURA_KOVAN,
+	'',
+	live
+);
 export default web3Util;

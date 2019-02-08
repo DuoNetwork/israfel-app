@@ -1,6 +1,8 @@
+// fix for @ledgerhq/hw-transport-u2f 4.28.0
+import '@babel/polyfill';
+import { Constants } from '@finbook/israfel-common';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
 import * as relayerActions from './relayerActions';
 
@@ -49,7 +51,7 @@ describe('actions', () => {
 	test('subscribeOrder dummy account', () => {
 		const store: any = mockStore({});
 		relayerClient.subscribeOrderHistory = jest.fn();
-		store.dispatch(relayerActions.subscribeOrder(CST.DUMMY_ADDR));
+		store.dispatch(relayerActions.subscribeOrder(Constants.DUMMY_ADDR));
 		return new Promise(resolve =>
 			setTimeout(() => {
 				expect(store.getActions()).toMatchSnapshot();

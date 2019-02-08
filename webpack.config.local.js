@@ -99,51 +99,9 @@ module.exports = {
 	resolve: {
 		alias: {
 			moment: path.resolve('./node_modules/moment'),
-
-			bip39: path.resolve('../duo-contract-wrapper/node_modules/bip39'),
-
-			'bn.js': path.resolve('../israfel-relayer/node_modules/bn.js'),
-			'bignumber.js': path.resolve('../israfel-relayer/node_modules/bignumber.js'),
+			'bn.js': path.resolve('./node_modules/bn.js'),
 			immutable: path.resolve('./node_modules/immutable'),
-			elliptic: path.resolve('./node_modules/elliptic'),
-			'ethereumjs-wallet': path.resolve(
-				'../duo-contract-wrapper/node_modules/ethereumjs-wallet'
-			),
-			ethers: path.resolve('../israfel-relayer/node_modules/ethers'),
-			lodash: path.resolve('./node_modules/lodash'),
-			underscore: path.resolve('../israfel-relayer/node_modules/underscore'),
-			'@0x/contract-artifacts': path.resolve(
-				'../israfel-relayer/node_modules/@0x/contract-artifacts'
-			),
-			'web3-eth-accounts': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-accounts'
-			),
-			'web3-eth-contract': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-contract'
-			),
-			'web3-eth-personal': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-eth-personal'
-			),
-			'web3-eth': path.resolve('../duo-contract-wrapper/node_modules/web3-eth'),
-			'web3-provider-engine': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-provider-engine'
-			),
-			'web3-utils': path.resolve('../duo-contract-wrapper/node_modules/web3-utils'),
-			'web3-core-method': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-method'
-			),
-			'web3-core-helpers': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-core-helpers'
-			),
-			'web3-providers-ws': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ws'
-			),
-			'web3-providers-ipc': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-ipc'
-			),
-			'web3-providers-http': path.resolve(
-				'../duo-contract-wrapper/node_modules/web3-providers-http'
-			)
+			elliptic: path.resolve('./node_modules/elliptic')
 		},
 		modules: [path.join(__dirname, 'src'), 'node_modules'],
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
