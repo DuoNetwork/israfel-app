@@ -1,6 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`web3Wrapper 1`] = `
+exports[`DualClassWrapper 1`] = `
+Object {
+  "custodian": Object {
+    "contract": "dualClassWrapper",
+  },
+}
+`;
+
+exports[`DualClassWrapper 2`] = `
+Array [
+  Array [
+    mockConstructor {},
+    "custodian",
+  ],
+]
+`;
+
+exports[`Web3Wrapper 1`] = `
 Array [
   Array [
     [Object],
