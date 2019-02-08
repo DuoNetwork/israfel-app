@@ -1,3 +1,4 @@
+import { Constants, IUserOrder } from '@finbook/israfel-common';
 import { Table } from 'antd';
 import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
@@ -5,7 +6,6 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { INotification } from 'ts/common/types';
 import util from 'ts/common/util';
-import { Constants, IUserOrder } from '../../../../../israfel-common/src';
 import { SButton, SCard, STableWrapper } from './_styled';
 import OrderDetailCard from './OrderDetailCard';
 

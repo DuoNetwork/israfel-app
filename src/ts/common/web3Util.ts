@@ -1,4 +1,4 @@
-import { Constants, Web3Util } from '../../../../israfel-common/src';
+import { Constants, Web3Util } from '@finbook/israfel-common';
 
 const live = __ENV__ === Constants.DB_LIVE;
 const web3Util = new Web3Util(

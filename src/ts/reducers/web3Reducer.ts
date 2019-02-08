@@ -1,5 +1,5 @@
+import { Constants } from '@finbook/israfel-common';
 import { AnyAction } from 'redux';
-import { Constants } from '../../../../israfel-common/src';
 import * as CST from '../common/constants';
 import { IWeb3State } from '../common/types';
 

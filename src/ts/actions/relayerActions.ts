@@ -1,7 +1,4 @@
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
-import * as CST from 'ts/common/constants';
-import relayerClient from 'ts/common/relayerClient';
-import { INotification, VoidThunkAction } from 'ts/common/types';
 import {
 	Constants,
 	IOrderBookSnapshot,
@@ -9,7 +6,10 @@ import {
 	IToken,
 	ITrade,
 	IUserOrder
-} from '../../../../israfel-common/src';
+} from '@finbook/israfel-common';
+import * as CST from 'ts/common/constants';
+import relayerClient from 'ts/common/relayerClient';
+import { INotification, VoidThunkAction } from 'ts/common/types';
 
 export function connectionUpdate(connected: boolean) {
 	return {

@@ -1,11 +1,11 @@
-// import { Select } from 'antd';
+import { Constants, IToken, ITrade } from '@finbook/israfel-common';
 import { Checkbox } from 'antd';
 import { Table } from 'antd';
 import link from 'images/icons/linkBlack.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import util from 'ts/common/util';
-import { Constants, IToken, ITrade } from '../../../../../israfel-common/src';
+
 import { SDivFlexCenter } from '../_styled';
 import { SCard, SCardList, SCardTitle } from './_styled';
 const Column = Table.Column;

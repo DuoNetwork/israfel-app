@@ -1,6 +1,6 @@
+import { Constants, IUserOrder, Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
 import moment from 'moment';
-import { Constants, IUserOrder, Util as CommonUtil } from '../../../../israfel-common/src';
 import * as CST from './constants';
 import { ICustodianInfo } from './types';
 

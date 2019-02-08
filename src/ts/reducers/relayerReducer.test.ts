@@ -1,6 +1,6 @@
+import { Constants } from '@finbook/israfel-common';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
-import { Constants } from '../../../../israfel-common/src';
 import { initialState, relayerReducer } from './relayerReducer';
 
 describe('relayer reducer', () => {

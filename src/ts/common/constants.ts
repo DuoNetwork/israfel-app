@@ -1,4 +1,4 @@
-import { Constants } from '../../../../israfel-common/src';
+import { Constants } from '@finbook/israfel-common';
 
 export const AC_ACCOUNT = 'account';
 export const AC_NETWORK = 'network';

@@ -1,8 +1,8 @@
+import { Constants, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
 import { AnyAction } from 'redux';
 import * as CST from 'ts/common/constants';
 import relayerClient from 'ts/common/relayerClient';
 import { IRelayerState } from 'ts/common/types';
-import { Constants, IToken, ITrade, IUserOrder } from '../../../../israfel-common/src';
 
 export const initialState: IRelayerState = {
 	connection: false,

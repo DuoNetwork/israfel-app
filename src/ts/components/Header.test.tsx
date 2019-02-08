@@ -1,10 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-
+import { Constants } from '@finbook/israfel-common';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { Constants } from '../../../../israfel-common/src';
 import * as CST from '../common/constants';
 import Header from './Header';
 

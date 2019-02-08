@@ -1,9 +1,9 @@
+import { Constants } from '@finbook/israfel-common';
 import duoIcon from 'images/DUO_icon.png';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as CST from 'ts/common/constants';
 import util from 'ts/common/util';
-import { Constants } from '../../../../israfel-common/src';
 import { SDivFlexCenter, SHeader } from './_styled';
 
 export interface IProps {

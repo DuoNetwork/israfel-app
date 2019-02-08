@@ -1,10 +1,10 @@
-import * as Constants from '../../../../israfel-common/src/constants';
-jest.mock('../../../../israfel-common/src', () => ({
+import * as Constants from '@finbook/israfel-common/dist/constants';
+jest.mock('@finbook/israfel-common', () => ({
 	Constants: Constants,
 	Web3Util: jest.fn(() => ({}))
 }));
 
-import { Web3Util } from '../../../../israfel-common/src';
+import { Web3Util } from '@finbook/israfel-common';
 
 import web3Util from './web3Util';
 

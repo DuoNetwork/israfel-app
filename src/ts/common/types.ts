@@ -1,14 +1,14 @@
 import { IDualClassStates } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
-import { AnyAction } from 'redux';
-import { ThunkAction } from 'redux-thunk';
 import {
 	IOrderBookSnapshot,
 	IStatus,
 	IToken,
 	ITrade,
 	IUserOrder
-} from '../../../../israfel-common/src';
+} from '@finbook/israfel-common';
+import { AnyAction } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 export type VoidThunkAction = ThunkAction<void, IState, undefined, AnyAction>;
 

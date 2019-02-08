@@ -1,9 +1,9 @@
 import { IDualClassStates } from '@finbook/duo-contract-wrapper';
+import { Constants } from '@finbook/israfel-common';
 import * as CST from 'ts/common/constants';
 import { getDualClassWrapper } from 'ts/common/duoWrapper';
 import { IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
-import { Constants } from '../../../../israfel-common/src';
 
 export function accountUpdate(account: string) {
 	return {

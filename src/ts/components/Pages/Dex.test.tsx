@@ -3,10 +3,10 @@
  */
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
+import { Constants } from '@finbook/israfel-common';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { Constants } from '../../../../../israfel-common/src';
 import Dex from './Dex';
 
 describe('Dex Test', () => {

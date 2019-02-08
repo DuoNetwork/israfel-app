@@ -1,8 +1,9 @@
+import { IStatus } from '@finbook/israfel-common';
 import { Table } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import util from 'ts/common/util';
-import { IStatus } from '../../../../../israfel-common/src';
+
 import { SCard, SCardTitle, STableWrapper } from './_styled';
 
 const { Column } = Table;

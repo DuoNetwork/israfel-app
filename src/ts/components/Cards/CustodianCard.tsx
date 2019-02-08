@@ -1,5 +1,6 @@
 import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { IOrderBookSnapshot } from '@finbook/israfel-common';
 import { Icon, Tooltip } from 'antd';
 import * as d3 from 'd3';
 import link from 'images/icons/link.png';
@@ -10,7 +11,6 @@ import { ColorStyles } from 'ts/common/styles';
 import { ICustodianInfo, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import PriceChart from 'ts/components/Charts/PriceChart';
-import { IOrderBookSnapshot } from '../../../../../israfel-common/src';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 

@@ -1,5 +1,5 @@
 import { DualClassWrapper, Web3Wrapper } from '@finbook/duo-contract-wrapper';
-import { Constants } from '../../../../israfel-common/src';
+import { Constants } from '@finbook/israfel-common';
 
 export const duoWeb3Wrapper = new Web3Wrapper(
 	window,

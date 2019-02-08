@@ -1,17 +1,12 @@
 import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
 import { Spin } from 'antd';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
-import {
-	Constants,
-	IOrderBookSnapshot,
-	IToken,
-	ITrade,
-	IUserOrder
-} from '../../../../../israfel-common/src';
+
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -234,9 +229,6 @@ export default class Dex extends React.Component<IProps, IState> {
 							? {
 									color: 'red',
 									fontWeight: 600
-									// checkNetwork
-									// 	? CST.TT_NETWORK_CHECK[locale]
-									// 	: 'loading... '
 							}
 							: {}
 					}

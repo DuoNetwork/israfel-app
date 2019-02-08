@@ -1,9 +1,9 @@
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
+import { Constants } from '@finbook/israfel-common';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import relayerClient from 'ts/common/relayerClient';
-import { Constants } from '../../../../israfel-common/src';
 import * as relayerActions from './relayerActions';
 
 const mockStore = configureMockStore([thunk]);
