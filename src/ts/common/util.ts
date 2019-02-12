@@ -65,10 +65,6 @@ class Util {
 
 	public round = CommonUtil.round;
 
-	public getDayExpiry = CommonUtil.getDayExpiry;
-
-	public getMonthEndExpiry = CommonUtil.getMonthEndExpiry;
-
 	public getExpiryTimestamp = CommonUtil.getExpiryTimestamp;
 
 	public getOrderTitle(order: IUserOrder) {

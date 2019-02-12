@@ -115,7 +115,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
-const getExpiryDescription = (isMonth: boolean) => `Valid till ${util.formatExpiry(isMonth)}`;
+const getExpiryDescription = (isWeek: boolean) => `Valid till ${util.formatExpiry(isWeek)}`;
 
 const getLimit = (
 	price: string,
@@ -894,7 +894,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													value={expiry}
 												>
 													<Radio value={1}>Day</Radio>
-													<Radio value={2}>Month</Radio>
+													<Radio value={2}>Week</Radio>
 												</RadioGroup>
 											</SDivFlexCenter>
 											<div className="convert-radio-des">
