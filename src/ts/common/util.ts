@@ -13,8 +13,8 @@ class Util {
 		else return 'long time ago';
 	}
 
-	public formatExpiry(isMonth: boolean) {
-		return moment(util.getExpiryTimestamp(isMonth)).format('YYYY-MM-DD HH:mm');
+	public formatExpiry(isWeek: boolean) {
+		return moment(CommonUtil.getExpiryTimestamp(isWeek)).format('YYYY-MM-DD HH:mm');
 	}
 
 	public formatTime(time: any) {
