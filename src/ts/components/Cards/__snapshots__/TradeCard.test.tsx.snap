@@ -617,7 +617,7 @@ exports[`TradeCard Test Test Snapshot Approve 1`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -1259,7 +1259,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 1`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -1901,7 +1901,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 2`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -2543,7 +2543,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 3`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -3185,7 +3185,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 4`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -3828,7 +3828,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 5`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -4471,7 +4471,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 6`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -5114,7 +5114,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 7`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -5755,7 +5755,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 8`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -6396,7 +6396,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 9`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -7036,7 +7036,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 10`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -7676,7 +7676,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 11`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -8315,7 +8315,7 @@ exports[`TradeCard Test Test Snapshot Test Snapshot 12`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -8985,7 +8985,7 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 1`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>
@@ -9655,7 +9655,7 @@ exports[`TradeCard Test Test Snapshot getDerivedStateFromProps 2`] = `
                       type="radio"
                       value={2}
                     >
-                      Month
+                      Week
                     </Radio>
                   </RadioGroup>
                 </styled.div>

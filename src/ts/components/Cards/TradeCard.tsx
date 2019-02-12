@@ -1,4 +1,4 @@
-import { IOrderBookSnapshot, IToken, ITrade } from '@finbook/israfel-common';
+import { IOrderBookSnapshot, IToken, ITrade, Util as CommonUtil } from '@finbook/israfel-common';
 import { Radio, Spin } from 'antd';
 import * as d3 from 'd3';
 import close from 'images/icons/close.svg';
@@ -115,7 +115,7 @@ const getFeeDescription = (token: string, price: string, amount: string, tokenIn
 		: 0;
 	return `Pay ${fee} ${feeSchedule && feeSchedule.asset ? feeSchedule.asset : token} fee`;
 };
-const getExpiryDescription = (isMonth: boolean) => `Valid till ${util.formatExpiry(isMonth)}`;
+const getExpiryDescription = (isWeek: boolean) => `Valid till ${util.formatExpiry(isWeek)}`;
 
 const getLimit = (
 	price: string,
@@ -158,7 +158,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		super(props);
 		const price =
 			props.tokenInfo && props.orderBook.asks && props.orderBook.asks.length
-				? util.formatFixedNumber(
+				? CommonUtil.formatFixedNumber(
 						props.orderBook.asks[0].price ? props.orderBook.asks[0].price : 0,
 						props.tokenInfo.precisions[CST.TH_WETH]
 				)
@@ -189,7 +189,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (nextProps.account !== prevState.account || nextProps.token !== prevState.token) {
 			const price =
 				nextProps.tokenInfo && nextProps.orderBook.asks && nextProps.orderBook.asks.length
-					? util.formatFixedNumber(
+					? CommonUtil.formatFixedNumber(
 							nextProps.orderBook.asks[0].price
 								? nextProps.orderBook.asks[0].price
 								: 0,
@@ -242,7 +242,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const { isBid, price, expiry } = this.state;
 		const step = tokenInfo ? tokenInfo.denomination : null;
 		const amount = step
-			? util.formatFixedNumber(Math.max(0, (limit * Number(e)) / 100 - step), step)
+			? CommonUtil.formatFixedNumber(Math.max(0, (limit * Number(e)) / 100 - step), step)
 			: limit * (Number(e) / 100) + '';
 		this.setState({
 			amount: amount,
@@ -260,7 +260,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P)) {
 			const stepPrice = tokenInfo ? tokenInfo.precisions[CST.TH_WETH] : null;
 			const price = stepPrice
-				? util.formatFixedNumber(Number(e), stepPrice)
+				? CommonUtil.formatFixedNumber(Number(e), stepPrice)
 				: this.state.price;
 			this.setState({
 				price: price,
@@ -289,7 +289,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		if (e.match(CST.RX_NUM_P) && Number(e)) {
 			const step = tokenInfo ? tokenInfo.denomination : null;
 			const amount = step
-				? util.formatFixedNumber(Math.min(Number(e), Math.max(limit - step, 0)), step)
+				? CommonUtil.formatFixedNumber(Math.min(Number(e), Math.max(limit - step, 0)), step)
 				: this.state.amount;
 			this.setState({
 				amount: amount,
@@ -315,7 +315,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 		const orders = (!isBid ? orderBook.bids : orderBook.asks).slice(0, 1);
 		const price =
 			orders && orders.length
-				? util.formatFixedNumber(orders[0].price ? orders[0].price : 0, precision)
+				? CommonUtil.formatFixedNumber(orders[0].price ? orders[0].price : 0, precision)
 				: '';
 		this.setState({
 			isBid: isBid,
@@ -393,7 +393,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				Number(price),
 				Number(amount),
 				isBid,
-				util.getExpiryTimestamp(expiry === 2)
+				CommonUtil.getExpiryTimestamp(expiry === 2)
 			);
 			this.setState({
 				price: '',
@@ -406,6 +406,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		} catch (error) {
+			console.log(error);
 			notify({
 				level: 'error',
 				title: `${token}-${CST.TH_WETH}`,
@@ -535,7 +536,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 						<div className="trade-nav">
 							<span className="navspan">NAV</span>
 							<span className="trade-nav-px">
-								{`${util.formatFixedNumber(navInEth, precision)} ETH`}
+								{`${CommonUtil.formatFixedNumber(navInEth, precision)} ETH`}
 							</span>
 							<span style={{ fontSize: 10, color: ColorStyles.TextBlackAlphaL }}>
 								{`Last updated: ${util.convertUpdateTime(navUpdatedAt)}`}
@@ -567,7 +568,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 										>
 											<span className="content">
 												{item.balance && item.balance > 0
-													? util.formatFixedNumber(
+													? CommonUtil.formatFixedNumber(
 															item.balance,
 															denomination
 													)
@@ -576,7 +577,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<span className="title bid-span">
 												<b>
 													{item.price && item.price > 0
-														? util.formatFixedNumber(
+														? CommonUtil.formatFixedNumber(
 																item.price,
 																precision
 														)
@@ -601,7 +602,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											<span className="title ask-span">
 												<b>
 													{item.price && item.price > 0
-														? util.formatFixedNumber(
+														? CommonUtil.formatFixedNumber(
 																item.price,
 																precision
 														)
@@ -610,7 +611,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 											</span>
 											<span className="content">
 												{item.balance && item.balance > 0
-													? util.formatFixedNumber(
+													? CommonUtil.formatFixedNumber(
 															item.balance,
 															denomination
 													)
@@ -676,7 +677,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														<b>
 															{item.maker.price &&
 															item.maker.price > 0
-																? util.formatFixedNumber(
+																? CommonUtil.formatFixedNumber(
 																		item.maker.price,
 																		precision
 																)
@@ -688,7 +689,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 														style={{ width: '25%' }}
 													>
 														{item.maker.amount && item.maker.amount > 0
-															? util.formatFixedNumber(
+															? CommonUtil.formatFixedNumber(
 																	item.maker.amount,
 																	denomination
 															)
@@ -894,7 +895,7 @@ export default class TradeCard extends React.Component<IProps, IState> {
 													value={expiry}
 												>
 													<Radio value={1}>Day</Radio>
-													<Radio value={2}>Month</Radio>
+													<Radio value={2}>Week</Radio>
 												</RadioGroup>
 											</SDivFlexCenter>
 											<div className="convert-radio-des">

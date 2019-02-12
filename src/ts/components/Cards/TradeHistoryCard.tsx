@@ -1,4 +1,4 @@
-import { Constants, IToken, ITrade } from '@finbook/israfel-common';
+import { Constants, IToken, ITrade, Util as CommonUtil } from '@finbook/israfel-common';
 import { Checkbox } from 'antd';
 import { Table } from 'antd';
 import link from 'images/icons/linkBlack.png';
@@ -56,11 +56,11 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 						[CST.TH_TYPE]:
 							t.taker.price === t.maker.price ? CST.TH_LIMIT : CST.TH_MARKET,
 						[CST.TH_SIDE]: t.taker.side === Constants.DB_BID ? CST.TH_BUY : CST.TH_SELL,
-						[CST.TH_PX]: util.formatFixedNumber(
+						[CST.TH_PX]: CommonUtil.formatFixedNumber(
 							t.maker.price,
 							token ? token.precisions[CST.TH_WETH] : 0
 						),
-						[CST.TH_AMOUNT]: util.formatFixedNumber(
+						[CST.TH_AMOUNT]: CommonUtil.formatFixedNumber(
 							t.maker.amount,
 							token ? token.denomination : 0
 						),

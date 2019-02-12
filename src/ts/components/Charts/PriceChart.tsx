@@ -1,8 +1,8 @@
 import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
 import * as React from 'react';
 //import { ColorStyles } from 'ts/common/styles';
-import util from '../../common/util';
 
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 const width = 190 - margin.left - margin.right;
@@ -23,7 +23,7 @@ function drawLines(
 			.html('<span>Loading...</span>');
 		return;
 	}
-	const now = util.getUTCNowTimestamp();
+	const now = CommonUtil.getUTCNowTimestamp();
 	const beginningTime = now / 1000 - 24 * timeOffset;
 	const source = sourceData.filter(a => a.timestamp / 1000 > beginningTime);
 	//Establish SVG Playground
