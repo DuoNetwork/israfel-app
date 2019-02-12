@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import { Util as CommonUtil } from '@finbook/israfel-common';
 import { Radio } from 'antd';
 import { shallow } from 'enzyme';
 // import { mount } from 'enzyme';
@@ -56,11 +57,11 @@ describe('TradeCard Test', () => {
 		const handleClose = jest.fn();
 		it('Test Snapshot', () => {
 			util.formatTime = jest.fn(() => '01-01 00:00:00');
-			util.getExpiryTimestamp = jest.fn();
-			util.formatFixedNumber = jest.fn();
+			CommonUtil.getExpiryTimestamp = jest.fn();
+			CommonUtil.formatFixedNumber = jest.fn();
 			util.formatBalance = jest.fn();
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
@@ -274,7 +275,7 @@ describe('TradeCard Test', () => {
 			Math.max = jest.fn(() => 1);
 			util.formatTime = jest.fn(() => '01-01 00:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
@@ -351,7 +352,7 @@ describe('TradeCard Test', () => {
 		it('Approve', () => {
 			Math.max = jest.fn(() => 1);
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(
@@ -409,7 +410,7 @@ describe('TradeCard Test', () => {
 		it('getDerivedStateFromProps', () => {
 			Math.max = jest.fn(() => 1);
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const addOrder = jest.fn();
 			const setUnlimitedTokenAllowance = jest.fn();
 			const wrapper = shallow(

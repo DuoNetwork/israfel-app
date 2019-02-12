@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-
+import { Util as CommonUtil } from '@finbook/israfel-common';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import util from 'ts/common/util';
@@ -20,7 +20,7 @@ describe('BalanceCard Test', () => {
 		it('Test Snapshot', () => {
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const unwrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const notify = jest.fn();
@@ -63,7 +63,7 @@ describe('BalanceCard Test', () => {
 		it('Test Negative Input', () => {
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			const wrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const unwrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const notify = jest.fn();
@@ -106,7 +106,7 @@ describe('BalanceCard Test', () => {
 		it('Test window.open', () => {
 			util.formatMaturity = jest.fn(() => '1970-01-01 08:00:00');
 			util.formatExpiry = jest.fn(() => '1970-01-01 19:00:00');
-			util.getUTCNowTimestamp = jest.fn(() => 1234567890);
+			CommonUtil.getUTCNowTimestamp = jest.fn(() => 1234567890);
 			window.open = jest.fn();
 			const wrapEther = jest.fn(() => Promise.resolve('txHash'));
 			const unwrapEther = jest.fn(() => Promise.resolve('txHash'));

@@ -6,7 +6,7 @@ import { ICustodianInfo } from './types';
 
 class Util {
 	public convertUpdateTime(timestamp: number): string {
-		const diff = this.getUTCNowTimestamp() - timestamp;
+		const diff = CommonUtil.getUTCNowTimestamp() - timestamp;
 		if (diff < 60000) return 'just now';
 		else if (diff < 3600000) return Math.floor(diff / 60000) + ' min ago';
 		else if (diff < 86400000) return Math.floor(diff / 3600000) + ' hrs ago';
@@ -58,14 +58,6 @@ class Util {
 	public formatMaturity(maturity: number) {
 		return maturity ? moment(maturity).format('YYYY-MM-DD HH:mm') : CST.TH_PERPETUAL;
 	}
-
-	public formatFixedNumber = CommonUtil.formatFixedNumber;
-
-	public getUTCNowTimestamp = CommonUtil.getUTCNowTimestamp;
-
-	public round = CommonUtil.round;
-
-	public getExpiryTimestamp = CommonUtil.getExpiryTimestamp;
 
 	public getOrderTitle(order: IUserOrder) {
 		if (order.type === Constants.DB_ADD) return 'Order Placed';
@@ -157,7 +149,7 @@ class Util {
 				: 'expires in ' +
 				(info
 						? Math.floor(
-								(info.states.maturity - util.getUTCNowTimestamp()) / 86400000
+								(info.states.maturity - CommonUtil.getUTCNowTimestamp()) / 86400000
 						).toFixed(0)
 						: 0) +
 				' days'
