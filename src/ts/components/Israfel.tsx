@@ -1,3 +1,4 @@
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { Layout } from 'antd';
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -17,7 +18,13 @@ export default class Israfel extends React.Component<{}> {
 				<SContent>
 					<Switch>
 						<Route path={'/status'} render={() => <Status />} />
-						<Route render={() => <Dex />} />
+						<Route
+							render={() => (
+								<Dex
+									types={[WrapperConstants.BEETHOVEN, WrapperConstants.MOZART]}
+								/>
+							)}
+						/>
 					</Switch>
 				</SContent>
 			</Layout>

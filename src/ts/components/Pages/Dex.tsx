@@ -17,6 +17,7 @@ import TradeCard from '../Cards/TradeCard';
 import TradeHistoryCard from '../Cards/TradeHistoryCard';
 
 interface IProps {
+	types: string[];
 	network: number;
 	locale: string;
 	tokens: IToken[];
@@ -106,6 +107,7 @@ export default class Dex extends React.Component<IProps, IState> {
 
 	public render() {
 		const {
+			types,
 			tokens,
 			account,
 			acceptedPrices,
@@ -134,21 +136,22 @@ export default class Dex extends React.Component<IProps, IState> {
 			convertBToken,
 			showBalances
 		} = this.state;
-		const beethovenList: string[] = [];
-		const mozartList: string[] = [];
+		const custodianTypeList: string[][] = types.map(() => []);
 		const checkNetwork =
 			(__ENV__ !== Constants.DB_LIVE && network !== Constants.NETWORK_ID_KOVAN) ||
 			(__ENV__ === Constants.DB_LIVE && network !== Constants.NETWORK_ID_MAIN);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
 			const code = info.code.toLowerCase();
-			if (code.startsWith(WrapperConstants.BEETHOVEN.toLowerCase()))
-				beethovenList.push(custodian);
-			else if (code.startsWith(WrapperConstants.MOZART.toLowerCase()))
-				mozartList.push(custodian);
+			for (let i = 0; i < types.length; i++)
+				if (code.startsWith(types[i].toLowerCase())) {
+					custodianTypeList[i].push(custodian);
+					break;
+				}
 		}
-		beethovenList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
-		mozartList.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity);
+		custodianTypeList.forEach(list =>
+			list.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity)
+		);
 		const tradeTokenInfo = tokens.find(t => t.code === tradeToken);
 		const tradeTokenBalance = tradeTokenInfo
 			? custodianTokenBalances[tradeTokenInfo.custodian][tradeToken]
@@ -176,53 +179,36 @@ export default class Dex extends React.Component<IProps, IState> {
 		const tokenBalances: Array<{ code: string; balance: number; address: string }> = [];
 		let totalNav = 0;
 
-		beethovenList.forEach(c => {
-			const codes = Object.keys(custodianTokenBalances[c] || {});
-			codes.sort((a, b) => a.localeCompare(b));
-			codes.forEach(code => {
-				const balance =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].balance
-						: 0;
-				const address =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].address
-						: '';
-				tokenBalances.push({
-					code: code,
-					balance: balance,
-					address: address
+		custodianTypeList.forEach(list => {
+			list.forEach(c => {
+				const codes = Object.keys(custodianTokenBalances[c] || {});
+				codes.sort((a, b) => (a.startsWith('a') ? 1 : -1 ) * a.localeCompare(b));
+				codes.forEach(code => {
+					const balance =
+						custodianTokenBalances[c] && custodianTokenBalances[c][code]
+							? custodianTokenBalances[c][code].balance
+							: 0;
+					const address =
+						custodianTokenBalances[c] && custodianTokenBalances[c][code]
+							? custodianTokenBalances[c][code].address
+							: '';
+					tokenBalances.push({
+						code: code,
+						balance: balance,
+						address: address
+					});
+					if (code.startsWith('a') || code.startsWith('s'))
+						totalNav += balance * custodians[c].states.navA;
+					else totalNav += balance * custodians[c].states.navB;
 				});
-				if (code.startsWith('a')) totalNav += balance * custodians[c].states.navA;
-				else totalNav += balance * custodians[c].states.navB;
 			});
 		});
-		mozartList.forEach(c => {
-			const codes = Object.keys(custodianTokenBalances[c] || {});
-			codes.sort((a, b) => -a.localeCompare(b));
-			codes.forEach(code => {
-				const balance =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].balance
-						: 0;
-				const address =
-					custodianTokenBalances[c] && custodianTokenBalances[c][code]
-						? custodianTokenBalances[c][code].address
-						: '';
-				tokenBalances.push({
-					code: code,
-					balance: balance,
-					address: address
-				});
-				if (code.startsWith('s')) totalNav += balance * custodians[c].states.navA;
-				else totalNav += balance * custodians[c].states.navB;
-			});
-		});
+
 		totalNav += (ethBalance.eth + ethBalance.weth) * ethPrice;
 		return (
 			<div>
 				<Spin
-					spinning={!connection || !beethovenList.length || !mozartList.length}
+					spinning={!connection || custodianTypeList.some(list => !list.length)}
 					tip={checkNetwork ? CST.TT_NETWORK_CHECK[locale] : 'loading... '}
 					style={
 						checkNetwork
@@ -233,75 +219,44 @@ export default class Dex extends React.Component<IProps, IState> {
 							: {}
 					}
 				>
-					<SDivFlexCenter
-						center
-						horizontal
-						marginBottom="20px"
-						style={{ paddingTop: '20px' }}
-					>
-						{beethovenList.map(c => {
-							const tbs = custodianTokenBalances[c] || {};
-							const obs: { [pair: string]: IOrderBookSnapshot } = {};
-							for (const code in tbs) {
-								const pair = code + '|' + CST.TH_WETH;
-								obs[pair] = orderBooks[pair];
-							}
-							return (
-								<CustodianCard
-									key={c}
-									type={WrapperConstants.BEETHOVEN}
-									custodian={c}
-									handleConvert={this.handleConvert}
-									handleTrade={this.handleTrade}
-									info={custodians[c]}
-									margin="0 10px"
-									acceptedPrices={acceptedPrices[c] || []}
-									tokenBalances={tbs}
-									orderBooks={obs}
-									ethPrice={ethPrice}
-								/>
-							);
-						})}
-						{Array.from(Array(Math.max(0, 2 - beethovenList.length)).keys()).map(a => (
-							<DummyCustodianCard
-								key={a}
-								type={WrapperConstants.BEETHOVEN}
-								margin="0 10px"
-							/>
-						))}
-					</SDivFlexCenter>
-					<SDivFlexCenter center horizontal marginBottom="20px">
-						{mozartList.map(c => {
-							const tbs = custodianTokenBalances[c] || {};
-							const obs: { [pair: string]: IOrderBookSnapshot } = {};
-							for (const code in tbs) {
-								const pair = code + '|' + CST.TH_WETH;
-								obs[pair] = orderBooks[pair];
-							}
-							return (
-								<CustodianCard
-									key={c}
-									type={WrapperConstants.MOZART}
-									custodian={c}
-									handleConvert={this.handleConvert}
-									handleTrade={this.handleTrade}
-									info={custodians[c]}
-									margin="0 10px"
-									acceptedPrices={acceptedPrices[c] || []}
-									tokenBalances={tbs}
-									orderBooks={obs}
-									ethPrice={ethPrice}
-								/>
-							);
-						})}
-						{Array.from(Array(Math.max(0, 2 - mozartList.length)).keys()).map(a => (
-							<DummyCustodianCard
-								key={a}
-								type={WrapperConstants.MOZART}
-								margin="0 10px"
-							/>
-						))}
-					</SDivFlexCenter>{' '}
+					{types.map((type, i) => (
+						<SDivFlexCenter
+							key={type}
+							center
+							horizontal
+							marginBottom="20px"
+							style={{ paddingTop: '20px' }}
+						>
+							{custodianTypeList[i].map(c => {
+								const tbs = custodianTokenBalances[c] || {};
+								const obs: { [pair: string]: IOrderBookSnapshot } = {};
+								for (const code in tbs) {
+									const pair = code + '|' + CST.TH_WETH;
+									obs[pair] = orderBooks[pair];
+								}
+								return (
+									<CustodianCard
+										key={c}
+										type={type}
+										custodian={c}
+										handleConvert={this.handleConvert}
+										handleTrade={this.handleTrade}
+										info={custodians[c]}
+										margin="0 10px"
+										acceptedPrices={acceptedPrices[c] || []}
+										tokenBalances={tbs}
+										orderBooks={obs}
+										ethPrice={ethPrice}
+									/>
+								);
+							})}
+							{Array.from(
+								Array(Math.max(0, 2 - custodianTypeList[i].length)).keys()
+							).map(a => (
+								<DummyCustodianCard key={a} type={type} margin="0 10px" />
+							))}
+						</SDivFlexCenter>
+					))}
 					<OrderHistoryCard
 						orderHistory={orderHistory}
 						account={account}

@@ -12,6 +12,7 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -139,7 +140,13 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Mozart"
       marginBottom="20px"
+      style={
+        Object {
+          "paddingTop": "20px",
+        }
+      }
     >
       <CustodianCard
         acceptedPrices={
@@ -270,7 +277,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
         type="Mozart"
       />
     </styled.div>
-     
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
@@ -351,14 +357,14 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
       tokenBalances={
         Array [
           Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "balance": 0,
-            "code": "LETH",
-          },
-          Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
             "balance": 0,
             "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
           },
           Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -433,14 +439,14 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
     tokenBalances={
       Array [
         Object {
-          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-          "balance": 0,
-          "code": "LETH",
-        },
-        Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
           "balance": 0,
           "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
         },
         Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -474,6 +480,7 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -601,7 +608,13 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Mozart"
       marginBottom="20px"
+      style={
+        Object {
+          "paddingTop": "20px",
+        }
+      }
     >
       <CustodianCard
         acceptedPrices={
@@ -732,7 +745,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
         type="Mozart"
       />
     </styled.div>
-     
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
@@ -813,14 +825,14 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
       tokenBalances={
         Array [
           Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "balance": 0,
-            "code": "LETH",
-          },
-          Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
             "balance": 0,
             "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
           },
           Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -895,14 +907,14 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
     tokenBalances={
       Array [
         Object {
-          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-          "balance": 0,
-          "code": "LETH",
-        },
-        Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
           "balance": 0,
           "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
         },
         Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -936,6 +948,7 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -1063,7 +1076,13 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Mozart"
       marginBottom="20px"
+      style={
+        Object {
+          "paddingTop": "20px",
+        }
+      }
     >
       <CustodianCard
         acceptedPrices={
@@ -1194,7 +1213,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
         type="Mozart"
       />
     </styled.div>
-     
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
@@ -1275,14 +1293,14 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
       tokenBalances={
         Array [
           Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "balance": 0,
-            "code": "LETH",
-          },
-          Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
             "balance": 0,
             "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
           },
           Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -1357,14 +1375,14 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
     tokenBalances={
       Array [
         Object {
-          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-          "balance": 0,
-          "code": "LETH",
-        },
-        Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
           "balance": 0,
           "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
         },
         Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -1398,6 +1416,7 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -1525,7 +1544,13 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Mozart"
       marginBottom="20px"
+      style={
+        Object {
+          "paddingTop": "20px",
+        }
+      }
     >
       <CustodianCard
         acceptedPrices={
@@ -1656,7 +1681,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
         type="Mozart"
       />
     </styled.div>
-     
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
@@ -1737,14 +1761,14 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
       tokenBalances={
         Array [
           Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "balance": 0,
-            "code": "LETH",
-          },
-          Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
             "balance": 0,
             "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
           },
           Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -1819,14 +1843,14 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
     tokenBalances={
       Array [
         Object {
-          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-          "balance": 0,
-          "code": "LETH",
-        },
-        Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
           "balance": 0,
           "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
         },
         Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -1860,6 +1884,7 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -1987,7 +2012,13 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
     <styled.div
       center={true}
       horizontal={true}
+      key="Mozart"
       marginBottom="20px"
+      style={
+        Object {
+          "paddingTop": "20px",
+        }
+      }
     >
       <CustodianCard
         acceptedPrices={
@@ -2118,7 +2149,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
         type="Mozart"
       />
     </styled.div>
-     
     <OrderHistoryCard
       account="test"
       deleteOrder={[MockFunction]}
@@ -2199,14 +2229,14 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
       tokenBalances={
         Array [
           Object {
-            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-            "balance": 0,
-            "code": "LETH",
-          },
-          Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
             "balance": 0,
             "code": "sETH",
+          },
+          Object {
+            "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+            "balance": 0,
+            "code": "LETH",
           },
           Object {
             "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
@@ -2281,14 +2311,14 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
     tokenBalances={
       Array [
         Object {
-          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
-          "balance": 0,
-          "code": "LETH",
-        },
-        Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",
           "balance": 0,
           "code": "sETH",
+        },
+        Object {
+          "address": "0x59E6B3d43F762310626d2905148939973db2BBd3",
+          "balance": 0,
+          "code": "LETH",
         },
         Object {
           "address": "0x8a3beca74e0e737460bde45a09594a8d7d8c9886",

@@ -3,6 +3,7 @@
  */
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { Constants } from '@finbook/israfel-common';
 import { shallow } from 'enzyme';
 import * as React from 'react';
@@ -289,6 +290,7 @@ describe('Dex Test', () => {
 			const componentWillUnmount = jest.fn();
 			const wrapper = shallow(
 				<Dex
+					types={[WrapperConstants.BEETHOVEN, WrapperConstants.MOZART]}
 					locale={CST.LOCALE_EN}
 					network={Constants.NETWORK_ID_KOVAN}
 					tokens={[token as any]}
