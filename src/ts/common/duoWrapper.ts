@@ -1,4 +1,4 @@
-import { DualClassWrapper, Web3Wrapper } from '@finbook/duo-contract-wrapper';
+import { DualClassWrapper, VivaldiWrapper, Web3Wrapper } from '@finbook/duo-contract-wrapper';
 import { Constants } from '@finbook/israfel-common';
 
 export const duoWeb3Wrapper = new Web3Wrapper(
@@ -9,11 +9,22 @@ export const duoWeb3Wrapper = new Web3Wrapper(
 	'',
 	__ENV__ === Constants.DB_LIVE
 );
-export const dualClassWrappers: { [custodian: string]: DualClassWrapper } = {};
-export const getDualClassWrapper = (custodian: string) => {
-	if (!dualClassWrappers[custodian])
-		dualClassWrappers[custodian] = new DualClassWrapper(duoWeb3Wrapper, custodian);
-	return dualClassWrappers[custodian];
+export const custodianWrappers: { [custodian: string]: DualClassWrapper | VivaldiWrapper } = {};
+export const getCustodianWrapper = (custodian: string) => {
+	if (!custodianWrappers[custodian]) {
+		let isDualClass = true;
+		for (const tenor in duoWeb3Wrapper.contractAddresses.Custodians.Vivaldi) {
+			const addr = duoWeb3Wrapper.contractAddresses.Custodians.Vivaldi[tenor];
+			if (addr.custodian.address === custodian) {
+				isDualClass = false;
+				break;
+			}
+		}
+		custodianWrappers[custodian] = isDualClass
+			? new DualClassWrapper(duoWeb3Wrapper, custodian)
+			: new VivaldiWrapper(duoWeb3Wrapper, custodian);
+	}
+	return custodianWrappers[custodian];
 };
 
 export const getTokensPerEth = DualClassWrapper.getTokensPerEth;

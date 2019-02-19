@@ -184,7 +184,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 										style={{ fontSize: 10, marginLeft: 4 }}
 									>
 										<b>
-											{util.formatBalance(info.states.ethCollateral) +
+											{util.formatBalance(info.states.collateral) +
 												' ' +
 												CST.TH_ETH}
 										</b>

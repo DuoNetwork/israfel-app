@@ -60,7 +60,7 @@ relayerClient.onOrder(
 		store.dispatch(
 			relayerActions.notificationUpdate({
 				level: 'error',
-				title: method + orderHash,
+				title: `Orders ${method} ${orderHash}`,
 				message: error,
 				transactionHash: ''
 			})
@@ -72,7 +72,7 @@ relayerClient.onOrderBook(
 		store.dispatch(
 			relayerActions.notificationUpdate({
 				level: 'error',
-				title: method + pair,
+				title: `Order Book ${method} ${pair}`,
 				message: error,
 				transactionHash: ''
 			})

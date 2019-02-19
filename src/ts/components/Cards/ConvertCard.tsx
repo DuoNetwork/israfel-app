@@ -5,7 +5,7 @@ import link from 'images/icons/link.png';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { duoWeb3Wrapper, getDualClassWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper, getCustodianWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
@@ -307,7 +307,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 		const { account, custodian, handleClose, info, notify, wethAddress } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
-		const cw = getDualClassWrapper(custodian);
+		const cw = getCustodianWrapper(custodian);
 		if (!info || !cw) {
 			this.setState({
 				loading: false
@@ -497,7 +497,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								<li style={{ padding: '5px 15px' }}>
 									<span className="title">{CST.TH_COLLATERAL}</span>
 									<span className="content">
-										{util.formatBalance(info ? info.states.ethCollateral : 0) +
+										{util.formatBalance(info ? info.states.collateral : 0) +
 											' ' +
 											CST.TH_ETH}
 									</span>
