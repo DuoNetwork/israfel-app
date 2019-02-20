@@ -32,7 +32,7 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'Bull and Bear',
-			template: path.resolve(__dirname, 'src/index.ejs'),
+			template: path.resolve(__dirname, 'src/indexV.ejs'),
 			favicon: path.join(__dirname, 'src/images/favicon.ico'),
 			filename: 'index.html'
 		})

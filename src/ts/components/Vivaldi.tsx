@@ -14,11 +14,11 @@ import {
 	SDesCard,
 	SDivFlexCenter,
 	SGraphCard,
-	SHeader,
 	SInfoCard,
 	SJoinButton,
 	SPayoutCard,
-	SUserCount
+	SUserCount,
+	SVHeader
 } from './_styled';
 
 export default class Admin extends React.PureComponent {
@@ -47,7 +47,7 @@ export default class Admin extends React.PureComponent {
 					</div>
 				</MediaQuery>
 				<MediaQuery maxDeviceWidth={899}>
-					<SHeader>
+					<SVHeader>
 						<div className="title">
 							ETH
 							<img src={eth} />
@@ -57,7 +57,7 @@ export default class Admin extends React.PureComponent {
 							<b>Prediction</b>
 							<b>Market</b>
 						</div>
-					</SHeader>
+					</SVHeader>
 					<SInfoCard>
 						<div className="info-bar">
 							<div className="info-bar-left">
