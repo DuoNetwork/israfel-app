@@ -1,15 +1,15 @@
-import bet from "images/Bet.png";
-import down from "images/down.png";
-import eth from "images/ethIconB.png";
-import graph from "images/GraphCard.png";
-import placeHolder from "images/Mobile.png";
-import up from "images/up.png";
-import user from "images/user.png";
-import moment from "moment";
-import * as React from "react";
-import Countdown from "react-countdown-now";
-import MediaQuery from "react-responsive";
-import util from "ts/common/util";
+import bet from 'images/Bet.png';
+import down from 'images/down.png';
+import eth from 'images/ethIconB.png';
+import graph from 'images/GraphCard.png';
+import placeHolder from 'images/Mobile.png';
+import up from 'images/up.png';
+import user from 'images/user.png';
+import moment from 'moment';
+import * as React from 'react';
+import Countdown from 'react-countdown-now';
+import MediaQuery from 'react-responsive';
+import util from 'ts/common/util';
 import {
 	SDesCard,
 	SDivFlexCenter,
@@ -19,19 +19,12 @@ import {
 	SJoinButton,
 	SPayoutCard,
 	SUserCount
-} from "./_styled";
+} from './_styled';
 
-export interface IAdminProps {
-	signedIn: boolean;
-}
-
-export default class Admin extends React.PureComponent<IAdminProps> {
-	constructor(props: IAdminProps) {
-		super(props);
-	}
+export default class Admin extends React.PureComponent {
 	public render() {
-		const Endtime = "2019-2-20 23:00";
-		const renderer = ({hours, minutes, seconds, completed}: any) => {
+		const Endtime = '2019-2-20 23:00';
+		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Game Finished</span>;
 			else
 				return (
@@ -117,32 +110,32 @@ export default class Admin extends React.PureComponent<IAdminProps> {
 						<div className="section">
 							<h3>Current Game</h3>
 							<div className="row">
-								<div className='col1'>
-									<h4 className='col-title'># OF ETH SPENT</h4>
-									<h4 className='col-content'>39.68</h4>
+								<div className="col1">
+									<h4 className="col-title"># OF ETH SPENT</h4>
+									<h4 className="col-content">39.68</h4>
 								</div>
-								<div className='col2'>
-									<h4 className='col-title'>EXPECTED RETURN</h4>
-									<h4 className='col-content'>67.88</h4>
+								<div className="col2">
+									<h4 className="col-title">EXPECTED RETURN</h4>
+									<h4 className="col-content">67.88</h4>
 								</div>
-								<div className='col3'>
-									<h4 className='col-content increase'>+98.44%</h4>
+								<div className="col3">
+									<h4 className="col-content increase">+98.44%</h4>
 								</div>
 							</div>
 						</div>
 						<div className="section">
 							<h3>Previous Game</h3>
 							<div className="row">
-								<div className='col1'>
-									<h4 className='col-title'># OF ETH SPENT</h4>
-									<h4 className='col-content'>39.68</h4>
+								<div className="col1">
+									<h4 className="col-title"># OF ETH SPENT</h4>
+									<h4 className="col-content">39.68</h4>
 								</div>
-								<div className='col2'>
-									<h4 className='col-title'>EXPECTED RETURN</h4>
-									<h4 className='col-content'>27.88</h4>
+								<div className="col2">
+									<h4 className="col-title">EXPECTED RETURN</h4>
+									<h4 className="col-content">27.88</h4>
 								</div>
-								<div className='col3'>
-									<h4 className='col-content decrease'>-23.44%</h4>
+								<div className="col3">
+									<h4 className="col-content decrease">-23.44%</h4>
 								</div>
 							</div>
 						</div>
