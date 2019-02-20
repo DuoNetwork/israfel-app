@@ -179,10 +179,15 @@ export default class Dex extends React.Component<IProps, IState> {
 		const tokenBalances: Array<{ code: string; balance: number; address: string }> = [];
 		let totalNav = 0;
 
-		custodianTypeList.forEach(list => {
+		custodianTypeList.forEach((list, i) => {
+			const type = types[i];
 			list.forEach(c => {
 				const codes = Object.keys(custodianTokenBalances[c] || {});
-				codes.sort((a, b) => (a.startsWith('a') ? 1 : -1 ) * a.localeCompare(b));
+				codes.sort((a, b) =>
+					type === WrapperConstants.VIVALDI
+						? a.localeCompare(b)
+						: (a.startsWith('a') ? 1 : -1) * a.localeCompare(b)
+				);
 				codes.forEach(code => {
 					const balance =
 						custodianTokenBalances[c] && custodianTokenBalances[c][code]

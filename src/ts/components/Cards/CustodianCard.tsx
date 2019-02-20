@@ -60,9 +60,12 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		} = this.props;
 		const { timeOffset } = this.state;
 		const contractCode = info.code;
-		const tenor = info.states.maturity
-			? contractCode.split('-')[1]
-			: WrapperConstants.TENOR_PPT;
+		const tenor =
+			type === WrapperConstants.VIVALDI
+				? contractCode.substring(contractCode.indexOf('-') + 1)
+				: info.states.maturity
+				? contractCode.split('-')[1]
+				: WrapperConstants.TENOR_PPT;
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';

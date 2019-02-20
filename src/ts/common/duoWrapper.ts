@@ -15,7 +15,7 @@ export const getCustodianWrapper = (custodian: string) => {
 		let isDualClass = true;
 		for (const tenor in duoWeb3Wrapper.contractAddresses.Custodians.Vivaldi) {
 			const addr = duoWeb3Wrapper.contractAddresses.Custodians.Vivaldi[tenor];
-			if (addr.custodian.address === custodian) {
+			if (addr.custodian.address.toLowerCase() === custodian) {
 				isDualClass = false;
 				break;
 			}

@@ -13,7 +13,7 @@ Array [
 
 exports[`custodianWrapper 1`] = `
 Object {
-  "0xbC16d4C7A79811EA199f00FFc34da1fD2ca02765": Object {
+  "0xdae93661f5d44e331bbf852c661363427607cf7d": Object {
     "contract": "vivaldiWrapper",
   },
   "custodian": Object {
@@ -105,15 +105,15 @@ Array [
             },
             "100C-3H": Object {
               "aToken": Object {
-                "address": "0x5E5dB8ad021Bef4b6140980e9a9b45bc21c0Ead3",
+                "address": "0x1A93a7ce3Dc8858648482A4763a9f3B9e6E97873",
                 "code": "ETH-100C-3H",
               },
               "bToken": Object {
-                "address": "0xF47c77AB23F4e9a8df79A6FAA009D7Cc011cbe3C",
+                "address": "0x8e158382191E23B299375d16Ce614f8c456CDB3a",
                 "code": "ETH-100P-3H",
               },
               "custodian": Object {
-                "address": "0xbC16d4C7A79811EA199f00FFc34da1fD2ca02765",
+                "address": "0xdAe93661F5d44E331bbf852C661363427607cF7D",
                 "code": "VIVALDI-100C-3H",
               },
             },
@@ -235,15 +235,15 @@ Array [
             },
             "100C-3H": Object {
               "aToken": Object {
-                "address": "0x5E5dB8ad021Bef4b6140980e9a9b45bc21c0Ead3",
+                "address": "0x1A93a7ce3Dc8858648482A4763a9f3B9e6E97873",
                 "code": "ETH-100C-3H",
               },
               "bToken": Object {
-                "address": "0xF47c77AB23F4e9a8df79A6FAA009D7Cc011cbe3C",
+                "address": "0x8e158382191E23B299375d16Ce614f8c456CDB3a",
                 "code": "ETH-100P-3H",
               },
               "custodian": Object {
-                "address": "0xbC16d4C7A79811EA199f00FFc34da1fD2ca02765",
+                "address": "0xdAe93661F5d44E331bbf852C661363427607cF7D",
                 "code": "VIVALDI-100C-3H",
               },
             },
@@ -277,7 +277,7 @@ Array [
         ],
       },
     },
-    "0xbC16d4C7A79811EA199f00FFc34da1fD2ca02765",
+    "0xdae93661f5d44e331bbf852c661363427607cf7d",
   ],
 ]
 `;

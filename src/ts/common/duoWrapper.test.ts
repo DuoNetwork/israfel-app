@@ -22,7 +22,7 @@ test('Web3Wrapper', () => {
 
 test('custodianWrapper', () => {
 	getCustodianWrapper('custodian');
-	getCustodianWrapper('0xbC16d4C7A79811EA199f00FFc34da1fD2ca02765');
+	getCustodianWrapper('0xdAe93661F5d44E331bbf852C661363427607cF7D'.toLowerCase());
 	expect(custodianWrappers).toMatchSnapshot();
 	expect((DualClassWrapper as any).mock.calls).toMatchSnapshot();
 	expect((VivaldiWrapper as any).mock.calls).toMatchSnapshot();

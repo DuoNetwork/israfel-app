@@ -90,28 +90,15 @@ export function getCustodianBalances(): VoidThunkAction {
 				Promise.all([
 					web3Util.getTokenBalance(token.code, account),
 					web3Util.getTokenAllowance(token.code, account)
-				])
-					.then(result =>
-						dispatch(
-							tokenBalanceUpdate(token.code, token.custodian, {
-								balance: result[0],
-								allowance: result[1],
-								address: token.address
-							})
-						)
+				]).then(result =>
+					dispatch(
+						tokenBalanceUpdate(token.code, token.custodian, {
+							balance: result[0],
+							allowance: result[1],
+							address: token.address
+						})
 					)
-					.catch(async error => {
-						console.log(token.code);
-						console.log();
-						console.log(web3Util.getTokenAddressFromCode(token.code));
-						console.log(
-							await web3Util.contractWrappers.erc20Token.getBalanceAsync(
-								web3Util.getTokenAddressFromCode(token.code),
-								account
-							)
-						);
-						console.log(error);
-					});
+				);
 		}
 	};
 }

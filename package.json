@@ -99,7 +99,7 @@
 	},
 	"dependencies": {
 		"@babel/polyfill": "^7.2.5",
-		"@finbook/duo-contract-wrapper": "file:finbook-duo-contract-wrapper-1.2.0.tgz",
+		"@finbook/duo-contract-wrapper": "^1.2.0",
 		"@finbook/duo-market-data": "^1.0.1",
 		"@finbook/israfel-common": "^1.1.0",
 		"antd": "^3.13.1",
