@@ -11,6 +11,8 @@
 		"start": "webpack-dev-server --config webpack.config.local.js",
 		"vivaldi": "webpack-dev-server --config webpack.config.vivaldi.local.js",
 		"analyze": "npm run clean && npm run analyze:build && npm run analyze:no:build",
+		"analyzeVivaldi": "npm run clean && npm run analyzeVivaldi:build && npm run analyze:no:build",
+		"analyzeVivaldi:build": "webpack --config webpack.config.vivaldi.analyze.js",
 		"analyze:build": "webpack --config webpack.config.analyze.js",
 		"analyze:no:build": "webpack-bundle-analyzer dist/stats.json",
 		"rebuildDev": "webpack --config webpack.config.dev.js",

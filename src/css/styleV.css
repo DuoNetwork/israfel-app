@@ -1,0 +1,38 @@
+
+body {
+	font-family: 'Roboto', 'Microsoft YaHei' !important;
+	background: #F5F5F5;
+}
+/* Vivaldi */
+header {
+	height: 60px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: rgba(104, 104, 104, 1);
+	line-height: 60px;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
+}
+
+header>span {
+	color: rgba(89, 173, 255, 1);
+}
+
+.img-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 60px;
+}
+.img-wrapper > img {
+	width: 200px;
+	height: 282px;
+	margin-bottom: 40px;
+}
+.img-wrapper > h3 {
+	font-size: 14px;
+	font-weight: 400;
+	color: rgba(130,130,130,1);
+}
+/* Vivaldi */

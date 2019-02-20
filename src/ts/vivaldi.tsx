@@ -1,6 +1,6 @@
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
-import 'css/style.css';
+import 'css/styleV.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

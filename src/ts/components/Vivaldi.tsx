@@ -19,9 +19,9 @@ import {
 	SPayoutCard,
 	SUserCount,
 	SVHeader
-} from './_styled';
+} from './_styledV';
 
-export default class Admin extends React.PureComponent {
+export default class Vivaldi extends React.PureComponent {
 	public render() {
 		const Endtime = '2019-2-20 23:00';
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
