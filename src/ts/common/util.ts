@@ -250,6 +250,10 @@ class Util {
 	public getEtherScanAddressLink(account: string) {
 		return `${this.getEtherScanLink()}/address/${account}`;
 	}
+
+	public fillZero(num: number) {
+		return num < 10 ? `0${num}` : `${num}`;
+	}
 }
 
 const util = new Util();
