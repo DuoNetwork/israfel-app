@@ -171,18 +171,37 @@ export const SUserCount = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin: 0 14px;
+		margin: 0 10px;
 		color: ${ColorStyles.ThemeTextAlpha};
 		font-weight: 500;
+		font-size: 16px;
 	}
 	.user-img {
-		width: 16px;
-		height: 16px;
+		width: 18px;
+		height: 18px;
 		margin-right: 4px;
 	}
 	.ud-img {
-		width: 24px;
-		height: 15px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 48px;
+		height: 43px;
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+		transition: all, .3s;
+		img{
+		width: 22px;
+		height: 14px;
+		}
+	}
+	.up-img {
+		background: ${ColorStyles.ThemeGreen};
+		padding-bottom: 5px;
+	}
+	.down-img {
+		background: ${ColorStyles.ThemeRed};
+		padding-top: 5px;
 	}
 `;
 

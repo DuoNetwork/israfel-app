@@ -1,9 +1,8 @@
-import bet from 'images/Bet.png';
-import down from 'images/down.png';
+import down from 'images/downW.png';
 import eth from 'images/ethIconB.png';
 import graph from 'images/GraphCard.png';
 import placeHolder from 'images/Mobile.png';
-import up from 'images/up.png';
+import up from 'images/upW.png';
 import user from 'images/user.png';
 import moment from 'moment';
 import * as React from 'react';
@@ -15,17 +14,16 @@ import {
 	SDivFlexCenter,
 	SGraphCard,
 	SInfoCard,
-	SJoinButton,
 	SPayoutCard,
 	SUserCount,
 	SVHeader
 } from './_styledV';
 
-export default class Vivaldi extends React.PureComponent {
+export default class Admin extends React.PureComponent {
 	public render() {
-		const Endtime = '2019-2-20 23:00';
+		const Endtime = '2019-2-21 17:56';
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
-			if (completed) return <span>Game Finished</span>;
+			if (completed) return <span>Result Settling</span>;
 			else
 				return (
 					<span>
@@ -85,20 +83,20 @@ export default class Vivaldi extends React.PureComponent {
 							<Countdown date={moment(Endtime).valueOf()} renderer={renderer} />
 						</div>
 					</SDesCard>
-					<SDivFlexCenter horizontal padding="12px 8%">
+					<SDivFlexCenter horizontal padding="12px 10%">
 						<SUserCount>
 							<div>
 								<img className="user-img" src={user} />
 								123
 							</div>
-							<img className="ud-img" src={down} />
+							<div className="ud-img down-img">
+								<img src={down} />
+							</div>
 						</SUserCount>
-						<SJoinButton>
-							<img src={bet} />
-							Bet
-						</SJoinButton>
 						<SUserCount>
-							<img className="ud-img" src={up} />
+							<div className="ud-img up-img">
+								<img src={up} />
+							</div>
 							<div>
 								<img className="user-img" src={user} />
 								123
