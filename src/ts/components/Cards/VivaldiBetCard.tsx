@@ -1,3 +1,5 @@
+import bear from 'images/vivaldi/bear.png';
+import bull from 'images/vivaldi/bull.png';
 import down2 from 'images/vivaldi/downdownW.png';
 import down from 'images/vivaldi/downW.png';
 import up2 from 'images/vivaldi/upupW.png';
@@ -8,7 +10,13 @@ import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import util from 'ts/common/util';
-import { SBetInfoWrapper, SSliderWrapper, STagWrapper, SVBetCard } from './_styledV';
+import {
+	SBetInfoWrapper,
+	SCardButtonWrapper,
+	SSliderWrapper,
+	STagWrapper,
+	SVBetCard
+} from './_styledV';
 
 interface IProps {
 	cardOpen: boolean;
@@ -25,13 +33,15 @@ interface IProps {
 
 interface IState {
 	currentTag: number;
+	betNumber: number;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			currentTag: props.entryTag
+			currentTag: props.entryTag,
+			betNumber: 0
 		};
 	}
 
@@ -48,20 +58,34 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		}
 	};
 
+	private onSliderChange = (value: number) => {
+		this.setState({
+			betNumber: value
+		});
+	};
+
+	private onClose = () => {
+		this.setState({
+			betNumber: 0
+		});
+		this.props.onCancel();
+	};
+
 	public render() {
 		const {
 			cardOpen,
 			endTime,
 			entryTag,
-			onCancel,
 			onTagChange,
 			downdownPrice,
 			downPrice,
 			upPrice,
 			upupPrice
 		} = this.props;
+		const { betNumber } = this.state;
 		const min = 0;
-		const max = 100;
+		const max = 10;
+		const ratio = 0.55;
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Result Settling</span>;
 			else
@@ -120,20 +144,54 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								' count-down'
 							}
 						>
-							<Countdown date={moment(endTime).valueOf()} renderer={renderer}/>
+							<Countdown date={moment(endTime).valueOf()} renderer={renderer} />
 						</div>
 					</SBetInfoWrapper>
 					<SSliderWrapper>
-						<div className='slider-wrapper'>
-							<Slider min={min} max={max} defaultValue={10} />
-							123
-						</div>					</SSliderWrapper>
-					<span
-						style={{ background: '#fcfcfc', color: '#333' }}
-						onClick={() => onCancel()}
-					>
-						close
-					</span>
+						<div className="des-wrapper">
+							<div className="des-row">
+								<div>Paying</div>
+								<div>{util.formatBalance(betNumber)}</div>
+								<div>ETH</div>
+							</div>
+							<div className="des-row">
+								<div>To Earn</div>
+								<div>{util.formatBalance(betNumber * (1 + ratio))}</div>
+								<div>ETH</div>
+								<div>{`(+${util.formatPercent(ratio)})`}</div>
+							</div>
+						</div>
+						<div className="slider-wrapper">
+							<Slider
+								min={min}
+								max={max}
+								defaultValue={0}
+								value={betNumber}
+								step={0.1}
+								onChange={this.onSliderChange}
+								className={entryTag === 0 || entryTag === 1 ? 'below' : 'above'}
+							/>
+						</div>
+					</SSliderWrapper>
+					<SCardButtonWrapper>
+						<div
+							className={
+								(entryTag === 0 || entryTag === 1 ? 'belowC' : 'aboveC') +
+								' button'
+							}
+							onClick={this.onClose}
+						>
+							CANCEL
+						</div>
+						<div
+							className={
+								(entryTag === 0 || entryTag === 1 ? 'below' : 'above') + ' button'
+							}
+						>
+							BUY
+							<img src={entryTag === 0 || entryTag === 1 ? bear : bull} />
+						</div>
+					</SCardButtonWrapper>
 				</div>
 			</SVBetCard>
 		);
