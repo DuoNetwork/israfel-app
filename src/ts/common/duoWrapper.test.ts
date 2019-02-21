@@ -22,7 +22,7 @@ test('Web3Wrapper', () => {
 
 test('custodianWrapper', () => {
 	getCustodianWrapper('custodian');
-	getCustodianWrapper('0xdAe93661F5d44E331bbf852C661363427607cF7D'.toLowerCase());
+	getCustodianWrapper(kovan.Custodians.Vivaldi['100C-3H'].custodian.address.toLowerCase());
 	expect(custodianWrappers).toMatchSnapshot();
 	expect((DualClassWrapper as any).mock.calls).toMatchSnapshot();
 	expect((VivaldiWrapper as any).mock.calls).toMatchSnapshot();

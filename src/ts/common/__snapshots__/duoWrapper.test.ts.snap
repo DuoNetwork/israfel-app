@@ -13,7 +13,7 @@ Array [
 
 exports[`custodianWrapper 1`] = `
 Object {
-  "0xdae93661f5d44e331bbf852c661363427607cf7d": Object {
+  "0xd697eb5a080590e14e00fd355ceb547fb5b32de1": Object {
     "contract": "vivaldiWrapper",
   },
   "custodian": Object {
@@ -105,15 +105,15 @@ Array [
             },
             "100C-3H": Object {
               "aToken": Object {
-                "address": "0x1A93a7ce3Dc8858648482A4763a9f3B9e6E97873",
+                "address": "0xa869BB78A3eEb6F6F47f131EDE3dFfF19578674B",
                 "code": "ETH-100C-3H",
               },
               "bToken": Object {
-                "address": "0x8e158382191E23B299375d16Ce614f8c456CDB3a",
+                "address": "0xC17Dcd4899b65742B439c551743f1b5e140deF4e",
                 "code": "ETH-100P-3H",
               },
               "custodian": Object {
-                "address": "0xdAe93661F5d44E331bbf852C661363427607cF7D",
+                "address": "0xD697eb5a080590E14e00fd355CeB547Fb5B32dE1",
                 "code": "VIVALDI-100C-3H",
               },
             },
@@ -235,15 +235,15 @@ Array [
             },
             "100C-3H": Object {
               "aToken": Object {
-                "address": "0x1A93a7ce3Dc8858648482A4763a9f3B9e6E97873",
+                "address": "0xa869BB78A3eEb6F6F47f131EDE3dFfF19578674B",
                 "code": "ETH-100C-3H",
               },
               "bToken": Object {
-                "address": "0x8e158382191E23B299375d16Ce614f8c456CDB3a",
+                "address": "0xC17Dcd4899b65742B439c551743f1b5e140deF4e",
                 "code": "ETH-100P-3H",
               },
               "custodian": Object {
-                "address": "0xdAe93661F5d44E331bbf852C661363427607cF7D",
+                "address": "0xD697eb5a080590E14e00fd355CeB547Fb5B32dE1",
                 "code": "VIVALDI-100C-3H",
               },
             },
@@ -277,7 +277,7 @@ Array [
         ],
       },
     },
-    "0xdae93661f5d44e331bbf852c661363427607cf7d",
+    "0xd697eb5a080590e14e00fd355ceb547fb5b32de1",
   ],
 ]
 `;
