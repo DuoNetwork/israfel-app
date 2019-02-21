@@ -116,7 +116,7 @@ export const SGraphCard = styled.div`
 	padding: 20px 4% 10px;
 	img {
 		width: 100%;
-		height: 180px;
+		height: 240px;
 	}
 `;
 

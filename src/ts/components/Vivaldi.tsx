@@ -1,9 +1,9 @@
-import down from 'images/downW.png';
 import eth from 'images/ethIconB.png';
-import graph from 'images/GraphCard.png';
-import placeHolder from 'images/Mobile.png';
-import up from 'images/upW.png';
-import user from 'images/user.png';
+import down from 'images/vivaldi/downW.png';
+import graph from 'images/vivaldi/GraphCard.png';
+import placeHolder from 'images/vivaldi/Mobile.png';
+import up from 'images/vivaldi/upW.png';
+import user from 'images/vivaldi/user.png';
 import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
@@ -18,9 +18,37 @@ import {
 	SUserCount,
 	SVHeader
 } from './_styledV';
+import VivaldiBetCard from './Cards/VivaldiBetCard';
 
-export default class Admin extends React.PureComponent {
+//interface IProps {}
+interface IState {
+	openBetCard: boolean;
+	entryTag: number;
+}
+export default class Vivaldi extends React.PureComponent<{}, IState> {
+	constructor(props: any) {
+		super(props);
+		this.state = {
+			openBetCard: false,
+			entryTag: 0
+		};
+	}
+
+	public handleBetCard = (entry?: number) => {
+		this.setState({
+			openBetCard: !this.state.openBetCard,
+			entryTag: entry ? entry : this.state.entryTag
+		});
+	};
+
+	public handleBetCardTag = (tag: number) => {
+		this.setState({
+			entryTag: tag
+		});
+	};
+
 	public render() {
+		const { openBetCard, entryTag } = this.state;
 		const Endtime = '2019-2-21 17:56';
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Result Settling</span>;
@@ -89,12 +117,12 @@ export default class Admin extends React.PureComponent {
 								<img className="user-img" src={user} />
 								123
 							</div>
-							<div className="ud-img down-img">
+							<div className="ud-img down-img" onClick={() => this.handleBetCard(1)}>
 								<img src={down} />
 							</div>
 						</SUserCount>
 						<SUserCount>
-							<div className="ud-img up-img">
+							<div className="ud-img up-img" onClick={() => this.handleBetCard(2)}>
 								<img src={up} />
 							</div>
 							<div>
@@ -138,6 +166,17 @@ export default class Admin extends React.PureComponent {
 							</div>
 						</div>
 					</SPayoutCard>
+					<VivaldiBetCard
+						cardOpen={openBetCard}
+						endTime={Endtime}
+						entryTag={entryTag}
+						downdownPrice={140}
+						downPrice={145}
+						upPrice={155}
+						upupPrice={160}
+						onCancel={this.handleBetCard}
+						onTagChange={this.handleBetCardTag}
+					/>
 				</MediaQuery>
 			</div>
 		);
