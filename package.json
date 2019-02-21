@@ -102,7 +102,7 @@
 	},
 	"dependencies": {
 		"@babel/polyfill": "^7.2.5",
-		"@finbook/duo-contract-wrapper": "^1.2.1",
+		"@finbook/duo-contract-wrapper": "^1.2.2",
 		"@finbook/duo-market-data": "^1.0.1",
 		"@finbook/israfel-common": "^1.1.0",
 		"@types/react-responsive": "^3.0.3",
