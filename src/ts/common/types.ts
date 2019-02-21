@@ -1,4 +1,4 @@
-import { IDualClassStates } from '@finbook/duo-contract-wrapper';
+import { IDualClassStates, IVivaldiStates } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
 import {
 	IOrderBookSnapshot,
@@ -71,4 +71,9 @@ export interface ITokenBalance {
 export interface ICustodianInfo {
 	code: string;
 	states: IDualClassStates;
+}
+
+export interface IVivaldiCustodianInfo {
+	code: string;
+	states: IVivaldiStates;
 }
