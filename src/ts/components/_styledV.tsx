@@ -89,6 +89,13 @@ export const SInfoCard = styled.div`
 			justify-content: center;
 			align-items: center;
 			border: 1px dashed ${ColorStyles.BorderBlack3};
+			transition: all .3s;
+		}
+		.showMini {
+			opacity: 1;
+		}
+		.hideMini {
+			opacity: 0;
 		}
 	}
 	.subtitle-bar {

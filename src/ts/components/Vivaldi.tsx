@@ -90,9 +90,13 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 								<div className="info-title">Ethereum</div>
 								<div className="info-price">$150.00</div>
 							</div>
-							{/* {<div className='info-bar-right'>
-							Graph
-						</div>} */}
+							<div
+								className={
+									(openBetCard ? 'showMini' : 'hideMini') + ' info-bar-right'
+								}
+							>
+								Mini Graph
+							</div>
 						</div>
 						<div className="subtitle-bar">
 							<span className="updown-button">UP</span>
