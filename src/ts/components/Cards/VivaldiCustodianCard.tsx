@@ -2,15 +2,13 @@ import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice } from '@finbook/duo-market-data';
 import { IOrderBookSnapshot } from '@finbook/israfel-common';
 import { Icon, Tooltip } from 'antd';
-import * as d3 from 'd3';
 import link from 'images/icons/link.png';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { duoWeb3Wrapper, getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper } from 'ts/common/duoWrapper';
 import { ColorStyles } from 'ts/common/styles';
-import { ICustodianInfo, ITokenBalance } from 'ts/common/types';
+import { ITokenBalance, IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
-import PriceChart from 'ts/components/Charts/PriceChart';
 import { SDivFlexCenter } from '../_styled';
 import { SButton, SCard, SCardList, SCardTitle } from './_styled';
 
@@ -19,7 +17,7 @@ interface IProps {
 	custodian: string;
 	tokenBalances: { [code: string]: ITokenBalance };
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
-	info: ICustodianInfo;
+	info: IVivaldiCustodianInfo;
 	margin: string;
 	acceptedPrices: IAcceptedPrice[];
 	ethPrice: number;
@@ -53,43 +51,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 			handleConvert,
 			handleTrade,
 			tokenBalances,
-			acceptedPrices,
 			orderBooks,
 			ethPrice,
 			custodian
 		} = this.props;
 		const { timeOffset } = this.state;
 		const contractCode = info.code;
-		const tenor =
-			type === WrapperConstants.VIVALDI
-				? contractCode.substring(contractCode.indexOf('-') + 1)
-				: info.states.maturity
-				? contractCode.split('-')[1]
-				: WrapperConstants.TENOR_PPT;
+		const tenor = contractCode.substring(contractCode.indexOf('-') + 1);
 		const contractAddress = duoWeb3Wrapper.contractAddresses.Custodians[type][tenor];
 		const aCode = contractAddress ? contractAddress.aToken.code : '';
 		const bCode = contractAddress ? contractAddress.bToken.code : '';
-		const isBeethoven = type === WrapperConstants.BEETHOVEN;
-		const aNumber = d3.format(isBeethoven ? '.2%' : '.2f')(
-			getTokenInterestOrLeverage(info.states, isBeethoven, true)
-		);
-		const aLabel = aNumber + (isBeethoven ? CST.TH_PA : 'x');
-		const aDescription =
-			aCode +
-			' holders ' +
-			(aNumber.startsWith('-') ? ' is shorting ' : 'receiving payments at ') +
-			aNumber +
-			(aNumber.startsWith('-') ? ' leverage' : ' per annum.');
-		const bLabel =
-			d3.format('.2f')(getTokenInterestOrLeverage(info.states, isBeethoven, false)) + 'x';
-		const bDescription =
-			bCode +
-			' holders are' +
-			(Number(getTokenInterestOrLeverage(info.states, isBeethoven, false)) > 0
-				? ' longing '
-				: ' shorting ') +
-			bLabel +
-			' leverage.';
 		const aOrderBook = orderBooks[aCode + '|' + CST.TH_WETH];
 		const bOrderBook = orderBooks[bCode + '|' + CST.TH_WETH];
 		const aBestBid =
@@ -101,9 +72,6 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 		const bBestAsk =
 			bOrderBook && bOrderBook.asks.length ? bOrderBook.asks[0].price * ethPrice : 0;
 		const isTrading = info.states.state === WrapperConstants.CTD_TRADING;
-		const isNearReset =
-			info.states.navB - info.states.limitLower < 0.1 ||
-			info.states.limitUpper - info.states.navB < 0.1;
 		return (
 			<SCard
 				title={
@@ -130,12 +98,7 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 							<div className="status-ligh-wrapper">
 								<div
 									className={
-										'status-light ' +
-										(isNearReset
-											? 'status1'
-											: info.states.state === 'Trading'
-											? 'status3'
-											: 'status2')
+										'status-light ' + (isTrading ? 'status3' : 'status2')
 									}
 								/>
 							</div>
@@ -165,17 +128,10 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 										<Icon type="swap" />
 									</span>
 									<span className="content">
-										{isBeethoven ? (
-											<div className="cus-des">
-												<div>Income Token</div>
-												<div>Leverage Token</div>
-											</div>
-										) : (
-											<div className="cus-des">
-												<div>Short Token</div>
-												<div>Long Token</div>
-											</div>
-										)}
+										<div className="cus-des">
+											<div>In Token</div>
+											<div>Out Token</div>
+										</div>
 									</span>
 								</li>
 								<li style={{ justifyContent: 'start' }}>
@@ -228,27 +184,20 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div className="cuscardtokenwrapper">
 						<span style={{ display: 'flex', alignItems: 'center' }}>
 							{aCode}
-							<span className="aspan">{isBeethoven ? 'INCOME' : 'SHORT'}</span>
+							<span className="aspan">IN</span>
 						</span>
-						<Tooltip title={aDescription} placement="top">
-							<span>{aLabel}</span>
-						</Tooltip>
 					</div>
 					<div className="cuscardnavtag">
 						<span className="navspan">NAV</span>
-						<span>
-							<b>{'$' + (info ? util.formatPriceShort(info.states.navA) : 0)}</b>
-						</span>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="90px" padding="5px 0 15px 0">
 					<div style={{ width: '56%' }}>
-						<PriceChart
-							prices={acceptedPrices}
-							timeOffset={timeOffset}
-							name={aCode}
-							isA={true}
-						/>
+						<div>
+							Round End:{' '}
+							{util.formatMaturity(info.states.resetPriceTime + info.states.period)}
+						</div>
+						<div>Last Round: {info.states.isKnockedIn ? 'In' : 'Out'}</div>
 					</div>
 					<div
 						style={{
@@ -282,27 +231,16 @@ export default class CustodianCard extends React.Component<IProps, IState> {
 					<div className="cuscardtokenwrapper">
 						<span style={{ display: 'flex', alignItems: 'center' }}>
 							{bCode}
-							<span className="aspan">{isBeethoven ? 'LEVERAGE' : 'LONG'}</span>
+							<span className="aspan">OUT</span>
 						</span>
-						<Tooltip title={bDescription} placement="top">
-							<span>{bLabel}</span>
-						</Tooltip>
 					</div>
 					<div className="cuscardnavtag">
-						<span className="navspan">NAV</span>
-						<span>
-							<b>{'$' + (info ? util.formatPriceShort(info.states.navB) : 0)}</b>
-						</span>
+						<span className="navspan">MID</span>
 					</div>
 				</SDivFlexCenter>
 				<SDivFlexCenter horizontal height="80px" padding="5px 0 5px 0">
 					<div style={{ width: '56%' }}>
-						<PriceChart
-							prices={acceptedPrices}
-							timeOffset={timeOffset}
-							name={bCode}
-							isA={false}
-						/>
+						<div>Current Strike: {info.states.roundStrike}</div>
 					</div>
 					<div
 						style={{

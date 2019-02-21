@@ -1,7 +1,7 @@
-import { IDualClassStates } from '@finbook/duo-contract-wrapper';
+import { ICustodianStates } from '@finbook/duo-contract-wrapper';
 import { Constants } from '@finbook/israfel-common';
 import * as CST from 'ts/common/constants';
-import { getDualClassWrapper } from 'ts/common/duoWrapper';
+import { getCustodianWrapper } from 'ts/common/duoWrapper';
 import { IEthBalance, ITokenBalance, VoidThunkAction } from 'ts/common/types';
 import web3Util from 'ts/common/web3Util';
 
@@ -46,7 +46,7 @@ export function tokenBalanceUpdate(code: string, custodian: string, balance: ITo
 	};
 }
 
-export function custodianUpdate(custodian: string, code: string, states: IDualClassStates) {
+export function custodianUpdate(custodian: string, code: string, states: ICustodianStates) {
 	return {
 		type: CST.AC_CUSTODIAN,
 		custodian: custodian,
@@ -77,10 +77,12 @@ export function getCustodianBalances(): VoidThunkAction {
 
 		for (const token of tokens) {
 			if (!processedCustodian[token.custodian]) {
-				const cw = getDualClassWrapper(token.custodian);
+				const cw = getCustodianWrapper(token.custodian);
 				if (cw)
-					Promise.all([cw.getContractCode(), cw.getStates()]).then(result =>
-						dispatch(custodianUpdate(token.custodian, result[0], result[1]))
+					Promise.all([cw.getContractCode(), cw.getStates()] as any).then(result =>
+						dispatch(
+							custodianUpdate(token.custodian, result[0] as any, result[1] as any)
+						)
 					);
 				processedCustodian[token.custodian] = true;
 			}

@@ -1,6 +1,6 @@
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
-import 'css/style.css';
+import 'css/styleV.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ import * as web3Actions from './actions/web3Actions';
 import relayerClient from './common/relayerClient';
 import util from './common/util';
 import web3Util from './common/web3Util';
-import Israfel from './containers/IsrafelContainer';
+import Vivaldi from './components/Vivaldi';
 import store from './store/store';
 
 web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
@@ -90,7 +90,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<React.StrictMode>
-				<Israfel />
+				<Vivaldi />
 			</React.StrictMode>
 		</Router>
 	</Provider>,

@@ -3,7 +3,7 @@ import '@babel/polyfill';
 import { Constants } from '@finbook/israfel-common';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { dualClassWrappers } from 'ts/common/duoWrapper';
+import { custodianWrappers } from 'ts/common/duoWrapper';
 import web3Util from 'ts/common/web3Util';
 
 import * as web3Actions from './web3Actions';
@@ -99,7 +99,7 @@ describe('actions', () => {
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
-		dualClassWrappers['custodian'] = {
+		custodianWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),
 			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
 		} as any;
@@ -110,7 +110,7 @@ describe('actions', () => {
 				expect(web3Util.getEthBalance as jest.Mock).not.toBeCalled();
 				expect(web3Util.getTokenBalance as jest.Mock).not.toBeCalled();
 				expect(web3Util.getTokenAllowance as jest.Mock).not.toBeCalled();
-				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
+				expect(custodianWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
 		);
@@ -133,7 +133,7 @@ describe('actions', () => {
 		web3Util.getEthBalance = jest.fn(() => Promise.resolve(111));
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
-		dualClassWrappers['custodian'] = {
+		custodianWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),
 			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
 		} as any;
@@ -144,7 +144,7 @@ describe('actions', () => {
 				expect((web3Util.getEthBalance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect((web3Util.getTokenBalance as jest.Mock).mock.calls).toMatchSnapshot();
 				expect((web3Util.getTokenAllowance as jest.Mock).mock.calls).toMatchSnapshot();
-				expect(dualClassWrappers['custodian'].getStates as jest.Mock).toBeCalled();
+				expect(custodianWrappers['custodian'].getStates as jest.Mock).toBeCalled();
 				resolve();
 			}, 0)
 		);
@@ -169,7 +169,7 @@ describe('actions', () => {
 		web3Util.getTokenBalance = jest.fn(() => Promise.resolve(222));
 		web3Util.getTokenAllowance = jest.fn(() => Promise.resolve(333));
 		web3Util.getCurrentAddress = jest.fn(() => Promise.resolve('0x0'));
-		dualClassWrappers['custodian'] = {
+		custodianWrappers['custodian'] = {
 			getStates: jest.fn(() => Promise.resolve('custodianStates')),
 			getContractCode: jest.fn(() => Promise.resolve('custodianCode'))
 		} as any;

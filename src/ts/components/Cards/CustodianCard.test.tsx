@@ -35,7 +35,7 @@ describe('CustodianCard Test', () => {
 				alpha: 1,
 				beta: 1,
 				createCommRate: 0.01,
-				ethCollateral: 35.27156158513282,
+				collateral: 35.27156158513282,
 				feeBalance: 16.29381269809767,
 				iterationGasThreshold: 65000,
 				lastOperationTime: 0,

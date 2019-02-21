@@ -6,7 +6,6 @@ import * as React from 'react';
 import * as CST from 'ts/common/constants';
 import { getTokenInterestOrLeverage } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
-
 import { SDivFlexCenter } from '../_styled';
 import BalanceCard from '../Cards/BalanceCard';
 import ConvertCard from '../Cards/ConvertCard';
@@ -15,6 +14,7 @@ import DummyCustodianCard from '../Cards/DummyCustodianCard';
 import OrderHistoryCard from '../Cards/OrderHistoryCard';
 import TradeCard from '../Cards/TradeCard';
 import TradeHistoryCard from '../Cards/TradeHistoryCard';
+import VivaldiCustodianCard from '../Cards/VivaldiCustodianCard';
 
 interface IProps {
 	types: string[];
@@ -179,10 +179,15 @@ export default class Dex extends React.Component<IProps, IState> {
 		const tokenBalances: Array<{ code: string; balance: number; address: string }> = [];
 		let totalNav = 0;
 
-		custodianTypeList.forEach(list => {
+		custodianTypeList.forEach((list, i) => {
+			const type = types[i];
 			list.forEach(c => {
 				const codes = Object.keys(custodianTokenBalances[c] || {});
-				codes.sort((a, b) => (a.startsWith('a') ? 1 : -1 ) * a.localeCompare(b));
+				codes.sort((a, b) =>
+					type === WrapperConstants.VIVALDI
+						? a.localeCompare(b)
+						: (a.startsWith('a') ? 1 : -1) * a.localeCompare(b)
+				);
 				codes.forEach(code => {
 					const balance =
 						custodianTokenBalances[c] && custodianTokenBalances[c][code]
@@ -234,7 +239,21 @@ export default class Dex extends React.Component<IProps, IState> {
 									const pair = code + '|' + CST.TH_WETH;
 									obs[pair] = orderBooks[pair];
 								}
-								return (
+								return type === WrapperConstants.VIVALDI ? (
+									<VivaldiCustodianCard
+										key={c}
+										type={type}
+										custodian={c}
+										handleConvert={this.handleConvert}
+										handleTrade={this.handleTrade}
+										info={custodians[c] as any}
+										margin="0 10px"
+										acceptedPrices={acceptedPrices[c] || []}
+										tokenBalances={tbs}
+										orderBooks={obs}
+										ethPrice={ethPrice}
+									/>
+								) : (
 									<CustodianCard
 										key={c}
 										type={type}

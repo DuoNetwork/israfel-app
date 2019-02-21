@@ -19,6 +19,14 @@ export default class Israfel extends React.Component<{}> {
 					<Switch>
 						<Route path={'/status'} render={() => <Status />} />
 						<Route
+							path={'/pm'}
+							render={() => (
+								<Dex
+									types={[WrapperConstants.VIVALDI]}
+								/>
+							)}
+						/>
+						<Route
 							render={() => (
 								<Dex
 									types={[WrapperConstants.BEETHOVEN, WrapperConstants.MOZART]}

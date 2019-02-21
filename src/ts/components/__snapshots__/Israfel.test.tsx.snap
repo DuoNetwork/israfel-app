@@ -11,6 +11,10 @@ exports[`Israfel Test Israfel Test Test Snapshot 1`] = `
         render={[Function]}
       />
       <Route
+        path="/pm"
+        render={[Function]}
+      />
+      <Route
         render={[Function]}
       />
     </Switch>

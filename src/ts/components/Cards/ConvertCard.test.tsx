@@ -31,7 +31,7 @@ describe('ConvertCard Test', () => {
 				minBalance: 123,
 				totalSupplyA: 123,
 				totalSupplyB: 123,
-				ethCollateral: 123,
+				collateral: 123,
 				navA: 123,
 				navB: 123,
 				lastPrice: 123,

@@ -5,7 +5,7 @@ import link from 'images/icons/link.png';
 import waring from 'images/icons/waring.svg';
 import * as React from 'react';
 import * as CST from 'ts/common/constants';
-import { duoWeb3Wrapper, getDualClassWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
+import { duoWeb3Wrapper, getCustodianWrapper, getTokensPerEth } from 'ts/common/duoWrapper';
 import { ICustodianInfo, IEthBalance, INotification, ITokenBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import { SDivFlexCenter } from '../_styled';
@@ -277,6 +277,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					});
 			}, 10000);
 		} catch (error) {
+			notify({
+				level: 'error',
+				title: CST.TH_WETH,
+				message: 'Error in approval: ' + error,
+				transactionHash: ''
+			});
 			this.setState({ loading: false });
 		}
 	};
@@ -307,7 +313,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 		});
 		const { account, custodian, handleClose, info, notify, wethAddress } = this.props;
 		const { isCreate, amount, wethCreate, wethAmount, description } = this.state;
-		const cw = getDualClassWrapper(custodian);
+		const cw = getCustodianWrapper(custodian);
 		if (!info || !cw) {
 			this.setState({
 				loading: false
@@ -325,9 +331,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					? await cw.create(
 							account,
 							wethCreate ? Number(wethAmount) : Number(amount),
-							wethCreate ? wethAddress : ''
+							wethCreate ? wethAddress : '',
+							{
+								gasLimit: 200000
+							}
 					)
-					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha)
+					: await cw.redeem(account, Number(amount), Number(amount) / info.states.alpha || 1)
 			});
 			handleClose();
 		} catch (error) {
@@ -392,6 +401,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			sliderWETH
 		} = this.state;
 		const [aTokenPerEth, bTokenPerEth] = info ? getTokensPerEth(info.states) : [0, 0];
+		const contractCode = info ? info.code.split('-')[0] : '';
+		const isBeethoven = contractCode === WrapperConstants.BEETHOVEN.toUpperCase();
+		const isVivaldi = contractCode === WrapperConstants.VIVALDI.toUpperCase();
 		const limit = isCreate
 			? wethCreate
 				? ethBalance.weth
@@ -400,13 +412,10 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 			? Math.round(
 					Math.min(
 						tokenBalances[aToken].balance,
-						tokenBalances[bToken].balance / info.states.alpha
+						tokenBalances[bToken].balance / info.states.alpha || 1
 					) * 99
 			) / 100
 			: 0;
-
-		const contractCode = info ? info.code.split('-')[0] : '';
-		const isBeethoven = contractCode === WrapperConstants.BEETHOVEN.toUpperCase();
 
 		return (
 			<div style={{ display: !!custodian ? 'block' : 'none' }}>
@@ -418,6 +427,8 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								' ' +
 								(isBeethoven
 									? WrapperConstants.BEETHOVEN
+									: isVivaldi
+									? WrapperConstants.VIVALDI
 									: WrapperConstants.MOZART)}
 							<img
 								className="cus-link"
@@ -497,7 +508,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								<li style={{ padding: '5px 15px' }}>
 									<span className="title">{CST.TH_COLLATERAL}</span>
 									<span className="content">
-										{util.formatBalance(info ? info.states.ethCollateral : 0) +
+										{util.formatBalance(info ? info.states.collateral : 0) +
 											' ' +
 											CST.TH_ETH}
 									</span>
@@ -536,7 +547,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 					<Spin
 						spinning={loading}
 						tip={
-							(wethCreate && !allowance ? 'Approving' : 'Submitting') +
+							((wethCreate || isVivaldi) && !allowance ? 'Approving' : 'Submitting') +
 							'. Please check your MetaMask!'
 						}
 					>
@@ -583,7 +594,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											<div className="tabletitle2">{aToken}</div>
 											<div className="tabletitle2">{bToken}</div>
 											<div className="tabletitle2" style={{ width: '20%' }}>
-												{wethCreate ? CST.TH_WETH : CST.TH_ETH}
+												{wethCreate || isVivaldi ? CST.TH_WETH : CST.TH_ETH}
 											</div>
 										</li>
 										<li
@@ -614,7 +625,9 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											</div>
 											<div className="tablecontent2" style={{ width: '20%' }}>
 												{util.formatBalance(
-													wethCreate ? ethBalance.weth : ethBalance.eth
+													wethCreate || isVivaldi
+														? ethBalance.weth
+														: ethBalance.eth
 												)}
 											</div>
 										</li>
@@ -629,8 +642,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											style={{
 												padding: '0 10px',
 												marginBottom: 0,
-												pointerEvents: wethCreate ? 'none' : 'auto',
-												opacity: wethCreate ? 0.3 : 1
+												pointerEvents:
+													isCreate && (wethCreate || isVivaldi)
+														? 'none'
+														: 'auto',
+												opacity:
+													isCreate && (wethCreate || isVivaldi) ? 0.3 : 1
 											}}
 										>
 											<span className="input-des">
@@ -658,8 +675,12 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 											className={'input-line'}
 											style={{
 												padding: '0 15px',
-												pointerEvents: wethCreate ? 'none' : 'auto',
-												opacity: wethCreate ? 0.3 : 1
+												pointerEvents:
+													isCreate && (wethCreate || isVivaldi)
+														? 'none'
+														: 'auto',
+												opacity:
+													isCreate && (wethCreate || isVivaldi) ? 0.3 : 1
 											}}
 										>
 											<SSlider
@@ -741,7 +762,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 												}
 											/>
 										</li>
-										{!allowance && !loading && (wethCreate && isCreate) ? (
+										{!allowance && !loading && wethCreate && isCreate ? (
 											<div
 												className="pop-up-convert"
 												style={{
@@ -790,7 +811,11 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								style={{
 									opacity:
 										limit === 0 ||
-										Number(isCreate && wethCreate ? wethAmount : amount) === 0
+										Number(
+											isCreate && (wethCreate || isVivaldi)
+												? wethAmount
+												: amount
+										) === 0
 											? 0.3
 											: 1
 								}}
