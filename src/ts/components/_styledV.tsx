@@ -142,7 +142,7 @@ export const SDesCard = styled.div`
 		text-align: center;
 		font-size: 36px;
 		font-weight: 500;
-		color: ${ColorStyles.TitlePM};
+		color: ${ColorStyles.ThemeText};
 	}
 `;
 

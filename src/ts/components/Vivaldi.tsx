@@ -49,7 +49,7 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 
 	public render() {
 		const { openBetCard, entryTag } = this.state;
-		const Endtime = '2019-2-21 17:56';
+		const Endtime = '2019-2-21 22:56';
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Result Settling</span>;
 			else
