@@ -1,6 +1,6 @@
 //import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice } from '@finbook/duo-market-data';
-import { IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
+import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
 import down from 'images/vivaldi/downW.png';
 import graph from 'images/vivaldi/GraphCard.png';
@@ -11,23 +11,9 @@ import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import MediaQuery from 'react-responsive';
-import {
-	ICustodianInfo,
-	IEthBalance,
-	INotification,
-	ITokenBalance,
-	IVivaldiCustodianInfo
-} from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, INotification, ITokenBalance, IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
-import {
-	SDesCard,
-	SDivFlexCenter,
-	SGraphCard,
-	SInfoCard,
-	SPayoutCard,
-	SUserCount,
-	SVHeader
-} from './_styledV';
+import { SDesCard, SDivFlexCenter, SGraphCard, SInfoCard, SPayoutCard, SUserCount, SVHeader } from './_styledV';
 import VivaldiBetCard from './Cards/VivaldiBetCard';
 interface IProps {
 	types: string[];
@@ -91,19 +77,20 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	private getReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
-		if (isKnockedIn && code.toLowerCase().includes('c')) {
-			for (const userOrder of userOrders)
-				if (userOrder.type === 'terminate' && userOrder.fill > 0) {
+
+		for (const userOrder of userOrders)
+			if (isKnockedIn && code.toLowerCase().includes('c')) {
+				if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
 					accumulatedPayout += userOrder.fill - userOrder.price * userOrder.fill;
 					totalEthPaid += userOrder.price * userOrder.fill;
 				}
-		} else {
-			for (const userOrder of userOrders)
-				if (userOrder.type === 'terminate' && userOrder.fill > 0) {
+
+				if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
 					totalEthPaid += userOrder.price * userOrder.fill;
 					accumulatedPayout += 0 - userOrder.price * userOrder.fill;
 				}
-		}
+			}
+
 		return [accumulatedPayout, totalEthPaid];
 	};
 
