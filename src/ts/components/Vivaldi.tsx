@@ -125,7 +125,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
 			' (' +
 			util.formatPercentAcc(
-					Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
+				Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
 			) +
 			')'
 			: '··· (···)';
@@ -255,7 +255,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						</div>
 					</SPayoutCard>
 					<VivaldiBetCard
+						account={this.props.account}
 						code={codeV}
+						tokens={this.props.tokens}
 						ethBalance={ethBalance}
 						orderBooks={orderBooks}
 						cardOpen={openBetCard}
@@ -267,6 +269,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						upupPrice={160}
 						onCancel={this.handleBetCard}
 						onTagChange={this.handleBetCardTag}
+						addOrder={this.props.addOrder}
 					/>
 				</MediaQuery>
 			</div>

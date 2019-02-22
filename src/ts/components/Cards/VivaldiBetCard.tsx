@@ -1,7 +1,6 @@
-import { IOrderBookSnapshot } from '@finbook/israfel-common';
+import { IOrderBookSnapshot, IToken, Util as CommonUtil } from '@finbook/israfel-common';
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
-//import down2 from 'images/vivaldi/downdownW.png';
 import down from 'images/vivaldi/downW.png';
 //import up2 from 'images/vivaldi/upupW.png';
 import up from 'images/vivaldi/upW.png';
@@ -10,8 +9,9 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
+//import down2 from 'images/vivaldi/downdownW.png';
+import * as CST from 'ts/common/constants';
 import { IEthBalance } from 'ts/common/types';
-//import { IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
 	SBetInfoWrapper,
@@ -20,9 +20,12 @@ import {
 	STagWrapper,
 	SVBetCard
 } from './_styledV';
+//import { IVivaldiCustodianInfo } from 'ts/common/types';
 
 interface IProps {
 	//info: IVivaldiCustodianInfo
+	account: string;
+	tokens: IToken[];
 	code: string;
 	ethBalance: IEthBalance;
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
@@ -36,11 +39,21 @@ interface IProps {
 	onBuy?: () => void;
 	onCancel: (entry?: number) => void;
 	onTagChange: (tag: number) => void;
+	addOrder: (
+		account: string,
+		pair: string,
+		price: number,
+		amount: number,
+		isBid: boolean,
+		expiry: number
+	) => Promise<string>;
 }
 
 interface IState {
 	currentTag: number;
 	betNumber: number;
+	betPrice: number;
+	toEarn: number;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -48,7 +61,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		super(props);
 		this.state = {
 			currentTag: props.entryTag,
-			betNumber: 0
+			betNumber: 0,
+			betPrice: 0,
+			toEarn: 0
 		};
 	}
 
@@ -65,9 +80,45 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		}
 	};
 
+	private placeOrder = async () => {
+		const { account, addOrder } = this.props;
+		try {
+			await addOrder(
+				account,
+				this.props.code.replace('VIVALDI', 'ETH') + '|' + CST.TH_WETH,
+				Number(this.state.betPrice),
+				Number(this.state.betNumber),
+				true,
+				CommonUtil.getExpiryTimestamp(false)
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	private onSliderChange = (value: number) => {
+		const orderBookSnapshot = this.getOrderBookSnapshot() as IOrderBookSnapshot;
+		if (!orderBookSnapshot.asks) return;
+
+		let amt = 0;
+		let price = 0;
+		for (const orderBookLevel of orderBookSnapshot.asks) {
+			amt += orderBookLevel.balance;
+			price = orderBookLevel.price + 0.01;
+			if (amt >= value) {
+				this.setState({
+					betNumber: value,
+					betPrice: price,
+					toEarn: value / price
+				});
+				return;
+			}
+		}
+
 		this.setState({
-			betNumber: value
+			betNumber: amt,
+			betPrice: price,
+			toEarn: amt / price
 		});
 	};
 
@@ -78,9 +129,14 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		this.props.onCancel();
 	};
 
+	private getOrderBookSnapshot = () => {
+		return this.props.orderBooks
+			? this.props.orderBooks[`${this.props.code.replace('VIVALDI', 'ETH')}|WETH`]
+			: {};
+	};
+
 	public render() {
 		const {
-			code,
 			cardOpen,
 			endTime,
 			entryTag,
@@ -89,19 +145,14 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			downPrice,
 			upPrice,
 			upupPrice,
-			ethBalance,
-			orderBooks
+			ethBalance
 		} = this.props;
-		const orderBookSnapshot = orderBooks
-			? orderBooks[`${code.replace('VIVALDI', 'ETH')}|WETH`]
-			: {};
-		console.log(orderBookSnapshot);
-
-		const { betNumber } = this.state;
+		// const orderBookSnapshot = this.getOrderBookSnapshot();
+		const { betNumber, toEarn } = this.state;
 		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
 		const min = 0;
-		const max = 10;
-		const ratio = 0.55;
+		const max = Math.min(ethBalance.weth || 0, 10);
+		const ratio = betNumber ? (toEarn - betNumber) / betNumber : 0;
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
 			else
@@ -172,7 +223,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							</div>
 							<div className="des-row">
 								<div>To Earn</div>
-								<div>{util.formatBalance(betNumber * (1 + ratio))}</div>
+								<div>{util.formatBalance(toEarn)}</div>
 								<div>ETH</div>
 								<div>{`(+${util.formatPercent(ratio)})`}</div>
 							</div>
@@ -202,6 +253,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							className={
 								(entryTag === 0 || entryTag === 1 ? 'below' : 'above') + ' button'
 							}
+							onClick={this.placeOrder}
 						>
 							BUY
 							<img src={entryTag === 0 || entryTag === 1 ? bear : bull} />
