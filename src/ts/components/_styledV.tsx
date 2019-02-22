@@ -235,10 +235,12 @@ export const SPayoutCard = styled.div`
 		.downSpan {
 			color: ${ColorStyles.ThemeRedAlpha};
 			font-size: 20px;
+			transition: all 0.3s;
 		}
 		.upSpan {
 			color: ${ColorStyles.ThemeGreenAlpha};
 			font-size: 20px;
+			transition: all 0.3s;
 		}
 	}
 	.section {

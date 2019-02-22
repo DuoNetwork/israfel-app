@@ -33,6 +33,10 @@ class Util {
 			.replace(/G/g, 'B');
 	}
 
+	public formatStrike(num: number) {
+		return d3.format('.4f')(num);
+	}
+
 	public formatBalance(num: number) {
 		if (Math.abs(num) < 1e-4) return '0.000';
 		return d3

@@ -50,13 +50,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	private getPrice = (ddP: number, dP: number, uP: number, uuP: number, entryTag: number) => {
 		switch (entryTag) {
 			case 0:
-				return ddP ? ('$' + util.formatPriceShort(ddP)) : '···';
+				return ddP ? ('$' + util.formatStrike(ddP)) : '···';
 			case 1:
-				return dP ? ('$' + util.formatPriceShort(dP)) : '···';
+				return dP ? ('$' + util.formatStrike(dP)) : '···';
 			case 2:
-				return uP ? ('$' + util.formatPriceShort(uP)) : '···';
+				return uP ? ('$' + util.formatStrike(uP)) : '···';
 			default:
-				return uuP ? '$' + (util.formatPriceShort(uuP)) : '···';
+				return uuP ? '$' + (util.formatStrike(uuP)) : '···';
 		}
 	};
 
@@ -89,7 +89,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		const max = 10;
 		const ratio = 0.55;
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
-			if (completed) return <span>Result Settling</span>;
+			if (completed) return <span>Settling</span>;
 			else
 				return (
 					<span>
@@ -128,8 +128,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					</STagWrapper>
 					<SBetInfoWrapper>
 						<h3>
-							I think <b>ETH</b> is going to{' '}
-							{entryTag === 0 || entryTag === 1 ? 'below' : 'above'}
+							I think <b>ETH</b> is going to
+							{entryTag === 0 || entryTag === 1 ? ' below' : ' above'}
 						</h3>
 						<div
 							className={
