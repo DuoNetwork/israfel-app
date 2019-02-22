@@ -1,3 +1,4 @@
+import { IOrderBookSnapshot } from '@finbook/israfel-common';
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
 //import down2 from 'images/vivaldi/downdownW.png';
@@ -9,6 +10,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
+import { IEthBalance } from 'ts/common/types';
 //import { IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
@@ -21,6 +23,9 @@ import {
 
 interface IProps {
 	//info: IVivaldiCustodianInfo
+	code: string;
+	ethBalance: IEthBalance;
+	orderBooks: { [pair: string]: IOrderBookSnapshot };
 	cardOpen: boolean;
 	endTime: number;
 	entryTag: number;
@@ -50,13 +55,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	private getPrice = (ddP: number, dP: number, uP: number, uuP: number, entryTag: number) => {
 		switch (entryTag) {
 			case 0:
-				return ddP ? ('$' + util.formatStrike(ddP)) : '···';
+				return ddP ? '$' + util.formatStrike(ddP) : '···';
 			case 1:
-				return dP ? ('$' + util.formatStrike(dP)) : '···';
+				return dP ? '$' + util.formatStrike(dP) : '···';
 			case 2:
-				return uP ? ('$' + util.formatStrike(uP)) : '···';
+				return uP ? '$' + util.formatStrike(uP) : '···';
 			default:
-				return uuP ? '$' + (util.formatStrike(uuP)) : '···';
+				return uuP ? '$' + util.formatStrike(uuP) : '···';
 		}
 	};
 
@@ -75,6 +80,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 	public render() {
 		const {
+			code,
 			cardOpen,
 			endTime,
 			entryTag,
@@ -82,9 +88,17 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			downdownPrice,
 			downPrice,
 			upPrice,
-			upupPrice
+			upupPrice,
+			ethBalance,
+			orderBooks
 		} = this.props;
+		const orderBookSnapshot = orderBooks
+			? orderBooks[`${code.replace('VIVALDI', 'ETH')}|WETH`]
+			: {};
+		console.log(orderBookSnapshot);
+
 		const { betNumber } = this.state;
+		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
 		const min = 0;
 		const max = 10;
 		const ratio = 0.55;
@@ -169,7 +183,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								max={max}
 								defaultValue={0}
 								value={betNumber}
-								step={0.1}
+								step={step}
 								onChange={this.onSliderChange}
 								className={entryTag === 0 || entryTag === 1 ? 'below' : 'above'}
 							/>
@@ -178,8 +192,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					<SCardButtonWrapper>
 						<div
 							className={
-								(entryTag === 0 || entryTag === 1 ? 'belowC' : 'aboveC') +
-								' button'
+								(entryTag === 0 || entryTag === 1 ? 'belowC' : 'aboveC') + ' button'
 							}
 							onClick={this.onClose}
 						>

@@ -89,7 +89,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { ethPrice, types, custodians } = this.props;
+		const { ethPrice, types, custodians, orderBooks, ethBalance } = this.props;
 		const { openBetCard, entryTag } = this.state;
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
@@ -133,6 +133,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			? infoV.states.resetPriceTime + infoV.states.period
 			: moment().valueOf();
 		const roundStrike = infoV ? infoV.states.roundStrike : 0;
+		const codeV = infoV ? infoV.code : '';
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -254,6 +255,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						</div>
 					</SPayoutCard>
 					<VivaldiBetCard
+						code={codeV}
+						ethBalance={ethBalance}
+						orderBooks={orderBooks}
 						cardOpen={openBetCard}
 						endTime={Endtime}
 						entryTag={entryTag}
