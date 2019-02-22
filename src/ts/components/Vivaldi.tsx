@@ -88,6 +88,25 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		});
 	};
 
+	private getReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
+		let accumulatedPayout = 0;
+		let totalEthPaid = 0;
+		if (isKnockedIn && code.toLowerCase().includes('c')) {
+			for (const userOrder of userOrders)
+				if (userOrder.type === 'terminate' && userOrder.fill > 0) {
+					accumulatedPayout += userOrder.fill - userOrder.price * userOrder.fill;
+					totalEthPaid += userOrder.price * userOrder.fill;
+				}
+		} else {
+			for (const userOrder of userOrders)
+				if (userOrder.type === 'terminate' && userOrder.fill > 0) {
+					totalEthPaid += userOrder.price * userOrder.fill;
+					accumulatedPayout += 0 - userOrder.price * userOrder.fill;
+				}
+		}
+		return [accumulatedPayout, totalEthPaid];
+	};
+
 	public render() {
 		const { ethPrice, types, custodians, orderBooks, ethBalance } = this.props;
 		const { openBetCard, entryTag } = this.state;
@@ -100,6 +119,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					</span>
 				);
 		};
+
 		const custodianTypeList: string[][] = types.map(() => []);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
@@ -114,6 +134,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			list.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity)
 		);
 		const infoV: IVivaldiCustodianInfo = custodians[custodianTypeList[0] as any] as any;
+
 		const upDownClass = infoV
 			? infoV.states.roundStrike < ethPrice
 				? 'incPx'
@@ -134,6 +155,40 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			: moment().valueOf();
 		const roundStrike = infoV ? infoV.states.roundStrike : 0;
 		const codeV = infoV ? infoV.code : '';
+
+		let prevRoundPayout = 0;
+		let prevRoundInvest = 0;
+		let currentRoundInvest = 0;
+		let currentRoundPayout = 0;
+		const pair = codeV.replace('VIVALDI', 'ETH') + '|WETH';
+		if (infoV && this.props.orderHistory[pair]) {
+			const isKnockedIn = infoV.states.isKnockedIn;
+			// calculating preRound payout
+			const lastResetTime = infoV.states.resetPriceTime;
+
+			const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
+				uo =>
+					uo.createdAt <= lastResetTime &&
+					uo.createdAt >= lastResetTime - infoV.states.period
+			);
+			if (prevRoundUserOrders.length > 0)
+				[prevRoundPayout, prevRoundInvest] = this.getReturn(
+					isKnockedIn,
+					codeV,
+					prevRoundUserOrders
+				);
+
+			const currentRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
+				uo => uo.createdAt > lastResetTime
+			);
+			if (currentRoundUserOrders.length > 0)
+				[currentRoundPayout, currentRoundInvest] = this.getReturn(
+					isKnockedIn,
+					codeV,
+					currentRoundUserOrders
+				);
+		}
+
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -226,14 +281,20 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<div className="row">
 								<div className="col1">
 									<h4 className="col-title"># OF ETH SPENT</h4>
-									<h4 className="col-content">39.68</h4>
+									<h4 className="col-content">{currentRoundInvest}</h4>
 								</div>
 								<div className="col2">
 									<h4 className="col-title">EXPECTED RETURN</h4>
-									<h4 className="col-content">67.88</h4>
+									<h4 className="col-content">{currentRoundPayout}</h4>
 								</div>
 								<div className="col3">
-									<h4 className="col-content increase">+98.44%</h4>
+									<h4 className="col-content increase">
+										{util.formatPercent(
+											currentRoundInvest
+												? currentRoundPayout / currentRoundInvest
+												: 0
+										)}
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -242,14 +303,18 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<div className="row">
 								<div className="col1">
 									<h4 className="col-title"># OF ETH SPENT</h4>
-									<h4 className="col-content">39.68</h4>
+									<h4 className="col-content">{prevRoundInvest}</h4>
 								</div>
 								<div className="col2">
 									<h4 className="col-title"># OF ETH RETURN</h4>
-									<h4 className="col-content">27.88</h4>
+									<h4 className="col-content">{prevRoundPayout}</h4>
 								</div>
 								<div className="col3">
-									<h4 className="col-content decrease">-23.44%</h4>
+									<h4 className="col-content decrease">
+										{util.formatPercent(
+											prevRoundInvest ? prevRoundPayout / prevRoundInvest : 0
+										)}
+									</h4>
 								</div>
 							</div>
 						</div>
