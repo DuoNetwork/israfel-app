@@ -1,13 +1,23 @@
+//import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
+import { IAcceptedPrice } from '@finbook/duo-market-data';
+import { IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
 import down from 'images/vivaldi/downW.png';
 import graph from 'images/vivaldi/GraphCard.png';
 import placeHolder from 'images/vivaldi/Mobile.png';
 import up from 'images/vivaldi/upW.png';
-import user from 'images/vivaldi/user.png';
+//import user from 'images/vivaldi/user.png';
 import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import MediaQuery from 'react-responsive';
+import {
+	ICustodianInfo,
+	IEthBalance,
+	INotification,
+	ITokenBalance,
+	IVivaldiCustodianInfo
+} from 'ts/common/types';
 import util from 'ts/common/util';
 import {
 	SDesCard,
@@ -19,14 +29,45 @@ import {
 	SVHeader
 } from './_styledV';
 import VivaldiBetCard from './Cards/VivaldiBetCard';
-
-//interface IProps {}
+interface IProps {
+	types: string[];
+	network: number;
+	locale: string;
+	tokens: IToken[];
+	account: string;
+	ethBalance: IEthBalance;
+	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
+	ethPrice: number;
+	trades: { [pair: string]: ITrade[] };
+	custodians: { [custodian: string]: ICustodianInfo };
+	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
+	orderBooks: { [pair: string]: IOrderBookSnapshot };
+	orderHistory: { [pair: string]: IUserOrder[] };
+	connection: boolean;
+	wethAddress: string;
+	notify: (notification: INotification) => any;
+	subscribeOrder: (account: string) => any;
+	unsubscribeOrder: () => any;
+	wrapEther: (amount: number, address: string) => Promise<string>;
+	unwrapEther: (amount: number, address: string) => Promise<string>;
+	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
+	web3PersonalSign: (account: string, message: string) => Promise<string>;
+	addOrder: (
+		account: string,
+		pair: string,
+		price: number,
+		amount: number,
+		isBid: boolean,
+		expiry: number
+	) => Promise<string>;
+	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
+}
 interface IState {
 	openBetCard: boolean;
 	entryTag: number;
 }
-export default class Vivaldi extends React.PureComponent<{}, IState> {
-	constructor(props: any) {
+export default class Vivaldi extends React.PureComponent<IProps, IState> {
+	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			openBetCard: false,
@@ -48,10 +89,10 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 	};
 
 	public render() {
+		const { ethPrice, types, custodians } = this.props;
 		const { openBetCard, entryTag } = this.state;
-		const Endtime = '2019-2-21 22:56';
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
-			if (completed) return <span>Result Settling</span>;
+			if (completed) return <span>Settling</span>;
 			else
 				return (
 					<span>
@@ -59,6 +100,39 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 					</span>
 				);
 		};
+		const custodianTypeList: string[][] = types.map(() => []);
+		for (const custodian in custodians) {
+			const info = custodians[custodian];
+			const code = info.code.toLowerCase();
+			for (let i = 0; i < types.length; i++)
+				if (code.startsWith(types[i].toLowerCase())) {
+					custodianTypeList[i].push(custodian);
+					break;
+				}
+		}
+		custodianTypeList.forEach(list =>
+			list.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity)
+		);
+		const infoV: IVivaldiCustodianInfo = custodians[custodianTypeList[0] as any] as any;
+		const upDownClass = infoV
+			? infoV.states.roundStrike < ethPrice
+				? 'incPx'
+				: 'decPx'
+			: 'loading';
+		const upDownText = infoV ? (infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN') : '···';
+		const upDownChange = infoV
+			? '$' +
+			util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
+			' (' +
+			util.formatPercentAcc(
+					Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
+			) +
+			')'
+			: '··· (···)';
+		const Endtime = infoV
+			? infoV.states.resetPriceTime + infoV.states.period
+			: moment().valueOf();
+		const roundStrike = infoV ? infoV.states.roundStrike : 0;
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -88,7 +162,9 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 						<div className="info-bar">
 							<div className="info-bar-left">
 								<div className="info-title">Ethereum</div>
-								<div className="info-price">$150.00</div>
+								<div className="info-price">{`$${util.formatPriceShort(
+									ethPrice
+								)}`}</div>
 							</div>
 							<div
 								className={
@@ -99,8 +175,8 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 							</div>
 						</div>
 						<div className="subtitle-bar">
-							<span className="updown-button">UP</span>
-							<span className="change-button">$10.23 (10.23%)</span>
+							<span className={upDownClass + ' updown-button'}>{upDownText}</span>
+							<span className={upDownClass + 'T change-button'}>{upDownChange}</span>
 							<span className="game-button">current game</span>
 						</div>
 					</SInfoCard>
@@ -112,15 +188,15 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 							Where do you think the price of <b>ETH</b> is going in
 						</div>
 						<div className="count-down">
-							<Countdown date={moment(Endtime).valueOf()} renderer={renderer} />
+							<Countdown date={Endtime} renderer={renderer} />
 						</div>
 					</SDesCard>
-					<SDivFlexCenter horizontal padding="12px 10%">
+					<SDivFlexCenter horizontal padding="12px 20%">
 						<SUserCount>
-							<div>
+							{/* <div>
 								<img className="user-img" src={user} />
 								123
-							</div>
+							</div> */}
 							<div className="ud-img down-img" onClick={() => this.handleBetCard(1)}>
 								<img src={down} />
 							</div>
@@ -129,14 +205,21 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 							<div className="ud-img up-img" onClick={() => this.handleBetCard(2)}>
 								<img src={up} />
 							</div>
-							<div>
+							{/* <div>
 								<img className="user-img" src={user} />
 								123
-							</div>
+							</div> */}
 						</SUserCount>
 					</SDivFlexCenter>
 					<SPayoutCard>
-						<div className="title">My Payouts</div>
+						<div className="title">
+							My Payouts{' '}
+							<span
+								className={entryTag === 0 || entryTag === 1 ? 'downSpan' : 'upSpan'}
+							>
+								{entryTag === 0 || entryTag === 1 ? '(down)' : '(up)'}
+							</span>
+						</div>
 						<div className="section">
 							<h3>Current Game</h3>
 							<div className="row">
@@ -161,7 +244,7 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 									<h4 className="col-content">39.68</h4>
 								</div>
 								<div className="col2">
-									<h4 className="col-title">EXPECTED RETURN</h4>
+									<h4 className="col-title"># OF ETH RETURN</h4>
 									<h4 className="col-content">27.88</h4>
 								</div>
 								<div className="col3">
@@ -175,8 +258,8 @@ export default class Vivaldi extends React.PureComponent<{}, IState> {
 						endTime={Endtime}
 						entryTag={entryTag}
 						downdownPrice={140}
-						downPrice={145}
-						upPrice={155}
+						downPrice={roundStrike}
+						upPrice={roundStrike}
 						upupPrice={160}
 						onCancel={this.handleBetCard}
 						onTagChange={this.handleBetCardTag}

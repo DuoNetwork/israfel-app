@@ -21,15 +21,17 @@ export const SDivFlexCenter = styled.div`
 	display: flex;
 	width: ${(props: IDivFlexCenterProps) => props.width};
 	height: ${(props: IDivFlexCenterProps) => props.height};
-	flex-direction: ${(props: IDivFlexCenterProps) => (props.horizontal ? (props.rowInv ? 'row-reverse' : 'row') : 'column')};
-	justify-content: ${(props: IDivFlexCenterProps) => (props.noJust ? null : props.center ? 'center' : 'space-between')};
-	padding: ${(props: IDivFlexCenterProps) => (props.padding)};
+	flex-direction: ${(props: IDivFlexCenterProps) =>
+		props.horizontal ? (props.rowInv ? 'row-reverse' : 'row') : 'column'};
+	justify-content: ${(props: IDivFlexCenterProps) =>
+		props.noJust ? null : props.center ? 'center' : 'space-between'};
+	padding: ${(props: IDivFlexCenterProps) => props.padding};
 	padding-left: ${(props: IDivFlexCenterProps) => (props.padding ? null : props.paddingLeft)};
 	padding-right: ${(props: IDivFlexCenterProps) => (props.padding ? null : props.paddingRight)};
 	padding-top: ${(props: IDivFlexCenterProps) => (props.padding ? null : props.paddingTop)};
 	padding-bottom: ${(props: IDivFlexCenterProps) => (props.padding ? null : props.paddingBottom)};
-	margin-bottom: ${(props: IDivFlexCenterProps) => (props.marginBottom)};
-	margin-top: ${(props: IDivFlexCenterProps) => (props.marginTop)};
+	margin-bottom: ${(props: IDivFlexCenterProps) => props.marginBottom};
+	margin-top: ${(props: IDivFlexCenterProps) => props.marginTop};
 `;
 
 export const SVHeader = styled.div`
@@ -89,7 +91,7 @@ export const SInfoCard = styled.div`
 			justify-content: center;
 			align-items: center;
 			border: 1px dashed ${ColorStyles.BorderBlack3};
-			transition: all .3s;
+			transition: all 0.3s;
 		}
 		.showMini {
 			opacity: 1;
@@ -104,12 +106,24 @@ export const SInfoCard = styled.div`
 		.updown-button {
 			padding: 2px 8px;
 			border-radius: 2px;
-			background: ${ColorStyles.ThemeGreen};
 			color: #fff;
 			margin-right: 8px;
+			background: ${ColorStyles.ThemeText};
+		}
+		.decPx {
+			background: ${ColorStyles.ThemeRed} !important;
+		}
+		.incPx {
+			background: ${ColorStyles.ThemeGreen} !important;
+		}
+		.decPxT {
+			color: ${ColorStyles.ThemeRed} !important;
+		}
+		.incPxT {
+			color: ${ColorStyles.ThemeGreen} !important;
 		}
 		.change-button {
-			color: ${ColorStyles.ThemeGreen};
+			color: ${ColorStyles.ThemeText};
 			margin-right: 8px;
 		}
 		.game-button {
@@ -195,11 +209,11 @@ export const SUserCount = styled.div`
 		align-items: center;
 		width: 48px;
 		height: 43px;
-		box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-		transition: all, .3s;
-		img{
-		width: 22px;
-		height: 14px;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+		transition: all, 0.3s;
+		img {
+			width: 22px;
+			height: 14px;
 		}
 	}
 	.up-img {
@@ -218,6 +232,14 @@ export const SPayoutCard = styled.div`
 		color: ${ColorStyles.ThemeTextAlpha};
 		font-size: 22px;
 		font-weight: 500;
+		.downSpan {
+			color: ${ColorStyles.ThemeRedAlpha};
+			font-size: 20px;
+		}
+		.upSpan {
+			color: ${ColorStyles.ThemeGreenAlpha};
+			font-size: 20px;
+		}
 	}
 	.section {
 		h3 {

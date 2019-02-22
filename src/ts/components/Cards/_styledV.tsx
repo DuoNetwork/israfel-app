@@ -13,7 +13,7 @@ export const SVBetCard = styled.div`
 		transition: all, 0.3s;
 	}
 	.bet-card-close {
-		top: 209px;
+		top: 194px;
 		opacity: 0;
 		pointer-events: none;
 	}

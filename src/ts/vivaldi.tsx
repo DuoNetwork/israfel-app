@@ -1,5 +1,6 @@
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import 'css/styleV.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -10,7 +11,7 @@ import * as web3Actions from './actions/web3Actions';
 import relayerClient from './common/relayerClient';
 import util from './common/util';
 import web3Util from './common/web3Util';
-import Vivaldi from './components/Vivaldi';
+import Vivaldi from './containers/VivaldiContainer';
 import store from './store/store';
 
 web3Util.onWeb3AccountUpdate((addr: string, network: number) => {
@@ -90,7 +91,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<React.StrictMode>
-				<Vivaldi />
+				<Vivaldi types={[WrapperConstants.VIVALDI]}/>
 			</React.StrictMode>
 		</Router>
 	</Provider>,

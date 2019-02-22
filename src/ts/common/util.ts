@@ -45,6 +45,10 @@ class Util {
 		return d3.format('.0%')(num);
 	}
 
+	public formatPercentAcc(num: number) {
+		return d3.format('.2%')(num);
+	}
+
 	public formatNumber(num: number) {
 		if (Math.abs(num) < 1e-4) return '0.000';
 		if (Math.abs(num) < 1) return d3.format(',.4n')(num);

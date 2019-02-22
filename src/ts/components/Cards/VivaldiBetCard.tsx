@@ -1,14 +1,15 @@
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
-import down2 from 'images/vivaldi/downdownW.png';
+//import down2 from 'images/vivaldi/downdownW.png';
 import down from 'images/vivaldi/downW.png';
-import up2 from 'images/vivaldi/upupW.png';
+//import up2 from 'images/vivaldi/upupW.png';
 import up from 'images/vivaldi/upW.png';
-import moment from 'moment';
+//import moment from 'moment';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
+//import { IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
 	SBetInfoWrapper,
@@ -19,8 +20,9 @@ import {
 } from './_styledV';
 
 interface IProps {
+	//info: IVivaldiCustodianInfo
 	cardOpen: boolean;
-	endTime: string;
+	endTime: number;
 	entryTag: number;
 	downdownPrice: number;
 	downPrice: number;
@@ -48,13 +50,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	private getPrice = (ddP: number, dP: number, uP: number, uuP: number, entryTag: number) => {
 		switch (entryTag) {
 			case 0:
-				return '$' + util.formatPriceShort(ddP);
+				return ddP ? ('$' + util.formatPriceShort(ddP)) : '···';
 			case 1:
-				return '$' + util.formatPriceShort(dP);
+				return dP ? ('$' + util.formatPriceShort(dP)) : '···';
 			case 2:
-				return '$' + util.formatPriceShort(uP);
+				return uP ? ('$' + util.formatPriceShort(uP)) : '···';
 			default:
-				return '$' + util.formatPriceShort(uuP);
+				return uuP ? '$' + (util.formatPriceShort(uuP)) : '···';
 		}
 	};
 
@@ -99,12 +101,12 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			<SVBetCard>
 				<div className={(cardOpen ? 'bet-card-open' : 'bet-card-close') + ' card-wrapper'}>
 					<STagWrapper>
-						<div
+						{/* <div
 							className={entryTag === 0 ? 'down-active' : 'down-inactive'}
 							onClick={() => onTagChange(0)}
 						>
 							<img src={down2} style={{ marginTop: 4 }} />
-						</div>
+						</div> */}
 						<div
 							className={entryTag === 1 ? 'down-active' : 'down-inactive'}
 							onClick={() => onTagChange(1)}
@@ -117,12 +119,12 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 						>
 							<img src={up} style={{ marginBottom: 4 }} />
 						</div>
-						<div
+						{/* <div
 							className={entryTag === 3 ? 'up-active' : 'up-inactive'}
 							onClick={() => onTagChange(3)}
 						>
 							<img src={up2} style={{ marginBottom: 4 }} />
-						</div>
+						</div> */}
 					</STagWrapper>
 					<SBetInfoWrapper>
 						<h3>
@@ -144,7 +146,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								' count-down'
 							}
 						>
-							<Countdown date={moment(endTime).valueOf()} renderer={renderer} />
+							<Countdown date={endTime} renderer={renderer} />
 						</div>
 					</SBetInfoWrapper>
 					<SSliderWrapper>
