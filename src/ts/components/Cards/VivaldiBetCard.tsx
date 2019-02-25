@@ -23,23 +23,22 @@ import {
 //import { IVivaldiCustodianInfo } from 'ts/common/types';
 
 interface IProps {
-	//info: IVivaldiCustodianInfo
 	pair: string;
+	vivaldiIndex: number;
+	isCall: boolean;
 	account: string;
 	tokens: IToken[];
-	code: string;
 	ethBalance: IEthBalance;
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
-	cardOpen: boolean;
+	isBetCardOpen: boolean;
 	endTime: number;
-	entryTag: number;
 	downdownPrice: number;
 	downPrice: number;
 	upPrice: number;
 	upupPrice: number;
 	onBuy?: () => void;
 	onCancel: (entry?: number) => void;
-	onTagChange: (tag: number) => void;
+	onTagChange: (vivaldiIndex: number, isCall: boolean) => void;
 	addOrder: (
 		account: string,
 		pair: string,
@@ -51,7 +50,6 @@ interface IProps {
 }
 
 interface IState {
-	currentTag: number;
 	betNumber: number;
 	betPrice: number;
 	toEarn: number;
@@ -61,24 +59,36 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
-			currentTag: props.entryTag,
 			betNumber: 0,
 			betPrice: 0,
 			toEarn: 0
 		};
 	}
 
-	private getPrice = (ddP: number, dP: number, uP: number, uuP: number, entryTag: number) => {
-		switch (entryTag) {
-			case 0:
-				return ddP ? '$' + util.formatStrike(ddP) : '···';
-			case 1:
-				return dP ? '$' + util.formatStrike(dP) : '···';
-			case 2:
-				return uP ? '$' + util.formatStrike(uP) : '···';
-			default:
-				return uuP ? '$' + util.formatStrike(uuP) : '···';
-		}
+	private getPrice = (
+		ddP: number,
+		dP: number,
+		uP: number,
+		uuP: number,
+		vivaldiIndex: number,
+		isCall: boolean
+	) => {
+		if (isCall)
+			return vivaldiIndex === 0
+				? uP
+					? '$' + util.formatStrike(uP)
+					: '···'
+				: uuP
+				? '$' + util.formatStrike(uuP)
+				: '···';
+		else
+			return vivaldiIndex === 0
+				? dP
+					? '$' + util.formatStrike(dP)
+					: '···'
+				: ddP
+				? '$' + util.formatStrike(ddP)
+				: '···';
 	};
 
 	private placeOrder = async () => {
@@ -131,16 +141,15 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	};
 
 	private getOrderBookSnapshot = () => {
-		return this.props.orderBooks
-			? this.props.orderBooks[`${this.props.code.replace('VIVALDI', 'ETH')}|WETH`]
-			: {};
+		return this.props.orderBooks ? this.props.orderBooks[this.props.pair] : {};
 	};
 
 	public render() {
 		const {
-			cardOpen,
+			isBetCardOpen,
 			endTime,
-			entryTag,
+			vivaldiIndex,
+			isCall,
 			onTagChange,
 			downdownPrice,
 			downPrice,
@@ -148,7 +157,6 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			upupPrice,
 			ethBalance
 		} = this.props;
-		// const orderBookSnapshot = this.getOrderBookSnapshot();
 		const { betNumber, toEarn } = this.state;
 		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
 		const min = 0;
@@ -165,29 +173,35 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		};
 		return (
 			<SVBetCard>
-				<div className={(cardOpen ? 'bet-card-open' : 'bet-card-close') + ' card-wrapper'}>
+				<div
+					className={
+						(isBetCardOpen ? 'bet-card-open' : 'bet-card-close') + ' card-wrapper'
+					}
+				>
 					<STagWrapper>
 						{/* <div
 							className={entryTag === 0 ? 'down-active' : 'down-inactive'}
-							onClick={() => onTagChange(0)}
+							onClick={() => onTagChange(1, false)}
 						>
 							<img src={down2} style={{ marginTop: 4 }} />
 						</div> */}
 						<div
-							className={entryTag === 1 ? 'down-active' : 'down-inactive'}
-							onClick={() => onTagChange(1)}
+							className={
+								!isCall && vivaldiIndex === 0 ? 'down-active' : 'down-inactive'
+							}
+							onClick={() => onTagChange(0, false)}
 						>
 							<img src={down} style={{ marginTop: 4 }} />
 						</div>
 						<div
-							className={entryTag === 2 ? 'up-active' : 'up-inactive'}
-							onClick={() => onTagChange(2)}
+							className={isCall && vivaldiIndex === 0 ? 'up-active' : 'up-inactive'}
+							onClick={() => onTagChange(0, true)}
 						>
 							<img src={up} style={{ marginBottom: 4 }} />
 						</div>
 						{/* <div
 							className={entryTag === 3 ? 'up-active' : 'up-inactive'}
-							onClick={() => onTagChange(3)}
+							onClick={() => onTagChange(1, true)}
 						>
 							<img src={up2} style={{ marginBottom: 4 }} />
 						</div> */}
@@ -195,23 +209,20 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					<SBetInfoWrapper>
 						<h3>
 							I think <b>ETH</b> is going to
-							{entryTag === 0 || entryTag === 1 ? ' below' : ' above'}
+							{!isCall ? ' below' : ' above'}
 						</h3>
-						<div
-							className={
-								(entryTag === 0 || entryTag === 1 ? 'below' : 'above') +
-								' price-wrapper'
-							}
-						>
-							{this.getPrice(downdownPrice, downPrice, upPrice, upupPrice, entryTag)}
+						<div className={(!isCall ? 'below' : 'above') + ' price-wrapper'}>
+							{this.getPrice(
+								downdownPrice,
+								downPrice,
+								upPrice,
+								upupPrice,
+								vivaldiIndex,
+								isCall
+							)}
 							<span> in</span>
 						</div>
-						<div
-							className={
-								(entryTag === 0 || entryTag === 1 ? 'below' : 'above') +
-								' count-down'
-							}
-						>
+						<div className={(!isCall ? 'below' : 'above') + ' count-down'}>
 							<Countdown date={endTime} renderer={renderer} />
 						</div>
 					</SBetInfoWrapper>
@@ -237,27 +248,23 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								value={betNumber}
 								step={step}
 								onChange={this.onSliderChange}
-								className={entryTag === 0 || entryTag === 1 ? 'below' : 'above'}
+								className={!isCall ? 'below' : 'above'}
 							/>
 						</div>
 					</SSliderWrapper>
 					<SCardButtonWrapper>
 						<div
-							className={
-								(entryTag === 0 || entryTag === 1 ? 'belowC' : 'aboveC') + ' button'
-							}
+							className={(!isCall ? 'belowC' : 'aboveC') + ' button'}
 							onClick={this.onClose}
 						>
 							CANCEL
 						</div>
 						<div
-							className={
-								(entryTag === 0 || entryTag === 1 ? 'below' : 'above') + ' button'
-							}
+							className={(!isCall ? 'below' : 'above') + ' button'}
 							onClick={this.placeOrder}
 						>
 							BUY
-							<img src={entryTag === 0 || entryTag === 1 ? bear : bull} />
+							<img src={!isCall ? bear : bull} />
 						</div>
 					</SCardButtonWrapper>
 				</div>

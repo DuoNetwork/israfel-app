@@ -1,10 +1,10 @@
 //import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
+import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
 import {
 	Constants,
 	IOrderBookSnapshot,
 	IToken,
-	ITrade,
 	IUserOrder,
 	Util as CommonUtil
 } from '@finbook/israfel-common';
@@ -48,7 +48,6 @@ interface IProps {
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
 	exchangePrices: IPrice[];
-	trades: { [pair: string]: ITrade[] };
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
 	orderBooks: { [pair: string]: IOrderBookSnapshot };
@@ -58,10 +57,6 @@ interface IProps {
 	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
-	wrapEther: (amount: number, address: string) => Promise<string>;
-	unwrapEther: (amount: number, address: string) => Promise<string>;
-	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
-	web3PersonalSign: (account: string, message: string) => Promise<string>;
 	addOrder: (
 		account: string,
 		pair: string,
@@ -70,23 +65,23 @@ interface IProps {
 		isBid: boolean,
 		expiry: number
 	) => Promise<string>;
-	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
 }
 interface IState {
 	connection: boolean;
 	account: string;
-	openBetCard: boolean;
-	entryTag: number;
-	// pair: string;
+	isBetCardOpen: boolean;
+	vivaldiIndex: number;
+	isCall: boolean;
 }
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			vivaldiIndex: 0,
 			connection: props.connection,
 			account: props.account,
-			openBetCard: false,
-			entryTag: 2
+			isBetCardOpen: false,
+			isCall: true
 		};
 	}
 
@@ -113,14 +108,15 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 
 	public handleBetCard = (entry?: number) => {
 		this.setState({
-			openBetCard: !this.state.openBetCard,
-			entryTag: entry ? entry : this.state.entryTag
+			isBetCardOpen: !this.state.isBetCardOpen,
+			isCall: entry ? (entry === 2 ? true : false) : this.state.isCall
 		});
 	};
 
-	public handleBetCardTag = (tag: number) => {
+	public handleBetCardTag = ( vivaldiIndex: number, isCall: boolean) => {
 		this.setState({
-			entryTag: tag
+			vivaldiIndex: vivaldiIndex,
+			isCall: isCall
 		});
 	};
 
@@ -159,7 +155,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 
 	public render() {
 		const { ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices } = this.props;
-		const { openBetCard, entryTag } = this.state;
+		const { isBetCardOpen, isCall, vivaldiIndex } = this.state;
 
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
@@ -184,69 +180,73 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			list.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity)
 		);
 
-		const infoV: IVivaldiCustodianInfo = custodians[custodianTypeList[0] as any] as any;
-		const upDownClass = infoV
-			? infoV.states.roundStrike < ethPrice
-				? 'incPx'
-				: 'decPx'
-			: 'loading';
-		const upDownText = infoV ? (infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN') : '···';
-		const upDownChange = infoV
-			? '$' +
-			util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
-			' (' +
-			util.formatPercentAcc(
-				Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
-			) +
-			')'
-			: '··· (···)';
-		const Endtime = infoV
-			? infoV.states.resetPriceTime + infoV.states.period
-			: moment().valueOf();
-		const roundStrike = infoV ? infoV.states.roundStrike : 0;
-		const codeV = infoV ? infoV.code : '';
+		const infoV: IVivaldiCustodianInfo = custodians[
+			custodianTypeList[vivaldiIndex] as any
+		] as any;
+
+		let codeV = '';
+		let pair = '';
+		let upDownChange = '··· (···)';
+		let upDownClass = 'loading';
+		let upDownText = '···';
+		let Endtime = moment().valueOf();
+		let roundStrike = 0;
 		let prevRoundPayout = 0;
 		let prevRoundInvest = 0;
 		let currentRoundInvest = 0;
 		let currentRoundPayout = 0;
-		let pair = '';
-		switch (entryTag) {
-			case 1:
-				pair = 'ETH-100P-3H' + `|${Constants.TOKEN_WETH}`;
-				break;
-			case 2:
-				pair = 'ETH-100C-3H' + `|${Constants.TOKEN_WETH}`;
-				break;
-			default:
-				break;
-		}
+		if (infoV) {
+			codeV = infoV.code;
+			roundStrike = infoV.states.roundStrike;
+			upDownText = infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN';
+			upDownClass = infoV.states.roundStrike < ethPrice ? 'incPx' : 'decPx';
+			Endtime = infoV.states.resetPriceTime + infoV.states.period;
+			upDownChange =
+				'$' +
+				util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
+				' (' +
+				util.formatPercentAcc(
+					Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
+				) +
+				')';
+			pair =
+				(isCall
+					? infoV.code.replace(WrapperConstants.VIVALDI.toUpperCase(), Constants.ETH)
+					: infoV.code
+							.replace(WrapperConstants.VIVALDI.toUpperCase(), Constants.ETH)
+							.replace('C', 'P')) + `|${Constants.TOKEN_WETH}`;
 
-		if (infoV && this.props.orderHistory[pair]) {
-			const isKnockedIn = infoV.states.isKnockedIn;
-			const lastResetTime = infoV.states.resetPriceTime;
+			if (this.props.orderHistory[pair]) {
+				const isKnockedIn = infoV.states.isKnockedIn;
+				const lastResetTime = infoV.states.resetPriceTime;
 
-			const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
-				uo =>
-					uo.createdAt <= lastResetTime &&
-					uo.createdAt >= lastResetTime - infoV.states.period &&
-					uo.side === Constants.DB_BID &&
-					uo.pair === pair
-			);
-			if (prevRoundUserOrders.length > 0)
-				[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
-					isKnockedIn,
-					codeV,
-					prevRoundUserOrders
+				const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
+					uo =>
+						uo.createdAt <= lastResetTime &&
+						uo.createdAt >= lastResetTime - infoV.states.period &&
+						uo.side === Constants.DB_BID &&
+						uo.pair === pair
 				);
+				if (prevRoundUserOrders.length > 0)
+					[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
+						isKnockedIn,
+						codeV,
+						prevRoundUserOrders
+					);
 
-			const currentRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
-				uo =>
-					uo.createdAt > lastResetTime && uo.side === Constants.DB_BID && uo.pair === pair
-			);
-			if (currentRoundUserOrders.length > 0)
-				[currentRoundPayout, currentRoundInvest] = this.getCurrentRoundExpectedReturn(
-					currentRoundUserOrders
+				const currentRoundUserOrders = (this.props.orderHistory[
+					pair
+				] as IUserOrder[]).filter(
+					uo =>
+						uo.createdAt > lastResetTime &&
+						uo.side === Constants.DB_BID &&
+						uo.pair === pair
 				);
+				if (currentRoundUserOrders.length > 0)
+					[currentRoundPayout, currentRoundInvest] = this.getCurrentRoundExpectedReturn(
+						currentRoundUserOrders
+					);
+			}
 		}
 
 		return (
@@ -284,7 +284,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							</div>
 							{/* <div
 								className={
-									(openBetCard ? 'showMini' : 'hideMini') + ' info-bar-right'
+									(isBetCardOpen ? 'showMini' : 'hideMini') + ' info-bar-right'
 								}
 							>
 								Mini Graph
@@ -338,10 +338,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					<SPayoutCard>
 						<div className="title">
 							My Payouts{' '}
-							<span
-								className={entryTag === 0 || entryTag === 1 ? 'downSpan' : 'upSpan'}
-							>
-								{entryTag === 0 || entryTag === 1 ? '(down)' : '(up)'}
+							<span className={isCall ? 'upSpan' : 'downSpan'}>
+								{isCall ? '(up)' : '(down)'}
 							</span>
 						</div>
 						<div className="section">
@@ -398,13 +396,13 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					<VivaldiBetCard
 						pair={pair}
 						account={this.props.account}
-						code={codeV}
 						tokens={this.props.tokens}
 						ethBalance={ethBalance}
 						orderBooks={orderBooks}
-						cardOpen={openBetCard}
+						isBetCardOpen={isBetCardOpen}
 						endTime={Endtime}
-						entryTag={entryTag}
+						vivaldiIndex={vivaldiIndex}
+						isCall={isCall}
 						downdownPrice={140}
 						downPrice={roundStrike}
 						upPrice={roundStrike}
