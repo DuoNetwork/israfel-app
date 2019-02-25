@@ -121,20 +121,22 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
 
-		for (const userOrder of userOrders)
-			if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
+		const processed: { [orderHash: string]: boolean } = {};
+
+		userOrders.forEach(uo => {
+			const { orderHash, price, fill } = uo;
+			if (processed[orderHash]) return;
+			processed[orderHash] = true;
+			if (fill > 0) {
 				if (code.toLowerCase().includes('c')) {
-					accumulatedPayout += isKnockedIn
-						? userOrder.fill
-						: 0 - userOrder.price * userOrder.fill;
-					totalEthPaid += userOrder.price * userOrder.fill;
+					accumulatedPayout += isKnockedIn ? fill : 0 - price * fill;
+					totalEthPaid += price * fill;
 				}
 			} else {
-				accumulatedPayout += isKnockedIn
-					? 0
-					: userOrder.fill - userOrder.price * userOrder.fill;
-				totalEthPaid += userOrder.price * userOrder.fill;
+				accumulatedPayout += isKnockedIn ? 0 : fill - price * fill;
+				totalEthPaid += price * fill;
 			}
+		});
 
 		return [accumulatedPayout, totalEthPaid];
 	};
@@ -142,11 +144,19 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	private getCurrentRoundExpectedReturn = (userOrders: IUserOrder[]) => {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
-		for (const userOrder of userOrders)
-			if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
-				accumulatedPayout += userOrder.fill - userOrder.price * userOrder.fill;
-				totalEthPaid += userOrder.price * userOrder.fill;
+
+		const processed: { [orderHash: string]: boolean } = {};
+
+		userOrders.forEach(uo => {
+			const { orderHash, price, fill } = uo;
+			if (processed[orderHash]) return;
+			processed[orderHash] = true;
+			if (fill > 0) {
+				accumulatedPayout += fill - price * fill;
+				totalEthPaid += price * fill;
 			}
+		});
+
 		return [accumulatedPayout, totalEthPaid];
 	};
 
@@ -228,7 +238,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
 						isKnockedIn,
 						codeV,
-						prevRoundUserOrders
+						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
 					);
 
 				const currentRoundUserOrders = (this.props.orderHistory[
@@ -241,7 +251,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 				);
 				if (currentRoundUserOrders.length > 0)
 					[currentRoundPayout, currentRoundInvest] = this.getCurrentRoundExpectedReturn(
-						currentRoundUserOrders
+						currentRoundUserOrders.sort(
+							(a, b) => -a.currentSequence + b.currentSequence
+						)
 					);
 			}
 		}
@@ -326,10 +338,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							</div>
 						</SUserCount>
 						<SUserCount>
-							<div
-								className="ud-img up-img"
-								onClick={() => this.toggleBetCard(true)}
-							>
+							<div className="ud-img up-img" onClick={() => this.toggleBetCard(true)}>
 								<img src={up} />
 							</div>
 							{/* <div>
