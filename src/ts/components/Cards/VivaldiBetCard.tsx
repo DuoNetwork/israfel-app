@@ -9,8 +9,6 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
-//import down2 from 'images/vivaldi/downdownW.png';
-// import * as CST from 'ts/common/constants';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
@@ -20,7 +18,6 @@ import {
 	STagWrapper,
 	SVBetCard
 } from './_styledV';
-//import { IVivaldiCustodianInfo } from 'ts/common/types';
 
 interface IProps {
 	pair: string;
@@ -29,7 +26,7 @@ interface IProps {
 	account: string;
 	tokens: IToken[];
 	ethBalance: IEthBalance;
-	orderBooks: { [pair: string]: IOrderBookSnapshot };
+	orderBookSnapshot: IOrderBookSnapshot;
 	isBetCardOpen: boolean;
 	endTime: number;
 	downdownPrice: number;
@@ -37,8 +34,8 @@ interface IProps {
 	upPrice: number;
 	upupPrice: number;
 	onBuy?: () => void;
-	onCancel: (entry?: number) => void;
-	onTagChange: (vivaldiIndex: number, isCall: boolean) => void;
+	onCancel: (isCall?: boolean) => void;
+	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
 	addOrder: (
 		account: string,
 		pair: string,
@@ -108,7 +105,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	};
 
 	private onSliderChange = (value: number) => {
-		const orderBookSnapshot = this.getOrderBookSnapshot() as IOrderBookSnapshot;
+		const orderBookSnapshot = this.props.orderBookSnapshot;
 		if (!orderBookSnapshot.asks) return;
 
 		let amt = 0;
@@ -140,17 +137,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		this.props.onCancel();
 	};
 
-	private getOrderBookSnapshot = () => {
-		return this.props.orderBooks ? this.props.orderBooks[this.props.pair] : {};
-	};
-
 	public render() {
 		const {
 			isBetCardOpen,
 			endTime,
 			vivaldiIndex,
 			isCall,
-			onTagChange,
+			onGameTypeChange,
 			downdownPrice,
 			downPrice,
 			upPrice,
@@ -189,13 +182,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							className={
 								!isCall && vivaldiIndex === 0 ? 'down-active' : 'down-inactive'
 							}
-							onClick={() => onTagChange(0, false)}
+							onClick={() => onGameTypeChange(0, false)}
 						>
 							<img src={down} style={{ marginTop: 4 }} />
 						</div>
 						<div
 							className={isCall && vivaldiIndex === 0 ? 'up-active' : 'up-inactive'}
-							onClick={() => onTagChange(0, true)}
+							onClick={() => onGameTypeChange(0, true)}
 						>
 							<img src={up} style={{ marginBottom: 4 }} />
 						</div>

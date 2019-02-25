@@ -1,4 +1,3 @@
-//import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
 import {
@@ -10,10 +9,8 @@ import {
 } from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
 import down from 'images/vivaldi/downW.png';
-//import graph from 'images/vivaldi/GraphCard.png';
 import placeHolder from 'images/vivaldi/Mobile.png';
 import up from 'images/vivaldi/upW.png';
-//import user from 'images/vivaldi/user.png';
 import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
@@ -106,14 +103,14 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		this.props.unsubscribeOrder();
 	}
 
-	public handleBetCard = (entry?: number) => {
+	public toggleBetCard = (isCall?: boolean) => {
 		this.setState({
 			isBetCardOpen: !this.state.isBetCardOpen,
-			isCall: entry ? (entry === 2 ? true : false) : this.state.isCall
+			isCall: isCall || false
 		});
 	};
 
-	public handleBetCardTag = ( vivaldiIndex: number, isCall: boolean) => {
+	public selectBetType = (vivaldiIndex: number, isCall: boolean) => {
 		this.setState({
 			vivaldiIndex: vivaldiIndex,
 			isCall: isCall
@@ -321,12 +318,18 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 								<img className="user-img" src={user} />
 								123
 							</div> */}
-							<div className="ud-img down-img" onClick={() => this.handleBetCard(1)}>
+							<div
+								className="ud-img down-img"
+								onClick={() => this.toggleBetCard(false)}
+							>
 								<img src={down} />
 							</div>
 						</SUserCount>
 						<SUserCount>
-							<div className="ud-img up-img" onClick={() => this.handleBetCard(2)}>
+							<div
+								className="ud-img up-img"
+								onClick={() => this.toggleBetCard(true)}
+							>
 								<img src={up} />
 							</div>
 							{/* <div>
@@ -398,7 +401,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						account={this.props.account}
 						tokens={this.props.tokens}
 						ethBalance={ethBalance}
-						orderBooks={orderBooks}
+						orderBookSnapshot={orderBooks[pair]}
 						isBetCardOpen={isBetCardOpen}
 						endTime={Endtime}
 						vivaldiIndex={vivaldiIndex}
@@ -407,8 +410,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						downPrice={roundStrike}
 						upPrice={roundStrike}
 						upupPrice={160}
-						onCancel={this.handleBetCard}
-						onTagChange={this.handleBetCardTag}
+						onCancel={this.toggleBetCard}
+						onGameTypeChange={this.selectBetType}
 						addOrder={this.props.addOrder}
 					/>
 				</MediaQuery>
