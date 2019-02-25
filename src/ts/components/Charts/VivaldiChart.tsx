@@ -29,6 +29,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 	const miniTimestamp = d3.min(source.map(d => d.timestamp)) || 0;
 	const maxNumber = d3.max(source.map(d => d.close)) || 0;
 	const minNumber = d3.min(source.map(d => d.close)) || 0;
+	const range = maxNumber - minNumber;
 	console.log(maxNumber);
 	console.log(minNumber);
 	console.log(
@@ -48,7 +49,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 	//ETH Linear YScale
 	const ethYScale = d3
 		.scaleLinear()
-		.domain([minNumber, maxNumber])
+		.domain([minNumber - range * 0.1 , maxNumber + range * 0.1])
 		.range([height, 0]);
 	const chart = svg
 		.append('g')
@@ -96,8 +97,8 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		.attr('fill', 'none')
 		.attr('stroke-linejoin', 'round')
 		.attr('stroke-linecap', 'round')
-		.attr('stroke', 'rgb(64,79,84)')
-		.attr('stroke-width', 2);
+		.attr('stroke', 'rgb(64,79,84, 0.8)')
+		.attr('stroke-width', 3);
 	chart
 		.append('path')
 		.attr('class', 'reset-line')
