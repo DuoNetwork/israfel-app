@@ -32,18 +32,7 @@ relayerClient.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
 	store.dispatch(relayerActions.infoUpdate(tokens, status, acceptedPrices, exchangePrices));
 	store.dispatch(web3Actions.refresh());
 });
-relayerClient.onTrade(
-	(pair, trades) => store.dispatch(relayerActions.tradeUpdate(pair, trades)),
-	(method, pair, error) =>
-		store.dispatch(
-			relayerActions.notificationUpdate({
-				level: 'error',
-				title: method + pair,
-				message: error,
-				transactionHash: ''
-			})
-		)
-);
+
 relayerClient.onOrder(
 	userOrders => store.dispatch(relayerActions.orderHistoryUpdate(userOrders)),
 	userOrder => {
