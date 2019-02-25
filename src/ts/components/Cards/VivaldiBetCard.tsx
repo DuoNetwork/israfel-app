@@ -10,7 +10,7 @@ import 'rc-slider/assets/index.css';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 //import down2 from 'images/vivaldi/downdownW.png';
-import * as CST from 'ts/common/constants';
+// import * as CST from 'ts/common/constants';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
@@ -24,6 +24,7 @@ import {
 
 interface IProps {
 	//info: IVivaldiCustodianInfo
+	pair: string;
 	account: string;
 	tokens: IToken[];
 	code: string;
@@ -85,7 +86,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		try {
 			await addOrder(
 				account,
-				this.props.code.replace('VIVALDI', 'ETH') + '|' + CST.TH_WETH,
+				this.props.pair,
 				Number(this.state.betPrice),
 				Number(this.state.betNumber),
 				true,

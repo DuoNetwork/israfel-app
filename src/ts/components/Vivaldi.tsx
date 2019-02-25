@@ -11,10 +11,25 @@ import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import MediaQuery from 'react-responsive';
-import { ICustodianInfo, IEthBalance, INotification, ITokenBalance, IVivaldiCustodianInfo } from 'ts/common/types';
+import {
+	ICustodianInfo,
+	IEthBalance,
+	INotification,
+	ITokenBalance,
+	IVivaldiCustodianInfo
+} from 'ts/common/types';
 import util from 'ts/common/util';
-import { SDesCard, SDivFlexCenter, SGraphCard, SInfoCard, SPayoutCard, SUserCount, SVHeader } from './_styledV';
+import {
+	SDesCard,
+	SDivFlexCenter,
+	SGraphCard,
+	SInfoCard,
+	SPayoutCard,
+	SUserCount,
+	SVHeader
+} from './_styledV';
 import VivaldiBetCard from './Cards/VivaldiBetCard';
+
 interface IProps {
 	types: string[];
 	network: number;
@@ -49,16 +64,43 @@ interface IProps {
 	deleteOrder: (pair: string, orderHashes: string[], signature: string) => void;
 }
 interface IState {
+	connection: boolean;
+	account: string;
 	openBetCard: boolean;
 	entryTag: number;
+	// pair: string;
 }
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	constructor(props: IProps) {
 		super(props);
 		this.state = {
+			connection: props.connection,
+			account: props.account,
 			openBetCard: false,
-			entryTag: 0
+			entryTag: 2
 		};
+	}
+
+	public componentDidMount() {
+		document.title = 'DUO | Trustless Derivatives';
+		this.props.subscribeOrder(this.props.account);
+	}
+
+	public static getDerivedStateFromProps(props: IProps, state: IState) {
+		if (props.connection !== state.connection || props.account !== state.account) {
+			if (props.connection) props.subscribeOrder(props.account);
+			else props.unsubscribeOrder();
+			return {
+				connection: props.connection,
+				account: props.account
+			};
+		}
+
+		return null;
+	}
+
+	public componentWillUnmount() {
+		this.props.unsubscribeOrder();
 	}
 
 	public handleBetCard = (entry?: number) => {
@@ -74,29 +116,43 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		});
 	};
 
-	private getReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
+	private getPrevRoundReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
 
 		for (const userOrder of userOrders)
-			if (isKnockedIn && code.toLowerCase().includes('c')) {
-				if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
-					accumulatedPayout += userOrder.fill - userOrder.price * userOrder.fill;
+			if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
+				if (code.toLowerCase().includes('c')) {
+					accumulatedPayout += isKnockedIn
+						? userOrder.fill
+						: 0 - userOrder.price * userOrder.fill;
 					totalEthPaid += userOrder.price * userOrder.fill;
 				}
-
-				if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
-					totalEthPaid += userOrder.price * userOrder.fill;
-					accumulatedPayout += 0 - userOrder.price * userOrder.fill;
-				}
+			} else {
+				accumulatedPayout += isKnockedIn
+					? 0
+					: userOrder.fill - userOrder.price * userOrder.fill;
+				totalEthPaid += userOrder.price * userOrder.fill;
 			}
 
+		return [accumulatedPayout, totalEthPaid];
+	};
+
+	private getCurrentRoundExpectedReturn = (userOrders: IUserOrder[]) => {
+		let accumulatedPayout = 0;
+		let totalEthPaid = 0;
+		for (const userOrder of userOrders)
+			if (userOrder.type === Constants.DB_TERMINATE && userOrder.fill > 0) {
+				accumulatedPayout += userOrder.fill - userOrder.price * userOrder.fill;
+				totalEthPaid += userOrder.price * userOrder.fill;
+			}
 		return [accumulatedPayout, totalEthPaid];
 	};
 
 	public render() {
 		const { ethPrice, types, custodians, orderBooks, ethBalance } = this.props;
 		const { openBetCard, entryTag } = this.state;
+
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
 			else
@@ -120,8 +176,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		custodianTypeList.forEach(list =>
 			list.sort((a, b) => custodians[a].states.maturity - custodians[b].states.maturity)
 		);
-		const infoV: IVivaldiCustodianInfo = custodians[custodianTypeList[0] as any] as any;
 
+		const infoV: IVivaldiCustodianInfo = custodians[custodianTypeList[0] as any] as any;
 		const upDownClass = infoV
 			? infoV.states.roundStrike < ethPrice
 				? 'incPx'
@@ -130,12 +186,12 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		const upDownText = infoV ? (infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN') : '···';
 		const upDownChange = infoV
 			? '$' +
-			util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
-			' (' +
-			util.formatPercentAcc(
-				Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
-			) +
-			')'
+			  util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
+			  ' (' +
+			  util.formatPercentAcc(
+					Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
+			  ) +
+			  ')'
 			: '··· (···)';
 		const Endtime = infoV
 			? infoV.states.resetPriceTime + infoV.states.period
@@ -147,31 +203,42 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let prevRoundInvest = 0;
 		let currentRoundInvest = 0;
 		let currentRoundPayout = 0;
-		const pair = codeV.replace('VIVALDI', 'ETH') + '|WETH';
+		let pair = '';
+		switch (entryTag) {
+			case 1:
+				pair = 'ETH-100P-3H' + `|${Constants.TOKEN_WETH}`;
+				break;
+			case 2:
+				pair = 'ETH-100C-3H' + `|${Constants.TOKEN_WETH}`;
+				break;
+			default:
+				break;
+		}
+
 		if (infoV && this.props.orderHistory[pair]) {
 			const isKnockedIn = infoV.states.isKnockedIn;
-			// calculating preRound payout
 			const lastResetTime = infoV.states.resetPriceTime;
 
 			const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
 				uo =>
 					uo.createdAt <= lastResetTime &&
-					uo.createdAt >= lastResetTime - infoV.states.period
+					uo.createdAt >= lastResetTime - infoV.states.period &&
+					uo.side === Constants.DB_BID &&
+					uo.pair === pair
 			);
 			if (prevRoundUserOrders.length > 0)
-				[prevRoundPayout, prevRoundInvest] = this.getReturn(
+				[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
 					isKnockedIn,
 					codeV,
 					prevRoundUserOrders
 				);
 
 			const currentRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
-				uo => uo.createdAt > lastResetTime
+				uo =>
+					uo.createdAt > lastResetTime && uo.side === Constants.DB_BID && uo.pair === pair
 			);
 			if (currentRoundUserOrders.length > 0)
-				[currentRoundPayout, currentRoundInvest] = this.getReturn(
-					isKnockedIn,
-					codeV,
+				[currentRoundPayout, currentRoundInvest] = this.getCurrentRoundExpectedReturn(
 					currentRoundUserOrders
 				);
 		}
@@ -268,11 +335,15 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<div className="row">
 								<div className="col1">
 									<h4 className="col-title"># OF ETH SPENT</h4>
-									<h4 className="col-content">{currentRoundInvest}</h4>
+									<h4 className="col-content">
+										{util.formatNumber(currentRoundInvest)}
+									</h4>
 								</div>
 								<div className="col2">
 									<h4 className="col-title">EXPECTED RETURN</h4>
-									<h4 className="col-content">{currentRoundPayout}</h4>
+									<h4 className="col-content">
+										{util.formatNumber(currentRoundPayout)}
+									</h4>
 								</div>
 								<div className="col3">
 									<h4 className="col-content increase">
@@ -290,11 +361,15 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<div className="row">
 								<div className="col1">
 									<h4 className="col-title"># OF ETH SPENT</h4>
-									<h4 className="col-content">{prevRoundInvest}</h4>
+									<h4 className="col-content">
+										{util.formatNumber(prevRoundInvest)}
+									</h4>
 								</div>
 								<div className="col2">
 									<h4 className="col-title"># OF ETH RETURN</h4>
-									<h4 className="col-content">{prevRoundPayout}</h4>
+									<h4 className="col-content">
+										{util.formatNumber(prevRoundPayout)}
+									</h4>
 								</div>
 								<div className="col3">
 									<h4 className="col-content decrease">
@@ -307,6 +382,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						</div>
 					</SPayoutCard>
 					<VivaldiBetCard
+						pair={pair}
 						account={this.props.account}
 						code={codeV}
 						tokens={this.props.tokens}
