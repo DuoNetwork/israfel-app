@@ -220,6 +220,10 @@ export const SCardButtonWrapper = styled.div`
 			margin-left: 4px;
 		}
 	}
+	.button-disabled{
+		background:  ${ColorStyles.BorderBlack4} !important;
+		pointer-events: none;
+	}
 	.aboveC {
 		border-color: ${ColorStyles.ThemeGreen};
 		color: ${ColorStyles.ThemeGreen};

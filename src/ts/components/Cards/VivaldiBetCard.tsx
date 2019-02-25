@@ -148,7 +148,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			downPrice,
 			upPrice,
 			upupPrice,
-			ethBalance
+			ethBalance,
+			orderBookSnapshot
 		} = this.props;
 		const { betNumber, toEarn } = this.state;
 		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
@@ -253,7 +254,13 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							CANCEL
 						</div>
 						<div
-							className={(!isCall ? 'below' : 'above') + ' button'}
+							className={
+								(!isCall ? 'below' : 'above') +
+								' button' +
+								(orderBookSnapshot && orderBookSnapshot.asks.length
+									? ''
+									: ' button-disabled')
+							}
 							onClick={this.placeOrder}
 						>
 							BUY
