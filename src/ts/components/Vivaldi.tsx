@@ -1,6 +1,13 @@
 //import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
 import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
-import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder, Util as CommonUtil } from '@finbook/israfel-common';
+import {
+	Constants,
+	IOrderBookSnapshot,
+	IToken,
+	ITrade,
+	IUserOrder,
+	Util as CommonUtil
+} from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
 import down from 'images/vivaldi/downW.png';
 //import graph from 'images/vivaldi/GraphCard.png';
@@ -290,7 +297,15 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						</div>
 					</SInfoCard>
 					<SGraphCard>
-						<VivaldiChart prices={exchangePrices ? exchangePrices : []} innerWidth={window.innerWidth * 0.92} resetTime={infoV ? infoV.states.resetPriceTime : CommonUtil.getUTCNowTimestamp()}/>
+						<VivaldiChart
+							prices={exchangePrices ? exchangePrices : []}
+							innerWidth={window.innerWidth * 0.92}
+							resetTime={
+								infoV
+									? infoV.states.resetPriceTime
+									: CommonUtil.getUTCNowTimestamp()
+							}
+						/>
 					</SGraphCard>
 					<SDesCard>
 						<div>

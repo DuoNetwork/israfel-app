@@ -1,18 +1,14 @@
 import { IPrice } from '@finbook/duo-market-data';
 import { Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
+import moment from 'moment';
 import * as React from 'react';
-//import { ColorStyles } from 'ts/common/styles';
+import { ColorStyles } from 'ts/common/styles';
 
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 const height = 240 - margin.top - margin.bottom;
 
-function drawLines(
-	el: Element,
-	sourceData: IPrice[],
-	innerWidth: number,
-	resetTime: number,
-) {
+function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetTime: number) {
 	const width = innerWidth - margin.left - margin.right;
 	if (!sourceData.length) {
 		d3.selectAll('.loading').remove();
@@ -25,15 +21,20 @@ function drawLines(
 	const now = CommonUtil.getUTCNowTimestamp();
 	const beginningTime = resetTime - 3 * 3600 * 1000;
 	const source = sourceData;
-	console.log('################## Source')
-	console.log(source)
+	console.log('################## Source');
+	console.log(source);
 	//Establish SVG Playground
 	d3.selectAll('.loading').remove();
 	d3.selectAll('#timeserieschart').remove();
+	const miniTimestamp = d3.min(source.map(d => d.timestamp)) || 0;
 	const maxNumber = d3.max(source.map(d => d.close)) || 0;
 	const minNumber = d3.min(source.map(d => d.close)) || 0;
 	console.log(maxNumber);
 	console.log(minNumber);
+	console.log(
+		moment(beginningTime).format('YYYY-MM-DD HH:mm:ss') + '    number: ' + moment(beginningTime)
+	);
+	console.log(source);
 	const svg = d3
 		.select(el)
 		.append('svg')
@@ -42,27 +43,27 @@ function drawLines(
 		.attr('height', height + margin.top + margin.bottom);
 	const xScale = d3
 		.scaleLinear()
-		.domain([beginningTime, now])
+		.domain([miniTimestamp, now])
 		.range([0, width]);
 	//ETH Linear YScale
 	const ethYScale = d3
 		.scaleLinear()
-		.domain([minNumber * 0.9, maxNumber * 1.1])
+		.domain([minNumber, maxNumber])
 		.range([height, 0]);
 	const chart = svg
 		.append('g')
 		.attr('class', 'graph-area')
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	const startValue = source[0].close;
-	const area = d3
-		.area<any>()
-		.x(d => {
-			return xScale(d.timestamp);
-		})
-		.y0(ethYScale(startValue))
-		.y1(d => {
-			return ethYScale(d.close);
-		});
+	// const startValue = source[0].close;
+	// const area = d3
+	// 	.area<any>()
+	// 	.x(d => {
+	// 		return xScale(d.timestamp);
+	// 	})
+	// 	.y0(ethYScale(startValue))
+	// 	.y1(d => {
+	// 		return ethYScale(d.close);
+	// 	});
 	const line = d3
 		.line<any>()
 		.x(d => {
@@ -71,14 +72,23 @@ function drawLines(
 		.y(d => {
 			return ethYScale(d.close);
 		});
-	chart.append('path')
-		.datum(source)
-		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-		.attr('fill', 'none')
-		.attr('class', 'area')
-		.attr('d', area)
-		.attr('fill', 'rgb(100,100,100)');
-	chart.append('path')
+	const lineN = d3
+		.line<any>()
+		.x(d => {
+			return d.x;
+		})
+		.y(d => {
+			return d.y;
+		});
+	// chart.append('path')
+	// 	.datum(source)
+	// 	.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+	// 	.attr('fill', 'none')
+	// 	.attr('class', 'area')
+	// 	.attr('d', area)
+	// 	.attr('fill', 'rgb(100,100,100)');
+	chart
+		.append('path')
 		.datum(source)
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 		.attr('class', 'line')
@@ -86,8 +96,22 @@ function drawLines(
 		.attr('fill', 'none')
 		.attr('stroke-linejoin', 'round')
 		.attr('stroke-linecap', 'round')
-		.attr('stroke', 'rgb(0,0,0)')
-		.attr('stroke-width', 1.5);
+		.attr('stroke', 'rgb(64,79,84)')
+		.attr('stroke-width', 2);
+	chart
+		.append('path')
+		.attr('class', 'reset-line')
+		.attr('d', () => {
+			return lineN([
+				{ x: xScale(resetTime), y: margin.top },
+				{
+					x: xScale(resetTime),
+					y: height - margin.bottom
+				}
+			]);
+		})
+		.attr('stroke', ColorStyles.BorderBlack1)
+		.attr('stroke-width', 2);
 	// svg.append('rect')
 	// 	.attr('x', -1)
 	// 	.attr('y', 0)
@@ -126,7 +150,8 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 		const { prices, innerWidth, resetTime } = nextProps;
 		if (
 			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices) ||
-			JSON.stringify(nextProps.innerWidth) !== JSON.stringify(this.props.innerWidth)
+			JSON.stringify(nextProps.innerWidth) !== JSON.stringify(this.props.innerWidth) ||
+			JSON.stringify(nextProps.resetTime) !== JSON.stringify(this.props.resetTime)
 		)
 			drawLines(this.chartRef.current as Element, prices, innerWidth, resetTime);
 
