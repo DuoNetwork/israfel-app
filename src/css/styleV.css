@@ -35,4 +35,15 @@ header>span {
 	font-weight: 400;
 	color: rgba(130,130,130,1);
 }
+
+.loading {
+	height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 500;
+	border: 1px dashed rgba(0,0,0,0.2);
+	color: rgba(104, 104, 104, 1);
+}
 /* Vivaldi */

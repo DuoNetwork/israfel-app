@@ -1,9 +1,9 @@
 //import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
-import { IAcceptedPrice } from '@finbook/duo-market-data';
-import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder } from '@finbook/israfel-common';
+import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
+import { Constants, IOrderBookSnapshot, IToken, ITrade, IUserOrder, Util as CommonUtil } from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
 import down from 'images/vivaldi/downW.png';
-import graph from 'images/vivaldi/GraphCard.png';
+//import graph from 'images/vivaldi/GraphCard.png';
 import placeHolder from 'images/vivaldi/Mobile.png';
 import up from 'images/vivaldi/upW.png';
 //import user from 'images/vivaldi/user.png';
@@ -29,6 +29,7 @@ import {
 	SVHeader
 } from './_styledV';
 import VivaldiBetCard from './Cards/VivaldiBetCard';
+import VivaldiChart from './Charts/VivaldiChart';
 
 interface IProps {
 	types: string[];
@@ -39,6 +40,7 @@ interface IProps {
 	ethBalance: IEthBalance;
 	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
+	exchangePrices: IPrice[];
 	trades: { [pair: string]: ITrade[] };
 	custodians: { [custodian: string]: ICustodianInfo };
 	custodianTokenBalances: { [custodian: string]: { [code: string]: ITokenBalance } };
@@ -82,7 +84,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	}
 
 	public componentDidMount() {
-		document.title = 'DUO | Trustless Derivatives';
 		this.props.subscribeOrder(this.props.account);
 	}
 
@@ -150,7 +151,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { ethPrice, types, custodians, orderBooks, ethBalance } = this.props;
+		const { ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices } = this.props;
 		const { openBetCard, entryTag } = this.state;
 
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
@@ -162,7 +163,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					</span>
 				);
 		};
-
 		const custodianTypeList: string[][] = types.map(() => []);
 		for (const custodian in custodians) {
 			const info = custodians[custodian];
@@ -186,19 +186,18 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		const upDownText = infoV ? (infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN') : '···';
 		const upDownChange = infoV
 			? '$' +
-			  util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
-			  ' (' +
-			  util.formatPercentAcc(
-					Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
-			  ) +
-			  ')'
+			util.formatPriceShort(Math.abs(infoV.states.roundStrike - ethPrice)) +
+			' (' +
+			util.formatPercentAcc(
+				Math.abs(infoV.states.roundStrike - ethPrice) / infoV.states.roundStrike
+			) +
+			')'
 			: '··· (···)';
 		const Endtime = infoV
 			? infoV.states.resetPriceTime + infoV.states.period
 			: moment().valueOf();
 		const roundStrike = infoV ? infoV.states.roundStrike : 0;
 		const codeV = infoV ? infoV.code : '';
-
 		let prevRoundPayout = 0;
 		let prevRoundInvest = 0;
 		let currentRoundInvest = 0;
@@ -276,13 +275,13 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									ethPrice
 								)}`}</div>
 							</div>
-							<div
+							{/* <div
 								className={
 									(openBetCard ? 'showMini' : 'hideMini') + ' info-bar-right'
 								}
 							>
 								Mini Graph
-							</div>
+							</div> */}
 						</div>
 						<div className="subtitle-bar">
 							<span className={upDownClass + ' updown-button'}>{upDownText}</span>
@@ -291,7 +290,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						</div>
 					</SInfoCard>
 					<SGraphCard>
-						<img src={graph} />
+						<VivaldiChart prices={exchangePrices ? exchangePrices : []} innerWidth={window.innerWidth * 0.92} resetTime={infoV ? infoV.states.resetPriceTime : CommonUtil.getUTCNowTimestamp()}/>
 					</SGraphCard>
 					<SDesCard>
 						<div>
