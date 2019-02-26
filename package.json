@@ -15,6 +15,8 @@
 		"analyzeVivaldi:build": "webpack --config webpack.config.vivaldi.analyze.js",
 		"analyze:build": "webpack --config webpack.config.analyze.js",
 		"analyze:no:build": "webpack-bundle-analyzer dist/stats.json",
+		"rebuildVivaldi": "webpack --config webpack.config.vivaldi.uat.js",
+		"buildVivaldi": "npm run clean && npm run rebuildVivaldi",
 		"rebuildDev": "webpack --config webpack.config.dev.js",
 		"rebuild": "webpack --config webpack.config.uat.js",
 		"rebuildLive": "webpack --config webpack.config.prod.js",
