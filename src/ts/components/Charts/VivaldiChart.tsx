@@ -1,7 +1,7 @@
 import { IPrice } from '@finbook/duo-market-data';
 import { Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
-import moment from 'moment';
+// import moment from 'moment';
 import * as React from 'react';
 import { ColorStyles } from 'ts/common/styles';
 
@@ -19,7 +19,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		return;
 	}
 	const now = CommonUtil.getUTCNowTimestamp();
-	const beginningTime = resetTime - 3 * 3600 * 1000;
+	// const beginningTime = resetTime - 3 * 3600 * 1000;
 	const source = sourceData;
 	console.log('################## Source');
 	console.log(source);
@@ -30,12 +30,6 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 	const maxNumber = d3.max(source.map(d => d.close)) || 0;
 	const minNumber = d3.min(source.map(d => d.close)) || 0;
 	const range = maxNumber - minNumber;
-	console.log(maxNumber);
-	console.log(minNumber);
-	console.log(
-		moment(beginningTime).format('YYYY-MM-DD HH:mm:ss') + '    number: ' + moment(beginningTime)
-	);
-	console.log(source);
 	const svg = d3
 		.select(el)
 		.append('svg')
