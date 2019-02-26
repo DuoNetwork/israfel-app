@@ -221,7 +221,7 @@ export const SCardButtonWrapper = styled.div`
 		}
 	}
 	.button-disabled{
-		background:  ${ColorStyles.BorderBlack4} !important;
+		background:  #B3B9BA !important;
 		pointer-events: none;
 	}
 	.aboveC {
