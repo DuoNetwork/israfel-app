@@ -202,7 +202,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					</STagWrapper>
 					<SBetInfoWrapper>
 						<h3>
-							I think <b>ETH</b> is going to
+							I think <b>ETH</b> is going
 							{!isCall ? ' below' : ' above'}
 						</h3>
 						<div className={(!isCall ? 'below' : 'above') + ' price-wrapper'}>

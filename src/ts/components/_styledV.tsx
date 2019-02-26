@@ -85,13 +85,47 @@ export const SInfoCard = styled.div`
 			}
 		}
 		.info-bar-right {
-			height: 72px;
-			width: 50%;
+			padding: 4px 0 12px 0;
+			width: 48%;
 			display: flex;
-			justify-content: center;
-			align-items: center;
-			border: 1px dashed ${ColorStyles.BorderBlack3};
+			justify-content: space-between;
+			flex-direction: column;
+			font-weight: 300;
 			transition: all 0.3s;
+			p {
+				margin: 4px 0;
+				font-size: 14px;
+				font-weight: 400;
+				display: flex;
+				div:first-child {
+					color: ${ColorStyles.ThemeTextAlpha};
+					width: 44px;
+				}
+				div:last-child {
+					color: ${ColorStyles.ThemeText};
+					text-align: right;
+					width: 70px;
+				}
+			}
+			.input-line {
+				display: flex;
+				input {
+					border-radius: 2px;
+					border: 1px solid ${ColorStyles.BorderBlack3};
+					height: 20px;
+					width: 65%;
+					margin-right: 8px;
+					outline: none;
+				}
+				div {
+					border-radius: 2px;
+					background: ${ColorStyles.TitlePM};
+					color: #fff;
+					font-size: 12px;
+					line-height: 24px;
+					padding: 0 4px;
+				}
+			}
 		}
 		.showMini {
 			opacity: 1;
@@ -277,6 +311,56 @@ export const SPayoutCard = styled.div`
 		}
 		.decrease {
 			color: ${ColorStyles.ThemeRed} !important;
+		}
+	}
+`;
+
+export const SAllowenceCard = styled.div`
+	position: fixed;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	height: 100%;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 10%;
+	.allowenceWrapper {
+		width: 70%;
+		border-radius: 6px;
+		height: 150px;
+		background: #fff;
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		p {
+			color: ${ColorStyles.ThemeTextAlpha};
+			line-height: 24px;
+			margin-bottom: 5px;
+			b {
+				color: ${ColorStyles.ThemeText};
+			}
+		}
+		input {
+			width: 100%;
+			height: 24px;
+			border-radius: 2px;
+			padding: 0 4px;
+			border: 1px solid ${ColorStyles.BorderBlack3};
+			color: ${ColorStyles.ThemeText};
+			outline: none;
+			&::placeholder {
+				color: ${ColorStyles.ThemeTextAlphaL};
+			}
+		}
+		.allow-button {
+			padding: 6px 12px;
+			border-radius: 4px;
+			background: ${ColorStyles.TitlePM};
+			color: #fff;
 		}
 	}
 `;

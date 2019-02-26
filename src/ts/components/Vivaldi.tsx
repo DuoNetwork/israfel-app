@@ -15,6 +15,7 @@ import moment from 'moment';
 import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import MediaQuery from 'react-responsive';
+import * as CST from 'ts/common/constants';
 import {
 	ICustodianInfo,
 	IEthBalance,
@@ -24,6 +25,7 @@ import {
 } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
+	SAllowenceCard,
 	SDesCard,
 	SDivFlexCenter,
 	SGraphCard,
@@ -61,6 +63,7 @@ interface IProps {
 		isBid: boolean,
 		expiry: number
 	) => Promise<string>;
+	wrapEther: (amount: number, address: string) => Promise<string>;
 }
 interface IState {
 	connection: boolean;
@@ -68,6 +71,7 @@ interface IState {
 	isBetCardOpen: boolean;
 	vivaldiIndex: number;
 	isCall: boolean;
+	ethInput: string;
 }
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	constructor(props: IProps) {
@@ -77,7 +81,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			connection: props.connection,
 			account: props.account,
 			isBetCardOpen: false,
-			isCall: true
+			isCall: true,
+			ethInput: ''
 		};
 	}
 
@@ -115,6 +120,19 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			isCall: isCall
 		});
 	};
+	private handleWrap = () => {
+		const { wrapEther, account } = this.props;
+		const { ethInput } = this.state;
+
+		if (ethInput.match(CST.RX_NUM_P))
+			wrapEther(Number(ethInput), account).then(() => this.setState({ ethInput: '' }));
+		else this.setState({ ethInput: '' });
+	};
+
+	private handleETHInputChange = (value: string) =>
+		this.setState({
+			ethInput: value
+		});
 
 	private getPrevRoundReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
 		let accumulatedPayout = 0;
@@ -161,7 +179,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 
 	public render() {
 		const { ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices } = this.props;
-		const { isBetCardOpen, isCall, vivaldiIndex } = this.state;
+		const { isBetCardOpen, isCall, vivaldiIndex, ethInput } = this.state;
 
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
@@ -256,7 +274,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					);
 			}
 		}
-
+		console.log('***********');
+		console.log(ethBalance);
+		console.log(ethBalance.allowance);
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -289,19 +309,35 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 								<div className="info-price">{`$${util.formatPriceShort(
 									ethPrice
 								)}`}</div>
+								<div className="subtitle-bar">
+									<span className={upDownClass + ' updown-button'}>
+										{upDownText}
+									</span>
+									<span className={upDownClass + 'T change-button'}>
+										{upDownChange}
+									</span>
+									<span className="game-button">current game</span>
+								</div>
 							</div>
-							{/* <div
-								className={
-									(isBetCardOpen ? 'showMini' : 'hideMini') + ' info-bar-right'
-								}
-							>
-								Mini Graph
-							</div> */}
-						</div>
-						<div className="subtitle-bar">
-							<span className={upDownClass + ' updown-button'}>{upDownText}</span>
-							<span className={upDownClass + 'T change-button'}>{upDownChange}</span>
-							<span className="game-button">current game</span>
+							<div className="info-bar-right">
+								Balance
+								<p>
+									<div>ETH</div>
+									<div>{util.formatBalance(ethBalance.eth)}</div>
+								</p>
+								<p>
+									<div>WETH</div>
+									<div>{util.formatBalance(ethBalance.weth)}</div>
+								</p>
+								<div className='input-line'>
+									<input
+										placeholder="input wrap nubmer"
+										value={ethInput}
+										onChange={e => this.handleETHInputChange(e.target.value)}
+									/>
+									<div onClick={this.handleWrap}>WRAP</div>
+								</div>
+							</div>
 						</div>
 					</SInfoCard>
 					<SGraphCard>
@@ -422,6 +458,35 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						onGameTypeChange={this.selectBetType}
 						addOrder={this.props.addOrder}
 					/>
+					{ethBalance.eth && ethBalance.weth === 0 ? (
+						<SAllowenceCard>
+							<div className="allowenceWrapper">
+								<p>
+									Not enough <b>WETH</b>, please get some <b>WETH</b> for further
+									transaction.
+								</p>
+								<input
+									placeholder="input wrap nubmer"
+									value={ethInput}
+									onChange={e => this.handleETHInputChange(e.target.value)}
+								/>
+								<div className="allow-button" onClick={this.handleWrap}>
+									Wrap
+								</div>
+							</div>
+						</SAllowenceCard>
+					) : null}
+					{ethBalance.weth && ethBalance.allowance === 0 ? (
+						<SAllowenceCard>
+							<div className="allowenceWrapper">
+								<p>
+									Not enough <b>Allowence</b>, please comfirm <b>Allowence</b> for
+									further transaction.
+								</p>
+								<div className="allow-button">ALLOW</div>
+							</div>
+						</SAllowenceCard>
+					) : null}
 				</MediaQuery>
 			</div>
 		);

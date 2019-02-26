@@ -1,5 +1,5 @@
 import { IPrice } from '@finbook/duo-market-data';
-import { Util as CommonUtil } from '@finbook/israfel-common';
+// import { Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
 // import moment from 'moment';
 import * as React from 'react';
@@ -18,13 +18,14 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 			.html('<span>Loading...</span>');
 		return;
 	}
-	const now = CommonUtil.getUTCNowTimestamp();
-	// const beginningTime = resetTime - 3 * 3600 * 1000;
+	//const now = CommonUtil.getUTCNowTimestamp();
+	const beginningTime = resetTime - 12 * 3600 * 1000;
+	const endTime = resetTime + 12 * 3600 * 1000;
 	const source = sourceData;
 	//Establish SVG Playground
 	d3.selectAll('.loading').remove();
 	d3.selectAll('#timeserieschart').remove();
-	const miniTimestamp = d3.min(source.map(d => d.timestamp)) || 0;
+	//const miniTimestamp = d3.min(source.map(d => d.timestamp)) || 0;
 	const maxNumber = d3.max(source.map(d => d.close)) || 0;
 	const minNumber = d3.min(source.map(d => d.close)) || 0;
 	const range = maxNumber - minNumber;
@@ -36,7 +37,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		.attr('height', height + margin.top + margin.bottom);
 	const xScale = d3
 		.scaleLinear()
-		.domain([miniTimestamp, now])
+		.domain([beginningTime, endTime])
 		.range([0, width]);
 	//ETH Linear YScale
 	const ethYScale = d3
@@ -89,7 +90,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		.attr('fill', 'none')
 		.attr('stroke-linejoin', 'round')
 		.attr('stroke-linecap', 'round')
-		.attr('stroke', 'rgb(64,79,84, 0.8)')
+		.attr('stroke', ColorStyles.TitlePM)
 		.attr('stroke-width', 3);
 	chart
 		.append('path')

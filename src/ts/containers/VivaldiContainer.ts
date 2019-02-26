@@ -23,6 +23,7 @@ function mapStateToProps(state: IState) {
 		wethAddress: web3Util.contractAddresses.etherToken,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0,
 		exchangePrices: state.relayer.exchangePrices['kraken'],
+		wrapEther: (amount: number, address: string) => web3Util.wrapEther(amount, address),
 		addOrder: (
 			account: string,
 			pair: string,
