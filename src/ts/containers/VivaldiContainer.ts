@@ -14,7 +14,6 @@ function mapStateToProps(state: IState) {
 		network: state.web3.network,
 		tokens: state.relayer.tokens,
 		account: state.web3.account,
-		acceptedPrices: state.relayer.acceptedPrices,
 		custodians: state.web3.custodians,
 		custodianTokenBalances: state.web3.custodianTokenBalances,
 		ethBalance: state.web3.ethBalance,

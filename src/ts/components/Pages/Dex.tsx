@@ -233,8 +233,6 @@ export default class Dex extends React.Component<IProps, IState> {
 							style={{ paddingTop: '20px' }}
 						>
 							{custodianTypeList[i].map(c => {
-								console.log("********************");
-								console.log(c);
 								const tbs = custodianTokenBalances[c] || {};
 								const obs: { [pair: string]: IOrderBookSnapshot } = {};
 								for (const code in tbs) {

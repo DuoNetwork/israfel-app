@@ -1,5 +1,5 @@
 import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
-import { IAcceptedPrice, IPrice } from '@finbook/duo-market-data';
+import { IPrice } from '@finbook/duo-market-data';
 import {
 	Constants,
 	IOrderBookSnapshot,
@@ -42,7 +42,6 @@ interface IProps {
 	tokens: IToken[];
 	account: string;
 	ethBalance: IEthBalance;
-	acceptedPrices: { [custodian: string]: IAcceptedPrice[] };
 	ethPrice: number;
 	exchangePrices: IPrice[];
 	custodians: { [custodian: string]: ICustodianInfo };

@@ -21,8 +21,6 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 	const now = CommonUtil.getUTCNowTimestamp();
 	// const beginningTime = resetTime - 3 * 3600 * 1000;
 	const source = sourceData;
-	console.log('################## Source');
-	console.log(source);
 	//Establish SVG Playground
 	d3.selectAll('.loading').remove();
 	d3.selectAll('#timeserieschart').remove();

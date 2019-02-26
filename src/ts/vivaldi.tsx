@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import * as relayerActions from './actions/relayerActions';
 import * as web3Actions from './actions/web3Actions';
+import { isVivaldiCustodian } from './common/duoWrapper';
 import relayerClient from './common/relayerClient';
 import util from './common/util';
 import web3Util from './common/web3Util';
@@ -29,7 +30,14 @@ store.dispatch(web3Actions.refresh());
 setInterval(() => store.dispatch(web3Actions.refresh()), 10000);
 
 relayerClient.onInfoUpdate((tokens, status, acceptedPrices, exchangePrices) => {
-	store.dispatch(relayerActions.infoUpdate(tokens, status, acceptedPrices, exchangePrices));
+	store.dispatch(
+		relayerActions.infoUpdate(
+			tokens.filter(token => isVivaldiCustodian(token.custodian)),
+			status,
+			acceptedPrices,
+			exchangePrices
+		)
+	);
 	store.dispatch(web3Actions.refresh());
 });
 
@@ -80,7 +88,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router>
 			<React.StrictMode>
-				<Vivaldi types={[WrapperConstants.VIVALDI]}/>
+				<Vivaldi types={[WrapperConstants.VIVALDI]} />
 			</React.StrictMode>
 		</Router>
 	</Provider>,
