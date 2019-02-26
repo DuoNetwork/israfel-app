@@ -34,7 +34,7 @@ interface IProps {
 	downPrice: number;
 	upPrice: number;
 	upupPrice: number;
-	betPriceInc: number;
+	markUp: number;
 	onBuy?: () => void;
 	onCancel: (isCall?: boolean) => void;
 	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
@@ -114,7 +114,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		let price = 0;
 		for (const orderBookLevel of orderBookSnapshot.asks) {
 			amt += orderBookLevel.balance;
-			price = orderBookLevel.price + this.props.betPriceInc;
+			price = orderBookLevel.price + this.props.markUp;
 			if (amt >= value) {
 				this.setState({
 					betNumber: value,
