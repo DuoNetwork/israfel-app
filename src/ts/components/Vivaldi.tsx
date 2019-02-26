@@ -453,6 +453,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						onCancel={this.toggleBetCard}
 						onGameTypeChange={this.selectBetType}
 						addOrder={this.props.addOrder}
+						betPriceInc={0.01}
 					/>
 					{ethBalance.eth && ethBalance.weth === 0 ? (
 						<SAllowenceCard>

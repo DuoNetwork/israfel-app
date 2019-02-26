@@ -11,6 +11,7 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
+
 import {
 	SBetInfoWrapper,
 	SCardButtonWrapper,
@@ -33,6 +34,7 @@ interface IProps {
 	downPrice: number;
 	upPrice: number;
 	upupPrice: number;
+	betPriceInc: number;
 	onBuy?: () => void;
 	onCancel: (isCall?: boolean) => void;
 	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
@@ -112,7 +114,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		let price = 0;
 		for (const orderBookLevel of orderBookSnapshot.asks) {
 			amt += orderBookLevel.balance;
-			price = orderBookLevel.price + 0.01;
+			price = orderBookLevel.price + this.props.betPriceInc;
 			if (amt >= value) {
 				this.setState({
 					betNumber: value,
@@ -149,7 +151,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			upPrice,
 			upupPrice,
 			ethBalance,
-			orderBookSnapshot
+			orderBookSnapshot,
 		} = this.props;
 		const { betNumber, toEarn } = this.state;
 		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
