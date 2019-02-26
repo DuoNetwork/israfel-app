@@ -19,7 +19,6 @@ import * as CST from 'ts/common/constants';
 import {
 	ICustodianInfo,
 	IEthBalance,
-	INotification,
 	ITokenBalance,
 	IVivaldiCustodianInfo
 } from 'ts/common/types';
@@ -52,7 +51,6 @@ interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
 	wethAddress: string;
-	notify: (notification: INotification) => any;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
 	addOrder: (
@@ -64,6 +62,7 @@ interface IProps {
 		expiry: number
 	) => Promise<string>;
 	wrapEther: (amount: number, address: string) => Promise<string>;
+	setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) => any;
 }
 interface IState {
 	connection: boolean;
@@ -178,7 +177,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices } = this.props;
+		const { account, ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices, setUnlimitedTokenAllowance } = this.props;
 		const { isBetCardOpen, isCall, vivaldiIndex, ethInput } = this.state;
 
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
@@ -274,9 +273,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					);
 			}
 		}
-		console.log('***********');
-		console.log(ethBalance);
-		console.log(ethBalance.allowance);
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -480,10 +476,10 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						<SAllowenceCard>
 							<div className="allowenceWrapper">
 								<p>
-									Not enough <b>Allowence</b>, please comfirm <b>Allowence</b> for
+									Not enough <b>WETH Allowence</b>, please comfirm allowence for
 									further transaction.
 								</p>
-								<div className="allow-button">ALLOW</div>
+								<div className="allow-button" onClick={() => setUnlimitedTokenAllowance('WETH', account)}>ALLOW</div>
 							</div>
 						</SAllowenceCard>
 					) : null}
