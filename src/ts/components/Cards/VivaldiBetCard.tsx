@@ -101,6 +101,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				true,
 				CommonUtil.getExpiryTimestamp(false)
 			);
+
+			this.props.onCancel(this.props.isCall);
+			this.setState({ betNumber: 0, betPrice: 0, toEarn: 0 });
 		} catch (error) {
 			console.log(error);
 		}
@@ -151,10 +154,12 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			upPrice,
 			upupPrice,
 			ethBalance,
-			orderBookSnapshot,
+			orderBookSnapshot
 		} = this.props;
 		const { betNumber, toEarn } = this.state;
-		const step = ethBalance ? Math.max(ethBalance.weth / 20, 0.2) : 0.2;
+		const step = ethBalance
+			? Math.max(ethBalance.weth / 20, ethBalance.weth > 0.2 ? 0.2 : ethBalance.weth)
+			: 0.2;
 		const min = 0;
 		const max = Math.min(ethBalance.weth || 0, 10);
 		const ratio = betNumber ? (toEarn - betNumber) / betNumber : 0;
