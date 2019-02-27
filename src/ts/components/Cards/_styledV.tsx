@@ -109,7 +109,7 @@ export const SSliderWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	.slider-wrapper {
-		width: 90%;
+		width: 70%;
 		margin: 8px 0;
 		display: flex;
 		justify-content: center;

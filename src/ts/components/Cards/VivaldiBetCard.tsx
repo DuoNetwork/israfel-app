@@ -36,7 +36,7 @@ interface IProps {
 	upupPrice: number;
 	markUp: number;
 	onBuy?: () => void;
-	onCancel: (isCall?: boolean) => void;
+	onCancel: (isCall: boolean) => void;
 	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
 	addOrder: (
 		account: string,
@@ -136,7 +136,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		this.setState({
 			betNumber: 0
 		});
-		this.props.onCancel();
+		this.props.onCancel(this.props.isCall);
 	};
 
 	public render() {

@@ -88,8 +88,6 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		.attr('class', 'line')
 		.attr('d', line)
 		.attr('fill', 'none')
-		.attr('stroke-linejoin', 'round')
-		.attr('stroke-linecap', 'round')
 		.attr('stroke', ColorStyles.TitlePM)
 		.attr('stroke-width', 3);
 	chart

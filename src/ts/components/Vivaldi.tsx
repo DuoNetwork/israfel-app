@@ -16,12 +16,7 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import MediaQuery from 'react-responsive';
 import * as CST from 'ts/common/constants';
-import {
-	ICustodianInfo,
-	IEthBalance,
-	ITokenBalance,
-	IVivaldiCustodianInfo
-} from 'ts/common/types';
+import { ICustodianInfo, IEthBalance, ITokenBalance, IVivaldiCustodianInfo } from 'ts/common/types';
 import util from 'ts/common/util';
 import {
 	SAllowenceCard,
@@ -106,14 +101,16 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		this.props.unsubscribeOrder();
 	}
 
-	public toggleBetCard = (isCall?: boolean) => {
+	public toggleBetCard = (isCall: boolean) => {
+		console.log(this.state.isCall);
 		this.setState({
 			isBetCardOpen: !this.state.isBetCardOpen,
-			isCall: isCall || false
+			isCall: isCall
 		});
 	};
 
 	public selectBetType = (vivaldiIndex: number, isCall: boolean) => {
+		console.log(this.state.isCall);
 		this.setState({
 			vivaldiIndex: vivaldiIndex,
 			isCall: isCall
@@ -177,7 +174,16 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { account, ethPrice, types, custodians, orderBooks, ethBalance, exchangePrices, setUnlimitedTokenAllowance } = this.props;
+		const {
+			account,
+			ethPrice,
+			types,
+			custodians,
+			orderBooks,
+			ethBalance,
+			exchangePrices,
+			setUnlimitedTokenAllowance
+		} = this.props;
 		const { isBetCardOpen, isCall, vivaldiIndex, ethInput } = this.state;
 
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
@@ -325,7 +331,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									<div>WETH</div>
 									<div>{util.formatBalance(ethBalance.weth)}</div>
 								</p>
-								<div className='input-line'>
+								<div className="input-line">
 									<input
 										placeholder="input wrap nubmer"
 										value={ethInput}
@@ -480,7 +486,12 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									Not enough <b>WETH Allowence</b>, please comfirm allowence for
 									further transaction.
 								</p>
-								<div className="allow-button" onClick={() => setUnlimitedTokenAllowance('WETH', account)}>ALLOW</div>
+								<div
+									className="allow-button"
+									onClick={() => setUnlimitedTokenAllowance('WETH', account)}
+								>
+									ALLOW
+								</div>
 							</div>
 						</SAllowenceCard>
 					) : null}
