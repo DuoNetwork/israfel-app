@@ -25,7 +25,7 @@ interface IProps {
 	vivaldiIndex: number;
 	isCall: boolean;
 	account: string;
-	tokens: IToken[];
+	token?: IToken;
 	ethBalance: IEthBalance;
 	orderBookSnapshot: IOrderBookSnapshot;
 	isBetCardOpen: boolean;
@@ -51,7 +51,6 @@ interface IProps {
 interface IState {
 	betNumber: number;
 	betPrice: number;
-	toEarn: number;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -59,8 +58,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		super(props);
 		this.state = {
 			betNumber: 0,
-			betPrice: 0,
-			toEarn: 0
+			betPrice: 0
 		};
 	}
 
@@ -103,7 +101,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			);
 
 			this.props.onCancel(this.props.isCall);
-			this.setState({ betNumber: 0, betPrice: 0, toEarn: 0 });
+			this.setState({ betNumber: 0, betPrice: 0 });
 		} catch (error) {
 			console.log(error);
 		}
@@ -113,6 +111,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		const orderBookSnapshot = this.props.orderBookSnapshot;
 		if (!orderBookSnapshot.asks) return;
 
+		const denomination = this.props.token ? this.props.token.denomination : 0.1;
 		let amt = 0;
 		let price = 0;
 		for (const orderBookLevel of orderBookSnapshot.asks) {
@@ -120,18 +119,16 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			price = orderBookLevel.price + this.props.markUp;
 			if (amt >= value) {
 				this.setState({
-					betNumber: value,
-					betPrice: price,
-					toEarn: value / price
+					betNumber: Math.floor(value / denomination) * denomination,
+					betPrice: price
 				});
 				return;
 			}
 		}
 
 		this.setState({
-			betNumber: amt,
-			betPrice: price,
-			toEarn: amt / price
+			betNumber: Math.floor(amt / denomination) * denomination,
+			betPrice: price
 		});
 	};
 
@@ -156,13 +153,12 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			ethBalance,
 			orderBookSnapshot
 		} = this.props;
-		const { betNumber, toEarn } = this.state;
+		const { betNumber, betPrice } = this.state;
 		const step = ethBalance
 			? Math.max(ethBalance.weth / 20, ethBalance.weth > 0.2 ? 0.2 : ethBalance.weth)
 			: 0.2;
 		const min = 0;
-		const max = Math.min(ethBalance.weth || 0, 10);
-		const ratio = betNumber ? (toEarn - betNumber) / betNumber : 0;
+		const max = betPrice ? ethBalance.weth / betPrice : Math.min(ethBalance.weth || 0, 10);
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
 			if (completed) return <span>Settling</span>;
 			else
@@ -231,14 +227,16 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 						<div className="des-wrapper">
 							<div className="des-row">
 								<div>Paying</div>
-								<div>{util.formatBalance(betNumber)}</div>
+								<div>{util.formatBalance(betNumber * betPrice)}</div>
 								<div>ETH</div>
 							</div>
 							<div className="des-row">
 								<div>To Earn</div>
-								<div>{util.formatBalance(toEarn)}</div>
+								<div>{util.formatBalance(betNumber)}</div>
 								<div>ETH</div>
-								<div>{`(+${util.formatPercent(ratio)})`}</div>
+								<div>{`(+${util.formatPercent(
+									betPrice ? 1 / betPrice - 1 : 0
+								)})`}</div>
 							</div>
 						</div>
 						<div className="slider-wrapper">

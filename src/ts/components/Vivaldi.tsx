@@ -445,7 +445,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					<VivaldiBetCard
 						pair={pair}
 						account={this.props.account}
-						tokens={this.props.tokens}
+						token={this.props.tokens.find(t => pair.startsWith(t.code))}
 						ethBalance={ethBalance}
 						orderBookSnapshot={orderBooks[pair]}
 						isBetCardOpen={isBetCardOpen}
