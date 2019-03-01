@@ -140,7 +140,7 @@ export default class TradeHistoryCard extends React.Component<IProps, IState> {
 							</Table>
 						</div>
 					</SCardList>
-					<SCardList noMargin style={{ width: 200 }}>
+					<SCardList noMargin style={{ width: 180 }}>
 						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
 							<Checkbox
 								style={{ paddingLeft: 3, marginTop: 10 }}

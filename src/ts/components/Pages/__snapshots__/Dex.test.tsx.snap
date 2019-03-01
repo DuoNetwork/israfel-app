@@ -12,7 +12,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
     <styled.div
       center={true}
       horizontal={true}
-      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -136,18 +135,6 @@ exports[`Dex Test User Login Test Snapshot 1`] = `
         }
         type="Beethoven"
       />
-    </styled.div>
-    <styled.div
-      center={true}
-      horizontal={true}
-      key="Mozart"
-      marginBottom="20px"
-      style={
-        Object {
-          "paddingTop": "20px",
-        }
-      }
-    >
       <CustodianCard
         acceptedPrices={
           Array [
@@ -480,7 +467,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
     <styled.div
       center={true}
       horizontal={true}
-      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -604,18 +590,6 @@ exports[`Dex Test User Login Test Snapshot 2`] = `
         }
         type="Beethoven"
       />
-    </styled.div>
-    <styled.div
-      center={true}
-      horizontal={true}
-      key="Mozart"
-      marginBottom="20px"
-      style={
-        Object {
-          "paddingTop": "20px",
-        }
-      }
-    >
       <CustodianCard
         acceptedPrices={
           Array [
@@ -948,7 +922,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
     <styled.div
       center={true}
       horizontal={true}
-      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -1072,18 +1045,6 @@ exports[`Dex Test User Login Test Snapshot 3`] = `
         }
         type="Beethoven"
       />
-    </styled.div>
-    <styled.div
-      center={true}
-      horizontal={true}
-      key="Mozart"
-      marginBottom="20px"
-      style={
-        Object {
-          "paddingTop": "20px",
-        }
-      }
-    >
       <CustodianCard
         acceptedPrices={
           Array [
@@ -1416,7 +1377,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
     <styled.div
       center={true}
       horizontal={true}
-      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -1540,18 +1500,6 @@ exports[`Dex Test User Login Test Snapshot 4`] = `
         }
         type="Beethoven"
       />
-    </styled.div>
-    <styled.div
-      center={true}
-      horizontal={true}
-      key="Mozart"
-      marginBottom="20px"
-      style={
-        Object {
-          "paddingTop": "20px",
-        }
-      }
-    >
       <CustodianCard
         acceptedPrices={
           Array [
@@ -1884,7 +1832,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
     <styled.div
       center={true}
       horizontal={true}
-      key="Beethoven"
       marginBottom="20px"
       style={
         Object {
@@ -2008,18 +1955,6 @@ exports[`Dex Test User Login Test Snapshot 5`] = `
         }
         type="Beethoven"
       />
-    </styled.div>
-    <styled.div
-      center={true}
-      horizontal={true}
-      key="Mozart"
-      marginBottom="20px"
-      style={
-        Object {
-          "paddingTop": "20px",
-        }
-      }
-    >
       <CustodianCard
         acceptedPrices={
           Array [

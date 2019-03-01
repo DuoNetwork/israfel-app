@@ -109,7 +109,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test Snapshot 1`] = `
       noMargin={true}
       style={
         Object {
-          "width": 200,
+          "width": 180,
         }
       }
     >
@@ -267,7 +267,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 1`] =
       noMargin={true}
       style={
         Object {
-          "width": 200,
+          "width": 180,
         }
       }
     >
@@ -425,7 +425,7 @@ exports[`TradeHistoryCard Test Test Snapshot Test getDerivedStateFromProps 2`] =
       noMargin={true}
       style={
         Object {
-          "width": 200,
+          "width": 180,
         }
       }
     >

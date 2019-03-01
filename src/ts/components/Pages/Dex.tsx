@@ -224,58 +224,56 @@ export default class Dex extends React.Component<IProps, IState> {
 							: {}
 					}
 				>
-					{types.map((type, i) => (
-						<SDivFlexCenter
-							key={type}
-							center
-							horizontal
-							marginBottom="20px"
-							style={{ paddingTop: '20px' }}
-						>
-							{custodianTypeList[i].map(c => {
-								const tbs = custodianTokenBalances[c] || {};
-								const obs: { [pair: string]: IOrderBookSnapshot } = {};
-								for (const code in tbs) {
-									const pair = code + '|' + CST.TH_WETH;
-									obs[pair] = orderBooks[pair];
-								}
-								return type === WrapperConstants.VIVALDI ? (
-									<VivaldiCustodianCard
-										key={c}
-										type={type}
-										custodian={c}
-										handleConvert={this.handleConvert}
-										handleTrade={this.handleTrade}
-										info={custodians[c] as any}
-										margin="0 10px"
-										acceptedPrices={acceptedPrices[c] || []}
-										tokenBalances={tbs}
-										orderBooks={obs}
-										ethPrice={ethPrice}
-									/>
-								) : (
-									<CustodianCard
-										key={c}
-										type={type}
-										custodian={c}
-										handleConvert={this.handleConvert}
-										handleTrade={this.handleTrade}
-										info={custodians[c]}
-										margin="0 10px"
-										acceptedPrices={acceptedPrices[c] || []}
-										tokenBalances={tbs}
-										orderBooks={obs}
-										ethPrice={ethPrice}
-									/>
-								);
-							})}
-							{Array.from(
-								Array(Math.max(0, 2 - custodianTypeList[i].length)).keys()
-							).map(a => (
-								<DummyCustodianCard key={a} type={type} margin="0 10px" />
-							))}
-						</SDivFlexCenter>
-					))}
+					<SDivFlexCenter
+						center
+						horizontal
+						marginBottom="20px"
+						style={{ paddingTop: '20px' }}
+					>
+						{types.map((type, i) =>
+							!custodianTypeList[i].length ? (
+								<DummyCustodianCard type={type} margin="0 10px" />
+							) : (
+								custodianTypeList[i].map(c => {
+									const tbs = custodianTokenBalances[c] || {};
+									const obs: { [pair: string]: IOrderBookSnapshot } = {};
+									for (const code in tbs) {
+										const pair = code + '|' + CST.TH_WETH;
+										obs[pair] = orderBooks[pair];
+									}
+									return type === WrapperConstants.VIVALDI ? (
+										<VivaldiCustodianCard
+											key={c}
+											type={type}
+											custodian={c}
+											handleConvert={this.handleConvert}
+											handleTrade={this.handleTrade}
+											info={custodians[c] as any}
+											margin="0 10px"
+											acceptedPrices={acceptedPrices[c] || []}
+											tokenBalances={tbs}
+											orderBooks={obs}
+											ethPrice={ethPrice}
+										/>
+									) : (
+										<CustodianCard
+											key={c}
+											type={type}
+											custodian={c}
+											handleConvert={this.handleConvert}
+											handleTrade={this.handleTrade}
+											info={custodians[c]}
+											margin="0 10px"
+											acceptedPrices={acceptedPrices[c] || []}
+											tokenBalances={tbs}
+											orderBooks={obs}
+											ethPrice={ethPrice}
+										/>
+									);
+								})
+							)
+						)}
+					</SDivFlexCenter>
 					<OrderHistoryCard
 						orderHistory={orderHistory}
 						account={account}
@@ -325,7 +323,6 @@ export default class Dex extends React.Component<IProps, IState> {
 						tokens={tokens}
 					/>
 				</Spin>
-
 				<BalanceCard
 					visible={showBalances}
 					account={account}
