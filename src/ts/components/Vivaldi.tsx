@@ -130,7 +130,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			ethInput: value
 		});
 
-	private getPrevRoundReturn = (isKnockedIn: boolean, code: string, userOrders: IUserOrder[]) => {
+	private getPrevRoundReturn = (isKnockedIn: boolean, userOrders: IUserOrder[]) => {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
 
@@ -141,13 +141,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			if (processed[orderHash]) return;
 			processed[orderHash] = true;
 			if (fill > 0) {
-				if (code.toLowerCase().includes('c')) {
-					accumulatedPayout += isKnockedIn ? fill : 0 - price * fill;
-					totalEthPaid += price * fill;
-				}
-			} else {
-				accumulatedPayout += isKnockedIn ? 0 : fill - price * fill;
 				totalEthPaid += price * fill;
+				accumulatedPayout += isKnockedIn ? fill : 0;
 			}
 		});
 
@@ -213,7 +208,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			custodianTypeList[vivaldiIndex] as any
 		] as any;
 
-		let codeV = '';
 		let pair = '';
 		let upDownChange = '··· (···)';
 		let upDownClass = 'loading';
@@ -225,7 +219,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let currentRoundInvest = 0;
 		let currentRoundPayout = 0;
 		if (infoV) {
-			codeV = infoV.code;
 			roundStrike = infoV.states.roundStrike;
 			upDownText = infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN';
 			upDownClass = infoV.states.roundStrike < ethPrice ? 'incPx' : 'decPx';
@@ -258,8 +251,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 				);
 				if (prevRoundUserOrders.length > 0)
 					[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
-						isKnockedIn,
-						codeV,
+						isKnockedIn && isCall || !isKnockedIn && !isCall,
 						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
 					);
 
