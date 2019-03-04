@@ -425,9 +425,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									</h4>
 								</div>
 								<div className="col3">
-									<h4 className="col-content decrease">
+									<h4 className={(prevRoundPayout >= prevRoundInvest ? "increase" : "decrease") + " col-content"}>
 										{util.formatPercent(
-											prevRoundInvest ? prevRoundPayout / prevRoundInvest : 0
+											prevRoundInvest ? prevRoundPayout / prevRoundInvest - 1 : 0
 										)}
 									</h4>
 								</div>
