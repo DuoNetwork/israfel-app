@@ -66,6 +66,7 @@ interface IState {
 	vivaldiIndex: number;
 	isCall: boolean;
 	ethInput: string;
+	inProgress: boolean;
 }
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	constructor(props: IProps) {
@@ -76,7 +77,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			account: props.account,
 			isBetCardOpen: false,
 			isCall: true,
-			ethInput: ''
+			ethInput: '',
+			inProgress: false
 		};
 	}
 
@@ -102,7 +104,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	}
 
 	public toggleBetCard = (isCall: boolean) => {
-		console.log(this.state.isCall);
 		this.setState({
 			isBetCardOpen: !this.state.isBetCardOpen,
 			isCall: isCall
@@ -110,7 +111,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	public selectBetType = (vivaldiIndex: number, isCall: boolean) => {
-		console.log(this.state.isCall);
 		this.setState({
 			vivaldiIndex: vivaldiIndex,
 			isCall: isCall

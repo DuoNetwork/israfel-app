@@ -51,6 +51,8 @@ interface IProps {
 interface IState {
 	betNumber: number;
 	betPrice: number;
+	isCall: boolean;
+	vivaldiIndex: number;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -58,8 +60,23 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		super(props);
 		this.state = {
 			betNumber: 0,
-			betPrice: 0
+			betPrice: 0,
+			isCall: props.isCall,
+			vivaldiIndex: props.vivaldiIndex
 		};
+	}
+	public static getDerivedStateFromProps(props: IProps, state: IState) {
+		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
+			console.log('changed')
+			return {
+				betNumber: 0,
+				betPrice: 0,
+				isCall: props.isCall,
+				vivaldiIndex: props.vivaldiIndex
+			};
+		}
+
+		return null
 	}
 
 	private getPrice = (
@@ -109,7 +126,10 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 	private onSliderChange = (value: number) => {
 		const orderBookSnapshot = this.props.orderBookSnapshot;
-		if (!orderBookSnapshot.asks) return;
+		if (!orderBookSnapshot.asks) {
+			console.log("no orderBook")
+			return;
+		}
 
 		const denomination = this.props.token ? this.props.token.denomination : 0.1;
 		let amt = 0;

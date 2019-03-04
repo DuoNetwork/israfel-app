@@ -115,7 +115,7 @@ header>span {
 
 /* D3 Test Graph */
 svg {
-	overflow: visible !important;
+	overflow: hidden !important;
 }
 
 .d3-test-graph {
