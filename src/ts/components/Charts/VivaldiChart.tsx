@@ -14,8 +14,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 		d3.selectAll('.loading').remove();
 		d3.select(el)
 			.append('div')
-			.attr('class', 'loading')
-			.html('<span>Loading...</span>');
+			.attr('class', 'loading');
 		return;
 	}
 	//const now = CommonUtil.getUTCNowTimestamp();

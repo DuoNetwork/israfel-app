@@ -45,7 +45,6 @@ header>span {
 	align-items: center;
 	font-size: 32px;
 	font-weight: 500;
-	border: 1px dashed rgba(0, 0, 0, 0.2);
 	color: rgba(104, 104, 104, 1);
 }
 .up-down-wrapper {
