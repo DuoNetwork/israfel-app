@@ -406,7 +406,6 @@ export default class TradeCard extends React.Component<IProps, IState> {
 				submitting: false
 			});
 		} catch (error) {
-			console.log(error);
 			notify({
 				level: 'error',
 				title: `${token}-${CST.TH_WETH}`,

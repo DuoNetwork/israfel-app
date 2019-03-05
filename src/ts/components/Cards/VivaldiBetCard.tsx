@@ -149,10 +149,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 	private onSliderChange = (value: number) => {
 		const orderBookSnapshot = this.props.orderBookSnapshot;
-		if (!orderBookSnapshot.asks) {
-			console.log('no orderBook');
-			return;
-		}
+		if (!orderBookSnapshot.asks) return;
 
 		const denomination = this.props.token ? this.props.token.denomination : 0.1;
 		let amt = 0;
@@ -211,7 +208,6 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					</span>
 				);
 		};
-		console.log(orderBookSnapshot)
 		return (
 			<SVBetCard>
 				<div
