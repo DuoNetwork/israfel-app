@@ -71,7 +71,6 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
-			console.log('changed')
 			let amt = 0;
 			let price = 0;
 			let zeroRate = 0;
@@ -100,7 +99,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			return { zeroRate: zeroRate };
 		}
 
-		return null
+		return null;
 	}
 
 	private getPrice = (
@@ -151,7 +150,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	private onSliderChange = (value: number) => {
 		const orderBookSnapshot = this.props.orderBookSnapshot;
 		if (!orderBookSnapshot.asks) {
-			console.log("no orderBook")
+			console.log('no orderBook');
 			return;
 		}
 
@@ -212,6 +211,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 					</span>
 				);
 		};
+		console.log(orderBookSnapshot)
 		return (
 			<SVBetCard>
 				<div
@@ -267,34 +267,42 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							<Countdown date={endTime} renderer={renderer} />
 						</div>
 					</SBetInfoWrapper>
-					<SSliderWrapper>
-						<div className="des-wrapper">
-							<div className="des-row">
-								<div>Paying</div>
-								<div>{util.formatBalance(betNumber * betPrice)}</div>
-								<div>ETH</div>
+
+					{orderBookSnapshot && orderBookSnapshot.asks.length ? (
+						<SSliderWrapper>
+							<div className="des-wrapper">
+								<div className="des-row">
+									<div>Paying</div>
+									<div>{util.formatBalance(betNumber * betPrice)}</div>
+									<div>ETH</div>
+								</div>
+								<div className="des-row">
+									<div>To Earn</div>
+									<div>{util.formatBalance(betNumber)}</div>
+									<div>ETH</div>
+									<div>{`(+${util.formatPercent(
+										betPrice ? 1 / betPrice - 1 : zeroRate
+									)})`}</div>
+								</div>
 							</div>
-							<div className="des-row">
-								<div>To Earn</div>
-								<div>{util.formatBalance(betNumber)}</div>
-								<div>ETH</div>
-								<div>{`(+${util.formatPercent(
-									betPrice ? 1 / betPrice - 1 : zeroRate
-								)})`}</div>
+							<div className="slider-wrapper">
+								<Slider
+									min={min}
+									max={max}
+									defaultValue={0}
+									value={betNumber}
+									step={step}
+									onChange={this.onSliderChange}
+									className={!isCall ? 'below' : 'above'}
+								/>
 							</div>
-						</div>
-						<div className="slider-wrapper">
-							<Slider
-								min={min}
-								max={max}
-								defaultValue={0}
-								value={betNumber}
-								step={step}
-								onChange={this.onSliderChange}
-								className={!isCall ? 'below' : 'above'}
-							/>
-						</div>
-					</SSliderWrapper>
+						</SSliderWrapper>
+					) : (
+						<SSliderWrapper>
+							<div className="des-wrapper-ph">No markets</div>
+						</SSliderWrapper>
+					)}
+
 					<SCardButtonWrapper>
 						<div
 							className={(!isCall ? 'belowC' : 'aboveC') + ' button'}

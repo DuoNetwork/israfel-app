@@ -155,6 +155,16 @@ export const SSliderWrapper = styled.div`
 			}
 		}
 	}
+	.des-wrapper-ph {
+		width: 100%;
+		height: 136px;
+		font-size: 20px;
+		font-weight: 500;
+		color: ${ColorStyles.ThemeTextAlpha};
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.des-wrapper {
 		width: 100%;
 		padding: 10px 0;

@@ -211,7 +211,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let pair = '';
 		let upDownChange = '··· (···)';
 		let upDownClass = 'loading';
-		let upDownText = '···';
 		let Endtime = moment().valueOf();
 		let roundStrike = 0;
 		let prevRoundPayout = 0;
@@ -220,7 +219,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let currentRoundPayout = 0;
 		if (infoV) {
 			roundStrike = infoV.states.roundStrike;
-			upDownText = infoV.states.roundStrike < ethPrice ? 'UP' : 'DOWN';
 			upDownClass = infoV.states.roundStrike < ethPrice ? 'incPx' : 'decPx';
 			Endtime = infoV.states.resetPriceTime + infoV.states.period;
 			upDownChange =
@@ -304,9 +302,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									ethPrice
 								)}`}</div>
 								<div className="subtitle-bar">
-									<span className={upDownClass + ' updown-button'}>
-										{upDownText}
-									</span>
 									<span className={upDownClass + 'T change-button'}>
 										{upDownChange}
 									</span>
@@ -361,13 +356,13 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							</div> */}
 							<div
 								className="ud-img down-img"
-								onClick={() => this.toggleBetCard(false)}
+								onClick={() => orderBooks[pair] ? this.toggleBetCard(false) : null}
 							>
 								<img src={down} />
 							</div>
 						</SUserCount>
 						<SUserCount>
-							<div className="ud-img up-img" onClick={() => this.toggleBetCard(true)}>
+							<div className="ud-img up-img" onClick={() => orderBooks[pair] ? this.toggleBetCard(true) : null}>
 								<img src={up} />
 							</div>
 							{/* <div>
