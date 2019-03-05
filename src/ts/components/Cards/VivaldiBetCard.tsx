@@ -53,6 +53,8 @@ interface IState {
 	betPrice: number;
 	isCall: boolean;
 	vivaldiIndex: number;
+	orderBookSnapshot: IOrderBookSnapshot;
+	zeroRate: number;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -62,18 +64,40 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			betNumber: 0,
 			betPrice: 0,
 			isCall: props.isCall,
-			vivaldiIndex: props.vivaldiIndex
+			vivaldiIndex: props.vivaldiIndex,
+			orderBookSnapshot: props.orderBookSnapshot,
+			zeroRate: 0
 		};
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
 			console.log('changed')
+			let amt = 0;
+			let price = 0;
+			let zeroRate = 0;
+			for (const orderBookLevel of props.orderBookSnapshot.asks) {
+				amt += orderBookLevel.balance;
+				price = orderBookLevel.price + props.markUp;
+				if (amt >= 0.1) zeroRate = 1 / price - 1;
+			}
 			return {
 				betNumber: 0,
 				betPrice: 0,
 				isCall: props.isCall,
-				vivaldiIndex: props.vivaldiIndex
+				vivaldiIndex: props.vivaldiIndex,
+				zeroRate: zeroRate
 			};
+		}
+		if (props.orderBookSnapshot !== state.orderBookSnapshot && props.orderBookSnapshot) {
+			let amt = 0;
+			let price = 0;
+			let zeroRate = 0;
+			for (const orderBookLevel of props.orderBookSnapshot.asks) {
+				amt += orderBookLevel.balance;
+				price = orderBookLevel.price + props.markUp;
+				if (amt >= 0.1) zeroRate = 1 / price - 1;
+			}
+			return { zeroRate: zeroRate };
 		}
 
 		return null
@@ -173,7 +197,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			ethBalance,
 			orderBookSnapshot
 		} = this.props;
-		const { betNumber, betPrice } = this.state;
+		const { betNumber, betPrice, zeroRate } = this.state;
 		const step = ethBalance
 			? Math.max(ethBalance.weth / 20, ethBalance.weth > 0.2 ? 0.2 : ethBalance.weth)
 			: 0.2;
@@ -255,7 +279,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								<div>{util.formatBalance(betNumber)}</div>
 								<div>ETH</div>
 								<div>{`(+${util.formatPercent(
-									betPrice ? 1 / betPrice - 1 : 0
+									betPrice ? 1 / betPrice - 1 : zeroRate
 								)})`}</div>
 							</div>
 						</div>
@@ -282,7 +306,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							className={
 								(!isCall ? 'below' : 'above') +
 								' button' +
-								(orderBookSnapshot && orderBookSnapshot.asks.length
+								(orderBookSnapshot && orderBookSnapshot.asks.length && betNumber
 									? ''
 									: ' button-disabled')
 							}

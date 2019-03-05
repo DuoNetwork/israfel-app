@@ -353,7 +353,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<Countdown date={Endtime} renderer={renderer} />
 						</div>
 					</SDesCard>
-					<SDivFlexCenter horizontal padding="12px 20%">
+					<SDivFlexCenter horizontal padding="12px 20%" className='up-down-wrapper'>
 						<SUserCount>
 							{/* <div>
 								<img className="user-img" src={user} />

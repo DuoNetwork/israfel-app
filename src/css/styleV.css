@@ -1,8 +1,8 @@
-
 body {
 	font-family: 'Roboto', 'Microsoft YaHei' !important;
 	background: #F5F5F5;
 }
+
 /* Vivaldi */
 header {
 	height: 60px;
@@ -25,25 +25,44 @@ header>span {
 	align-items: center;
 	padding-top: 60px;
 }
-.img-wrapper > img {
+
+.img-wrapper>img {
 	width: 200px;
 	height: 282px;
 	margin-bottom: 40px;
 }
-.img-wrapper > h3 {
+
+.img-wrapper>h3 {
 	font-size: 14px;
 	font-weight: 400;
-	color: rgba(130,130,130,1);
+	color: rgba(130, 130, 130, 1);
 }
 
 .loading {
 	height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    font-weight: 500;
-	border: 1px dashed rgba(0,0,0,0.2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32px;
+	font-weight: 500;
+	border: 1px dashed rgba(0, 0, 0, 0.2);
 	color: rgba(104, 104, 104, 1);
 }
+.up-down-wrapper {
+	position: relative;
+}
+.up-down-wrapper::before {
+	content: '';
+	position: absolute;
+	top: calc(50% - 1px);
+	width: 100%;
+
+	border-bottom: 1px dashed rgba(64,79,84,.2);
+	z-index: -1;
+	left: 0;
+}
+.up-down-wrapper > div {
+	z-index: 0;
+}
+
 /* Vivaldi */
