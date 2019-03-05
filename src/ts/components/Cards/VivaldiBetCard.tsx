@@ -11,10 +11,10 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
-
 import {
 	SBetInfoWrapper,
 	SCardButtonWrapper,
+	SNotice,
 	SSliderWrapper,
 	STagWrapper,
 	SVBetCard
@@ -55,6 +55,7 @@ interface IState {
 	vivaldiIndex: number;
 	orderBookSnapshot: IOrderBookSnapshot;
 	zeroRate: number;
+	showNotice: boolean;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -66,7 +67,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			isCall: props.isCall,
 			vivaldiIndex: props.vivaldiIndex,
 			orderBookSnapshot: props.orderBookSnapshot,
-			zeroRate: 0
+			zeroRate: 0,
+			showNotice: false
 		};
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
@@ -127,7 +129,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				? '$' + util.formatStrike(ddP)
 				: '···';
 	};
-
+	private closeNotice = () => {
+		setTimeout(() => this.setState({showNotice: false}), 2000)
+	}
 	private placeOrder = async () => {
 		const { account, addOrder } = this.props;
 		try {
@@ -141,7 +145,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			);
 
 			this.props.onCancel(this.props.isCall);
-			this.setState({ betNumber: 0, betPrice: 0 });
+			this.setState({ betNumber: 0, betPrice: 0, showNotice: true });
+			this.closeNotice();
 		} catch (error) {
 			console.log(error);
 		}
@@ -174,7 +179,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 	private onClose = () => {
 		this.setState({
-			betNumber: 0
+			betNumber: 0,
 		});
 		this.props.onCancel(this.props.isCall);
 	};
@@ -193,7 +198,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			ethBalance,
 			orderBookSnapshot
 		} = this.props;
-		const { betNumber, betPrice, zeroRate } = this.state;
+		const { betNumber, betPrice, zeroRate, showNotice } = this.state;
 		const step = ethBalance
 			? Math.max(ethBalance.weth / 20, ethBalance.weth > 0.2 ? 0.2 : ethBalance.weth)
 			: 0.2;
@@ -210,6 +215,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		};
 		return (
 			<SVBetCard>
+				<SNotice className={showNotice ? 'showDiv' : 'hideDiv'}> Order Placed </SNotice>
 				<div
 					className={
 						(isBetCardOpen ? 'bet-card-open' : 'bet-card-close') + ' card-wrapper'

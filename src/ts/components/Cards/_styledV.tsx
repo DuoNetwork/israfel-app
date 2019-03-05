@@ -230,8 +230,8 @@ export const SCardButtonWrapper = styled.div`
 			margin-left: 4px;
 		}
 	}
-	.button-disabled{
-		background:  #B3B9BA !important;
+	.button-disabled {
+		background: #b3b9ba !important;
 		pointer-events: none;
 	}
 	.aboveC {
@@ -254,4 +254,25 @@ export const SCardButtonWrapper = styled.div`
 		background: ${ColorStyles.ThemeRed};
 		color: #fff;
 	}
+`;
+
+export const SNotice = styled.div`
+	position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 12px 24px;
+	background: rgba(255,255,255,1);
+	border-radius: 4px;
+	border: 1px solid ${ColorStyles.BorderBlack3};
+	box-shadow: 0 0px 4px 0 rgba(0,0,0,.4);
+	color: ${ColorStyles.ThemeText};
+	transition: opacity .5s;
+	&.hideDiv {
+		opacity: 0
+	}
+	&.showDiv {
+		opacity: 1
+	}
+
 `;
