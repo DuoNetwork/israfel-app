@@ -269,7 +269,8 @@ export const SNotice = styled.div`
 	color: ${ColorStyles.ThemeText};
 	transition: opacity .5s;
 	&.hideDiv {
-		opacity: 0
+		opacity: 0;
+		pointer-events: none;
 	}
 	&.showDiv {
 		opacity: 1
