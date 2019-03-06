@@ -81,14 +81,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				titleN: props.titleN
 			};
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
-			let amt = 0;
-			let price = 0;
-			let zeroRate = 0;
-			for (const orderBookLevel of props.orderBookSnapshot.asks) {
-				amt += orderBookLevel.balance;
-				price = orderBookLevel.price + props.markUp;
-				if (amt >= 0.1) zeroRate = 1 / price - 1;
-			}
+			const price = props.orderBookSnapshot.asks[0].price + props.markUp;
+			const zeroRate = 1 / price - 1;
 			return {
 				betNumber: 0,
 				betPrice: 0,
@@ -99,14 +93,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			};
 		}
 		if (props.orderBookSnapshot !== state.orderBookSnapshot && props.orderBookSnapshot) {
-			let amt = 0;
-			let price = 0;
-			let zeroRate = 0;
-			for (const orderBookLevel of props.orderBookSnapshot.asks) {
-				amt += orderBookLevel.balance;
-				price = orderBookLevel.price + props.markUp;
-				if (amt >= 0.1) zeroRate = 1 / price - 1;
-			}
+			const price = props.orderBookSnapshot.asks[0].price + props.markUp;
+			const zeroRate = 1 / price - 1;
 			return { zeroRate: zeroRate, titleN: props.titleN };
 		}
 		return null;
