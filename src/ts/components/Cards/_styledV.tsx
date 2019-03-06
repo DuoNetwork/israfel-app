@@ -258,23 +258,35 @@ export const SCardButtonWrapper = styled.div`
 
 export const SNotice = styled.div`
 	position: fixed;
-    top: 30px;
+	top: 30px;
 	left: 50%;
 	font-size: 12px;
-    transform: translate(-50%, 0);
-    padding: 12px 24px;
-	background: rgba(255,255,255,1);
+	transform: translate(-50%, 0);
+	padding: 12px 24px;
+	background: rgba(255, 255, 255, 1);
 	border-radius: 4px;
 	border: 1px solid ${ColorStyles.BorderBlack3};
-	box-shadow: 0 0px 4px 0 rgba(0,0,0,.4);
+	box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.4);
 	color: ${ColorStyles.ThemeText};
-	transition: opacity .5s;
+	transition: opacity 0.5s;
 	&.hideDiv {
 		opacity: 0;
 		pointer-events: none;
 	}
 	&.showDiv {
-		opacity: 1
+		opacity: 1;
 	}
-
+	&::after {
+		position: absolute;
+		content: 'X';
+		top: -3px;
+		right: -3px;
+		font-size: 10px;
+		transform: scaleX(1.3);
+		color: ${ColorStyles.ThemeTextAlphaL};
+		background: white;
+		padding: 3px;
+		border-radius: 50%;
+		border: 1px solid ${ColorStyles.BorderBlack3};
+	}
 `;
