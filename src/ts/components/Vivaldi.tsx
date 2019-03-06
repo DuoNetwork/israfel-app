@@ -352,7 +352,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						<div className="info-bar">
 							<div className="info-bar-left">
 								<div className="info-title">Ethereum</div>
-								<div className="info-price">{`$${util.formatPriceShort(
+								<div className="info-price">{`$${util.formatNumber(
 									ethPrice
 								)}`}</div>
 								<div className="subtitle-bar">
@@ -437,8 +437,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<h3>Current Game</h3>
 							<div className="row">
 								<div className="col3">
-									<h4 className="col-content downSpan">PUT</h4>
-									<h4 className="col-content upSpan">CALL</h4>
+									<h4 className="col-content downSpan">DOWN</h4>
+									<h4 className="col-content upSpan">UP</h4>
 								</div>
 								<div className="col1">
 									<h4 className="col-title">Positions</h4>
