@@ -305,6 +305,16 @@ export const SPayoutCard = styled.div`
 		.col3 {
 			display: flex;
 			flex-direction: column-reverse;
+			h4 {
+				text-align: left;
+				font-weight: 300;
+			}
+			.upSpan {
+				color: ${ColorStyles.ThemeGreen} !important;
+			}
+			.downSpan {
+				color: ${ColorStyles.ThemeRed} !important;
+			}
 		}
 		.increase {
 			color: ${ColorStyles.ThemeGreen} !important;

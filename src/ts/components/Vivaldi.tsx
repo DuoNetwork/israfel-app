@@ -381,16 +381,24 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					</SDivFlexCenter>
 					<SPayoutCard>
 						<div className="title">
-							My Payouts{' '}
-							<span className={isCall ? 'upSpan' : 'downSpan'}>
-								{isCall ? '(up)' : '(down)'}
-							</span>
+							My Payouts
 						</div>
 						<div className="section">
 							<h3>Current Game</h3>
 							<div className="row">
+								<div className="col3">
+									<h4 className="col-content downSpan">
+										PUT
+									</h4>
+									<h4 className="col-content upSpan">
+										CALL
+									</h4>
+								</div>
 								<div className="col1">
 									<h4 className="col-title"># OF ETH SPENT</h4>
+									<h4 className="col-content">
+										{util.formatNumber(currentRoundInvest)}
+									</h4>
 									<h4 className="col-content">
 										{util.formatNumber(currentRoundInvest)}
 									</h4>
@@ -400,14 +408,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									<h4 className="col-content">
 										{util.formatNumber(currentRoundPayout)}
 									</h4>
-								</div>
-								<div className="col3">
-									<h4 className="col-content increase">
-										{util.formatPercent(
-											currentRoundInvest
-												? currentRoundPayout / currentRoundInvest
-												: 0
-										)}
+									<h4 className="col-content">
+										{util.formatNumber(currentRoundInvest)}
 									</h4>
 								</div>
 							</div>
