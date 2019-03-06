@@ -35,6 +35,7 @@ interface IProps {
 	upPrice: number;
 	upupPrice: number;
 	markUp: number;
+	titleN: string;
 	onBuy?: () => void;
 	onCancel: (isCall: boolean) => void;
 	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
@@ -56,6 +57,7 @@ interface IState {
 	orderBookSnapshot: IOrderBookSnapshot;
 	zeroRate: number;
 	showNotice: boolean;
+	titleN: string;
 }
 
 export default class VivaldiBetCard extends React.PureComponent<IProps, IState> {
@@ -68,10 +70,19 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			vivaldiIndex: props.vivaldiIndex,
 			orderBookSnapshot: props.orderBookSnapshot,
 			zeroRate: 0,
-			showNotice: false
+			showNotice: false,
+			titleN: props.titleN
 		};
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
+		if (JSON.stringify(props.titleN) !== JSON.stringify(state.titleN)) {
+			console.log('titleChange')
+			return {
+				showNotice: true,
+				titleN: props.titleN
+			};
+
+		}
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
 			let amt = 0;
 			let price = 0;
@@ -86,7 +97,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				betPrice: 0,
 				isCall: props.isCall,
 				vivaldiIndex: props.vivaldiIndex,
-				zeroRate: zeroRate
+				zeroRate: zeroRate,
+				titleN: props.titleN
 			};
 		}
 		if (props.orderBookSnapshot !== state.orderBookSnapshot && props.orderBookSnapshot) {
@@ -98,9 +110,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				price = orderBookLevel.price + props.markUp;
 				if (amt >= 0.1) zeroRate = 1 / price - 1;
 			}
-			return { zeroRate: zeroRate };
+			return { zeroRate: zeroRate, titleN: props.titleN };
 		}
-
 		return null;
 	}
 
@@ -129,9 +140,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				? '$' + util.formatStrike(ddP)
 				: '···';
 	};
-	private closeNotice = () => {
-		setTimeout(() => this.setState({showNotice: false}), 2000)
-	}
+	// private closeNotice = () => {
+	// 	setTimeout(() => this.setState({showNotice: false}), 2000)
+	// }
 	private placeOrder = async () => {
 		const { account, addOrder } = this.props;
 		try {
@@ -146,7 +157,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 			this.props.onCancel(this.props.isCall);
 			this.setState({ betNumber: 0, betPrice: 0, showNotice: true });
-			this.closeNotice();
+			//this.closeNotice();
 		} catch (error) {
 			console.log(error);
 		}
@@ -179,7 +190,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 
 	private onClose = () => {
 		this.setState({
-			betNumber: 0,
+			betNumber: 0
 		});
 		this.props.onCancel(this.props.isCall);
 	};
@@ -196,7 +207,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			upPrice,
 			upupPrice,
 			ethBalance,
-			orderBookSnapshot
+			orderBookSnapshot,
+			titleN
 		} = this.props;
 		const { betNumber, betPrice, zeroRate, showNotice } = this.state;
 		const min = 0;
@@ -212,7 +224,12 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		};
 		return (
 			<SVBetCard>
-				<SNotice className={showNotice ? 'showDiv' : 'hideDiv'}> Order Placed </SNotice>
+				<SNotice
+					className={showNotice ? 'showDiv' : 'hideDiv'}
+					onClick={() => this.setState({ showNotice: false })}
+				>
+					{titleN}
+				</SNotice>
 				<div
 					className={
 						(isBetCardOpen ? 'bet-card-open' : 'bet-card-close') + ' card-wrapper'

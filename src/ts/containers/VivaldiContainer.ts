@@ -23,6 +23,7 @@ function mapStateToProps(state: IState) {
 		wethAddress: web3Util.contractAddresses.etherToken,
 		ethPrice: krakenPrices && krakenPrices.length ? krakenPrices[0].close : 0,
 		exchangePrices: state.relayer.exchangePrices['kraken'],
+		titleN: state.relayer.notification.title,
 		wrapEther: (amount: number, address: string) => web3Util.wrapEther(amount, address),
 		setUnlimitedTokenAllowance: (code: string, account: string, spender?: string) =>
 			web3Util.setUnlimitedTokenAllowance(code, account, spender),

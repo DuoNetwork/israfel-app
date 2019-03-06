@@ -27,7 +27,6 @@ function drawLines(el: Element, sourceData: IPrice[], lastPrice: number, innerWi
 		close: lastPrice
 	} as any)
 	source.sort((a, b) => a.timestamp - b.timestamp);
-	console.log(source)
 	//Establish SVG Playground
 	d3.selectAll('.loading').remove();
 	d3.selectAll('#timeserieschart').remove();

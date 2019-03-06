@@ -259,7 +259,8 @@ export const SCardButtonWrapper = styled.div`
 export const SNotice = styled.div`
 	position: fixed;
     top: 30px;
-    left: 50%;
+	left: 50%;
+	font-size: 12px;
     transform: translate(-50%, 0);
     padding: 12px 24px;
 	background: rgba(255,255,255,1);

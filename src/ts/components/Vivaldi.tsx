@@ -46,6 +46,7 @@ interface IProps {
 	orderHistory: { [pair: string]: IUserOrder[] };
 	connection: boolean;
 	wethAddress: string;
+	titleN: string;
 	subscribeOrder: (account: string) => any;
 	unsubscribeOrder: () => any;
 	addOrder: (
@@ -177,7 +178,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			orderBooks,
 			ethBalance,
 			exchangePrices,
-			setUnlimitedTokenAllowance
+			setUnlimitedTokenAllowance,
+			titleN
 		} = this.props;
 		const { isBetCardOpen, isCall, vivaldiIndex, ethInput } = this.state;
 
@@ -249,7 +251,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 				);
 				if (prevRoundUserOrders.length > 0)
 					[prevRoundPayout, prevRoundInvest] = this.getPrevRoundReturn(
-						isKnockedIn && isCall || !isKnockedIn && !isCall,
+						(isKnockedIn && isCall) || (!isKnockedIn && !isCall),
 						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
 					);
 
@@ -269,6 +271,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					);
 			}
 		}
+		console.log("titleN")
+		console.log(titleN)
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
@@ -349,7 +353,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							<Countdown date={Endtime} renderer={renderer} />
 						</div>
 					</SDesCard>
-					<SDivFlexCenter horizontal padding="12px 20%" className='up-down-wrapper'>
+					<SDivFlexCenter horizontal padding="12px 20%" className="up-down-wrapper">
 						<SUserCount>
 							{/* <div>
 								<img className="user-img" src={user} />
@@ -357,13 +361,18 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							</div> */}
 							<div
 								className="ud-img down-img"
-								onClick={() => orderBooks[pair] ? this.toggleBetCard(false) : null}
+								onClick={() =>
+									orderBooks[pair] ? this.toggleBetCard(false) : null
+								}
 							>
 								<img src={down} />
 							</div>
 						</SUserCount>
 						<SUserCount>
-							<div className="ud-img up-img" onClick={() => orderBooks[pair] ? this.toggleBetCard(true) : null}>
+							<div
+								className="ud-img up-img"
+								onClick={() => (orderBooks[pair] ? this.toggleBetCard(true) : null)}
+							>
 								<img src={up} />
 							</div>
 							{/* <div>
@@ -421,9 +430,17 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 									</h4>
 								</div>
 								<div className="col3">
-									<h4 className={(prevRoundPayout >= prevRoundInvest ? "increase" : "decrease") + " col-content"}>
+									<h4
+										className={
+											(prevRoundPayout >= prevRoundInvest
+												? 'increase'
+												: 'decrease') + ' col-content'
+										}
+									>
 										{util.formatPercent(
-											prevRoundInvest ? prevRoundPayout / prevRoundInvest - 1 : 0
+											prevRoundInvest
+												? prevRoundPayout / prevRoundInvest - 1
+												: 0
 										)}
 									</h4>
 								</div>
@@ -448,6 +465,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						onGameTypeChange={this.selectBetType}
 						addOrder={this.props.addOrder}
 						markUp={0.01}
+						titleN={titleN}
 					/>
 					{ethBalance.eth && ethBalance.weth === 0 ? (
 						<SAllowenceCard>
