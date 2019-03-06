@@ -271,8 +271,6 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					);
 			}
 		}
-		console.log("titleN")
-		console.log(titleN)
 		return (
 			<div>
 				<MediaQuery minDeviceWidth={900}>
