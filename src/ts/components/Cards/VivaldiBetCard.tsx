@@ -75,13 +75,11 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 		};
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
-		if (JSON.stringify(props.titleN) !== JSON.stringify(state.titleN)) {
+		if (JSON.stringify(props.titleN) !== JSON.stringify(state.titleN))
 			return {
 				showNotice: true,
 				titleN: props.titleN
 			};
-
-		}
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
 			let amt = 0;
 			let price = 0;
