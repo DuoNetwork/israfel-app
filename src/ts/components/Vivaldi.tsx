@@ -171,15 +171,14 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	};
 
 	private getPrevRoundPayout = (
-		pair: string,
+		pairs: string[],
 		period: number,
-		isCall: boolean,
 		isKnockedIn: boolean,
 		lastResetTime: number
 	): IPayout => {
 		const res: IPayout = { totalEthPaid: 0, totalPayout: 0 };
-		[pair, this.getTheOtherPair(pair)].map(p => {
-			const prevRoundUserOrders = (this.props.orderHistory[p] as IUserOrder[]).filter(
+		pairs.forEach(pair => {
+			const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
 				uo =>
 					uo.createdAt <= lastResetTime &&
 					uo.createdAt >= lastResetTime - period &&
@@ -188,7 +187,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			);
 			if (prevRoundUserOrders.length > 0) {
 				const prevPayout = this.getPrevRoundPayoutForToken(
-					(isKnockedIn && isCall) || (!isKnockedIn && !isCall),
+					(isKnockedIn && pair.includes('C')) || (!isKnockedIn && pair.includes('P')),
 					prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
 				);
 				res.totalEthPaid += prevPayout.totalEthPaid;
@@ -307,14 +306,16 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							.replace(WrapperConstants.VIVALDI.toUpperCase(), Constants.ETH)
 							.replace('C', 'P')) + `|${Constants.TOKEN_WETH}`;
 
-			if (this.props.orderHistory[pair]) {
+			if (
+				this.props.orderHistory[pair] &&
+				this.props.orderHistory[this.getTheOtherPair(pair)]
+			) {
 				const isKnockedIn = infoV.states.isKnockedIn;
 				const lastResetTime = infoV.states.resetPriceTime;
 
 				prevRoundPayout = this.getPrevRoundPayout(
-					pair,
+					[pair, this.getTheOtherPair(pair)],
 					infoV.states.period,
-					isCall,
 					isKnockedIn,
 					lastResetTime
 				);
