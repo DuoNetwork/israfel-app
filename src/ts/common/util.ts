@@ -156,10 +156,10 @@ class Util {
 				? 'never expires'
 				: 'expires in ' +
 				(info
-						? Math.floor(
-								(info.states.maturity - CommonUtil.getUTCNowTimestamp()) / 86400000
+					? Math.floor(
+							(info.states.maturity - CommonUtil.getUTCNowTimestamp()) / 86400000
 						).toFixed(0)
-						: 0) +
+					: 0) +
 				' days'
 		}.`;
 	}
@@ -261,6 +261,14 @@ class Util {
 
 	public fillZero(num: number) {
 		return num < 10 ? `0${num}` : `${num}`;
+	}
+
+	public isEmptyObject(obj: object | undefined | null): boolean {
+		if (!obj) return true;
+
+		for (const prop in obj) if (obj.hasOwnProperty(prop)) return false;
+
+		return true;
 	}
 }
 

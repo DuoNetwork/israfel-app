@@ -77,3 +77,13 @@ export interface IVivaldiCustodianInfo {
 	code: string;
 	states: IVivaldiStates;
 }
+
+export interface IPosition {
+	ethPaid: number;
+	positions: number;
+}
+
+export interface IPayout {
+	totalEthPaid: number;
+	totalPayout: number;
+}
