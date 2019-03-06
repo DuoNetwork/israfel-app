@@ -76,7 +76,6 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 	}
 	public static getDerivedStateFromProps(props: IProps, state: IState) {
 		if (JSON.stringify(props.titleN) !== JSON.stringify(state.titleN)) {
-			console.log('titleChange')
 			return {
 				showNotice: true,
 				titleN: props.titleN
