@@ -1,5 +1,5 @@
 import { IPrice } from '@finbook/duo-market-data';
-// import { Util as CommonUtil } from '@finbook/israfel-common';
+import { Util as CommonUtil } from '@finbook/israfel-common';
 import * as d3 from 'd3';
 // import moment from 'moment';
 import * as React from 'react';
@@ -8,7 +8,7 @@ import { ColorStyles } from 'ts/common/styles';
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 const height = 240 - margin.top - margin.bottom;
 
-function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetTime: number) {
+function drawLines(el: Element, sourceData: IPrice[], lastPrice: number, innerWidth: number, resetTime: number) {
 	const width = innerWidth - margin.left - margin.right;
 	if (!sourceData.length) {
 		d3.selectAll('.loading').remove();
@@ -20,7 +20,14 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 	//const now = CommonUtil.getUTCNowTimestamp();
 	const beginningTime = resetTime - 12 * 3600 * 1000;
 	const endTime = resetTime + 12 * 3600 * 1000;
-	const source = sourceData;
+	const source = [];
+	sourceData.forEach(d => source.push(d));
+	source.push({
+		timestamp: CommonUtil.getUTCNowTimestamp(),
+		close: lastPrice
+	} as any)
+	source.sort((a, b) => a.timestamp - b.timestamp);
+	console.log(source)
 	//Establish SVG Playground
 	d3.selectAll('.loading').remove();
 	d3.selectAll('#timeserieschart').remove();
@@ -121,6 +128,7 @@ function drawLines(el: Element, sourceData: IPrice[], innerWidth: number, resetT
 
 interface IProps {
 	prices: any[];
+	ethPrice: number;
 	innerWidth: number;
 	resetTime: number;
 }
@@ -133,18 +141,19 @@ export default class TimeSeriesChart extends React.Component<IProps> {
 	}
 
 	public componentDidMount() {
-		const { prices, innerWidth, resetTime } = this.props;
-		drawLines(this.chartRef.current as Element, prices, innerWidth, resetTime);
+		const { prices, ethPrice, innerWidth, resetTime } = this.props;
+		drawLines(this.chartRef.current as Element, prices, ethPrice, innerWidth, resetTime);
 	}
 
 	public shouldComponentUpdate(nextProps: IProps) {
-		const { prices, innerWidth, resetTime } = nextProps;
+		const { prices, ethPrice, innerWidth, resetTime } = nextProps;
 		if (
 			JSON.stringify(nextProps.prices) !== JSON.stringify(this.props.prices) ||
 			JSON.stringify(nextProps.innerWidth) !== JSON.stringify(this.props.innerWidth) ||
-			JSON.stringify(nextProps.resetTime) !== JSON.stringify(this.props.resetTime)
+			JSON.stringify(nextProps.resetTime) !== JSON.stringify(this.props.resetTime) ||
+			JSON.stringify(nextProps.ethPrice) !== JSON.stringify(this.props.ethPrice)
 		)
-			drawLines(this.chartRef.current as Element, prices, innerWidth, resetTime);
+			drawLines(this.chartRef.current as Element, prices, ethPrice, innerWidth, resetTime);
 
 		return false;
 	}

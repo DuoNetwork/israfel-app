@@ -332,6 +332,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					<SGraphCard>
 						<VivaldiChart
 							prices={exchangePrices ? exchangePrices : []}
+							ethPrice={ethPrice}
 							innerWidth={window.innerWidth * 0.92}
 							resetTime={
 								infoV

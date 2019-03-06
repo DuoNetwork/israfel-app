@@ -199,9 +199,6 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			orderBookSnapshot
 		} = this.props;
 		const { betNumber, betPrice, zeroRate, showNotice } = this.state;
-		const step = ethBalance
-			? Math.max(ethBalance.weth / 20, ethBalance.weth > 0.2 ? 0.2 : ethBalance.weth)
-			: 0.2;
 		const min = 0;
 		const max = betPrice ? ethBalance.weth / betPrice : Math.min(ethBalance.weth || 0, 10);
 		const renderer = ({ hours, minutes, seconds, completed }: any) => {
@@ -293,7 +290,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 									max={max}
 									defaultValue={0}
 									value={betNumber}
-									step={step}
+									step={0.1}
 									onChange={this.onSliderChange}
 									className={!isCall ? 'below' : 'above'}
 								/>
