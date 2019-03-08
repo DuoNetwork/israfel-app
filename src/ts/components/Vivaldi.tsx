@@ -178,20 +178,22 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 	): IPayout => {
 		const res: IPayout = { totalEthPaid: 0, totalPayout: 0 };
 		pairs.forEach(pair => {
-			const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
-				uo =>
-					uo.createdAt <= lastResetTime &&
-					uo.createdAt >= lastResetTime - period &&
-					uo.side === Constants.DB_BID &&
-					uo.pair === pair
-			);
-			if (prevRoundUserOrders.length > 0) {
-				const prevPayout = this.getPrevRoundPayoutForToken(
-					(isKnockedIn && pair.includes('C')) || (!isKnockedIn && pair.includes('P')),
-					prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
+			if (this.props.orderHistory[pair]) {
+				const prevRoundUserOrders = (this.props.orderHistory[pair] as IUserOrder[]).filter(
+					uo =>
+						uo.createdAt <= lastResetTime &&
+						uo.createdAt >= lastResetTime - period &&
+						uo.side === Constants.DB_BID &&
+						uo.pair === pair
 				);
-				res.totalEthPaid += prevPayout.totalEthPaid;
-				res.totalPayout += prevPayout.totalPayout;
+				if (prevRoundUserOrders.length > 0) {
+					const prevPayout = this.getPrevRoundPayoutForToken(
+						(isKnockedIn && pair.includes('C')) || (!isKnockedIn && pair.includes('P')),
+						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
+					);
+					res.totalEthPaid += prevPayout.totalEthPaid;
+					res.totalPayout += prevPayout.totalPayout;
+				}
 			}
 		});
 
@@ -225,13 +227,23 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		lastResetTime: number
 	): { [pair: string]: IPosition } => {
 		const res: { [pair: string]: IPosition } = {};
+
 		[pair, this.getTheOtherPair(pair)].map(p => {
-			const currentRoundUserOrders = (this.props.orderHistory[p] as IUserOrder[]).filter(
-				uo => uo.createdAt > lastResetTime && uo.side === Constants.DB_BID && uo.pair === p
-			);
-			res[p] = this.getCurrentRoundPositionForOneToken(
-				currentRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
-			);
+			if (this.props.orderHistory[p] as IUserOrder[]) {
+				const currentRoundUserOrders = (this.props.orderHistory[p] as IUserOrder[]).filter(
+					uo =>
+						uo.createdAt > lastResetTime &&
+						uo.side === Constants.DB_BID &&
+						uo.pair === p
+				);
+				res[p] = this.getCurrentRoundPositionForOneToken(
+					currentRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
+				);
+			} else
+				res[p] = {
+					positions: 0,
+					ethPaid: 0
+				};
 		});
 
 		return res;
@@ -307,7 +319,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 							.replace('C', 'P')) + `|${Constants.TOKEN_WETH}`;
 
 			if (
-				this.props.orderHistory[pair] &&
+				this.props.orderHistory[pair] ||
 				this.props.orderHistory[this.getTheOtherPair(pair)]
 			) {
 				const isKnockedIn = infoV.states.isKnockedIn;
