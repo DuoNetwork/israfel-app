@@ -219,7 +219,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			if (fill > 0) {
 				positions += fill;
 				totalEthPaid +=
-					price * fill + this.state.feeAsset === Constants.TOKEN_WETH ? uo.fee : 0;
+					price * fill + (this.state.feeAsset === Constants.TOKEN_WETH ? uo.fee : 0);
 			}
 		});
 
