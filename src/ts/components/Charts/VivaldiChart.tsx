@@ -18,8 +18,8 @@ function drawLines(el: Element, sourceData: IPrice[], lastPrice: number, innerWi
 		return;
 	}
 	//const now = CommonUtil.getUTCNowTimestamp();
-	const beginningTime = resetTime - 12 * 3600 * 1000;
-	const endTime = resetTime + 12 * 3600 * 1000;
+	const beginningTime = resetTime - 1 * 3600 * 1000;
+	const endTime = resetTime + 1 * 3600 * 1000;
 	const source = [];
 	sourceData.forEach(d => source.push(d));
 	source.push({
