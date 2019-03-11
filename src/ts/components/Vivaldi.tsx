@@ -5,6 +5,7 @@ import {
 	IOrderBookSnapshot,
 	IToken,
 	IUserOrder,
+	OrderUtil,
 	Util as CommonUtil
 } from '@finbook/israfel-common';
 import eth from 'images/ethIconB.png';
@@ -152,7 +153,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 
 	private getPrevRoundPayoutForToken = (
 		isPaidOut: boolean,
-		userOrders: IUserOrder[]
+		userOrders: IUserOrder[],
+		token?: IToken
 	): IPayout => {
 		let accumulatedPayout = 0;
 		let totalEthPaid = 0;
@@ -164,7 +166,18 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			if (processed[orderHash]) return;
 			processed[orderHash] = true;
 			if (fill > 0) {
-				totalEthPaid += price * fill;
+				totalEthPaid +=
+					price * fill +
+					(token && this.state.feeAsset === Constants.TOKEN_WETH
+						? Number(
+								OrderUtil.getPriceBeforeFee(
+									CommonUtil.round(fill),
+									CommonUtil.round(fill * price),
+									token.feeSchedules.WETH,
+									true
+								).feeAmount.valueOf()
+						)
+						: 0);
 				accumulatedPayout += isPaidOut ? fill : 0;
 			}
 		});
@@ -180,7 +193,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		pairs: string[],
 		period: number,
 		isKnockedIn: boolean,
-		lastResetTime: number
+		lastResetTime: number,
+		token: IToken
 	): IPayout => {
 		const res: IPayout = { totalEthPaid: 0, totalPayout: 0 };
 		pairs.forEach(pair => {
@@ -195,7 +209,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 				if (prevRoundUserOrders.length > 0) {
 					const prevPayout = this.getPrevRoundPayoutForToken(
 						(isKnockedIn && pair.includes('C')) || (!isKnockedIn && pair.includes('P')),
-						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
+						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence),
+						token
 					);
 					res.totalEthPaid += prevPayout.totalEthPaid;
 					res.totalPayout += prevPayout.totalPayout * (1 - this.state.clearFee);
@@ -344,7 +359,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					[pair, this.getTheOtherPair(pair)],
 					infoV.states.period,
 					isKnockedIn,
-					lastResetTime
+					lastResetTime,
+					token
 				);
 
 				currentRoundPositions = this.getCurrentRoundPositions(pair, lastResetTime);
