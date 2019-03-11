@@ -274,14 +274,14 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								<div className="des-row">
 									<div>Paying</div>
 									<div>
-										{util.formatBalance(
+										{util.formatNumber(
 											betNumber * betPrice +
 												(token &&
 												this.props.feeAsset === Constants.TOKEN_WETH
 													? Number(
 															OrderUtil.getPriceBeforeFee(
-																betNumber,
-																betNumber * betPrice,
+																CommonUtil.round(betNumber),
+																CommonUtil.round(betNumber * betPrice),
 																token.feeSchedules.WETH,
 																true
 															).feeAmount.valueOf()
@@ -293,7 +293,7 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								</div>
 								<div className="des-row">
 									<div>To Earn</div>
-									<div>{util.formatBalance(betNumber)}</div>
+									<div>{util.formatNumber(betNumber)}</div>
 									<div>ETH</div>
 									<div>{`(+${util.formatPercent(
 										betPrice ? 1 / betPrice - 1 : zeroRate
