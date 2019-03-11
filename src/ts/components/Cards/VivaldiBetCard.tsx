@@ -1,4 +1,10 @@
-import { Constants, IOrderBookSnapshot, IToken, OrderUtil, Util as CommonUtil } from '@finbook/israfel-common';
+import {
+	Constants,
+	IOrderBookSnapshot,
+	IToken,
+	OrderUtil,
+	Util as CommonUtil
+} from '@finbook/israfel-common';
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
 import down from 'images/vivaldi/downW.png';
@@ -11,7 +17,14 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
-import { SBetInfoWrapper, SCardButtonWrapper, SNotice, SSliderWrapper, STagWrapper, SVBetCard } from './_styledV';
+import {
+	SBetInfoWrapper,
+	SCardButtonWrapper,
+	SNotice,
+	SSliderWrapper,
+	STagWrapper,
+	SVBetCard
+} from './_styledV';
 
 interface IProps {
 	pair: string;
@@ -274,20 +287,24 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 								<div className="des-row">
 									<div>Paying</div>
 									<div>
-										{util.formatNumber(
-											betNumber * betPrice +
-												(token &&
-												this.props.feeAsset === Constants.TOKEN_WETH
-													? Number(
-															OrderUtil.getPriceBeforeFee(
-																CommonUtil.round(betNumber),
-																CommonUtil.round(betNumber * betPrice),
-																token.feeSchedules.WETH,
-																true
-															).feeAmount.valueOf()
-													)
-													: 0)
-										)}
+										{betNumber
+											? util.formatNumber(
+													betNumber * betPrice +
+														(token &&
+														this.props.feeAsset === Constants.TOKEN_WETH
+															? Number(
+																	OrderUtil.getPriceBeforeFee(
+																		CommonUtil.round(betNumber),
+																		CommonUtil.round(
+																			betNumber * betPrice
+																		),
+																		token.feeSchedules.WETH,
+																		true
+																	).feeAmount.valueOf()
+															)
+															: 0)
+											)
+											: 0}
 									</div>
 									<div>ETH</div>
 								</div>
