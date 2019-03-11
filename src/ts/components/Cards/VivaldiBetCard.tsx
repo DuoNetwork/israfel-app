@@ -1,10 +1,4 @@
-import {
-	IOrderBookSnapshot,
-	IToken,
-	OrderUtil,
-	Util as CommonUtil,
-	Constants
-} from '@finbook/israfel-common';
+import { Constants, IOrderBookSnapshot, IToken, OrderUtil, Util as CommonUtil } from '@finbook/israfel-common';
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
 import down from 'images/vivaldi/downW.png';
@@ -17,14 +11,7 @@ import * as React from 'react';
 import Countdown from 'react-countdown-now';
 import { IEthBalance } from 'ts/common/types';
 import util from 'ts/common/util';
-import {
-	SBetInfoWrapper,
-	SCardButtonWrapper,
-	SNotice,
-	SSliderWrapper,
-	STagWrapper,
-	SVBetCard
-} from './_styledV';
+import { SBetInfoWrapper, SCardButtonWrapper, SNotice, SSliderWrapper, STagWrapper, SVBetCard } from './_styledV';
 
 interface IProps {
 	pair: string;
