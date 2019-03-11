@@ -81,7 +81,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 				titleN: props.titleN
 			};
 		if (props.isCall !== state.isCall || props.vivaldiIndex !== state.vivaldiIndex) {
-			const price = props.orderBookSnapshot.asks.length ? props.orderBookSnapshot.asks[0].price + props.markUp : 1;
+			const price = props.orderBookSnapshot.asks.length
+				? props.orderBookSnapshot.asks[0].price + props.markUp
+				: 1;
 			const zeroRate = 1 / price - 1;
 			return {
 				betNumber: 0,
@@ -93,7 +95,9 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			};
 		}
 		if (props.orderBookSnapshot !== state.orderBookSnapshot && props.orderBookSnapshot) {
-			const price = props.orderBookSnapshot.asks.length ? props.orderBookSnapshot.asks[0].price + props.markUp : 1;
+			const price = props.orderBookSnapshot.asks.length
+				? props.orderBookSnapshot.asks[0].price + props.markUp
+				: 1;
 			const zeroRate = 1 / price - 1;
 			return { zeroRate: zeroRate, titleN: props.titleN };
 		}
@@ -274,7 +278,14 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 							<div className="des-wrapper">
 								<div className="des-row">
 									<div>Paying</div>
-									<div>{util.formatBalance(betNumber * betPrice)}</div>
+									<div>
+										{util.formatBalance(
+											betNumber * betPrice +
+												(this.props.token
+													? this.props.token.feeSchedules.WETH.minimum
+													: 0)
+										)}
+									</div>
 									<div>ETH</div>
 								</div>
 								<div className="des-row">

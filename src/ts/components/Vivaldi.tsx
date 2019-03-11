@@ -75,6 +75,8 @@ interface IState {
 	isCall: boolean;
 	ethInput: string;
 	inProgress: boolean;
+	clearFee: number;
+	tradingFee: number;
 }
 
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
@@ -87,7 +89,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			isBetCardOpen: false,
 			isCall: true,
 			ethInput: '',
-			inProgress: false
+			inProgress: false,
+			clearFee: 0,
+			tradingFee: 0
 		};
 	}
 
@@ -192,7 +196,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						prevRoundUserOrders.sort((a, b) => -a.currentSequence + b.currentSequence)
 					);
 					res.totalEthPaid += prevPayout.totalEthPaid;
-					res.totalPayout += prevPayout.totalPayout;
+					res.totalPayout += prevPayout.totalPayout * (1 - this.state.clearFee);
 				}
 			}
 		});
@@ -212,7 +216,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			processed[orderHash] = true;
 			if (fill > 0) {
 				positions += fill;
-				totalEthPaid += price * fill;
+				totalEthPaid += (price * fill);
 			}
 		});
 
@@ -300,6 +304,9 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 		let prevRoundPayout: IPayout = { totalEthPaid: 0, totalPayout: 0 };
 		let currentRoundPositions: { [pair: string]: IPosition } = {};
 		if (infoV) {
+			this.setState({
+				clearFee: infoV.states.clearCommRate
+			});
 			roundStrike = infoV.states.roundStrike;
 			upDownClass = infoV.states.roundStrike < ethPrice ? 'incPx' : 'decPx';
 			Endtime = infoV.states.resetPriceTime + infoV.states.period;
@@ -317,6 +324,11 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					: infoV.code
 							.replace(WrapperConstants.VIVALDI.toUpperCase(), Constants.ETH)
 							.replace('C', 'P')) + `|${Constants.TOKEN_WETH}`;
+
+			this.setState({
+				tradingFee: (this.props.tokens.find(t => pair.startsWith(t.code)) as IToken)
+					.feeSchedules.WETH.minimum
+			});
 
 			if (
 				this.props.orderHistory[pair] ||
