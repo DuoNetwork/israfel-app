@@ -77,6 +77,7 @@ interface IState {
 	inProgress: boolean;
 	clearFee: number;
 	tradingFee: number;
+	feeAsset: string;
 }
 
 export default class Vivaldi extends React.PureComponent<IProps, IState> {
@@ -91,7 +92,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			ethInput: '',
 			inProgress: false,
 			clearFee: 0,
-			tradingFee: 0
+			tradingFee: 0,
+			feeAsset: Constants.TOKEN_WETH
 		};
 	}
 
@@ -216,7 +218,8 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 			processed[orderHash] = true;
 			if (fill > 0) {
 				positions += fill;
-				totalEthPaid += (price * fill);
+				totalEthPaid +=
+					price * fill + this.state.feeAsset === Constants.TOKEN_WETH ? uo.fee : 0;
 			}
 		});
 
@@ -324,10 +327,10 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 					: infoV.code
 							.replace(WrapperConstants.VIVALDI.toUpperCase(), Constants.ETH)
 							.replace('C', 'P')) + `|${Constants.TOKEN_WETH}`;
-
+			const token = this.props.tokens.find(t => pair.startsWith(t.code)) as IToken;
 			this.setState({
-				tradingFee: (this.props.tokens.find(t => pair.startsWith(t.code)) as IToken)
-					.feeSchedules.WETH.minimum
+				tradingFee: token.feeSchedules.WETH.minimum,
+				feeAsset: token.feeSchedules.WETH.asset ? token.feeSchedules.WETH.asset : token.code
 			});
 
 			if (
@@ -567,6 +570,7 @@ export default class Vivaldi extends React.PureComponent<IProps, IState> {
 						addOrder={this.props.addOrder}
 						markUp={0.01}
 						titleN={titleN}
+						feeAsset={this.state.feeAsset}
 					/>
 					{ethBalance.eth && ethBalance.weth === 0 ? (
 						<SAllowenceCard>

@@ -1,4 +1,10 @@
-import { IOrderBookSnapshot, IToken, Util as CommonUtil } from '@finbook/israfel-common';
+import {
+	IOrderBookSnapshot,
+	IToken,
+	OrderUtil,
+	Util as CommonUtil,
+	Constants
+} from '@finbook/israfel-common';
 import bear from 'images/vivaldi/bear.png';
 import bull from 'images/vivaldi/bull.png';
 import down from 'images/vivaldi/downW.png';
@@ -36,6 +42,7 @@ interface IProps {
 	upupPrice: number;
 	markUp: number;
 	titleN: string;
+	feeAsset: string;
 	onBuy?: () => void;
 	onCancel: (isCall: boolean) => void;
 	onGameTypeChange: (vivaldiIndex: number, isCall: boolean) => void;
@@ -197,7 +204,8 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 			upupPrice,
 			ethBalance,
 			orderBookSnapshot,
-			titleN
+			titleN,
+			token
 		} = this.props;
 		const { betNumber, betPrice, zeroRate, showNotice } = this.state;
 		const min = 0;
@@ -281,8 +289,16 @@ export default class VivaldiBetCard extends React.PureComponent<IProps, IState> 
 									<div>
 										{util.formatBalance(
 											betNumber * betPrice +
-												(this.props.token
-													? this.props.token.feeSchedules.WETH.minimum
+												(token &&
+												this.props.feeAsset === Constants.TOKEN_WETH
+													? Number(
+															OrderUtil.getPriceBeforeFee(
+																betNumber,
+																betNumber * betPrice,
+																token.feeSchedules.WETH,
+																true
+															).feeAmount.valueOf()
+													)
 													: 0)
 										)}
 									</div>
