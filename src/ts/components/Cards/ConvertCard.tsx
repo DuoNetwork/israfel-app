@@ -1,4 +1,5 @@
 import { Constants as WrapperConstants } from '@finbook/duo-contract-wrapper';
+import { Constants as CommonConstants } from '@finbook/israfel-common';
 import { Spin } from 'antd';
 import close from 'images/icons/close.svg';
 import link from 'images/icons/link.png';
@@ -436,7 +437,7 @@ export default class ConvertCard extends React.Component<IProps, IState> {
 								style={{ width: '14px', marginLeft: '10px' }}
 								onClick={() =>
 									window.open(
-										`https://kovan.duo.network/${
+										`https://${__ENV__ === CommonConstants.DB_LIVE ? 'app' : 'kovan'}.duo.network/${
 											info ? info.code.split('-')[0].toLowerCase() : ''
 										}/${
 											info
