@@ -204,7 +204,8 @@ export default class Dex extends React.Component<IProps, IState> {
 					});
 					if (code.startsWith('a') || code.startsWith('s'))
 						totalNav += balance * custodians[c].states.navA;
-					else totalNav += balance * custodians[c].states.navB;
+					else if (code.startsWith('b') || code.startsWith('L'))totalNav += balance * custodians[c].states.navB;
+					else totalNav += balance * 0.5;
 				});
 			});
 		});
